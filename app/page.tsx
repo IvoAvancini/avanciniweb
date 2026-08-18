@@ -125,6 +125,57 @@ const heroSlides = [
     niche: "Advocacia empresarial",
     chip: "Autoridade antes da reunião",
   },
+  {
+    id: "nexa",
+    domain: "nexa.solar / landing page conceito",
+    image: "/concepts/atlas-villa.webp",
+    alt: "Residência atendida pela empresa fictícia Nexa Solar",
+    brand: "NEXA SOLAR",
+    nav: ["Como funciona", "Economia", "Projetos"],
+    cta: "SIMULAR ECONOMIA",
+    eyebrow: "ENERGIA SOLAR INTELIGENTE",
+    title: <>Energia que reduz sua conta.</>,
+    description: "Uma landing page construída para transformar economia estimada em pedidos de orçamento.",
+    button: "QUERO SIMULAR ↗",
+    proof: "até 95%",
+    proofText: <>de redução<br />na conta</>,
+    niche: "Landing · Energia solar",
+    chip: "Simulação que gera orçamento",
+  },
+  {
+    id: "vitta",
+    domain: "vitta.implantes / landing page conceito",
+    image: "/concepts/lumina-clinic.jpg",
+    alt: "Atendimento da clínica fictícia Vitta Implantes",
+    brand: "VITTA",
+    nav: ["Tratamento", "Especialistas", "Depoimentos"],
+    cta: "AGENDAR AVALIAÇÃO",
+    eyebrow: "IMPLANTES DENTÁRIOS",
+    title: <>Volte a sorrir com segurança.</>,
+    description: "Oferta clara, confiança clínica e agendamento direto em uma página focada em conversão.",
+    button: "QUERO MINHA AVALIAÇÃO ↗",
+    proof: "+1.800",
+    proofText: <>sorrisos<br />transformados</>,
+    niche: "Landing · Implantes",
+    chip: "Confiança que vira avaliação",
+  },
+  {
+    id: "apexprotect",
+    domain: "apex.protect / landing page conceito",
+    image: "/concepts/apex-cars.jpg",
+    alt: "Veículo premium protegido pela empresa fictícia Apex Protect",
+    brand: "APEX PROTECT",
+    nav: ["Proteção", "Resultados", "Garantia"],
+    cta: "PEDIR ORÇAMENTO",
+    eyebrow: "PROTEÇÃO AUTOMOTIVA PREMIUM",
+    title: <>Seu carro, impecável por mais tempo.</>,
+    description: "Uma oferta visual e objetiva para vender vitrificação, PPF e proteção de pintura.",
+    button: "PROTEGER MEU CARRO ↗",
+    proof: "10 anos",
+    proofText: <>de garantia<br />no PPF</>,
+    niche: "Landing · Proteção automotiva",
+    chip: "Desejo que vira orçamento",
+  },
 ] as const;
 
 const previewProjects = {
@@ -1336,6 +1387,76 @@ export default function Home() {
                 <div className="moreira-rule" />
               </div>
             )}
+            {heroSlide.id === "nexa" && (
+              <div className="hero-concept lead-concept nexa-concept">
+                <img src={heroSlide.image} alt={heroSlide.alt} />
+                <div className="lead-nav">
+                  <strong>NEXA<span>SOLAR</span></strong>
+                  <small>COMO FUNCIONA&nbsp;&nbsp; PROJETOS&nbsp;&nbsp; DÚVIDAS</small>
+                  <b>SIMULAR AGORA</b>
+                </div>
+                <div className="lead-copy">
+                  <small>ENERGIA SOLAR · BAHIA</small>
+                  <h3>Troque a conta<br />por patrimônio.</h3>
+                  <p>Descubra em 30 segundos quanto sua empresa ou residência pode economizar.</p>
+                  <div className="lead-proof-row"><span>✓ Projeto completo</span><span>✓ Homologação inclusa</span></div>
+                </div>
+                <div className="lead-form-card nexa-form">
+                  <small>SIMULAÇÃO GRATUITA</small>
+                  <h4>Quanto você paga de energia?</h4>
+                  <div><span>R$</span><b>1.200</b></div>
+                  <p>Economia estimada em 25 anos</p>
+                  <strong>R$ 318.000</strong>
+                  <button>RECEBER MEU ESTUDO →</button>
+                </div>
+              </div>
+            )}
+            {heroSlide.id === "vitta" && (
+              <div className="hero-concept lead-concept vitta-concept">
+                <img src={heroSlide.image} alt={heroSlide.alt} />
+                <div className="lead-nav">
+                  <strong>VITTA<span>IMPLANTES</span></strong>
+                  <small>TRATAMENTO&nbsp;&nbsp; EQUIPE&nbsp;&nbsp; HISTÓRIAS</small>
+                  <b>AGENDAR</b>
+                </div>
+                <div className="lead-copy">
+                  <small>IMPLANTES COM CARGA IMEDIATA</small>
+                  <h3>Seu sorriso<br /><em>de volta.</em></h3>
+                  <p>Planejamento digital, especialistas experientes e acompanhamento próximo em todas as etapas.</p>
+                  <div className="vitta-rating"><b>4.9</b><span>★★★★★<br />326 avaliações verificadas</span></div>
+                </div>
+                <div className="lead-form-card vitta-form">
+                  <small>AVALIAÇÃO PERSONALIZADA</small>
+                  <h4>Fale com nossa equipe.</h4>
+                  <div className="lead-fake-field">Seu nome <i /></div>
+                  <div className="lead-fake-field">WhatsApp <i /></div>
+                  <button>QUERO AGENDAR →</button>
+                  <p>Retorno em até 15 minutos.</p>
+                </div>
+              </div>
+            )}
+            {heroSlide.id === "apexprotect" && (
+              <div className="hero-concept lead-concept protect-concept">
+                <img src={heroSlide.image} alt={heroSlide.alt} />
+                <div className="lead-nav">
+                  <strong>APEX<span>PROTECT</span></strong>
+                  <small>PPF&nbsp;&nbsp; VITRIFICAÇÃO&nbsp;&nbsp; RESULTADOS</small>
+                  <b>ORÇAMENTO</b>
+                </div>
+                <div className="lead-copy">
+                  <small>PPF · PROTEÇÃO INVISÍVEL</small>
+                  <h3>Brilho de agora.<br /><em>Proteção por anos.</em></h3>
+                  <p>Película autorregenerativa contra riscos, pedras, manchas e desgaste da pintura.</p>
+                  <button>QUERO PROTEGER MEU CARRO →</button>
+                </div>
+                <div className="protect-specs">
+                  <span><b>10</b> anos de garantia</span>
+                  <span><b>72h</b> para entrega</span>
+                  <span><b>100%</b> acabamento premium</span>
+                </div>
+                <div className="protect-badge">ANTES<br /><b>—</b><br />DEPOIS</div>
+              </div>
+            )}
           </div>
           <div className="floating-chip chip-one">
             <span>●</span>
@@ -1351,7 +1472,11 @@ export default function Home() {
           <div className="hero-controls" aria-label="Escolher segmento">
             <button
               type="button"
-              onClick={() => setHeroIndex((heroIndex + 2) % 3)}
+              onClick={() =>
+                setHeroIndex(
+                  (heroIndex + heroSlides.length - 1) % heroSlides.length,
+                )
+              }
               aria-label="Segmento anterior"
             >
               ←
@@ -1369,7 +1494,9 @@ export default function Home() {
             ))}
             <button
               type="button"
-              onClick={() => setHeroIndex((heroIndex + 1) % 3)}
+              onClick={() =>
+                setHeroIndex((heroIndex + 1) % heroSlides.length)
+              }
               aria-label="Próximo segmento"
             >
               →
