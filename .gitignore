@@ -43,3 +43,5 @@ yarn-error.log*
 /*.png
 /*.tar.gz
 /({clientHeight
+/public/projects/san-diego-full.jpg
+/public/projects/tape-car.jpg
