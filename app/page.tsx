@@ -559,7 +559,14 @@ function PreviewCanvas({ type, slide }: { type: PreviewType; slide: number }) {
         <b>03 / 03</b>
       </div>
       <div className="aurea-cart-items">
-        <small>02 PRODUTOS</small>
+        <div className="aurea-shipping-progress">
+          <div>
+            <small>FRETE GRÁTIS DESBLOQUEADO</small>
+            <b>Seu ritual viaja por nossa conta.</b>
+          </div>
+          <span><i /> 100%</span>
+        </div>
+        <small>SEU RITUAL · 02 PRODUTOS</small>
         <article>
           <img src="/concepts/aurea-skin.jpg" alt="Produto Áurea" />
           <div>
@@ -578,9 +585,21 @@ function PreviewCanvas({ type, slide }: { type: PreviewType; slide: number }) {
           </div>
           <strong>R$ 109</strong>
         </article>
+        <div className="aurea-cart-extra">
+          <div className="aurea-extra-image">
+            <img src="/concepts/aurea-skin.jpg" alt="Óleo de limpeza Áurea" />
+          </div>
+          <div>
+            <small>COMPLETE O RITUAL</small>
+            <b>Óleo de Limpeza Botânico</b>
+            <span>Remove impurezas sem ressecar · 100 ml</span>
+          </div>
+          <strong>+ R$ 72</strong>
+        </div>
       </div>
       <aside>
-        <small>RESUMO</small>
+        <small>RESUMO DO PEDIDO</small>
+        <h3>Quase seu.</h3>
         <p>
           Subtotal <b>R$ 198</b>
         </p>
@@ -591,7 +610,12 @@ function PreviewCanvas({ type, slide }: { type: PreviewType; slide: number }) {
           Total <b>R$ 198</b>
         </div>
         <button>FINALIZAR COMPRA ↗</button>
-        <span>Compra segura · Troca fácil · Pix ou cartão</span>
+        <div className="aurea-coupon">Tem um cupom? <b>ADICIONAR +</b></div>
+        <div className="aurea-payment-options">
+          <span><b>PIX</b> 5% de desconto</span>
+          <span><b>6×</b> sem juros no cartão</span>
+          <span><b>↺</b> primeira troca grátis</span>
+        </div>
       </aside>
     </div>
   );
