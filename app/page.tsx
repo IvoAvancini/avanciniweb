@@ -16,7 +16,7 @@ export default function Home() {
 
   return <main>
     <header className={scrolled ? "header scrolled" : "header"}>
-      <a className="logo" href="#inicio" aria-label="Avancini Web, início"><span className="logo-mark">A</span><span>AVANCINI<b>WEB</b><small>Uma solução Avancini OS</small></span></a>
+      <a className="logo" href="#inicio" aria-label="Avancini Web, início"><span className="logo-mark">A</span><span><span className="brand-name">AVANCINI <b>WEB</b></span><small>Uma solução Avancini OS</small></span></a>
       <nav className={menuOpen ? "nav open" : "nav"} aria-label="Navegação principal"><a href="#servicos" onClick={() => setMenuOpen(false)}>Serviços</a><a href="#projetos" onClick={() => setMenuOpen(false)}>Projetos</a><a href="#processo" onClick={() => setMenuOpen(false)}>Processo</a><a href="#contato" onClick={() => setMenuOpen(false)}>Orçamento</a></nav>
       <a className="button button-small header-cta" href={whatsapp} target="_blank" rel="noreferrer">Solicitar orçamento <span>↗</span></a>
       <button className="menu-toggle" type="button" onClick={() => setMenuOpen(!menuOpen)} aria-label="Abrir menu" aria-expanded={menuOpen}><span /><span /></button>
@@ -43,7 +43,7 @@ export default function Home() {
 
     <section className="final-cta" id="contato"><div className="cta-grid" /><div className="cta-orb" /><div className="eyebrow"><span /> Sua marca pode ocupar mais espaço</div><h2>Chega de parecer menor<br />do que sua empresa realmente é.</h2><p>Conte o que você precisa. A Avancini Web transforma sua ideia em uma presença digital impossível de ignorar.</p><a className="button button-primary button-xl" href={whatsapp} target="_blank" rel="noreferrer">Solicitar meu orçamento <span>↗</span></a><small>Conversa direta pelo WhatsApp · Sem compromisso</small></section>
 
-    <footer><div className="footer-top"><a className="logo footer-logo" href="#inicio"><span className="logo-mark">A</span><span>AVANCINI<b>WEB</b><small>Uma solução Avancini OS</small></span></a><p>Experiências digitais criadas para posicionar, impressionar e converter.</p><div><a href="mailto:ivoavancini@hotmail.com">ivoavancini@hotmail.com</a><a href="tel:+5573981019782">(73) 98101-9782</a></div></div><div className="footer-bottom"><span>© {new Date().getFullYear()} Avancini OS</span><span>Estratégia · Web design · Conversão</span><a href="#inicio">Voltar ao topo ↑</a></div></footer>
+    <footer><div className="footer-top"><a className="logo footer-logo" href="#inicio"><span className="logo-mark">A</span><span><span className="brand-name">AVANCINI <b>WEB</b></span><small>Uma solução Avancini OS</small></span></a><p>Experiências digitais criadas para posicionar, impressionar e converter.</p><div><a href="mailto:ivoavancini@hotmail.com">ivoavancini@hotmail.com</a><a href="tel:+5573981019782">(73) 98101-9782</a></div></div><div className="footer-bottom"><span>© {new Date().getFullYear()} Avancini OS</span><span>Estratégia · Web design · Conversão</span><a href="#inicio">Voltar ao topo ↑</a></div></footer>
     <a className="whatsapp-float" href={whatsapp} target="_blank" rel="noreferrer" aria-label="Falar com a Avancini Web no WhatsApp"><span>●</span><b>Solicitar orçamento</b></a>
   </main>;
 }

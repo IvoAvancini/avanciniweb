@@ -12,6 +12,7 @@ button{font:inherit}
 .header.scrolled{height:72px;background:rgba(7,8,11,.82);backdrop-filter:blur(18px);border-color:var(--line)}
 .logo{display:flex;align-items:center;gap:11px;font-family:"Space Grotesk";font-size:18px;font-weight:700;letter-spacing:-.5px;line-height:.9}
 .logo b{color:var(--red)}
+.brand-name{display:inline-flex;align-items:baseline;gap:7px;white-space:nowrap}
 .logo small{display:block;margin-top:6px;color:#666d7b;font:600 7px/1 "Manrope";letter-spacing:1.3px;text-transform:uppercase}
 .logo-mark{display:grid;place-items:center;width:34px;height:34px;border:1px solid rgba(255,24,56,.7);border-radius:10px;background:linear-gradient(145deg,rgba(255,24,56,.32),rgba(92,0,14,.12));color:#ff6478;font-size:17px;box-shadow:0 0 24px rgba(255,24,56,.15)}
 .nav{display:flex;gap:28px;margin-left:auto}
