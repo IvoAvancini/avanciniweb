@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Avancini OS | Sites, IA e sistemas sob medida",
-  description: "Sites de conversão, inteligências artificiais e sistemas de gestão para transformar sua empresa em uma operação digital conectada.",
+  title: "Avancini Web | Sites impossíveis de ignorar",
+  description: "Sites institucionais, landing pages e lojas virtuais criados para posicionar sua empresa, despertar desejo e transformar visitas em clientes.",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
