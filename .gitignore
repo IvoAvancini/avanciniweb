@@ -42,6 +42,6 @@ yarn-error.log*
 # local visual QA and generated archives
 /*.png
 /*.tar.gz
-/({clientHeight
+/([{}]clientHeight
 /public/projects/san-diego-full.jpg
 /public/projects/tape-car.jpg
