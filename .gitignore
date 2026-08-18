@@ -38,3 +38,8 @@ yarn-error.log*
 /.wrangler/
 /outputs/
 /work/
+
+# local visual QA and generated archives
+/*.png
+/*.tar.gz
+/({clientHeight

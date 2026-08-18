@@ -2,55 +2,1028 @@
 
 import { useEffect, useState } from "react";
 
-const whatsapp = "https://wa.me/5573981019782?text=Ol%C3%A1%21%20Conheci%20a%20Avancini%20Web%20e%20quero%20um%20or%C3%A7amento%20para%20meu%20site.";
+const whatsapp =
+  "https://wa.me/5573981019782?text=Ol%C3%A1%21%20Conheci%20a%20Avancini%20Web%20e%20quero%20um%20or%C3%A7amento%20para%20meu%20site.";
 const services = [
-  { number: "01", label: "LANDING PAGES", title: "Uma página. Um objetivo. Mais conversão.", text: "Páginas estratégicas para campanhas, lançamentos e captação de contatos, com uma mensagem que conduz o visitante até a ação.", tag: "Performance e conversão", type: "landing" },
-  { number: "02", label: "SITES INSTITUCIONAIS", title: "A presença digital que sua empresa merece.", text: "Sites autorais que transformam sua marca em uma experiência de confiança, posicionamento e desejo desde o primeiro contato.", tag: "Autoridade e posicionamento", type: "institutional" },
-  { number: "03", label: "E-COMMERCE", title: "Sua vitrine aberta para vender todos os dias.", text: "Lojas virtuais claras, rápidas e preparadas para facilitar a escolha, reduzir dúvidas e levar o cliente até a compra.", tag: "Experiência de compra", type: "commerce" },
+  {
+    number: "01",
+    label: "LANDING PAGES",
+    title: "Uma página. Um objetivo. Mais conversão.",
+    text: "Páginas estratégicas para campanhas, lançamentos e captação de contatos, com uma mensagem que conduz o visitante até a ação.",
+    tag: "Performance e conversão",
+    type: "landing",
+    journey: ["Oferta", "Prova", "Contato"],
+  },
+  {
+    number: "02",
+    label: "SITES INSTITUCIONAIS",
+    title: "A presença digital que sua empresa merece.",
+    text: "Sites autorais que transformam sua marca em uma experiência de confiança, posicionamento e desejo desde o primeiro contato.",
+    tag: "Autoridade e posicionamento",
+    type: "institutional",
+    journey: ["Posição", "Portfólio", "Confiança"],
+  },
+  {
+    number: "03",
+    label: "E-COMMERCE",
+    title: "Sua vitrine aberta para vender todos os dias.",
+    text: "Lojas virtuais claras, rápidas e preparadas para facilitar a escolha, reduzir dúvidas e levar o cliente até a compra.",
+    tag: "Experiência de compra",
+    type: "commerce",
+    journey: ["Descoberta", "Produto", "Compra"],
+  },
 ] as const;
 
 const heroSlides = [
-  { id: "atlas", domain: "atlas.imoveis / projeto conceito", image: "/concepts/atlas-villa.webp", alt: "Villa contemporânea do projeto fictício Atlas Imóveis", brand: "ATLAS.", nav: ["Imóveis", "Lançamentos", "Contato"], cta: "AGENDAR VISITA", eyebrow: "IMÓVEIS DE ALTO PADRÃO", title: <>O endereço da sua<br /><em>próxima conquista.</em></>, description: "Residências selecionadas para quem entende que viver bem também é uma decisão de patrimônio.", button: "EXPLORAR IMÓVEIS ↗", proof: "32", proofText: <>imóveis<br />exclusivos</>, niche: "Mercado imobiliário", chip: "Desejo que vira visita" },
-  { id: "brasa", domain: "brasa73.com / projeto conceito", image: "/concepts/brasa-dining.jpg", alt: "Prato autoral do restaurante fictício Brasa 73", brand: "BRASA 73", nav: ["Menu", "Experiência", "Reservas"], cta: "RESERVAR MESA", eyebrow: "COZINHA AUTORAL", title: <>Uma noite para<br /><em>lembrar pelo sabor.</em></>, description: "Ingredientes locais, fogo e técnica em uma experiência criada para permanecer na memória.", button: "CONHECER O MENU ↗", proof: "4.9", proofText: <>avaliação<br />dos clientes</>, niche: "Gastronomia premium", chip: "Experiência que lota mesas" },
-  { id: "moreira", domain: "moreiralima.adv / projeto conceito", image: "/concepts/moreira-law.jpg", alt: "Advogados em reunião no projeto fictício Moreira e Lima", brand: "M&L", nav: ["Atuação", "Escritório", "Conteúdo"], cta: "FALAR COM ESPECIALISTA", eyebrow: "DIREITO EMPRESARIAL", title: <>Segurança jurídica<br /><em>para avançar.</em></>, description: "Estratégia legal clara para empresas que tomam decisões importantes todos os dias.", button: "CONHECER O ESCRITÓRIO ↗", proof: "18", proofText: <>anos de<br />experiência</>, niche: "Advocacia empresarial", chip: "Autoridade antes da reunião" },
+  {
+    id: "atlas",
+    domain: "atlas.imoveis / projeto conceito",
+    image: "/concepts/atlas-villa.webp",
+    alt: "Villa contemporânea do projeto fictício Atlas Imóveis",
+    brand: "ATLAS.",
+    nav: ["Imóveis", "Lançamentos", "Contato"],
+    cta: "AGENDAR VISITA",
+    eyebrow: "IMÓVEIS DE ALTO PADRÃO",
+    title: (
+      <>
+        O endereço da sua
+        <br />
+        <em>próxima conquista.</em>
+      </>
+    ),
+    description:
+      "Residências selecionadas para quem entende que viver bem também é uma decisão de patrimônio.",
+    button: "EXPLORAR IMÓVEIS ↗",
+    proof: "32",
+    proofText: (
+      <>
+        imóveis
+        <br />
+        exclusivos
+      </>
+    ),
+    niche: "Mercado imobiliário",
+    chip: "Desejo que vira visita",
+  },
+  {
+    id: "brasa",
+    domain: "brasa73.com / projeto conceito",
+    image: "/concepts/brasa-dining.jpg",
+    alt: "Prato autoral do restaurante fictício Brasa 73",
+    brand: "BRASA 73",
+    nav: ["Menu", "Experiência", "Reservas"],
+    cta: "RESERVAR MESA",
+    eyebrow: "COZINHA AUTORAL",
+    title: (
+      <>
+        Uma noite para
+        <br />
+        <em>lembrar pelo sabor.</em>
+      </>
+    ),
+    description:
+      "Ingredientes locais, fogo e técnica em uma experiência criada para permanecer na memória.",
+    button: "CONHECER O MENU ↗",
+    proof: "4.9",
+    proofText: (
+      <>
+        avaliação
+        <br />
+        dos clientes
+      </>
+    ),
+    niche: "Gastronomia premium",
+    chip: "Experiência que lota mesas",
+  },
+  {
+    id: "moreira",
+    domain: "moreiralima.adv / projeto conceito",
+    image: "/concepts/moreira-law.jpg",
+    alt: "Advogados em reunião no projeto fictício Moreira e Lima",
+    brand: "M&L",
+    nav: ["Atuação", "Escritório", "Conteúdo"],
+    cta: "FALAR COM ESPECIALISTA",
+    eyebrow: "DIREITO EMPRESARIAL",
+    title: (
+      <>
+        Segurança jurídica
+        <br />
+        <em>para avançar.</em>
+      </>
+    ),
+    description:
+      "Estratégia legal clara para empresas que tomam decisões importantes todos os dias.",
+    button: "CONHECER O ESCRITÓRIO ↗",
+    proof: "18",
+    proofText: (
+      <>
+        anos de
+        <br />
+        experiência
+      </>
+    ),
+    niche: "Advocacia empresarial",
+    chip: "Autoridade antes da reunião",
+  },
 ] as const;
 
 const previewProjects = {
-  landing: { name: "LUMINA", kind: "Landing page · Estética avançada", accent: "rose", pages: [
-    { label: "Início", eyebrow: "PROTOCOLO EXCLUSIVO", title: "Sua pele, sua melhor versão.", text: "Uma abertura emocional, oferta clara e ação imediata para transformar interesse em avaliação.", metric: "+2.400 clientes atendidas" },
-    { label: "Tratamentos", eyebrow: "JORNADA PERSONALIZADA", title: "Cada pele pede um cuidado único.", text: "Benefícios, protocolos e diferenciais organizados para reduzir dúvidas e aumentar confiança.", metric: "6 protocolos exclusivos" },
-    { label: "Conversão", eyebrow: "AVALIAÇÃO INICIAL", title: "Seu novo ritual começa aqui.", text: "Uma chamada final forte, depoimentos e formulário curto levando a visitante ao agendamento.", metric: "Agenda integrada" },
-  ]},
-  institutional: { name: "VÉRTICE.", kind: "Site institucional · Arquitetura", accent: "earth", pages: [
-    { label: "Início", eyebrow: "ARQUITETURA AUTORAL", title: "Projetos que atravessam o tempo.", text: "A primeira tela posiciona o escritório e transforma portfólio em desejo.", metric: "48 projetos entregues" },
-    { label: "Projetos", eyebrow: "PORTFÓLIO SELECIONADO", title: "Espaços pensados para pertencer.", text: "Uma galeria editorial apresenta residências, detalhes e conceitos sem poluir a experiência.", metric: "12 anos de trajetória" },
-    { label: "Escritório", eyebrow: "MÉTODO VÉRTICE", title: "Do primeiro traço à entrega.", text: "Processo, equipe e contato encerram a narrativa com autoridade e proximidade.", metric: "Atendimento personalizado" },
-  ]},
-  commerce: { name: "ÁUREA", kind: "E-commerce · Skincare botânico", accent: "sand", pages: [
-    { label: "Coleção", eyebrow: "RITUAL ESSENCIAL", title: "Menos excessos. Mais pele.", text: "Uma vitrine limpa que apresenta propósito, benefícios e produtos desde o primeiro olhar.", metric: "Rotina a partir de R$ 89" },
-    { label: "Produto", eyebrow: "SÉRUM LUMINOSO", title: "Potência botânica, textura leve.", text: "Ingredientes, resultados e modo de uso organizados para facilitar a decisão de compra.", metric: "4.9 · 186 avaliações" },
-    { label: "Carrinho", eyebrow: "COMPRA SEM ATRITO", title: "Seu ritual está quase completo.", text: "Resumo claro, frete visível e segurança para conduzir a cliente até o pagamento.", metric: "Frete grátis acima de R$ 199" },
-  ]},
+  landing: {
+    name: "LUMINA",
+    kind: "Landing page · Estética avançada",
+    accent: "rose",
+    pages: [
+      {
+        label: "Início",
+        eyebrow: "PROTOCOLO EXCLUSIVO",
+        title: "Sua pele, sua melhor versão.",
+        text: "Uma abertura emocional, oferta clara e ação imediata para transformar interesse em avaliação.",
+        metric: "+2.400 clientes atendidas",
+      },
+      {
+        label: "Tratamentos",
+        eyebrow: "JORNADA PERSONALIZADA",
+        title: "Cada pele pede um cuidado único.",
+        text: "Benefícios, protocolos e diferenciais organizados para reduzir dúvidas e aumentar confiança.",
+        metric: "6 protocolos exclusivos",
+      },
+      {
+        label: "Conversão",
+        eyebrow: "AVALIAÇÃO INICIAL",
+        title: "Seu novo ritual começa aqui.",
+        text: "Uma chamada final forte, depoimentos e formulário curto levando a visitante ao agendamento.",
+        metric: "Agenda integrada",
+      },
+    ],
+  },
+  institutional: {
+    name: "VÉRTICE.",
+    kind: "Site institucional · Arquitetura",
+    accent: "earth",
+    pages: [
+      {
+        label: "Início",
+        eyebrow: "ARQUITETURA AUTORAL",
+        title: "Projetos que atravessam o tempo.",
+        text: "A primeira tela posiciona o escritório e transforma portfólio em desejo.",
+        metric: "48 projetos entregues",
+      },
+      {
+        label: "Projetos",
+        eyebrow: "PORTFÓLIO SELECIONADO",
+        title: "Espaços pensados para pertencer.",
+        text: "Uma galeria editorial apresenta residências, detalhes e conceitos sem poluir a experiência.",
+        metric: "12 anos de trajetória",
+      },
+      {
+        label: "Escritório",
+        eyebrow: "MÉTODO VÉRTICE",
+        title: "Do primeiro traço à entrega.",
+        text: "Processo, equipe e contato encerram a narrativa com autoridade e proximidade.",
+        metric: "Atendimento personalizado",
+      },
+    ],
+  },
+  commerce: {
+    name: "ÁUREA",
+    kind: "E-commerce · Skincare botânico",
+    accent: "sand",
+    pages: [
+      {
+        label: "Coleção",
+        eyebrow: "RITUAL ESSENCIAL",
+        title: "Menos excessos. Mais pele.",
+        text: "Uma vitrine limpa que apresenta propósito, benefícios e produtos desde o primeiro olhar.",
+        metric: "Rotina a partir de R$ 89",
+      },
+      {
+        label: "Produto",
+        eyebrow: "SÉRUM LUMINOSO",
+        title: "Potência botânica, textura leve.",
+        text: "Ingredientes, resultados e modo de uso organizados para facilitar a decisão de compra.",
+        metric: "4.9 · 186 avaliações",
+      },
+      {
+        label: "Carrinho",
+        eyebrow: "COMPRA SEM ATRITO",
+        title: "Seu ritual está quase completo.",
+        text: "Resumo claro, frete visível e segurança para conduzir a cliente até o pagamento.",
+        metric: "Frete grátis acima de R$ 199",
+      },
+    ],
+  },
 } as const;
 
 type PreviewType = keyof typeof previewProjects;
+type NicheType = "cars" | "fashion" | "realestate" | "fastfood";
+
+const nicheModels = [
+  {
+    type: "cars" as const,
+    number: "01",
+    label: "LOJA DE CARROS",
+    brand: "APEX MOTORS",
+    title: "Do estoque à simulação.",
+    text: "Catálogo, filtros, avaliação do usado, financiamento e contato comercial.",
+    image: "/concepts/apex-cars.jpg",
+    proof: "+120",
+    proofLabel: "veículos selecionados",
+    chips: ["Procedência", "Financiamento", "Avaliação"],
+  },
+  {
+    type: "fashion" as const,
+    number: "02",
+    label: "MODA & ROUPAS",
+    brand: "NOMA",
+    title: "Da coleção ao carrinho.",
+    text: "Campanha editorial, categorias, produto, tamanhos e compra sem atrito.",
+    image: "/concepts/noma-fashion.jpg",
+    proof: "DROP 04",
+    proofLabel: "coleção limitada",
+    chips: ["Editorial", "Tamanhos", "Checkout"],
+  },
+  {
+    type: "realestate" as const,
+    number: "03",
+    label: "IMOBILIÁRIA",
+    brand: "ATLAS IMÓVEIS",
+    title: "Da busca à visita.",
+    text: "Pesquisa inteligente, imóveis, bairros, prova de autoridade e agendamento.",
+    image: "/concepts/atlas-villa.webp",
+    proof: "24",
+    proofLabel: "endereços exclusivos",
+    chips: ["Curadoria", "Bairros", "Visitas"],
+  },
+  {
+    type: "fastfood" as const,
+    number: "04",
+    label: "FAST-FOOD",
+    brand: "BRASA BURGER",
+    title: "Da fome ao pedido.",
+    text: "Oferta visual, cardápio, combos, adicionais e pedido direto no celular.",
+    image: "/concepts/brasa-burger.png",
+    proof: "30–45",
+    proofLabel: "minutos para chegar",
+    chips: ["Cardápio", "Combos", "Pedido"],
+  },
+];
 
 function PreviewCanvas({ type, slide }: { type: PreviewType; slide: number }) {
   if (type === "landing") {
-    if (slide === 0) return <div className="concept-screen lumina-home"><img src="/concepts/lumina-clinic.jpg" alt="Atendimento estético Lumina" /><div className="concept-screen-nav"><strong>LUMINA</strong><span>Tratamentos&nbsp;&nbsp; Sobre&nbsp;&nbsp; Resultados</span><b>AGENDAR</b></div><div className="lumina-home-copy"><small>ESTÉTICA AVANÇADA</small><h3>Sua pele,<br /><em>sem excessos.</em></h3><p>Protocolos personalizados para resultados naturais e uma relação mais leve com o espelho.</p><b>QUERO MINHA AVALIAÇÃO ↗</b></div><div className="lumina-seal">+2.400<br /><span>clientes atendidas</span></div></div>;
-    if (slide === 1) return <div className="concept-screen lumina-treatments"><div className="concept-screen-nav"><strong>LUMINA</strong><span>Protocolos selecionados</span><b>02 / 03</b></div><div className="lumina-treatment-intro"><small>CUIDADO SOB MEDIDA</small><h3>Não existe pele igual.<br />Nem tratamento deveria.</h3><p>Uma jornada construída depois de ouvir, avaliar e entender o que você realmente deseja.</p></div><div className="lumina-treatment-grid"><article><span>01</span><b>Glow Natural</b><small>Luminosidade e textura</small></article><article className="with-photo"><img src="/concepts/lumina-clinic.jpg" alt="Procedimento Lumina" /><span>02</span><b>Firmeza Essencial</b><small>Estímulo e sustentação</small></article><article><span>03</span><b>Renovação</b><small>Uniformidade e viço</small></article></div></div>;
-    return <div className="concept-screen lumina-booking"><div className="concept-screen-nav"><strong>LUMINA</strong><span>Seu primeiro passo</span><b>03 / 03</b></div><div className="lumina-proof"><small>RESULTADOS REAIS</small><blockquote>“Me senti ouvida antes de qualquer procedimento. O resultado ficou exatamente como eu queria: natural.”</blockquote><span>— Mariana, cliente Lumina</span><div><b>4.9</b><small>186 avaliações verificadas</small></div></div><div className="lumina-form"><small>AVALIAÇÃO PERSONALIZADA</small><h3>Vamos cuidar de você?</h3><label>Seu nome <span /></label><label>WhatsApp <span /></label><label>O que você gostaria de melhorar? <span /></label><button>QUERO AGENDAR MINHA AVALIAÇÃO ↗</button><p>Retorno em até 1 hora útil.</p></div></div>;
+    if (slide === 0)
+      return (
+        <div className="concept-screen lumina-home">
+          <img
+            src="/concepts/lumina-clinic.jpg"
+            alt="Atendimento estético Lumina"
+          />
+          <div className="concept-screen-nav">
+            <strong>LUMINA</strong>
+            <span>Tratamentos&nbsp;&nbsp; Sobre&nbsp;&nbsp; Resultados</span>
+            <b>AGENDAR</b>
+          </div>
+          <div className="lumina-home-copy">
+            <small>ESTÉTICA AVANÇADA</small>
+            <h3>
+              Sua pele,
+              <br />
+              <em>sem excessos.</em>
+            </h3>
+            <p>
+              Protocolos personalizados para resultados naturais e uma relação
+              mais leve com o espelho.
+            </p>
+            <b>QUERO MINHA AVALIAÇÃO ↗</b>
+          </div>
+          <div className="lumina-seal">
+            +2.400
+            <br />
+            <span>clientes atendidas</span>
+          </div>
+        </div>
+      );
+    if (slide === 1)
+      return (
+        <div className="concept-screen lumina-treatments">
+          <div className="concept-screen-nav">
+            <strong>LUMINA</strong>
+            <span>Protocolos selecionados</span>
+            <b>02 / 03</b>
+          </div>
+          <div className="lumina-treatment-intro">
+            <small>CUIDADO SOB MEDIDA</small>
+            <h3>
+              Não existe pele igual.
+              <br />
+              Nem tratamento deveria.
+            </h3>
+            <p>
+              Uma jornada construída depois de ouvir, avaliar e entender o que
+              você realmente deseja.
+            </p>
+          </div>
+          <div className="lumina-treatment-grid">
+            <article>
+              <span>01</span>
+              <b>Glow Natural</b>
+              <small>Luminosidade e textura</small>
+            </article>
+            <article className="with-photo">
+              <img
+                src="/concepts/lumina-clinic.jpg"
+                alt="Procedimento Lumina"
+              />
+              <span>02</span>
+              <b>Firmeza Essencial</b>
+              <small>Estímulo e sustentação</small>
+            </article>
+            <article>
+              <span>03</span>
+              <b>Renovação</b>
+              <small>Uniformidade e viço</small>
+            </article>
+          </div>
+        </div>
+      );
+    return (
+      <div className="concept-screen lumina-booking">
+        <div className="concept-screen-nav">
+          <strong>LUMINA</strong>
+          <span>Seu primeiro passo</span>
+          <b>03 / 03</b>
+        </div>
+        <div className="lumina-proof">
+          <small>RESULTADOS REAIS</small>
+          <blockquote>
+            “Me senti ouvida antes de qualquer procedimento. O resultado ficou
+            exatamente como eu queria: natural.”
+          </blockquote>
+          <span>— Mariana, cliente Lumina</span>
+          <div>
+            <b>4.9</b>
+            <small>186 avaliações verificadas</small>
+          </div>
+        </div>
+        <div className="lumina-form">
+          <small>AVALIAÇÃO PERSONALIZADA</small>
+          <h3>Vamos cuidar de você?</h3>
+          <div className="mock-field">
+            Seu nome <span />
+          </div>
+          <div className="mock-field">
+            WhatsApp <span />
+          </div>
+          <div className="mock-field">
+            O que você gostaria de melhorar? <span />
+          </div>
+          <button>QUERO AGENDAR MINHA AVALIAÇÃO ↗</button>
+          <p>Retorno em até 1 hora útil.</p>
+        </div>
+      </div>
+    );
   }
 
   if (type === "institutional") {
-    if (slide === 0) return <div className="concept-screen vertice-home-full"><img src="/concepts/vertice-home.jpg" alt="Projeto residencial Vértice" /><div className="vertice-side-brand">VÉRTICE.</div><div className="vertice-home-nav">PROJETOS&nbsp;&nbsp;&nbsp; ESCRITÓRIO&nbsp;&nbsp;&nbsp; CONTATO</div><div className="vertice-home-copy"><span>RESIDÊNCIA 735 · BAHIA</span><h3>Matéria.<br />Luz.<br />Silêncio.</h3><p>Arquitetura autoral para atravessar gerações.</p></div><b className="vertice-counter">01 / 03</b></div>;
-    if (slide === 1) return <div className="concept-screen vertice-gallery"><div className="vertice-gallery-head"><strong>VÉRTICE.</strong><span>PROJETOS SELECIONADOS</span><b>02 / 03</b></div><div className="vertice-gallery-grid"><article><img src="/concepts/vertice-home.jpg" alt="Residência pátio" /><div><b>CASA PÁTIO</b><span>Trancoso · BA</span></div></article><article><img src="/concepts/atlas-villa.webp" alt="Casa horizonte" /><div><b>CASA HORIZONTE</b><span>Porto Seguro · BA</span></div></article><article><img src="/concepts/vertice-home.jpg" alt="Residência 735" /><div><b>RESIDÊNCIA 735</b><span>Eunápolis · BA</span></div></article></div><p>← ARRASTE PARA EXPLORAR →</p></div>;
-    return <div className="concept-screen vertice-method"><div className="vertice-method-head"><strong>VÉRTICE.</strong><span>O ESCRITÓRIO</span><b>03 / 03</b></div><div className="vertice-method-title"><small>NOSSO MÉTODO</small><h3>Do terreno<br />à memória.</h3><p>Um processo próximo, preciso e profundamente conectado ao modo como você deseja viver.</p></div><div className="vertice-method-steps"><article><span>01</span><b>Escuta</b><p>Rotina, desejos e contexto.</p></article><article><span>02</span><b>Conceito</b><p>Forma, matéria e luz.</p></article><article><span>03</span><b>Realização</b><p>Detalhe até a entrega.</p></article></div><div className="vertice-method-stats"><b>48<small>projetos</small></b><b>12<small>anos</small></b><b>07<small>prêmios</small></b></div></div>;
+    if (slide === 0)
+      return (
+        <div className="concept-screen vertice-home-full">
+          <img
+            src="/concepts/vertice-home.jpg"
+            alt="Projeto residencial Vértice"
+          />
+          <div className="vertice-side-brand">VÉRTICE.</div>
+          <div className="vertice-home-nav">
+            PROJETOS&nbsp;&nbsp;&nbsp; ESCRITÓRIO&nbsp;&nbsp;&nbsp; CONTATO
+          </div>
+          <div className="vertice-home-copy">
+            <span>RESIDÊNCIA 735 · BAHIA</span>
+            <h3>
+              Matéria.
+              <br />
+              Luz.
+              <br />
+              Silêncio.
+            </h3>
+            <p>Arquitetura autoral para atravessar gerações.</p>
+          </div>
+          <b className="vertice-counter">01 / 03</b>
+        </div>
+      );
+    if (slide === 1)
+      return (
+        <div className="concept-screen vertice-gallery">
+          <div className="vertice-gallery-head">
+            <strong>VÉRTICE.</strong>
+            <span>PROJETOS SELECIONADOS</span>
+            <b>02 / 03</b>
+          </div>
+          <div className="vertice-gallery-grid">
+            <article>
+              <img src="/concepts/vertice-home.jpg" alt="Residência pátio" />
+              <div>
+                <b>CASA PÁTIO</b>
+                <span>Trancoso · BA</span>
+              </div>
+            </article>
+            <article>
+              <img src="/concepts/atlas-villa.webp" alt="Casa horizonte" />
+              <div>
+                <b>CASA HORIZONTE</b>
+                <span>Porto Seguro · BA</span>
+              </div>
+            </article>
+            <article>
+              <img src="/concepts/vertice-home.jpg" alt="Residência 735" />
+              <div>
+                <b>RESIDÊNCIA 735</b>
+                <span>Eunápolis · BA</span>
+              </div>
+            </article>
+          </div>
+          <p>← ARRASTE PARA EXPLORAR →</p>
+        </div>
+      );
+    return (
+      <div className="concept-screen vertice-method">
+        <div className="vertice-method-head">
+          <strong>VÉRTICE.</strong>
+          <span>O ESCRITÓRIO</span>
+          <b>03 / 03</b>
+        </div>
+        <div className="vertice-method-title">
+          <small>NOSSO MÉTODO</small>
+          <h3>
+            Do terreno
+            <br />à memória.
+          </h3>
+          <p>
+            Um processo próximo, preciso e profundamente conectado ao modo como
+            você deseja viver.
+          </p>
+        </div>
+        <div className="vertice-method-steps">
+          <article>
+            <span>01</span>
+            <b>Escuta</b>
+            <p>Rotina, desejos e contexto.</p>
+          </article>
+          <article>
+            <span>02</span>
+            <b>Conceito</b>
+            <p>Forma, matéria e luz.</p>
+          </article>
+          <article>
+            <span>03</span>
+            <b>Realização</b>
+            <p>Detalhe até a entrega.</p>
+          </article>
+        </div>
+        <div className="vertice-method-stats">
+          <b>
+            48<small>projetos</small>
+          </b>
+          <b>
+            12<small>anos</small>
+          </b>
+          <b>
+            07<small>prêmios</small>
+          </b>
+        </div>
+      </div>
+    );
   }
 
-  if (slide === 0) return <div className="concept-screen aurea-home"><div className="aurea-nav"><strong>ÁUREA</strong><span>ROSTO&nbsp;&nbsp; CORPO&nbsp;&nbsp; RITUAIS</span><b>SACOLA 0</b></div><div className="aurea-home-copy"><small>SKINCARE BOTÂNICO</small><h3>Menos etapas.<br />Mais intenção.</h3><p>Fórmulas essenciais para uma rotina que cabe na vida real.</p><b>DESCOBRIR O RITUAL ↗</b></div><img src="/concepts/aurea-skin.jpg" alt="Produtos Áurea" /><div className="aurea-ticker">VEGANO · CRUELTY FREE · ATIVOS BRASILEIROS · EMBALAGEM CONSCIENTE</div></div>;
-  if (slide === 1) return <div className="concept-screen aurea-product"><div className="aurea-product-brand">ÁUREA <span>02 / 03</span></div><div className="aurea-product-photo"><img src="/concepts/aurea-skin.jpg" alt="Sérum Luminoso Áurea" /><span>ARRASTE PARA VER DETALHES</span></div><div className="aurea-product-info"><small>BEST-SELLER · 30 ML</small><h3>Sérum<br />Luminoso</h3><div className="stars">★★★★★ <span>4.9 (186)</span></div><p>Vitamina C estabilizada, niacinamida e extrato de açaí para iluminar sem sensibilizar.</p><ul><li>Textura ultraleve</li><li>Resultados em 21 dias</li><li>Para todos os tipos de pele</li></ul><b>R$ 89</b><button>ADICIONAR À SACOLA</button></div></div>;
-  return <div className="concept-screen aurea-cart"><div className="aurea-cart-head"><strong>ÁUREA</strong><span>SUA SACOLA</span><b>03 / 03</b></div><div className="aurea-cart-items"><small>02 PRODUTOS</small><article><img src="/concepts/aurea-skin.jpg" alt="Produto Áurea" /><div><b>Sérum Luminoso</b><span>30 ml · Quantidade 1</span><small>Remover</small></div><strong>R$ 89</strong></article><article><div className="aurea-placeholder" /><div><b>Creme Barreira</b><span>50 g · Quantidade 1</span><small>Remover</small></div><strong>R$ 109</strong></article></div><aside><small>RESUMO</small><p>Subtotal <b>R$ 198</b></p><p>Frete <b>Grátis</b></p><div>Total <b>R$ 198</b></div><button>FINALIZAR COMPRA ↗</button><span>Compra segura · Troca fácil · Pix ou cartão</span></aside></div>;
+  if (slide === 0)
+    return (
+      <div className="concept-screen aurea-home">
+        <div className="aurea-nav">
+          <strong>ÁUREA</strong>
+          <span>ROSTO&nbsp;&nbsp; CORPO&nbsp;&nbsp; RITUAIS</span>
+          <b>SACOLA 0</b>
+        </div>
+        <div className="aurea-home-copy">
+          <small>SKINCARE BOTÂNICO</small>
+          <h3>
+            Menos etapas.
+            <br />
+            Mais intenção.
+          </h3>
+          <p>Fórmulas essenciais para uma rotina que cabe na vida real.</p>
+          <b>DESCOBRIR O RITUAL ↗</b>
+        </div>
+        <img src="/concepts/aurea-skin.jpg" alt="Produtos Áurea" />
+        <div className="aurea-ticker">
+          VEGANO · CRUELTY FREE · ATIVOS BRASILEIROS · EMBALAGEM CONSCIENTE
+        </div>
+      </div>
+    );
+  if (slide === 1)
+    return (
+      <div className="concept-screen aurea-product">
+        <div className="aurea-product-brand">
+          ÁUREA <span>02 / 03</span>
+        </div>
+        <div className="aurea-product-photo">
+          <img src="/concepts/aurea-skin.jpg" alt="Sérum Luminoso Áurea" />
+          <span>ARRASTE PARA VER DETALHES</span>
+        </div>
+        <div className="aurea-product-info">
+          <small>BEST-SELLER · 30 ML</small>
+          <h3>
+            Sérum
+            <br />
+            Luminoso
+          </h3>
+          <div className="stars">
+            ★★★★★ <span>4.9 (186)</span>
+          </div>
+          <p>
+            Vitamina C estabilizada, niacinamida e extrato de açaí para iluminar
+            sem sensibilizar.
+          </p>
+          <ul>
+            <li>Textura ultraleve</li>
+            <li>Resultados em 21 dias</li>
+            <li>Para todos os tipos de pele</li>
+          </ul>
+          <b>R$ 89</b>
+          <button>ADICIONAR À SACOLA</button>
+        </div>
+      </div>
+    );
+  return (
+    <div className="concept-screen aurea-cart">
+      <div className="aurea-cart-head">
+        <strong>ÁUREA</strong>
+        <span>SUA SACOLA</span>
+        <b>03 / 03</b>
+      </div>
+      <div className="aurea-cart-items">
+        <small>02 PRODUTOS</small>
+        <article>
+          <img src="/concepts/aurea-skin.jpg" alt="Produto Áurea" />
+          <div>
+            <b>Sérum Luminoso</b>
+            <span>30 ml · Quantidade 1</span>
+            <small>Remover</small>
+          </div>
+          <strong>R$ 89</strong>
+        </article>
+        <article>
+          <div className="aurea-placeholder" />
+          <div>
+            <b>Creme Barreira</b>
+            <span>50 g · Quantidade 1</span>
+            <small>Remover</small>
+          </div>
+          <strong>R$ 109</strong>
+        </article>
+      </div>
+      <aside>
+        <small>RESUMO</small>
+        <p>
+          Subtotal <b>R$ 198</b>
+        </p>
+        <p>
+          Frete <b>Grátis</b>
+        </p>
+        <div>
+          Total <b>R$ 198</b>
+        </div>
+        <button>FINALIZAR COMPRA ↗</button>
+        <span>Compra segura · Troca fácil · Pix ou cartão</span>
+      </aside>
+    </div>
+  );
+}
+
+function NicheFullPage({ type }: { type: NicheType }) {
+  if (type === "cars")
+    return (
+      <div className="niche-page cars-page">
+        <section className="cars-hero">
+          <nav>
+            <strong>
+              APEX<span>MOTORS</span>
+            </strong>
+            <div>
+              ESTOQUE&nbsp;&nbsp; VENDA SEU CARRO&nbsp;&nbsp; FINANCIAMENTO
+            </div>
+            <b>FALAR COM CONSULTOR</b>
+          </nav>
+          <img src="/concepts/apex-cars.jpg" alt="Showroom Apex Motors" />
+          <div>
+            <small>SELEÇÃO PREMIUM · PROCEDÊNCIA GARANTIDA</small>
+            <h2>
+              Seu próximo carro
+              <br />
+              começa aqui.
+            </h2>
+            <p>
+              Veículos selecionados, avaliação transparente e uma negociação sem
+              surpresa.
+            </p>
+            <button>VER ESTOQUE ↗</button>
+          </div>
+          <aside>
+            <b>+120</b>
+            <span>veículos disponíveis</span>
+            <b>4.9</b>
+            <span>avaliação dos clientes</span>
+          </aside>
+        </section>
+        <div className="cars-assurance">
+          <span><b>01</b> Laudo cautelar completo</span>
+          <span><b>02</b> Garantia de procedência</span>
+          <span><b>03</b> Entrega em todo o Brasil</span>
+        </div>
+        <section className="cars-search">
+          <span>
+            MARCA <b>Todas</b>
+          </span>
+          <span>
+            MODELO <b>Todos</b>
+          </span>
+          <span>
+            FAIXA DE PREÇO <b>Até R$ 250 mil</b>
+          </span>
+          <button>BUSCAR 48 VEÍCULOS →</button>
+        </section>
+        <section className="cars-stock">
+          <header>
+            <small>DESTAQUES DO ESTOQUE</small>
+            <h3>Escolhidos para impressionar.</h3>
+          </header>
+          <div>
+            {[
+              "Porsche 718 Cayman",
+              "BMW 320i M Sport",
+              "Audi Q5 Performance",
+            ].map((name, i) => (
+              <article key={name}>
+                <div className={`car-thumb car-${i}`}>
+                  <img src="/concepts/apex-cars.jpg" alt="" />
+                  <span>2024 · {i * 7 + 8}.000 km</span>
+                </div>
+                <h4>{name}</h4>
+                <div className="car-specs">
+                  <span>Automático</span><span>Gasolina</span><span>Revisado</span>
+                </div>
+                <p>
+                  A partir de{" "}
+                  <b>
+                    R$ {i === 0 ? "649.900" : i === 1 ? "289.900" : "379.900"}
+                  </b>
+                </p>
+                <button>VER DETALHES</button>
+              </article>
+            ))}
+          </div>
+        </section>
+        <section className="cars-finance">
+          <div>
+            <small>FINANCIAMENTO SOB MEDIDA</small>
+            <h3>
+              Seu plano.
+              <br />
+              Seu ritmo.
+            </h3>
+            <p>
+              Simule entrada, prazo e parcela antes mesmo de falar com um
+              consultor.
+            </p>
+            <button>SIMULAR AGORA ↗</button>
+          </div>
+          <aside>
+            <span>
+              Valor do veículo <b>R$ 289.900</b>
+            </span>
+            <span>
+              Entrada <b>R$ 90.000</b>
+            </span>
+            <span>
+              Prazo <b>48 meses</b>
+            </span>
+            <strong>
+              Parcela estimada <b>R$ 5.480</b>
+            </strong>
+          </aside>
+        </section>
+        <section className="cars-trade">
+          <small>SEU CARRO PODE SER A ENTRADA</small>
+          <h3>Avaliação rápida, justa e sem compromisso.</h3>
+          <button>AVALIAR MEU CARRO →</button>
+        </section>
+      </div>
+    );
+
+  if (type === "fashion")
+    return (
+      <div className="niche-page fashion-page">
+        <section className="fashion-hero">
+          <nav>
+            <strong>NOMA</strong>
+            <span>NOVIDADES&nbsp;&nbsp; FEMININO&nbsp;&nbsp; ESSENCIAIS</span>
+            <b>BUSCAR&nbsp;&nbsp; SACOLA (0)</b>
+          </nav>
+          <img src="/concepts/noma-fashion.jpg" alt="Editorial Noma" />
+          <div>
+            <small>DROP 04 · FORMAS DE AGORA</small>
+            <h2>
+              Vista o que
+              <br />
+              <em>fica em você.</em>
+            </h2>
+            <button>CONHECER A COLEÇÃO</button>
+          </div>
+          <p>
+            Peças essenciais, modelagens precisas e produção em pequenos lotes.
+          </p>
+        </section>
+        <div className="fashion-marquee">
+          <span>NOVA COLEÇÃO</span> ENTREGA EXPRESSA · TROCA FÁCIL · PRODUÇÃO LIMITADA · <span>DROP 04</span>
+        </div>
+        <section className="fashion-categories">
+          <article>
+            <span>01</span>
+            <h3>Alfaiataria leve</h3>
+            <b>12 peças →</b>
+          </article>
+          <article>
+            <span>02</span>
+            <h3>Novos essenciais</h3>
+            <b>18 peças →</b>
+          </article>
+          <article>
+            <span>03</span>
+            <h3>Últimas unidades</h3>
+            <b>Comprar →</b>
+          </article>
+        </section>
+        <section className="fashion-products">
+          <header>
+            <h3>Mais desejados</h3>
+            <span>VER TODOS →</span>
+          </header>
+          <div>
+            {["Blazer Íris", "Saia Linha", "Tricot Areia"].map((name, i) => (
+              <article key={name}>
+                <div>
+                  <img
+                    src="/concepts/noma-fashion.jpg"
+                    alt=""
+                    style={{ objectPosition: `${35 + i * 25}% center` }}
+                  />
+                  <button>+</button>
+                </div>
+                <small>NOMA · DROP 04</small>
+                <h4>{name}</h4>
+                <p>R$ {i === 0 ? "489" : i === 1 ? "279" : "329"}</p>
+                <div className="fashion-options">
+                  <span>P</span><span>M</span><span>G</span><i /><i />
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+        <section className="fashion-manifesto">
+          <span>N</span>
+          <div>
+            <small>POR QUE NOMA</small>
+            <h3>
+              Menos tendências.
+              <br />
+              Mais identidade.
+            </h3>
+            <p>
+              Desenhamos roupas que atravessam estações, combinam entre si e
+              acompanham diferentes versões da mesma mulher.
+            </p>
+            <button>CONHEÇA NOSSA HISTÓRIA →</button>
+          </div>
+        </section>
+        <section className="fashion-news">
+          <small>10% NA PRIMEIRA COMPRA</small>
+          <h3>Entre para a lista Noma.</h3>
+          <div>
+            seu melhor e-mail <button>QUERO RECEBER →</button>
+          </div>
+        </section>
+      </div>
+    );
+
+  if (type === "realestate")
+    return (
+      <div className="niche-page estate-page">
+        <section className="estate-hero">
+          <img src="/concepts/atlas-villa.webp" alt="Imóvel Atlas" />
+          <nav>
+            <strong>ATLAS.</strong>
+            <span>
+              COMPRAR&nbsp;&nbsp; ALUGAR&nbsp;&nbsp; LANÇAMENTOS&nbsp;&nbsp;
+              BAIRROS
+            </span>
+            <b>ATENDIMENTO</b>
+          </nav>
+          <div>
+            <small>IMÓVEIS QUE MUDAM O JEITO DE VIVER</small>
+            <h2>
+              Encontre espaço
+              <br />
+              para o próximo capítulo.
+            </h2>
+            <div className="estate-search">
+              <span>
+                Quero <b>Comprar⌄</b>
+              </span>
+              <span>
+                Em <b>Trancoso, BA⌄</b>
+              </span>
+              <span>
+                Tipo <b>Casa⌄</b>
+              </span>
+              <button>BUSCAR 24 IMÓVEIS →</button>
+            </div>
+          </div>
+        </section>
+        <div className="estate-intelligence">
+          <span><small>VALORIZAÇÃO MÉDIA</small><b>+18,4%</b> nos últimos 24 meses</span>
+          <span><small>CURADORIA ATLAS</small><b>1 em 12</b> imóveis é selecionado</span>
+          <span><small>ATENDIMENTO</small><b>7 dias</b> por semana</span>
+        </div>
+        <section className="estate-curation">
+          <header>
+            <small>CURADORIA ATLAS</small>
+            <h3>Imóveis que merecem ser vistos.</h3>
+            <p>
+              Cada endereço é visitado, verificado e selecionado por
+              especialistas locais.
+            </p>
+          </header>
+          <div>
+            <article className="estate-main">
+              <img src="/concepts/atlas-villa.webp" alt="Villa Aurora" />
+              <span>EXCLUSIVIDADE</span>
+              <h4>Villa Aurora</h4>
+              <p>
+                Trancoso · 5 suítes · 680 m² <b>R$ 8,4 milhões</b>
+              </p>
+            </article>
+            <article>
+              <img src="/concepts/vertice-home.jpg" alt="Casa Pátio" />
+              <h4>Casa Pátio</h4>
+              <p>
+                Eunápolis · 4 suítes <b>R$ 3,2 milhões</b>
+              </p>
+            </article>
+          </div>
+        </section>
+        <section className="estate-neighborhood">
+          <div>
+            <small>VIVER EM TRANCOSO</small>
+            <h3>
+              Natureza por perto.
+              <br />
+              Tempo no seu ritmo.
+            </h3>
+            <p>
+              Guias de bairro com escolas, gastronomia, mobilidade e tudo que
+              importa antes de escolher um novo endereço.
+            </p>
+            <button>EXPLORAR O BAIRRO →</button>
+          </div>
+          <aside>
+            <b>12 min</b>
+            <span>do Quadrado</span>
+            <b>8 km</b>
+            <span>da praia</span>
+            <b>24</b>
+            <span>imóveis disponíveis</span>
+          </aside>
+        </section>
+        <section className="estate-agent">
+          <small>ATENDIMENTO HUMANO</small>
+          <h3>
+            Conte o que você procura.
+            <br />
+            Nós encontramos.
+          </h3>
+          <p>
+            Um especialista local seleciona os imóveis certos e organiza sua
+            agenda de visitas.
+          </p>
+          <button>FALAR COM UM ESPECIALISTA ↗</button>
+        </section>
+      </div>
+    );
+
+  return (
+    <div className="niche-page fast-page">
+      <section className="fast-hero">
+        <nav>
+          <strong>
+            BRASA<span>BURGER</span>
+          </strong>
+          <div>CARDÁPIO&nbsp;&nbsp; LOJAS&nbsp;&nbsp; NOSSA BRASA</div>
+          <b>PEDIR AGORA</b>
+        </nav>
+        <img src="/concepts/brasa-burger.png" alt="Burger Brasa" />
+        <div>
+          <small>SMASH NA BRASA · ENTREGA RÁPIDA</small>
+          <h2>
+            Fome não
+            <br />
+            espera.
+          </h2>
+          <p>
+            Carne na brasa, pão tostado e molho da casa. Seu pedido pronto em
+            poucos cliques.
+          </p>
+          <button>VER CARDÁPIO ↗</button>
+        </div>
+        <aside>
+          <b>30–45 min</b>
+          <span>tempo médio</span>
+        </aside>
+      </section>
+      <div className="fast-promo-strip">
+        <span>HOJE</span>
+        <b>COMBO BRASA + FRITAS + REFIL</b>
+        <strong>R$ 39,90</strong>
+        <small>PEÇA PELO APP →</small>
+      </div>
+      <section className="fast-combos">
+        <header>
+          <small>OS MAIS PEDIDOS</small>
+          <h3>Escolha seu favorito.</h3>
+        </header>
+        <div>
+          {["Brasa Bacon", "Duplo Fogo", "Chicken Crunch"].map((name, i) => (
+            <article key={name}>
+              <span>0{i + 1}</span>
+              <div className="burger-circle">
+                <img src="/concepts/brasa-burger.png" alt="" />
+              </div>
+              <h4>{name}</h4>
+              <p>
+                {i === 0
+                  ? "Bacon crocante, cheddar e molho Brasa"
+                  : i === 1
+                    ? "Dois smash, queijo e cebola crispy"
+                    : "Frango crocante e maionese verde"}
+              </p>
+              <b>R$ {i === 0 ? "32,90" : i === 1 ? "38,90" : "29,90"}</b>
+              <button>ADICIONAR +</button>
+            </article>
+          ))}
+        </div>
+      </section>
+      <section className="fast-builder">
+        <div>
+          <small>MONTE DO SEU JEITO</small>
+          <h3>
+            Sua fome.
+            <br />
+            Suas regras.
+          </h3>
+          <p>
+            Escolha a proteína, o queijo, os extras e finalize com seu molho
+            favorito.
+          </p>
+        </div>
+        <ol>
+          <li>
+            <b>01</b>Escolha o burger <span>→</span>
+          </li>
+          <li>
+            <b>02</b>Adicione extras <span>→</span>
+          </li>
+          <li>
+            <b>03</b>Escolha o acompanhamento <span>→</span>
+          </li>
+          <li>
+            <b>04</b>Receba quentinho <span>→</span>
+          </li>
+        </ol>
+      </section>
+      <section className="fast-app">
+        <span>
+          BRASA
+          <br />
+          CLUB
+        </span>
+        <div>
+          <small>PEÇA DIRETO. GANHE PONTOS.</small>
+          <h3>
+            Baixe o app e ganhe
+            <br />
+            20% no primeiro pedido.
+          </h3>
+          <button>QUERO MEU DESCONTO ↗</button>
+        </div>
+      </section>
+    </div>
+  );
 }
 
 export default function Home() {
@@ -60,46 +1033,920 @@ export default function Home() {
   const [heroPaused, setHeroPaused] = useState(false);
   const [preview, setPreview] = useState<PreviewType | null>(null);
   const [previewSlide, setPreviewSlide] = useState(0);
-  useEffect(() => { const onScroll = () => setScrolled(window.scrollY > 18); onScroll(); window.addEventListener("scroll", onScroll); return () => window.removeEventListener("scroll", onScroll); }, []);
-  useEffect(() => { if (heroPaused) return; const timer = window.setInterval(() => setHeroIndex((index) => (index + 1) % heroSlides.length), 5600); return () => window.clearInterval(timer); }, [heroPaused]);
-  useEffect(() => { if (!preview) return; document.body.style.overflow = "hidden"; const onKey = (event: KeyboardEvent) => { if (event.key === "Escape") setPreview(null); if (event.key === "ArrowRight") setPreviewSlide((slide) => (slide + 1) % 3); if (event.key === "ArrowLeft") setPreviewSlide((slide) => (slide + 2) % 3); }; window.addEventListener("keydown", onKey); return () => { document.body.style.overflow = ""; window.removeEventListener("keydown", onKey); }; }, [preview]);
+  const [nichePreview, setNichePreview] = useState<NicheType | null>(null);
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 18);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+  useEffect(() => {
+    if (heroPaused) return;
+    const timer = window.setInterval(
+      () => setHeroIndex((index) => (index + 1) % heroSlides.length),
+      5600,
+    );
+    return () => window.clearInterval(timer);
+  }, [heroPaused]);
+  useEffect(() => {
+    if (!preview && !nichePreview) return;
+    document.body.style.overflow = "hidden";
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setPreview(null);
+        setNichePreview(null);
+      }
+      if (preview && event.key === "ArrowRight")
+        setPreviewSlide((slide) => (slide + 1) % 3);
+      if (preview && event.key === "ArrowLeft")
+        setPreviewSlide((slide) => (slide + 2) % 3);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [preview, nichePreview]);
 
   const heroSlide = heroSlides[heroIndex];
   const activePreview = preview ? previewProjects[preview] : null;
-  const openPreview = (type: PreviewType) => { setPreview(type); setPreviewSlide(0); };
+  const openPreview = (type: PreviewType) => {
+    setPreview(type);
+    setPreviewSlide(0);
+  };
 
-  return <main>
-    <header className={scrolled ? "header scrolled" : "header"}>
-      <a className="logo" href="#inicio" aria-label="Avancini Web, início"><span className="logo-mark">A</span><span><span className="brand-name">AVANCINI <b>WEB</b></span><small>Uma solução Avancini OS</small></span></a>
-      <nav className={menuOpen ? "nav open" : "nav"} aria-label="Navegação principal"><a href="#servicos" onClick={() => setMenuOpen(false)}>Serviços</a><a href="#projetos" onClick={() => setMenuOpen(false)}>Projetos</a><a href="#processo" onClick={() => setMenuOpen(false)}>Processo</a><a href="#contato" onClick={() => setMenuOpen(false)}>Orçamento</a></nav>
-      <a className="button button-small header-cta" href={whatsapp} target="_blank" rel="noreferrer">Solicitar orçamento <span>↗</span></a>
-      <button className="menu-toggle" type="button" onClick={() => setMenuOpen(!menuOpen)} aria-label="Abrir menu" aria-expanded={menuOpen}><span /><span /></button>
-    </header>
+  return (
+    <main>
+      <header className={scrolled ? "header scrolled" : "header"}>
+        <a className="logo" href="#inicio" aria-label="Avancini Web, início">
+          <span className="logo-mark">A</span>
+          <span>
+            <span className="brand-name">
+              AVANCINI <b>WEB</b>
+            </span>
+            <small>Uma solução Avancini OS</small>
+          </span>
+        </a>
+        <nav
+          className={menuOpen ? "nav open" : "nav"}
+          aria-label="Navegação principal"
+        >
+          <a href="#servicos" onClick={() => setMenuOpen(false)}>
+            Serviços
+          </a>
+          <a href="#projetos" onClick={() => setMenuOpen(false)}>
+            Projetos
+          </a>
+          <a href="#processo" onClick={() => setMenuOpen(false)}>
+            Processo
+          </a>
+          <a href="#contato" onClick={() => setMenuOpen(false)}>
+            Orçamento
+          </a>
+        </nav>
+        <a
+          className="button button-small header-cta"
+          href={whatsapp}
+          target="_blank"
+          rel="noreferrer"
+        >
+          Solicitar orçamento <span>↗</span>
+        </a>
+        <button
+          className="menu-toggle"
+          type="button"
+          onClick={() => setMenuOpen(!menuOpen)}
+          aria-label={menuOpen ? "Fechar menu" : "Abrir menu"}
+          aria-expanded={menuOpen}
+        >
+          <span />
+          <span />
+        </button>
+      </header>
 
-    <section className="hero" id="inicio">
-      <div className="hero-glow glow-one" /><div className="hero-glow glow-two" /><div className="red-sweep" aria-hidden="true" /><div className="kinetic-lines" aria-hidden="true"><i /><i /><i /><i /></div>
-      <div className="hero-copy"><div className="eyebrow"><span /> Design estratégico para marcas ambiciosas</div><h1>Sites impossíveis<br />de <em>ignorar.</em></h1><p>Criamos experiências digitais que fazem sua empresa parecer maior, mais confiável e mais preparada para transformar atenção em clientes.</p><div className="hero-actions"><a className="button button-primary" href={whatsapp} target="_blank" rel="noreferrer">Quero um site à altura da minha marca <span>↗</span></a><a className="button button-ghost" href="#projetos">Ver projetos <span>↓</span></a></div><div className="hero-trust"><span>Estratégia antes da estética</span><span>Design exclusivo</span><span>Experiência mobile</span></div></div>
-      <div className={`web-stage hero-showcase slide-${heroSlide.id}`} aria-label="Vitrine rotativa de exemplos fictícios" onMouseEnter={() => setHeroPaused(true)} onMouseLeave={() => setHeroPaused(false)}><div className="orbit orbit-a" /><div className="orbit orbit-b" /><div className="browser-card browser-back"><div className="browser-bar"><i /><i /><i /></div><div className="wireframe"><span /><b /><b /><b /></div></div><div className="browser-card browser-main" key={heroSlide.id}><div className="browser-bar"><div><i /><i /><i /></div><span>{heroSlide.domain}</span><b>LIVE</b></div>{heroSlide.id === "atlas" && <div className="hero-concept atlas-concept"><div className="atlas-nav"><strong>ATLAS.</strong><span>BAHIA · BRASIL</span><b>MENU +</b></div><div className="atlas-copy"><small>CURADORIA IMOBILIÁRIA</small><h3>Viver raro.</h3><p>Casas extraordinárias para histórias que não cabem no comum.</p><button>EXPLORAR COLEÇÃO ↗</button></div><img src={heroSlide.image} alt={heroSlide.alt} /><div className="atlas-listing"><span>01 / 08</span><b>VILLA AURORA</b><small>Trancoso · 680 m² · 5 suítes</small></div><div className="atlas-price">A PARTIR DE<br /><b>R$ 8,4M</b></div></div>}{heroSlide.id === "brasa" && <div className="hero-concept brasa-concept"><img src={heroSlide.image} alt={heroSlide.alt} /><div className="brasa-nav"><strong>BRASA<sup>73</sup></strong><span>MENU&nbsp;&nbsp;&nbsp; HISTÓRIA&nbsp;&nbsp;&nbsp; CONTATO</span><b>RESERVAS ↗</b></div><div className="brasa-copy"><small>FOGO · TERRA · TEMPO</small><h3>O sabor<br />de ficar.</h3><p>Uma cozinha brasileira contemporânea, guiada pelo fogo e pelo que nasce perto.</p></div><div className="brasa-date"><span>MENU DEGUSTAÇÃO</span><b>7 tempos · R$ 280</b></div><div className="brasa-circle">73</div></div>}{heroSlide.id === "moreira" && <div className="hero-concept moreira-concept"><div className="moreira-nav"><strong>MOREIRA<br />& LIMA</strong><span>SOLUÇÕES&nbsp;&nbsp;&nbsp; ESCRITÓRIO&nbsp;&nbsp;&nbsp; INSIGHTS</span><b>CONTATO</b></div><div className="moreira-copy"><small>DIREITO EMPRESARIAL</small><h3>Clareza para<br />decisões complexas.</h3><p>Inteligência jurídica para proteger valor, reduzir riscos e sustentar o próximo movimento da sua empresa.</p><button>CONHEÇA NOSSA ATUAÇÃO →</button></div><img src={heroSlide.image} alt={heroSlide.alt} /><div className="moreira-index"><b>18</b><span>anos construindo<br />relações de confiança</span></div><div className="moreira-rule" /></div>}</div><div className="floating-chip chip-one"><span>●</span><div><small>NICHO EM DESTAQUE</small><b>{heroSlide.niche}</b></div></div><div className="floating-chip chip-two"><small>EXEMPLO FICTÍCIO</small><b>{heroSlide.chip} →</b></div><div className="hero-controls" aria-label="Escolher segmento"><button type="button" onClick={() => setHeroIndex((heroIndex + 2) % 3)} aria-label="Segmento anterior">←</button>{heroSlides.map((slide, index) => <button type="button" className={index === heroIndex ? "active" : ""} onClick={() => setHeroIndex(index)} aria-label={`Ver exemplo de ${slide.niche}`} key={slide.id}>{String(index + 1).padStart(2, "0")}</button>)}<button type="button" onClick={() => setHeroIndex((heroIndex + 1) % 3)} aria-label="Próximo segmento">→</button></div></div>
-    </section>
+      <section className="hero" id="inicio">
+        <div className="hero-glow glow-one" />
+        <div className="hero-glow glow-two" />
+        <div className="red-sweep" aria-hidden="true" />
+        <div className="kinetic-lines" aria-hidden="true">
+          <i />
+          <i />
+          <i />
+          <i />
+        </div>
+        <div className="hero-copy">
+          <div className="eyebrow">
+            <span /> Design estratégico para marcas ambiciosas
+          </div>
+          <h1>
+            Sites impossíveis
+            <br />
+            de <em>ignorar.</em>
+          </h1>
+          <p>
+            Criamos experiências digitais que fazem sua empresa parecer maior,
+            mais confiável e mais preparada para transformar atenção em
+            clientes.
+          </p>
+          <div className="hero-actions">
+            <a
+              className="button button-primary"
+              href={whatsapp}
+              target="_blank"
+              rel="noreferrer"
+            >
+              Quero um site à altura da minha marca <span>↗</span>
+            </a>
+            <a className="button button-ghost" href="#projetos">
+              Ver projetos <span>↓</span>
+            </a>
+          </div>
+          <div className="hero-trust">
+            <span>Estratégia antes da estética</span>
+            <span>Design exclusivo</span>
+            <span>Experiência mobile</span>
+          </div>
+        </div>
+        <div
+          className={`web-stage hero-showcase slide-${heroSlide.id}`}
+          aria-label="Vitrine rotativa de exemplos fictícios"
+          onMouseEnter={() => setHeroPaused(true)}
+          onMouseLeave={() => setHeroPaused(false)}
+        >
+          <div className="orbit orbit-a" />
+          <div className="orbit orbit-b" />
+          <div className="browser-card browser-back">
+            <div className="browser-bar">
+              <i />
+              <i />
+              <i />
+            </div>
+            <div className="wireframe">
+              <span />
+              <b />
+              <b />
+              <b />
+            </div>
+          </div>
+          <div className="browser-card browser-main" key={heroSlide.id}>
+            <div className="browser-bar">
+              <div>
+                <i />
+                <i />
+                <i />
+              </div>
+              <span>{heroSlide.domain}</span>
+              <b>LIVE</b>
+            </div>
+            {heroSlide.id === "atlas" && (
+              <div className="hero-concept atlas-concept">
+                <div className="atlas-nav">
+                  <strong>ATLAS.</strong>
+                  <span>BAHIA · BRASIL</span>
+                  <b>MENU +</b>
+                </div>
+                <div className="atlas-vertical">CURATED LIVING · 16°29&apos;S</div>
+                <div className="atlas-copy">
+                  <small>CURADORIA IMOBILIÁRIA</small>
+                  <h3>Viver raro.</h3>
+                  <p>
+                    Casas extraordinárias para histórias que não cabem no comum.
+                  </p>
+                  <button>EXPLORAR COLEÇÃO ↗</button>
+                </div>
+                <img src={heroSlide.image} alt={heroSlide.alt} />
+                <div className="atlas-listing">
+                  <span>01 / 08</span>
+                  <b>VILLA AURORA</b>
+                  <small>Trancoso · 680 m² · 5 suítes</small>
+                </div>
+                <div className="atlas-price">
+                  A PARTIR DE
+                  <br />
+                  <b>R$ 8,4M</b>
+                </div>
+                <div className="atlas-award">
+                  <b>AD</b>
+                  <span>seleção<br />2026</span>
+                </div>
+              </div>
+            )}
+            {heroSlide.id === "brasa" && (
+              <div className="hero-concept brasa-concept">
+                <img src={heroSlide.image} alt={heroSlide.alt} />
+                <div className="brasa-nav">
+                  <strong>
+                    BRASA<sup>73</sup>
+                  </strong>
+                  <span>
+                    MENU&nbsp;&nbsp;&nbsp; HISTÓRIA&nbsp;&nbsp;&nbsp; CONTATO
+                  </span>
+                  <b>RESERVAS ↗</b>
+                </div>
+                <div className="brasa-copy">
+                  <small>FOGO · TERRA · TEMPO</small>
+                  <h3>
+                    O sabor
+                    <br />
+                    de ficar.
+                  </h3>
+                  <p>
+                    Uma cozinha brasileira contemporânea, guiada pelo fogo e
+                    pelo que nasce perto.
+                  </p>
+                </div>
+                <div className="brasa-date">
+                  <span>MENU DEGUSTAÇÃO</span>
+                  <b>7 tempos · R$ 280</b>
+                </div>
+                <div className="brasa-circle">73</div>
+                <div className="brasa-availability">
+                  <i /> 3 mesas disponíveis hoje
+                </div>
+                <div className="brasa-signature">cozinha de território</div>
+              </div>
+            )}
+            {heroSlide.id === "moreira" && (
+              <div className="hero-concept moreira-concept">
+                <div className="moreira-nav">
+                  <strong>
+                    MOREIRA
+                    <br />& LIMA
+                  </strong>
+                  <span>
+                    SOLUÇÕES&nbsp;&nbsp;&nbsp; ESCRITÓRIO&nbsp;&nbsp;&nbsp;
+                    INSIGHTS
+                  </span>
+                  <b>CONTATO</b>
+                </div>
+                <div className="moreira-copy">
+                  <small>DIREITO EMPRESARIAL</small>
+                  <h3>
+                    Clareza para
+                    <br />
+                    decisões complexas.
+                  </h3>
+                  <p>
+                    Inteligência jurídica para proteger valor, reduzir riscos e
+                    sustentar o próximo movimento da sua empresa.
+                  </p>
+                  <button>CONHEÇA NOSSA ATUAÇÃO →</button>
+                </div>
+                <div className="moreira-brief">
+                  <small>BRIEFING EXECUTIVO · 07</small>
+                  <b>Governança que protege<br />o próximo movimento.</b>
+                  <span>LER INSIGHT →</span>
+                </div>
+                <div className="moreira-confidential">
+                  CONFIDENCIALIDADE · ESTRATÉGIA · PRECISÃO
+                </div>
+                <img src={heroSlide.image} alt={heroSlide.alt} />
+                <div className="moreira-index">
+                  <b>18</b>
+                  <span>
+                    anos construindo
+                    <br />
+                    relações de confiança
+                  </span>
+                </div>
+                <div className="moreira-rule" />
+              </div>
+            )}
+          </div>
+          <div className="floating-chip chip-one">
+            <span>●</span>
+            <div>
+              <small>NICHO EM DESTAQUE</small>
+              <b>{heroSlide.niche}</b>
+            </div>
+          </div>
+          <div className="floating-chip chip-two">
+            <small>EXEMPLO FICTÍCIO</small>
+            <b>{heroSlide.chip} →</b>
+          </div>
+          <div className="hero-controls" aria-label="Escolher segmento">
+            <button
+              type="button"
+              onClick={() => setHeroIndex((heroIndex + 2) % 3)}
+              aria-label="Segmento anterior"
+            >
+              ←
+            </button>
+            {heroSlides.map((slide, index) => (
+              <button
+                type="button"
+                className={index === heroIndex ? "active" : ""}
+                onClick={() => setHeroIndex(index)}
+                aria-label={`Ver exemplo de ${slide.niche}`}
+                key={slide.id}
+              >
+                {String(index + 1).padStart(2, "0")}
+              </button>
+            ))}
+            <button
+              type="button"
+              onClick={() => setHeroIndex((heroIndex + 1) % 3)}
+              aria-label="Próximo segmento"
+            >
+              →
+            </button>
+          </div>
+        </div>
+      </section>
 
-    <section className="signal-bar" aria-label="Especialidades da Avancini Web"><div><span>01</span>Landing pages</div><div><span>02</span>Sites institucionais</div><div><span>03</span>E-commerce</div><div><span>04</span>Design responsivo</div></section>
+      <section
+        className="signal-bar"
+        aria-label="Especialidades da Avancini Web"
+      >
+        <div>
+          <span>01</span>Landing pages
+        </div>
+        <div>
+          <span>02</span>Sites institucionais
+        </div>
+        <div>
+          <span>03</span>E-commerce
+        </div>
+        <div>
+          <span>04</span>Design responsivo
+        </div>
+      </section>
 
-    <section className="section manifesto"><div className="section-index">01 — SUA MARCA É JULGADA EM SEGUNDOS</div><div className="manifesto-grid"><h2>Antes de falar com você, o cliente já decidiu o que pensa da sua empresa.</h2><div><p>Um site comum faz sua marca parecer comum. Uma mensagem confusa faz o visitante ir embora. Uma experiência lenta transforma interesse em desconfiança.</p><p className="highlight-line">Seu site não é apenas uma página. É a primeira impressão, o melhor vendedor e a vitrine da sua empresa.</p></div></div><div className="impact-line"><span>VISUAL QUE PRENDE</span><span>MENSAGEM QUE CONVENCE</span><span>EXPERIÊNCIA QUE CONVERTE</span></div></section>
+      <section className="section manifesto">
+        <div className="section-index">
+          01 — SUA MARCA É JULGADA EM SEGUNDOS
+        </div>
+        <div className="manifesto-grid">
+          <h2>
+            Antes de falar com você, o cliente já decidiu o que pensa da sua
+            empresa.
+          </h2>
+          <div>
+            <p>
+              Um site comum faz sua marca parecer comum. Uma mensagem confusa
+              faz o visitante ir embora. Uma experiência lenta transforma
+              interesse em desconfiança.
+            </p>
+            <p className="highlight-line">
+              Seu site não é apenas uma página. É a primeira impressão, o melhor
+              vendedor e a vitrine da sua empresa.
+            </p>
+          </div>
+        </div>
+        <div className="impact-line">
+          <span>VISUAL QUE PRENDE</span>
+          <span>MENSAGEM QUE CONVENCE</span>
+          <span>EXPERIÊNCIA QUE CONVERTE</span>
+        </div>
+      </section>
 
-    <section className="section services" id="servicos"><div className="section-heading"><div><span className="section-index">02 — O QUE CRIAMOS</span><h2>Não entregamos páginas.<br />Criamos percepção de valor.</h2></div><p>Cada exemplo abaixo mostra como estratégia, texto e design podem transformar negócios que disputam atenção e confiança todos os dias.</p></div><div className="service-grid">{services.map((service) => <article className={`service-card ${service.type}`} key={service.number}><div className="service-top"><span>{service.number}</span><small>{service.label}</small></div><button className="service-visual service-preview-button" type="button" onClick={() => openPreview(service.type)} aria-label={`Ampliar exemplo de ${service.label.toLowerCase()}`}>{service.type === "landing" && <div className="example-site example-clinic"><div className="example-nav"><b>LUMINA</b><span>ESTÉTICA AVANÇADA</span><i>AGENDAR</i></div><img src="/concepts/lumina-clinic.jpg" alt="Profissional realizando tratamento estético" /><div className="example-copy"><small>PROTOCOLO EXCLUSIVO</small><strong>Sua pele,<br />sua melhor versão.</strong><p>Avaliação personalizada e tecnologia para resultados naturais.</p><b>QUERO MINHA AVALIAÇÃO ↗</b></div><div className="example-badge">+2.400<br /><span>clientes atendidas</span></div></div>}{service.type === "institutional" && <div className="example-site example-architecture"><img src="/concepts/vertice-home.jpg" alt="Residência contemporânea" /><div className="example-nav"><b>VÉRTICE.</b><span>Projetos · Escritório</span><i>CONTATO</i></div><div className="example-copy"><small>PROJETO RESIDENCIAL</small><strong>Arquitetura que<br />atravessa o tempo.</strong><p>Residência 735 · Bahia</p></div></div>}{service.type === "commerce" && <div className="example-site example-commerce"><div className="example-nav"><b>ÁUREA</b><span>SKINCARE BOTÂNICO</span><i>SACOLA 0</i></div><div className="shop-hero"><div><small>RITUAL ESSENCIAL</small><strong>Menos excessos.<br />Mais pele.</strong><b>COMPRAR ROTINA ↗</b></div><img src="/concepts/aurea-skin.jpg" alt="Produtos de skincare" /></div><div className="shop-products"><span>Sérum Luminoso <b>R$ 89</b></span><span>Creme Barreira <b>R$ 109</b></span></div></div>}<span className="preview-hover"><b>↗</b> Ampliar projeto</span></button><h3>{service.title}</h3><p>{service.text}</p><div className="service-tag"><i />{service.tag}</div></article>)}</div></section>
+      <section className="section services" id="servicos">
+        <div className="section-heading">
+          <div>
+            <span className="section-index">02 — O QUE CRIAMOS</span>
+            <h2>
+              Não entregamos páginas.
+              <br />
+              Criamos percepção de valor.
+            </h2>
+          </div>
+          <p>
+            Cada exemplo abaixo mostra como estratégia, texto e design podem
+            transformar negócios que disputam atenção e confiança todos os dias.
+          </p>
+        </div>
+        <div className="service-grid">
+          {services.map((service) => (
+            <article
+              className={`service-card ${service.type}`}
+              key={service.number}
+            >
+              <div className="service-top">
+                <span>{service.number}</span>
+                <small>{service.label}</small>
+              </div>
+              <button
+                className="service-visual service-preview-button"
+                type="button"
+                onClick={() => openPreview(service.type)}
+                aria-label={`Ampliar exemplo de ${service.label.toLowerCase()}`}
+              >
+                {service.type === "landing" && (
+                  <div className="example-site example-clinic">
+                    <div className="example-nav">
+                      <b>LUMINA</b>
+                      <span>ESTÉTICA AVANÇADA</span>
+                      <i>AGENDAR</i>
+                    </div>
+                    <img
+                      src="/concepts/lumina-clinic.jpg"
+                      alt="Profissional realizando tratamento estético"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                    <div className="example-copy">
+                      <small>PROTOCOLO EXCLUSIVO</small>
+                      <strong>
+                        Sua pele,
+                        <br />
+                        sua melhor versão.
+                      </strong>
+                      <p>
+                        Avaliação personalizada e tecnologia para resultados
+                        naturais.
+                      </p>
+                      <b>QUERO MINHA AVALIAÇÃO ↗</b>
+                    </div>
+                    <div className="example-badge">
+                      +2.400
+                      <br />
+                      <span>clientes atendidas</span>
+                    </div>
+                  </div>
+                )}
+                {service.type === "institutional" && (
+                  <div className="example-site example-architecture">
+                    <img
+                      src="/concepts/vertice-home.jpg"
+                      alt="Residência contemporânea"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                    <div className="example-nav">
+                      <b>VÉRTICE.</b>
+                      <span>Projetos · Escritório</span>
+                      <i>CONTATO</i>
+                    </div>
+                    <div className="example-copy">
+                      <small>PROJETO RESIDENCIAL</small>
+                      <strong>
+                        Arquitetura que
+                        <br />
+                        atravessa o tempo.
+                      </strong>
+                      <p>Residência 735 · Bahia</p>
+                    </div>
+                  </div>
+                )}
+                {service.type === "commerce" && (
+                  <div className="example-site example-commerce">
+                    <div className="example-nav">
+                      <b>ÁUREA</b>
+                      <span>SKINCARE BOTÂNICO</span>
+                      <i>SACOLA 0</i>
+                    </div>
+                    <div className="shop-hero">
+                      <div>
+                        <small>RITUAL ESSENCIAL</small>
+                        <strong>
+                          Menos excessos.
+                          <br />
+                          Mais pele.
+                        </strong>
+                        <b>COMPRAR ROTINA ↗</b>
+                      </div>
+                      <img
+                        src="/concepts/aurea-skin.jpg"
+                        alt="Produtos de skincare"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    </div>
+                    <div className="shop-products">
+                      <span>
+                        Sérum Luminoso <b>R$ 89</b>
+                      </span>
+                      <span>
+                        Creme Barreira <b>R$ 109</b>
+                      </span>
+                    </div>
+                  </div>
+                )}
+                <span className="preview-hover">
+                  <b>↗</b> Ampliar projeto
+                </span>
+              </button>
+              <div className="service-journey">
+                <small>ESTRUTURA QUE CONDUZ À AÇÃO</small>
+                <div>
+                  {service.journey.map((step, index) => (
+                    <span key={step}>
+                      <b>{String(index + 1).padStart(2, "0")}</b>
+                      {step}
+                    </span>
+                  ))}
+                </div>
+              </div>
+              <h3>{service.title}</h3>
+              <p>{service.text}</p>
+              <div className="service-tag">
+                <i />
+                {service.tag}
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
 
-    <section className="section projects" id="projetos"><div className="section-heading"><div><span className="section-index">03 — PROJETOS SELECIONADOS</span><h2>Veja o trabalho.<br />Imagine a sua marca.</h2></div><p>Duas empresas, dois universos visuais e a mesma missão: transformar a presença digital em confiança e oportunidade.</p></div><div className="project-list">
-      <article className="project-showcase sandiego"><div className="project-copy"><div className="project-number">01 / SAÚDE & AUTORIDADE</div><h3>Clínica<br />San Diego</h3><p>Uma experiência acolhedora e confiável para apresentar atendimentos, diferenciais e facilitar o contato com a clínica.</p><div className="project-tags"><span>Site institucional</span><span>Experiência mobile</span><span>Conversão</span></div><div className="project-status"><i /> Site real completo <span>sem links externos</span></div></div><div className="project-screen"><div className="device-browser"><div className="device-top"><i /><i /><i /><span>clinicasandiego.com</span><b>ROLE ↓</b></div><div className="project-scroll" tabIndex={0} aria-label="Demonstração rolável completa do site Clínica San Diego"><img src="/projects/san-diego-full.png" alt="Captura completa do site da Clínica San Diego" /></div></div><div className="scroll-hint">Role dentro da tela <span>↓</span></div><div className="screen-label">PROJETO REAL / 01</div></div></article>
-      <article className="project-showcase tapecar"><div className="project-copy"><div className="project-number">02 / AUTOMOTIVO & PRESENÇA LOCAL</div><h3>Tape Car</h3><p>Uma presença digital intensa para posicionar a empresa, destacar seus serviços automotivos e aproximar clientes em Eunápolis.</p><div className="project-tags"><span>Site institucional</span><span>Marca local</span><span>WhatsApp</span></div><div className="project-status"><i /> Site real completo <span>sem links externos</span></div></div><div className="project-screen"><div className="device-browser"><div className="device-top"><i /><i /><i /><span>tapecar.com</span><b>ROLE ↓</b></div><div className="project-scroll" tabIndex={0} aria-label="Demonstração rolável completa do site Tape Car"><img src="/projects/tape-car-full.png" alt="Captura completa do site Tape Car" /></div></div><div className="scroll-hint">Role dentro da tela <span>↓</span></div><div className="screen-label">PROJETO REAL / 02</div></div></article>
-    </div></section>
+      <section className="section niche-models" id="modelos">
+        <div className="section-heading">
+          <div>
+            <span className="section-index">03 — ESTRUTURAS POR SEGMENTO</span>
+            <h2>
+              Não é só uma tela bonita.
+              <br />É um site inteiro pensado para vender.
+            </h2>
+          </div>
+          <p>
+            Explore quatro modelos completos e veja como conteúdo, oferta,
+            catálogo e conversão mudam conforme o negócio.
+          </p>
+        </div>
+        <div className="niche-model-grid">
+          {nicheModels.map((model) => (
+            <article
+              className={`niche-model-card niche-${model.type}`}
+              key={model.type}
+            >
+              <div className="niche-model-number">
+                {model.number} / {model.label}
+              </div>
+              <button
+                type="button"
+                onClick={() => setNichePreview(model.type)}
+                aria-label={`Ver estrutura completa de ${model.label.toLowerCase()}`}
+              >
+                <img
+                  src={model.image}
+                  alt={`Exemplo fictício ${model.brand}`}
+                  decoding="async"
+                />
+                <div className="model-mini-nav">
+                  <i />
+                  <span>INÍCIO&nbsp;&nbsp; COLEÇÃO&nbsp;&nbsp; CONTATO</span>
+                  <small>MENU +</small>
+                </div>
+                <span>{model.brand}</span>
+                <div className="model-proof">
+                  <strong>{model.proof}</strong>
+                  <small>{model.proofLabel}</small>
+                </div>
+                <b>VER ESTRUTURA COMPLETA ↗</b>
+              </button>
+              <h3>{model.title}</h3>
+              <p>{model.text}</p>
+              <div>
+                {model.chips.map((chip, index) => (
+                  <span key={chip}>0{index + 1} {chip}</span>
+                ))}
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
 
-    <section className="section process" id="processo"><div className="process-intro"><span className="section-index">04 — DO PRIMEIRO CONTATO AO LANÇAMENTO</span><h2>Um processo claro.<br />Um resultado marcante.</h2><p>Você acompanha as decisões importantes sem precisar entender de tecnologia. A Avancini Web transforma seus objetivos em uma experiência digital pronta para crescer.</p><a className="text-cta" href={whatsapp} target="_blank" rel="noreferrer">Começar meu projeto <span>↗</span></a></div><div className="process-steps"><article><span>01</span><div><small>IMERSÃO</small><h3>Entendemos sua empresa</h3><p>Objetivos, público, diferenciais e a percepção que sua marca precisa transmitir.</p></div></article><article><span>02</span><div><small>ESTRATÉGIA & DESIGN</small><h3>Criamos uma presença única</h3><p>Mensagem, estrutura e visual construídos para orientar e impressionar.</p></div></article><article><span>03</span><div><small>LANÇAMENTO</small><h3>Seu novo site entra em cena</h3><p>Responsivo, rápido e preparado para receber seus próximos clientes.</p></div></article></div></section>
+      <section className="section projects" id="projetos">
+        <div className="section-heading">
+          <div>
+            <span className="section-index">04 — PROJETOS SELECIONADOS</span>
+            <h2>
+              Veja o trabalho.
+              <br />
+              Imagine a sua marca.
+            </h2>
+          </div>
+          <p>
+            Duas empresas, dois universos visuais e a mesma missão: transformar
+            a presença digital em confiança e oportunidade.
+          </p>
+        </div>
+        <div className="project-list">
+          <article className="project-showcase sandiego">
+            <div className="project-copy">
+              <div className="project-number">01 / SAÚDE & AUTORIDADE</div>
+              <h3>
+                Clínica
+                <br />
+                San Diego
+              </h3>
+              <p>
+                Uma experiência acolhedora e confiável para apresentar
+                atendimentos, diferenciais e facilitar o contato com a clínica.
+              </p>
+              <div className="project-tags">
+                <span>Site institucional</span>
+                <span>Experiência mobile</span>
+                <span>Conversão</span>
+              </div>
+              <div className="project-status">
+                <i /> Site real completo <span>sem links externos</span>
+              </div>
+            </div>
+            <div className="project-screen">
+              <div className="device-browser">
+                <div className="device-top">
+                  <i />
+                  <i />
+                  <i />
+                  <span>clinicasandiego.com</span>
+                  <b>ROLE ↓</b>
+                </div>
+                <div
+                  className="project-scroll"
+                  role="region"
+                  aria-label="Demonstração rolável completa do site Clínica San Diego"
+                >
+                  <img
+                    src="/projects/san-diego-full.png"
+                    alt="Captura completa do site da Clínica San Diego"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+              </div>
+              <div className="scroll-hint">
+                Role dentro da tela <span>↓</span>
+              </div>
+              <div className="screen-label">PROJETO REAL / 01</div>
+            </div>
+          </article>
+          <article className="project-showcase tapecar">
+            <div className="project-copy">
+              <div className="project-number">
+                02 / AUTOMOTIVO & PRESENÇA LOCAL
+              </div>
+              <h3>Tape Car</h3>
+              <p>
+                Uma presença digital intensa para posicionar a empresa, destacar
+                seus serviços automotivos e aproximar clientes em Eunápolis.
+              </p>
+              <div className="project-tags">
+                <span>Site institucional</span>
+                <span>Marca local</span>
+                <span>WhatsApp</span>
+              </div>
+              <div className="project-status">
+                <i /> Site real completo <span>sem links externos</span>
+              </div>
+            </div>
+            <div className="project-screen">
+              <div className="device-browser">
+                <div className="device-top">
+                  <i />
+                  <i />
+                  <i />
+                  <span>tapecar.com</span>
+                  <b>ROLE ↓</b>
+                </div>
+                <div
+                  className="project-scroll"
+                  role="region"
+                  aria-label="Demonstração rolável completa do site Tape Car"
+                >
+                  <img
+                    src="/projects/tape-car-full.png"
+                    alt="Captura completa do site Tape Car"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+              </div>
+              <div className="scroll-hint">
+                Role dentro da tela <span>↓</span>
+              </div>
+              <div className="screen-label">PROJETO REAL / 02</div>
+            </div>
+          </article>
+        </div>
+      </section>
 
-    <section className="final-cta" id="contato"><div className="cta-grid" /><div className="cta-orb" /><div className="eyebrow"><span /> Sua marca pode ocupar mais espaço</div><h2>Chega de parecer menor<br />do que sua empresa realmente é.</h2><p>Conte o que você precisa. A Avancini Web transforma sua ideia em uma presença digital impossível de ignorar.</p><a className="button button-primary button-xl" href={whatsapp} target="_blank" rel="noreferrer">Solicitar meu orçamento <span>↗</span></a><small>Conversa direta pelo WhatsApp · Sem compromisso</small></section>
+      <section className="section process" id="processo">
+        <div className="process-intro">
+          <span className="section-index">
+            05 — DO PRIMEIRO CONTATO AO LANÇAMENTO
+          </span>
+          <h2>
+            Um processo claro.
+            <br />
+            Um resultado marcante.
+          </h2>
+          <p>
+            Você acompanha as decisões importantes sem precisar entender de
+            tecnologia. A Avancini Web transforma seus objetivos em uma
+            experiência digital pronta para crescer.
+          </p>
+          <a
+            className="text-cta"
+            href={whatsapp}
+            target="_blank"
+            rel="noreferrer"
+          >
+            Começar meu projeto <span>↗</span>
+          </a>
+        </div>
+        <div className="process-steps">
+          <article>
+            <span>01</span>
+            <div>
+              <small>IMERSÃO</small>
+              <h3>Entendemos sua empresa</h3>
+              <p>
+                Objetivos, público, diferenciais e a percepção que sua marca
+                precisa transmitir.
+              </p>
+            </div>
+          </article>
+          <article>
+            <span>02</span>
+            <div>
+              <small>ESTRATÉGIA & DESIGN</small>
+              <h3>Criamos uma presença única</h3>
+              <p>
+                Mensagem, estrutura e visual construídos para orientar e
+                impressionar.
+              </p>
+            </div>
+          </article>
+          <article>
+            <span>03</span>
+            <div>
+              <small>LANÇAMENTO</small>
+              <h3>Seu novo site entra em cena</h3>
+              <p>
+                Responsivo, rápido e preparado para receber seus próximos
+                clientes.
+              </p>
+            </div>
+          </article>
+        </div>
+      </section>
 
-    {activePreview && preview && <div className="preview-modal" role="dialog" aria-modal="true" aria-label={`Demonstração ampliada do projeto ${activePreview.name}`} onMouseDown={(event) => { if (event.target === event.currentTarget) setPreview(null); }}><div className={`preview-dialog preview-${activePreview.accent}`}><button className="preview-close" type="button" onClick={() => setPreview(null)} aria-label="Fechar visualização">×</button><div className="preview-browser-bar"><div><i /><i /><i /></div><span>{activePreview.kind}</span><b>{String(previewSlide + 1).padStart(2, "0")} / 03</b></div><div className="preview-unique-canvas" key={`${preview}-${previewSlide}`}><PreviewCanvas type={preview} slide={previewSlide} /></div><div className="preview-controls"><button type="button" onClick={() => setPreviewSlide((previewSlide + 2) % 3)} aria-label="Tela anterior">←</button><div>{activePreview.pages.map((page, index) => <button type="button" className={index === previewSlide ? "active" : ""} onClick={() => setPreviewSlide(index)} aria-label={`Ver tela ${page.label}`} key={page.label} />)}</div><span>{activePreview.pages[previewSlide].label} · exemplo fictício</span><button type="button" onClick={() => setPreviewSlide((previewSlide + 1) % 3)} aria-label="Próxima tela">→</button></div></div></div>}
+      <section className="final-cta" id="contato">
+        <div className="cta-grid" />
+        <div className="cta-orb" />
+        <div className="eyebrow">
+          <span /> Sua marca pode ocupar mais espaço
+        </div>
+        <h2>
+          Chega de parecer menor
+          <br />
+          do que sua empresa realmente é.
+        </h2>
+        <p>
+          Conte o que você precisa. A Avancini Web transforma sua ideia em uma
+          presença digital impossível de ignorar.
+        </p>
+        <a
+          className="button button-primary button-xl"
+          href={whatsapp}
+          target="_blank"
+          rel="noreferrer"
+        >
+          Solicitar meu orçamento <span>↗</span>
+        </a>
+        <small>Conversa direta pelo WhatsApp · Sem compromisso</small>
+      </section>
 
-    <footer><div className="footer-top"><a className="logo footer-logo" href="#inicio"><span className="logo-mark">A</span><span><span className="brand-name">AVANCINI <b>WEB</b></span><small>Uma solução Avancini OS</small></span></a><p>Experiências digitais criadas para posicionar, impressionar e converter.</p><div><a href="mailto:ivoavancini@hotmail.com">ivoavancini@hotmail.com</a><a href="tel:+5573981019782">(73) 98101-9782</a></div></div><div className="footer-bottom"><span>© {new Date().getFullYear()} Avancini OS</span><span>Estratégia · Web design · Conversão</span><a href="#inicio">Voltar ao topo ↑</a></div></footer>
-    <a className="whatsapp-float" href={whatsapp} target="_blank" rel="noreferrer" aria-label="Falar com a Avancini Web no WhatsApp"><span>●</span><b>Solicitar orçamento</b></a>
-  </main>;
+      {nichePreview && (
+        <div
+          className="niche-modal"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Modelo completo por segmento"
+        >
+          <div className="niche-modal-dialog">
+            <button
+              className="preview-close"
+              type="button"
+              onClick={() => setNichePreview(null)}
+              aria-label="Fechar modelo completo"
+            >
+              ×
+            </button>
+            <div className="preview-browser-bar">
+              <div>
+                <i />
+                <i />
+                <i />
+              </div>
+              <span>Modelo completo · role para explorar</span>
+              <b>CONCEITO FICTÍCIO</b>
+            </div>
+            <div
+              className="niche-full-scroll"
+              role="region"
+              aria-label="Estrutura completa rolável do modelo"
+            >
+              <NicheFullPage type={nichePreview} />
+            </div>
+            <div className="niche-scroll-note">
+              <span>↓</span> Role dentro da tela para ver a estrutura completa
+            </div>
+          </div>
+        </div>
+      )}
+
+      {activePreview && preview && (
+        <div
+          className="preview-modal"
+          role="dialog"
+          aria-modal="true"
+          aria-label={`Demonstração ampliada do projeto ${activePreview.name}`}
+        >
+          <div className={`preview-dialog preview-${activePreview.accent}`}>
+            <button
+              className="preview-close"
+              type="button"
+              onClick={() => setPreview(null)}
+              aria-label="Fechar visualização"
+            >
+              ×
+            </button>
+            <div className="preview-browser-bar">
+              <div>
+                <i />
+                <i />
+                <i />
+              </div>
+              <span>{activePreview.kind}</span>
+              <b>{String(previewSlide + 1).padStart(2, "0")} / 03</b>
+            </div>
+            <div
+              className="preview-unique-canvas"
+              key={`${preview}-${previewSlide}`}
+            >
+              <PreviewCanvas type={preview} slide={previewSlide} />
+            </div>
+            <div className="preview-controls">
+              <button
+                type="button"
+                onClick={() => setPreviewSlide((previewSlide + 2) % 3)}
+                aria-label="Tela anterior"
+              >
+                ←
+              </button>
+              <div>
+                {activePreview.pages.map((page, index) => (
+                  <button
+                    type="button"
+                    className={index === previewSlide ? "active" : ""}
+                    onClick={() => setPreviewSlide(index)}
+                    aria-label={`Ver tela ${page.label}`}
+                    key={page.label}
+                  />
+                ))}
+              </div>
+              <span>
+                {activePreview.pages[previewSlide].label} · exemplo fictício
+              </span>
+              <button
+                type="button"
+                onClick={() => setPreviewSlide((previewSlide + 1) % 3)}
+                aria-label="Próxima tela"
+              >
+                →
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      <footer>
+        <div className="footer-top">
+          <a className="logo footer-logo" href="#inicio">
+            <span className="logo-mark">A</span>
+            <span>
+              <span className="brand-name">
+                AVANCINI <b>WEB</b>
+              </span>
+              <small>Uma solução Avancini OS</small>
+            </span>
+          </a>
+          <p>
+            Experiências digitais criadas para posicionar, impressionar e
+            converter.
+          </p>
+          <div>
+            <a href="mailto:ivoavancini@hotmail.com">ivoavancini@hotmail.com</a>
+            <a href="tel:+5573981019782">(73) 98101-9782</a>
+          </div>
+        </div>
+        <div className="footer-bottom">
+          <span>© {new Date().getFullYear()} Avancini OS</span>
+          <span>Estratégia · Web design · Conversão</span>
+          <a href="#inicio">Voltar ao topo ↑</a>
+        </div>
+      </footer>
+      <a
+        className="whatsapp-float"
+        href={whatsapp}
+        target="_blank"
+        rel="noreferrer"
+        aria-label="Falar com a Avancini Web no WhatsApp"
+      >
+        <span>●</span>
+        <b>Solicitar orçamento</b>
+      </a>
+    </main>
+  );
 }
