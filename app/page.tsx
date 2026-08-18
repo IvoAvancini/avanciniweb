@@ -1154,7 +1154,9 @@ export default function Home() {
     <main>
       <header className={scrolled ? "header scrolled" : "header"}>
         <a className="logo" href="#inicio" aria-label="Avancini Web, início">
-          <span className="logo-mark">A</span>
+          <span className="logo-mark" aria-hidden="true">
+            <i />
+          </span>
           <span>
             <span className="brand-name">
               AVANCINI <b>WEB</b>
@@ -2065,7 +2067,9 @@ export default function Home() {
       <footer>
         <div className="footer-top">
           <a className="logo footer-logo" href="#inicio">
-            <span className="logo-mark">A</span>
+            <span className="logo-mark" aria-hidden="true">
+              <i />
+            </span>
             <span>
               <span className="brand-name">
                 AVANCINI <b>WEB</b>
