@@ -37,13 +37,15 @@ export default function Home() {
 
       <section className="hero" id="inicio">
         <div className="hero-glow glow-one" /><div className="hero-glow glow-two" />
+        <div className="red-sweep" aria-hidden="true" />
+        <div className="kinetic-lines" aria-hidden="true"><i /><i /><i /><i /></div>
         <div className="hero-copy">
           <div className="system-label"><span /> Sistemas digitais para empresas que querem avançar</div>
           <h1>Seu negócio não precisa de mais uma ferramenta.<br /><em>Precisa de um sistema.</em></h1>
           <p>Criamos sites, inteligências artificiais e operações digitais que trabalham juntas para atrair clientes, organizar sua empresa e sustentar o crescimento.</p>
           <div className="hero-actions">
             <a className="button button-primary" href={whatsapp} target="_blank" rel="noreferrer">Quero evoluir minha operação <span>↗</span></a>
-            <a className="button button-ghost" href="#projetos">Ver projetos reais <span>↓</span></a>
+            <a className="button button-ghost" href="#projetos">Ver demonstrações <span>↓</span></a>
           </div>
           <div className="hero-trust"><span>Estratégia antes do código</span><span>Atendimento 100% online</span><span>Projeto sob medida</span></div>
         </div>
@@ -98,14 +100,14 @@ export default function Home() {
       </section>
 
       <section className="section projects" id="projetos">
-        <div className="section-heading"><div><span className="section-index">03 — PROJETOS REAIS</span><h2>Não mostramos promessas.<br />Mostramos construção.</h2></div><p>Produtos digitais desenhados para contextos diferentes, com a mesma atenção à estratégia, clareza e uso no celular.</p></div>
+        <div className="section-heading"><div><span className="section-index">03 — DEMONSTRAÇÕES VISUAIS</span><h2>Não mostramos promessas.<br />Mostramos construção.</h2></div><p>Conceitos visuais desenhados para contextos diferentes, com a mesma atenção à estratégia, clareza e uso no celular — apresentados sem links externos.</p></div>
         <div className="project-list">
           <article className="project-card lumora">
-            <div className="project-info"><div className="project-number">01 / SISTEMAS & GESTÃO</div><h3>Lumora</h3><p>Ecossistema para salões e clínicas de estética organizarem agenda, clientes e operação em uma experiência central.</p><div className="project-tags"><span>Produto digital</span><span>Gestão</span><span>Automação</span></div><a href="https://www.avancini.me/" target="_blank" rel="noreferrer">Conhecer o projeto <span>↗</span></a></div>
+            <div className="project-info"><div className="project-number">01 / SISTEMAS & GESTÃO</div><h3>Lumora</h3><p>Ecossistema para salões e clínicas de estética organizarem agenda, clientes e operação em uma experiência central.</p><div className="project-tags"><span>Produto digital</span><span>Gestão</span><span>Automação</span></div><div className="project-status"><i /> Demonstração visual <span>sem link externo</span></div></div>
             <div className="project-canvas"><div className="mock-shell"><aside><b>L</b><i/><i/><i/><i/></aside><div><div className="mock-title"><span>Bom dia, Lumora</span><small>Visão geral</small></div><div className="mock-stats"><i/><i/><i/></div><div className="mock-content"><span/><span/><span/><span/><span/></div></div></div></div>
           </article>
           <article className="project-card sandiego">
-            <div className="project-info"><div className="project-number">02 / SAÚDE & CONVERSÃO</div><h3>Clínica San Diego</h3><p>Presença digital para apresentar autoridade médica, especialidades e caminhos de contato com clareza e confiança.</p><div className="project-tags"><span>Site institucional</span><span>Saúde</span><span>Conversão</span></div><a href="https://clinicasandiego.vercel.app/clinica" target="_blank" rel="noreferrer">Ver projeto online <span>↗</span></a></div>
+            <div className="project-info"><div className="project-number">02 / SAÚDE & CONVERSÃO</div><h3>Clínica San Diego</h3><p>Presença digital para apresentar autoridade médica, especialidades e caminhos de contato com clareza e confiança.</p><div className="project-tags"><span>Site institucional</span><span>Saúde</span><span>Conversão</span></div><div className="project-status"><i /> Demonstração visual <span>sem link externo</span></div></div>
             <div className="project-canvas"><div className="clinic-mock"><div className="clinic-nav"><b>SD</b><span/><span/><span/></div><div className="clinic-hero"><small>CUIDADO ESPECIALIZADO</small><strong>Saúde com<br/>atenção humana.</strong><i/></div><div className="clinic-footer"><span/><span/><span/></div></div></div>
           </article>
         </div>
