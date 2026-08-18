@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 
 const whatsapp =
   "https://wa.me/5573981019782?text=Ol%C3%A1%21%20Conheci%20a%20Avancini%20Web%20e%20quero%20um%20or%C3%A7amento%20para%20meu%20site.";
@@ -31,6 +31,33 @@ const services = [
     tag: "Experiência de compra",
     type: "commerce",
     journey: ["Descoberta", "Produto", "Compra"],
+  },
+] as const;
+
+const offers = [
+  {
+    name: "Landing Page",
+    price: "A partir de R$ 2.500",
+    deadline: "Prazo médio de 7 a 15 dias úteis",
+    description: "Para campanhas, serviços específicos e captação direta de contatos.",
+    includes: ["Estratégia da oferta", "Design exclusivo", "WhatsApp e métricas"],
+    featured: false,
+  },
+  {
+    name: "Site Institucional",
+    price: "A partir de R$ 4.500",
+    deadline: "Prazo médio de 15 a 30 dias úteis",
+    description: "Para empresas que precisam transmitir confiança, estrutura e autoridade.",
+    includes: ["Arquitetura completa", "Versão mobile", "SEO técnico inicial"],
+    featured: true,
+  },
+  {
+    name: "E-commerce",
+    price: "A partir de R$ 7.500",
+    deadline: "Prazo médio de 30 a 45 dias úteis",
+    description: "Para transformar produtos em uma experiência de compra clara e desejável.",
+    includes: ["Vitrine e produtos", "Jornada de compra", "Integrações essenciais"],
+    featured: false,
   },
 ] as const;
 
@@ -1109,6 +1136,11 @@ export default function Home() {
   const [preview, setPreview] = useState<PreviewType | null>(null);
   const [previewSlide, setPreviewSlide] = useState(0);
   const [nichePreview, setNichePreview] = useState<NicheType | null>(null);
+  const [projectType, setProjectType] = useState("Site institucional");
+  const [segment, setSegment] = useState("");
+  const [goal, setGoal] = useState("Gerar mais contatos");
+  const [investment, setInvestment] = useState("R$ 4.500 a R$ 7.500");
+  const [timeline, setTimeline] = useState("Em até 30 dias");
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 18);
     onScroll();
@@ -1148,6 +1180,19 @@ export default function Home() {
   const openPreview = (type: PreviewType) => {
     setPreview(type);
     setPreviewSlide(0);
+  };
+
+  const submitBudget = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const message = [
+      "Olá! Conheci a Avancini Web e quero conversar sobre um projeto.",
+      `Tipo: ${projectType}`,
+      `Segmento: ${segment || "Ainda vou explicar"}`,
+      `Objetivo: ${goal}`,
+      `Investimento previsto: ${investment}`,
+      `Prazo desejado: ${timeline}`,
+    ].join("\n");
+    window.open(`https://wa.me/5573981019782?text=${encodeURIComponent(message)}`, "_blank", "noopener,noreferrer");
   };
 
   return (
@@ -1769,8 +1814,8 @@ export default function Home() {
             </h2>
           </div>
           <p>
-            Duas empresas, dois universos visuais e a mesma missão: transformar
-            a presença digital em confiança e oportunidade.
+            Um case publicado que pode ser visitado e conceitos comerciais que
+            mostram até onde uma presença digital pode chegar.
           </p>
         </div>
         <div className="project-list">
@@ -1783,17 +1828,25 @@ export default function Home() {
                 San Diego
               </h3>
               <p>
-                Uma experiência acolhedora e confiável para apresentar
-                atendimentos, diferenciais e facilitar o contato com a clínica.
+                O site organiza especialidades, equipe, horários e agendamento
+                em uma experiência acolhedora para quem está escolhendo onde se cuidar.
               </p>
+              <dl className="case-details">
+                <div><dt>DESAFIO</dt><dd>Reunir muitos serviços de saúde sem perder clareza.</dd></div>
+                <div><dt>ENTREGA</dt><dd>Site institucional com equipe, vacinas e contato direto.</dd></div>
+                <div><dt>RESULTADO VERIFICÁVEL</dt><dd>Presença digital publicada e acessível ao público.</dd></div>
+              </dl>
               <div className="project-tags">
                 <span>Site institucional</span>
                 <span>Experiência mobile</span>
                 <span>Conversão</span>
               </div>
               <div className="project-status">
-                <i /> Site real completo <span>sem links externos</span>
+                <i /> Case real e publicado <span>clinicasandiego.com.br</span>
               </div>
+              <a className="case-link" href="https://clinicasandiego.com.br/#nossa_equipe" target="_blank" rel="noreferrer">
+                Visitar o site publicado <span>↗</span>
+              </a>
             </div>
             <div className="project-screen">
               <div className="device-browser">
@@ -1833,13 +1886,18 @@ export default function Home() {
                 Uma presença digital intensa para posicionar a empresa, destacar
                 seus serviços automotivos e aproximar clientes em Eunápolis.
               </p>
+              <dl className="case-details">
+                <div><dt>OBJETIVO</dt><dd>Traduzir a força local da marca em uma vitrine digital premium.</dd></div>
+                <div><dt>ESTRUTURA</dt><dd>Serviços, processo, localização e contato por WhatsApp.</dd></div>
+                <div><dt>STATUS</dt><dd>Conceito comercial criado para demonstração.</dd></div>
+              </dl>
               <div className="project-tags">
                 <span>Site institucional</span>
                 <span>Marca local</span>
                 <span>WhatsApp</span>
               </div>
               <div className="project-status">
-                <i /> Site real completo <span>sem links externos</span>
+                <i /> Conceito de apresentação <span>não publicado</span>
               </div>
             </div>
             <div className="project-screen">
@@ -1867,16 +1925,51 @@ export default function Home() {
               <div className="scroll-hint">
                 Role dentro da tela <span>↓</span>
               </div>
-              <div className="screen-label">PROJETO REAL / 02</div>
+              <div className="screen-label">CONCEITO COMERCIAL / 02</div>
             </div>
           </article>
+        </div>
+      </section>
+
+      <section className="section proof-section" aria-labelledby="proof-title">
+        <div className="proof-intro">
+          <span className="section-index">05 — CONFIANÇA QUE PODE SER CONFERIDA</span>
+          <h2 id="proof-title">Nada de resultado inventado.</h2>
+          <p>
+            A Clínica San Diego é o case real e publicado deste portfólio. Os demais
+            trabalhos estão identificados como conceitos para você avaliar direção,
+            estrutura e qualidade visual sem confundir demonstração com cliente real.
+          </p>
+          <a href="https://clinicasandiego.com.br/" target="_blank" rel="noreferrer" className="text-cta">
+            Conferir a Clínica San Diego ao vivo <span>↗</span>
+          </a>
+        </div>
+        <div className="testimonial-grid">
+          <blockquote>
+            <p>“Excelente profissional, muito dedicado!”</p>
+            <cite>
+              <strong>Gildo Gonçalves Costa</strong>
+              <span>Paciente · depoimento publicado no site da clínica</span>
+            </cite>
+          </blockquote>
+          <blockquote>
+            <p>“Ótimo atendimento, horário marcado e lugar aconchegante.”</p>
+            <cite>
+              <strong>Flávia Gomes</strong>
+              <span>Paciente · depoimento publicado no site da clínica</span>
+            </cite>
+          </blockquote>
+          <small>
+            Os depoimentos acima avaliam a Clínica San Diego, não a Avancini Web.
+            Foram reproduzidos como conteúdo presente no projeto publicado.
+          </small>
         </div>
       </section>
 
       <section className="section process" id="processo">
         <div className="process-intro">
           <span className="section-index">
-            05 — DO PRIMEIRO CONTATO AO LANÇAMENTO
+            06 — DO PRIMEIRO CONTATO AO LANÇAMENTO
           </span>
           <h2>
             Um processo claro.
@@ -1934,30 +2027,101 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="section investment" id="investimento">
+        <div className="section-heading">
+          <div>
+            <span className="section-index">07 — INVESTIMENTO & PRAZO</span>
+            <h2>Clareza antes da proposta.</h2>
+          </div>
+          <p>
+            As faixas abaixo são pontos de partida. O valor final depende da estrutura,
+            conteúdo e integrações definidas no diagnóstico.
+          </p>
+        </div>
+        <div className="offer-grid">
+          {offers.map((offer) => (
+            <article className={offer.featured ? "offer-card featured" : "offer-card"} key={offer.name}>
+              {offer.featured && <small>MAIS PROCURADO</small>}
+              <h3>{offer.name}</h3>
+              <strong>{offer.price}</strong>
+              <span>{offer.deadline}</span>
+              <p>{offer.description}</p>
+              <ul>
+                {offer.includes.map((item) => <li key={item}>{item}</li>)}
+              </ul>
+              <a href="#contato">Quero conversar <b>↗</b></a>
+            </article>
+          ))}
+        </div>
+        <p className="investment-note">Pagamento e cronograma são definidos na proposta. Domínio, hospedagem e serviços externos podem variar conforme a solução escolhida.</p>
+      </section>
+
       <section className="final-cta" id="contato">
         <div className="cta-grid" />
         <div className="cta-orb" />
         <div className="eyebrow">
           <span /> Sua marca pode ocupar mais espaço
         </div>
-        <h2>
-          Chega de parecer menor
-          <br />
-          do que sua empresa realmente é.
-        </h2>
-        <p>
-          Conte o que você precisa. A Avancini Web transforma sua ideia em uma
-          presença digital impossível de ignorar.
-        </p>
-        <a
-          className="button button-primary button-xl"
-          href={whatsapp}
-          target="_blank"
-          rel="noreferrer"
-        >
-          Solicitar meu orçamento <span>↗</span>
-        </a>
-        <small>Conversa direta pelo WhatsApp · Sem compromisso</small>
+        <div className="budget-copy">
+          <h2>Vamos descobrir o projeto certo para sua empresa.</h2>
+          <p>
+            Responda cinco pontos rápidos. O WhatsApp será aberto com um briefing
+            organizado para a conversa já começar no lugar certo.
+          </p>
+          <div className="budget-proof">
+            <span>01 · Sem formulário infinito</span>
+            <span>02 · Resposta direta</span>
+            <span>03 · Sem compromisso</span>
+          </div>
+        </div>
+        <form className="budget-form" onSubmit={submitBudget}>
+          <label>
+            <span>O que você precisa?</span>
+            <select value={projectType} onChange={(event) => setProjectType(event.target.value)}>
+              <option>Landing page</option>
+              <option>Site institucional</option>
+              <option>E-commerce</option>
+              <option>Ainda não sei</option>
+            </select>
+          </label>
+          <label>
+            <span>Qual é o segmento da empresa?</span>
+            <input value={segment} onChange={(event) => setSegment(event.target.value)} placeholder="Ex.: clínica, imobiliária, restaurante" />
+          </label>
+          <label>
+            <span>Principal objetivo</span>
+            <select value={goal} onChange={(event) => setGoal(event.target.value)}>
+              <option>Gerar mais contatos</option>
+              <option>Vender online</option>
+              <option>Transmitir mais autoridade</option>
+              <option>Divulgar um serviço específico</option>
+            </select>
+          </label>
+          <div className="budget-row">
+            <label>
+              <span>Investimento previsto</span>
+              <select value={investment} onChange={(event) => setInvestment(event.target.value)}>
+                <option>Até R$ 2.500</option>
+                <option>R$ 2.500 a R$ 4.500</option>
+                <option>R$ 4.500 a R$ 7.500</option>
+                <option>Acima de R$ 7.500</option>
+              </select>
+            </label>
+            <label>
+              <span>Prazo desejado</span>
+              <select value={timeline} onChange={(event) => setTimeline(event.target.value)}>
+                <option>Em até 15 dias</option>
+                <option>Em até 30 dias</option>
+                <option>Em até 60 dias</option>
+                <option>Sem urgência</option>
+              </select>
+            </label>
+          </div>
+          <button className="button button-primary button-xl" type="submit">
+            Enviar briefing pelo WhatsApp <span>↗</span>
+          </button>
+          <small>Você revisa a mensagem antes de enviar.</small>
+        </form>
       </section>
 
       {nichePreview && (
