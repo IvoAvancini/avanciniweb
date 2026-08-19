@@ -28,18 +28,18 @@ const services = [
 const offers = [
   {
     name: "Landing Page",
-    price: "A partir de R$ 2.500",
-    deadline: "Prazo médio de 7 a 15 dias úteis",
-    description: "Para campanhas, serviços específicos e captação direta de contatos.",
-    includes: ["Estratégia da oferta", "Design exclusivo", "WhatsApp e métricas"],
+    price: "R$ 97/mês",
+    deadline: "Sem entrada · permanência mínima de 12 meses",
+    description: "Uma página estratégica para divulgar um serviço e transformar visitas em contatos.",
+    includes: ["Hospedagem e suporte", "WhatsApp e SEO local", "Até 2 pequenos ajustes por mês"],
     featured: false,
   },
   {
     name: "Site Completo",
-    price: "A partir de R$ 4.500",
-    deadline: "Prazo médio de 15 a 45 dias úteis",
-    description: "Para empresas que precisam transmitir autoridade, organizar sua operação digital ou vender online.",
-    includes: ["Institucional, catálogo ou loja virtual", "Versão mobile", "SEO técnico inicial"],
+    price: "R$ 147/mês",
+    deadline: "Sem entrada · permanência mínima de 12 meses",
+    description: "Uma presença completa para apresentar a empresa, serviços, diferenciais e canais de contato.",
+    includes: ["Até 5 páginas", "Hospedagem, suporte e SEO local", "Até 2 pequenos ajustes por mês"],
     featured: true,
   },
 ] as const;
@@ -1120,6 +1120,7 @@ export default function Home() {
   const [previewSlide, setPreviewSlide] = useState(0);
   const [nichePreview, setNichePreview] = useState<NicheType | null>(null);
   const [projectType, setProjectType] = useState("Site completo");
+  const [contractModel, setContractModel] = useState("Assinatura mensal");
   const [segment, setSegment] = useState("");
   const [goal, setGoal] = useState("Gerar mais contatos");
   const [investment, setInvestment] = useState("R$ 4.500 a R$ 7.500");
@@ -1170,6 +1171,7 @@ export default function Home() {
     const message = [
       "Olá! Conheci a Avancini Web e quero conversar sobre um projeto.",
       `Tipo: ${projectType}`,
+      `Contratação: ${contractModel}`,
       `Segmento: ${segment || "Ainda vou explicar"}`,
       `Objetivo: ${goal}`,
       `Investimento previsto: ${investment}`,
@@ -1211,11 +1213,9 @@ export default function Home() {
         </nav>
         <a
           className="button button-small header-cta"
-          href={whatsapp}
-          target="_blank"
-          rel="noreferrer"
+          href="/site-por-assinatura"
         >
-          Solicitar orçamento <span>↗</span>
+          Ver planos <span>↗</span>
         </a>
         <button
           className="menu-toggle"
@@ -1260,18 +1260,16 @@ export default function Home() {
           <div className="hero-actions">
             <a
               className="button button-primary"
-              href={whatsapp}
-              target="_blank"
-              rel="noreferrer"
+              href="/site-por-assinatura"
             >
-              Quero um site à altura da minha marca <span>↗</span>
+              Quero meu site por assinatura <span>↗</span>
             </a>
             <a className="button button-ghost" href="#projetos">
               Ver projetos <span>↓</span>
             </a>
           </div>
           <div className="hero-trust">
-            <span>Estratégia antes da estética</span>
+            <span>A partir de R$ 97/mês</span>
             <span>Design exclusivo</span>
             <span>Experiência mobile</span>
           </div>
@@ -1550,7 +1548,7 @@ export default function Home() {
           <span>02</span>Sites completos
         </div>
         <div>
-          <span>03</span>Sites com vendas
+          <span>03</span>Sem entrada
         </div>
         <div>
           <span>04</span>Design responsivo
@@ -1984,11 +1982,11 @@ export default function Home() {
         <div className="section-heading">
           <div>
             <span className="section-index">07 — INVESTIMENTO & PRAZO</span>
-            <h2>Clareza antes da proposta.</h2>
+            <h2>Escolha como quer começar.</h2>
           </div>
           <p>
-            As faixas abaixo são pontos de partida. O valor final depende da estrutura,
-            conteúdo e integrações definidas no diagnóstico.
+            Assine uma solução pronta para crescer ou peça um projeto totalmente
+            personalizado para necessidades fora dos planos.
           </p>
         </div>
         <div className="offer-grid">
@@ -2006,7 +2004,15 @@ export default function Home() {
             </article>
           ))}
         </div>
-        <p className="investment-note">Pagamento e cronograma são definidos na proposta. Domínio, hospedagem e serviços externos podem variar conforme a solução escolhida.</p>
+        <article className="custom-offer">
+          <div>
+            <small>PROJETO SOB MEDIDA</small>
+            <h3>Precisa de algo além dos planos?</h3>
+            <p>Mais páginas, catálogo, loja virtual, integrações ou uma estrutura exclusiva recebem escopo, prazo e valor personalizados.</p>
+          </div>
+          <a href="#contato" className="button button-ghost">Solicitar orçamento <span>↗</span></a>
+        </article>
+        <p className="investment-note">O subdomínio Avancini está incluso. Domínio próprio pode ser conectado em qualquer plano; o registro anual é pago pelo cliente.</p>
       </section>
 
       <section className="final-cta" id="contato">
@@ -2028,6 +2034,14 @@ export default function Home() {
           </div>
         </div>
         <form className="budget-form" onSubmit={submitBudget}>
+          <label>
+            <span>Como deseja contratar?</span>
+            <select value={contractModel} onChange={(event) => setContractModel(event.target.value)}>
+              <option>Assinatura mensal</option>
+              <option>Projeto sob medida</option>
+              <option>Quero entender as duas opções</option>
+            </select>
+          </label>
           <label>
             <span>O que você precisa?</span>
             <select value={projectType} onChange={(event) => setProjectType(event.target.value)}>
