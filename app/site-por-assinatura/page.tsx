@@ -1,7 +1,8 @@
 "use client";
 
-import { track } from "@vercel/analytics";
 import { useState, type FormEvent } from "react";
+import Link from "next/link";
+import { trackLead, trackMarketingEvent } from "../marketing-events";
 
 const plans = [
   {
@@ -34,56 +35,94 @@ const plans = [
   },
 ] as const;
 
-function recordConversion(event: string, data?: Record<string, string>) {
-  track(event, data);
-  const browser = window as typeof window & {
-    gtag?: (...args: unknown[]) => void;
-    fbq?: (...args: unknown[]) => void;
-  };
-  browser.gtag?.("event", event, data);
-  browser.fbq?.("trackCustom", event, data);
-}
+type ContractModel = "Assinatura mensal" | "Pagamento único" | "Quero entender as duas opções";
+
+const planOptions: Record<ContractModel, readonly string[]> = {
+  "Assinatura mensal": [
+    "Landing de Conversão — R$ 97/mês",
+    "Site Institucional — R$ 199,90/mês",
+    "Quero ajuda para escolher o plano",
+  ],
+  "Pagamento único": [
+    "Landing de Conversão — solicitar orçamento",
+    "Site Institucional — solicitar orçamento",
+    "Projeto exclusivo — solicitar orçamento",
+    "Quero explicar minha necessidade",
+  ],
+  "Quero entender as duas opções": [
+    "Landing de Conversão",
+    "Site Institucional",
+    "Projeto mais completo ou exclusivo",
+    "Ainda não sei",
+  ],
+};
+
+const domainOptions: Record<ContractModel, readonly string[]> = {
+  "Assinatura mensal": [
+    "Quero usar o endereço Avancini incluso",
+    "Já tenho domínio próprio",
+    "Quero registrar um domínio novo à parte",
+    "Não sei qual escolher",
+  ],
+  "Pagamento único": [
+    "Já tenho domínio próprio",
+    "Quero incluir um domínio próprio na proposta",
+    "Não sei qual escolher",
+  ],
+  "Quero entender as duas opções": [
+    "Já tenho domínio próprio",
+    "Quero registrar um domínio próprio",
+    "Posso usar o endereço Avancini se assinar",
+    "Ainda não sei",
+  ],
+};
 
 const whatsappFor = (message: string) =>
   `https://wa.me/5573981019782?text=${encodeURIComponent(message)}`;
 
 export default function SubscriptionPage() {
-  const [model, setModel] = useState("Assinatura mensal");
+  const [model, setModel] = useState<ContractModel>("Assinatura mensal");
   const [plan, setPlan] = useState("Site Institucional — R$ 199,90/mês");
   const [segment, setSegment] = useState("");
   const [domain, setDomain] = useState("Quero usar o endereço Avancini incluso");
+  const [timeline, setTimeline] = useState("Em até 15 dias");
+
+  const changeModel = (nextModel: ContractModel) => {
+    setModel(nextModel);
+    setPlan(planOptions[nextModel][0]);
+    setDomain(domainOptions[nextModel][0]);
+  };
+
+  const moveToBriefing = () => {
+    window.setTimeout(() => document.getElementById("comecar")?.scrollIntoView({ behavior: "smooth" }), 0);
+  };
 
   const choosePlan = (selected: string) => {
     setModel("Assinatura mensal");
     setPlan(selected);
-    recordConversion("plan_selected", { plan: selected });
-    window.open(
-      whatsappFor(`Olá! Quero contratar o plano ${selected} e entender os próximos passos.`),
-      "_blank",
-      "noopener,noreferrer",
-    );
+    setDomain("Quero usar o endereço Avancini incluso");
+    trackMarketingEvent("plan_selected", { plan: selected });
+    moveToBriefing();
   };
 
   const chooseCustom = () => {
     setModel("Pagamento único");
     setPlan("Projeto exclusivo — solicitar orçamento");
-    recordConversion("custom_quote_selected");
-    window.open(
-      whatsappFor("Olá! Preciso de um Projeto Exclusivo e quero solicitar um orçamento personalizado."),
-      "_blank",
-      "noopener,noreferrer",
-    );
+    setDomain(domainOptions["Pagamento único"][0]);
+    trackMarketingEvent("custom_quote_selected");
+    moveToBriefing();
   };
 
   const submit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    recordConversion("lead_whatsapp", { model, plan, segment: segment || "não informado" });
+    trackLead("briefing_planos", { model, plan, segment: segment || "não informado" });
     const message = [
       "Olá! Vim pela página da Avancini Web e quero começar meu projeto.",
       `Modelo: ${model}`,
       `Plano/necessidade: ${plan}`,
       `Segmento: ${segment || "Vou explicar pelo WhatsApp"}`,
       `Domínio: ${domain}`,
+      `Prazo desejado: ${timeline}`,
     ].join("\n");
     window.open(whatsappFor(message), "_blank", "noopener,noreferrer");
   };
@@ -91,12 +130,12 @@ export default function SubscriptionPage() {
   return (
     <main className="sub-page">
       <header className="sub-header">
-        <a className="logo" href="/" aria-label="Avancini Web, página principal">
+        <Link className="logo" href="/" aria-label="Avancini Web, página principal">
           <span className="logo-mark" aria-hidden="true"><i /></span>
           <span><span className="brand-name">AVANCINI <b>WEB</b></span><small>Uma solução Avancini OS</small></span>
-        </a>
+        </Link>
         <nav className="sub-header-actions" aria-label="Navegação da página de planos">
-          <a href="/" className="sub-back-link"><b aria-hidden="true">←</b><span>Voltar para o site</span></a>
+          <Link href="/" className="sub-back-link"><b aria-hidden="true">←</b><span>Voltar para o site</span></Link>
           <a href="#planos" className="sub-header-link"><span>Ver planos</span><b aria-hidden="true">↓</b></a>
         </nav>
       </header>
@@ -112,7 +151,7 @@ export default function SubscriptionPage() {
             <div><small>SITE INSTITUCIONAL</small><strong>R$ 199,90<em>/mês</em></strong></div>
           </div>
           <div className="sub-actions">
-            <a href="#planos" className="button button-primary" onClick={() => recordConversion("hero_subscription_click")}>Quero meu site por assinatura <span>↗</span></a>
+            <a href="#planos" className="button button-primary" onClick={() => trackMarketingEvent("hero_subscription_click")}>Quero meu site por assinatura <span>↗</span></a>
             <button type="button" className="button button-ghost" onClick={chooseCustom}>Prefiro pagar uma vez</button>
           </div>
           <div className="sub-microproof"><span>Sem entrada</span><span>Hospedagem inclusa</span><span>Experiência mobile</span></div>
@@ -155,7 +194,7 @@ export default function SubscriptionPage() {
         </div>
         <div className="sub-plan-grid">
           {plans.map((item) => (
-            <article className={item.featured ? "sub-plan featured" : "sub-plan"} key={item.id}>
+            <article className={item.featured ? "sub-plan featured" : "sub-plan"} id={`plano-${item.id}`} key={item.id}>
               {item.featured && <small className="sub-popular">MAIS ESCOLHIDO</small>}
               <span className="sub-plan-code">{item.id === "landing" ? "01" : "02"} / ASSINATURA</span>
               <h3>{item.name}</h3>
@@ -163,10 +202,13 @@ export default function SubscriptionPage() {
               <div className="sub-plan-price"><sup>R$</sup><strong>{item.price}</strong><span>/mês</span></div>
               <small className="sub-contract">Sem entrada · permanência mínima de 6 meses</small>
               <ul>{item.features.map((feature) => <li key={feature}>{feature}</li>)}</ul>
-              <button type="button" onClick={() => choosePlan(`${item.name} — R$ ${item.price}/mês`)}>{item.id === "landing" ? "Contratar minha landing" : "Contratar meu site"} <span>↗</span></button>
+              <div className="sub-plan-actions">
+                <button type="button" onClick={() => choosePlan(`${item.name} — R$ ${item.price}/mês`)}>{item.id === "landing" ? "Contratar minha landing" : "Contratar meu site"} <span>↗</span></button>
+                <a href={whatsappFor(`Olá! Tenho uma dúvida sobre o plano ${item.name} por R$ ${item.price}/mês.`)} target="_blank" rel="noreferrer" onClick={() => trackLead("duvida_plano_assinatura", { plan: item.name })}>Tirar uma dúvida</a>
+              </div>
             </article>
           ))}
-          <article className="sub-plan custom-plan">
+          <article className="sub-plan custom-plan" id="plano-exclusivo">
             <span className="sub-plan-code">03 / PAGAMENTO ÚNICO</span>
             <h3>Projeto Exclusivo</h3>
             <p>A mesma qualidade de estratégia, design e desenvolvimento, adquirida em pagamento único.</p>
@@ -178,10 +220,19 @@ export default function SubscriptionPage() {
               <li>Site entregue conforme o escopo aprovado</li>
               <li>Manutenção opcional</li>
             </ul>
-            <button type="button" onClick={chooseCustom}>Conversar sobre meu projeto <span>↗</span></button>
+            <div className="sub-plan-actions">
+              <button type="button" onClick={chooseCustom}>Solicitar meu orçamento <span>↗</span></button>
+              <a href={whatsappFor("Olá! Tenho uma dúvida sobre o Projeto Exclusivo com pagamento único.")} target="_blank" rel="noreferrer" onClick={() => trackLead("duvida_projeto_exclusivo")}>Tirar uma dúvida</a>
+            </div>
           </article>
         </div>
         <div className="sub-domain-note"><b>Domínio na assinatura:</b> endereço Avancini incluso. Se o cliente já possui <strong>domínio próprio</strong>, conectamos ao site; se quiser registrar um novo, o domínio é pago à parte. No projeto exclusivo, o domínio próprio entra na proposta.</div>
+        <div className="sub-delivery" aria-label="Etapas e prazos de entrega">
+          <div><small>CONTEÚDO PRONTO, CRIAÇÃO EM MOVIMENTO</small><strong>Prazo combinado antes do início.</strong><p>A contagem começa depois que textos, imagens e informações necessárias forem enviados.</p></div>
+          <span><b>7 dias</b><small>Estrutura direta</small></span>
+          <span><b>15 dias</b><small>Projeto intermediário</small></span>
+          <span><b>30 dias</b><small>Estrutura completa</small></span>
+        </div>
       </section>
 
       <section className="sub-section sub-choice">
@@ -223,6 +274,8 @@ export default function SubscriptionPage() {
             <div className="sub-project-screen">
               <div className="device-browser">
                 <div className="device-top"><i /><i /><i /><span>avancini.web / redesign san diego</span><b>ROLE ↓</b></div>
+                {/* Região rolável precisa receber foco para também funcionar por teclado. */}
+                {/* eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex */}
                 <div className="project-scroll" role="region" tabIndex={0} aria-label="Demonstração rolável completa do projeto Clínica San Diego">
                   <img src="/projects/san-diego-full.png" alt="Captura completa da proposta de redesign da Clínica San Diego" loading="lazy" decoding="async" />
                 </div>
@@ -241,6 +294,8 @@ export default function SubscriptionPage() {
             <div className="sub-project-screen">
               <div className="device-browser">
                 <div className="device-top"><i /><i /><i /><span>avancini.web / projeto tape car</span><b>ROLE ↓</b></div>
+                {/* Região rolável precisa receber foco para também funcionar por teclado. */}
+                {/* eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex */}
                 <div className="project-scroll" role="region" tabIndex={0} aria-label="Demonstração rolável completa do projeto Tape Car">
                   <img src="/projects/tape-car-full.png" alt="Captura completa do projeto Tape Car" loading="lazy" decoding="async" />
                 </div>
@@ -260,7 +315,7 @@ export default function SubscriptionPage() {
           <details name="subscription-faq"><summary>Existe permanência mínima?</summary><p>Sim. Como a assinatura não possui entrada, a permanência mínima é de 6 meses. Depois desse período, o cancelamento segue normalmente as condições do contrato.</p></details>
           <details name="subscription-faq"><summary>O que acontece se eu cancelar?</summary><p>Depois dos 6 meses, a assinatura pode ser encerrada. A hospedagem e o site por assinatura são desativados; qualquer domínio próprio registrado pelo cliente continua pertencendo a ele.</p></details>
           <details name="subscription-faq"><summary>Assinatura tem qualidade inferior?</summary><p>Não. Estratégia, design, versão mobile e cuidado de desenvolvimento seguem o mesmo padrão. O que muda é a forma de pagamento, o domínio incluído e como funciona a continuidade após a entrega.</p></details>
-          <details name="subscription-faq"><summary>Em quanto tempo fica pronto?</summary><p>O prazo começa após o envio de textos, imagens e informações. A previsão exata é confirmada antes do início, conforme a estrutura escolhida.</p></details>
+          <details name="subscription-faq"><summary>Em quanto tempo fica pronto?</summary><p>Trabalhamos com prazos de 7, 15 ou até 30 dias, definidos antes do início conforme a estrutura escolhida. A contagem começa após o envio dos textos, imagens e informações necessárias.</p></details>
         </div>
       </section>
 
@@ -271,19 +326,21 @@ export default function SubscriptionPage() {
           <p>Você revisa a mensagem antes de enviar. A conversa continua diretamente pelo WhatsApp.</p>
         </div>
         <form onSubmit={submit}>
-          <label><span>Modelo de contratação</span><select value={model} onChange={(event) => setModel(event.target.value)}><option>Assinatura mensal</option><option>Pagamento único</option><option>Quero entender as duas opções</option></select></label>
-          <label><span>Plano ou necessidade</span><select value={plan} onChange={(event) => setPlan(event.target.value)}><option>Landing de Conversão — R$ 97/mês</option><option>Site Institucional — R$ 199,90/mês</option><option>Projeto exclusivo — solicitar orçamento</option><option>Quero explicar minha necessidade</option></select></label>
+          <label><span>Modelo de contratação</span><select value={model} onChange={(event) => changeModel(event.target.value as ContractModel)}><option>Assinatura mensal</option><option>Pagamento único</option><option>Quero entender as duas opções</option></select></label>
+          <label><span>Plano ou necessidade</span><select value={plan} onChange={(event) => setPlan(event.target.value)}>{planOptions[model].map((option) => <option key={option}>{option}</option>)}</select></label>
           <label><span>Segmento da empresa</span><input value={segment} onChange={(event) => setSegment(event.target.value)} placeholder="Ex.: clínica, restaurante, escritório" /></label>
-          <label><span>Domínio</span><select value={domain} onChange={(event) => setDomain(event.target.value)}><option>Quero usar o endereço Avancini incluso</option><option>Já tenho domínio próprio</option><option>Quero registrar um domínio novo à parte</option><option>Quero pagamento único com domínio próprio</option><option>Não sei qual escolher</option></select></label>
+          <label><span>Domínio</span><select value={domain} onChange={(event) => setDomain(event.target.value)}>{domainOptions[model].map((option) => <option key={option}>{option}</option>)}</select></label>
+          <label><span>Prazo desejado</span><select value={timeline} onChange={(event) => setTimeline(event.target.value)}><option>Em até 7 dias</option><option>Em até 15 dias</option><option>Em até 30 dias</option></select></label>
           <button type="submit">Continuar pelo WhatsApp <span>↗</span></button>
           <small>Sem compromisso · conversa direta</small>
         </form>
       </section>
 
       <footer className="sub-footer">
-        <a className="logo" href="/"><span className="logo-mark" aria-hidden="true"><i /></span><span><span className="brand-name">AVANCINI <b>WEB</b></span><small>Uma solução Avancini OS</small></span></a>
+        <Link className="logo" href="/"><span className="logo-mark" aria-hidden="true"><i /></span><span><span className="brand-name">AVANCINI <b>WEB</b></span><small>Uma solução Avancini OS</small></span></Link>
         <span>Landings de conversão · Sites institucionais · Eunápolis, Bahia</span>
-        <a href="/">Conhecer a Avancini Web <b>↗</b></a>
+        <nav className="sub-footer-legal" aria-label="Informações legais"><Link href="/privacidade">Privacidade</Link><Link href="/termos">Termos</Link></nav>
+        <Link href="/">Conhecer a Avancini Web <b>↗</b></Link>
       </footer>
       <a className="sub-sticky" href="#planos">Planos a partir de R$ 97/mês <b>↗</b></a>
     </main>

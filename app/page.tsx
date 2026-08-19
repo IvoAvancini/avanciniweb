@@ -1,7 +1,8 @@
 "use client";
+/* eslint-disable jsx-a11y/no-noninteractive-tabindex -- As prévias roláveis precisam receber foco para funcionar também pelo teclado. */
 
-import { track } from "@vercel/analytics";
 import { useEffect, useState, type FormEvent } from "react";
+import { trackLead, trackMarketingEvent } from "./marketing-events";
 
 const whatsappFor = (message: string) =>
   `https://wa.me/5573981019782?text=${encodeURIComponent(message)}`;
@@ -39,6 +40,9 @@ const offers = [
     ideal: "Ideal para anúncios, campanhas e serviços específicos",
     cta: "Quero uma landing",
     message: "Olá! Quero contratar a Landing de Conversão por R$ 97/mês e entender os próximos passos.",
+    primaryHref: "/site-por-assinatura#plano-landing",
+    primaryExternal: false,
+    question: "Olá! Tenho uma dúvida sobre a Landing de Conversão por assinatura.",
     featured: false,
   },
   {
@@ -50,6 +54,9 @@ const offers = [
     ideal: "Ideal para apresentar toda a empresa e gerar autoridade",
     cta: "Quero um site institucional",
     message: "Olá! Quero contratar o Site Institucional por R$ 199,90/mês e entender os próximos passos.",
+    primaryHref: "/site-por-assinatura#plano-site",
+    primaryExternal: false,
+    question: "Olá! Tenho uma dúvida sobre o Site Institucional por assinatura.",
     featured: true,
   },
   {
@@ -61,6 +68,9 @@ const offers = [
     ideal: "Ideal para quem prefere adquirir o projeto e decidir depois sobre manutenção",
     cta: "Solicitar orçamento",
     message: "Olá! Preciso de um Projeto Exclusivo e quero solicitar um orçamento personalizado.",
+    primaryHref: whatsappFor("Olá! Quero solicitar um orçamento para um Projeto Exclusivo com pagamento único."),
+    primaryExternal: true,
+    question: "Olá! Tenho uma dúvida sobre o Projeto Exclusivo com pagamento único.",
     featured: false,
   },
 ] as const;
@@ -1273,7 +1283,7 @@ export default function Home() {
 
   const submitBudget = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    track("briefing_whatsapp", { projectType, contractModel, goal });
+    trackLead("briefing_principal", { projectType, contractModel, goal });
     const message = [
       "Olá! Conheci a Avancini Web e quero conversar sobre um projeto.",
       `Tipo: ${projectType}`,
@@ -1683,10 +1693,16 @@ export default function Home() {
             </p>
           </div>
         </div>
-        <div className="impact-line">
-          <span>VISUAL QUE PRENDE</span>
-          <span>MENSAGEM QUE CONVENCE</span>
-          <span>EXPERIÊNCIA QUE CONVERTE</span>
+        <div className="impact-line decision-line" aria-label="Escolha rápida de serviço">
+          <a href="/site-por-assinatura#plano-landing" onClick={() => trackMarketingEvent("quick_choice", { choice: "landing" })}>
+            <small>QUERO DIVULGAR UMA OFERTA</small><b>Landing Page</b><span>Ver plano ↗</span>
+          </a>
+          <a href="/site-por-assinatura#plano-site" onClick={() => trackMarketingEvent("quick_choice", { choice: "site" })}>
+            <small>QUERO APRESENTAR A EMPRESA</small><b>Site Profissional</b><span>Ver plano ↗</span>
+          </a>
+          <a href={whatsappFor("Olá! Conheci a Avancini Web e quero ajuda para escolher entre uma landing page e um site profissional.")} target="_blank" rel="noreferrer" onClick={() => trackLead("duvida_escolha_servico")}>
+            <small>AINDA NÃO SEI QUAL ESCOLHER</small><b>Receber orientação</b><span>Falar no WhatsApp ↗</span>
+          </a>
         </div>
       </section>
 
@@ -1998,36 +2014,10 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section proof-section" aria-labelledby="proof-title">
-        <div className="proof-intro">
-          <span className="section-index">05 — DOIS PONTOS DE PARTIDA</span>
-          <h2 id="proof-title">Redesign ou criação do zero.</h2>
-          <p>
-            Algumas empresas já possuem um site que precisa evoluir. Outras ainda
-            precisam construir sua primeira presença digital. A Avancini Web trabalha
-            a partir da realidade de cada negócio.
-          </p>
-        </div>
-        <div className="origin-grid">
-          <article>
-            <span>01 / REDESIGN</span>
-            <h3>Clínica San Diego</h3>
-            <p>O site anterior serve como comparação para enxergar a evolução de estrutura, hierarquia e percepção de valor.</p>
-            <a href="https://clinicasandiego.com.br/" target="_blank" rel="noreferrer">Ver o site anterior <b>↗</b></a>
-          </article>
-          <article>
-            <span>02 / CRIAÇÃO DO ZERO</span>
-            <h3>Tape Car</h3>
-            <p>Sem uma presença anterior para reformular, o projeto nasceu do posicionamento, dos serviços e da realidade da empresa.</p>
-            <small>NÃO EXISTIA SITE ANTERIOR</small>
-          </article>
-        </div>
-      </section>
-
       <section className="section process" id="processo">
         <div className="process-intro">
           <span className="section-index">
-            06 — DO PRIMEIRO CONTATO AO LANÇAMENTO
+            05 — DO PRIMEIRO CONTATO AO LANÇAMENTO
           </span>
           <h2>
             Um processo claro.
@@ -2044,6 +2034,7 @@ export default function Home() {
             href={whatsapp}
             target="_blank"
             rel="noreferrer"
+            onClick={() => trackLead("processo")}
           >
             Começar meu projeto <span>↗</span>
           </a>
@@ -2083,12 +2074,19 @@ export default function Home() {
             </div>
           </article>
         </div>
+        <div className="delivery-strip" aria-label="Prazos disponíveis para entrega">
+          <div><small>PRAZO DEFINIDO ANTES DE COMEÇAR</small><strong>Entrega combinada com clareza.</strong></div>
+          <span><b>7 dias</b><small>Estruturas diretas</small></span>
+          <span><b>15 dias</b><small>Projetos intermediários</small></span>
+          <span><b>30 dias</b><small>Estruturas completas</small></span>
+          <em>O prazo começa após o recebimento do conteúdo necessário.</em>
+        </div>
       </section>
 
       <section className="section investment" id="investimento">
         <div className="section-heading">
           <div>
-            <span className="section-index">07 — INVESTIMENTO & PRAZO</span>
+            <span className="section-index">06 — INVESTIMENTO & PRAZO</span>
             <h2>Escolha como quer começar.</h2>
           </div>
           <p>
@@ -2124,7 +2122,26 @@ export default function Home() {
               <ul>
                 {offer.includes.map((item) => <li key={item}>{item}</li>)}
               </ul>
-              <a href={whatsappFor(offer.message)} target="_blank" rel="noreferrer" onClick={() => track("offer_whatsapp", { offer: offer.name })}>{offer.cta} <b>↗</b></a>
+              <div className="offer-actions">
+                <a
+                  className="offer-primary"
+                  href={offer.primaryHref}
+                  target={offer.primaryExternal ? "_blank" : undefined}
+                  rel={offer.primaryExternal ? "noreferrer" : undefined}
+                  onClick={() => trackMarketingEvent("offer_contract_click", { offer: offer.name })}
+                >
+                  {offer.cta} <b>↗</b>
+                </a>
+                <a
+                  className="offer-question"
+                  href={whatsappFor(offer.question)}
+                  target="_blank"
+                  rel="noreferrer"
+                  onClick={() => trackLead("duvida_plano", { offer: offer.name })}
+                >
+                  Tirar uma dúvida
+                </a>
+              </div>
             </article>
           ))}
         </div>
@@ -2238,7 +2255,7 @@ export default function Home() {
             </div>
             <div className="preview-sales-cta">
               <span>Imaginou sua empresa com uma estrutura assim?</span>
-              <a href={whatsappFor("Olá! Vi um dos modelos completos da Avancini Web e quero uma estrutura nesse nível para minha empresa.")} target="_blank" rel="noreferrer" onClick={() => track("model_whatsapp", { model: nichePreview })}>Quero algo nesse nível <b>↗</b></a>
+              <a href={whatsappFor("Olá! Vi um dos modelos completos da Avancini Web e quero uma estrutura nesse nível para minha empresa.")} target="_blank" rel="noreferrer" onClick={() => trackLead("modelo_completo", { model: nichePreview })}>Quero algo nesse nível <b>↗</b></a>
             </div>
           </div>
         </div>
@@ -2307,7 +2324,7 @@ export default function Home() {
             </div>
             <div className="preview-sales-cta">
               <span>Gostou dessa direção visual?</span>
-              <a href={whatsappFor(`Olá! Gostei do exemplo ${activePreview.name} e quero conversar sobre uma direção parecida para minha empresa.`)} target="_blank" rel="noreferrer" onClick={() => track("preview_whatsapp", { preview: activePreview.name })}>Quero um projeto assim <b>↗</b></a>
+              <a href={whatsappFor(`Olá! Gostei do exemplo ${activePreview.name} e quero conversar sobre uma direção parecida para minha empresa.`)} target="_blank" rel="noreferrer" onClick={() => trackLead("preview_projeto", { preview: activePreview.name })}>Quero um projeto assim <b>↗</b></a>
             </div>
           </div>
         </div>
@@ -2337,7 +2354,7 @@ export default function Home() {
         </div>
         <div className="footer-bottom">
           <span>© {new Date().getFullYear()} Avancini OS</span>
-          <span>Estratégia · Web design · Conversão</span>
+          <nav aria-label="Informações legais"><a href="/privacidade">Privacidade</a><a href="/termos">Termos</a></nav>
           <a href="#inicio">Voltar ao topo ↑</a>
         </div>
       </footer>
@@ -2347,6 +2364,7 @@ export default function Home() {
         target="_blank"
         rel="noreferrer"
         aria-label="Falar com a Avancini Web no WhatsApp"
+        onClick={() => trackLead("botao_flutuante")}
       >
         <span>●</span>
         <b>Solicitar orçamento</b>

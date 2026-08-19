@@ -4,8 +4,11 @@ import Script from "next/script";
 
 const gaId = process.env.NEXT_PUBLIC_GA_ID;
 const metaPixelId = process.env.NEXT_PUBLIC_META_PIXEL_ID;
+const marketingEnabled = process.env.NEXT_PUBLIC_MARKETING_ENABLED === "true";
 
 export function MarketingScripts() {
+  if (!marketingEnabled) return null;
+
   return (
     <>
       {gaId && (
