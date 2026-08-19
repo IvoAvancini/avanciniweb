@@ -16,21 +16,12 @@ const services = [
   },
   {
     number: "02",
-    label: "SITES INSTITUCIONAIS",
-    title: "A presença digital que sua empresa merece.",
-    text: "Sites autorais que transformam sua marca em uma experiência de confiança, posicionamento e desejo desde o primeiro contato.",
-    tag: "Autoridade e posicionamento",
+    label: "SITES COMPLETOS",
+    title: "Um site capaz de apresentar, convencer e vender.",
+    text: "Sites autorais para posicionar sua empresa, apresentar serviços, organizar catálogos ou vender online — sempre com uma experiência coerente com sua marca.",
+    tag: "Autoridade, estrutura e vendas",
     type: "institutional",
-    journey: ["Posição", "Portfólio", "Confiança"],
-  },
-  {
-    number: "03",
-    label: "E-COMMERCE",
-    title: "Sua vitrine aberta para vender todos os dias.",
-    text: "Lojas virtuais claras, rápidas e preparadas para facilitar a escolha, reduzir dúvidas e levar o cliente até a compra.",
-    tag: "Experiência de compra",
-    type: "commerce",
-    journey: ["Descoberta", "Produto", "Compra"],
+    journey: ["Estrutura", "Confiança", "Ação"],
   },
 ] as const;
 
@@ -44,20 +35,12 @@ const offers = [
     featured: false,
   },
   {
-    name: "Site Institucional",
+    name: "Site Completo",
     price: "A partir de R$ 4.500",
-    deadline: "Prazo médio de 15 a 30 dias úteis",
-    description: "Para empresas que precisam transmitir confiança, estrutura e autoridade.",
-    includes: ["Arquitetura completa", "Versão mobile", "SEO técnico inicial"],
+    deadline: "Prazo médio de 15 a 45 dias úteis",
+    description: "Para empresas que precisam transmitir autoridade, organizar sua operação digital ou vender online.",
+    includes: ["Institucional, catálogo ou loja virtual", "Versão mobile", "SEO técnico inicial"],
     featured: true,
-  },
-  {
-    name: "E-commerce",
-    price: "A partir de R$ 7.500",
-    deadline: "Prazo médio de 30 a 45 dias úteis",
-    description: "Para transformar produtos em uma experiência de compra clara e desejável.",
-    includes: ["Vitrine e produtos", "Jornada de compra", "Integrações essenciais"],
-    featured: false,
   },
 ] as const;
 
@@ -264,7 +247,7 @@ const previewProjects = {
   },
   commerce: {
     name: "ÁUREA",
-    kind: "E-commerce · Skincare botânico",
+    kind: "Site completo · Skincare botânico",
     accent: "sand",
     pages: [
       {
@@ -1136,7 +1119,7 @@ export default function Home() {
   const [preview, setPreview] = useState<PreviewType | null>(null);
   const [previewSlide, setPreviewSlide] = useState(0);
   const [nichePreview, setNichePreview] = useState<NicheType | null>(null);
-  const [projectType, setProjectType] = useState("Site institucional");
+  const [projectType, setProjectType] = useState("Site completo");
   const [segment, setSegment] = useState("");
   const [goal, setGoal] = useState("Gerar mais contatos");
   const [investment, setInvestment] = useState("R$ 4.500 a R$ 7.500");
@@ -1564,10 +1547,10 @@ export default function Home() {
           <span>01</span>Landing pages
         </div>
         <div>
-          <span>02</span>Sites institucionais
+          <span>02</span>Sites completos
         </div>
         <div>
-          <span>03</span>E-commerce
+          <span>03</span>Sites com vendas
         </div>
         <div>
           <span>04</span>Design responsivo
@@ -1687,40 +1670,6 @@ export default function Home() {
                         atravessa o tempo.
                       </strong>
                       <p>Residência 735 · Bahia</p>
-                    </div>
-                  </div>
-                )}
-                {service.type === "commerce" && (
-                  <div className="example-site example-commerce">
-                    <div className="example-nav">
-                      <b>ÁUREA</b>
-                      <span>SKINCARE BOTÂNICO</span>
-                      <i>SACOLA 0</i>
-                    </div>
-                    <div className="shop-hero">
-                      <div>
-                        <small>RITUAL ESSENCIAL</small>
-                        <strong>
-                          Menos excessos.
-                          <br />
-                          Mais pele.
-                        </strong>
-                        <b>COMPRAR ROTINA ↗</b>
-                      </div>
-                      <img
-                        src="/concepts/aurea-skin.jpg"
-                        alt="Produtos de skincare"
-                        loading="lazy"
-                        decoding="async"
-                      />
-                    </div>
-                    <div className="shop-products">
-                      <span>
-                        Sérum Luminoso <b>R$ 89</b>
-                      </span>
-                      <span>
-                        Creme Barreira <b>R$ 109</b>
-                      </span>
                     </div>
                   </div>
                 )}
@@ -2083,8 +2032,8 @@ export default function Home() {
             <span>O que você precisa?</span>
             <select value={projectType} onChange={(event) => setProjectType(event.target.value)}>
               <option>Landing page</option>
-              <option>Site institucional</option>
-              <option>E-commerce</option>
+              <option>Site completo</option>
+              <option>Site com loja virtual</option>
               <option>Ainda não sei</option>
             </select>
           </label>
