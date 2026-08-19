@@ -95,7 +95,10 @@ export default function SubscriptionPage() {
           <span className="logo-mark" aria-hidden="true"><i /></span>
           <span><span className="brand-name">AVANCINI <b>WEB</b></span><small>Uma solução Avancini OS</small></span>
         </a>
-        <a href="#planos" className="sub-header-link">Ver planos <span>↓</span></a>
+        <nav className="sub-header-actions" aria-label="Navegação da página de planos">
+          <a href="/" className="sub-back-link"><b aria-hidden="true">←</b><span>Voltar para o site</span></a>
+          <a href="#planos" className="sub-header-link"><span>Ver planos</span><b aria-hidden="true">↓</b></a>
+        </nav>
       </header>
 
       <section className="sub-hero">
