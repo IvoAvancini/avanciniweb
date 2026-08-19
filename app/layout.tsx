@@ -1,10 +1,23 @@
 import type { Metadata } from "next";
+import { Manrope, Space_Grotesk } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { MarketingScripts } from "./marketing-scripts";
 import "./globals.css";
 
 // Trocar para https://web.avancini.me quando o subdomínio estiver conectado na Vercel.
 const siteUrl = "https://avanciniweb.vercel.app";
+
+const manrope = Manrope({
+  subsets: ["latin"],
+  variable: "--font-manrope",
+  display: "swap",
+});
+
+const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin"],
+  variable: "--font-space",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -34,7 +47,7 @@ export const metadata: Metadata = {
       "Estratégia, design e conversão para transformar sua presença digital em uma ferramenta comercial.",
     images: [
       {
-        url: "/og-v3.png",
+        url: "/og-v3.jpg",
         width: 1200,
         height: 630,
         alt: "Avancini Web — sites impossíveis de ignorar",
@@ -46,7 +59,7 @@ export const metadata: Metadata = {
     title: "Avancini Web | Sites impossíveis de ignorar",
     description:
       "Landings de conversão, sites institucionais e projetos exclusivos com estratégia e design autoral.",
-    images: ["/og-v3.png"],
+    images: ["/og-v3.jpg"],
   },
   robots: { index: true, follow: true },
 };
@@ -68,7 +81,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
 
   return (
     <html lang="pt-BR">
-      <body>
+      <body className={`${manrope.variable} ${spaceGrotesk.variable}`}>
         {children}
         <script
           type="application/ld+json"

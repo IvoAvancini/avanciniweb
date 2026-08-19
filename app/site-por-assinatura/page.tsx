@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { trackLead, trackMarketingEvent } from "../marketing-events";
 
@@ -277,7 +278,7 @@ export default function SubscriptionPage() {
                 {/* Região rolável precisa receber foco para também funcionar por teclado. */}
                 {/* eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex */}
                 <div className="project-scroll" role="region" tabIndex={0} aria-label="Demonstração rolável completa do projeto Clínica San Diego">
-                  <img src="/projects/san-diego-full.png" alt="Captura completa da proposta de redesign da Clínica San Diego" loading="lazy" decoding="async" />
+                  <Image src="/projects/san-diego-full.png" alt="Captura completa da proposta de redesign da Clínica San Diego" width={1264} height={6720} sizes="(max-width: 760px) 92vw, 56vw" quality={82} />
                 </div>
               </div>
               <div className="scroll-hint">Role dentro da tela <span>↓</span></div>
@@ -297,7 +298,7 @@ export default function SubscriptionPage() {
                 {/* Região rolável precisa receber foco para também funcionar por teclado. */}
                 {/* eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex */}
                 <div className="project-scroll" role="region" tabIndex={0} aria-label="Demonstração rolável completa do projeto Tape Car">
-                  <img src="/projects/tape-car-full.png" alt="Captura completa do projeto Tape Car" loading="lazy" decoding="async" />
+                  <Image src="/projects/tape-car-full.png" alt="Captura completa do projeto Tape Car" width={1264} height={5388} sizes="(max-width: 760px) 92vw, 56vw" quality={82} />
                 </div>
               </div>
               <div className="scroll-hint">Role dentro da tela <span>↓</span></div>

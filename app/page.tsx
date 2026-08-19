@@ -2,7 +2,31 @@
 /* eslint-disable jsx-a11y/no-noninteractive-tabindex -- As prévias roláveis precisam receber foco para funcionar também pelo teclado. */
 
 import { useEffect, useState, type FormEvent } from "react";
+import Image, { type ImageProps } from "next/image";
 import { trackLead, trackMarketingEvent } from "./marketing-events";
+
+const imageDimensions = {
+  "/concepts/apex-cars.jpg": { width: 1400, height: 2100 },
+  "/concepts/aurea-skin.jpg": { width: 1400, height: 933 },
+  "/concepts/brasa-burger.png": { width: 640, height: 640 },
+  "/concepts/brasa-dining.jpg": { width: 1600, height: 1104 },
+  "/concepts/lumina-clinic.jpg": { width: 2500, height: 3748 },
+  "/concepts/moreira-law.jpg": { width: 2000, height: 1058 },
+  "/concepts/noma-fashion.jpg": { width: 1334, height: 2000 },
+  "/concepts/vertice-home.jpg": { width: 1400, height: 933 },
+  "/concepts/atlas-villa.webp": { width: 1400, height: 770 },
+  "/projects/san-diego-full.png": { width: 1264, height: 6720 },
+  "/projects/tape-car-full.png": { width: 1264, height: 5388 },
+} as const;
+
+type SiteImageProps = Omit<ImageProps, "src" | "width" | "height"> & {
+  src: string;
+};
+
+function SiteImage({ src, sizes = "(max-width: 760px) 100vw, 70vw", quality = 74, ...props }: SiteImageProps) {
+  const dimensions = imageDimensions[src as keyof typeof imageDimensions] ?? { width: 1600, height: 1000 };
+  return <Image src={src} width={dimensions.width} height={dimensions.height} sizes={sizes} quality={quality} {...props} />;
+}
 
 const whatsappFor = (message: string) =>
   `https://wa.me/5573981019782?text=${encodeURIComponent(message)}`;
@@ -433,7 +457,7 @@ function PreviewCanvas({ type, slide }: { type: PreviewType; slide: number }) {
     if (slide === 0)
       return (
         <div className="concept-screen lumina-home">
-          <img
+          <SiteImage
             src="/concepts/lumina-clinic.jpg"
             alt="Atendimento estético Lumina"
           />
@@ -489,7 +513,7 @@ function PreviewCanvas({ type, slide }: { type: PreviewType; slide: number }) {
               <small>Luminosidade e textura</small>
             </article>
             <article className="with-photo">
-              <img
+              <SiteImage
                 src="/concepts/lumina-clinic.jpg"
                 alt="Procedimento Lumina"
               />
@@ -547,7 +571,7 @@ function PreviewCanvas({ type, slide }: { type: PreviewType; slide: number }) {
     if (slide === 0)
       return (
         <div className="concept-screen vertice-home-full">
-          <img
+          <SiteImage
             src="/concepts/vertice-home.jpg"
             alt="Projeto residencial Vértice"
           />
@@ -579,21 +603,21 @@ function PreviewCanvas({ type, slide }: { type: PreviewType; slide: number }) {
           </div>
           <div className="vertice-gallery-grid">
             <article>
-              <img src="/concepts/vertice-home.jpg" alt="Residência pátio" />
+              <SiteImage src="/concepts/vertice-home.jpg" alt="Residência pátio" />
               <div>
                 <b>CASA PÁTIO</b>
                 <span>Trancoso · BA</span>
               </div>
             </article>
             <article>
-              <img src="/concepts/atlas-villa.webp" alt="Casa horizonte" />
+              <SiteImage src="/concepts/atlas-villa.webp" alt="Casa horizonte" />
               <div>
                 <b>CASA HORIZONTE</b>
                 <span>Porto Seguro · BA</span>
               </div>
             </article>
             <article>
-              <img src="/concepts/vertice-home.jpg" alt="Residência 735" />
+              <SiteImage src="/concepts/vertice-home.jpg" alt="Residência 735" />
               <div>
                 <b>RESIDÊNCIA 735</b>
                 <span>Eunápolis · BA</span>
@@ -671,7 +695,7 @@ function PreviewCanvas({ type, slide }: { type: PreviewType; slide: number }) {
           <p>Fórmulas essenciais para uma rotina que cabe na vida real.</p>
           <b>DESCOBRIR O RITUAL ↗</b>
         </div>
-        <img src="/concepts/aurea-skin.jpg" alt="Produtos Áurea" />
+        <SiteImage src="/concepts/aurea-skin.jpg" alt="Produtos Áurea" />
         <div className="aurea-ticker">
           VEGANO · CRUELTY FREE · ATIVOS BRASILEIROS · EMBALAGEM CONSCIENTE
         </div>
@@ -684,7 +708,7 @@ function PreviewCanvas({ type, slide }: { type: PreviewType; slide: number }) {
           ÁUREA <span>02 / 03</span>
         </div>
         <div className="aurea-product-photo">
-          <img src="/concepts/aurea-skin.jpg" alt="Sérum Luminoso Áurea" />
+          <SiteImage src="/concepts/aurea-skin.jpg" alt="Sérum Luminoso Áurea" />
           <span>ARRASTE PARA VER DETALHES</span>
         </div>
         <div className="aurea-product-info">
@@ -728,7 +752,7 @@ function PreviewCanvas({ type, slide }: { type: PreviewType; slide: number }) {
         </div>
         <small>SEU RITUAL · 02 PRODUTOS</small>
         <article>
-          <img src="/concepts/aurea-skin.jpg" alt="Produto Áurea" />
+          <SiteImage src="/concepts/aurea-skin.jpg" alt="Produto Áurea" />
           <div>
             <b>Sérum Luminoso</b>
             <span>30 ml · Quantidade 1</span>
@@ -747,7 +771,7 @@ function PreviewCanvas({ type, slide }: { type: PreviewType; slide: number }) {
         </article>
         <div className="aurea-cart-extra">
           <div className="aurea-extra-image">
-            <img src="/concepts/aurea-skin.jpg" alt="Óleo de limpeza Áurea" />
+            <SiteImage src="/concepts/aurea-skin.jpg" alt="Óleo de limpeza Áurea" />
           </div>
           <div>
             <small>COMPLETE O RITUAL</small>
@@ -795,7 +819,7 @@ function NicheFullPage({ type }: { type: NicheType }) {
             </div>
             <b>FALAR COM CONSULTOR</b>
           </nav>
-          <img src="/concepts/apex-cars.jpg" alt="Showroom Apex Motors" />
+          <SiteImage src="/concepts/apex-cars.jpg" alt="Showroom Apex Motors" />
           <div>
             <small>SELEÇÃO PREMIUM · PROCEDÊNCIA GARANTIDA</small>
             <h2>
@@ -846,7 +870,7 @@ function NicheFullPage({ type }: { type: NicheType }) {
             ].map((name, i) => (
               <article key={name}>
                 <div className={`car-thumb car-${i}`}>
-                  <img src="/concepts/apex-cars.jpg" alt="" />
+                  <SiteImage src="/concepts/apex-cars.jpg" alt="" />
                   <span>2024 · {i * 7 + 8}.000 km</span>
                 </div>
                 <h4>{name}</h4>
@@ -910,7 +934,7 @@ function NicheFullPage({ type }: { type: NicheType }) {
             <span>NOVIDADES&nbsp;&nbsp; FEMININO&nbsp;&nbsp; ESSENCIAIS</span>
             <b>BUSCAR&nbsp;&nbsp; SACOLA (0)</b>
           </nav>
-          <img src="/concepts/noma-fashion.jpg" alt="Editorial Noma" />
+          <SiteImage src="/concepts/noma-fashion.jpg" alt="Editorial Noma" />
           <div>
             <small>DROP 04 · FORMAS DE AGORA</small>
             <h2>
@@ -953,7 +977,7 @@ function NicheFullPage({ type }: { type: NicheType }) {
             {["Blazer Íris", "Saia Linha", "Tricot Areia"].map((name, i) => (
               <article key={name}>
                 <div>
-                  <img
+                  <SiteImage
                     src="/concepts/noma-fashion.jpg"
                     alt=""
                     style={{ objectPosition: `${35 + i * 25}% center` }}
@@ -1000,7 +1024,7 @@ function NicheFullPage({ type }: { type: NicheType }) {
     return (
       <div className="niche-page estate-page">
         <section className="estate-hero">
-          <img src="/concepts/atlas-villa.webp" alt="Imóvel Atlas" />
+          <SiteImage src="/concepts/atlas-villa.webp" alt="Imóvel Atlas" />
           <nav>
             <strong>ATLAS.</strong>
             <span>
@@ -1046,7 +1070,7 @@ function NicheFullPage({ type }: { type: NicheType }) {
           </header>
           <div>
             <article className="estate-main">
-              <img src="/concepts/atlas-villa.webp" alt="Villa Aurora" />
+              <SiteImage src="/concepts/atlas-villa.webp" alt="Villa Aurora" />
               <span>EXCLUSIVIDADE</span>
               <h4>Villa Aurora</h4>
               <p>
@@ -1054,7 +1078,7 @@ function NicheFullPage({ type }: { type: NicheType }) {
               </p>
             </article>
             <article>
-              <img src="/concepts/vertice-home.jpg" alt="Casa Pátio" />
+              <SiteImage src="/concepts/vertice-home.jpg" alt="Casa Pátio" />
               <h4>Casa Pátio</h4>
               <p>
                 Eunápolis · 4 suítes <b>R$ 3,2 milhões</b>
@@ -1111,7 +1135,7 @@ function NicheFullPage({ type }: { type: NicheType }) {
           <div>CARDÁPIO&nbsp;&nbsp; LOJAS&nbsp;&nbsp; NOSSA BRASA</div>
           <b>PEDIR AGORA</b>
         </nav>
-        <img src="/concepts/brasa-burger.png" alt="Burger Brasa" />
+        <SiteImage src="/concepts/brasa-burger.png" alt="Burger Brasa" />
         <div>
           <small>SMASH NA BRASA · ENTREGA RÁPIDA</small>
           <h2>
@@ -1146,7 +1170,7 @@ function NicheFullPage({ type }: { type: NicheType }) {
             <article key={name}>
               <span>0{i + 1}</span>
               <div className="burger-circle">
-                <img src="/concepts/brasa-burger.png" alt="" />
+                <SiteImage src="/concepts/brasa-burger.png" alt="" />
               </div>
               <h4>{name}</h4>
               <p>
@@ -1215,6 +1239,7 @@ export default function Home() {
   const [scrolled, setScrolled] = useState(false);
   const [heroIndex, setHeroIndex] = useState(0);
   const [heroPaused, setHeroPaused] = useState(false);
+  const [heroInView, setHeroInView] = useState(true);
   const [preview, setPreview] = useState<PreviewType | null>(null);
   const [previewSlide, setPreviewSlide] = useState(0);
   const [nichePreview, setNichePreview] = useState<NicheType | null>(null);
@@ -1231,13 +1256,23 @@ export default function Home() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
   useEffect(() => {
-    if (heroPaused) return;
+    const hero = document.getElementById("inicio");
+    if (!hero) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setHeroInView(entry.isIntersecting),
+      { threshold: 0.05 },
+    );
+    observer.observe(hero);
+    return () => observer.disconnect();
+  }, []);
+  useEffect(() => {
+    if (heroPaused || !heroInView) return;
     const timer = window.setInterval(
       () => setHeroIndex((index) => (index + 1) % heroSlides.length),
       5600,
     );
     return () => window.clearInterval(timer);
-  }, [heroPaused]);
+  }, [heroInView, heroPaused]);
   useEffect(() => {
     if (!preview && !nichePreview) return;
     document.body.style.overflow = "hidden";
@@ -1438,7 +1473,7 @@ export default function Home() {
                   </p>
                   <button>EXPLORAR COLEÇÃO ↗</button>
                 </div>
-                <img src={heroSlide.image} alt={heroSlide.alt} />
+                <SiteImage src={heroSlide.image} alt={heroSlide.alt} sizes="(max-width: 760px) 100vw, 55vw" priority />
                 <div className="atlas-listing">
                   <span>01 / 08</span>
                   <b>VILLA AURORA</b>
@@ -1457,7 +1492,7 @@ export default function Home() {
             )}
             {heroSlide.id === "brasa" && (
               <div className="hero-concept brasa-concept">
-                <img src={heroSlide.image} alt={heroSlide.alt} />
+                <SiteImage src={heroSlide.image} alt={heroSlide.alt} sizes="(max-width: 760px) 100vw, 55vw" />
                 <div className="brasa-nav">
                   <strong>
                     BRASA<sup>73</sup>
@@ -1524,7 +1559,7 @@ export default function Home() {
                 <div className="moreira-confidential">
                   CONFIDENCIALIDADE · ESTRATÉGIA · PRECISÃO
                 </div>
-                <img src={heroSlide.image} alt={heroSlide.alt} />
+                <SiteImage src={heroSlide.image} alt={heroSlide.alt} sizes="(max-width: 760px) 100vw, 55vw" />
                 <div className="moreira-index">
                   <b>18</b>
                   <span>
@@ -1538,7 +1573,7 @@ export default function Home() {
             )}
             {heroSlide.id === "nexa" && (
               <div className="hero-concept lead-concept nexa-concept">
-                <img src={heroSlide.image} alt={heroSlide.alt} />
+                <SiteImage src={heroSlide.image} alt={heroSlide.alt} sizes="(max-width: 760px) 100vw, 55vw" />
                 <div className="lead-nav">
                   <strong>NEXA<span>SOLAR</span></strong>
                   <small>COMO FUNCIONA&nbsp;&nbsp; PROJETOS&nbsp;&nbsp; DÚVIDAS</small>
@@ -1562,7 +1597,7 @@ export default function Home() {
             )}
             {heroSlide.id === "vitta" && (
               <div className="hero-concept lead-concept vitta-concept">
-                <img src={heroSlide.image} alt={heroSlide.alt} />
+                <SiteImage src={heroSlide.image} alt={heroSlide.alt} sizes="(max-width: 760px) 100vw, 55vw" />
                 <div className="lead-nav">
                   <strong>VITTA<span>IMPLANTES</span></strong>
                   <small>TRATAMENTO&nbsp;&nbsp; EQUIPE&nbsp;&nbsp; HISTÓRIAS</small>
@@ -1586,7 +1621,7 @@ export default function Home() {
             )}
             {heroSlide.id === "apexprotect" && (
               <div className="hero-concept lead-concept protect-concept">
-                <img src={heroSlide.image} alt={heroSlide.alt} />
+                <SiteImage src={heroSlide.image} alt={heroSlide.alt} sizes="(max-width: 760px) 100vw, 55vw" />
                 <div className="lead-nav">
                   <strong>APEX<span>PROTECT</span></strong>
                   <small>PPF&nbsp;&nbsp; VITRIFICAÇÃO&nbsp;&nbsp; RESULTADOS</small>
@@ -1744,11 +1779,10 @@ export default function Home() {
                       <span>ESTÉTICA AVANÇADA</span>
                       <i>AGENDAR</i>
                     </div>
-                    <img
+                    <SiteImage
                       src="/concepts/lumina-clinic.jpg"
                       alt="Profissional realizando tratamento estético"
-                      loading="lazy"
-                      decoding="async"
+                      sizes="(max-width: 760px) 92vw, 40vw"
                     />
                     <div className="example-copy">
                       <small>PROTOCOLO EXCLUSIVO</small>
@@ -1772,11 +1806,10 @@ export default function Home() {
                 )}
                 {service.type === "institutional" && (
                   <div className="example-site example-architecture">
-                    <img
+                    <SiteImage
                       src="/concepts/vertice-home.jpg"
                       alt="Residência contemporânea"
-                      loading="lazy"
-                      decoding="async"
+                      sizes="(max-width: 760px) 92vw, 40vw"
                     />
                     <div className="example-nav">
                       <b>VÉRTICE.</b>
@@ -1854,10 +1887,10 @@ export default function Home() {
                 onClick={() => setNichePreview(model.type)}
                 aria-label={`Ver estrutura completa de ${model.label.toLowerCase()}`}
               >
-                <img
+                <SiteImage
                   src={model.image}
                   alt={`Exemplo fictício ${model.brand}`}
-                  decoding="async"
+                  sizes="(max-width: 760px) 92vw, 24vw"
                 />
                 <div className="model-mini-nav">
                   <i />
@@ -1943,11 +1976,11 @@ export default function Home() {
                   tabIndex={0}
                   aria-label="Demonstração rolável completa do site Clínica San Diego"
                 >
-                  <img
+                  <SiteImage
                     src="/projects/san-diego-full.png"
                     alt="Captura completa do site da Clínica San Diego"
-                    loading="lazy"
-                    decoding="async"
+                    sizes="(max-width: 760px) 92vw, 54vw"
+                    quality={82}
                   />
                 </div>
               </div>
@@ -1997,11 +2030,11 @@ export default function Home() {
                   tabIndex={0}
                   aria-label="Demonstração rolável completa do site Tape Car"
                 >
-                  <img
+                  <SiteImage
                     src="/projects/tape-car-full.png"
                     alt="Captura completa do site Tape Car"
-                    loading="lazy"
-                    decoding="async"
+                    sizes="(max-width: 760px) 92vw, 54vw"
+                    quality={82}
                   />
                 </div>
               </div>
