@@ -157,10 +157,10 @@ export default function SubscriptionPage() {
 
       <section className="sub-section sub-case">
         <div className="sub-case-copy">
-          <span>CASE REAL PUBLICADO</span>
+          <span>EXEMPLO DE REDESIGN</span>
           <h2>Clínica San Diego</h2>
-          <p>Um site completo para organizar especialidades, apresentar a equipe, facilitar o agendamento e transmitir confiança antes mesmo da primeira consulta.</p>
-          <a href="https://clinicasandiego.com.br/" target="_blank" rel="noreferrer">Visitar o site publicado <b>↗</b></a>
+          <p>A partir do site anterior da clínica, criamos uma nova proposta para organizar especialidades, apresentar a equipe e facilitar o agendamento.</p>
+          <a href="https://clinicasandiego.com.br/" target="_blank" rel="noreferrer">Ver o site anterior para comparar <b>↗</b></a>
         </div>
         <div className="sub-case-screen"><img src="/projects/san-diego.jpg" alt="Página inicial da Clínica San Diego" /></div>
       </section>

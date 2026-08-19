@@ -1765,8 +1765,8 @@ export default function Home() {
             </h2>
           </div>
           <p>
-            Um case publicado que pode ser visitado e conceitos comerciais que
-            mostram até onde uma presença digital pode chegar.
+            Um redesign construído a partir de um site anterior e uma criação
+            iniciada totalmente do zero.
           </p>
         </div>
         <div className="project-list">
@@ -1779,13 +1779,13 @@ export default function Home() {
                 San Diego
               </h3>
               <p>
-                O site organiza especialidades, equipe, horários e agendamento
-                em uma experiência acolhedora para quem está escolhendo onde se cuidar.
+                Um redesign para reorganizar especialidades, equipe, horários e
+                agendamento em uma experiência mais clara e acolhedora.
               </p>
               <dl className="case-details">
-                <div><dt>DESAFIO</dt><dd>Reunir muitos serviços de saúde sem perder clareza.</dd></div>
-                <div><dt>ENTREGA</dt><dd>Site institucional com equipe, vacinas e contato direto.</dd></div>
-                <div><dt>RESULTADO VERIFICÁVEL</dt><dd>Presença digital publicada e acessível ao público.</dd></div>
+                <div><dt>PONTO DE PARTIDA</dt><dd>A clínica já possuía um site, usado como referência para a comparação.</dd></div>
+                <div><dt>NOVA PROPOSTA</dt><dd>Estrutura, mensagem e experiência visual completamente redesenhadas.</dd></div>
+                <div><dt>OBJETIVO</dt><dd>Transmitir mais confiança e facilitar o caminho até o agendamento.</dd></div>
               </dl>
               <div className="project-tags">
                 <span>Site institucional</span>
@@ -1793,10 +1793,10 @@ export default function Home() {
                 <span>Conversão</span>
               </div>
               <div className="project-status">
-                <i /> Case real e publicado <span>clinicasandiego.com.br</span>
+                <i /> Redesign completo <span>a partir do site anterior</span>
               </div>
               <a className="case-link" href="https://clinicasandiego.com.br/#nossa_equipe" target="_blank" rel="noreferrer">
-                Visitar o site publicado <span>↗</span>
+                Ver o site anterior para comparar <span>↗</span>
               </a>
             </div>
             <div className="project-screen">
@@ -1805,7 +1805,7 @@ export default function Home() {
                   <i />
                   <i />
                   <i />
-                  <span>clinicasandiego.com</span>
+                  <span>avancini.web / redesign san diego</span>
                   <b>ROLE ↓</b>
                 </div>
                 <div
@@ -1824,7 +1824,7 @@ export default function Home() {
               <div className="scroll-hint">
                 Role dentro da tela <span>↓</span>
               </div>
-              <div className="screen-label">PROJETO REAL / 01</div>
+              <div className="screen-label">REDESIGN / 01</div>
             </div>
           </article>
           <article className="project-showcase tapecar">
@@ -1840,7 +1840,8 @@ export default function Home() {
               <dl className="case-details">
                 <div><dt>OBJETIVO</dt><dd>Traduzir a força local da marca em uma vitrine digital premium.</dd></div>
                 <div><dt>ESTRUTURA</dt><dd>Serviços, processo, localização e contato por WhatsApp.</dd></div>
-                <div><dt>STATUS</dt><dd>Conceito comercial criado para demonstração.</dd></div>
+                <div><dt>PONTO DE PARTIDA</dt><dd>A Tape Car ainda não possuía um site.</dd></div>
+                <div><dt>ENTREGA</dt><dd>Estrutura e identidade digital criadas completamente do zero.</dd></div>
               </dl>
               <div className="project-tags">
                 <span>Site institucional</span>
@@ -1848,7 +1849,7 @@ export default function Home() {
                 <span>WhatsApp</span>
               </div>
               <div className="project-status">
-                <i /> Conceito de apresentação <span>não publicado</span>
+                <i /> Criação do zero <span>sem site anterior</span>
               </div>
             </div>
             <div className="project-screen">
@@ -1857,7 +1858,7 @@ export default function Home() {
                   <i />
                   <i />
                   <i />
-                  <span>tapecar.com</span>
+                  <span>avancini.web / projeto tape car</span>
                   <b>ROLE ↓</b>
                 </div>
                 <div
@@ -1876,7 +1877,7 @@ export default function Home() {
               <div className="scroll-hint">
                 Role dentro da tela <span>↓</span>
               </div>
-              <div className="screen-label">CONCEITO COMERCIAL / 02</div>
+              <div className="screen-label">CRIAÇÃO DO ZERO / 02</div>
             </div>
           </article>
         </div>
@@ -1884,36 +1885,27 @@ export default function Home() {
 
       <section className="section proof-section" aria-labelledby="proof-title">
         <div className="proof-intro">
-          <span className="section-index">05 — CONFIANÇA QUE PODE SER CONFERIDA</span>
-          <h2 id="proof-title">Nada de resultado inventado.</h2>
+          <span className="section-index">05 — DOIS PONTOS DE PARTIDA</span>
+          <h2 id="proof-title">Redesign ou criação do zero.</h2>
           <p>
-            A Clínica San Diego é o case real e publicado deste portfólio. Os demais
-            trabalhos estão identificados como conceitos para você avaliar direção,
-            estrutura e qualidade visual sem confundir demonstração com cliente real.
+            Algumas empresas já possuem um site que precisa evoluir. Outras ainda
+            precisam construir sua primeira presença digital. A Avancini Web trabalha
+            a partir da realidade de cada negócio.
           </p>
-          <a href="https://clinicasandiego.com.br/" target="_blank" rel="noreferrer" className="text-cta">
-            Conferir a Clínica San Diego ao vivo <span>↗</span>
-          </a>
         </div>
-        <div className="testimonial-grid">
-          <blockquote>
-            <p>“Excelente profissional, muito dedicado!”</p>
-            <cite>
-              <strong>Gildo Gonçalves Costa</strong>
-              <span>Paciente · depoimento publicado no site da clínica</span>
-            </cite>
-          </blockquote>
-          <blockquote>
-            <p>“Ótimo atendimento, horário marcado e lugar aconchegante.”</p>
-            <cite>
-              <strong>Flávia Gomes</strong>
-              <span>Paciente · depoimento publicado no site da clínica</span>
-            </cite>
-          </blockquote>
-          <small>
-            Os depoimentos acima avaliam a Clínica San Diego, não a Avancini Web.
-            Foram reproduzidos como conteúdo presente no projeto publicado.
-          </small>
+        <div className="origin-grid">
+          <article>
+            <span>01 / REDESIGN</span>
+            <h3>Clínica San Diego</h3>
+            <p>O site anterior serve como comparação para enxergar a evolução de estrutura, hierarquia e percepção de valor.</p>
+            <a href="https://clinicasandiego.com.br/" target="_blank" rel="noreferrer">Ver o site anterior <b>↗</b></a>
+          </article>
+          <article>
+            <span>02 / CRIAÇÃO DO ZERO</span>
+            <h3>Tape Car</h3>
+            <p>Sem uma presença anterior para reformular, o projeto nasceu do posicionamento, dos serviços e da realidade da empresa.</p>
+            <small>NÃO EXISTIA SITE ANTERIOR</small>
+          </article>
         </div>
       </section>
 
