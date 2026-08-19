@@ -2188,10 +2188,9 @@ export default function Home() {
             <label>
               <span>Prazo desejado</span>
               <select value={timeline} onChange={(event) => setTimeline(event.target.value)}>
+                <option>Em até 7 dias</option>
                 <option>Em até 15 dias</option>
                 <option>Em até 30 dias</option>
-                <option>Em até 60 dias</option>
-                <option>Sem urgência</option>
               </select>
             </label>
           </div>
