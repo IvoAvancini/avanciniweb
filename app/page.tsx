@@ -1,13 +1,17 @@
 "use client";
 
+import { track } from "@vercel/analytics";
 import { useEffect, useState, type FormEvent } from "react";
 
-const whatsapp =
-  "https://wa.me/5573981019782?text=Ol%C3%A1%21%20Conheci%20a%20Avancini%20Web%20e%20quero%20um%20or%C3%A7amento%20para%20meu%20site.";
+const whatsappFor = (message: string) =>
+  `https://wa.me/5573981019782?text=${encodeURIComponent(message)}`;
+const whatsapp = whatsappFor(
+  "Olá! Conheci a Avancini Web e quero conversar sobre o site da minha empresa.",
+);
 const services = [
   {
     number: "01",
-    label: "LANDING PAGES",
+    label: "LANDINGS DE CONVERSÃO",
     title: "Uma página. Um objetivo. Mais conversão.",
     text: "Páginas estratégicas para campanhas, lançamentos e captação de contatos, com uma mensagem que conduz o visitante até a ação.",
     tag: "Performance e conversão",
@@ -16,7 +20,7 @@ const services = [
   },
   {
     number: "02",
-    label: "SITES COMPLETOS",
+    label: "SITES INSTITUCIONAIS",
     title: "Um site capaz de apresentar, convencer e vender.",
     text: "Sites autorais para posicionar sua empresa, apresentar serviços, organizar catálogos ou vender online — sempre com uma experiência coerente com sua marca.",
     tag: "Autoridade, estrutura e vendas",
@@ -27,11 +31,14 @@ const services = [
 
 const offers = [
   {
-    name: "Landing Page",
+    name: "Landing de Conversão",
     price: "R$ 97/mês",
     deadline: "Sem entrada · permanência mínima de 12 meses",
     description: "Uma jornada direta para divulgar uma oferta específica e transformar visitas em contatos.",
     includes: ["Foco em uma única oferta", "Hospedagem, WhatsApp e suporte", "1 pequeno ajuste por mês"],
+    ideal: "Ideal para anúncios, campanhas e serviços específicos",
+    cta: "Quero uma landing",
+    message: "Olá! Quero contratar a Landing de Conversão por R$ 97/mês e entender os próximos passos.",
     featured: false,
   },
   {
@@ -40,14 +47,20 @@ const offers = [
     deadline: "Sem entrada · permanência mínima de 12 meses",
     description: "Uma presença completa para organizar a empresa, seus serviços, diferenciais e caminhos de contato.",
     includes: ["Estrutura e navegação completas", "Hospedagem, WhatsApp e suporte", "1 pequeno ajuste por mês"],
+    ideal: "Ideal para apresentar toda a empresa e gerar autoridade",
+    cta: "Quero um site institucional",
+    message: "Olá! Quero contratar o Site Institucional por R$ 247/mês e entender os próximos passos.",
     featured: true,
   },
   {
-    name: "Projeto Personalizado",
+    name: "Projeto Exclusivo",
     price: "Sob orçamento",
     deadline: "Escopo, prazo e valor personalizados",
     description: "Para catálogos, lojas virtuais, integrações ou experiências que pedem uma solução exclusiva.",
     includes: ["Briefing e proposta individual", "Funcionalidades sob medida", "Manutenção opcional"],
+    ideal: "Ideal para lojas, catálogos, integrações e ideias fora do padrão",
+    cta: "Solicitar orçamento",
+    message: "Olá! Preciso de um Projeto Exclusivo e quero solicitar um orçamento personalizado.",
     featured: false,
   },
 ] as const;
@@ -1176,6 +1189,7 @@ export default function Home() {
 
   const submitBudget = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    track("briefing_whatsapp", { projectType, contractModel, goal });
     const message = [
       "Olá! Conheci a Avancini Web e quero conversar sobre um projeto.",
       `Tipo: ${projectType}`,
@@ -1190,6 +1204,7 @@ export default function Home() {
 
   return (
     <main>
+      <div className="page-progress" aria-hidden="true" />
       <header className={scrolled ? "header scrolled" : "header"}>
         <a className="logo" href="#inicio" aria-label="Avancini Web, início">
           <span className="logo-mark" aria-hidden="true">
@@ -1270,7 +1285,7 @@ export default function Home() {
               className="button button-primary"
               href="/site-por-assinatura"
             >
-              Quero meu site por assinatura <span>↗</span>
+              Escolher meu plano <span>↗</span>
             </a>
             <a className="button button-ghost" href="#projetos">
               Ver projetos <span>↓</span>
@@ -1550,10 +1565,10 @@ export default function Home() {
         aria-label="Especialidades da Avancini Web"
       >
         <div>
-          <span>01</span>Landing pages
+          <span>01</span>Landings de conversão
         </div>
         <div>
-          <span>02</span>Sites completos
+          <span>02</span>Sites institucionais
         </div>
         <div>
           <span>03</span>Sem entrada
@@ -1693,6 +1708,12 @@ export default function Home() {
                     </span>
                   ))}
                 </div>
+              </div>
+              <div className="service-segments" aria-label="Segmentos de exemplo">
+                {(service.type === "landing"
+                  ? ["Clínicas", "Energia solar", "Serviços locais"]
+                  : ["Advocacia", "Imobiliárias", "Restaurantes"]
+                ).map((segment) => <span key={segment}>{segment}</span>)}
               </div>
               <h3>{service.title}</h3>
               <p>{service.text}</p>
@@ -1989,6 +2010,21 @@ export default function Home() {
             personalizado para necessidades fora dos planos.
           </p>
         </div>
+        <div className="offer-guide" aria-label="Comparação entre landing page e site institucional">
+          <article>
+            <span>QUERO VENDER UMA OFERTA</span>
+            <h3>Landing de Conversão</h3>
+            <p>Uma jornada curta para anunciar um serviço, reduzir dúvidas e levar o visitante a uma única ação.</p>
+            <div><b>Anúncios</b><b>Campanhas</b><b>Captação</b></div>
+          </article>
+          <div className="offer-guide-or">OU</div>
+          <article>
+            <span>QUERO APRESENTAR MINHA EMPRESA</span>
+            <h3>Site Institucional</h3>
+            <p>Uma estrutura completa para organizar serviços, diferenciais, conteúdo, autoridade e contatos.</p>
+            <div><b>Presença</b><b>Navegação</b><b>Autoridade</b></div>
+          </article>
+        </div>
         <div className="offer-grid">
           {offers.map((offer) => (
             <article className={offer.featured ? "offer-card featured" : "offer-card"} key={offer.name}>
@@ -1997,10 +2033,11 @@ export default function Home() {
               <strong>{offer.price}</strong>
               <span>{offer.deadline}</span>
               <p>{offer.description}</p>
+              <em className="offer-ideal">{offer.ideal}</em>
               <ul>
                 {offer.includes.map((item) => <li key={item}>{item}</li>)}
               </ul>
-              <a href="#contato">Quero conversar <b>↗</b></a>
+              <a href={whatsappFor(offer.message)} target="_blank" rel="noreferrer" onClick={() => track("offer_whatsapp", { offer: offer.name })}>{offer.cta} <b>↗</b></a>
             </article>
           ))}
         </div>
@@ -2037,9 +2074,9 @@ export default function Home() {
           <label>
             <span>O que você precisa?</span>
             <select value={projectType} onChange={(event) => setProjectType(event.target.value)}>
-              <option>Landing page — R$ 97/mês</option>
+              <option>Landing de Conversão — R$ 97/mês</option>
               <option>Site institucional — R$ 247/mês</option>
-              <option>Projeto personalizado — solicitar orçamento</option>
+              <option>Projeto exclusivo — solicitar orçamento</option>
               <option>Ainda não sei</option>
             </select>
           </label>
@@ -2060,7 +2097,7 @@ export default function Home() {
             <label>
               <span>Opção de investimento</span>
               <select value={investment} onChange={(event) => setInvestment(event.target.value)}>
-                <option>R$ 97/mês — Landing page</option>
+                <option>R$ 97/mês — Landing de Conversão</option>
                 <option>R$ 247/mês — Site institucional</option>
                 <option>Quero solicitar um orçamento</option>
                 <option>Quero entender as opções</option>
@@ -2117,6 +2154,10 @@ export default function Home() {
             </div>
             <div className="niche-scroll-note">
               <span>↓</span> Role dentro da tela para ver a estrutura completa
+            </div>
+            <div className="preview-sales-cta">
+              <span>Imaginou sua empresa com uma estrutura assim?</span>
+              <a href={whatsappFor("Olá! Vi um dos modelos completos da Avancini Web e quero uma estrutura nesse nível para minha empresa.")} target="_blank" rel="noreferrer" onClick={() => track("model_whatsapp", { model: nichePreview })}>Quero algo nesse nível <b>↗</b></a>
             </div>
           </div>
         </div>
@@ -2182,6 +2223,10 @@ export default function Home() {
               >
                 →
               </button>
+            </div>
+            <div className="preview-sales-cta">
+              <span>Gostou dessa direção visual?</span>
+              <a href={whatsappFor(`Olá! Gostei do exemplo ${activePreview.name} e quero conversar sobre uma direção parecida para minha empresa.`)} target="_blank" rel="noreferrer" onClick={() => track("preview_whatsapp", { preview: activePreview.name })}>Quero um projeto assim <b>↗</b></a>
             </div>
           </div>
         </div>

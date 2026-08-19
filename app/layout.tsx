@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     template: "%s | Avancini Web",
   },
   description:
-    "Criação de landing pages e sites completos com estratégia, design exclusivo e foco em conversão. Projetos institucionais, catálogos e lojas virtuais para todo o Brasil.",
+    "Criação de landings de conversão, sites institucionais e projetos exclusivos com estratégia, design autoral e foco em negócios para todo o Brasil.",
   keywords: [
     "criação de sites",
     "criação de sites em Eunápolis",
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Avancini Web | Sites impossíveis de ignorar",
     description:
-      "Landing pages e sites completos com estratégia, design exclusivo e foco em conversão.",
+      "Landings de conversão, sites institucionais e projetos exclusivos com estratégia e design autoral.",
     images: ["/og-v3.png"],
   },
   robots: { index: true, follow: true },
@@ -58,7 +58,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     name: "Avancini Web",
     url: siteUrl,
     description:
-      "Criação de landing pages e sites completos com estratégia, design exclusivo e foco em conversão.",
+      "Criação de landings de conversão, sites institucionais e projetos exclusivos com estratégia e design autoral.",
     areaServed: ["Eunápolis", "Bahia", "Brasil"],
     telephone: "+55 73 98101-9782",
     email: "ivoavancini@hotmail.com",

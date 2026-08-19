@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Site profissional por assinatura | Avancini Web",
     description:
-      "Seu site profissional sem entrada: escolha uma landing page, um site institucional ou solicite um projeto personalizado.",
+      "Seu site profissional sem entrada: escolha uma landing de conversão, um site institucional ou solicite um projeto exclusivo.",
     url: "https://avanciniweb.vercel.app/site-por-assinatura",
     images: [],
   },
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     card: "summary",
     title: "Site profissional por assinatura | Avancini Web",
     description:
-      "Landing pages por R$ 97/mês, sites institucionais por R$ 247/mês e projetos personalizados sob orçamento.",
+      "Landings de conversão por R$ 97/mês, sites institucionais por R$ 247/mês e projetos exclusivos sob orçamento.",
     images: [],
   },
 };
