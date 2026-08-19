@@ -1247,6 +1247,10 @@ export default function Home() {
       </header>
 
       <section className="hero" id="inicio">
+        <div className="hero-art-backdrop" aria-hidden="true">
+          <i className="art-scan" />
+          <i className="art-flare" />
+        </div>
         <div className="hero-glow glow-one" />
         <div className="hero-glow glow-two" />
         <div className="red-sweep" aria-hidden="true" />
