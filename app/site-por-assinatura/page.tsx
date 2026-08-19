@@ -21,7 +21,7 @@ const plans = [
   {
     id: "site",
     name: "Site Institucional",
-    price: "247",
+    price: "199,90",
     description: "Para organizar toda a presença da empresa, com navegação, autoridade e diferentes caminhos de contato.",
     features: [
       "Estrutura institucional completa",
@@ -49,9 +49,9 @@ const whatsappFor = (message: string) =>
 
 export default function SubscriptionPage() {
   const [model, setModel] = useState("Assinatura mensal");
-  const [plan, setPlan] = useState("Site Institucional — R$ 247/mês");
+  const [plan, setPlan] = useState("Site Institucional — R$ 199,90/mês");
   const [segment, setSegment] = useState("");
-  const [domain, setDomain] = useState("Ainda não tenho domínio");
+  const [domain, setDomain] = useState("Quero usar o endereço Avancini incluso");
 
   const choosePlan = (selected: string) => {
     setModel("Assinatura mensal");
@@ -65,7 +65,7 @@ export default function SubscriptionPage() {
   };
 
   const chooseCustom = () => {
-    setModel("Projeto sob medida");
+    setModel("Pagamento único");
     setPlan("Projeto exclusivo — solicitar orçamento");
     recordConversion("custom_quote_selected");
     window.open(
@@ -106,11 +106,11 @@ export default function SubscriptionPage() {
           <p>Tenha uma presença profissional, rápida e preparada para transformar visitas em conversas — sem pagar milhares de reais para começar.</p>
           <div className="sub-price-line">
             <div><small>LANDING DE CONVERSÃO</small><strong>R$ 97<em>/mês</em></strong></div>
-            <div><small>SITE INSTITUCIONAL</small><strong>R$ 247<em>/mês</em></strong></div>
+            <div><small>SITE INSTITUCIONAL</small><strong>R$ 199,90<em>/mês</em></strong></div>
           </div>
           <div className="sub-actions">
             <a href="#planos" className="button button-primary" onClick={() => recordConversion("hero_subscription_click")}>Quero meu site por assinatura <span>↗</span></a>
-            <button type="button" className="button button-ghost" onClick={chooseCustom}>Prefiro um projeto sob medida</button>
+            <button type="button" className="button button-ghost" onClick={chooseCustom}>Prefiro pagar uma vez</button>
           </div>
           <div className="sub-microproof"><span>Sem entrada</span><span>Hospedagem inclusa</span><span>Experiência mobile</span></div>
         </div>
@@ -158,70 +158,106 @@ export default function SubscriptionPage() {
               <h3>{item.name}</h3>
               <p>{item.description}</p>
               <div className="sub-plan-price"><sup>R$</sup><strong>{item.price}</strong><span>/mês</span></div>
-              <small className="sub-contract">Sem entrada · permanência mínima de 12 meses</small>
+              <small className="sub-contract">Sem entrada · permanência mínima de 6 meses</small>
               <ul>{item.features.map((feature) => <li key={feature}>{feature}</li>)}</ul>
               <button type="button" onClick={() => choosePlan(`${item.name} — R$ ${item.price}/mês`)}>{item.id === "landing" ? "Contratar minha landing" : "Contratar meu site"} <span>↗</span></button>
             </article>
           ))}
           <article className="sub-plan custom-plan">
-            <span className="sub-plan-code">03 / SOB MEDIDA</span>
+            <span className="sub-plan-code">03 / PAGAMENTO ÚNICO</span>
             <h3>Projeto Exclusivo</h3>
-            <p>Para estruturas mais completas ou complexas, com escopo definido para a necessidade real da empresa.</p>
+            <p>A mesma qualidade de estratégia, design e desenvolvimento, adquirida em pagamento único.</p>
             <div className="sub-plan-custom-price">Solicite um orçamento</div>
             <small className="sub-contract">Valor e prazo definidos após o briefing</small>
             <ul>
-              <li>Catálogo, loja virtual ou integrações</li>
-              <li>Funcionalidades e estrutura exclusivas</li>
-              <li>Escopo, prazo e propriedade combinados</li>
+              <li>Pagamento único pelo projeto</li>
+              <li>Domínio próprio e exclusivo</li>
+              <li>Site entregue conforme o escopo aprovado</li>
               <li>Manutenção opcional</li>
             </ul>
             <button type="button" onClick={chooseCustom}>Conversar sobre meu projeto <span>↗</span></button>
           </article>
         </div>
-        <div className="sub-domain-note"><b>Domínio:</b> endereço Avancini incluso. Se preferir <strong>suaempresa.com.br</strong>, conectamos o domínio próprio e o registro anual fica em nome do cliente.</div>
+        <div className="sub-domain-note"><b>Domínio na assinatura:</b> endereço Avancini incluso. Se o cliente já possui <strong>domínio próprio</strong>, conectamos ao site; se quiser registrar um novo, o domínio é pago à parte. No projeto exclusivo, o domínio próprio entra na proposta.</div>
       </section>
 
       <section className="sub-section sub-choice">
         <div className="sub-heading compact">
           <span>DUAS FORMAS DE CONTRATAR</span>
-          <h2>Assinatura ou projeto sob medida?</h2>
+          <h2>A qualidade é a mesma. O que muda é como você paga.</h2>
         </div>
         <div className="sub-choice-grid">
           <article>
-            <span>MAIS ACESSÍVEL</span><h3>Por assinatura</h3>
-            <p>Ideal para empresas que querem começar sem investimento inicial e manter o site sempre acompanhado.</p>
-            <ul><li>Mensalidade fixa</li><li>Hospedagem e suporte</li><li>1 pequeno ajuste mensal</li><li>Site ativo durante a assinatura</li></ul>
+            <span>SEM INVESTIMENTO ALTO DE ENTRADA</span><h3>Por assinatura</h3>
+            <p>Um site completo e profissional, com o investimento dividido e acompanhamento contínuo enquanto a assinatura estiver ativa.</p>
+            <ul><li>Mesmo padrão de estratégia e design</li><li>Hospedagem e suporte inclusos</li><li>1 pequeno ajuste mensal</li><li>Endereço Avancini incluso</li></ul>
             <a href="#planos">Ver os planos <b>↗</b></a>
           </article>
           <article>
-            <span>ESCOPO PERSONALIZADO</span><h3>Projeto sob medida</h3>
-            <p>Para quem precisa de catálogo, loja virtual, integrações, áreas especiais ou uma experiência totalmente exclusiva.</p>
-            <ul><li>Pagamento único combinado</li><li>Escopo e prazo personalizados</li><li>Funcionalidades especiais</li><li>Manutenção opcional</li></ul>
+            <span>COMPRA ÚNICA</span><h3>Projeto exclusivo</h3>
+            <p>Para quem prefere pagar uma vez, receber o projeto em seu domínio próprio e decidir se quer manutenção depois.</p>
+            <ul><li>Mesmo padrão de estratégia e design</li><li>Pagamento único combinado</li><li>Domínio próprio e exclusivo</li><li>Manutenção opcional</li></ul>
             <button type="button" onClick={chooseCustom}>Solicitar orçamento <b>↗</b></button>
           </article>
         </div>
       </section>
 
-      <section className="sub-section sub-case">
-        <div className="sub-case-copy">
-          <span>EXEMPLO DE REDESIGN</span>
-          <h2>Clínica San Diego</h2>
-          <p>A partir do site anterior da clínica, criamos uma nova proposta para organizar especialidades, apresentar a equipe e facilitar o agendamento.</p>
-          <a href="https://clinicasandiego.com.br/" target="_blank" rel="noreferrer">Ver o site anterior para comparar <b>↗</b></a>
+      <section className="sub-section sub-projects">
+        <div className="sub-heading compact">
+          <span>VEJA A ESTRUTURA, NÃO APENAS UMA IMAGEM</span>
+          <h2>Dois projetos. Dois pontos de partida.</h2>
+          <p>Role dentro de cada tela para acompanhar a estrutura completa dos projetos.</p>
         </div>
-        <div className="sub-case-screen"><img src="/projects/san-diego.jpg" alt="Página inicial da Clínica San Diego" /></div>
+        <div className="sub-project-list">
+          <article className="sub-project-card sandiego">
+            <div className="sub-project-copy">
+              <span>01 / REDESIGN</span>
+              <h3>Clínica San Diego</h3>
+              <p>Uma nova proposta criada a partir do site anterior da clínica, reorganizando especialidades, equipe e agendamento.</p>
+              <div><b>Saúde</b><b>Autoridade</b><b>Agendamento</b></div>
+              <a href="https://clinicasandiego.com.br/" target="_blank" rel="noreferrer">Ver o site anterior para comparar <strong>↗</strong></a>
+            </div>
+            <div className="sub-project-screen">
+              <div className="device-browser">
+                <div className="device-top"><i /><i /><i /><span>avancini.web / redesign san diego</span><b>ROLE ↓</b></div>
+                <div className="project-scroll" role="region" tabIndex={0} aria-label="Demonstração rolável completa do projeto Clínica San Diego">
+                  <img src="/projects/san-diego-full.png" alt="Captura completa da proposta de redesign da Clínica San Diego" loading="lazy" decoding="async" />
+                </div>
+              </div>
+              <div className="scroll-hint">Role dentro da tela <span>↓</span></div>
+            </div>
+          </article>
+          <article className="sub-project-card tapecar">
+            <div className="sub-project-copy">
+              <span>02 / CRIAÇÃO DO ZERO</span>
+              <h3>Tape Car</h3>
+              <p>Uma presença digital construída do zero para organizar os serviços, fortalecer a marca local e facilitar o contato.</p>
+              <div><b>Automotivo</b><b>Marca local</b><b>WhatsApp</b></div>
+              <small>A EMPRESA NÃO POSSUÍA SITE ANTERIOR</small>
+            </div>
+            <div className="sub-project-screen">
+              <div className="device-browser">
+                <div className="device-top"><i /><i /><i /><span>avancini.web / projeto tape car</span><b>ROLE ↓</b></div>
+                <div className="project-scroll" role="region" tabIndex={0} aria-label="Demonstração rolável completa do projeto Tape Car">
+                  <img src="/projects/tape-car-full.png" alt="Captura completa do projeto Tape Car" loading="lazy" decoding="async" />
+                </div>
+              </div>
+              <div className="scroll-hint">Role dentro da tela <span>↓</span></div>
+            </div>
+          </article>
+        </div>
       </section>
 
       <section className="sub-section sub-faq">
         <div className="sub-heading compact"><span>SEM LETRA MIÚDA ESCONDIDA</span><h2>Dúvidas antes de começar</h2></div>
         <div className="sub-faq-grid">
-          <details open><summary>O site fica no meu domínio?</summary><p>Sim. Você pode usar o endereço Avancini incluso ou conectar um domínio próprio registrado em seu nome.</p></details>
-          <details><summary>Posso pedir alterações?</summary><p>Os planos incluem um pequeno ajuste mensal, como trocar um texto, imagem ou informação. Novas seções, funcionalidades ou reformulações recebem orçamento separado.</p></details>
-          <details><summary>Posso pagar diretamente pelo site?</summary><p>O pagamento é liberado por um link seguro depois que confirmamos o plano, o domínio, o conteúdo necessário e o contrato. Assim você não paga antes de sabermos que a opção escolhida realmente atende sua empresa.</p></details>
-          <details><summary>Existe permanência mínima?</summary><p>Sim. Como não cobramos entrada, os planos de assinatura possuem permanência mínima de 12 meses.</p></details>
-          <details><summary>O que acontece se eu cancelar?</summary><p>Após o período mínimo, você pode cancelar conforme as condições do contrato. A hospedagem e o site por assinatura são desativados; seu domínio próprio continua sendo seu.</p></details>
-          <details><summary>E se eu quiser algo diferente?</summary><p>Você pode contratar um projeto sob medida, com escopo, prazo, propriedade e manutenção definidos na proposta.</p></details>
-          <details><summary>Em quanto tempo fica pronto?</summary><p>O prazo começa após o envio de textos, imagens e informações. A previsão exata é confirmada antes do início.</p></details>
+          <details name="subscription-faq" open><summary>Como funciona o domínio?</summary><p>Na assinatura, você pode usar o endereço Avancini incluso ou conectar um domínio que já possui. Se quiser registrar um domínio novo, ele é pago à parte e fica em seu nome. No projeto exclusivo, o domínio próprio faz parte da proposta.</p></details>
+          <details name="subscription-faq"><summary>Posso pedir alterações?</summary><p>A assinatura inclui um pequeno ajuste mensal, como trocar texto, imagem, telefone ou informação existente. Novas seções, funcionalidades ou reformulações recebem orçamento separado. No projeto exclusivo, alterações posteriores entram na manutenção opcional.</p></details>
+          <details name="subscription-faq"><summary>Posso pagar diretamente pelo site?</summary><p>Sim. Depois de confirmarmos plano, domínio, conteúdo e contrato, você recebe um link seguro para pagamento. Assim nenhuma cobrança acontece antes de validarmos que a opção escolhida atende sua empresa.</p></details>
+          <details name="subscription-faq"><summary>Existe permanência mínima?</summary><p>Sim. Como a assinatura não possui entrada, a permanência mínima é de 6 meses. Depois desse período, o cancelamento segue normalmente as condições do contrato.</p></details>
+          <details name="subscription-faq"><summary>O que acontece se eu cancelar?</summary><p>Depois dos 6 meses, a assinatura pode ser encerrada. A hospedagem e o site por assinatura são desativados; qualquer domínio próprio registrado pelo cliente continua pertencendo a ele.</p></details>
+          <details name="subscription-faq"><summary>Assinatura tem qualidade inferior?</summary><p>Não. Estratégia, design, versão mobile e cuidado de desenvolvimento seguem o mesmo padrão. O que muda é a forma de pagamento, o domínio incluído e como funciona a continuidade após a entrega.</p></details>
+          <details name="subscription-faq"><summary>Em quanto tempo fica pronto?</summary><p>O prazo começa após o envio de textos, imagens e informações. A previsão exata é confirmada antes do início, conforme a estrutura escolhida.</p></details>
         </div>
       </section>
 
@@ -232,10 +268,10 @@ export default function SubscriptionPage() {
           <p>Você revisa a mensagem antes de enviar. A conversa continua diretamente pelo WhatsApp.</p>
         </div>
         <form onSubmit={submit}>
-          <label><span>Modelo de contratação</span><select value={model} onChange={(event) => setModel(event.target.value)}><option>Assinatura mensal</option><option>Projeto sob medida</option><option>Quero entender as duas opções</option></select></label>
-          <label><span>Plano ou necessidade</span><select value={plan} onChange={(event) => setPlan(event.target.value)}><option>Landing de Conversão — R$ 97/mês</option><option>Site Institucional — R$ 247/mês</option><option>Projeto exclusivo — solicitar orçamento</option><option>Quero explicar minha necessidade</option></select></label>
+          <label><span>Modelo de contratação</span><select value={model} onChange={(event) => setModel(event.target.value)}><option>Assinatura mensal</option><option>Pagamento único</option><option>Quero entender as duas opções</option></select></label>
+          <label><span>Plano ou necessidade</span><select value={plan} onChange={(event) => setPlan(event.target.value)}><option>Landing de Conversão — R$ 97/mês</option><option>Site Institucional — R$ 199,90/mês</option><option>Projeto exclusivo — solicitar orçamento</option><option>Quero explicar minha necessidade</option></select></label>
           <label><span>Segmento da empresa</span><input value={segment} onChange={(event) => setSegment(event.target.value)} placeholder="Ex.: clínica, restaurante, escritório" /></label>
-          <label><span>Domínio</span><select value={domain} onChange={(event) => setDomain(event.target.value)}><option>Ainda não tenho domínio</option><option>Já tenho domínio próprio</option><option>Quero usar o endereço Avancini</option><option>Não sei qual escolher</option></select></label>
+          <label><span>Domínio</span><select value={domain} onChange={(event) => setDomain(event.target.value)}><option>Quero usar o endereço Avancini incluso</option><option>Já tenho domínio próprio</option><option>Quero registrar um domínio novo à parte</option><option>Quero pagamento único com domínio próprio</option><option>Não sei qual escolher</option></select></label>
           <button type="submit">Continuar pelo WhatsApp <span>↗</span></button>
           <small>Sem compromisso · conversa direta</small>
         </form>

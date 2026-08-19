@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Site profissional por assinatura",
   description:
-    "Landing pages por R$ 97/mês e sites institucionais por R$ 247/mês, sem entrada, com hospedagem, suporte e experiência mobile.",
+    "Landings de conversão por R$ 97/mês e sites institucionais por R$ 199,90/mês, sem entrada, com hospedagem, suporte e experiência mobile.",
   alternates: { canonical: "/site-por-assinatura" },
   openGraph: {
     title: "Site profissional por assinatura | Avancini Web",
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     card: "summary",
     title: "Site profissional por assinatura | Avancini Web",
     description:
-      "Landings de conversão por R$ 97/mês, sites institucionais por R$ 247/mês e projetos exclusivos sob orçamento.",
+      "Landings de conversão por R$ 97/mês, sites institucionais por R$ 199,90/mês e projetos exclusivos com pagamento único.",
     images: [],
   },
 };

@@ -33,7 +33,7 @@ const offers = [
   {
     name: "Landing de Conversão",
     price: "R$ 97/mês",
-    deadline: "Sem entrada · permanência mínima de 12 meses",
+    deadline: "Sem entrada · permanência mínima de 6 meses",
     description: "Uma jornada direta para divulgar uma oferta específica e transformar visitas em contatos.",
     includes: ["Foco em uma única oferta", "Hospedagem, WhatsApp e suporte", "1 pequeno ajuste por mês"],
     ideal: "Ideal para anúncios, campanhas e serviços específicos",
@@ -43,22 +43,22 @@ const offers = [
   },
   {
     name: "Site Institucional",
-    price: "R$ 247/mês",
-    deadline: "Sem entrada · permanência mínima de 12 meses",
+    price: "R$ 199,90/mês",
+    deadline: "Sem entrada · permanência mínima de 6 meses",
     description: "Uma presença completa para organizar a empresa, seus serviços, diferenciais e caminhos de contato.",
     includes: ["Estrutura e navegação completas", "Hospedagem, WhatsApp e suporte", "1 pequeno ajuste por mês"],
     ideal: "Ideal para apresentar toda a empresa e gerar autoridade",
     cta: "Quero um site institucional",
-    message: "Olá! Quero contratar o Site Institucional por R$ 247/mês e entender os próximos passos.",
+    message: "Olá! Quero contratar o Site Institucional por R$ 199,90/mês e entender os próximos passos.",
     featured: true,
   },
   {
     name: "Projeto Exclusivo",
     price: "Sob orçamento",
     deadline: "Escopo, prazo e valor personalizados",
-    description: "Para catálogos, lojas virtuais, integrações ou experiências que pedem uma solução exclusiva.",
-    includes: ["Briefing e proposta individual", "Funcionalidades sob medida", "Manutenção opcional"],
-    ideal: "Ideal para lojas, catálogos, integrações e ideias fora do padrão",
+    description: "A mesma qualidade de criação, contratada uma única vez, com propriedade do projeto e continuidade sob sua escolha.",
+    includes: ["Mesmo padrão de estratégia e design", "Pagamento único", "Domínio próprio e exclusivo", "Manutenção opcional"],
+    ideal: "Ideal para quem prefere adquirir o projeto e decidir depois sobre manutenção",
     cta: "Solicitar orçamento",
     message: "Olá! Preciso de um Projeto Exclusivo e quero solicitar um orçamento personalizado.",
     featured: false,
@@ -1140,11 +1140,11 @@ export default function Home() {
   const [preview, setPreview] = useState<PreviewType | null>(null);
   const [previewSlide, setPreviewSlide] = useState(0);
   const [nichePreview, setNichePreview] = useState<NicheType | null>(null);
-  const [projectType, setProjectType] = useState("Site institucional — R$ 247/mês");
+  const [projectType, setProjectType] = useState("Site institucional — R$ 199,90/mês");
   const [contractModel, setContractModel] = useState("Assinatura mensal");
   const [segment, setSegment] = useState("");
   const [goal, setGoal] = useState("Gerar mais contatos");
-  const [investment, setInvestment] = useState("R$ 247/mês — Site institucional");
+  const [investment, setInvestment] = useState("R$ 199,90/mês — Site institucional");
   const [timeline, setTimeline] = useState("Em até 30 dias");
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 18);
@@ -1840,6 +1840,7 @@ export default function Home() {
                 <div
                   className="project-scroll"
                   role="region"
+                  tabIndex={0}
                   aria-label="Demonstração rolável completa do site Clínica San Diego"
                 >
                   <img
@@ -1893,6 +1894,7 @@ export default function Home() {
                 <div
                   className="project-scroll"
                   role="region"
+                  tabIndex={0}
                   aria-label="Demonstração rolável completa do site Tape Car"
                 >
                   <img
@@ -2006,8 +2008,9 @@ export default function Home() {
             <h2>Escolha como quer começar.</h2>
           </div>
           <p>
-            Assine uma solução pronta para crescer ou peça um projeto totalmente
-            personalizado para necessidades fora dos planos.
+            O padrão de estratégia, design e cuidado é o mesmo. Na assinatura,
+            você dilui o investimento; no projeto exclusivo, paga uma vez e
+            escolhe se deseja manutenção depois.
           </p>
         </div>
         <div className="offer-guide" aria-label="Comparação entre landing page e site institucional">
@@ -2041,7 +2044,7 @@ export default function Home() {
             </article>
           ))}
         </div>
-        <p className="investment-note">O subdomínio Avancini está incluso. Domínio próprio pode ser conectado em qualquer plano; o registro anual é pago pelo cliente.</p>
+        <p className="investment-note">Na assinatura, o endereço Avancini está incluso. Se o cliente já possui domínio próprio, conectamos sem problema; a compra de um novo domínio é paga à parte. No projeto exclusivo, o domínio próprio faz parte da proposta.</p>
       </section>
 
       <section className="final-cta" id="contato">
@@ -2067,7 +2070,7 @@ export default function Home() {
             <span>Como deseja contratar?</span>
             <select value={contractModel} onChange={(event) => setContractModel(event.target.value)}>
               <option>Assinatura mensal</option>
-              <option>Projeto sob medida</option>
+              <option>Pagamento único</option>
               <option>Quero entender as duas opções</option>
             </select>
           </label>
@@ -2075,7 +2078,7 @@ export default function Home() {
             <span>O que você precisa?</span>
             <select value={projectType} onChange={(event) => setProjectType(event.target.value)}>
               <option>Landing de Conversão — R$ 97/mês</option>
-              <option>Site institucional — R$ 247/mês</option>
+              <option>Site institucional — R$ 199,90/mês</option>
               <option>Projeto exclusivo — solicitar orçamento</option>
               <option>Ainda não sei</option>
             </select>
@@ -2098,7 +2101,7 @@ export default function Home() {
               <span>Opção de investimento</span>
               <select value={investment} onChange={(event) => setInvestment(event.target.value)}>
                 <option>R$ 97/mês — Landing de Conversão</option>
-                <option>R$ 247/mês — Site institucional</option>
+                <option>R$ 199,90/mês — Site institucional</option>
                 <option>Quero solicitar um orçamento</option>
                 <option>Quero entender as opções</option>
               </select>
