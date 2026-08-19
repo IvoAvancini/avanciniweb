@@ -65,6 +65,74 @@ const offers = [
   },
 ] as const;
 
+type ContractModel = "Assinatura mensal" | "Pagamento único" | "Quero entender as duas opções";
+
+const briefingOptions: Record<
+  ContractModel,
+  readonly { project: string; investments: readonly string[] }[]
+> = {
+  "Assinatura mensal": [
+    {
+      project: "Landing de Conversão — plano mensal",
+      investments: ["R$ 97/mês — Landing de Conversão"],
+    },
+    {
+      project: "Site institucional — plano mensal",
+      investments: ["R$ 199,90/mês — Site institucional"],
+    },
+    {
+      project: "Ainda não sei qual plano escolher",
+      investments: [
+        "Quero uma recomendação entre os planos",
+        "Até R$ 97/mês",
+        "Até R$ 199,90/mês",
+      ],
+    },
+  ],
+  "Pagamento único": [
+    {
+      project: "Landing de Conversão — pagamento único",
+      investments: ["Solicitar orçamento para uma landing"],
+    },
+    {
+      project: "Site institucional — pagamento único",
+      investments: ["Solicitar orçamento para um site institucional"],
+    },
+    {
+      project: "Projeto exclusivo ou mais complexo",
+      investments: ["Solicitar orçamento personalizado"],
+    },
+    {
+      project: "Ainda não sei qual estrutura preciso",
+      investments: ["Quero uma recomendação e um orçamento"],
+    },
+  ],
+  "Quero entender as duas opções": [
+    {
+      project: "Landing de Conversão",
+      investments: ["Comparar mensalidade e pagamento único"],
+    },
+    {
+      project: "Site institucional",
+      investments: ["Comparar mensalidade e pagamento único"],
+    },
+    {
+      project: "Projeto mais completo ou exclusivo",
+      investments: ["Entender qual contratação faz mais sentido"],
+    },
+    {
+      project: "Ainda não sei",
+      investments: ["Quero receber uma recomendação"],
+    },
+  ],
+};
+
+const contractModelHelp: Record<ContractModel, string> = {
+  "Assinatura mensal": "Planos sem entrada, com hospedagem, suporte e permanência mínima de 6 meses.",
+  "Pagamento único": "Projeto adquirido uma única vez, com domínio próprio e manutenção opcional.",
+  "Quero entender as duas opções": "Você recebe uma comparação clara para decidir sem compromisso.",
+};
+
 const heroSlides = [
   {
     id: "atlas",
@@ -1140,8 +1208,8 @@ export default function Home() {
   const [preview, setPreview] = useState<PreviewType | null>(null);
   const [previewSlide, setPreviewSlide] = useState(0);
   const [nichePreview, setNichePreview] = useState<NicheType | null>(null);
-  const [projectType, setProjectType] = useState("Site institucional — R$ 199,90/mês");
-  const [contractModel, setContractModel] = useState("Assinatura mensal");
+  const [projectType, setProjectType] = useState("Site institucional — plano mensal");
+  const [contractModel, setContractModel] = useState<ContractModel>("Assinatura mensal");
   const [segment, setSegment] = useState("");
   const [goal, setGoal] = useState("Gerar mais contatos");
   const [investment, setInvestment] = useState("R$ 199,90/mês — Site institucional");
@@ -1185,6 +1253,22 @@ export default function Home() {
   const openPreview = (type: PreviewType) => {
     setPreview(type);
     setPreviewSlide(0);
+  };
+
+  const availableProjects = briefingOptions[contractModel];
+  const selectedProject = availableProjects.find((option) => option.project === projectType) ?? availableProjects[0];
+
+  const changeContractModel = (nextModel: ContractModel) => {
+    const firstProject = briefingOptions[nextModel][0];
+    setContractModel(nextModel);
+    setProjectType(firstProject.project);
+    setInvestment(firstProject.investments[0]);
+  };
+
+  const changeProjectType = (nextProject: string) => {
+    const project = briefingOptions[contractModel].find((option) => option.project === nextProject);
+    setProjectType(nextProject);
+    if (project) setInvestment(project.investments[0]);
   };
 
   const submitBudget = (event: FormEvent<HTMLFormElement>) => {
@@ -2068,19 +2152,17 @@ export default function Home() {
         <form className="budget-form" onSubmit={submitBudget}>
           <label>
             <span>Como deseja contratar?</span>
-            <select value={contractModel} onChange={(event) => setContractModel(event.target.value)}>
+            <select value={contractModel} onChange={(event) => changeContractModel(event.target.value as ContractModel)}>
               <option>Assinatura mensal</option>
               <option>Pagamento único</option>
               <option>Quero entender as duas opções</option>
             </select>
+            <small className="budget-context" aria-live="polite">{contractModelHelp[contractModel]}</small>
           </label>
           <label>
             <span>O que você precisa?</span>
-            <select value={projectType} onChange={(event) => setProjectType(event.target.value)}>
-              <option>Landing de Conversão — R$ 97/mês</option>
-              <option>Site institucional — R$ 199,90/mês</option>
-              <option>Projeto exclusivo — solicitar orçamento</option>
-              <option>Ainda não sei</option>
+            <select value={projectType} onChange={(event) => changeProjectType(event.target.value)}>
+              {availableProjects.map((option) => <option key={option.project}>{option.project}</option>)}
             </select>
           </label>
           <label>
@@ -2098,12 +2180,9 @@ export default function Home() {
           </label>
           <div className="budget-row">
             <label>
-              <span>Opção de investimento</span>
+              <span>Condição de investimento</span>
               <select value={investment} onChange={(event) => setInvestment(event.target.value)}>
-                <option>R$ 97/mês — Landing de Conversão</option>
-                <option>R$ 199,90/mês — Site institucional</option>
-                <option>Quero solicitar um orçamento</option>
-                <option>Quero entender as opções</option>
+                {selectedProject.investments.map((option) => <option key={option}>{option}</option>)}
               </select>
             </label>
             <label>
