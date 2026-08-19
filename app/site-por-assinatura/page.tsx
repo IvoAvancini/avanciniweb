@@ -10,25 +10,25 @@ const plans = [
     price: "97",
     description: "Para divulgar uma oferta, campanha ou serviço e receber contatos.",
     features: [
-      "Uma página completa e responsiva",
+      "Jornada única focada em uma oferta",
       "Botões de WhatsApp e formulário",
-      "SEO local e velocidade",
+      "Carregamento rápido e versão mobile",
       "Hospedagem e suporte inclusos",
-      "Até 2 pequenos ajustes por mês",
+      "1 pequeno ajuste por mês",
     ],
     featured: false,
   },
   {
     id: "site",
-    name: "Site Completo",
-    price: "147",
-    description: "Para apresentar sua empresa, serviços, diferenciais e canais de contato.",
+    name: "Site Institucional",
+    price: "247",
+    description: "Para organizar toda a presença da empresa, com navegação, autoridade e diferentes caminhos de contato.",
     features: [
-      "Até 5 páginas personalizadas",
-      "Formulários e WhatsApp",
-      "SEO local e experiência mobile",
+      "Estrutura institucional completa",
+      "Serviços, diferenciais e conteúdos organizados",
+      "Navegação, formulários e WhatsApp",
       "Hospedagem e suporte inclusos",
-      "Até 2 pequenos ajustes por mês",
+      "1 pequeno ajuste por mês",
     ],
     featured: true,
   },
@@ -46,7 +46,7 @@ function recordConversion(event: string, data?: Record<string, string>) {
 
 export default function SubscriptionPage() {
   const [model, setModel] = useState("Assinatura mensal");
-  const [plan, setPlan] = useState("Site Completo — R$ 147/mês");
+  const [plan, setPlan] = useState("Site Institucional — R$ 247/mês");
   const [segment, setSegment] = useState("");
   const [domain, setDomain] = useState("Ainda não tenho domínio");
 
@@ -95,7 +95,7 @@ export default function SubscriptionPage() {
           <p>Tenha uma presença profissional, rápida e preparada para transformar visitas em conversas — sem pagar milhares de reais para começar.</p>
           <div className="sub-price-line">
             <div><small>LANDING PAGE</small><strong>R$ 97<em>/mês</em></strong></div>
-            <div><small>SITE COMPLETO</small><strong>R$ 147<em>/mês</em></strong></div>
+            <div><small>SITE INSTITUCIONAL</small><strong>R$ 247<em>/mês</em></strong></div>
           </div>
           <div className="sub-actions">
             <a href="#planos" className="button button-primary" onClick={() => recordConversion("hero_subscription_click")}>Quero meu site por assinatura <span>↗</span></a>
@@ -115,7 +115,7 @@ export default function SubscriptionPage() {
         <div className="sub-heading">
           <span>ESCOLHA SUA ESTRUTURA</span>
           <h2>Comece pequeno.<br />Pareça profissional desde o primeiro dia.</h2>
-          <p>Os dois planos incluem design adaptado à sua marca, versão mobile, hospedagem e suporte.</p>
+          <p>A landing vende uma oferta específica. O site institucional apresenta a empresa inteira. Os dois incluem design adaptado à marca, versão mobile, hospedagem e suporte.</p>
         </div>
         <div className="sub-plan-grid">
           {plans.map((item) => (
@@ -130,6 +130,20 @@ export default function SubscriptionPage() {
               <button type="button" onClick={() => choosePlan(`${item.name} — R$ ${item.price}/mês`)}>Escolher {item.name} <span>↗</span></button>
             </article>
           ))}
+          <article className="sub-plan custom-plan">
+            <span className="sub-plan-code">03 / SOB MEDIDA</span>
+            <h3>Projeto Personalizado</h3>
+            <p>Para estruturas mais completas ou complexas, com escopo definido para a necessidade real da empresa.</p>
+            <div className="sub-plan-custom-price">Solicite um orçamento</div>
+            <small className="sub-contract">Valor e prazo definidos após o briefing</small>
+            <ul>
+              <li>Catálogo, loja virtual ou integrações</li>
+              <li>Funcionalidades e estrutura exclusivas</li>
+              <li>Escopo, prazo e propriedade combinados</li>
+              <li>Manutenção opcional</li>
+            </ul>
+            <button type="button" onClick={chooseCustom}>Solicitar orçamento <span>↗</span></button>
+          </article>
         </div>
         <div className="sub-domain-note"><b>Domínio:</b> endereço Avancini incluso. Se preferir <strong>suaempresa.com.br</strong>, conectamos o domínio próprio e o registro anual fica em nome do cliente.</div>
       </section>
@@ -148,7 +162,7 @@ export default function SubscriptionPage() {
           </article>
           <article>
             <span>ESCOPO PERSONALIZADO</span><h3>Projeto sob medida</h3>
-            <p>Para quem precisa de mais páginas, catálogo, loja virtual, integrações ou uma experiência totalmente exclusiva.</p>
+            <p>Para quem precisa de catálogo, loja virtual, integrações, áreas especiais ou uma experiência totalmente exclusiva.</p>
             <ul><li>Pagamento único combinado</li><li>Escopo e prazo personalizados</li><li>Funcionalidades especiais</li><li>Manutenção opcional</li></ul>
             <button type="button" onClick={chooseCustom}>Solicitar orçamento <b>↗</b></button>
           </article>
@@ -169,7 +183,7 @@ export default function SubscriptionPage() {
         <div className="sub-heading compact"><span>SEM LETRA MIÚDA ESCONDIDA</span><h2>Dúvidas antes de começar</h2></div>
         <div className="sub-faq-grid">
           <details open><summary>O site fica no meu domínio?</summary><p>Sim. Você pode usar o endereço Avancini incluso ou conectar um domínio próprio registrado em seu nome.</p></details>
-          <details><summary>Posso pedir alterações?</summary><p>Os planos incluem até dois pequenos ajustes mensais. Novas páginas ou reformulações recebem orçamento separado.</p></details>
+          <details><summary>Posso pedir alterações?</summary><p>Os planos incluem um pequeno ajuste mensal, como trocar um texto, imagem ou informação. Novas seções, funcionalidades ou reformulações recebem orçamento separado.</p></details>
           <details><summary>Existe permanência mínima?</summary><p>Sim. Como não cobramos entrada, os planos de assinatura possuem permanência mínima de 12 meses.</p></details>
           <details><summary>O que acontece se eu cancelar?</summary><p>Após o período mínimo, você pode cancelar conforme as condições do contrato. A hospedagem e o site por assinatura são desativados; seu domínio próprio continua sendo seu.</p></details>
           <details><summary>E se eu quiser algo diferente?</summary><p>Você pode contratar um projeto sob medida, com escopo, prazo, propriedade e manutenção definidos na proposta.</p></details>
@@ -185,7 +199,7 @@ export default function SubscriptionPage() {
         </div>
         <form onSubmit={submit}>
           <label><span>Modelo de contratação</span><select value={model} onChange={(event) => setModel(event.target.value)}><option>Assinatura mensal</option><option>Projeto sob medida</option><option>Quero entender as duas opções</option></select></label>
-          <label><span>Plano ou necessidade</span><select value={plan} onChange={(event) => setPlan(event.target.value)}><option>Landing Page — R$ 97/mês</option><option>Site Completo — R$ 147/mês</option><option>Quero explicar minha necessidade</option></select></label>
+          <label><span>Plano ou necessidade</span><select value={plan} onChange={(event) => setPlan(event.target.value)}><option>Landing Page — R$ 97/mês</option><option>Site Institucional — R$ 247/mês</option><option>Projeto personalizado — solicitar orçamento</option><option>Quero explicar minha necessidade</option></select></label>
           <label><span>Segmento da empresa</span><input value={segment} onChange={(event) => setSegment(event.target.value)} placeholder="Ex.: clínica, restaurante, escritório" /></label>
           <label><span>Domínio</span><select value={domain} onChange={(event) => setDomain(event.target.value)}><option>Ainda não tenho domínio</option><option>Já tenho domínio próprio</option><option>Quero usar o endereço Avancini</option><option>Não sei qual escolher</option></select></label>
           <button type="submit">Continuar pelo WhatsApp <span>↗</span></button>

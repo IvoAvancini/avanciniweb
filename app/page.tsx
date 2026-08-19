@@ -30,17 +30,25 @@ const offers = [
     name: "Landing Page",
     price: "R$ 97/mês",
     deadline: "Sem entrada · permanência mínima de 12 meses",
-    description: "Uma página estratégica para divulgar um serviço e transformar visitas em contatos.",
-    includes: ["Hospedagem e suporte", "WhatsApp e SEO local", "Até 2 pequenos ajustes por mês"],
+    description: "Uma jornada direta para divulgar uma oferta específica e transformar visitas em contatos.",
+    includes: ["Foco em uma única oferta", "Hospedagem, WhatsApp e suporte", "1 pequeno ajuste por mês"],
     featured: false,
   },
   {
-    name: "Site Completo",
-    price: "R$ 147/mês",
+    name: "Site Institucional",
+    price: "R$ 247/mês",
     deadline: "Sem entrada · permanência mínima de 12 meses",
-    description: "Uma presença completa para apresentar a empresa, serviços, diferenciais e canais de contato.",
-    includes: ["Até 5 páginas", "Hospedagem, suporte e SEO local", "Até 2 pequenos ajustes por mês"],
+    description: "Uma presença completa para organizar a empresa, seus serviços, diferenciais e caminhos de contato.",
+    includes: ["Estrutura e navegação completas", "Hospedagem, WhatsApp e suporte", "1 pequeno ajuste por mês"],
     featured: true,
+  },
+  {
+    name: "Projeto Personalizado",
+    price: "Sob orçamento",
+    deadline: "Escopo, prazo e valor personalizados",
+    description: "Para catálogos, lojas virtuais, integrações ou experiências que pedem uma solução exclusiva.",
+    includes: ["Briefing e proposta individual", "Funcionalidades sob medida", "Manutenção opcional"],
+    featured: false,
   },
 ] as const;
 
@@ -1119,11 +1127,11 @@ export default function Home() {
   const [preview, setPreview] = useState<PreviewType | null>(null);
   const [previewSlide, setPreviewSlide] = useState(0);
   const [nichePreview, setNichePreview] = useState<NicheType | null>(null);
-  const [projectType, setProjectType] = useState("Site completo");
+  const [projectType, setProjectType] = useState("Site institucional — R$ 247/mês");
   const [contractModel, setContractModel] = useState("Assinatura mensal");
   const [segment, setSegment] = useState("");
   const [goal, setGoal] = useState("Gerar mais contatos");
-  const [investment, setInvestment] = useState("R$ 4.500 a R$ 7.500");
+  const [investment, setInvestment] = useState("R$ 247/mês — Site institucional");
   const [timeline, setTimeline] = useState("Em até 30 dias");
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 18);
@@ -1269,7 +1277,7 @@ export default function Home() {
             </a>
           </div>
           <div className="hero-trust">
-            <span>A partir de R$ 97/mês</span>
+            <span>Planos a partir de R$ 97/mês</span>
             <span>Design exclusivo</span>
             <span>Experiência mobile</span>
           </div>
@@ -1996,14 +2004,6 @@ export default function Home() {
             </article>
           ))}
         </div>
-        <article className="custom-offer">
-          <div>
-            <small>PROJETO SOB MEDIDA</small>
-            <h3>Precisa de algo além dos planos?</h3>
-            <p>Mais páginas, catálogo, loja virtual, integrações ou uma estrutura exclusiva recebem escopo, prazo e valor personalizados.</p>
-          </div>
-          <a href="#contato" className="button button-ghost">Solicitar orçamento <span>↗</span></a>
-        </article>
         <p className="investment-note">O subdomínio Avancini está incluso. Domínio próprio pode ser conectado em qualquer plano; o registro anual é pago pelo cliente.</p>
       </section>
 
@@ -2037,9 +2037,9 @@ export default function Home() {
           <label>
             <span>O que você precisa?</span>
             <select value={projectType} onChange={(event) => setProjectType(event.target.value)}>
-              <option>Landing page</option>
-              <option>Site completo</option>
-              <option>Site com loja virtual</option>
+              <option>Landing page — R$ 97/mês</option>
+              <option>Site institucional — R$ 247/mês</option>
+              <option>Projeto personalizado — solicitar orçamento</option>
               <option>Ainda não sei</option>
             </select>
           </label>
@@ -2058,12 +2058,12 @@ export default function Home() {
           </label>
           <div className="budget-row">
             <label>
-              <span>Investimento previsto</span>
+              <span>Opção de investimento</span>
               <select value={investment} onChange={(event) => setInvestment(event.target.value)}>
-                <option>Até R$ 2.500</option>
-                <option>R$ 2.500 a R$ 4.500</option>
-                <option>R$ 4.500 a R$ 7.500</option>
-                <option>Acima de R$ 7.500</option>
+                <option>R$ 97/mês — Landing page</option>
+                <option>R$ 247/mês — Site institucional</option>
+                <option>Quero solicitar um orçamento</option>
+                <option>Quero entender as opções</option>
               </select>
             </label>
             <label>
