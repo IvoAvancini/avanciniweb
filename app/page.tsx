@@ -1,22 +1,21 @@
-import { EcosystemOrb } from "./EcosystemOrb";
+import { FlowWS } from "./FlowWS";
 
 const instagramUrl = "https://www.instagram.com/avancinios/";
 const email = "ivoavancini@hotmail.com";
 const contactUrl =
-  "https://wa.me/5573981019782?text=Ol%C3%A1%2C%20Ivo!%20Vim%20pelo%20site%20da%20Avancini%20OS%20e%20quero%20descobrir%20qual%20frente%20faz%20mais%20sentido%20para%20minha%20empresa.";
+  "https://wa.me/5573981019782?text=Ol%C3%A1%2C%20Ivo!%20Vim%20pelo%20site%20da%20Avancini%20OS%20e%20quero%20descobrir%20se%20minha%20empresa%20precisa%20da%20Web%2C%20da%20Sync%20ou%20das%20duas.";
 
 const syncSite = process.env.NEXT_PUBLIC_AVANCINI_SYNC_URL;
-const brainSite = process.env.NEXT_PUBLIC_AVANCINI_BRAIN_URL;
 
-const fronts = [
+const specializations = [
   {
     key: "W",
     name: "AVANCINI WEB",
-    area: "PRESENÇA DIGITAL",
-    statement: "Para ser encontrado, compreendido e escolhido.",
+    area: "SITES & PRESENÇA DIGITAL",
+    statement: "Presença que atrai antes mesmo da primeira conversa.",
     description:
-      "Sites e páginas comerciais que apresentam sua empresa com clareza, elevam a percepção de valor e conduzem visitantes para a próxima ação.",
-    services: ["Sites institucionais", "Landing pages", "Experiências digitais"],
+      "Sites e páginas comerciais que explicam seu valor, elevam a confiança na sua marca e conduzem o visitante para entrar em contato.",
+    services: ["Sites institucionais", "Landing pages", "Experiências de conversão"],
     href: "https://avanciniweb.vercel.app",
     cta: "Visitar o site da Web",
     className: "front-web",
@@ -24,30 +23,16 @@ const fronts = [
   {
     key: "S",
     name: "AVANCINI SYNC",
-    area: "SISTEMAS & OPERAÇÃO",
-    statement: "Para organizar clientes, conversas e processos.",
+    area: "ATENDIMENTO & AUTOMAÇÃO COM IA",
+    statement: "Inteligência que responde enquanto o interesse está quente.",
     description:
-      "Sistemas, CRM e chatbots que reúnem informações e rotinas para sua equipe trabalhar com mais clareza e menos improviso.",
-    services: ["Sistemas sob medida", "CRM", "Chatbots e integrações"],
+      "Chatbots e automações que atendem, qualificam e acompanham contatos no WhatsApp, Instagram, e-mail e outros pontos da jornada.",
+    services: ["Chatbots com IA", "WhatsApp e Instagram", "Acompanhamentos automáticos"],
     href:
       syncSite ||
-      `https://wa.me/5573981019782?text=${encodeURIComponent("Olá, Ivo! Quero conhecer a Avancini Sync e organizar a operação da minha empresa.")}`,
+      `https://wa.me/5573981019782?text=${encodeURIComponent("Olá, Ivo! Quero conhecer a Avancini Sync para automatizar o atendimento da minha empresa.")}`,
     cta: syncSite ? "Visitar o site da Sync" : "Conversar sobre Sync",
     className: "front-sync",
-  },
-  {
-    key: "B",
-    name: "AVANCINI BRAIN",
-    area: "AUTOMAÇÃO & IA",
-    statement: "Para automatizar o repetitivo e ampliar sua capacidade.",
-    description:
-      "Inteligência artificial e automações para Instagram, WhatsApp, e-mail e fluxos que não deveriam depender de trabalho manual constante.",
-    services: ["Automação com IA", "Instagram e WhatsApp", "E-mail e fluxos multicanal"],
-    href:
-      brainSite ||
-      `https://wa.me/5573981019782?text=${encodeURIComponent("Olá, Ivo! Quero conhecer a Avancini Brain e automatizar processos da minha empresa.")}`,
-    cta: brainSite ? "Visitar o site da Brain" : "Conversar sobre Brain",
-    className: "front-brain",
   },
 ] as const;
 
@@ -59,7 +44,6 @@ function BrandMark({ large = false }: { large?: boolean }) {
       <i className="symbol-cut" />
       <span className="symbol-dot symbol-dot-web" />
       <span className="symbol-dot symbol-dot-sync" />
-      <span className="symbol-dot symbol-dot-brain" />
     </span>
   );
 }
@@ -77,8 +61,8 @@ export default function Home() {
         </a>
 
         <nav aria-label="Navegação principal">
-          <a href="#radar">Radar WSB</a>
-          <a href="#frentes">As frentes</a>
+          <a href="#fluxo-ws">Fluxo WS</a>
+          <a href="#frentes">Especializações</a>
           <a href="#como-funciona">Como funciona</a>
         </nav>
 
@@ -92,105 +76,98 @@ export default function Home() {
         <div className="hero-glow" aria-hidden="true" />
 
         <div className="hero-copy">
-          <p className="eyebrow"><span /> AVANCINI OS / MATRIZ DE TECNOLOGIA</p>
+          <p className="eyebrow"><span /> AVANCINI OS / WEB + INTELIGÊNCIA</p>
           <h1>
-            Seu negócio não precisa de tudo.
-            <em>Precisa da tecnologia certa.</em>
+            Sua empresa precisa ser encontrada.
+            <em>E responder quando o cliente chegar.</em>
           </h1>
           <p className="hero-description">
-            A Avancini OS encontra o ponto que está limitando sua empresa e direciona
-            para Web, Sync ou Brain — separadamente ou em conjunto, quando fizer sentido.
+            A Avancini Web cria a presença que atrai. A Avancini Sync usa IA para
+            atender, qualificar e acompanhar. Comece por uma ou conecte as duas.
           </p>
           <div className="hero-actions">
-            <a className="button button-primary" href="#radar">Descobrir minha frente <span>↓</span></a>
+            <a className="button button-primary" href="#fluxo-ws">Encontrar meu caminho <span>↓</span></a>
             <a className="button button-ghost" href={contactUrl} target="_blank" rel="noreferrer">
               Falar com a Avancini OS <span>↗</span>
             </a>
           </div>
-          <p className="hero-proof"><i /> Sem pacote obrigatório. Comece pelo que mais precisa agora.</p>
+          <p className="hero-proof"><i /> Duas especializações. Uma direção. Nenhum pacote obrigatório.</p>
         </div>
 
-        <div className="identity-stage" role="img" aria-label="Símbolo Avancini OS conectado às três frentes Web, Sync e Brain">
+        <div className="identity-stage identity-stage-ws" role="img" aria-label="Símbolo Avancini OS conectado às especializações Web e Sync">
           <div className="stage-ring stage-ring-one" aria-hidden="true" />
           <div className="stage-ring stage-ring-two" aria-hidden="true" />
           <div className="stage-axis" aria-hidden="true" />
-          <span className="stage-label stage-web"><i /> WEB <small>APARECER</small></span>
-          <span className="stage-label stage-sync"><i /> SYNC <small>ORGANIZAR</small></span>
-          <span className="stage-label stage-brain"><i /> BRAIN <small>AUTOMATIZAR</small></span>
+          <span className="stage-label stage-web"><i /> WEB <small>ATRAIR</small></span>
+          <span className="stage-label stage-sync"><i /> SYNC <small>ATENDER</small></span>
           <BrandMark large />
           <div className="stage-caption">
-            <span>UMA MARCA</span>
-            <b>TRÊS CAMINHOS PARA AVANÇAR</b>
+            <span>FLUXO WS</span>
+            <b>WEB PARA ATRAIR. SYNC PARA ATENDER.</b>
           </div>
         </div>
 
         <div className="hero-footer">
-          <span>WEB · SYNC · BRAIN</span>
-          <a href="#ponto-de-partida">ENTENDA O SEU PONTO DE PARTIDA ↓</a>
+          <span>WEB · SYNC</span>
+          <a href="#momentos">DESCUBRA ONDE ESTÁ A OPORTUNIDADE ↓</a>
         </div>
       </section>
 
-      <section className="starting-point" id="ponto-de-partida">
+      <section className="starting-point" id="momentos">
         <div className="section-intro">
-          <p className="eyebrow dark"><span /> O PONTO DE PARTIDA</p>
-          <h2>O gargalo muda.<br />A direção também.</h2>
+          <p className="eyebrow dark"><span /> DOIS MOMENTOS DECISIVOS</p>
+          <h2>Antes do contato.<br />Depois do clique.</h2>
           <p>
-            Uma empresa pode ter um bom site e ainda perder clientes na operação.
-            Pode estar organizada e desperdiçar horas em tarefas repetitivas.
-            A recomendação começa pelo problema — nunca pelo pacote.
+            Você pode perder uma oportunidade porque sua presença não convenceu.
+            Ou porque ninguém respondeu no momento em que o interesse apareceu.
+            É exatamente nesses dois pontos que a Avancini atua.
           </p>
         </div>
 
-        <div className="problem-grid">
-          <a className="problem-card problem-web" href="#radar">
-            <span>01 / APARECER</span>
-            <h3>Sua marca existe, mas ainda não transmite o valor que entrega.</h3>
-            <p>O caminho começa pela Avancini Web.</p>
+        <div className="problem-grid problem-grid-ws">
+          <a className="problem-card problem-web" href="#fluxo-ws">
+            <span>W / ANTES DO CONTATO</span>
+            <h3>Sua marca precisa transmitir confiança antes de pedir uma conversa.</h3>
+            <p>Avancini Web — presença, clareza e conversão.</p>
             <i>→</i>
           </a>
-          <a className="problem-card problem-sync" href="#radar">
-            <span>02 / ORGANIZAR</span>
-            <h3>Clientes, mensagens e processos estão espalhados demais.</h3>
-            <p>O caminho começa pela Avancini Sync.</p>
-            <i>→</i>
-          </a>
-          <a className="problem-card problem-brain" href="#radar">
-            <span>03 / AUTOMATIZAR</span>
-            <h3>Sua equipe repete tarefas que a tecnologia poderia executar.</h3>
-            <p>O caminho começa pela Avancini Brain.</p>
+          <a className="problem-card problem-sync" href="#fluxo-ws">
+            <span>S / DEPOIS DO CLIQUE</span>
+            <h3>Seu atendimento precisa responder antes que o interesse esfrie.</h3>
+            <p>Avancini Sync — atendimento e automação com IA.</p>
             <i>→</i>
           </a>
         </div>
       </section>
 
-      <section className="radar-section" id="radar">
+      <section className="radar-section" id="fluxo-ws">
         <div className="radar-heading">
-          <p className="eyebrow"><span /> DIAGNÓSTICO DIRETO</p>
-          <h2>Radar WSB</h2>
+          <p className="eyebrow"><span /> DIRECIONAMENTO DIRETO</p>
+          <h2>Fluxo WS</h2>
           <p>
-            Três escolhas claras. Uma recomendação imediata. Sem exigir que sua empresa
-            contrate o que não precisa.
+            Descubra se o próximo avanço está em atrair melhor, atender melhor
+            ou conectar os dois momentos.
           </p>
         </div>
-        <EcosystemOrb />
+        <FlowWS />
       </section>
 
       <section className="fronts-section" id="frentes">
         <div className="section-intro fronts-intro">
-          <p className="eyebrow dark"><span /> UMA MARCA. TRÊS CAMINHOS.</p>
-          <h2>Especialistas quando separados.<br />Conectáveis quando necessário.</h2>
+          <p className="eyebrow dark"><span /> DUAS ESPECIALIZAÇÕES</p>
+          <h2>Foco para vender melhor.<br />Conexão para ir mais longe.</h2>
           <p>
-            Cada frente tem identidade, entrega e objetivo próprios. A Avancini OS mantém
-            tudo no mesmo nível e conecta as partes somente quando isso melhora o resultado.
+            Cada marca resolve um momento específico da jornada do cliente.
+            Elas funcionam separadas e se conectam quando isso aumenta a oportunidade.
           </p>
         </div>
 
-        <div className="front-grid">
-          {fronts.map((front) => (
+        <div className="front-grid front-grid-ws">
+          {specializations.map((front) => (
             <article className={`front-card ${front.className}`} data-key={front.key} key={front.name}>
               <div className="front-topline">
                 <span className="front-key">{front.key}</span>
-                <span>FRENTE INDEPENDENTE</span>
+                <span>ESPECIALIZAÇÃO AVANCINI</span>
               </div>
               <p className="front-area">{front.area}</p>
               <h3>{front.name}</h3>
@@ -207,44 +184,44 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="choice-manifesto">
+      <section className="choice-manifesto choice-manifesto-ws">
         <div className="choice-mark"><BrandMark large /></div>
         <div className="choice-copy">
-          <p className="eyebrow"><span /> DO SEU JEITO. NO SEU MOMENTO.</p>
-          <h2>Você não contrata um ecossistema inteiro.</h2>
+          <p className="eyebrow"><span /> ESCOLHA SIMPLES</p>
+          <h2>Uma especialização agora. A outra quando fizer sentido.</h2>
           <p>
-            Você começa pelo avanço que faz sentido agora. Se amanhã surgir um novo
-            desafio, outra frente pode entrar sem apagar o que já foi construído.
+            Você não precisa comprar uma estrutura inteira. Pode começar pela Web,
+            começar pela Sync ou conectar as duas quando o desafio estiver nos dois lados.
           </p>
         </div>
         <div className="choice-options">
-          <div><b>1</b><span>Uma frente para resolver o problema atual.</span></div>
-          <div><b>2</b><span>Duas frentes quando os desafios se conectam.</span></div>
-          <div><b>3</b><span>As três somente quando a operação realmente pede.</span></div>
+          <div><b>W</b><span>Preciso atrair, posicionar e gerar mais contatos.</span></div>
+          <div><b>S</b><span>Preciso atender, qualificar e acompanhar automaticamente.</span></div>
+          <div><b>WS</b><span>Preciso melhorar a chegada e a resposta ao mesmo tempo.</span></div>
         </div>
       </section>
 
       <section className="process-section" id="como-funciona">
         <div className="process-heading">
           <p className="eyebrow dark"><span /> COMO FUNCIONA</p>
-          <h2>Da dúvida à direção certa.</h2>
-          <p>O primeiro passo é simples e não exige que você entenda de tecnologia.</p>
+          <h2>Do problema à especialização certa.</h2>
+          <p>Você não precisa saber o nome da solução. Basta explicar o que está acontecendo.</p>
         </div>
         <div className="process-grid">
           <article>
             <span>01</span>
-            <h3>Você conta o que está travando</h3>
-            <p>Presença digital, atendimento, organização ou tarefas repetitivas.</p>
+            <h3>Você conta onde a oportunidade escapa</h3>
+            <p>Antes do contato, durante o atendimento ou nos dois momentos.</p>
           </article>
           <article>
             <span>02</span>
-            <h3>A Avancini OS identifica a frente</h3>
-            <p>Você recebe uma direção clara: Web, Sync, Brain ou uma combinação necessária.</p>
+            <h3>A Avancini OS indica o caminho</h3>
+            <p>Web, Sync ou uma conexão objetiva entre as duas especializações.</p>
           </article>
           <article>
             <span>03</span>
-            <h3>O especialista entra em ação</h3>
-            <p>O projeto segue dentro da frente certa, com objetivo e entrega bem definidos.</p>
+            <h3>O projeto começa com foco</h3>
+            <p>Uma entrega clara para resolver o problema que realmente importa agora.</p>
           </article>
         </div>
         <a className="process-cta" href={contactUrl} target="_blank" rel="noreferrer">
@@ -254,25 +231,25 @@ export default function Home() {
 
       <section className="faq-section">
         <div className="faq-heading">
-          <p className="eyebrow"><span /> SEM LETRAS MIÚDAS</p>
+          <p className="eyebrow"><span /> SEM COMPLICAÇÃO</p>
           <h2>Perguntas diretas.<br />Respostas também.</h2>
         </div>
         <div className="faq-list">
           <details>
-            <summary>Preciso contratar Web, Sync e Brain juntas?<span>+</span></summary>
-            <p>Não. Cada frente funciona de forma independente. A combinação só é indicada quando mais de um desafio realmente precisa ser resolvido.</p>
+            <summary>Preciso contratar Web e Sync juntas?<span>+</span></summary>
+            <p>Não. Você pode contratar somente a especialização que resolve o problema atual. A conexão entre as duas é uma possibilidade, não uma obrigação.</p>
           </details>
           <details>
-            <summary>Como saber qual frente é a certa?<span>+</span></summary>
-            <p>Use o Radar WSB ou conte seu desafio diretamente. A Avancini OS identifica se a prioridade está em presença digital, operação ou automação.</p>
+            <summary>A Sync é apenas um chatbot?<span>+</span></summary>
+            <p>Não. Ela combina atendimento com IA e automações para responder, qualificar e acompanhar contatos em diferentes canais.</p>
           </details>
           <details>
-            <summary>Posso começar por uma e conectar outra depois?<span>+</span></summary>
-            <p>Sim. Essa é uma das principais vantagens da estrutura: começar pelo necessário agora e ampliar quando a empresa estiver pronta.</p>
+            <summary>Já tenho um site. Posso contratar somente a Sync?<span>+</span></summary>
+            <p>Sim. A Sync pode atuar sobre a presença que sua empresa já possui. Da mesma forma, a Web pode ser contratada sem automação.</p>
           </details>
           <details>
-            <summary>A Avancini OS atende empresas de qualquer lugar?<span>+</span></summary>
-            <p>Sim. O atendimento e o desenvolvimento dos projetos podem acontecer de forma online para empresas de todo o Brasil.</p>
+            <summary>Como saber por onde começar?<span>+</span></summary>
+            <p>Conte onde você sente que está perdendo oportunidades. A Avancini OS identifica o caminho mais coerente antes de apresentar qualquer proposta.</p>
           </details>
         </div>
       </section>
@@ -280,10 +257,10 @@ export default function Home() {
       <section className="contact-section" id="contato">
         <div className="contact-mark" aria-hidden="true"><BrandMark large /></div>
         <p className="eyebrow"><span /> PRÓXIMO MOVIMENTO</p>
-        <h2>Qual parte da sua empresa precisa avançar agora?</h2>
+        <h2>Você está perdendo antes ou depois do clique?</h2>
         <p>
-          Conte o desafio. A Avancini OS direciona você para a frente certa,
-          sem empurrar tecnologia que não faz sentido.
+          Conte o que acontece hoje. A Avancini OS mostra se o próximo passo
+          está na Web, na Sync ou na conexão entre as duas.
         </p>
         <div className="contact-actions">
           <a className="contact-primary" href={contactUrl} target="_blank" rel="noreferrer">
@@ -306,11 +283,10 @@ export default function Home() {
             <small>OPERATING SYSTEM</small>
           </span>
         </a>
-        <p>TECNOLOGIA CERTA PARA O PRÓXIMO PASSO.</p>
+        <p>WEB PARA ATRAIR. SYNC PARA ATENDER.</p>
         <div className="footer-links">
           <a href="https://avanciniweb.vercel.app" target="_blank" rel="noreferrer">WEB ↗</a>
           <a href="#frentes">SYNC</a>
-          <a href="#frentes">BRAIN</a>
           <a href={instagramUrl} target="_blank" rel="noreferrer">INSTAGRAM ↗</a>
         </div>
         <small>© 2026 AVANCINI OS. TODOS OS DIREITOS RESERVADOS.</small>
