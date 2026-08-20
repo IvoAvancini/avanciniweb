@@ -31,12 +31,12 @@ export default function Home() {
         <div className="showcase-intro" data-reveal>
           <div className="showcase-title">
             <span>AVANCINI OS</span>
-            <h1>Sua empresa já tem identidade<br /><em>A tecnologia precisa estar à altura</em></h1>
+            <h1>Seu negócio não nasceu para ser comum<br /><em>Sua tecnologia também não</em></h1>
           </div>
 
           <div className="showcase-statement">
             <BrandMark />
-            <p>A Avancini OS cria presença digital e automação com IA sob medida para empresas que recusam o genérico</p>
+            <p>A Avancini OS transforma a forma como sua empresa aparece, atende e cresce</p>
           </div>
         </div>
 
@@ -47,22 +47,24 @@ export default function Home() {
           </div>
 
           <div className="showcase-cards">
-            <a className="showcase-card showcase-web" href={webUrl} target="_blank" rel="noreferrer" aria-label="Abrir Avancini Web">
+            <a className="showcase-card showcase-web" data-letter="W" href={webUrl} target="_blank" rel="noreferrer" aria-label="Abrir Avancini Web">
               <iframe src={webUrl} title="Prévia da Avancini Web" tabIndex={-1} aria-hidden="true" />
               <div className="card-shade" />
               <div className="showcase-card-copy">
                 <small>PRESENÇA DIGITAL</small>
                 <h2>Avancini Web</h2>
+                <p>Sites autorais para ser encontrado, transmitir confiança e transformar atenção em oportunidade</p>
                 <span>Abrir experiência</span>
               </div>
             </a>
 
-            <a className="showcase-card showcase-sync" href={syncUrl} target="_blank" rel="noreferrer" aria-label="Abrir Avancini Sync">
+            <a className="showcase-card showcase-sync" data-letter="S" href={syncUrl} target="_blank" rel="noreferrer" aria-label="Abrir Avancini Sync">
               <iframe src={syncUrl} title="Prévia da Avancini Sync" tabIndex={-1} aria-hidden="true" />
               <div className="card-shade" />
               <div className="showcase-card-copy">
                 <small>AUTOMAÇÃO & IA</small>
                 <h2>Avancini Sync</h2>
+                <p>IA e automações para responder, organizar e acompanhar cada conversa sem deixar oportunidades esfriarem</p>
                 <span>Abrir experiência</span>
               </div>
             </a>

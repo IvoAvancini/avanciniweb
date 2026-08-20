@@ -424,18 +424,24 @@ footer>small { grid-column:1/-1; color:#515156; font-family:var(--font-geist-mon
 .choice-heading i { width:100%; height:1px; background:linear-gradient(90deg,rgba(255,255,255,.16),transparent); }
 .showcase-cards { display:flex; min-height:0; gap:10px; }
 .showcase-card { position:relative; min-width:0; flex:1; overflow:hidden; border:1px solid rgba(255,255,255,.15); background:#0a0a0a; isolation:isolate; transition:flex .65s cubic-bezier(.2,.8,.2,1),transform .45s,border-color .35s; }
+.showcase-web { background:radial-gradient(circle at 78% 28%,rgba(240,34,54,.19),transparent 34%),linear-gradient(145deg,#150407,#070707 65%); }
+.showcase-sync { background:radial-gradient(circle at 78% 28%,rgba(255,121,0,.17),transparent 34%),linear-gradient(145deg,#160b02,#070707 65%); }
+.showcase-card::before { content:attr(data-letter); position:absolute; z-index:-2; top:45%; right:8%; color:rgba(255,255,255,.035); font-size:clamp(190px,22vw,350px); font-weight:950; letter-spacing:-.1em; line-height:.7; transform:translateY(-50%); transition:opacity .45s,transform .75s cubic-bezier(.2,.8,.2,1); }
+.showcase-card:hover::before { opacity:0; transform:translateY(-50%) scale(1.12); }
 .showcase-card:hover { flex:1.08; transform:translateY(-4px); border-color:rgba(255,255,255,.35); }
-.showcase-card iframe { position:absolute; z-index:-3; top:0; left:0; width:160%; height:160%; border:0; opacity:.72; pointer-events:none; transform:scale(.625); transform-origin:top left; filter:saturate(.8) contrast(1.03); transition:opacity .5s,filter .5s,transform .7s cubic-bezier(.2,.8,.2,1); }
-.showcase-card:hover iframe { opacity:1; filter:saturate(1) contrast(1); transform:scale(.64); }
-.card-shade { position:absolute; z-index:-1; inset:0; background:linear-gradient(to top,rgba(4,4,4,.97) 0,rgba(4,4,4,.66) 32%,rgba(4,4,4,.05) 70%); }
+.showcase-card iframe { position:absolute; z-index:-3; top:0; left:0; width:160%; height:160%; border:0; opacity:0; pointer-events:none; transform:scale(.6); transform-origin:top left; filter:saturate(.78) contrast(1.04); transition:opacity .55s,filter .55s,transform .8s cubic-bezier(.2,.8,.2,1); }
+.showcase-card:hover iframe,.showcase-card:focus-visible iframe { opacity:.9; filter:saturate(1) contrast(1); transform:scale(.625); }
+.card-shade { position:absolute; z-index:-1; inset:0; background:linear-gradient(to top,rgba(4,4,4,.98) 0,rgba(4,4,4,.76) 38%,rgba(4,4,4,.12) 78%); transition:background .5s; }
+.showcase-card:hover .card-shade { background:linear-gradient(to top,rgba(4,4,4,.98) 0,rgba(4,4,4,.7) 34%,rgba(4,4,4,.08) 76%); }
 .showcase-web .card-shade { box-shadow:inset 0 -3px 0 var(--web); }
 .showcase-sync .card-shade { box-shadow:inset 0 -3px 0 var(--sync); }
-.showcase-card-copy { position:absolute; z-index:3; right:25px; bottom:22px; left:25px; display:grid; grid-template-columns:1fr auto; align-items:end; gap:5px 20px; }
-.showcase-card-copy small { grid-column:1/-1; font-family:var(--font-geist-mono),monospace; font-size:6px; font-weight:900; letter-spacing:.17em; }
+.showcase-card-copy { position:absolute; z-index:3; right:25px; bottom:22px; left:25px; }
+.showcase-card-copy small { display:block; margin-bottom:6px; font-family:var(--font-geist-mono),monospace; font-size:6px; font-weight:900; letter-spacing:.17em; }
 .showcase-web .showcase-card-copy small { color:var(--web); }
 .showcase-sync .showcase-card-copy small { color:var(--sync); }
 .showcase-card-copy h2 { margin:0; font-size:clamp(30px,3.2vw,52px); letter-spacing:-.06em; line-height:.9; }
-.showcase-card-copy span { padding-bottom:4px; border-bottom:1px solid currentColor; color:#c4c4c7; font-size:7px; font-weight:900; text-transform:uppercase; }
+.showcase-card-copy p { max-width:520px; margin:9px 0 12px; color:#a8a8ad; font-size:11px; line-height:1.45; }
+.showcase-card-copy span { display:inline-block; padding-bottom:4px; border-bottom:1px solid currentColor; color:#d0d0d3; font-size:7px; font-weight:900; text-transform:uppercase; }
 
 @media (max-width:700px) {
   .showcase-shell { min-height:100svh; }
@@ -454,11 +460,13 @@ footer>small { grid-column:1/-1; color:#515156; font-family:var(--font-geist-mon
   .showcase-statement p { font-size:9px; line-height:1.4; }
   .choice-heading { font-size:5px; }
   .showcase-cards { gap:7px; }
-  .showcase-card iframe { width:220%; height:220%; transform:scale(.455); }
-  .showcase-card:hover iframe { transform:scale(.465); }
-  .showcase-card-copy { right:11px; bottom:13px; left:11px; grid-template-columns:1fr; gap:4px; }
+  .showcase-card::before { top:38%; right:5%; font-size:145px; }
+  .showcase-card iframe { width:220%; height:220%; transform:scale(.43); }
+  .showcase-card:hover iframe,.showcase-card:focus-visible iframe { transform:scale(.455); }
+  .showcase-card-copy { right:11px; bottom:13px; left:11px; }
   .showcase-card-copy small { font-size:4px; }
   .showcase-card-copy h2 { font-size:clamp(22px,6.2vw,28px); }
+  .showcase-card-copy p { margin:6px 0 8px; font-size:7px; line-height:1.35; }
   .showcase-card-copy span { width:max-content; margin-top:3px; font-size:5px; }
 }
 
