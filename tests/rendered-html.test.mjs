@@ -23,14 +23,14 @@ test("renders the Avancini OS institutional site", async () => {
 
   const html = await response.text();
   assert.match(html, /Avancini OS — Tecnologia com identidade/i);
-  assert.match(html, /Sua empresa não precisa de mais tecnologia/i);
-  assert.match(html, /Precisa da tecnologia certa/i);
-  assert.match(html, /Duas especializações independentes/i);
+  assert.match(html, /Escolha onde/i);
+  assert.match(html, /avançar/i);
+  assert.match(html, /Só o que sua empresa precisa agora/i);
   assert.match(html, /scroll-progress/i);
   assert.match(html, /AVANCINI WEB/i);
   assert.match(html, /AVANCINI SYNC/i);
-  assert.match(html, /CHATBOTS &amp; AUTOMAÇÃO COM IA/i);
-  assert.match(html, /Conhecer a especialização/i);
+  assert.match(html, /Sites que posicionam/i);
+  assert.match(html, /IA que atende, responde/i);
   assert.match(html, /Falar conosco/i);
   assert.doesNotMatch(html, /AVANCINI BRAIN|\bCRM\b|Radar WSB/i);
   assert.doesNotMatch(html, /↗/i);
