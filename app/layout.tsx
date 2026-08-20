@@ -13,19 +13,19 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://avancini-os.fsddfsdfdsfdfsdffds.chatgpt.site"),
-  title: "Avancini OS — Web para atrair. Sync para atender.",
+  metadataBase: new URL("http://localhost:3000"),
+  title: "Avancini OS — Tecnologia com identidade",
   description:
-    "Avancini Web cria a presença que atrai. Avancini Sync usa IA para atender, qualificar e acompanhar. Comece por uma ou conecte as duas.",
+    "Avancini Web e Avancini Sync: duas especializações independentes para fortalecer sua presença digital e automatizar seu atendimento com IA.",
   openGraph: {
-    title: "Avancini OS — Web para atrair. Sync para atender.",
-    description: "Duas especializações: presença digital e atendimento com inteligência artificial.",
+    title: "Avancini OS — Tecnologia com identidade",
+    description: "Sua empresa não pode parecer menor do que ela é. Conheça Avancini Web e Avancini Sync.",
     images: ["/og-ws.png"],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Avancini OS — Web para atrair. Sync para atender.",
-    description: "Duas especializações: presença digital e atendimento com inteligência artificial.",
+    title: "Avancini OS — Tecnologia com identidade",
+    description: "Sua empresa não pode parecer menor do que ela é. Conheça Avancini Web e Avancini Sync.",
     images: ["/og-ws.png"],
   },
 };
