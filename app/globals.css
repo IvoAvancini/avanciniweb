@@ -46,10 +46,9 @@ a { color: inherit; text-decoration: none; }
   border: 1px solid rgba(66,232,239,.5);
   border-radius: 50%;
   overflow: hidden;
-  background: #05070b;
+  background: #05070b url('/avancini-mark.png') center / 124% auto no-repeat;
   box-shadow: inset 0 0 16px rgba(66,232,239,.12), 0 0 20px rgba(66,232,239,.1);
 }
-.brand-mark img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.24); }
 .site-header nav { display: flex; align-items: center; gap: 28px; color: #c7ced8; font-size: 12px; font-weight: 700; }
 .site-header nav > a { transition: color .2s ease; }
 .site-header nav > a:hover { color: white; }
@@ -109,7 +108,7 @@ a { color: inherit; text-decoration: none; }
   box-shadow: inset 0 0 30px rgba(255,255,255,.04), 0 30px 90px rgba(0,0,0,.5);
   transform: rotate(45deg);
 }
-.core-image { width: clamp(82px, 11vw, 150px); height: clamp(82px, 11vw, 150px); border-radius: 50%; object-fit: cover; transform: rotate(-45deg) scale(1.2); box-shadow: -6px 0 26px rgba(255,64,87,.45), 6px 0 26px rgba(66,232,239,.32); }
+.core-image { display: block; width: clamp(82px, 11vw, 150px); height: clamp(82px, 11vw, 150px); border-radius: 50%; background: #05070b url('/avancini-mark.png') center / 124% auto no-repeat; transform: rotate(-45deg) scale(1.2); box-shadow: -6px 0 26px rgba(255,64,87,.45), 6px 0 26px rgba(66,232,239,.32); }
 .visual-core small { margin-top: 18px; color: #8c96a3; font-size: 7px; font-weight: 800; letter-spacing: .2em; transform: rotate(-45deg); }
 .orbit-label { position: absolute; padding: 8px 12px; border: 1px solid rgba(255,255,255,.12); border-radius: 999px; background: rgba(6,9,14,.8); color: #c8d0da; font-size: 9px; font-weight: 900; letter-spacing: .16em; backdrop-filter: blur(8px); }
 .label-web { left: 4%; top: 25%; color: var(--cyan); }
@@ -183,9 +182,8 @@ a { color: inherit; text-decoration: none; }
 .red-bg { background: #bd253b; }
 
 .manifesto { display: grid; grid-template-columns: minmax(280px, .75fr) minmax(0, 1.25fr); gap: 7vw; align-items: center; min-height: 760px; padding: 100px 9vw; background: #07090d; }
-.manifesto-mark { position: relative; aspect-ratio: 1; max-width: 520px; overflow: hidden; border: 1px solid rgba(255,255,255,.09); border-radius: 50%; background: radial-gradient(circle, rgba(255,64,87,.12), transparent 68%); box-shadow: 0 0 90px rgba(255,64,87,.08); }
+.manifesto-mark { position: relative; aspect-ratio: 1; max-width: 520px; overflow: hidden; border: 1px solid rgba(255,255,255,.09); border-radius: 50%; background: url('/avancini-mark.png') center / 112% auto no-repeat, radial-gradient(circle, rgba(255,64,87,.12), transparent 68%); box-shadow: 0 0 90px rgba(255,64,87,.08); }
 .manifesto-mark::after { content: ""; position: absolute; inset: 12%; border: 1px solid rgba(255,255,255,.1); border-radius: 50%; }
-.manifesto-mark img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; transform: scale(1.08); }
 .manifesto blockquote { max-width: 850px; margin: 0; font-size: clamp(38px, 5vw, 76px); line-height: 1.04; letter-spacing: -.055em; }
 .manifesto-text { max-width: 610px; margin: 30px 0 0; color: #8792a0; font-size: 15px; line-height: 1.75; }
 

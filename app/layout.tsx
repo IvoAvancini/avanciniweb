@@ -13,6 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://avancini-os.fsddfsdfdsfdfsdffds.chatgpt.site"),
   title: "Avancini OS — Tecnologia que conecta negócios",
   description:
     "Conheça o ecossistema Avancini: Web para presença digital, Sync para sistemas e CRM, e Brain para automação e inteligência artificial.",

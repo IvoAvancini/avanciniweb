@@ -1,5 +1,3 @@
-import Image from "next/image";
-
 const companies = [
   {
     number: "01",
@@ -44,7 +42,7 @@ export default function Home() {
     <main>
       <header className="site-header">
         <a className="brand" href="#inicio" aria-label="Avancini OS — início">
-          <span className="brand-mark"><Image src="/avancini-mark.png" alt="" width={177} height={204} /></span>
+          <span className="brand-mark" aria-hidden="true" />
           <span>AVANCINI <b>OS</b></span>
         </a>
 
@@ -81,7 +79,7 @@ export default function Home() {
           <div className="orbit orbit-one" />
           <div className="orbit orbit-two" />
           <div className="visual-core">
-            <Image className="core-image" src="/avancini-mark.png" alt="" width={177} height={204} priority />
+            <span className="core-image" aria-hidden="true" />
             <small>AVANCINI OS</small>
           </div>
           <span className="orbit-label label-web">WEB</span>
@@ -175,7 +173,7 @@ export default function Home() {
       </section>
 
       <section className="manifesto">
-        <div className="manifesto-mark"><Image src="/avancini-mark.png" alt="Símbolo Avancini OS" width={177} height={204} /></div>
+        <div className="manifesto-mark" role="img" aria-label="Símbolo Avancini OS" />
         <div>
           <p className="eyebrow"><span /> NOSSA VISÃO</p>
           <blockquote>“Tecnologia extraordinária é aquela que torna o crescimento mais simples.”</blockquote>
@@ -192,7 +190,7 @@ export default function Home() {
 
       <footer>
         <a className="brand footer-brand" href="#inicio">
-          <span className="brand-mark"><Image src="/avancini-mark.png" alt="" width={177} height={204} /></span>
+          <span className="brand-mark" aria-hidden="true" />
           <span>AVANCINI <b>OS</b></span>
         </a>
         <div className="footer-units">
