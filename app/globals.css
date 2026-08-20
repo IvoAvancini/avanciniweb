@@ -401,4 +401,71 @@ footer>small { grid-column:1/-1; color:#515156; font-family:var(--font-geist-mon
   .portal-path { padding-top:18px; padding-bottom:18px; }
   .path-copy h2 { font-size:70px; }
 }
+
+/* Avancini OS — live experience gateway */
+.showcase-shell { position:relative; width:100%; height:100svh; min-height:650px; overflow:hidden; background:radial-gradient(circle at 18% 18%,rgba(240,34,54,.12),transparent 28%),#050505; }
+.showcase-shell::before { content:""; position:absolute; inset:0; pointer-events:none; opacity:.35; background-image:linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px); background-size:52px 52px; mask-image:linear-gradient(to bottom,#000,transparent 86%); }
+.showcase-header { position:absolute; z-index:30; top:0; right:0; left:0; display:flex; height:68px; align-items:center; justify-content:space-between; padding:0 4vw; border-bottom:1px solid rgba(255,255,255,.11); background:rgba(5,5,5,.78); backdrop-filter:blur(18px); }
+.showcase-header nav { display:flex; align-items:center; gap:8px; font-size:8px; font-weight:900; text-transform:uppercase; }
+.showcase-header nav a { padding:11px 13px; color:#94949a; transition:color .25s,background .25s; }
+.showcase-header nav a:hover { color:white; }
+.showcase-header .showcase-contact { border:1px solid rgba(255,255,255,.19); color:white; }
+.showcase-header .showcase-contact:hover { background:white; color:#080808; }
+.showcase-main { position:relative; z-index:4; display:grid; width:100%; height:100%; min-height:0; grid-template-rows:auto minmax(0,1fr); gap:20px; padding:96px 4vw 28px; }
+.showcase-intro { display:grid; grid-template-columns:minmax(0,1.45fr) minmax(270px,.55fr); align-items:end; gap:7vw; }
+.showcase-title>span { color:#77777d; font-family:var(--font-geist-mono),monospace; font-size:7px; font-weight:900; letter-spacing:.2em; }
+.showcase-title h1 { max-width:990px; margin:10px 0 0; font-size:clamp(42px,4.7vw,72px); letter-spacing:-.065em; line-height:.9; }
+.showcase-title h1 em { color:var(--web); font-style:normal; }
+.showcase-statement { display:grid; grid-template-columns:auto 1fr; align-items:start; gap:14px; padding-bottom:4px; }
+.showcase-statement .os-symbol { width:27px; height:31px; opacity:.9; }
+.showcase-statement p { max-width:390px; margin:0; color:#a2a2a8; font-size:clamp(12px,1vw,15px); line-height:1.55; }
+.showcase-choice { display:grid; min-height:0; grid-template-rows:auto minmax(0,1fr); gap:11px; }
+.choice-heading { display:flex; align-items:center; gap:13px; color:#6d6d72; font-family:var(--font-geist-mono),monospace; font-size:6px; font-weight:900; letter-spacing:.18em; }
+.choice-heading i { width:100%; height:1px; background:linear-gradient(90deg,rgba(255,255,255,.16),transparent); }
+.showcase-cards { display:flex; min-height:0; gap:10px; }
+.showcase-card { position:relative; min-width:0; flex:1; overflow:hidden; border:1px solid rgba(255,255,255,.15); background:#0a0a0a; isolation:isolate; transition:flex .65s cubic-bezier(.2,.8,.2,1),transform .45s,border-color .35s; }
+.showcase-card:hover { flex:1.08; transform:translateY(-4px); border-color:rgba(255,255,255,.35); }
+.showcase-card iframe { position:absolute; z-index:-3; top:0; left:0; width:160%; height:160%; border:0; opacity:.72; pointer-events:none; transform:scale(.625); transform-origin:top left; filter:saturate(.8) contrast(1.03); transition:opacity .5s,filter .5s,transform .7s cubic-bezier(.2,.8,.2,1); }
+.showcase-card:hover iframe { opacity:1; filter:saturate(1) contrast(1); transform:scale(.64); }
+.card-shade { position:absolute; z-index:-1; inset:0; background:linear-gradient(to top,rgba(4,4,4,.97) 0,rgba(4,4,4,.66) 32%,rgba(4,4,4,.05) 70%); }
+.showcase-web .card-shade { box-shadow:inset 0 -3px 0 var(--web); }
+.showcase-sync .card-shade { box-shadow:inset 0 -3px 0 var(--sync); }
+.showcase-card-copy { position:absolute; z-index:3; right:25px; bottom:22px; left:25px; display:grid; grid-template-columns:1fr auto; align-items:end; gap:5px 20px; }
+.showcase-card-copy small { grid-column:1/-1; font-family:var(--font-geist-mono),monospace; font-size:6px; font-weight:900; letter-spacing:.17em; }
+.showcase-web .showcase-card-copy small { color:var(--web); }
+.showcase-sync .showcase-card-copy small { color:var(--sync); }
+.showcase-card-copy h2 { margin:0; font-size:clamp(30px,3.2vw,52px); letter-spacing:-.06em; line-height:.9; }
+.showcase-card-copy span { padding-bottom:4px; border-bottom:1px solid currentColor; color:#c4c4c7; font-size:7px; font-weight:900; text-transform:uppercase; }
+
+@media (max-width:700px) {
+  .showcase-shell { min-height:100svh; }
+  .showcase-header { height:60px; padding:0 14px; }
+  .showcase-header .brand-copy small { display:none; }
+  .showcase-header .brand-copy b { font-size:10px; }
+  .showcase-header .os-symbol { width:33px; height:37px; }
+  .showcase-header nav { gap:0; font-size:6px; }
+  .showcase-header nav a { padding:9px 7px; }
+  .showcase-main { gap:14px; padding:78px 14px 14px; }
+  .showcase-intro { grid-template-columns:1fr; gap:10px; }
+  .showcase-title>span { font-size:5px; }
+  .showcase-title h1 { margin-top:7px; font-size:clamp(34px,9.5vw,42px); }
+  .showcase-statement { max-width:340px; gap:10px; }
+  .showcase-statement .os-symbol { width:20px; height:23px; }
+  .showcase-statement p { font-size:9px; line-height:1.4; }
+  .choice-heading { font-size:5px; }
+  .showcase-cards { gap:7px; }
+  .showcase-card iframe { width:220%; height:220%; transform:scale(.455); }
+  .showcase-card:hover iframe { transform:scale(.465); }
+  .showcase-card-copy { right:11px; bottom:13px; left:11px; grid-template-columns:1fr; gap:4px; }
+  .showcase-card-copy small { font-size:4px; }
+  .showcase-card-copy h2 { font-size:clamp(22px,6.2vw,28px); }
+  .showcase-card-copy span { width:max-content; margin-top:3px; font-size:5px; }
+}
+
+@media (max-height:690px) and (min-width:701px) {
+  .showcase-shell { min-height:610px; }
+  .showcase-header { height:62px; }
+  .showcase-main { gap:14px; padding-top:80px; padding-bottom:18px; }
+  .showcase-title h1 { font-size:52px; }
+}
 @media (hover:none),(pointer:coarse) { .cursor-ambient { display:none; } }
