@@ -17,10 +17,6 @@ export const metadata: Metadata = {
   title: "Avancini OS — Tecnologia que conecta negócios",
   description:
     "Conheça o ecossistema Avancini: Web para presença digital, Sync para sistemas e CRM, e Brain para automação e inteligência artificial.",
-  icons: {
-    icon: "/avancini-mark.png",
-    shortcut: "/avancini-mark.png",
-  },
   openGraph: {
     title: "Avancini OS — Web. Sync. Brain.",
     description: "Presença digital, sistemas conectados e automação com inteligência artificial em um único ecossistema.",

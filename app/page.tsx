@@ -1,3 +1,5 @@
+import { EcosystemOrb } from "./EcosystemOrb";
+
 const companies = [
   {
     number: "01",
@@ -75,17 +77,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="hero-visual" aria-label="Avancini OS: Web, Sync e Brain">
-          <div className="orbit orbit-one" />
-          <div className="orbit orbit-two" />
-          <div className="visual-core">
-            <span className="core-image" aria-hidden="true" />
-            <small>AVANCINI OS</small>
-          </div>
-          <span className="orbit-label label-web">WEB</span>
-          <span className="orbit-label label-sync">SYNC</span>
-          <span className="orbit-label label-brain">BRAIN</span>
-        </div>
+        <EcosystemOrb />
 
         <div className="hero-index" aria-hidden="true">
           <span>AVANCINI OS / 2026</span>
@@ -173,7 +165,12 @@ export default function Home() {
       </section>
 
       <section className="manifesto">
-        <div className="manifesto-mark" role="img" aria-label="Símbolo Avancini OS" />
+        <div className="manifesto-mark" role="img" aria-label="Símbolo conceitual Avancini OS">
+          <span className="manifesto-a">A</span>
+          <i className="manifesto-slash" />
+          <i className="manifesto-orbit orbit-alpha" />
+          <i className="manifesto-orbit orbit-beta" />
+        </div>
         <div>
           <p className="eyebrow"><span /> NOSSA VISÃO</p>
           <blockquote>“Tecnologia extraordinária é aquela que torna o crescimento mais simples.”</blockquote>
