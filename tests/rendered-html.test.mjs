@@ -22,11 +22,15 @@ test("renders the Avancini OS institutional site", async () => {
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
 
   const html = await response.text();
-  assert.match(html, /Avancini OS — Tecnologia que conecta negócios/i);
-  assert.match(html, /Construímos o digital/i);
+  assert.match(html, /Avancini OS — A tecnologia certa para o próximo passo/i);
+  assert.match(html, /Seu negócio não precisa de tudo/i);
+  assert.match(html, /Radar WSB/i);
   assert.match(html, /AVANCINI WEB/);
   assert.match(html, /AVANCINI SYNC/);
   assert.match(html, /AVANCINI BRAIN/);
+  assert.match(html, /instagram\.com\/avancinios/i);
+  assert.match(html, /avanciniweb\.vercel\.app/i);
+  assert.doesNotMatch(html, /avancini-mark\.png/i);
   assert.doesNotMatch(html, /codex-preview|Your site is taking shape/i);
 });
 
