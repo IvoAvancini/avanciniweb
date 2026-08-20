@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type CSSProperties } from "react";
+import { useRef, useState, type CSSProperties, type PointerEvent } from "react";
 
 const whatsappBase = "https://wa.me/5573981019782?text=";
 
@@ -49,11 +49,30 @@ type PathId = keyof typeof paths;
 
 export function FlowWS() {
   const [activeId, setActiveId] = useState<PathId>("web");
+  const panelRef = useRef<HTMLDivElement>(null);
   const active = paths[activeId];
-  const style = { "--unit-accent": active.accent } as CSSProperties;
+  const style = {
+    "--unit-accent": active.accent,
+    "--flow-x": "50%",
+    "--flow-y": "50%",
+  } as CSSProperties;
+
+  const handlePointerMove = (event: PointerEvent<HTMLDivElement>) => {
+    const panel = panelRef.current;
+    if (!panel) return;
+    const rect = panel.getBoundingClientRect();
+    panel.style.setProperty("--flow-x", `${((event.clientX - rect.left) / rect.width) * 100}%`);
+    panel.style.setProperty("--flow-y", `${((event.clientY - rect.top) / rect.height) * 100}%`);
+  };
 
   return (
-    <div className={`radar-panel radar-${activeId}`} style={style}>
+    <div
+      className={`radar-panel radar-${activeId}`}
+      ref={panelRef}
+      style={style}
+      onPointerMove={handlePointerMove}
+      data-reveal
+    >
       <div className="radar-choices" role="tablist" aria-label="Escolha onde sua empresa precisa avançar">
         <div className="radar-question">
           <span>FLUXO WS</span>

@@ -1,4 +1,7 @@
 import { FlowWS } from "./FlowWS";
+import { BrandMark } from "./BrandMark";
+import { IdentityStage } from "./IdentityStage";
+import { MotionLayer } from "./MotionLayer";
 
 const instagramUrl = "https://www.instagram.com/avancinios/";
 const email = "ivoavancini@hotmail.com";
@@ -36,21 +39,10 @@ const specializations = [
   },
 ] as const;
 
-function BrandMark({ large = false }: { large?: boolean }) {
-  return (
-    <span className={`os-symbol ${large ? "os-symbol-large" : ""}`} aria-hidden="true">
-      <i className="symbol-leg symbol-leg-left" />
-      <i className="symbol-leg symbol-leg-right" />
-      <i className="symbol-cut" />
-      <span className="symbol-dot symbol-dot-web" />
-      <span className="symbol-dot symbol-dot-sync" />
-    </span>
-  );
-}
-
 export default function Home() {
   return (
     <main>
+      <MotionLayer />
       <header className="site-header">
         <a className="brand" href="#inicio" aria-label="Avancini OS — início">
           <BrandMark />
@@ -75,7 +67,7 @@ export default function Home() {
         <div className="hero-grid" aria-hidden="true" />
         <div className="hero-glow" aria-hidden="true" />
 
-        <div className="hero-copy">
+        <div className="hero-copy" data-reveal>
           <p className="eyebrow"><span /> AVANCINI OS / WEB + INTELIGÊNCIA</p>
           <h1>
             Sua empresa precisa ser encontrada.
@@ -94,18 +86,7 @@ export default function Home() {
           <p className="hero-proof"><i /> Duas especializações. Uma direção. Nenhum pacote obrigatório.</p>
         </div>
 
-        <div className="identity-stage identity-stage-ws" role="img" aria-label="Símbolo Avancini OS conectado às especializações Web e Sync">
-          <div className="stage-ring stage-ring-one" aria-hidden="true" />
-          <div className="stage-ring stage-ring-two" aria-hidden="true" />
-          <div className="stage-axis" aria-hidden="true" />
-          <span className="stage-label stage-web"><i /> WEB <small>ATRAIR</small></span>
-          <span className="stage-label stage-sync"><i /> SYNC <small>ATENDER</small></span>
-          <BrandMark large />
-          <div className="stage-caption">
-            <span>FLUXO WS</span>
-            <b>WEB PARA ATRAIR. SYNC PARA ATENDER.</b>
-          </div>
-        </div>
+        <IdentityStage />
 
         <div className="hero-footer">
           <span>WEB · SYNC</span>
@@ -114,7 +95,7 @@ export default function Home() {
       </section>
 
       <section className="starting-point" id="momentos">
-        <div className="section-intro">
+        <div className="section-intro" data-reveal>
           <p className="eyebrow dark"><span /> DOIS MOMENTOS DECISIVOS</p>
           <h2>Antes do contato.<br />Depois do clique.</h2>
           <p>
@@ -125,13 +106,13 @@ export default function Home() {
         </div>
 
         <div className="problem-grid problem-grid-ws">
-          <a className="problem-card problem-web" href="#fluxo-ws">
+          <a className="problem-card problem-web" href="#fluxo-ws" data-reveal>
             <span>W / ANTES DO CONTATO</span>
             <h3>Sua marca precisa transmitir confiança antes de pedir uma conversa.</h3>
             <p>Avancini Web — presença, clareza e conversão.</p>
             <i>→</i>
           </a>
-          <a className="problem-card problem-sync" href="#fluxo-ws">
+          <a className="problem-card problem-sync" href="#fluxo-ws" data-reveal data-delay="1">
             <span>S / DEPOIS DO CLIQUE</span>
             <h3>Seu atendimento precisa responder antes que o interesse esfrie.</h3>
             <p>Avancini Sync — atendimento e automação com IA.</p>
@@ -141,7 +122,7 @@ export default function Home() {
       </section>
 
       <section className="radar-section" id="fluxo-ws">
-        <div className="radar-heading">
+        <div className="radar-heading" data-reveal>
           <p className="eyebrow"><span /> DIRECIONAMENTO DIRETO</p>
           <h2>Fluxo WS</h2>
           <p>
@@ -153,7 +134,7 @@ export default function Home() {
       </section>
 
       <section className="fronts-section" id="frentes">
-        <div className="section-intro fronts-intro">
+        <div className="section-intro fronts-intro" data-reveal>
           <p className="eyebrow dark"><span /> DUAS ESPECIALIZAÇÕES</p>
           <h2>Foco para vender melhor.<br />Conexão para ir mais longe.</h2>
           <p>
@@ -164,7 +145,7 @@ export default function Home() {
 
         <div className="front-grid front-grid-ws">
           {specializations.map((front) => (
-            <article className={`front-card ${front.className}`} data-key={front.key} key={front.name}>
+            <article className={`front-card ${front.className}`} data-key={front.key} key={front.name} data-reveal>
               <div className="front-topline">
                 <span className="front-key">{front.key}</span>
                 <span>ESPECIALIZAÇÃO AVANCINI</span>
@@ -185,8 +166,8 @@ export default function Home() {
       </section>
 
       <section className="choice-manifesto choice-manifesto-ws">
-        <div className="choice-mark"><BrandMark large /></div>
-        <div className="choice-copy">
+        <div className="choice-mark" data-reveal><BrandMark large /></div>
+        <div className="choice-copy" data-reveal data-delay="1">
           <p className="eyebrow"><span /> ESCOLHA SIMPLES</p>
           <h2>Uma especialização agora. A outra quando fizer sentido.</h2>
           <p>
@@ -194,7 +175,7 @@ export default function Home() {
             começar pela Sync ou conectar as duas quando o desafio estiver nos dois lados.
           </p>
         </div>
-        <div className="choice-options">
+        <div className="choice-options" data-reveal data-delay="2">
           <div><b>W</b><span>Preciso atrair, posicionar e gerar mais contatos.</span></div>
           <div><b>S</b><span>Preciso atender, qualificar e acompanhar automaticamente.</span></div>
           <div><b>WS</b><span>Preciso melhorar a chegada e a resposta ao mesmo tempo.</span></div>
@@ -202,23 +183,23 @@ export default function Home() {
       </section>
 
       <section className="process-section" id="como-funciona">
-        <div className="process-heading">
+        <div className="process-heading" data-reveal>
           <p className="eyebrow dark"><span /> COMO FUNCIONA</p>
           <h2>Do problema à especialização certa.</h2>
           <p>Você não precisa saber o nome da solução. Basta explicar o que está acontecendo.</p>
         </div>
         <div className="process-grid">
-          <article>
+          <article data-reveal>
             <span>01</span>
             <h3>Você conta onde a oportunidade escapa</h3>
             <p>Antes do contato, durante o atendimento ou nos dois momentos.</p>
           </article>
-          <article>
+          <article data-reveal data-delay="1">
             <span>02</span>
             <h3>A Avancini OS indica o caminho</h3>
             <p>Web, Sync ou uma conexão objetiva entre as duas especializações.</p>
           </article>
-          <article>
+          <article data-reveal data-delay="2">
             <span>03</span>
             <h3>O projeto começa com foco</h3>
             <p>Uma entrega clara para resolver o problema que realmente importa agora.</p>
@@ -230,11 +211,11 @@ export default function Home() {
       </section>
 
       <section className="faq-section">
-        <div className="faq-heading">
+        <div className="faq-heading" data-reveal>
           <p className="eyebrow"><span /> SEM COMPLICAÇÃO</p>
           <h2>Perguntas diretas.<br />Respostas também.</h2>
         </div>
-        <div className="faq-list">
+        <div className="faq-list" data-reveal data-delay="1">
           <details>
             <summary>Preciso contratar Web e Sync juntas?<span>+</span></summary>
             <p>Não. Você pode contratar somente a especialização que resolve o problema atual. A conexão entre as duas é uma possibilidade, não uma obrigação.</p>
@@ -254,7 +235,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="contact-section" id="contato">
+      <section className="contact-section" id="contato" data-reveal>
         <div className="contact-mark" aria-hidden="true"><BrandMark large /></div>
         <p className="eyebrow"><span /> PRÓXIMO MOVIMENTO</p>
         <h2>Você está perdendo antes ou depois do clique?</h2>

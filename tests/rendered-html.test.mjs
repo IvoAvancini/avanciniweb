@@ -25,6 +25,9 @@ test("renders the Avancini OS institutional site", async () => {
   assert.match(html, /Avancini OS — Web para atrair\. Sync para atender\./i);
   assert.match(html, /Sua empresa precisa ser encontrada/i);
   assert.match(html, /Fluxo WS/i);
+  assert.match(html, /MOVA O CURSOR/i);
+  assert.match(html, /scroll-progress/i);
+  assert.match(html, /aria-pressed="true"/i);
   assert.match(html, /AVANCINI WEB/);
   assert.match(html, /AVANCINI SYNC/);
   assert.match(html, /ATENDIMENTO &amp; AUTOMAÇÃO COM IA/i);
