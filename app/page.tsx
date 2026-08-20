@@ -30,6 +30,7 @@ export default function Home() {
         </a>
       </header>
 
+      <div className="hero-scroll-scene">
       <section className="hero" id="inicio">
         <div className="hero-grid" aria-hidden="true" />
         <div className="hero-copy" data-reveal>
@@ -59,8 +60,9 @@ export default function Home() {
 
         <div className="hero-bottom"><span>01 — PRESENÇA DIGITAL</span><span>02 — AUTOMAÇÃO COM IA</span></div>
       </section>
+      </div>
 
-      <section className="gateway-section" id="escolha">
+      <section className="gateway-section" id="escolha" data-scroll-scene>
         <div className="gateway-intro" data-reveal>
           <p className="eyebrow"><span /> ESCOLHA DIRETA</p>
           <h2>Dois caminhos.<br />Nenhuma obrigação.</h2>
@@ -69,7 +71,7 @@ export default function Home() {
         <BrandGateway />
       </section>
 
-      <section className="manifesto" id="manifesto">
+      <section className="manifesto" id="manifesto" data-scroll-scene>
         <div className="manifesto-kicker" data-reveal>CHEGA DE</div>
         <div className="manifesto-copy" data-reveal data-delay="1">
           <h2>Soluções genéricas que fazem sua empresa parecer igual a todas.</h2>
@@ -78,7 +80,7 @@ export default function Home() {
         <div className="manifesto-lines" aria-hidden="true"><span>IDENTIDADE</span><span>ESTRATÉGIA</span><span>IMPACTO</span></div>
       </section>
 
-      <section className="specialization specialization-web" id="web">
+      <section className="specialization specialization-web" id="web" data-scroll-scene>
         <div className="specialization-number" data-reveal>01</div>
         <div className="specialization-head" data-reveal>
           <p>AVANCINI WEB</p>
@@ -102,7 +104,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="specialization specialization-sync" id="sync">
+      <section className="specialization specialization-sync" id="sync" data-scroll-scene>
         <div className="specialization-number" data-reveal>02</div>
         <div className="specialization-head" data-reveal>
           <p>AVANCINI SYNC</p>
@@ -118,7 +120,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="independent-section">
+      <section className="independent-section" data-scroll-scene>
         <div className="independent-mark" data-reveal><BrandMark large /></div>
         <div className="independent-copy" data-reveal data-delay="1">
           <p className="eyebrow"><span /> AVANCINI OS</p>
@@ -131,7 +133,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="contact-section" id="contato" data-reveal>
+      <section className="contact-section" id="contato" data-reveal data-scroll-scene>
         <p className="eyebrow"><span /> SUA EMPRESA, DO SEU JEITO</p>
         <h2>Qual presença sua empresa está deixando hoje?</h2>
         <p>Conte o momento do seu negócio. A conversa começa pelo que você precisa — não por um pacote pronto.</p>

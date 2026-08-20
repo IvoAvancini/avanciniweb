@@ -9,6 +9,9 @@ export function MotionLayer() {
   useEffect(() => {
     const root = document.documentElement;
     root.classList.add("motion-enabled");
+    const heroScene = document.querySelector<HTMLElement>(".hero-scroll-scene");
+    const hero = document.querySelector<HTMLElement>(".hero");
+    const scenes = Array.from(document.querySelectorAll<HTMLElement>("[data-scroll-scene]"));
 
     const revealItems = Array.from(document.querySelectorAll<HTMLElement>("[data-reveal]"));
     const observer = new IntersectionObserver(
@@ -25,6 +28,7 @@ export function MotionLayer() {
     revealItems.forEach((item) => observer.observe(item));
 
     let frame = 0;
+    let lastScrollY = window.scrollY;
     const updateScroll = () => {
       cancelAnimationFrame(frame);
       frame = requestAnimationFrame(() => {
@@ -32,6 +36,28 @@ export function MotionLayer() {
         const progress = max > 0 ? window.scrollY / max : 0;
         progressRef.current?.style.setProperty("--scroll-progress", String(progress));
         root.classList.toggle("has-scrolled", window.scrollY > 24);
+        root.classList.toggle("scrolling-down", window.scrollY > lastScrollY && window.scrollY > 120);
+        lastScrollY = window.scrollY;
+
+        if (heroScene && hero) {
+          const rect = heroScene.getBoundingClientRect();
+          const distance = Math.max(heroScene.offsetHeight - window.innerHeight, 1);
+          const heroProgress = Math.min(1, Math.max(0, -rect.top / distance));
+          hero.style.setProperty("--hero-progress", String(heroProgress));
+          hero.style.setProperty("--hero-opacity", String(1 - heroProgress * 0.7));
+          hero.style.setProperty("--hero-copy-shift", `${heroProgress * -72}px`);
+          hero.style.setProperty("--hero-copy-scale", String(1 - heroProgress * 0.04));
+          hero.style.setProperty("--hero-signal-shift", `${heroProgress * -20}px`);
+          hero.style.setProperty("--hero-signal-scale", String(1 + heroProgress * 0.28));
+        }
+
+        scenes.forEach((scene) => {
+          const rect = scene.getBoundingClientRect();
+          const sceneProgress = Math.min(1, Math.max(0, (window.innerHeight - rect.top) / (window.innerHeight + rect.height)));
+          scene.style.setProperty("--scene-progress", String(sceneProgress));
+          scene.style.setProperty("--scene-shift", `${(0.5 - sceneProgress) * 70}px`);
+          scene.style.setProperty("--scene-shift-x", `${(sceneProgress - 0.5) * 70}px`);
+        });
       });
     };
 
