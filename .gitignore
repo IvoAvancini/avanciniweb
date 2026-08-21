@@ -46,3 +46,7 @@ yarn-error.log*
 /([{}]clientHeight
 /public/projects/san-diego-full.jpg
 /public/projects/tape-car.jpg
+
+_archive/
+*.tsbuildinfo
+tsconfig.tsbuildinfo

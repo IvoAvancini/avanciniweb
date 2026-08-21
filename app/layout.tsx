@@ -22,44 +22,46 @@ const spaceGrotesk = Space_Grotesk({
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Avancini Web | Criação de sites que vendem",
-    template: "%s | Avancini Web",
+    default: "Avancini OS | Tecnologia com identidade",
+    template: "%s | Avancini OS",
   },
   description:
-    "Criação de landings de conversão, sites institucionais e projetos exclusivos com estratégia, design autoral e foco em negócios para todo o Brasil.",
+    "Avancini Dash e Avancini Sync: presença digital, atendimento com IA e automações contratadas de forma independente.",
   keywords: [
+    "Avancini OS",
     "criação de sites",
-    "criação de sites em Eunápolis",
     "landing page profissional",
     "site institucional",
-    "loja virtual",
-    "web design Bahia",
-    "Avancini Web",
+    "chatbot para WhatsApp",
+    "atendimento com inteligência artificial",
+    "automação de atendimento",
+    "Avancini Dash",
+    "Avancini Sync",
   ],
   alternates: { canonical: "/" },
   openGraph: {
     type: "website",
     locale: "pt_BR",
     url: siteUrl,
-    siteName: "Avancini Web",
-    title: "Avancini Web | Sites impossíveis de ignorar",
+    siteName: "Avancini OS",
+    title: "Avancini OS | Tecnologia com identidade",
     description:
-      "Estratégia, design e conversão para transformar sua presença digital em uma ferramenta comercial.",
+      "Encontre o gargalo que custa oportunidades e entre direto na solução certa: Avancini Dash ou Avancini Sync.",
     images: [
       {
-        url: "/og-v3.jpg",
+        url: "/og.png",
         width: 1200,
         height: 630,
-        alt: "Avancini Web — sites impossíveis de ignorar",
+        alt: "Avancini OS — tecnologia com identidade",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Avancini Web | Sites impossíveis de ignorar",
+    title: "Avancini OS | Tecnologia com identidade",
     description:
-      "Landings de conversão, sites institucionais e projetos exclusivos com estratégia e design autoral.",
-    images: ["/og-v3.jpg"],
+      "Avancini Dash e Avancini Sync: soluções independentes para presença digital, atendimento e automação.",
+    images: ["/og.png"],
   },
   robots: { index: true, follow: true },
 };
@@ -67,16 +69,23 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   const structuredData = {
     "@context": "https://schema.org",
-    "@type": "ProfessionalService",
-    name: "Avancini Web",
+    "@type": "Organization",
+    name: "Avancini OS",
     url: siteUrl,
     description:
-      "Criação de landings de conversão, sites institucionais e projetos exclusivos com estratégia e design autoral.",
-    areaServed: ["Eunápolis", "Bahia", "Brasil"],
+      "Empresa de tecnologia responsável pelas soluções independentes Avancini Dash e Avancini Sync.",
+    areaServed: "Brasil",
     telephone: "+55 73 98101-9782",
     email: "ivoavancini@hotmail.com",
-    parentOrganization: { "@type": "Organization", name: "Avancini OS" },
-    sameAs: ["https://avanciniweb.vercel.app"],
+    sameAs: ["https://www.instagram.com/avancinios/"],
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: "Soluções Avancini",
+      itemListElement: [
+        { "@type": "Offer", itemOffered: { "@type": "Service", name: "Avancini Dash", description: "Criação de landings, sites institucionais e projetos digitais." } },
+        { "@type": "Offer", itemOffered: { "@type": "Service", name: "Avancini Sync", description: "Chatbots, atendentes com IA e automações." } },
+      ],
+    },
   };
 
   return (

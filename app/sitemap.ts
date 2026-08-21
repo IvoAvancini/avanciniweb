@@ -9,6 +9,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1,
     },
     {
+      url: "https://avanciniweb.vercel.app/dash",
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.9,
+    },
+    {
+      url: "https://avanciniweb.vercel.app/sync",
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.9,
+    },
+    {
       url: "https://avanciniweb.vercel.app/site-por-assinatura",
       lastModified: new Date(),
       changeFrequency: "monthly",

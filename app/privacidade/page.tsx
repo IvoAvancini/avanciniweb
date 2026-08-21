@@ -3,7 +3,7 @@ import { LegalPage } from "../legal-page";
 
 export const metadata: Metadata = {
   title: "Política de Privacidade",
-  description: "Saiba como a Avancini Web trata informações de contato e dados de navegação.",
+  description: "Saiba como a Avancini Dash trata informações de contato e dados de navegação.",
   alternates: { canonical: "/privacidade" },
 };
 
@@ -11,7 +11,7 @@ const sections = [
   {
     title: "Quem trata as informações",
     paragraphs: [
-      "A Avancini Web, uma solução da Avancini OS, é responsável pelas decisões relacionadas às informações recebidas por seus canais de atendimento.",
+      "A Avancini Dash, uma solução da Avancini OS, é responsável pelas decisões relacionadas às informações recebidas por seus canais de atendimento.",
       "Dúvidas e solicitações podem ser enviadas para ivoavancini@hotmail.com ou pelo WhatsApp informado no site.",
     ],
   },
@@ -63,5 +63,5 @@ const sections = [
 ] as const;
 
 export default function PrivacyPage() {
-  return <LegalPage eyebrow="PRIVACIDADE & TRANSPARÊNCIA" title="Política de Privacidade" intro="Informação clara sobre o que acontece quando você visita o site ou conversa com a Avancini Web." sections={sections} />;
+  return <LegalPage eyebrow="PRIVACIDADE & TRANSPARÊNCIA" title="Política de Privacidade" intro="Informação clara sobre o que acontece quando você visita o site ou conversa com a Avancini Dash." sections={sections} />;
 }
