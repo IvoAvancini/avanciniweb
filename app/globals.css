@@ -2003,3 +2003,60 @@ body:has(.web-page) .page-progress{background:linear-gradient(90deg,#43c85d,#a9f
   background: rgba(4, 18, 30, 0.12);
   color: #04121e;
 }
+
+/* LOGO MARK AVANCINI "A" PADRONIZADO E IDENTICO EM TODO O ECOSSISTEMA */
+.logo-mark {
+  position: relative;
+  display: block;
+  flex: 0 0 38px;
+  width: 38px;
+  height: 39px;
+  filter: drop-shadow(0 0 13px rgba(255, 24, 56, 0.3));
+}
+.logo-mark::before,
+.logo-mark::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(155deg, #ff4059 0%, #e00025 58%, #9e001b 100%);
+}
+.logo-mark::before {
+  clip-path: polygon(50% 0, 55% 29%, 25% 100%, 0 100%);
+}
+.logo-mark::after {
+  clip-path: polygon(50% 0, 100% 100%, 75% 88%, 46% 29%);
+}
+.logo-mark i {
+  position: absolute;
+  z-index: 2;
+  left: 9px;
+  top: 24px;
+  width: 21px;
+  height: 4px;
+  border-radius: 4px;
+  background: #fff;
+  transform: rotate(-17deg);
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.25);
+}
+
+.logo-mark-large {
+  width: 84px;
+  height: 86px;
+  flex: 0 0 84px;
+  filter: drop-shadow(0 0 32px rgba(255, 24, 56, 0.5));
+}
+.logo-mark-large i {
+  left: 20px;
+  top: 53px;
+  width: 46px;
+  height: 9px;
+  border-radius: 6px;
+}
+
+.logo-mark-sync::before,
+.logo-mark-sync::after {
+  background: linear-gradient(155deg, #38bdf8 0%, #0284c7 58%, #0369a1 100%);
+}
+.logo-mark-sync {
+  filter: drop-shadow(0 0 13px rgba(56, 189, 248, 0.35));
+}

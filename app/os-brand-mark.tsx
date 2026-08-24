@@ -1,10 +1,16 @@
-export function OSBrandMark({ large = false }: { large?: boolean }) {
+export function OSBrandMark({
+  large = false,
+  accent = "default",
+}: {
+  large?: boolean;
+  accent?: "default" | "web" | "sync";
+}) {
   return (
-    <span className={`oshub-mark ${large ? "oshub-mark-large" : ""}`} aria-hidden="true">
-      <i className="oshub-flare" />
-      <i className="oshub-leg oshub-leg-left" />
-      <i className="oshub-leg oshub-leg-right" />
-      <i className="oshub-cut" />
+    <span
+      className={`logo-mark avancini-a-mark ${large ? "logo-mark-large" : ""} ${accent !== "default" ? `logo-mark-${accent}` : ""}`}
+      aria-hidden="true"
+    >
+      <i />
     </span>
   );
 }
