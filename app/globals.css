@@ -2060,3 +2060,15 @@ body:has(.web-page) .page-progress{background:linear-gradient(90deg,#43c85d,#a9f
 .logo-mark-sync {
   filter: drop-shadow(0 0 13px rgba(56, 189, 248, 0.35));
 }
+
+/* AVANCINI A SVG STYLES */
+.avancini-a-svg {
+  filter: drop-shadow(0 0 14px rgba(255, 24, 56, 0.35));
+  transition: transform 0.25s ease, filter 0.25s ease;
+}
+.avancini-a-large {
+  filter: drop-shadow(0 0 32px rgba(255, 24, 56, 0.55));
+}
+.avancini-a-sync {
+  filter: drop-shadow(0 0 14px rgba(56, 189, 248, 0.4));
+}
