@@ -428,6 +428,231 @@ function WebOpportunitySimulator({ onLead }: { onLead: (message: string) => void
   );
 }
 
+
+function DashBeforeAfterSlider() {
+  const [sliderPos, setSliderPos] = useState(50);
+
+  return (
+    <section className="dash-comparison-section" id="antes-depois">
+      <div className="section-heading" style={{ margin: "0 auto 40px", maxWidth: "1240px" }}>
+        <div>
+          <span className="section-index">TRANSFORMAÇÃO REAL · ANTES VS DEPOIS</span>
+          <h2>A diferença entre um site comum<br />e o padrão Avancini Dash.</h2>
+        </div>
+        <p>Arraste o divisor para comparar o impacto visual, a clareza da proposta e a autoridade imediata percebida pelo visitante.</p>
+      </div>
+
+      <div
+        className="dash-comparison-slider-wrap"
+        onMouseMove={(e) => {
+          const rect = e.currentTarget.getBoundingClientRect();
+          const x = Math.max(0, Math.min(e.clientX - rect.left, rect.width));
+          setSliderPos((x / rect.width) * 100);
+        }}
+        onTouchMove={(e) => {
+          if (e.touches.length === 0) return;
+          const rect = e.currentTarget.getBoundingClientRect();
+          const x = Math.max(0, Math.min(e.touches[0].clientX - rect.left, rect.width));
+          setSliderPos((x / rect.width) * 100);
+        }}
+      >
+        <div className="dash-compare-tag dash-tag-before">ANTES · SITE ANTERIOR</div>
+        <div className="dash-compare-tag dash-tag-after">DEPOIS · PADRÃO AVANCINI DASH</div>
+
+        <div className="dash-compare-side">
+          <img src="/projects/san-diego.jpg" alt="Padrão Avancini Dash" />
+        </div>
+
+        <div className="dash-compare-before" style={{ width: `${sliderPos}%` }}>
+          <div style={{ width: "1040px", height: "480px", position: "relative" }}>
+            <img src="/projects/san-diego.jpg" alt="Site Anterior" style={{ filter: "grayscale(100%) contrast(85%) brightness(60%) blur(1px)" }} />
+          </div>
+        </div>
+
+        <div className="dash-compare-handle" style={{ left: `${sliderPos}%` }}>
+          ⇄
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ExpressProposalBuilder() {
+  const [selectedPlan, setSelectedPlan] = useState("landing");
+  const [fidelity, setFidelity] = useState("com-fidelidade");
+  const [domainType, setDomainType] = useState("avancini");
+
+  const plansMap = {
+    landing: {
+      name: "Landing Page Profissional",
+      priceFidelity: "R$ 89,90/mês",
+      priceNoFidelity: "R$ 49,90/mês",
+      setupNoFidelity: "R$ 490,00 à vista",
+      desc: "Página de alta conversão para serviços, consultores e ofertas diretas."
+    },
+    catalogo: {
+      name: "Site Catálogo / Vitrine",
+      priceFidelity: "A partir de R$ 179,90/mês",
+      priceNoFidelity: "A partir de R$ 79,90/mês",
+      setupNoFidelity: "A partir de R$ 790,00 à vista",
+      desc: "Vitrine completa para empresas com múltiplos produtos ou catálogo de serviços."
+    },
+    comboChatbot: {
+      name: "Combo Site + Chatbot",
+      priceFidelity: "A partir de R$ 249,90/mês",
+      priceNoFidelity: "A partir de R$ 149,90/mês",
+      setupNoFidelity: "A partir de R$ 690,00 à vista",
+      desc: "Landing page profissional com chatbot no WhatsApp 24/7."
+    },
+    comboIa: {
+      name: "Combo Site + Atendente IA",
+      priceFidelity: "A partir de R$ 397,90/mês",
+      priceNoFidelity: "A partir de R$ 249,90/mês",
+      setupNoFidelity: "A partir de R$ 990,00 à vista",
+      desc: "Vitrine de alto padrão integrada a Atendente com IA treinada."
+    }
+  };
+
+  const current = plansMap[selectedPlan as keyof typeof plansMap];
+  const isFidelity = fidelity === "com-fidelidade";
+  const monthlyPrice = isFidelity ? current.priceFidelity : current.priceNoFidelity;
+  const setupPrice = isFidelity ? "R$ 0 (Taxa Gratuita)" : current.setupNoFidelity;
+  const domainText = domainType === "combr" ? "Domínio Próprio .com.br (+ R$ 49,90 no 1º mês)" : "Endereço na rede Avancini (R$ 0)";
+
+  const msg = `Olá, Ivo! Montei minha proposta no configurador da Avancini Dash:
+- Plano: ${current.name}
+- Condição: ${isFidelity ? "Contrato 6 Meses (R$ 0 Criação)" : "Sem Fidelidade (Cancele quando quiser)"}
+- Criação: ${setupPrice}
+- Mensalidade: ${monthlyPrice}
+- Domínio: ${domainText}
+Quero tirar dúvidas e dar início ao projeto!`;
+
+  return (
+    <section className="proposal-builder-section" id="gerador-proposta">
+      <div className="section-heading" style={{ margin: "0 auto 40px", maxWidth: "1240px" }}>
+        <div>
+          <span className="section-index">CONFIGURADOR EXPRESS · 3 PASSOS</span>
+          <h2>Monte sua proposta sob medida<br />em menos de 1 minuto.</h2>
+        </div>
+        <p>Escolha o plano, o formato de contratação e envie diretamente para o WhatsApp do Ivo para começar.</p>
+      </div>
+
+      <div className="proposal-builder-wrap">
+        <div className="proposal-steps">
+          <div className="proposal-step-group">
+            <span className="step-num">PASSO 01</span>
+            <h4>Qual é o objetivo principal da sua empresa?</h4>
+            <div className="proposal-options-grid">
+              <button
+                type="button"
+                className={`proposal-opt-btn ${selectedPlan === "landing" ? "active" : ""}`}
+                onClick={() => setSelectedPlan("landing")}
+              >
+                <strong>Landing Page</strong>
+                <small style={{ display: "block", color: "#8892a0", marginTop: "4px" }}>Serviços e ofertas diretas</small>
+              </button>
+              <button
+                type="button"
+                className={`proposal-opt-btn ${selectedPlan === "catalogo" ? "active" : ""}`}
+                onClick={() => setSelectedPlan("catalogo")}
+              >
+                <strong>Site Catálogo</strong>
+                <small style={{ display: "block", color: "#8892a0", marginTop: "4px" }}>Múltiplos produtos/serviços</small>
+              </button>
+              <button
+                type="button"
+                className={`proposal-opt-btn ${selectedPlan === "comboChatbot" ? "active" : ""}`}
+                onClick={() => setSelectedPlan("comboChatbot")}
+              >
+                <strong>Combo + Chatbot</strong>
+                <small style={{ display: "block", color: "#8892a0", marginTop: "4px" }}>Site + WhatsApp automático</small>
+              </button>
+              <button
+                type="button"
+                className={`proposal-opt-btn ${selectedPlan === "comboIa" ? "active" : ""}`}
+                onClick={() => setSelectedPlan("comboIa")}
+              >
+                <strong>Combo + IA 24/7</strong>
+                <small style={{ display: "block", color: "#8892a0", marginTop: "4px" }}>Site + Atendente Inteligente</small>
+              </button>
+            </div>
+          </div>
+
+          <div className="proposal-step-group">
+            <span className="step-num">PASSO 02</span>
+            <h4>Como prefere contratar?</h4>
+            <div className="proposal-options-grid">
+              <button
+                type="button"
+                className={`proposal-opt-btn ${fidelity === "com-fidelidade" ? "active" : ""}`}
+                onClick={() => setFidelity("com-fidelidade")}
+              >
+                <strong>✨ Contrato 6 Meses</strong>
+                <small style={{ display: "block", color: "#8892a0", marginTop: "4px" }}>R$ 0 de entrada / sem taxa de criação</small>
+              </button>
+              <button
+                type="button"
+                className={`proposal-opt-btn ${fidelity === "sem-fidelidade" ? "active" : ""}`}
+                onClick={() => setFidelity("sem-fidelidade")}
+              >
+                <strong>🔓 Sem Fidelidade</strong>
+                <small style={{ display: "block", color: "#8892a0", marginTop: "4px" }}>Taxa de criação à vista + menor mensalidade</small>
+              </button>
+            </div>
+          </div>
+
+          <div className="proposal-step-group">
+            <span className="step-num">PASSO 03</span>
+            <h4>Qual endereço na internet você deseja?</h4>
+            <div className="proposal-options-grid">
+              <button
+                type="button"
+                className={`proposal-opt-btn ${domainType === "avancini" ? "active" : ""}`}
+                onClick={() => setDomainType("avancini")}
+              >
+                <strong>Rede Avancini (Grátis)</strong>
+                <small style={{ display: "block", color: "#8892a0", marginTop: "4px" }}>Incluso sem taxas adicionais</small>
+              </button>
+              <button
+                type="button"
+                className={`proposal-opt-btn ${domainType === "combr" ? "active" : ""}`}
+                onClick={() => setDomainType("combr")}
+              >
+                <strong>Domínio Próprio .com.br</strong>
+                <small style={{ display: "block", color: "#8892a0", marginTop: "4px" }}>+ R$ 49,90 no 1º mês (Registro.br)</small>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div className="proposal-summary-card">
+          <small>RESUMO DA PROPOSTA</small>
+          <h3>{current.name}</h3>
+          <div className="proposal-price-box">
+            <span>MENSALIDADE:</span>
+            <strong>{monthlyPrice}</strong>
+            <span style={{ marginTop: "6px", display: "block" }}>Taxa de criação: <b>{setupPrice}</b></span>
+          </div>
+          <ul>
+            <li>Estratégia, texto e design exclusivo</li>
+            <li>Versão mobile ultrarrápida</li>
+            <li>Hospedagem, SSL e suporte inclusos</li>
+            <li>{domainText}</li>
+          </ul>
+          <a
+            className="proposal-send-btn"
+            href={whatsappFor(msg)}
+            target="_blank"
+            rel="noreferrer"
+          >
+            ENVIAR PROPOSTA NO WHATSAPP <b>↗</b>
+          </a>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [leadOpen, setLeadOpen] = useState(false);
@@ -888,6 +1113,8 @@ export default function Home() {
         </div>
       </section>
 
+      <DashBeforeAfterSlider />
+      <ExpressProposalBuilder />
       <section className="section web-method" id="metodo">
         <div className="section-heading web-method-heading">
           <div><span className="section-index">METODOLOGIA / 05 PILARES</span><h2>Site bonito chama atenção.<br />Estratégia transforma em cliente.</h2></div>

@@ -2072,3 +2072,550 @@ body:has(.web-page) .page-progress{background:linear-gradient(90deg,#43c85d,#a9f
 .avancini-a-sync {
   filter: drop-shadow(0 0 14px rgba(56, 189, 248, 0.4));
 }
+
+/* ==========================================================================
+   FEATURE 1: SIMULADOR DE CHAT IA EM TEMPO REAL NO SYNC
+   ========================================================================== */
+.sync-interactive-ai-section {
+  padding: 100px 5vw;
+  background: radial-gradient(circle at 50% 0%, rgba(34, 211, 238, 0.12), transparent 45%), #05080c;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+.sync-ai-sim-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: 5vw;
+  align-items: center;
+  max-width: 1240px;
+  margin: 40px auto 0;
+}
+.sync-ai-sim-copy span.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #22d3ee;
+  font-size: 8px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+.sync-ai-sim-copy span.badge i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #22d3ee;
+  box-shadow: 0 0 10px #22d3ee;
+  animation: pulseDot 2s infinite ease-in-out;
+}
+.sync-ai-sim-copy h3 {
+  font-family: var(--font-space), sans-serif;
+  font-size: clamp(32px, 3.8vw, 52px);
+  line-height: 1.05;
+  margin: 0 0 18px;
+  letter-spacing: -1px;
+}
+.sync-ai-sim-copy p {
+  color: #94a3b8;
+  font-size: 14px;
+  line-height: 1.7;
+  margin: 0 0 28px;
+}
+.sync-ai-sim-triggers {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+.sync-ai-sim-triggers button {
+  text-align: left;
+  padding: 13px 18px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #e2e8f0;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.25s ease;
+}
+.sync-ai-sim-triggers button:hover, .sync-ai-sim-triggers button.active {
+  background: rgba(34, 211, 238, 0.12);
+  border-color: rgba(34, 211, 238, 0.45);
+  color: #fff;
+  transform: translateX(4px);
+}
+.sync-ai-sim-triggers button b {
+  color: #22d3ee;
+}
+
+/* WHATSAPP PHONE MOCKUP */
+.sync-wa-phone {
+  background: #0b141a;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 28px;
+  overflow: hidden;
+  box-shadow: 0 35px 90px rgba(0, 0, 0, 0.6), 0 0 50px rgba(34, 211, 238, 0.15);
+}
+.sync-wa-phone-top {
+  background: #1f2c34;
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+.sync-wa-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #22d3ee, #0284c7);
+  color: #04131f;
+  display: grid;
+  place-items: center;
+  font-weight: 900;
+  font-size: 14px;
+}
+.sync-wa-meta strong {
+  display: block;
+  font-size: 12px;
+  color: #e9edef;
+}
+.sync-wa-meta small {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 9px;
+  color: #22d3ee;
+}
+.sync-wa-meta small i {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #22d3ee;
+  box-shadow: 0 0 6px #22d3ee;
+}
+.sync-wa-chat-body {
+  padding: 24px 20px;
+  min-height: 320px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  background-color: #0b141a;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 16px 16px;
+}
+.sync-msg {
+  max-width: 82%;
+  padding: 12px 16px;
+  border-radius: 14px;
+  font-size: 11px;
+  line-height: 1.55;
+  position: relative;
+  animation: fadeIn 0.3s ease-out;
+}
+.sync-msg-user {
+  align-self: flex-end;
+  background: #005c4b;
+  color: #e9edef;
+  border-bottom-right-radius: 2px;
+}
+.sync-msg-ai {
+  align-self: flex-start;
+  background: #202c33;
+  color: #d1d7db;
+  border-bottom-left-radius: 2px;
+}
+.sync-msg-ai strong {
+  color: #22d3ee;
+  display: block;
+  font-size: 8px;
+  letter-spacing: 1px;
+  margin-bottom: 4px;
+  text-transform: uppercase;
+}
+.sync-typing-indicator {
+  align-self: flex-start;
+  background: #202c33;
+  padding: 10px 18px;
+  border-radius: 14px;
+  display: flex;
+  gap: 5px;
+}
+.sync-typing-indicator span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #22d3ee;
+  animation: bounceDot 1.4s infinite ease-in-out both;
+}
+.sync-typing-indicator span:nth-child(1) { animation-delay: -0.32s; }
+.sync-typing-indicator span:nth-child(2) { animation-delay: -0.16s; }
+
+.sync-wa-footer {
+  background: #1f2c34;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.sync-wa-footer input {
+  flex: 1;
+  background: #2a3942;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+  padding: 10px 18px;
+  color: #fff;
+  font-size: 11px;
+  outline: none;
+}
+.sync-wa-footer button {
+  background: #22d3ee;
+  color: #04131f;
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  font-weight: 900;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  transition: transform 0.2s ease;
+}
+.sync-wa-footer button:hover {
+  transform: scale(1.08);
+}
+
+@keyframes bounceDot {
+  0%, 80%, 100% { transform: scale(0); opacity: 0.4; }
+  40% { transform: scale(1); opacity: 1; }
+}
+
+/* ==========================================================================
+   FEATURE 2: CALCULADORA DE PERDA DE FATURAMENTO (SYNC)
+   ========================================================================== */
+.sync-loss-calc-section {
+  padding: 90px 5vw;
+  background: #070a0e;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+.sync-loss-calc-wrap {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 44px;
+  border-radius: 28px;
+  background: linear-gradient(145deg, #111722, #0a0e14);
+  border: 1px solid rgba(34, 211, 238, 0.25);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5), 0 0 50px rgba(34, 211, 238, 0.08);
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 5vw;
+  align-items: center;
+}
+.sync-calc-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+.sync-calc-field label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  font-weight: 700;
+  color: #cbd5e1;
+  margin-bottom: 8px;
+}
+.sync-calc-field label strong {
+  color: #22d3ee;
+  font-family: var(--font-space), sans-serif;
+  font-size: 14px;
+}
+.sync-calc-field input[type="range"] {
+  width: 100%;
+  accent-color: #22d3ee;
+  cursor: pointer;
+}
+.sync-calc-result {
+  background: rgba(255, 24, 56, 0.06);
+  border: 1px solid rgba(255, 24, 56, 0.3);
+  padding: 32px;
+  border-radius: 20px;
+  text-align: center;
+}
+.sync-calc-result small {
+  color: #ff4059;
+  font-size: 8px;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 8px;
+}
+.sync-calc-result h4 {
+  font-family: var(--font-space), sans-serif;
+  font-size: clamp(34px, 4vw, 54px);
+  color: #ff3355;
+  margin: 0 0 10px;
+  line-height: 1;
+}
+.sync-calc-result p {
+  color: #94a3b8;
+  font-size: 11px;
+  line-height: 1.6;
+  margin: 0 0 20px;
+}
+.sync-calc-result a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 13px 20px;
+  border-radius: 12px;
+  background: #22d3ee;
+  color: #04131f;
+  font-size: 11px;
+  font-weight: 900;
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.sync-calc-result a:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(34, 211, 238, 0.35);
+}
+
+/* ==========================================================================
+   FEATURE 3: SLIDER ANTES VS DEPOIS INTERATIVO (DASH)
+   ========================================================================== */
+.dash-comparison-section {
+  padding: 100px 5vw;
+  background: radial-gradient(circle at 50% 0%, rgba(255, 24, 56, 0.1), transparent 40%), #070707;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+.dash-comparison-slider-wrap {
+  position: relative;
+  max-width: 1040px;
+  margin: 40px auto 0;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow: 0 35px 90px rgba(0, 0, 0, 0.6);
+  user-select: none;
+}
+.dash-compare-side {
+  position: relative;
+  width: 100%;
+  height: 480px;
+  overflow: hidden;
+}
+.dash-compare-side img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.dash-compare-before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  overflow: hidden;
+  z-index: 2;
+  border-right: 2px solid #fff;
+}
+.dash-compare-handle {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #fff;
+  color: #050505;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  display: grid;
+  place-items: center;
+  font-weight: 900;
+  font-size: 14px;
+  cursor: ew-resize;
+  z-index: 3;
+}
+.dash-compare-tag {
+  position: absolute;
+  top: 20px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 8px;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  z-index: 4;
+}
+.dash-tag-before {
+  left: 20px;
+  background: rgba(0, 0, 0, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #cbd5e1;
+}
+.dash-tag-after {
+  right: 20px;
+  background: rgba(255, 24, 56, 0.9);
+  color: #fff;
+  box-shadow: 0 0 16px rgba(255, 24, 56, 0.5);
+}
+
+/* ==========================================================================
+   FEATURE 4: CONFIGURADOR DE PROPOSTA EM 3 PASSOS (BRIEFING EXPRESS)
+   ========================================================================== */
+.proposal-builder-section {
+  padding: 100px 5vw;
+  background: #080708;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+.proposal-builder-wrap {
+  max-width: 1100px;
+  margin: 40px auto 0;
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 4vw;
+  align-items: start;
+}
+.proposal-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+.proposal-step-group {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  padding: 24px;
+  border-radius: 18px;
+}
+.proposal-step-group span.step-num {
+  color: #ff4059;
+  font-size: 8px;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 6px;
+}
+.proposal-step-group h4 {
+  font-family: var(--font-space), sans-serif;
+  font-size: 18px;
+  margin: 0 0 14px;
+}
+.proposal-options-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+.proposal-opt-btn {
+  padding: 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.02);
+  color: #94a3b8;
+  font-size: 11px;
+  font-weight: 700;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.proposal-opt-btn:hover {
+  border-color: rgba(255, 255, 255, 0.3);
+  color: #fff;
+}
+.proposal-opt-btn.active {
+  background: rgba(255, 24, 56, 0.14);
+  border-color: #ff1838;
+  color: #fff;
+  font-weight: 800;
+}
+.proposal-summary-card {
+  position: sticky;
+  top: 100px;
+  padding: 34px;
+  border-radius: 24px;
+  background: linear-gradient(150deg, #151113, #0b090a);
+  border: 1px solid rgba(255, 24, 56, 0.35);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6), 0 0 40px rgba(255, 24, 56, 0.12);
+}
+.proposal-summary-card small {
+  color: #ff4059;
+  font-size: 8px;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+.proposal-summary-card h3 {
+  font-family: var(--font-space), sans-serif;
+  font-size: 24px;
+  margin: 10px 0 18px;
+}
+.proposal-price-box {
+  padding: 18px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  margin-bottom: 20px;
+}
+.proposal-price-box strong {
+  font-family: var(--font-space), sans-serif;
+  font-size: 34px;
+  color: #fff;
+  display: block;
+}
+.proposal-price-box span {
+  font-size: 11px;
+  color: #94a3b8;
+}
+.proposal-summary-card ul {
+  padding: 0;
+  list-style: none;
+  margin: 0 0 24px;
+  display: grid;
+  gap: 8px;
+}
+.proposal-summary-card ul li {
+  font-size: 10px;
+  color: #cbd5e1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.proposal-summary-card ul li::before {
+  content: "✓";
+  color: #ff4059;
+  font-weight: 900;
+}
+.proposal-summary-card a.proposal-send-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 14px 22px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #ff4059, #bd001c);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 900;
+  text-decoration: none;
+  box-shadow: 0 10px 30px rgba(255, 24, 56, 0.35);
+  transition: transform 0.2s ease;
+}
+.proposal-summary-card a.proposal-send-btn:hover {
+  transform: translateY(-2px);
+}
+
+@media (max-width: 900px) {
+  .sync-ai-sim-grid, .sync-loss-calc-wrap, .proposal-builder-wrap {
+    grid-template-columns: 1fr;
+  }
+  .proposal-options-grid {
+    grid-template-columns: 1fr;
+  }
+}

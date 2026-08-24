@@ -468,6 +468,224 @@ function SyncLossSimulator({ onLead }: { onLead: (context: string) => void }) {
   );
 }
 
+
+function InteractiveAiChatDemo() {
+  const [currentScenario, setCurrentScenario] = useState(0);
+  const [isTyping, setIsTyping] = useState(false);
+  const [customMsg, setCustomMsg] = useState("");
+  const [chatHistory, setChatHistory] = useState([
+    { side: "user", text: "Olá! Gostaria de agendar uma consulta para amanhã." },
+    { side: "ai", text: "Olá! Com certeza. Temos horários disponíveis amanhã às 10h30 e às 15h00. Qual especialidade ou tratamento você busca?" }
+  ]);
+
+  const scenarios = [
+    {
+      title: "Clínica / Saúde",
+      user: "Olá! Gostaria de agendar uma consulta para amanhã.",
+      ai: "Olá! Com certeza. Temos horários disponíveis amanhã às 10h30 e às 15h00. Qual especialidade ou tratamento você busca?"
+    },
+    {
+      title: "Loja de Carros",
+      user: "Vocês têm a BMW 320i em estoque e aceitam carro na troca?",
+      ai: "Temos sim! A BMW 320i M Sport 2024 branca está disponível no showroom. Aceitamos seu seminovo com avaliação justa na hora. Quer simular a entrada agora?"
+    },
+    {
+      title: "Estética Avançada",
+      user: "Qual o valor do protocolo de bioestimulador de colágeno?",
+      ai: "O valor varia conforme a área e número de ampolas. Realizamos uma avaliação facial 3D prévia para definir o plano ideal. Deseja agendar sua avaliação?"
+    },
+    {
+      title: "Advocacia / Jurídico",
+      user: "Preciso de uma orientação confidencial sobre revisão de contrato empresarial.",
+      ai: "Perfeito. Nossos sócios atendem sob sigilo ético absoluto. Vou colher os dados básicos e direcionar para uma videoconferência com o advogado especialista."
+    }
+  ];
+
+  const handleSelectScenario = (index: number) => {
+    setCurrentScenario(index);
+    setIsTyping(true);
+    const sc = scenarios[index];
+    setChatHistory([{ side: "user", text: sc.user }]);
+    setTimeout(() => {
+      setChatHistory([
+        { side: "user", text: sc.user },
+        { side: "ai", text: sc.ai }
+      ]);
+      setIsTyping(false);
+    }, 700);
+  };
+
+  const handleSendCustom = (e: FormEvent) => {
+    e.preventDefault();
+    if (!customMsg.trim()) return;
+    const text = customMsg;
+    setCustomMsg("");
+    setChatHistory(prev => [...prev, { side: "user", text }]);
+    setIsTyping(true);
+    setTimeout(() => {
+      setChatHistory(prev => [
+        ...prev,
+        {
+          side: "ai",
+          text: `Entendido! Esse é exatamente o tipo de pergunta que a IA da Avancini Sync responde e qualifica 24 horas por dia no WhatsApp da sua empresa.`
+        }
+      ]);
+      setIsTyping(false);
+    }, 800);
+  };
+
+  return (
+    <section className="sync-interactive-ai-section" id="simulador-ia">
+      <div className="section-heading" style={{ margin: "0 auto 40px", maxWidth: "1240px" }}>
+        <div>
+          <span className="section-index">SIMULADOR AO VIVO · TESTE AGORA</span>
+          <h2>Veja o Atendente IA<br />respondendo em tempo real.</h2>
+        </div>
+        <p>Clique em um dos cenários abaixo ou digite sua pergunta para ver como a IA da Avancini Sync entende o contexto e conduz o cliente ao fechamento.</p>
+      </div>
+
+      <div className="sync-ai-sim-grid">
+        <div className="sync-ai-sim-copy">
+          <span className="badge"><i /> INTELIGÊNCIA ARTIFICIAL CONVERSACIONAL</span>
+          <h3>Zero respostas robóticas.<br />Linguagem natural 24/7.</h3>
+          <p>O robô não apenas envia menus travados: ele lê o contexto, consulta a base de conhecimento do seu negócio e responde de forma humana e persuasiva.</p>
+          <div className="sync-ai-sim-triggers">
+            {scenarios.map((sc, idx) => (
+              <button
+                type="button"
+                key={sc.title}
+                className={currentScenario === idx ? "active" : ""}
+                onClick={() => handleSelectScenario(idx)}
+              >
+                <span>{sc.title}: "{sc.user.slice(0, 38)}..."</span>
+                <b>Testar ↗</b>
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div className="sync-wa-phone">
+          <div className="sync-wa-phone-top">
+            <div className="sync-wa-avatar">AI</div>
+            <div className="sync-wa-meta">
+              <strong>Atendente Inteligente · Avancini Sync</strong>
+              <small><i /> Ativo agora · Resposta instantânea</small>
+            </div>
+          </div>
+          <div className="sync-wa-chat-body">
+            {chatHistory.map((m, i) => (
+              <div key={i} className={m.side === "user" ? "sync-msg sync-msg-user" : "sync-msg sync-msg-ai"}>
+                {m.side === "ai" && <strong>Avancini Sync IA</strong>}
+                {m.text}
+              </div>
+            ))}
+            {isTyping && (
+              <div className="sync-typing-indicator">
+                <span /><span /><span />
+              </div>
+            )}
+          </div>
+          <form className="sync-wa-footer" onSubmit={handleSendCustom}>
+            <input
+              type="text"
+              placeholder="Digite uma pergunta de teste..."
+              value={customMsg}
+              onChange={(e) => setCustomMsg(e.target.value)}
+            />
+            <button type="submit" aria-label="Enviar mensagem de teste">➤</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function RevenueLossCalculator() {
+  const [dailyLeads, setDailyLeads] = useState(25);
+  const [avgTicket, setAvgTicket] = useState(350);
+  const [delayLevel, setDelayLevel] = useState("2 a 4 horas");
+
+  // Estimativa: Demora de 2h perde ~30% dos leads; demora de 4h+ perde ~45%
+  const lossRate = delayLevel === "Mais de 4 horas" ? 0.45 : delayLevel === "2 a 4 horas" ? 0.30 : 0.15;
+  const lostLeadsMonthly = Math.round(dailyLeads * 30 * lossRate);
+  const lostRevenueMonthly = Math.round(lostLeadsMonthly * (avgTicket * 0.15)); // conversão base 15%
+
+  const leadUrl = whatsappFor(`Olá! Fiz a simulação na calculadora do Avancini Sync. Recebo cerca de ${dailyLeads} contatos/dia e quero parar de perder oportunidades por demora de atendimento.`);
+
+  return (
+    <section className="sync-loss-calc-section" id="calculadora-perda">
+      <div className="sync-loss-calc-wrap">
+        <div className="sync-calc-inputs">
+          <div>
+            <span style={{ color: "#22d3ee", fontSize: "9px", fontWeight: 900, letterSpacing: "1.5px", textTransform: "uppercase" }}>CALCULADORA DE RETORNO (ROI)</span>
+            <h3 style={{ fontFamily: "var(--font-space)", fontSize: "28px", margin: "8px 0 18px" }}>Quanto sua empresa perde por demora de resposta?</h3>
+            <p style={{ color: "#94a3b8", fontSize: "12px", margin: 0 }}>Ajuste os valores da sua operação para ver o impacto financeiro de responder em segundos.</p>
+          </div>
+
+          <div className="sync-calc-field">
+            <label>
+              <span>Contatos recebidos por dia no WhatsApp:</span>
+              <strong>{dailyLeads} contatos/dia</strong>
+            </label>
+            <input
+              type="range"
+              min="5"
+              max="150"
+              step="5"
+              value={dailyLeads}
+              onChange={(e) => setDailyLeads(Number(e.target.value))}
+            />
+          </div>
+
+          <div className="sync-calc-field">
+            <label>
+              <span>Ticket médio do seu produto/serviço:</span>
+              <strong>R$ {avgTicket.toLocaleString("pt-BR")}</strong>
+            </label>
+            <input
+              type="range"
+              min="50"
+              max="3000"
+              step="50"
+              value={avgTicket}
+              onChange={(e) => setAvgTicket(Number(e.target.value))}
+            />
+          </div>
+
+          <div className="sync-calc-field">
+            <label>
+              <span>Tempo médio para responder quando ocupado:</span>
+              <strong>{delayLevel}</strong>
+            </label>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "8px", marginTop: "6px" }}>
+              {["15 a 30 min", "2 a 4 horas", "Mais de 4 horas"].map((lvl) => (
+                <button
+                  type="button"
+                  key={lvl}
+                  className={`proposal-opt-btn ${delayLevel === lvl ? "active" : ""}`}
+                  onClick={() => setDelayLevel(lvl)}
+                  style={{ textAlign: "center", padding: "10px" }}
+                >
+                  {lvl}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div className="sync-calc-result">
+          <small>ESTIMATIVA DE PERDA MENSAL</small>
+          <h4>R$ {lostRevenueMonthly.toLocaleString("pt-BR")}</h4>
+          <p>em oportunidades que esfriam ou fecham com concorrentes enquanto aguardam resposta.</p>
+          <a href={leadUrl} target="_blank" rel="noreferrer">
+            RECUPERAR ESSE FATURAMENTO COM O SYNC <b>↗</b>
+          </a>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export default function AvanciniSyncPage() {
   const [syncFidelityMode, setSyncFidelityMode] = useState<"com-fidelidade" | "sem-fidelidade">("com-fidelidade");
   const [menuOpen, setMenuOpen] = useState(false);
