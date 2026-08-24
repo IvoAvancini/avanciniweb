@@ -651,7 +651,7 @@ export default function AvanciniSyncPage() {
           <div>
             <span className="kicker">🌐 ECOSSISTEMA COMPLETO AVANCINI OS</span>
             <strong>Precisa também de um Site ou Landing Page Profissional?</strong>
-            <p>Contrate o <b>Combo Avancini OS</b>: sua vitrine no ar no Avancini Dash + automação de WhatsApp no Avancini Sync por apenas <b>R$ 249,90/mês</b> (Chatbot) ou <b>R$ 429,90/mês</b> (Atendente com IA).</p>
+            <p>Contrate o <b>Combo Avancini OS</b>: sua vitrine no ar no Avancini Dash + automação de WhatsApp no Avancini Sync por apenas <b>A partir de R$ 249,90/mês</b> (Chatbot) ou <b>A partir de R$ 397,90/mês</b> (Atendente com IA).</p>
           </div>
           <Link href="/dash#investimento" className="cta">Ver Combos com Site ↗</Link>
         </div>

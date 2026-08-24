@@ -176,7 +176,9 @@ const offers = [
   {
     name: "Landing Page Profissional",
     price: "R$ 89,90/mês",
-    deadline: "R$ 0 de taxa de criação · Contrato 12 meses",
+    priceNoFidelity: "R$ 49,90/mês",
+    setupNoFidelity: "R$ 490,00 à vista",
+    deadline: "R$ 0 de taxa de criação · Contrato 6 meses",
     description: "Uma landing criada no padrão Avancini Dash com alta conversão para atrair contatos e agendamentos.",
     includes: [
       "Estratégia, texto persuasivo e design exclusivo",
@@ -188,16 +190,18 @@ const offers = [
     ],
     ideal: "Para serviços, consultores e ofertas diretas",
     cta: "Quero minha Landing Page",
-    message: "Olá! Quero contratar a Landing Page Profissional por R$ 89,90/mês (sem taxa de criação · contrato de 12 meses).",
+    message: "Olá! Quero contratar a Landing Page Profissional por R$ 89,90/mês (sem taxa de criação · contrato de 6 meses).",
     question: "Olá! Tenho uma dúvida sobre a Landing Page Profissional.",
     badge: "MAIS ESCOLHIDO",
     featured: false,
   },
   {
     name: "Site Catálogo / Vitrine",
-    price: "R$ 179,90/mês",
-    deadline: "R$ 0 de taxa de criação · Contrato 12 meses",
-    description: "Estrutura completa com vitrine para empresas que apresentam múltiplos produtos, estoques ou catálogo completo de serviços.",
+    price: "A partir de R$ 179,90/mês",
+    priceNoFidelity: "A partir de R$ 79,90/mês",
+    setupNoFidelity: "A partir de R$ 790,00 à vista",
+    deadline: "R$ 0 de taxa de criação · Contrato 6 meses",
+    description: "Estrutura completa com vitrine para empresas que apresentam múltiplos produtos, estoques ou catálogo de serviços.",
     includes: [
       "Vitrine de produtos/serviços com fotos e especificações",
       "Botão de orçamento ou simulação no WhatsApp em cada item",
@@ -206,15 +210,17 @@ const offers = [
     ],
     ideal: "Para empresas com múltiplos produtos e serviços",
     cta: "Planejar meu Catálogo",
-    message: "Olá! Quero contratar o Site Catálogo / Vitrine por R$ 179,90/mês (contrato de 12 meses).",
+    message: "Olá! Quero contratar o Site Catálogo / Vitrine a partir de R$ 179,90/mês (contrato de 6 meses).",
     question: "Olá! Tenho uma dúvida sobre o Site Catálogo.",
     badge: "CATÁLOGO COMPLETO",
     featured: false,
   },
   {
     name: "Combo Site + Chatbot",
-    price: "R$ 249,90/mês",
-    deadline: "12 meses · Vitrine + WhatsApp Automático",
+    price: "A partir de R$ 249,90/mês",
+    priceNoFidelity: "A partir de R$ 149,90/mês",
+    setupNoFidelity: "A partir de R$ 690,00 à vista",
+    deadline: "6 meses · Vitrine + WhatsApp Automático",
     description: "Landing Page Profissional integrada ao chatbot do Avancini Sync para responder e triar clientes no WhatsApp 24/7.",
     includes: [
       "Landing Page Profissional completa",
@@ -224,15 +230,17 @@ const offers = [
     ],
     ideal: "Para quem quer atrair no site e triar no WhatsApp",
     cta: "Quero o Combo Chatbot",
-    message: "Olá! Quero contratar o Combo Site + Chatbot por R$ 249,90/mês.",
+    message: "Olá! Quero contratar o Combo Site + Chatbot a partir de R$ 249,90/mês.",
     question: "Olá! Tenho uma dúvida sobre o Combo Site + Chatbot.",
     badge: "COMBO ESSENCIAL",
     featured: false,
   },
   {
     name: "Combo Site + Atendente IA",
-    price: "R$ 429,90/mês",
-    deadline: "12 meses · Vitrine + Inteligência Artificial",
+    price: "A partir de R$ 397,90/mês",
+    priceNoFidelity: "A partir de R$ 249,90/mês",
+    setupNoFidelity: "A partir de R$ 990,00 à vista",
+    deadline: "6 meses · Vitrine + Inteligência Artificial",
     description: "A solução de elite da Avancini OS: vitrine de alta conversão integrada ao atendente com IA que entende o cliente e qualifica vendas em linguagem natural.",
     includes: [
       "Site ou Landing Page de alto padrão",
@@ -242,7 +250,7 @@ const offers = [
     ],
     ideal: "Para máxima autoridade e atendimento inteligente 24/7",
     cta: "Quero o Combo com IA",
-    message: "Olá! Quero contratar o Combo Site + Atendente IA por R$ 429,90/mês.",
+    message: "Olá! Quero contratar o Combo Site + Atendente IA a partir de R$ 397,90/mês.",
     question: "Olá! Tenho uma dúvida sobre o Combo com IA.",
     badge: "INTELIGÊNCIA TOTAL",
     featured: true,
@@ -787,6 +795,99 @@ export default function Home() {
         <a href="#investimento"><strong>4 caminhos</strong><span>recorrente ou pagamento<br />único sob medida</span><b>Comparar opções ↗</b></a>
       </section>
 
+      <section className="section projects" id="projetos" aria-labelledby="projects-showcase-title">
+        <div className="section-heading">
+          <div>
+            <span className="section-index">04 — PROJETOS SELECIONADOS</span>
+            <h2 id="projects-showcase-title">
+              Veja o trabalho real.<br />
+              Imagine a sua marca.
+            </h2>
+          </div>
+          <p>
+            Um redesign construído a partir de um site anterior e uma criação iniciada totalmente do zero.
+          </p>
+        </div>
+        <div className="project-list">
+          <article className="project-showcase sandiego">
+            <div className="project-copy">
+              <div className="project-number">01 / SAÚDE & AUTORIDADE</div>
+              <h3>
+                Clínica<br />San Diego
+              </h3>
+              <p>
+                Um redesign para reorganizar especialidades, equipe, horários e agendamento em uma experiência mais clara e acolhedora.
+              </p>
+              <dl className="case-details">
+                <div><dt>PONTO DE PARTIDA</dt><dd>A clínica já possuía um site, usado como referência para a comparação.</dd></div>
+                <div><dt>NOVA PROPOSTA</dt><dd>Estrutura, mensagem e experiência visual completamente redesenhadas.</dd></div>
+                <div><dt>OBJETIVO</dt><dd>Transmitir mais confiança e facilitar o caminho até o agendamento.</dd></div>
+              </dl>
+              <div className="project-tags">
+                <span>Site institucional</span>
+                <span>Experiência mobile</span>
+                <span>Conversão</span>
+              </div>
+              <div className="project-status">
+                <i /> Redesign completo <span>a partir do site anterior</span>
+              </div>
+              <a className="case-link" href="https://clinicasandiego.com.br/" target="_blank" rel="noreferrer">
+                Ver o site anterior para comparar <span>↗</span>
+              </a>
+            </div>
+            <div className="project-screen">
+              <div className="device-browser">
+                <div className="device-top">
+                  <i /><i /><i />
+                  <span>avancini.dash / redesign san diego</span>
+                  <b>ROLE ↓</b>
+                </div>
+                <div className="project-scroll" role="region" tabIndex={0} aria-label="Demonstração rolável completa do site Clínica San Diego">
+                  <SiteImage src="/projects/san-diego-full.png" alt="Captura completa do site da Clínica San Diego" sizes="(max-width: 760px) 92vw, 54vw" quality={82} />
+                </div>
+              </div>
+              <div className="scroll-hint">Role dentro da tela <span>↓</span></div>
+            </div>
+          </article>
+          <article className="project-showcase tapecar">
+            <div className="project-copy">
+              <div className="project-number">02 / AUTOMOTIVO & PRESENÇA LOCAL</div>
+              <h3>Tape Car</h3>
+              <p>
+                Uma presença digital intensa para posicionar a empresa, destacar seus serviços automotivos e aproximar clientes em Eunápolis.
+              </p>
+              <dl className="case-details">
+                <div><dt>OBJETIVO</dt><dd>Traduzir a força local da marca em uma vitrine digital premium.</dd></div>
+                <div><dt>ESTRUTURA</dt><dd>Serviços, processo, localização e contato por WhatsApp.</dd></div>
+                <div><dt>PONTO DE PARTIDA</dt><dd>A Tape Car ainda não possuía um site.</dd></div>
+                <div><dt>ENTREGA</dt><dd>Estrutura e identidade digital criadas completamente do zero.</dd></div>
+              </dl>
+              <div className="project-tags">
+                <span>Site institucional</span>
+                <span>Marca local</span>
+                <span>WhatsApp</span>
+              </div>
+              <div className="project-status">
+                <i /> Criação do zero <span>sem site anterior</span>
+              </div>
+            </div>
+            <div className="project-screen">
+              <div className="device-browser">
+                <div className="device-top">
+                  <i /><i /><i />
+                  <span>avancini.dash / projeto tape car</span>
+                  <b>ROLE ↓</b>
+                </div>
+                <div className="project-scroll" role="region" tabIndex={0} aria-label="Demonstração rolável completa do site Tape Car">
+                  <SiteImage src="/projects/tape-car-full.png" alt="Captura completa do site Tape Car" sizes="(max-width: 760px) 92vw, 54vw" quality={82} />
+                </div>
+              </div>
+              <div className="scroll-hint">Role dentro da tela <span>↓</span></div>
+            </div>
+          </article>
+        </div>
+      </section>
+
       <section className="section web-method" id="metodo">
         <div className="section-heading web-method-heading">
           <div><span className="section-index">METODOLOGIA / 05 PILARES</span><h2>Site bonito chama atenção.<br />Estratégia transforma em cliente.</h2></div>
@@ -977,14 +1078,14 @@ export default function Home() {
               className={fidelityMode === "com-fidelidade" ? "active" : ""}
               onClick={() => setFidelityMode("com-fidelidade")}
             >
-              ✨ Contrato 12 Meses <span className="badge-pill">R$ 0 Criação</span>
+              ✨ Contrato 6 Meses <span className="badge-pill">R$ 0 Criação</span>
             </button>
             <button
               type="button"
               className={fidelityMode === "sem-fidelidade" ? "active" : ""}
               onClick={() => setFidelityMode("sem-fidelidade")}
             >
-              🔓 Sem Fidelidade <span className="badge-pill">Cancele quando quiser</span>
+              🔓 Sem Fidelidade <span className="badge-pill">Criação única + menor mensalidade</span>
             </button>
           </div>
         </div>
@@ -992,21 +1093,16 @@ export default function Home() {
         <div className="offer-grid">
           {offers.map((offer) => {
             const isFidelity = fidelityMode === "com-fidelidade";
-            const badgeText = isFidelity ? (offer.badge ?? "CONTRATO 12 MESES") : "SEM FIDELIDADE";
+            const currentPrice = isFidelity ? offer.price : offer.priceNoFidelity;
+            const badgeText = isFidelity ? (offer.badge ?? "CONTRATO 6 MESES") : "SEM PERMANÊNCIA";
             const deadlineText = isFidelity
               ? offer.deadline
-              : offer.name.includes("Landing")
-                ? "R$ 490 à vista + R$ 89,90/mês · sem permanência"
-                : offer.name.includes("Catálogo")
-                  ? "R$ 790 à vista + R$ 179,90/mês · sem permanência"
-                  : offer.name.includes("Chatbot")
-                    ? "R$ 690 à vista + R$ 249,90/mês · sem permanência"
-                    : "R$ 990 à vista + R$ 429,90/mês · sem permanência";
+              : `Criação: ${offer.setupNoFidelity} · Cancele quando quiser`;
             return (
             <article className={offer.featured ? "offer-card featured" : "offer-card"} key={offer.name}>
               <small>{badgeText}</small>
               <h3>{offer.name}</h3>
-              <strong>{offer.price}</strong>
+              <strong>{currentPrice}</strong>
               <span>{deadlineText}</span>
               <p>{offer.description}</p>
               <em className="offer-ideal">{offer.ideal}</em>
@@ -1041,7 +1137,7 @@ export default function Home() {
             );
           })}
         </div>
-        <p className="investment-note">Todos os planos contam com a mesma qualidade de estratégia, texto persuasivo, design exclusivo e desenvolvimento de alta performance. Sem taxa de criação no contrato de 12 meses. O registro do domínio próprio .com.br possui taxa anual de R$ 49,90 no 1º mês (sujeito à consulta prévia de disponibilidade no Registro.br).</p>
+        <p className="investment-note">Todos os planos contam com a mesma qualidade de estratégia, texto persuasivo, design exclusivo e desenvolvimento de alta performance. Sem taxa de criação no contrato de 6 meses. O registro do domínio próprio .com.br possui taxa anual de R$ 49,90 no 1º mês (sujeito à consulta prévia de disponibilidade no Registro.br).</p>
       </section>
 
       <section className="section web-faq" id="duvidas">

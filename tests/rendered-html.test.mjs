@@ -71,7 +71,7 @@ test("renderiza a Avancini Sync com oferta mensal e demonstrações", async () =
   assert.match(html, /Seu cliente chamou/i);
   assert.match(html, /R\$ 197,90/i);
   assert.match(html, /R\$ 397,90/i);
-  assert.match(html, /R\$ 249,90/i);
+  assert.match(html, /249,90/i);
   assert.match(html, /Sem taxa de implementação/i);
   assert.match(html, /permanência mínima de 6 meses/i);
   assert.match(html, /melhor primeiro passo para este cenário/i);
@@ -94,7 +94,7 @@ test("mantém a página de planos alinhada aos valores e à marca Dash", async (
 
   assert.match(html, /Landing Page/i);
   assert.match(html, /R\$ 89,90/i);
-  assert.match(html, /R\$ 179,90/i);
+  assert.match(html, /179,90/i);
   assert.match(html, /Combo Site \+ Chatbot|Combo Site \+ Atendente IA/i);
   assert.match(html, /R\$ 249,90/i);
   assert.doesNotMatch(html, /R\$ 97\/mês|sub-sticky/i);

@@ -10,8 +10,10 @@ const plans = [
     id: "landing-page",
     name: "Landing Page Profissional",
     price: "89,90",
+    priceNoFidelity: "49,90",
+    setupNoFidelity: "R$ 490,00",
     suffix: "/mês",
-    contract: "R$ 0 de taxa de criação · Contrato de 12 meses",
+    contract: "R$ 0 de taxa de criação · Contrato de 6 meses",
     ideal: "Para serviços, consultores e ofertas diretas",
     description: "Página de alta conversão criada no padrão Avancini Dash para atrair contatos, clientes e agendamentos.",
     features: [
@@ -28,9 +30,11 @@ const plans = [
   {
     id: "site-catalogo",
     name: "Site Catálogo / Vitrine",
-    price: "179,90",
+    price: "A partir de 179,90",
+    priceNoFidelity: "A partir de 79,90",
+    setupNoFidelity: "A partir de R$ 790,00",
     suffix: "/mês",
-    contract: "R$ 0 de taxa de criação · Contrato de 12 meses",
+    contract: "R$ 0 de taxa de criação · Contrato de 6 meses",
     ideal: "Para empresas com múltiplos produtos ou catálogo de serviços",
     description: "Estrutura completa com vitrine de produtos, fotos, detalhes e orçamentos diretos no WhatsApp.",
     features: [
@@ -46,9 +50,11 @@ const plans = [
   {
     id: "combo-chatbot",
     name: "Combo Site + Chatbot",
-    price: "249,90",
+    price: "A partir de 249,90",
+    priceNoFidelity: "A partir de 149,90",
+    setupNoFidelity: "A partir de R$ 690,00",
     suffix: "/mês",
-    contract: "12 meses · Vitrine + WhatsApp Automático",
+    contract: "6 meses · Vitrine + WhatsApp Automático",
     ideal: "Para quem quer atrair no site e triar no WhatsApp 24/7",
     description: "Sua landing page profissional integrada ao fluxo de chatbot inteligente do Avancini Sync no WhatsApp.",
     features: [
@@ -64,9 +70,11 @@ const plans = [
   {
     id: "combo-ia",
     name: "Combo Site + Atendente IA",
-    price: "429,90",
+    price: "A partir de 397,90",
+    priceNoFidelity: "A partir de 249,90",
+    setupNoFidelity: "A partir de R$ 990,00",
     suffix: "/mês",
-    contract: "12 meses · Vitrine + Inteligência Artificial 24/7",
+    contract: "6 meses · Vitrine + Inteligência Artificial 24/7",
     ideal: "Para empresas que buscam máxima autoridade e atendimento com IA",
     description: "Sua vitrine de alta conversão integrada ao atendente com IA treinado na sua base para qualificar oportunidades em tempo real.",
     features: [
@@ -208,10 +216,10 @@ export default function SubscriptionPage() {
             <button type="button" className="button button-ghost" onClick={chooseInstitutional}>Quero um site completo</button>
           </div>
           <div className="sub-price-line">
-            <div><small>LANDING PAGE</small><strong>R$ 89,90</strong><em>por mês</em><span>R$ 0 criação · 12 meses</span></div>
-            <div><small>CATÁLOGO / VITRINE</small><strong>R$ 179,90</strong><em>por mês</em><span>múltiplos produtos e serviços</span></div>
-            <div><small>COMBO CHATBOT</small><strong>R$ 249,90</strong><em>por mês</em><span>site + WhatsApp automático</span></div>
-            <div><small>COMBO IA</small><strong>R$ 429,90</strong><em>por mês</em><span>site + Atendente IA 24/7</span></div>
+            <div><small>LANDING PAGE</small><strong>R$ 89,90</strong><em>por mês</em><span>R$ 0 criação · 6 meses</span></div>
+            <div><small>CATÁLOGO / VITRINE</small><strong>A partir de R$ 179,90</strong><em>por mês</em><span>múltiplos produtos e serviços</span></div>
+            <div><small>COMBO CHATBOT</small><strong>A partir de R$ 249,90</strong><em>por mês</em><span>site + WhatsApp automático</span></div>
+            <div><small>COMBO IA</small><strong>A partir de R$ 397,90</strong><em>por mês</em><span>site + Atendente IA 24/7</span></div>
           </div>
           <div className="sub-microproof"><span>Mesma qualidade em todas as opções</span><span>Hospedagem e SSL inclusos</span><span>Domínio próprio ou endereço Avancini</span></div>
         </div>
@@ -283,14 +291,14 @@ export default function SubscriptionPage() {
               className={fidelityMode === "com-fidelidade" ? "active" : ""}
               onClick={() => setFidelityMode("com-fidelidade")}
             >
-              ✨ Contrato 12 Meses <span className="badge-pill">R$ 0 Criação</span>
+              ✨ Contrato 6 Meses <span className="badge-pill">R$ 0 Criação</span>
             </button>
             <button
               type="button"
               className={fidelityMode === "sem-fidelidade" ? "active" : ""}
               onClick={() => setFidelityMode("sem-fidelidade")}
             >
-              🔓 Sem Fidelidade <span className="badge-pill">Cancele quando quiser</span>
+              🔓 Sem Fidelidade <span className="badge-pill">Criação única + menor mensalidade</span>
             </button>
           </div>
         </div>
@@ -298,23 +306,18 @@ export default function SubscriptionPage() {
         <div className="sub-plan-grid">
           {plans.map((item, index) => {
             const isFidelity = fidelityMode === "com-fidelidade";
+            const currentPrice = isFidelity ? item.price : item.priceNoFidelity;
             const contractText = isFidelity
               ? item.contract
-              : item.name.includes("Landing")
-                ? "Taxa única de criação: R$ 490 à vista · Sem permanência"
-                : item.name.includes("Catálogo")
-                  ? "Taxa única de criação: R$ 790 à vista · Sem permanência"
-                  : item.name.includes("Chatbot")
-                    ? "Taxa única de criação: R$ 690 à vista · Sem permanência"
-                    : "Taxa única de criação: R$ 990 à vista · Sem permanência";
+              : `Criação única: ${item.setupNoFidelity} à vista · Sem permanência`;
             return (
             <article className={item.featured ? "sub-plan featured" : "sub-plan"} id={`plano-${item.id}`} key={item.id}>
-              {item.featured && <small className="sub-popular">{isFidelity ? "CONTRATO 12 MESES" : "SEM FIDELIDADE"}</small>}
+              {item.featured && <small className="sub-popular">{isFidelity ? "CONTRATO 6 MESES" : "SEM PERMANÊNCIA"}</small>}
               <span className="sub-plan-code">0{index + 1} / PLANO ATIVO</span>
               <em className="sub-plan-ideal">{item.ideal}</em>
               <h3>{item.name}</h3>
               <p>{item.description}</p>
-              <div className="sub-plan-price"><sup>R$</sup><strong>{item.price}</strong><span>{item.suffix}</span></div>
+              <div className="sub-plan-price"><sup>R$</sup><strong>{currentPrice}</strong><span>{item.suffix}</span></div>
               <small className="sub-contract">{contractText}</small>
               <ul>{item.features.map((feature) => <li key={feature}>{feature}</li>)}</ul>
               <div className="sub-plan-actions">
@@ -370,7 +373,7 @@ export default function SubscriptionPage() {
         </div>
         <div className="sub-choice-grid">
           <article>
-            <span>CONTRATO 12 MESES · ENTRADA R$ 0</span><h3>Assinatura com fidelidade</h3>
+            <span>CONTRATO 6 MESES · ENTRADA R$ 0</span><h3>Assinatura com fidelidade</h3>
             <p>Você não paga nada pela taxa de criação do site. Apenas a mensalidade a partir de R$ 89,90/mês com hospedagem, SSL, suporte e manutenção contínua inclusos.</p>
             <ul><li>Taxa de criação: R$ 0</li><li>Hospedagem e SSL de alta velocidade inclusos</li><li>1 ajuste/atualização mensal gratuita</li><li>Domínio próprio .com.br ou endereço Avancini</li></ul>
             <a href="#planos">Ver os planos anuais <b>↗</b></a>
