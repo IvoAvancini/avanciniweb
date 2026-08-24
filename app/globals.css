@@ -2392,7 +2392,7 @@ body:has(.web-page) .page-progress{background:linear-gradient(90deg,#43c85d,#a9f
    ========================================================================== */
 .dash-comparison-section {
   padding: 100px 5vw;
-  background: radial-gradient(circle at 50% 0%, rgba(255, 24, 56, 0.1), transparent 40%), #070707;
+  background: radial-gradient(circle at 50% 0%, rgba(102, 238, 104, 0.1), transparent 42%), #050807;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 .dash-comparison-slider-wrap {
@@ -2411,6 +2411,9 @@ body:has(.web-page) .page-progress{background:linear-gradient(90deg,#43c85d,#a9f
   height: 480px;
   overflow: hidden;
 }
+.dash-compare-after,.dash-compare-before-canvas{display:grid;grid-template-rows:auto 1fr auto;padding:34px 42px;background:radial-gradient(circle at 78% 42%,rgba(102,238,104,.22),transparent 32%),linear-gradient(135deg,#071a13,#03100b);color:#f7fff8}
+.dash-compare-after nav,.dash-compare-before-canvas nav{display:flex;align-items:center;gap:24px;font-size:10px}.dash-compare-after nav b{margin-right:auto;font-size:18px;letter-spacing:.16em}.dash-compare-after nav button,.dash-compare-after>div button{border:0;border-radius:999px;background:#65ed68;color:#06130a;font-size:9px;font-weight:900;padding:12px 16px}.dash-compare-after>div{align-self:center;max-width:570px}.dash-compare-after>div small{color:#65ed68;font-size:9px;font-weight:900;letter-spacing:.16em}.dash-compare-after h3{margin:12px 0 14px;font:700 clamp(42px,5vw,68px)/.94 var(--font-space);letter-spacing:-.055em}.dash-compare-after p{max-width:430px;color:#a7b9b0;font-size:14px;line-height:1.6}.dash-compare-after aside,.dash-compare-before-canvas aside{display:flex;gap:10px}.dash-compare-after aside span,.dash-compare-after aside strong{padding:9px 13px;border:1px solid rgba(255,255,255,.12);border-radius:999px;font-size:8px}.dash-compare-after aside strong{border-color:#65ed68;color:#65ed68}
+.dash-compare-before-canvas{position:absolute;width:1040px;height:480px;background:#d8d8d4;color:#555}.dash-compare-before-canvas nav{border-bottom:1px solid #aaa;padding-bottom:16px}.dash-compare-before-canvas nav b{margin-right:auto;color:#333}.dash-compare-before-canvas>div{align-self:center;max-width:480px}.dash-compare-before-canvas h3{margin:0 0 15px;font:600 39px/1.05 Arial,sans-serif;color:#4e4e4e}.dash-compare-before-canvas p{font:14px/1.7 Arial,sans-serif;color:#6d6d6d}.dash-compare-before-canvas button{padding:9px 13px;border:1px solid #777;background:#c6c6c3;color:#555}.dash-compare-before-canvas aside span{padding:8px 11px;border:1px solid #aaa;border-radius:4px;font-size:8px}
 .dash-compare-side img {
   width: 100%;
   height: 100%;
@@ -2424,8 +2427,9 @@ body:has(.web-page) .page-progress{background:linear-gradient(90deg,#43c85d,#a9f
   bottom: 0;
   overflow: hidden;
   z-index: 2;
-  border-right: 2px solid #fff;
+  border-right: 2px solid #65ed68;
 }
+.dash-compare-range{position:absolute;z-index:5;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:ew-resize}
 .dash-compare-handle {
   position: absolute;
   top: 50%;
@@ -2462,9 +2466,9 @@ body:has(.web-page) .page-progress{background:linear-gradient(90deg,#43c85d,#a9f
 }
 .dash-tag-after {
   right: 20px;
-  background: rgba(255, 24, 56, 0.9);
-  color: #fff;
-  box-shadow: 0 0 16px rgba(255, 24, 56, 0.5);
+  background: #65ed68;
+  color: #06130a;
+  box-shadow: 0 0 20px rgba(101, 237, 104, 0.34);
 }
 
 /* ==========================================================================
@@ -2472,7 +2476,7 @@ body:has(.web-page) .page-progress{background:linear-gradient(90deg,#43c85d,#a9f
    ========================================================================== */
 .proposal-builder-section {
   padding: 100px 5vw;
-  background: #080708;
+  background: radial-gradient(circle at 84% 30%,rgba(101,237,104,.08),transparent 35%),#050807;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 .proposal-builder-wrap {
@@ -2495,7 +2499,7 @@ body:has(.web-page) .page-progress{background:linear-gradient(90deg,#43c85d,#a9f
   border-radius: 18px;
 }
 .proposal-step-group span.step-num {
-  color: #ff4059;
+  color: #65ed68;
   font-size: 8px;
   font-weight: 900;
   letter-spacing: 1.5px;
@@ -2525,13 +2529,14 @@ body:has(.web-page) .page-progress{background:linear-gradient(90deg,#43c85d,#a9f
   cursor: pointer;
   transition: all 0.2s ease;
 }
+.proposal-opt-btn small{display:block;margin-top:4px;color:#8892a0;font-size:8px;line-height:1.45}
 .proposal-opt-btn:hover {
   border-color: rgba(255, 255, 255, 0.3);
   color: #fff;
 }
 .proposal-opt-btn.active {
-  background: rgba(255, 24, 56, 0.14);
-  border-color: #ff1838;
+  background: rgba(101, 237, 104, 0.12);
+  border-color: #65ed68;
   color: #fff;
   font-weight: 800;
 }
@@ -2540,12 +2545,12 @@ body:has(.web-page) .page-progress{background:linear-gradient(90deg,#43c85d,#a9f
   top: 100px;
   padding: 34px;
   border-radius: 24px;
-  background: linear-gradient(150deg, #151113, #0b090a);
-  border: 1px solid rgba(255, 24, 56, 0.35);
-  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6), 0 0 40px rgba(255, 24, 56, 0.12);
+  background: linear-gradient(150deg, #0d1d16, #050906);
+  border: 1px solid rgba(101, 237, 104, 0.28);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6), 0 0 40px rgba(101, 237, 104, 0.1);
 }
 .proposal-summary-card small {
-  color: #ff4059;
+  color: #65ed68;
   font-size: 8px;
   font-weight: 900;
   letter-spacing: 1.5px;
@@ -2588,7 +2593,7 @@ body:has(.web-page) .page-progress{background:linear-gradient(90deg,#43c85d,#a9f
 }
 .proposal-summary-card ul li::before {
   content: "✓";
-  color: #ff4059;
+  color: #65ed68;
   font-weight: 900;
 }
 .proposal-summary-card a.proposal-send-btn {
@@ -2599,17 +2604,22 @@ body:has(.web-page) .page-progress{background:linear-gradient(90deg,#43c85d,#a9f
   width: 100%;
   padding: 14px 22px;
   border-radius: 12px;
-  background: linear-gradient(135deg, #ff4059, #bd001c);
-  color: #fff;
+  background: linear-gradient(135deg, #74f06e, #35bf5b);
+  color: #06130a;
   font-size: 11px;
   font-weight: 900;
   text-decoration: none;
-  box-shadow: 0 10px 30px rgba(255, 24, 56, 0.35);
+  box-shadow: 0 10px 30px rgba(101, 237, 104, 0.24);
   transition: transform 0.2s ease;
 }
 .proposal-summary-card a.proposal-send-btn:hover {
   transform: translateY(-2px);
 }
+
+.web-closing-cta{margin:0;padding:110px 6vw;text-align:center;background:radial-gradient(circle at 50% 100%,rgba(101,237,104,.13),transparent 38%),#050807;color:#f7fff8}.web-closing-cta>span{color:#65ed68;font-size:9px;font-weight:900;letter-spacing:.18em}.web-closing-cta h2{max-width:980px;margin:18px auto;font:650 clamp(42px,5.5vw,78px)/.97 var(--font-space);letter-spacing:-.055em}.web-closing-cta h2 em{color:#65ed68;font-style:normal}.web-closing-cta p{max-width:680px;margin:0 auto 28px;color:#9eadA6;font-size:14px;line-height:1.7}.web-closing-cta button{padding:16px 22px;border:0;border-radius:999px;background:#65ed68;color:#06130a;font-size:9px;font-weight:900;cursor:pointer;box-shadow:0 12px 35px rgba(101,237,104,.2);transition:transform .2s ease,box-shadow .2s ease}.web-closing-cta button:hover{transform:translateY(-3px);box-shadow:0 18px 45px rgba(101,237,104,.3)}
+
+.oshub-symbol-stage .avancini-a-large{width:150px;height:auto}
+.sync-page .sync-header,.sync-page .sync-header.scrolled{background:#030a16}
 
 @media (max-width: 900px) {
   .sync-ai-sim-grid, .sync-loss-calc-wrap, .proposal-builder-wrap {
@@ -2619,3 +2629,4 @@ body:has(.web-page) .page-progress{background:linear-gradient(90deg,#43c85d,#a9f
     grid-template-columns: 1fr;
   }
 }
+@media(max-width:600px){.dash-comparison-section,.proposal-builder-section{padding:76px 18px}.dash-compare-side,.dash-compare-before-canvas{height:390px}.dash-compare-after,.dash-compare-before-canvas{padding:30px 22px}.dash-compare-after nav span,.dash-compare-after nav button{display:none}.dash-compare-after h3{font-size:42px}.dash-compare-before-canvas{width:760px}.web-closing-cta{padding:90px 20px}.web-closing-cta h2{font-size:43px}.oshub-symbol-stage .avancini-a-large{width:104px}}

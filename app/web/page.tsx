@@ -19,6 +19,8 @@ const imageDimensions = {
   "/concepts/marina-realty.webp": { width: 1536, height: 1024 },
   "/projects/san-diego-full.png": { width: 1264, height: 6720 },
   "/projects/tape-car-full.png": { width: 1264, height: 5388 },
+  "/projects/san-diego-preview.webp": { width: 1400, height: 900 },
+  "/projects/tape-car-preview.webp": { width: 1400, height: 900 },
 } as const;
 
 type SiteImageProps = Omit<ImageProps, "src" | "width" | "height"> & {
@@ -36,10 +38,10 @@ const portfolioRows = [
   [
     { name: "Apex Motors", kind: "CONCEITO FICTÍCIO · VEÍCULOS", image: "/concepts/apex-cars.jpg", view: "cars", className: "web-port-cars", action: "ESTOQUE · TROCA · FINANCIAMENTO" },
     { name: "Torque Lab", kind: "CONCEITO FICTÍCIO · OFICINA MECÂNICA", image: "/concepts/torque-mechanic.webp", view: "mechanic", className: "web-port-torque", action: "DIAGNÓSTICO · OS · APROVAÇÃO" },
-    { name: "Clínica San Diego", kind: "PROJETO APLICADO · REDESIGN", image: "/projects/san-diego.jpg", view: "sandiego", className: "web-port-san", action: "SERVIÇOS · CONFIANÇA · CONTATO" },
+    { name: "Clínica San Diego", kind: "PROJETO APLICADO · REDESIGN", image: "/projects/san-diego-preview.webp", view: "sandiego", className: "web-port-san", action: "SERVIÇOS · CONFIANÇA · CONTATO" },
     { name: "Nexo Odonto", kind: "CONCEITO FICTÍCIO · ODONTOLOGIA", image: "/concepts/nexo-dental.webp", view: "dentistry", className: "web-port-dental", action: "TRATAMENTOS · CONFIANÇA · AGENDA" },
     { name: "Lumina", kind: "CONCEITO FICTÍCIO · ESTÉTICA", image: "/concepts/lumina-clinic.jpg", view: "aesthetics", className: "web-port-lumina", action: "PROTOCOLOS · AVALIAÇÃO · AGENDA" },
-    { name: "Tape Car", kind: "PROJETO APLICADO · ESTÉTICA AUTOMOTIVA", image: "/projects/tape-car.png", view: "tapecar", className: "web-port-tape", action: "PROTEÇÃO · ESTÉTICA · ORÇAMENTO" },
+    { name: "Tape Car", kind: "PROJETO APLICADO · ESTÉTICA AUTOMOTIVA", image: "/projects/tape-car-preview.webp", view: "tapecar", className: "web-port-tape", action: "PROTEÇÃO · ESTÉTICA · ORÇAMENTO" },
   ],
   [
     { name: "Noma", kind: "CONCEITO FICTÍCIO · MODA", image: "/concepts/noma-fashion.jpg", view: "fashion", className: "web-port-noma", action: "COLEÇÃO · TAMANHOS · COMPRA" },
@@ -177,7 +179,7 @@ const offers = [
     name: "Landing Page Profissional",
     price: "R$ 89,90/mês",
     priceNoFidelity: "R$ 49,90/mês",
-    setupNoFidelity: "R$ 490,00 à vista",
+    setupNoFidelity: "R$ 399,90 à vista",
     deadline: "R$ 0 de taxa de criação · Contrato 6 meses",
     description: "Uma landing criada no padrão Avancini Dash com alta conversão para atrair contatos e agendamentos.",
     includes: [
@@ -196,148 +198,66 @@ const offers = [
     featured: false,
   },
   {
-    name: "Site Catálogo / Vitrine",
-    price: "A partir de R$ 179,90/mês",
-    priceNoFidelity: "A partir de R$ 79,90/mês",
-    setupNoFidelity: "A partir de R$ 790,00 à vista",
+    name: "Site Institucional",
+    price: "A partir de R$ 149,90/mês",
+    priceNoFidelity: "A partir de R$ 69,90/mês",
+    setupNoFidelity: "A partir de R$ 599,90 à vista",
     deadline: "R$ 0 de taxa de criação · Contrato 6 meses",
-    description: "Estrutura completa com vitrine para empresas que apresentam múltiplos produtos, estoques ou catálogo de serviços.",
+    description: "Uma presença completa para apresentar a empresa, organizar serviços e transmitir autoridade antes da conversa.",
     includes: [
-      "Vitrine de produtos/serviços com fotos e especificações",
-      "Botão de orçamento ou simulação no WhatsApp em cada item",
+      "Estrutura institucional com páginas e navegação",
+      "Serviços, diferenciais, contatos e chamadas para ação",
       "Opção de .com.br próprio (+ R$ 49,90 no 1º mês sob consulta de disponibilidade)",
       "Hospedagem de alta velocidade, SSL e suporte contínuo",
     ],
-    ideal: "Para empresas com múltiplos produtos e serviços",
+    ideal: "Para empresas que precisam apresentar sua estrutura com clareza",
+    cta: "Planejar meu Site",
+    message: "Olá! Quero conversar sobre um Site Institucional da Avancini Dash.",
+    question: "Olá! Tenho uma dúvida sobre o Site Institucional.",
+    badge: "PRESENÇA COMPLETA",
+    featured: false,
+  },
+  {
+    name: "Site Catálogo / Vitrine",
+    price: "A partir de R$ 179,90/mês",
+    priceNoFidelity: "A partir de R$ 89,90/mês",
+    setupNoFidelity: "A partir de R$ 790,00 à vista",
+    deadline: "R$ 0 de taxa de criação · Contrato 6 meses",
+    description: "Estrutura completa para apresentar produtos, estoques ou um catálogo amplo de serviços sem parecer uma lista genérica.",
+    includes: [
+      "Vitrine de produtos ou serviços com fotos e detalhes",
+      "Botão de orçamento no WhatsApp em cada item",
+      "Filtros e organização conforme o volume do catálogo",
+      "Hospedagem, SSL, suporte e 1 ajuste mensal",
+    ],
+    ideal: "Para quem precisa mostrar variedade e facilitar pedidos de orçamento",
     cta: "Planejar meu Catálogo",
-    message: "Olá! Quero contratar o Site Catálogo / Vitrine a partir de R$ 179,90/mês (contrato de 6 meses).",
-    question: "Olá! Tenho uma dúvida sobre o Site Catálogo.",
+    message: "Olá! Quero conversar sobre um Site Catálogo / Vitrine da Avancini Dash.",
+    question: "Olá! Tenho uma dúvida sobre o Site Catálogo / Vitrine.",
     badge: "CATÁLOGO COMPLETO",
     featured: false,
   },
   {
-    name: "Combo Site + Chatbot",
-    price: "A partir de R$ 249,90/mês",
-    priceNoFidelity: "A partir de R$ 149,90/mês",
-    setupNoFidelity: "A partir de R$ 690,00 à vista",
-    deadline: "6 meses · Vitrine + WhatsApp Automático",
-    description: "Landing Page Profissional integrada ao chatbot do Avancini Sync para responder e triar clientes no WhatsApp 24/7.",
+    name: "Projeto Exclusivo",
+    price: "Sob orçamento",
+    priceNoFidelity: "Sob orçamento",
+    setupNoFidelity: "Proposta personalizada",
+    deadline: "Escopo, prazo e contratação definidos no briefing",
+    description: "Uma estrutura desenhada para a realidade da empresa quando o projeto não cabe em um formato pronto.",
     includes: [
-      "Landing Page Profissional completa",
-      "Chatbot no WhatsApp com triagem e respostas 24/7",
-      "Respostas automáticas e direcionamento de leads",
-      "Hospedagem, suporte e 1 ajuste mensal no site e no bot",
+      "Estratégia e arquitetura totalmente sob medida",
+      "Recursos, integrações e jornadas próprias",
+      "Proposta compatível com prioridade e orçamento",
+      "Pagamento recorrente ou único conforme o projeto",
     ],
-    ideal: "Para quem quer atrair no site e triar no WhatsApp",
-    cta: "Quero o Combo Chatbot",
-    message: "Olá! Quero contratar o Combo Site + Chatbot a partir de R$ 249,90/mês.",
-    question: "Olá! Tenho uma dúvida sobre o Combo Site + Chatbot.",
-    badge: "COMBO ESSENCIAL",
-    featured: false,
-  },
-  {
-    name: "Combo Site + Atendente IA",
-    price: "A partir de R$ 397,90/mês",
-    priceNoFidelity: "A partir de R$ 249,90/mês",
-    setupNoFidelity: "A partir de R$ 990,00 à vista",
-    deadline: "6 meses · Vitrine + Inteligência Artificial",
-    description: "A solução de elite da Avancini OS: vitrine de alta conversão integrada ao atendente com IA que entende o cliente e qualifica vendas em linguagem natural.",
-    includes: [
-      "Site ou Landing Page de alto padrão",
-      "Atendente IA treinado no WhatsApp e Instagram",
-      "Conversas em linguagem natural e qualificação ativa",
-      "Hospedagem, suporte prioritário e evolução contínua",
-    ],
-    ideal: "Para máxima autoridade e atendimento inteligente 24/7",
-    cta: "Quero o Combo com IA",
-    message: "Olá! Quero contratar o Combo Site + Atendente IA a partir de R$ 397,90/mês.",
-    question: "Olá! Tenho uma dúvida sobre o Combo com IA.",
-    badge: "INTELIGÊNCIA TOTAL",
+    ideal: "Para operações que precisam de algo além de uma estrutura padrão",
+    cta: "Montar meu Projeto",
+    message: "Olá! Quero montar um Projeto Exclusivo com a Avancini Dash.",
+    question: "Olá! Tenho uma dúvida sobre o Projeto Exclusivo.",
+    badge: "SOB MEDIDA",
     featured: true,
   },
 ] as const;
-
-type ContractModel = "Assinatura mensal" | "Pagamento único" | "Quero entender as duas opções";
-
-const briefingOptions: Record<
-  ContractModel,
-  readonly { project: string; investments: readonly string[] }[]
-> = {
-  "Assinatura mensal": [
-    {
-      project: "Landing Pro — domínio próprio",
-      investments: ["R$ 399,90 de implantação + R$ 49,90/mês"],
-    },
-    {
-      project: "Landing Start — sem entrada",
-      investments: ["R$ 89,90/mês — endereço Avancini · permanência de 6 meses"],
-    },
-    {
-      project: "Site institucional — implantação personalizada",
-      investments: ["A partir de R$ 599,90 + hospedagem e suporte a partir de R$ 79,90/mês"],
-    },
-    {
-      project: "Projeto sob medida — catálogo, loja ou função especial",
-      investments: ["Quero uma proposta compatível com a realidade da empresa"],
-    },
-    {
-      project: "Ainda não sei qual plano escolher",
-      investments: [
-        "Quero uma recomendação entre os planos",
-        "Quero começar sem entrada",
-        "Quero usar domínio próprio",
-      ],
-    },
-  ],
-  "Pagamento único": [
-    {
-      project: "Landing de Conversão — pagamento único",
-      investments: ["Solicitar orçamento para uma landing"],
-    },
-    {
-      project: "Site institucional — pagamento único",
-      investments: ["Solicitar orçamento para um site institucional"],
-    },
-    {
-      project: "Projeto Sob Medida — catálogo, loja ou função especial",
-      investments: ["Solicitar orçamento personalizado"],
-    },
-    {
-      project: "Ainda não sei qual estrutura preciso",
-      investments: ["Quero uma recomendação e um orçamento"],
-    },
-  ],
-  "Quero entender as duas opções": [
-    {
-      project: "Landing de Conversão",
-      investments: ["Comparar mensalidade e pagamento único"],
-    },
-    {
-      project: "Site institucional",
-      investments: ["Comparar mensalidade e pagamento único"],
-    },
-    {
-      project: "Projeto mais completo ou exclusivo",
-      investments: ["Entender qual contratação faz mais sentido"],
-    },
-    {
-      project: "Ainda não sei",
-      investments: ["Quero receber uma recomendação"],
-    },
-  ],
-};
-
-const contractModelHelp: Record<ContractModel, string> = {
-  "Assinatura mensal": "Criação profissional com hospedagem, SSL, suporte e continuidade inclusos.",
-  "Pagamento único": "Você paga uma vez pelo projeto, sem mensalidade Avancini. Domínio, hospedagem e manutenção ficam sob sua responsabilidade ou são contratados à parte.",
-  "Quero entender as duas opções": "Você recebe uma comparação clara para decidir sem compromisso.",
-};
-
-const timelineOptionsFor = (project: string) => {
-  if (project.includes("Landing")) return ["Em até 7 dias", "Em até 15 dias", "Quero alinhar o prazo"] as const;
-  if (project.toLocaleLowerCase("pt-BR").includes("site institucional")) return ["Em até 15 dias", "Em até 30 dias", "Quero alinhar o prazo"] as const;
-  return ["Em até 30 dias", "A combinar conforme o escopo"] as const;
-};
 
 function PortfolioConceptPage({ type }: { type: PortfolioSpotlightType }) {
   if (type === "sandiego") return (
@@ -436,42 +356,32 @@ function DashBeforeAfterSlider() {
     <section className="dash-comparison-section" id="antes-depois">
       <div className="section-heading" style={{ margin: "0 auto 40px", maxWidth: "1240px" }}>
         <div>
-          <span className="section-index">TRANSFORMAÇÃO REAL · ANTES VS DEPOIS</span>
+          <span className="section-index">ANTES E DEPOIS · EXPERIÊNCIA DIGITAL</span>
           <h2>A diferença entre um site comum<br />e o padrão Avancini Dash.</h2>
         </div>
         <p>Arraste o divisor para comparar o impacto visual, a clareza da proposta e a autoridade imediata percebida pelo visitante.</p>
       </div>
 
-      <div
-        className="dash-comparison-slider-wrap"
-        onMouseMove={(e) => {
-          const rect = e.currentTarget.getBoundingClientRect();
-          const x = Math.max(0, Math.min(e.clientX - rect.left, rect.width));
-          setSliderPos((x / rect.width) * 100);
-        }}
-        onTouchMove={(e) => {
-          if (e.touches.length === 0) return;
-          const rect = e.currentTarget.getBoundingClientRect();
-          const x = Math.max(0, Math.min(e.touches[0].clientX - rect.left, rect.width));
-          setSliderPos((x / rect.width) * 100);
-        }}
-      >
-        <div className="dash-compare-tag dash-tag-before">ANTES · SITE ANTERIOR</div>
-        <div className="dash-compare-tag dash-tag-after">DEPOIS · PADRÃO AVANCINI DASH</div>
+      <div className="dash-comparison-slider-wrap">
+        <div className="dash-compare-tag dash-tag-before">SEM DIREÇÃO</div>
+        <div className="dash-compare-tag dash-tag-after">COM ESTRATÉGIA DASH</div>
 
-        <div className="dash-compare-side">
-          <img src="/projects/san-diego.jpg" alt="Padrão Avancini Dash" />
+        <div className="dash-compare-side dash-compare-after" aria-hidden="true">
+          <nav><b>NORTE.</b><span>Serviços</span><span>Projetos</span><button>Solicitar proposta</button></nav>
+          <div><small>PRESENÇA QUE POSICIONA</small><h3>Sua empresa pronta<br />para ser escolhida.</h3><p>Clareza, autoridade e um caminho direto até o contato.</p><button>CONHECER A SOLUÇÃO ↗</button></div>
+          <aside><strong>+ presença</strong><span>mensagem clara</span><span>experiência mobile</span></aside>
         </div>
 
-        <div className="dash-compare-before" style={{ width: `${sliderPos}%` }}>
-          <div style={{ width: "1040px", height: "480px", position: "relative" }}>
-            <img src="/projects/san-diego.jpg" alt="Site Anterior" style={{ filter: "grayscale(100%) contrast(85%) brightness(60%) blur(1px)" }} />
+        <div className="dash-compare-before" style={{ width: `${sliderPos}%` }} aria-hidden="true">
+          <div className="dash-compare-before-canvas">
+            <nav><b>EMPRESA</b><span>Início | Sobre | Serviços | Contato</span></nav>
+            <div><h3>Bem-vindo ao nosso site</h3><p>Somos uma empresa comprometida com qualidade. Entre em contato para saber mais sobre nossos serviços.</p><button>Saiba mais</button></div>
+            <aside><span>Texto genérico</span><span>hierarquia fraca</span><span>sem próximo passo</span></aside>
           </div>
         </div>
 
-        <div className="dash-compare-handle" style={{ left: `${sliderPos}%` }}>
-          ⇄
-        </div>
+        <input className="dash-compare-range" type="range" min="12" max="88" value={sliderPos} onChange={(event) => setSliderPos(Number(event.target.value))} aria-label="Comparar um site sem direção com uma experiência Avancini Dash" />
+        <div className="dash-compare-handle" style={{ left: `${sliderPos}%` }} aria-hidden="true">⇄</div>
       </div>
     </section>
   );
@@ -479,60 +389,39 @@ function DashBeforeAfterSlider() {
 
 function ExpressProposalBuilder() {
   const [selectedPlan, setSelectedPlan] = useState("landing");
-  const [fidelity, setFidelity] = useState("com-fidelidade");
+  const [contractType, setContractType] = useState("recorrente");
   const [domainType, setDomainType] = useState("avancini");
 
   const plansMap = {
     landing: {
       name: "Landing Page Profissional",
-      priceFidelity: "R$ 89,90/mês",
-      priceNoFidelity: "R$ 49,90/mês",
-      setupNoFidelity: "R$ 490,00 à vista",
       desc: "Página de alta conversão para serviços, consultores e ofertas diretas."
+    },
+    institucional: {
+      name: "Site Institucional",
+      desc: "Presença completa para apresentar empresa, serviços, diferenciais e contato."
     },
     catalogo: {
       name: "Site Catálogo / Vitrine",
-      priceFidelity: "A partir de R$ 179,90/mês",
-      priceNoFidelity: "A partir de R$ 79,90/mês",
-      setupNoFidelity: "A partir de R$ 790,00 à vista",
       desc: "Vitrine completa para empresas com múltiplos produtos ou catálogo de serviços."
     },
-    comboChatbot: {
-      name: "Combo Site + Chatbot",
-      priceFidelity: "A partir de R$ 249,90/mês",
-      priceNoFidelity: "A partir de R$ 149,90/mês",
-      setupNoFidelity: "A partir de R$ 690,00 à vista",
-      desc: "Landing page profissional com chatbot no WhatsApp 24/7."
-    },
-    comboIa: {
-      name: "Combo Site + Atendente IA",
-      priceFidelity: "A partir de R$ 397,90/mês",
-      priceNoFidelity: "A partir de R$ 249,90/mês",
-      setupNoFidelity: "A partir de R$ 990,00 à vista",
-      desc: "Vitrine de alto padrão integrada a Atendente com IA treinada."
+    personalizado: {
+      name: "Projeto Personalizado",
+      desc: "Uma estrutura exclusiva quando o objetivo pede recursos e jornada próprios."
     }
   };
 
   const current = plansMap[selectedPlan as keyof typeof plansMap];
-  const isFidelity = fidelity === "com-fidelidade";
-  const monthlyPrice = isFidelity ? current.priceFidelity : current.priceNoFidelity;
-  const setupPrice = isFidelity ? "R$ 0 (Taxa Gratuita)" : current.setupNoFidelity;
-  const domainText = domainType === "combr" ? "Domínio Próprio .com.br (+ R$ 49,90 no 1º mês)" : "Endereço na rede Avancini (R$ 0)";
+  const domainText = domainType === "combr" ? "Domínio próprio .com.br" : "Endereço na rede Avancini";
 
-  const msg = `Olá, Ivo! Montei minha proposta no configurador da Avancini Dash:
-- Plano: ${current.name}
-- Condição: ${isFidelity ? "Contrato 6 Meses (R$ 0 Criação)" : "Sem Fidelidade (Cancele quando quiser)"}
-- Criação: ${setupPrice}
-- Mensalidade: ${monthlyPrice}
-- Domínio: ${domainText}
-Quero tirar dúvidas e dar início ao projeto!`;
+  const msg = `Olá, Ivo! Usei o configurador da Avancini Dash e quero conversar sobre ${current.name}. Prefiro ${contractType === "recorrente" ? "uma contratação recorrente" : "pagamento único"} e ${domainText.toLowerCase()}. Quero entender a melhor estrutura e receber uma proposta para minha realidade.`;
 
   return (
     <section className="proposal-builder-section" id="gerador-proposta">
       <div className="section-heading" style={{ margin: "0 auto 40px", maxWidth: "1240px" }}>
         <div>
-          <span className="section-index">CONFIGURADOR EXPRESS · 3 PASSOS</span>
-          <h2>Monte sua proposta sob medida<br />em menos de 1 minuto.</h2>
+          <span className="section-index">PRÓXIMO PASSO · SEM PREÇO REPETIDO</span>
+          <h2>Conte o que faz sentido.<br />A proposta nasce da sua realidade.</h2>
         </div>
         <p>Escolha o plano, o formato de contratação e envie diretamente para o WhatsApp do Ivo para começar.</p>
       </div>
@@ -559,22 +448,8 @@ Quero tirar dúvidas e dar início ao projeto!`;
                 <strong>Site Catálogo</strong>
                 <small style={{ display: "block", color: "#8892a0", marginTop: "4px" }}>Múltiplos produtos/serviços</small>
               </button>
-              <button
-                type="button"
-                className={`proposal-opt-btn ${selectedPlan === "comboChatbot" ? "active" : ""}`}
-                onClick={() => setSelectedPlan("comboChatbot")}
-              >
-                <strong>Combo + Chatbot</strong>
-                <small style={{ display: "block", color: "#8892a0", marginTop: "4px" }}>Site + WhatsApp automático</small>
-              </button>
-              <button
-                type="button"
-                className={`proposal-opt-btn ${selectedPlan === "comboIa" ? "active" : ""}`}
-                onClick={() => setSelectedPlan("comboIa")}
-              >
-                <strong>Combo + IA 24/7</strong>
-                <small style={{ display: "block", color: "#8892a0", marginTop: "4px" }}>Site + Atendente Inteligente</small>
-              </button>
+              <button type="button" className={`proposal-opt-btn ${selectedPlan === "institucional" ? "active" : ""}`} onClick={() => setSelectedPlan("institucional")}><strong>Site Institucional</strong><small>Empresa, serviços e autoridade</small></button>
+              <button type="button" className={`proposal-opt-btn ${selectedPlan === "personalizado" ? "active" : ""}`} onClick={() => setSelectedPlan("personalizado")}><strong>Projeto Personalizado</strong><small>Jornada e recursos sob medida</small></button>
             </div>
           </div>
 
@@ -584,19 +459,19 @@ Quero tirar dúvidas e dar início ao projeto!`;
             <div className="proposal-options-grid">
               <button
                 type="button"
-                className={`proposal-opt-btn ${fidelity === "com-fidelidade" ? "active" : ""}`}
-                onClick={() => setFidelity("com-fidelidade")}
+                className={`proposal-opt-btn ${contractType === "recorrente" ? "active" : ""}`}
+                onClick={() => setContractType("recorrente")}
               >
-                <strong>✨ Contrato 6 Meses</strong>
-                <small style={{ display: "block", color: "#8892a0", marginTop: "4px" }}>R$ 0 de entrada / sem taxa de criação</small>
+                <strong>Plano recorrente</strong>
+                <small>Menor entrada e acompanhamento contínuo</small>
               </button>
               <button
                 type="button"
-                className={`proposal-opt-btn ${fidelity === "sem-fidelidade" ? "active" : ""}`}
-                onClick={() => setFidelity("sem-fidelidade")}
+                className={`proposal-opt-btn ${contractType === "unico" ? "active" : ""}`}
+                onClick={() => setContractType("unico")}
               >
-                <strong>🔓 Sem Fidelidade</strong>
-                <small style={{ display: "block", color: "#8892a0", marginTop: "4px" }}>Taxa de criação à vista + menor mensalidade</small>
+                <strong>Pagamento único</strong>
+                <small>Projeto comprado e manutenção opcional</small>
               </button>
             </div>
           </div>
@@ -610,8 +485,8 @@ Quero tirar dúvidas e dar início ao projeto!`;
                 className={`proposal-opt-btn ${domainType === "avancini" ? "active" : ""}`}
                 onClick={() => setDomainType("avancini")}
               >
-                <strong>Rede Avancini (Grátis)</strong>
-                <small style={{ display: "block", color: "#8892a0", marginTop: "4px" }}>Incluso sem taxas adicionais</small>
+                <strong>Rede Avancini</strong>
+                <small>Endereço incluso na estrutura Avancini</small>
               </button>
               <button
                 type="button"
@@ -619,20 +494,17 @@ Quero tirar dúvidas e dar início ao projeto!`;
                 onClick={() => setDomainType("combr")}
               >
                 <strong>Domínio Próprio .com.br</strong>
-                <small style={{ display: "block", color: "#8892a0", marginTop: "4px" }}>+ R$ 49,90 no 1º mês (Registro.br)</small>
+                <small>Endereço exclusivo registrado para sua marca</small>
               </button>
             </div>
           </div>
         </div>
 
         <div className="proposal-summary-card">
-          <small>RESUMO DA PROPOSTA</small>
+          <small>SEU PONTO DE PARTIDA</small>
           <h3>{current.name}</h3>
-          <div className="proposal-price-box">
-            <span>MENSALIDADE:</span>
-            <strong>{monthlyPrice}</strong>
-            <span style={{ marginTop: "6px", display: "block" }}>Taxa de criação: <b>{setupPrice}</b></span>
-          </div>
+          <p>{current.desc}</p>
+          <div className="proposal-price-box"><span>CONTRATAÇÃO</span><strong>{contractType === "recorrente" ? "Plano recorrente" : "Pagamento único"}</strong><span>{domainText}</span></div>
           <ul>
             <li>Estratégia, texto e design exclusivo</li>
             <li>Versão mobile ultrarrápida</li>
@@ -645,7 +517,7 @@ Quero tirar dúvidas e dar início ao projeto!`;
             target="_blank"
             rel="noreferrer"
           >
-            ENVIAR PROPOSTA NO WHATSAPP <b>↗</b>
+            PEDIR UMA PROPOSTA COERENTE <b>↗</b>
           </a>
         </div>
       </div>
@@ -665,12 +537,6 @@ export default function Home() {
   const [scrolled, setScrolled] = useState(false);
   const [fidelityMode, setFidelityMode] = useState<"com-fidelidade" | "sem-fidelidade">("com-fidelidade");
   const [portfolioSpotlight, setPortfolioSpotlight] = useState<PortfolioSpotlightType | null>(null);
-  const [projectType, setProjectType] = useState("Site institucional — implantação personalizada");
-  const [contractModel, setContractModel] = useState<ContractModel>("Assinatura mensal");
-  const [segment, setSegment] = useState("");
-  const [goal, setGoal] = useState("Gerar mais contatos");
-  const [investment, setInvestment] = useState("A partir de R$ 599,90 + hospedagem e suporte a partir de R$ 79,90/mês");
-  const [timeline, setTimeline] = useState("Em até 30 dias");
   const navigateFromMenu = (event: MouseEvent<HTMLAnchorElement>, href: string) => {
     event.preventDefault();
     setMenuOpen(false);
@@ -767,10 +633,6 @@ export default function Home() {
     setPortfolioSpotlight(view as PortfolioSpotlightType);
   };
 
-  const availableProjects = briefingOptions[contractModel];
-  const selectedProject = availableProjects.find((option) => option.project === projectType) ?? availableProjects[0];
-  const timelineOptions = timelineOptionsFor(projectType);
-
   const openLead = (intent: string) => {
     setLeadIntent(intent);
     setLeadError("");
@@ -786,38 +648,6 @@ export default function Home() {
       setBudgetTransition(null);
       openLead(intent);
     }, 1350);
-  };
-
-  const changeContractModel = (nextModel: ContractModel) => {
-    const firstProject = briefingOptions[nextModel][0];
-    setContractModel(nextModel);
-    setProjectType(firstProject.project);
-    setInvestment(firstProject.investments[0]);
-    setTimeline(timelineOptionsFor(firstProject.project)[0]);
-  };
-
-  const changeProjectType = (nextProject: string) => {
-    const project = briefingOptions[contractModel].find((option) => option.project === nextProject);
-    setProjectType(nextProject);
-    if (project) {
-      setInvestment(project.investments[0]);
-      setTimeline(timelineOptionsFor(nextProject)[0]);
-    }
-  };
-
-  const submitBudget = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    trackLead("briefing_principal", { projectType, contractModel, goal });
-    const message = [
-      "Olá! Conheci a Avancini Dash e quero conversar sobre um projeto.",
-      `Tipo: ${projectType}`,
-      `Contratação: ${contractModel}`,
-      `Segmento: ${segment || "Ainda vou explicar"}`,
-      `Objetivo: ${goal}`,
-      `Investimento previsto: ${investment}`,
-      `Prazo desejado: ${timeline}`,
-    ].join("\n");
-    window.open(whatsappFor(message), "_blank", "noopener,noreferrer");
   };
 
   const submitLead = (event: FormEvent<HTMLFormElement>) => {
@@ -953,17 +783,17 @@ export default function Home() {
             <a href="/site-por-assinatura#plano-landing-page">
               <small>DOMÍNIO PRÓPRIO · MENOR MENSALIDADE</small>
               <strong>Landing Pro</strong>
-              <span>R$ 399,90 + R$ 49,90/mês ↗</span>
+              <span>Campanha, oferta e captação em uma jornada direta ↗</span>
             </a>
             <a href="/site-por-assinatura#plano-site-catalogo">
               <small>SEM ENTRADA · MESMA QUALIDADE</small>
               <strong>Landing Start</strong>
-              <span>R$ 89,90/mês · 6 meses ↗</span>
+              <span>Comece com endereço Avancini e estrutura completa ↗</span>
             </a>
             <a href="/site-por-assinatura#plano-site">
               <small>EMPRESA · SERVIÇOS · AUTORIDADE</small>
               <strong>Site Institucional</strong>
-              <span>Implantação a partir de R$ 599,90 ↗</span>
+              <span>Apresente a empresa inteira e transmita confiança ↗</span>
             </a>
           </div>
           <div className="hero-trust">
@@ -1020,101 +850,7 @@ export default function Home() {
         <a href="#investimento"><strong>4 caminhos</strong><span>recorrente ou pagamento<br />único sob medida</span><b>Comparar opções ↗</b></a>
       </section>
 
-      <section className="section projects" id="projetos" aria-labelledby="projects-showcase-title">
-        <div className="section-heading">
-          <div>
-            <span className="section-index">04 — PROJETOS SELECIONADOS</span>
-            <h2 id="projects-showcase-title">
-              Veja o trabalho real.<br />
-              Imagine a sua marca.
-            </h2>
-          </div>
-          <p>
-            Um redesign construído a partir de um site anterior e uma criação iniciada totalmente do zero.
-          </p>
-        </div>
-        <div className="project-list">
-          <article className="project-showcase sandiego">
-            <div className="project-copy">
-              <div className="project-number">01 / SAÚDE & AUTORIDADE</div>
-              <h3>
-                Clínica<br />San Diego
-              </h3>
-              <p>
-                Um redesign para reorganizar especialidades, equipe, horários e agendamento em uma experiência mais clara e acolhedora.
-              </p>
-              <dl className="case-details">
-                <div><dt>PONTO DE PARTIDA</dt><dd>A clínica já possuía um site, usado como referência para a comparação.</dd></div>
-                <div><dt>NOVA PROPOSTA</dt><dd>Estrutura, mensagem e experiência visual completamente redesenhadas.</dd></div>
-                <div><dt>OBJETIVO</dt><dd>Transmitir mais confiança e facilitar o caminho até o agendamento.</dd></div>
-              </dl>
-              <div className="project-tags">
-                <span>Site institucional</span>
-                <span>Experiência mobile</span>
-                <span>Conversão</span>
-              </div>
-              <div className="project-status">
-                <i /> Redesign completo <span>a partir do site anterior</span>
-              </div>
-              <a className="case-link" href="https://clinicasandiego.com.br/" target="_blank" rel="noreferrer">
-                Ver o site anterior para comparar <span>↗</span>
-              </a>
-            </div>
-            <div className="project-screen">
-              <div className="device-browser">
-                <div className="device-top">
-                  <i /><i /><i />
-                  <span>avancini.dash / redesign san diego</span>
-                  <b>ROLE ↓</b>
-                </div>
-                <div className="project-scroll" role="region" tabIndex={0} aria-label="Demonstração rolável completa do site Clínica San Diego">
-                  <SiteImage src="/projects/san-diego-full.png" alt="Captura completa do site da Clínica San Diego" sizes="(max-width: 760px) 92vw, 54vw" quality={82} />
-                </div>
-              </div>
-              <div className="scroll-hint">Role dentro da tela <span>↓</span></div>
-            </div>
-          </article>
-          <article className="project-showcase tapecar">
-            <div className="project-copy">
-              <div className="project-number">02 / AUTOMOTIVO & PRESENÇA LOCAL</div>
-              <h3>Tape Car</h3>
-              <p>
-                Uma presença digital intensa para posicionar a empresa, destacar seus serviços automotivos e aproximar clientes em Eunápolis.
-              </p>
-              <dl className="case-details">
-                <div><dt>OBJETIVO</dt><dd>Traduzir a força local da marca em uma vitrine digital premium.</dd></div>
-                <div><dt>ESTRUTURA</dt><dd>Serviços, processo, localização e contato por WhatsApp.</dd></div>
-                <div><dt>PONTO DE PARTIDA</dt><dd>A Tape Car ainda não possuía um site.</dd></div>
-                <div><dt>ENTREGA</dt><dd>Estrutura e identidade digital criadas completamente do zero.</dd></div>
-              </dl>
-              <div className="project-tags">
-                <span>Site institucional</span>
-                <span>Marca local</span>
-                <span>WhatsApp</span>
-              </div>
-              <div className="project-status">
-                <i /> Criação do zero <span>sem site anterior</span>
-              </div>
-            </div>
-            <div className="project-screen">
-              <div className="device-browser">
-                <div className="device-top">
-                  <i /><i /><i />
-                  <span>avancini.dash / projeto tape car</span>
-                  <b>ROLE ↓</b>
-                </div>
-                <div className="project-scroll" role="region" tabIndex={0} aria-label="Demonstração rolável completa do site Tape Car">
-                  <SiteImage src="/projects/tape-car-full.png" alt="Captura completa do site Tape Car" sizes="(max-width: 760px) 92vw, 54vw" quality={82} />
-                </div>
-              </div>
-              <div className="scroll-hint">Role dentro da tela <span>↓</span></div>
-            </div>
-          </article>
-        </div>
-      </section>
-
       <DashBeforeAfterSlider />
-      <ExpressProposalBuilder />
       <section className="section web-method" id="metodo">
         <div className="section-heading web-method-heading">
           <div><span className="section-index">METODOLOGIA / 05 PILARES</span><h2>Site bonito chama atenção.<br />Estratégia transforma em cliente.</h2></div>
@@ -1367,77 +1103,18 @@ export default function Home() {
         <p className="investment-note">Todos os planos contam com a mesma qualidade de estratégia, texto persuasivo, design exclusivo e desenvolvimento de alta performance. Sem taxa de criação no contrato de 6 meses. O registro do domínio próprio .com.br possui taxa anual de R$ 49,90 no 1º mês (sujeito à consulta prévia de disponibilidade no Registro.br).</p>
       </section>
 
+      <ExpressProposalBuilder />
+
       <section className="section web-faq" id="duvidas">
         <div className="web-faq-intro"><span>PERGUNTAS FREQUENTES</span><h2>Tire suas dúvidas<br /><em>antes de começar.</em></h2><p>As perguntas que mais aparecem antes de iniciar um projeto. Não encontrou a sua?</p><button type="button" onClick={() => openLead("Tenho uma dúvida sobre os serviços da Avancini Dash antes de começar meu projeto.")}>FALAR COM A AVANCINI <b>↗</b></button></div>
         <div className="web-faq-list">{webFaqs.map((item)=><details key={item.question}><summary>{item.question}<span>+</span></summary><p>{item.answer}</p></details>)}</div>
       </section>
 
-      <section className="final-cta" id="briefing-legado">
-        <div className="cta-grid" />
-        <div className="cta-orb" />
-        <div className="eyebrow">
-          <span /> Sua marca pode ocupar mais espaço
-        </div>
-        <div className="budget-copy">
-          <h2>Vamos descobrir o projeto certo para sua empresa.</h2>
-          <p>
-            Responda seis pontos rápidos. O WhatsApp será aberto com um briefing
-            organizado para a conversa já começar no lugar certo.
-          </p>
-          <div className="budget-proof">
-            <span>01 · Sem formulário infinito</span>
-            <span>02 · Resposta direta</span>
-            <span>03 · Sem compromisso</span>
-          </div>
-        </div>
-        <form className="budget-form" onSubmit={submitBudget}>
-          <label>
-            <span>Como deseja contratar?</span>
-            <select value={contractModel} onChange={(event) => changeContractModel(event.target.value as ContractModel)}>
-              <option>Assinatura mensal</option>
-              <option>Pagamento único</option>
-              <option>Quero entender as duas opções</option>
-            </select>
-            <small className="budget-context" aria-live="polite">{contractModelHelp[contractModel]}</small>
-          </label>
-          <label>
-            <span>O que você precisa?</span>
-            <select value={projectType} onChange={(event) => changeProjectType(event.target.value)}>
-              {availableProjects.map((option) => <option key={option.project}>{option.project}</option>)}
-            </select>
-          </label>
-          <label>
-            <span>Qual é o segmento da empresa? <small>(opcional)</small></span>
-            <input value={segment} onChange={(event) => setSegment(event.target.value)} placeholder="Ex.: clínica, imobiliária, restaurante" />
-          </label>
-          <label>
-            <span>Principal objetivo</span>
-            <select value={goal} onChange={(event) => setGoal(event.target.value)}>
-              <option>Gerar mais contatos</option>
-              <option>Vender online</option>
-              <option>Transmitir mais autoridade</option>
-              <option>Divulgar um serviço específico</option>
-            </select>
-          </label>
-          <div className="budget-row">
-            <label>
-              <span>Condição de investimento</span>
-              <select value={investment} onChange={(event) => setInvestment(event.target.value)}>
-                {selectedProject.investments.map((option) => <option key={option}>{option}</option>)}
-              </select>
-            </label>
-            <label>
-              <span>Prazo desejado</span>
-              <select value={timeline} onChange={(event) => setTimeline(event.target.value)}>
-                {timelineOptions.map((option) => <option key={option}>{option}</option>)}
-              </select>
-            </label>
-          </div>
-          <button className="button button-primary button-xl" type="submit">
-            Enviar briefing pelo WhatsApp <span>↗</span>
-          </button>
-          <small>Você revisa a mensagem antes de enviar.</small>
-        </form>
+      <section className="web-closing-cta">
+        <span>AVANCINI DASH · PRÓXIMO PASSO</span>
+        <h2>Sua empresa não precisa de mais uma página.<br /><em>Precisa de uma presença que trabalhe por ela.</em></h2>
+        <p>Conte o que você vende e onde sente que perde oportunidades. A conversa começa pelo problema, não por um pacote.</p>
+        <button type="button" onClick={() => openLead("Quero entender qual estrutura digital faz sentido para minha empresa.")}>CONVERSAR SOBRE MEU PROJETO <b>↗</b></button>
       </section>
 
       {activeSpotlight && portfolioSpotlight && (

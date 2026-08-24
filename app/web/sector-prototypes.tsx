@@ -20,7 +20,7 @@ export function SectorPrototypePage({ type }: { type: SectorPrototypeType }) {
   if (type === "cars") {
     const leadMsg = "Olá! Vi o showroom da Apex Motors no portfólio da Avancini Dash e quero uma estrutura nesse nível para minha loja de carros.";
     return (
-      <main className="${styles.page} ${styles.cars}" style={{ "--sector-accent": "#ff3823", "--sector-accent-soft": "#ffb8b0" } as CSSProperties}>
+      <main className={`${styles.page} ${styles.cars}`} style={{ "--sector-accent": "#ff3823", "--sector-accent-soft": "#ffb8b0" } as CSSProperties}>
         <nav className={styles.nav}>
           <strong>APEX MOTORS<small>ESTOQUE & PROCEDÊNCIA</small></strong>
           <div><span>Estoque (48)</span><span>Financiamento</span><span>Venda seu Usado</span><span>Blindados</span></div>
@@ -136,7 +136,7 @@ export function SectorPrototypePage({ type }: { type: SectorPrototypeType }) {
   if (type === "mechanic") {
     const leadMsg = "Olá! Vi o conceito da Torque Lab no portfólio da Avancini Dash e quero uma estrutura com diagnóstico e OS para minha oficina mecânica.";
     return (
-      <main className="${styles.page} ${styles.mechanic}" style={{ "--sector-accent": "#29a9ff", "--sector-accent-soft": "#9dd9ff" } as CSSProperties}>
+      <main className={`${styles.page} ${styles.mechanic}`} style={{ "--sector-accent": "#29a9ff", "--sector-accent-soft": "#9dd9ff" } as CSSProperties}>
         <nav className={styles.nav}>
           <strong>TORQUE LAB<small>CENTRO DE DIAGNÓSTICO & REPARO</small></strong>
           <div><span>Acompanhar OS</span><span>Serviços</span><span>Agendar Revisão</span><span>Garantia</span></div>
@@ -245,7 +245,7 @@ export function SectorPrototypePage({ type }: { type: SectorPrototypeType }) {
   if (type === "dentistry") {
     const leadMsg = "Olá! Vi a clínica Nexo Odonto no portfólio da Avancini Dash e quero uma estrutura para minha clínica odontológica.";
     return (
-      <main className="${styles.page} ${styles.dentistry}" style={{ "--sector-accent": "#2c8b76", "--sector-accent-soft": "#a7dfcf" } as CSSProperties}>
+      <main className={`${styles.page} ${styles.dentistry}`} style={{ "--sector-accent": "#2c8b76", "--sector-accent-soft": "#a7dfcf" } as CSSProperties}>
         <nav className={styles.nav}>
           <strong>NEXO ODONTO<small>ODONTOLOGIA INTEGRADA & ESTÉTICA</small></strong>
           <div><span>Tratamentos</span><span>Corpo Clínico</span><span>Antes & Depois</span><span>Primeira Consulta</span></div>
@@ -354,7 +354,7 @@ export function SectorPrototypePage({ type }: { type: SectorPrototypeType }) {
   if (type === "fashion") {
     const leadMsg = "Olá! Vi o editorial da Noma no portfólio da Avancini Dash e quero uma loja/vitrine nesse nível para minha marca de moda.";
     return (
-      <main className="${styles.page} ${styles.fashion}" style={{ "--sector-accent": "#eead91", "--sector-accent-soft": "#f8d8ca" } as CSSProperties}>
+      <main className={`${styles.page} ${styles.fashion}`} style={{ "--sector-accent": "#eead91", "--sector-accent-soft": "#f8d8ca" } as CSSProperties}>
         <nav className={styles.nav}>
           <strong>NOMA<small>MODA AUTORAL & ATEMPORAL</small></strong>
           <div><span>Drop 04</span><span>Alfaiataria</span><span>Linho Puro</span><span>Lookbook</span></div>
@@ -463,7 +463,7 @@ export function SectorPrototypePage({ type }: { type: SectorPrototypeType }) {
   if (type === "law") {
     const leadMsg = "Olá! Vi a Moreira & Lima no portfólio da Avancini Dash e quero uma presença digital de autoridade para meu escritório de advocacia.";
     return (
-      <main className="${styles.page} ${styles.law}" style={{ "--sector-accent": "#c8a46a", "--sector-accent-soft": "#ead7b6" } as CSSProperties}>
+      <main className={`${styles.page} ${styles.law}`} style={{ "--sector-accent": "#c8a46a", "--sector-accent-soft": "#ead7b6" } as CSSProperties}>
         <nav className={styles.nav}>
           <strong>MOREIRA & LIMA<small>ADVOCACIA EMPRESARIAL & TRIBUTÁRIA</small></strong>
           <div><span>Áreas de Prática</span><span>Sócios</span><span>Pareceres</span><span>Consulta Segura</span></div>
@@ -575,7 +575,7 @@ export function SectorPrototypePage({ type }: { type: SectorPrototypeType }) {
     const subTitle = isRealtor ? "CORRETORA DE IMÓVEIS DE ALTO PADRÃO" : "IMOBILIÁRIA & LANÇAMENTOS";
     const leadMsg = `Olá! Vi o portal ${brandName} no portfólio da Avancini Dash e quero uma estrutura imobiliária completa para meus imóveis.`;
     return (
-      <main className="${styles.page} ${styles.realestate}" style={{ "--sector-accent": "#b9e64b", "--sector-accent-soft": "#e4f6b4" } as CSSProperties}>
+      <main className={`${styles.page} ${styles.realestate}`} style={{ "--sector-accent": "#b9e64b", "--sector-accent-soft": "#e4f6b4" } as CSSProperties}>
         <nav className={styles.nav}>
           <strong>{brandName}<small>{subTitle}</small></strong>
           <div><span>Comprar</span><span>Alugar</span><span>Lançamentos</span><span>Bairros Nobres</span></div>
@@ -684,7 +684,7 @@ export function SectorPrototypePage({ type }: { type: SectorPrototypeType }) {
   if (type === "aesthetics") {
     const leadMsg = "Olá! Vi a Lumina Estética no portfólio da Avancini Dash e quero uma estrutura para minha clínica de estética.";
     return (
-      <main className="${styles.page} ${styles.aesthetics}" style={{ "--sector-accent": "#b87091", "--sector-accent-soft": "#e8bbce" } as CSSProperties}>
+      <main className={`${styles.page} ${styles.aesthetics}`} style={{ "--sector-accent": "#b87091", "--sector-accent-soft": "#e8bbce" } as CSSProperties}>
         <nav className={styles.nav}>
           <strong>LUMINA<small>ESTÉTICA AVANÇADA & PROTOCOLOS FACIAIS</small></strong>
           <div><span>Protocolos</span><span>Antes & Depois</span><span>Tecnologia</span><span>Avaliação</span></div>
@@ -793,7 +793,7 @@ export function SectorPrototypePage({ type }: { type: SectorPrototypeType }) {
   // Autonomous / Caio Move
   const leadMsg = "Olá! Vi o conceito Caio Move no portfólio da Avancini Dash e quero uma presença digital forte para minha consultoria/marca pessoal.";
   return (
-    <main className="${styles.page} ${styles.autonomous}" style={{ "--sector-accent": "#9edb3b", "--sector-accent-soft": "#d8f6a7" } as CSSProperties}>
+    <main className={`${styles.page} ${styles.autonomous}`} style={{ "--sector-accent": "#9edb3b", "--sector-accent-soft": "#d8f6a7" } as CSSProperties}>
       <nav className={styles.nav}>
         <strong>CAIO MOVE<small>PERFORMANCE & MOVIMENTO HUMANO</small></strong>
         <div><span>Método</span><span>Programas</span><span>Resultados</span><span>Agenda</span></div>
