@@ -48,7 +48,7 @@ export function Header({ onNavigate, activeView }: HeaderProps) {
     { id: "stores", label: "Lojas", view: "stores" },
   ];
 
-  const tabletNavLinks = [
+  const tabletNavLinks: Array<{ id: string; label: string; view: string; isHighlight?: boolean; param?: string }> = [
     { id: "vehicles", label: "Comprar", view: "vehicles" },
     { id: "offers", label: "Ofertas", view: "offers", isHighlight: true },
     { id: "tradein", label: "Vender", view: "tradein" },

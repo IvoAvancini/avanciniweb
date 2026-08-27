@@ -251,7 +251,7 @@ const salonServices = {
 
 function SalonShowcase() {
   const [service, setService] = useState<keyof typeof salonServices>("corte");
-  const [selectedSlot, setSelectedSlot] = useState(salonServices.corte.availability[0]);
+  const [selectedSlot, setSelectedSlot] = useState<string>(salonServices.corte.availability[0]);
   const active = salonServices[service];
   return (
     <main className={`${styles.site} ${styles.salon}`}>

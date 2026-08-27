@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useCora } from "../store/useCoraStore";
 import { Breadcrumbs } from "../components/CommonComponents";
 import { PropertyCard } from "../components/PropertyCard";
