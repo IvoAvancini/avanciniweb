@@ -1,5 +1,5 @@
 {
-  "name": "site-creator-vinext-starter",
+  "name": "avancini-os-matriz",
   "version": "0.1.0",
   "private": true,
   "engines": {
@@ -9,14 +9,12 @@
     "dev": "vinext dev",
     "build": "vinext build",
     "start": "vinext start",
-    "test": "npm run build",
+    "test": "npm run build && node --test tests/rendered-html.test.mjs",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next",
     "db:generate": "drizzle-kit generate"
   },
   "dependencies": {
-    "@vercel/analytics": "^2.0.1",
     "drizzle-orm": "0.45.2",
-    "next": "16.2.6",
     "react": "19.2.6",
     "react-dom": "19.2.6"
   },
@@ -44,6 +42,17 @@
     "vinext": "1.0.0-beta.2",
     "vite": "8.0.13",
     "wrangler": "4.92.0"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild",
+      "sharp",
+      "workerd",
+      "@cloudflare/workerd-windows-64",
+      "@cloudflare/workerd-linux-64",
+      "@cloudflare/workerd-darwin-64",
+      "@cloudflare/workerd-darwin-arm64"
+    ]
   },
   "type": "module"
 }

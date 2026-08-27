@@ -3,9 +3,54 @@
 
 import { useEffect, useRef, useState, type FormEvent, type MouseEvent } from "react";
 import Image, { type ImageProps } from "next/image";
+import dynamic from "next/dynamic";
 import Link from "next/link";
+import { AvanciniMark } from "../avancini-mark";
 import { trackLead, trackMarketingEvent } from "../marketing-events";
-import { SectorPrototypePage, type SectorPrototypeType } from "./sector-prototypes";
+import type { SectorShowcaseType } from "./sector-showcases";
+
+const SectorShowcasePage = dynamic(
+  () => import("./sector-showcases").then((module) => module.SectorShowcasePage),
+  { ssr: false },
+);
+
+const WebArrow = ({ size = 12 }: { size?: number }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2.8"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    aria-hidden="true"
+    className="dash-svg-arrow"
+    style={{ display: "inline-block", verticalAlign: "middle", marginLeft: 4 }}
+  >
+    <line x1="5" y1="12" x2="19" y2="12" />
+    <polyline points="12 5 19 12 12 19" />
+  </svg>
+);
+
+const WebDownArrow = ({ size = 12 }: { size?: number }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2.8"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    aria-hidden="true"
+    className="dash-svg-down-arrow"
+    style={{ display: "inline-block", verticalAlign: "middle", marginLeft: 4 }}
+  >
+    <line x1="12" y1="5" x2="12" y2="19" />
+    <polyline points="19 12 12 19 5 12" />
+  </svg>
+);
 
 const imageDimensions = {
   "/concepts/apex-cars.jpg": { width: 1400, height: 2100 },
@@ -17,6 +62,7 @@ const imageDimensions = {
   "/concepts/nexo-dental.webp": { width: 1536, height: 1024 },
   "/concepts/caio-move.webp": { width: 1536, height: 1024 },
   "/concepts/marina-realty.webp": { width: 1536, height: 1024 },
+  "/concepts/aurea-salon-v2.png": { width: 1536, height: 1024 },
   "/projects/san-diego-full.png": { width: 1264, height: 6720 },
   "/projects/tape-car-full.png": { width: 1264, height: 5388 },
   "/projects/san-diego-preview.webp": { width: 1400, height: 900 },
@@ -27,28 +73,33 @@ type SiteImageProps = Omit<ImageProps, "src" | "width" | "height"> & {
   src: string;
 };
 
-function SiteImage({ src, sizes = "(max-width: 760px) 100vw, 70vw", quality = 74, ...props }: SiteImageProps) {
+function SiteImage({ src, sizes, quality, ...props }: SiteImageProps & { sizes?: string; quality?: number }) {
   const dimensions = imageDimensions[src as keyof typeof imageDimensions] ?? { width: 1600, height: 1000 };
-  return <Image src={src} width={dimensions.width} height={dimensions.height} sizes={sizes} quality={quality} {...props} />;
+  return (
+    <Image
+      src={src}
+      width={dimensions.width}
+      height={dimensions.height}
+      sizes={sizes}
+      quality={quality}
+      loading="lazy"
+      {...props}
+    />
+  );
 }
 
 const whatsappFor = (message: string) =>
   `https://wa.me/5573981019782?text=${encodeURIComponent(message)}`;
 const portfolioRows = [
   [
-    { name: "Apex Motors", kind: "CONCEITO FICTÍCIO · VEÍCULOS", image: "/concepts/apex-cars.jpg", view: "cars", className: "web-port-cars", action: "ESTOQUE · TROCA · FINANCIAMENTO" },
-    { name: "Torque Lab", kind: "CONCEITO FICTÍCIO · OFICINA MECÂNICA", image: "/concepts/torque-mechanic.webp", view: "mechanic", className: "web-port-torque", action: "DIAGNÓSTICO · OS · APROVAÇÃO" },
-    { name: "Clínica San Diego", kind: "PROJETO APLICADO · REDESIGN", image: "/projects/san-diego-preview.webp", view: "sandiego", className: "web-port-san", action: "SERVIÇOS · CONFIANÇA · CONTATO" },
-    { name: "Nexo Odonto", kind: "CONCEITO FICTÍCIO · ODONTOLOGIA", image: "/concepts/nexo-dental.webp", view: "dentistry", className: "web-port-dental", action: "TRATAMENTOS · CONFIANÇA · AGENDA" },
-    { name: "Lumina", kind: "CONCEITO FICTÍCIO · ESTÉTICA", image: "/concepts/lumina-clinic.jpg", view: "aesthetics", className: "web-port-lumina", action: "PROTOCOLOS · AVALIAÇÃO · AGENDA" },
-    { name: "Tape Car", kind: "PROJETO APLICADO · ESTÉTICA AUTOMOTIVA", image: "/projects/tape-car-preview.webp", view: "tapecar", className: "web-port-tape", action: "PROTEÇÃO · ESTÉTICA · ORÇAMENTO" },
-  ],
-  [
-    { name: "Noma", kind: "CONCEITO FICTÍCIO · MODA", image: "/concepts/noma-fashion.jpg", view: "fashion", className: "web-port-noma", action: "COLEÇÃO · TAMANHOS · COMPRA" },
-    { name: "Caio Move", kind: "CONCEITO FICTÍCIO · PROFISSIONAL AUTÔNOMO", image: "/concepts/caio-move.webp", view: "autonomous", className: "web-port-autonomous", action: "MÉTODO · PROGRAMAS · AGENDA" },
-    { name: "Moreira & Lima", kind: "CONCEITO FICTÍCIO · ADVOCACIA", image: "/concepts/moreira-law.jpg", view: "moreira", className: "web-port-moreira", action: "ATUAÇÃO · MÉTODO · CONSULTA" },
-    { name: "Marina Vale", kind: "CONCEITO FICTÍCIO · CORRETORA", image: "/concepts/marina-realty.webp", view: "realtor", className: "web-port-realtor", action: "CURADORIA · BAIRROS · VISITAS" },
-    { name: "Cora Imóveis", kind: "CONCEITO FICTÍCIO · IMOBILIÁRIA", image: "/concepts/atlas-villa.webp", view: "realestate", className: "web-port-atlas", action: "BUSCA · MAPA · FAVORITOS" },
+    { name: "MOTORA // Ecossistema Automotivo", kind: "CONCESSIONÁRIA PREMIUM & SEMINOVOS", image: "/concepts/apex-cars.jpg", view: "cars", className: "web-port-cars", action: "ESTOQUE · COMPARADOR · FINANCIAMENTO" },
+    { name: "Vértice // E-commerce", kind: "MODA ESPORTIVA & STREETWEAR", image: "/concepts/nike-hero.jpg", view: "fashion", className: "web-port-noma", action: "COLEÇÃO 2026 · SACOLA VIP" },
+    { name: "Cora Imóveis", kind: "MANSÕES & PENTHOUSES", image: "/concepts/cora-penthouse.jpg", view: "realestate", className: "web-port-atlas", action: "RADAR · SIMULADOR SAC" },
+    { name: "Torque Lab", kind: "OFICINA DE ALTA PERFORMANCE", image: "/concepts/torque-mechanic.webp", view: "mechanic", className: "web-port-torque", action: "TELEMETRIA · OS AO VIVO" },
+    { name: "Clínica San Diego", kind: "PROJETO REAL · CLÍNICA MÉDICA", image: "/projects/san-diego-preview.webp", view: "sandiego", className: "web-port-san", action: "CUIDADO · PREVENÇÃO" },
+    { name: "Tape Car", kind: "PROJETO REAL · ESTÉTICA AUTOMOTIVA", image: "/projects/tape-car-preview.webp", view: "tapecar", className: "web-port-tape", action: "PROTEÇÃO · ESTÉTICA · CUIDADO" },
+    { name: "Moreira & Lima", kind: "ADVOCACIA EMPRESARIAL", image: "/concepts/moreira-law.jpg", view: "moreira", className: "web-port-law", action: "RISCO · CONTRATOS · DECISÃO" },
+    { name: "Auréa Atelier", kind: "SALÃO & EXPERIÊNCIA DE BELEZA", image: "/concepts/aurea-salon-v2.png", view: "salon", className: "web-port-salon", action: "AGENDA · SERVIÇOS · CURADORIA" },
   ],
 ] as const;
 
@@ -56,117 +107,107 @@ const webPillars = [
   { number: "01", title: "Direção estratégica", text: "Antes do visual, definimos o que sua empresa precisa comunicar e qual ação o visitante deve tomar." },
   { number: "02", title: "Texto que conduz", text: "Cada título, argumento e chamada existe para transformar atenção em confiança e confiança em contato." },
   { number: "03", title: "Design com presença", text: "Hierarquia, contraste e identidade para sua empresa parecer tão profissional quanto o trabalho que entrega." },
-  { number: "04", title: "Velocidade de verdade", text: "Uma experiência leve, responsiva e preparada para não perder pessoas antes mesmo da primeira impressão." },
-  { number: "05", title: "Conversão no celular", text: "A jornada é desenhada primeiro para a tela que o seu cliente realmente usa: o smartphone." },
+  { number: "04", title: "Velocidade que converte", text: "Uma experiência leve, responsiva e pensada primeiro para o celular — a tela que o seu cliente realmente usa." },
 ] as const;
 
 const webFaqs = [
   { question: "Como funciona o processo de criação?", answer: "Começamos entendendo sua empresa, o público e o objetivo do site. Depois alinhamos estrutura, mensagem e direção visual antes do desenvolvimento e da publicação." },
   { question: "Landing page e site institucional são a mesma coisa?", answer: "Não. A landing concentra o visitante em uma oferta e uma ação. O site institucional apresenta a empresa inteira, organiza serviços e constrói autoridade." },
   { question: "O site funciona bem no celular?", answer: "Sim. A experiência é planejada para celular, computador e outras telas, com atenção a legibilidade, velocidade e facilidade para entrar em contato." },
-  { question: "Posso usar meu próprio domínio?", answer: "Sim. Conectamos um domínio que já seja seu. Também existe a opção de usar um endereço Avancini incluso; um domínio novo é registrado separadamente e fica em seu nome." },
+
+  { question: "Posso usar meu próprio domínio?", answer: "Sim. Conectamos um domínio que já seja seu. Nos planos mensais, um novo .com.br é opcional e sujeito à análise de disponibilidade. No pagamento único, um domínio .com.br fica incluído no projeto, também sujeito à disponibilidade." },
   { question: "Quanto tempo demora para ficar pronto?", answer: "O prazo depende da estrutura e do conteúdo disponível. Como referência, projetos diretos podem levar 7 dias e estruturas completas até 30 dias, sempre combinado antes do início." },
-  { question: "A Landing Start tem qualidade inferior?", answer: "Não. Landing Start e Landing Pro recebem o mesmo padrão de estratégia, texto, design, versão mobile e acabamento. O que muda é o endereço: a Start usa um endereço Avancini e a Pro utiliza o domínio próprio do cliente." },
-  { question: "O que acontece depois da publicação?", answer: "Nos planos recorrentes, hospedagem, SSL, suporte e um pequeno ajuste mensal permanecem inclusos. Esse ajuste cobre troca de texto, imagem, telefone, horário ou informação existente. No pagamento único, não existe mensalidade Avancini: domínio, hospedagem e eventuais manutenções ficam sob responsabilidade do cliente ou são contratados separadamente." },
-  { question: "O que acontece se eu cancelar?", answer: "Em uma contratação recorrente, a hospedagem e a publicação são encerradas depois do período aplicável. O domínio registrado pelo cliente e os materiais fornecidos por ele continuam sendo dele. No pagamento único, a proposta esclarece a entrega dos arquivos e não existe mensalidade Avancini." },
-  { question: "O site pode apresentar produtos?", answer: "Sim. O Site Institucional pode incluir um catálogo de produtos ou serviços com contato pelo WhatsApp. Quando o projeto exige carrinho, pagamento, estoque ou frete, montamos uma Loja Virtual sob medida." },
+  { question: "A opção sem entrada tem qualidade inferior?", answer: "Não. Estratégia, texto, design, versão mobile e acabamento seguem o mesmo padrão. O que muda é a forma de contratação e o endereço escolhido, nunca o cuidado com a entrega." },
+  { question: "O que acontece depois da publicação ou se eu cancelar?", answer: "Nos planos recorrentes, hospedagem, SSL, suporte e um pequeno ajuste mensal permanecem inclusos. Ao cancelar, a hospedagem Avancini é encerrada depois do período aplicável; o domínio registrado pelo cliente e os materiais fornecidos por ele continuam sendo dele. No pagamento único não existe mensalidade Avancini, e a proposta define a entrega e a infraestrutura escolhida." },
+  { question: "Qual é a diferença entre Site Catálogo e Loja Virtual?", answer: "O Site Catálogo apresenta produtos e leva o pedido ou orçamento para o WhatsApp. A Loja Virtual conclui a compra dentro do site, com carrinho, pagamento, entrega e controle dos pedidos." },
 ] as const;
 
 const heroAudiences = ["EMPRESAS", "AUTÔNOMOS", "CLÍNICAS", "ESCRITÓRIOS", "MARCAS"] as const;
 
 function HeroAudienceTypewriter() {
   const [audienceIndex, setAudienceIndex] = useState(0);
-  const [text, setText] = useState("");
-  const [deleting, setDeleting] = useState(false);
 
   useEffect(() => {
-    const word = heroAudiences[audienceIndex];
-    const finishedTyping = text === word;
-    const finishedDeleting = text.length === 0;
-    const delay = finishedTyping && !deleting ? 1450 : deleting ? 48 : 82;
-    const timer = window.setTimeout(() => {
-      if (finishedTyping && !deleting) {
-        setDeleting(true);
-        return;
-      }
-      if (finishedDeleting && deleting) {
-        setDeleting(false);
-        setAudienceIndex((index) => (index + 1) % heroAudiences.length);
-        return;
-      }
-      setText((current) => deleting ? current.slice(0, -1) : word.slice(0, current.length + 1));
-    }, delay);
+    const timer = window.setInterval(() => {
+      setAudienceIndex((index) => (index + 1) % heroAudiences.length);
+    }, 2400);
+    return () => window.clearInterval(timer);
+  }, []);
 
-    return () => window.clearTimeout(timer);
-  }, [audienceIndex, deleting, text]);
-
-  return <strong>{text}<i aria-hidden="true" /></strong>;
+  const audience = heroAudiences[audienceIndex];
+  return <strong key={audience}>{audience}<i aria-hidden="true" /></strong>;
 }
 
 const portfolioSpotlights = {
   cars: {
     name: "Apex Motors",
-    kind: "Conceito fictício · automotivo premium",
+    kind: "Demonstração interativa · superesportivos & blindados",
     image: "/concepts/apex-cars.jpg",
-    description: "Estoque, procedência, troca e financiamento apresentados como uma jornada de compra completa.",
+    description: "Estoque VIP, estúdio 360°, laudo Dekra e simulador de financiamento completo.",
   },
   sandiego: {
     name: "Clínica San Diego",
-    kind: "Redesign completo · projeto aplicado",
+    kind: "Projeto real · Clínica Médica e Vacinas",
     image: "/projects/san-diego-full.png",
     description: "Uma experiência mais clara, acolhedora e preparada para transformar confiança em agendamento.",
   },
   tapecar: {
     name: "Tape Car",
-    kind: "Criação do zero · projeto aplicado",
+    kind: "Projeto real · estética automotiva",
     image: "/projects/tape-car-full.png",
-    description: "Uma presença digital intensa para apresentar serviços, elevar a percepção da marca e conquistar novos contatos.",
+    description: "Climatização, insulfilm, som e acessórios automotivos com acabamento cuidadoso e orientação direta sem complicação.",
   },
   mechanic: {
     name: "Torque Lab",
-    kind: "Conceito fictício · oficina mecânica",
+    kind: "Demonstração interativa · oficina mecânica",
     image: "/concepts/torque-mechanic.webp",
-    description: "Diagnóstico, orçamento, aprovação e acompanhamento da ordem de serviço sem ruído.",
+    description: "Diagnóstico, telemetria ao vivo, aprovação e acompanhamento da ordem de serviço sem ruído.",
   },
   dentistry: {
     name: "Nexo Odonto",
-    kind: "Conceito fictício · odontologia",
+    kind: "Demonstração interativa · odontologia",
     image: "/concepts/nexo-dental.webp",
     description: "Uma jornada que reduz insegurança, explica possibilidades e conduz à avaliação correta.",
   },
   aesthetics: {
     name: "Lumina",
-    kind: "Conceito fictício · estética avançada",
+    kind: "Demonstração interativa · estética avançada",
     image: "/concepts/lumina-clinic.jpg",
     description: "Tratamentos, objetivos e avaliação apresentados com elegância e sem promessas exageradas.",
   },
   autonomous: {
     name: "Caio Move",
-    kind: "Conceito fictício · profissional autônomo",
+    kind: "Demonstração interativa · profissional autônomo",
     image: "/concepts/caio-move.webp",
     description: "Marca pessoal, método, programas e agenda capazes de explicar valor antes da conversa sobre preço.",
   },
   realestate: {
     name: "Cora Imóveis",
-    kind: "Conceito fictício · imobiliária completa",
-    image: "/concepts/atlas-villa.webp",
-    description: "Busca detalhada, imóveis atualizados, favoritos, bairros e atendimento contextual em uma experiência moderna.",
+    kind: "Demonstração interativa · mansões & penthouses",
+    image: "/concepts/cora-penthouse.jpg",
+    description: "Curadoria patrimonial, mapa radar interativo, simulador SAC e agendamento privativo.",
   },
   moreira: {
     name: "Moreira & Lima",
-    kind: "Conceito fictício · advocacia empresarial",
+    kind: "Demonstração interativa · advocacia empresarial",
     image: "/concepts/moreira-law.jpg",
     description: "Sobriedade, clareza e autoridade para tornar assuntos complexos mais seguros desde o primeiro contato.",
   },
+  salon: {
+    name: "Auréa Atelier",
+    kind: "Demonstração interativa · salão de beleza",
+    image: "/concepts/aurea-salon-v2.png",
+    description: "Serviços, profissionais e agenda organizados em uma experiência elegante, rápida e fácil de entender.",
+  },
   fashion: {
-    name: "Noma",
-    kind: "Conceito fictício · moda autoral",
-    image: "/concepts/noma-fashion.jpg",
-    description: "Editorial, coleção e compra integrados em uma experiência minimalista com identidade forte.",
+    name: "Nike Lab // Aether",
+    kind: "Demonstração interativa · E-commerce & Sportswear",
+    image: "/concepts/nike-hero.jpg",
+    description: "E-commerce de alta performance, amortecimento Air Max, tecidos técnicos Dri-FIT e sacola de compras com checkout integrado.",
   },
   realtor: {
     name: "Marina Vale",
-    kind: "Conceito fictício · corretora de imóveis",
+    kind: "Demonstração interativa · corretora de imóveis",
     image: "/concepts/marina-realty.webp",
     description: "Marca pessoal, curadoria e bairros apresentados para transformar uma busca extensa em uma seleção útil.",
   },
@@ -177,37 +218,47 @@ type PortfolioSpotlightType = keyof typeof portfolioSpotlights;
 const offers = [
   {
     name: "Landing Page Profissional",
-    price: "R$ 89,90/mês",
-    priceNoFidelity: "R$ 49,90/mês",
+    decisionLabel: "CAPTAR PARA UMA OFERTA",
+    decisionAnswer: "Uma página · uma ação principal",
+    price: "R$ 79,90/mês",
+    priceNoFidelity: "R$ 99,90/mês",
     setupNoFidelity: "R$ 399,90 à vista",
+    oneTimePrice: "R$ 997,00",
+    oneTimeTerms: "Projeto entregue · sem mensalidade Avancini",
     deadline: "R$ 0 de taxa de criação · Contrato 6 meses",
     description: "Uma landing criada no padrão Avancini Dash com alta conversão para atrair contatos e agendamentos.",
+    scope: "1 página estratégica · 1 objetivo principal · conteúdo alinhado no briefing",
     includes: [
       "Estratégia, texto persuasivo e design exclusivo",
       "Formulário e WhatsApp integrados",
       "Versão mobile ultrarrápida e responsiva",
       "Endereço na rede Avancini incluso (R$ 0 de entrada)",
-      "Opção de .com.br próprio (+ R$ 49,90 no 1º mês sob consulta de disponibilidade)",
+      "Opção de domínio .com.br próprio, sujeita à disponibilidade e análise",
       "Hospedagem, SSL, suporte e 1 ajuste mensal",
     ],
     ideal: "Para serviços, consultores e ofertas diretas",
     cta: "Quero minha Landing Page",
-    message: "Olá! Quero contratar a Landing Page Profissional por R$ 89,90/mês (sem taxa de criação · contrato de 6 meses).",
+    message: "Olá! Quero contratar a Landing Page Profissional por R$ 79,90/mês (sem taxa de criação · contrato de 6 meses).",
     question: "Olá! Tenho uma dúvida sobre a Landing Page Profissional.",
     badge: "MAIS ESCOLHIDO",
     featured: false,
   },
   {
     name: "Site Institucional",
-    price: "A partir de R$ 149,90/mês",
-    priceNoFidelity: "A partir de R$ 69,90/mês",
+    decisionLabel: "APRESENTAR A EMPRESA",
+    decisionAnswer: "Autoridade · serviços · contatos",
+    price: "A partir de R$ 109,90/mês",
+    priceNoFidelity: "A partir de R$ 139,90/mês",
     setupNoFidelity: "A partir de R$ 599,90 à vista",
+    oneTimePrice: "A partir de R$ 1.997,00",
+    oneTimeTerms: "Projeto entregue · sem mensalidade Avancini",
     deadline: "R$ 0 de taxa de criação · Contrato 6 meses",
     description: "Uma presença completa para apresentar a empresa, organizar serviços e transmitir autoridade antes da conversa.",
+    scope: "Estrutura inicial de até 5 páginas · escopo ampliável após o briefing",
     includes: [
       "Estrutura institucional com páginas e navegação",
       "Serviços, diferenciais, contatos e chamadas para ação",
-      "Opção de .com.br próprio (+ R$ 49,90 no 1º mês sob consulta de disponibilidade)",
+      "Opção de domínio .com.br próprio, sujeita à disponibilidade e análise",
       "Hospedagem de alta velocidade, SSL e suporte contínuo",
     ],
     ideal: "Para empresas que precisam apresentar sua estrutura com clareza",
@@ -219,11 +270,16 @@ const offers = [
   },
   {
     name: "Site Catálogo / Vitrine",
-    price: "A partir de R$ 179,90/mês",
-    priceNoFidelity: "A partir de R$ 89,90/mês",
+    decisionLabel: "MOSTRAR VARIEDADE",
+    decisionAnswer: "Vitrine · filtros · pedido no WhatsApp",
+    price: "A partir de R$ 139,00/mês",
+    priceNoFidelity: "A partir de R$ 169,90/mês",
     setupNoFidelity: "A partir de R$ 790,00 à vista",
+    oneTimePrice: "A partir de R$ 2.497,00",
+    oneTimeTerms: "Projeto entregue · sem mensalidade Avancini",
     deadline: "R$ 0 de taxa de criação · Contrato 6 meses",
     description: "Estrutura completa para apresentar produtos, estoques ou um catálogo amplo de serviços sem parecer uma lista genérica.",
+    scope: "Catálogo inicial de até 30 itens · volumes maiores recebem proposta própria",
     includes: [
       "Vitrine de produtos ou serviços com fotos e detalhes",
       "Botão de orçamento no WhatsApp em cada item",
@@ -238,84 +294,104 @@ const offers = [
     featured: false,
   },
   {
-    name: "Projeto Exclusivo",
-    price: "Sob orçamento",
-    priceNoFidelity: "Sob orçamento",
-    setupNoFidelity: "Proposta personalizada",
-    deadline: "Escopo, prazo e contratação definidos no briefing",
-    description: "Uma estrutura desenhada para a realidade da empresa quando o projeto não cabe em um formato pronto.",
+    name: "Loja Virtual",
+    decisionLabel: "VENDER PELO SITE",
+    decisionAnswer: "Carrinho · pagamento · pedidos",
+    price: "A partir de R$ 149,90/mês",
+    priceNoFidelity: "A partir de R$ 189,90/mês",
+    setupNoFidelity: "A partir de R$ 999,90 à vista",
+    oneTimePrice: "A partir de R$ 2.997,00",
+    oneTimeTerms: "Projeto e loja entregues · custos da plataforma separados",
+    deadline: "R$ 0 de taxa de criação · Contrato 6 meses",
+    description: "Para vender dentro do site com carrinho, pagamento, entrega e gestão dos pedidos.",
+    scope: "Escopo definido por catálogo, pagamento, frete, estoque e plataforma escolhida",
     includes: [
-      "Estratégia e arquitetura totalmente sob medida",
-      "Recursos, integrações e jornadas próprias",
-      "Proposta compatível com prioridade e orçamento",
-      "Pagamento recorrente ou único conforme o projeto",
+      "Catálogo com variações de produto",
+      "Carrinho e pagamento integrados",
+      "Configuração de entrega ou retirada",
+      "Orientação para estoque, pedidos e plataforma",
     ],
-    ideal: "Para operações que precisam de algo além de uma estrutura padrão",
-    cta: "Montar meu Projeto",
-    message: "Olá! Quero montar um Projeto Exclusivo com a Avancini Dash.",
-    question: "Olá! Tenho uma dúvida sobre o Projeto Exclusivo.",
-    badge: "SOB MEDIDA",
-    featured: true,
+    ideal: "Para roupas, acessórios, cosméticos, brinquedos e outros produtos físicos",
+    cta: "Planejar minha Loja",
+    message: "Olá! Quero conversar sobre uma Loja Virtual da Avancini Dash.",
+    question: "Olá! Tenho uma dúvida sobre Loja Virtual, catálogo, pagamento e entrega.",
+    badge: "VENDA DENTRO DO SITE",
+    featured: false,
   },
 ] as const;
 
 function PortfolioConceptPage({ type }: { type: PortfolioSpotlightType }) {
-  if (type === "sandiego") return (
-    <div className="portfolio-full-page sandiego-full-page">
-      <section className="sandiego-hero">
-        <nav>
-          <strong><i>SD</i><span>CLÍNICA SAN DIEGO<small>CUIDADO MÉDICO INTEGRADO</small></span></strong>
-          <div><span>Especialidades</span><span>Equipe</span><span>Exames</span><span>Contato</span></div>
-          <button type="button">AGENDAR CONSULTA</button>
-        </nav>
-        <div className="sandiego-copy">
-          <small>SAÚDE COM ESCUTA, CLAREZA E CONTINUIDADE</small>
-          <h2>Cuidado completo.<br /><em>Em cada etapa.</em></h2>
-          <p>Consultas, exames e acompanhamento reunidos em uma experiência simples para você entender o próximo passo e se sentir bem cuidado.</p>
-          <div><button type="button">AGENDAR ATENDIMENTO ↗</button><span><i /> Atendimento particular e convênios</span></div>
-        </div>
-        <div className="sandiego-visual">
-          <SiteImage src="/concepts/lumina-clinic.jpg" alt="Profissional de saúde em atendimento cuidadoso" />
-          <aside><small>PRÓXIMO HORÁRIO</small><strong>Hoje · 16:40</strong><span>Confirmação pelo WhatsApp</span></aside>
-        </div>
-      </section>
-      <div className="sandiego-trust"><span><b>12+</b> especialidades</span><span><b>4.9</b> avaliação simulada</span><span><b>24h</b> para retorno de exames</span><span><b>1 só lugar</b> para acompanhar sua saúde</span></div>
-      <section className="sandiego-services">
-        <header><small>ESPECIALIDADES</small><h3>Você não precisa descobrir<br />sozinho por onde começar.</h3><p>A equipe orienta o atendimento certo e mantém seu histórico organizado ao longo do cuidado.</p></header>
-        <div>{[["01", "Clínica médica", "Avaliação ampla para entender sintomas e organizar os próximos passos."], ["02", "Cardiologia", "Prevenção, exames e acompanhamento com explicações claras."], ["03", "Saúde da mulher", "Cuidado próximo em diferentes fases, com privacidade e acolhimento."]].map(([number, title, copy]) => <article key={number}><span>{number}</span><h4>{title}</h4><p>{copy}</p><b>CONHECER ↗</b></article>)}</div>
-      </section>
-      <section className="sandiego-journey"><div><small>SUA JORNADA</small><h3>Da primeira conversa<br />ao acompanhamento.</h3></div><ol><li><b>01</b><span>Conte o que precisa</span><em>A equipe identifica a especialidade adequada.</em></li><li><b>02</b><span>Escolha o melhor horário</span><em>Confirmação e orientações chegam no celular.</em></li><li><b>03</b><span>Acompanhe sua saúde</span><em>Histórico, exames e retorno seguem conectados.</em></li></ol></section>
-      <section className="sandiego-final"><small>SEU CUIDADO PODE COMEÇAR AGORA</small><h3>Encontre o atendimento certo.</h3><button type="button">FALAR COM A CLÍNICA ↗</button></section>
-    </div>
-  );
-
-  if (type === "tapecar") return null;
-  const sectorType: SectorPrototypeType = type === "moreira" ? "law" : type;
-  return <SectorPrototypePage type={sectorType} />;
+  if (type === "sandiego" || type === "tapecar") return null;
+  const sectorType: SectorShowcaseType = type === "moreira" ? "law" : type;
+  return <SectorShowcasePage type={sectorType} />;
 }
 const formatMoney = (value: number) =>
   new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL", maximumFractionDigits: 0 }).format(value);
 
-function WebOpportunitySimulator({ onLead }: { onLead: (message: string) => void }) {
-  const [monthlyDemand, setMonthlyDemand] = useState(250);
-  const [currentContacts, setCurrentContacts] = useState(8);
-  const [additionalContacts, setAdditionalContacts] = useState(10);
-  const [averageTicket, setAverageTicket] = useState(300);
-  const [goal, setGoal] = useState<"oferta" | "empresa" | "vendas">("empresa");
+type DashOpportunityGoal = "oferta" | "empresa" | "vendas";
 
-  const monthlyOpportunity = additionalContacts * averageTicket;
+const dashOpportunityGoals = {
+  oferta: {
+    name: "Landing de Conversão",
+    reason: "Para concentrar uma campanha ou oferta em uma única ação, sem dispersar o visitante.",
+    wins: 4,
+    ticket: 250,
+    winsLabel: "Quantos clientes adicionais formam um cenário possível?",
+    winsHint: "escolha uma hipótese conservadora, não uma promessa",
+    ticketLabel: "Valor médio de cada contratação",
+    ticketHint: "ticket da oferta anunciada",
+    route: ["Vê a campanha", "Entende a oferta", "Pede orçamento"],
+    potentialLabel: "VALOR DESTE CENÁRIO HIPOTÉTICO",
+    outcome: "novos clientes",
+  },
+  empresa: {
+    name: "Site Institucional",
+    reason: "Para apresentar a empresa com autoridade, organizar serviços e gerar confiança antes da conversa.",
+    wins: 3,
+    ticket: 300,
+    winsLabel: "Quantos clientes adicionais formam um cenário possível?",
+    winsHint: "escolha uma hipótese conservadora, não uma promessa",
+    ticketLabel: "Valor médio de um novo cliente",
+    ticketHint: "primeira compra ou contratação",
+    route: ["Procura a empresa", "Compara confiança", "Entra em contato"],
+    potentialLabel: "VALOR DESTE CENÁRIO HIPOTÉTICO",
+    outcome: "novos clientes",
+  },
+  vendas: {
+    name: "Loja Virtual",
+    reason: "Para vender produtos no próprio site com catálogo, carrinho, pagamento, entrega e gestão dos pedidos.",
+    wins: 12,
+    ticket: 180,
+    winsLabel: "Quantos pedidos adicionais formam um cenário possível?",
+    winsHint: "escolha uma hipótese conservadora, não uma promessa",
+    ticketLabel: "Ticket médio de cada pedido",
+    ticketHint: "valor médio do carrinho",
+    route: ["Descobre o produto", "Adiciona ao carrinho", "Conclui o pedido"],
+    potentialLabel: "VALOR DESTE CENÁRIO HIPOTÉTICO",
+    outcome: "novos pedidos",
+  },
+} as const;
+
+function WebOpportunitySimulator({ onLead }: { onLead: (message: string) => void }) {
+  const [additionalWins, setAdditionalWins] = useState(3);
+  const [averageTicket, setAverageTicket] = useState(300);
+  const [goal, setGoal] = useState<DashOpportunityGoal>("empresa");
+
+  const currentGoal = dashOpportunityGoals[goal];
+  const monthlyOpportunity = additionalWins * averageTicket;
   const yearlyOpportunity = monthlyOpportunity * 12;
-  const recommendation = {
-    oferta: { name: "Landing de Conversão", reason: "Para transformar uma oferta específica em uma jornada curta até o contato." },
-    empresa: { name: "Site Institucional", reason: "Para apresentar a empresa com autoridade, organizar serviços e gerar confiança antes da conversa." },
-    vendas: { name: "Projeto Personalizado", reason: "Para catálogo, loja ou experiência com recursos próprios de venda e atendimento." },
-  }[goal];
+  const chooseGoal = (nextGoal: DashOpportunityGoal) => {
+    const next = dashOpportunityGoals[nextGoal];
+    setGoal(nextGoal);
+    setAdditionalWins(next.wins);
+    setAverageTicket(next.ticket);
+  };
 
   return (
     <section className="web-opportunity" aria-labelledby="web-opportunity-title">
       <header>
         <div><span>SIMULAÇÃO DE OPORTUNIDADE</span><h2 id="web-opportunity-title">Quanto pode custar<br /><em>continuar invisível?</em></h2></div>
-        <p>Não é só sobre ter um site bonito. É sobre quantas pessoas não encontram sua empresa, não sentem confiança ou escolhem quem parece mais preparado.</p>
+        <p>Escolha uma hipótese simples e veja o valor envolvido. O cálculo usa somente clientes adicionais × valor médio — sem porcentagem escondida e sem promessa de resultado.</p>
       </header>
       <div className="web-opportunity-console">
         <div className="web-opportunity-inputs">
@@ -323,203 +399,63 @@ function WebOpportunitySimulator({ onLead }: { onLead: (message: string) => void
           <fieldset className="dash-opportunity-choice">
             <legend>Qual resultado você precisa primeiro?</legend>
             <div>
-              <button className={goal === "oferta" ? "active" : ""} type="button" onClick={() => setGoal("oferta")}><span>01</span>Divulgar uma oferta</button>
-              <button className={goal === "empresa" ? "active" : ""} type="button" onClick={() => setGoal("empresa")}><span>02</span>Apresentar a empresa</button>
-              <button className={goal === "vendas" ? "active" : ""} type="button" onClick={() => setGoal("vendas")}><span>03</span>Vender pela internet</button>
+              <button aria-pressed={goal === "oferta"} className={goal === "oferta" ? "active" : ""} type="button" onClick={() => chooseGoal("oferta")}><span>01</span>Divulgar uma oferta</button>
+              <button aria-pressed={goal === "empresa"} className={goal === "empresa" ? "active" : ""} type="button" onClick={() => chooseGoal("empresa")}><span>02</span>Apresentar a empresa</button>
+              <button aria-pressed={goal === "vendas"} className={goal === "vendas" ? "active" : ""} type="button" onClick={() => chooseGoal("vendas")}><span>03</span>Vender pela internet</button>
             </div>
           </fieldset>
-          <label><span><b>Pessoas procurando seu serviço</b><small>estimativa mensal</small></span><output>{monthlyDemand}</output><input type="range" min="50" max="2000" step="50" value={monthlyDemand} onChange={(event) => setMonthlyDemand(Number(event.target.value))} /></label>
-          <label><span><b>Quantas conversas chegam até você hoje?</b><small>contatos recebidos no mês</small></span><output>{currentContacts}</output><input type="range" min="1" max="100" value={currentContacts} onChange={(event) => setCurrentContacts(Number(event.target.value))} /></label>
-          <label><span><b>Quantos novos contatos justificariam o projeto?</b><small>uma quantidade possível para simular</small></span><output>+{additionalContacts}</output><input type="range" min="1" max="50" value={additionalContacts} onChange={(event) => setAdditionalContacts(Number(event.target.value))} /></label>
-          <label><span><b>Valor médio de um novo cliente</b><small>ticket ou primeira compra</small></span><output>{formatMoney(averageTicket)}</output><input type="range" min="50" max="5000" step="50" value={averageTicket} onChange={(event) => setAverageTicket(Number(event.target.value))} /></label>
+          <label><span><b>{currentGoal.winsLabel}</b><small>{currentGoal.winsHint}</small></span><output>+{additionalWins}</output><input aria-label={currentGoal.winsLabel} type="range" min="1" max="50" value={additionalWins} onChange={(event) => setAdditionalWins(Number(event.target.value))} /></label>
+          <label><span><b>{currentGoal.ticketLabel}</b><small>{currentGoal.ticketHint}</small></span><output>{formatMoney(averageTicket)}</output><input aria-label={currentGoal.ticketLabel} type="range" min="50" max="5000" step="50" value={averageTicket} onChange={(event) => setAverageTicket(Number(event.target.value))} /></label>
+          <div className="dash-opportunity-formula"><small>CÁLCULO VISÍVEL</small><strong>{additionalWins} × {formatMoney(averageTicket)}</strong><span>clientes ou pedidos adicionais × valor médio</span></div>
         </div>
         <div className="web-opportunity-result" aria-live="polite">
-          <div className="opportunity-result-top"><span>PROJEÇÃO COM AS PREMISSAS ACIMA</span><b>REF:// DASH · {String(monthlyDemand).padStart(4, "0")}</b></div>
-          <div className="opportunity-current"><small>CONVERSAS QUE VOCÊ RECEBE HOJE</small><strong>{currentContacts}<em>/mês</em></strong><p>Você informou {currentContacts} contatos diante de uma procura estimada de {monthlyDemand} pessoas pelo serviço.</p></div>
-          <div className="opportunity-arrow" aria-hidden="true"><i /><b>+{additionalContacts} novas conversas</b><i /></div>
-          <div className="opportunity-route"><span>Cliente procura</span><i>→</i><span>Compara quem transmite confiança</span><i>→</i><span>Escolhe com quem conversar</span></div>
-          <div className="opportunity-potential"><small>POTENCIAL MENSAL DESTRAVADO</small><strong>{formatMoney(monthlyOpportunity)}<em>/mês</em></strong><p>Equivale a cerca de <b>{additionalContacts} novas conversas</b> se sua presença digital capturar um pouco melhor.</p></div>
-          <div className="dash-opportunity-recommendation"><div><small>MELHOR PRIMEIRO PASSO PARA ESTE OBJETIVO</small><strong>{recommendation.name}</strong><p>{recommendation.reason}</p></div><span>QUALIDADE COMPLETA<br /><b>estrutura conforme o objetivo</b></span></div>
-          <footer><div><small>EM 12 MESES NESTE CENÁRIO</small><strong>{formatMoney(yearlyOpportunity)}</strong></div><button type="button" onClick={() => onLead(`Quero conversar sobre ${recommendation.name}. Na simulação, usei ${monthlyDemand} pessoas procurando o serviço por mês, ${currentContacts} contatos atuais, ${additionalContacts} novas conversas como cenário e ticket médio de ${formatMoney(averageTicket)}.`)}>Quero transformar presença em clientes <b>↗</b></button></footer>
+          <div className="opportunity-result-top"><span>CENÁRIO CRIADO COM AS SUAS PREMISSAS</span><b>REF:// DASH · {goal.toUpperCase()}</b></div>
+          <div className="opportunity-current opportunity-current-copy"><small>O QUE ESTE NÚMERO SIGNIFICA</small><strong>{additionalWins}<em>{currentGoal.outcome}</em></strong><p>Esta é uma hipótese escolhida por você para enxergar a ordem de grandeza da oportunidade — não uma previsão automática.</p></div>
+          <div className="opportunity-arrow" aria-hidden="true"><i /><b>+{additionalWins} {currentGoal.outcome}</b><i /></div>
+          <div className="opportunity-route"><span>{currentGoal.route[0]}</span><i>→</i><span>{currentGoal.route[1]}</span><i>→</i><span>{currentGoal.route[2]}</span></div>
+          <div className="opportunity-potential"><small>{currentGoal.potentialLabel}</small><strong>{formatMoney(monthlyOpportunity)}<em>/mês</em></strong><p>Cálculo direto: <b>{additionalWins} {currentGoal.outcome}</b> × {formatMoney(averageTicket)} de valor médio.</p></div>
+          <div className="dash-opportunity-recommendation"><div><small>MELHOR PRIMEIRO PASSO PARA ESTE OBJETIVO</small><strong>{currentGoal.name}</strong><p>{currentGoal.reason}</p></div><span>QUALIDADE COMPLETA<br /><b>estrutura conforme o objetivo</b></span></div>
+          <footer><div><small>EM 12 MESES, SE O CENÁRIO SE REPETIR</small><strong>{formatMoney(yearlyOpportunity)}</strong></div><button type="button" onClick={() => onLead(`Quero conversar sobre ${currentGoal.name}. Montei uma hipótese de ${additionalWins} ${currentGoal.outcome} adicionais por mês, com valor médio de ${formatMoney(averageTicket)}.`)}>Quero avaliar este cenário <b>↗</b></button></footer>
         </div>
       </div>
-      <small className="opportunity-disclaimer">Estimativa educativa baseada nos valores que você escolheu. Não representa garantia de tráfego, conversão ou faturamento. O diagnóstico real considera mercado, oferta, canal e operação.</small>
+      <small className="opportunity-disclaimer">Simulação educativa baseada somente nos valores escolhidos por você. Não representa média de mercado, garantia de tráfego, conversão ou faturamento.</small>
     </section>
   );
 }
 
 
 function DashBeforeAfterSlider() {
-  const [sliderPos, setSliderPos] = useState(50);
-
   return (
     <section className="dash-comparison-section" id="antes-depois">
       <div className="section-heading" style={{ margin: "0 auto 40px", maxWidth: "1240px" }}>
         <div>
-          <span className="section-index">ANTES E DEPOIS · EXPERIÊNCIA DIGITAL</span>
-          <h2>A diferença entre um site comum<br />e o padrão Avancini Dash.</h2>
+          <span className="section-index">PROJETO REAL · CLÍNICA SAN DIEGO</span>
+          <h2>O site anterior de um lado.<br />O projeto aprovado do outro.</h2>
         </div>
-        <p>Arraste o divisor para comparar o impacto visual, a clareza da proposta e a autoridade imediata percebida pelo visitante.</p>
+        <p>Role dentro de cada janela para percorrer os dois projetos do início ao fim. A comparação usa somente o site antigo e a Clínica San Diego real criada no padrão Avancini Dash.</p>
       </div>
 
-      <div className="dash-comparison-slider-wrap">
-        <div className="dash-compare-tag dash-tag-before">SEM DIREÇÃO</div>
-        <div className="dash-compare-tag dash-tag-after">COM ESTRATÉGIA DASH</div>
-
-        <div className="dash-compare-side dash-compare-after" aria-hidden="true">
-          <nav><b>NORTE.</b><span>Serviços</span><span>Projetos</span><button>Solicitar proposta</button></nav>
-          <div><small>PRESENÇA QUE POSICIONA</small><h3>Sua empresa pronta<br />para ser escolhida.</h3><p>Clareza, autoridade e um caminho direto até o contato.</p><button>CONHECER A SOLUÇÃO ↗</button></div>
-          <aside><strong>+ presença</strong><span>mensagem clara</span><span>experiência mobile</span></aside>
-        </div>
-
-        <div className="dash-compare-before" style={{ width: `${sliderPos}%` }} aria-hidden="true">
-          <div className="dash-compare-before-canvas">
-            <nav><b>EMPRESA</b><span>Início | Sobre | Serviços | Contato</span></nav>
-            <div><h3>Bem-vindo ao nosso site</h3><p>Somos uma empresa comprometida com qualidade. Entre em contato para saber mais sobre nossos serviços.</p><button>Saiba mais</button></div>
-            <aside><span>Texto genérico</span><span>hierarquia fraca</span><span>sem próximo passo</span></aside>
+      <div className="dash-comparison-browsers">
+        <article className="dash-comparison-browser dash-comparison-before-browser">
+          <header><span><i /><i /><i /></span><strong>ANTES · SITE PÚBLICO ATUAL</strong><a href="https://clinicasandiego.com.br/" target="_blank" rel="noreferrer">ABRIR ↗</a></header>
+          <div className="dash-comparison-live-site">
+            <iframe src="https://clinicasandiego.com.br/" title="Site público da Clínica San Diego" loading="lazy" />
           </div>
-        </div>
+          <footer><span>ROLE DENTRO DA JANELA</span><b>Site real · navegação completa</b></footer>
+        </article>
 
-        <input className="dash-compare-range" type="range" min="12" max="88" value={sliderPos} onChange={(event) => setSliderPos(Number(event.target.value))} aria-label="Comparar um site sem direção com uma experiência Avancini Dash" />
-        <div className="dash-compare-handle" style={{ left: `${sliderPos}%` }} aria-hidden="true">⇄</div>
+        <article className="dash-comparison-browser dash-comparison-after-browser">
+          <header><span><i /><i /><i /></span><strong>DEPOIS · CLÍNICA SAN DIEGO REAL</strong><em>PROJETO APLICADO</em></header>
+          <div className="dash-comparison-project" role="region" tabIndex={0} aria-label="Projeto completo e real da Clínica San Diego, role para navegar">
+            <SiteImage src="/projects/san-diego-full.png" alt="Site completo e real da Clínica San Diego" sizes="72vw" quality={82} />
+          </div>
+          <footer><span>ROLE DENTRO DA JANELA</span><b>Experiência completa · do topo ao rodapé</b></footer>
+        </article>
       </div>
-    </section>
-  );
-}
-
-function ExpressProposalBuilder() {
-  const [selectedPlan, setSelectedPlan] = useState("landing");
-  const [contractType, setContractType] = useState("recorrente");
-  const [domainType, setDomainType] = useState("avancini");
-
-  const plansMap = {
-    landing: {
-      name: "Landing Page Profissional",
-      desc: "Página de alta conversão para serviços, consultores e ofertas diretas."
-    },
-    institucional: {
-      name: "Site Institucional",
-      desc: "Presença completa para apresentar empresa, serviços, diferenciais e contato."
-    },
-    catalogo: {
-      name: "Site Catálogo / Vitrine",
-      desc: "Vitrine completa para empresas com múltiplos produtos ou catálogo de serviços."
-    },
-    personalizado: {
-      name: "Projeto Personalizado",
-      desc: "Uma estrutura exclusiva quando o objetivo pede recursos e jornada próprios."
-    }
-  };
-
-  const current = plansMap[selectedPlan as keyof typeof plansMap];
-  const domainText = domainType === "combr" ? "Domínio próprio .com.br" : "Endereço na rede Avancini";
-
-  const msg = `Olá, Ivo! Usei o configurador da Avancini Dash e quero conversar sobre ${current.name}. Prefiro ${contractType === "recorrente" ? "uma contratação recorrente" : "pagamento único"} e ${domainText.toLowerCase()}. Quero entender a melhor estrutura e receber uma proposta para minha realidade.`;
-
-  return (
-    <section className="proposal-builder-section" id="gerador-proposta">
-      <div className="section-heading" style={{ margin: "0 auto 40px", maxWidth: "1240px" }}>
-        <div>
-          <span className="section-index">PRÓXIMO PASSO · SEM PREÇO REPETIDO</span>
-          <h2>Conte o que faz sentido.<br />A proposta nasce da sua realidade.</h2>
-        </div>
-        <p>Escolha o plano, o formato de contratação e envie diretamente para o WhatsApp do Ivo para começar.</p>
-      </div>
-
-      <div className="proposal-builder-wrap">
-        <div className="proposal-steps">
-          <div className="proposal-step-group">
-            <span className="step-num">PASSO 01</span>
-            <h4>Qual é o objetivo principal da sua empresa?</h4>
-            <div className="proposal-options-grid">
-              <button
-                type="button"
-                className={`proposal-opt-btn ${selectedPlan === "landing" ? "active" : ""}`}
-                onClick={() => setSelectedPlan("landing")}
-              >
-                <strong>Landing Page</strong>
-                <small style={{ display: "block", color: "#8892a0", marginTop: "4px" }}>Serviços e ofertas diretas</small>
-              </button>
-              <button
-                type="button"
-                className={`proposal-opt-btn ${selectedPlan === "catalogo" ? "active" : ""}`}
-                onClick={() => setSelectedPlan("catalogo")}
-              >
-                <strong>Site Catálogo</strong>
-                <small style={{ display: "block", color: "#8892a0", marginTop: "4px" }}>Múltiplos produtos/serviços</small>
-              </button>
-              <button type="button" className={`proposal-opt-btn ${selectedPlan === "institucional" ? "active" : ""}`} onClick={() => setSelectedPlan("institucional")}><strong>Site Institucional</strong><small>Empresa, serviços e autoridade</small></button>
-              <button type="button" className={`proposal-opt-btn ${selectedPlan === "personalizado" ? "active" : ""}`} onClick={() => setSelectedPlan("personalizado")}><strong>Projeto Personalizado</strong><small>Jornada e recursos sob medida</small></button>
-            </div>
-          </div>
-
-          <div className="proposal-step-group">
-            <span className="step-num">PASSO 02</span>
-            <h4>Como prefere contratar?</h4>
-            <div className="proposal-options-grid">
-              <button
-                type="button"
-                className={`proposal-opt-btn ${contractType === "recorrente" ? "active" : ""}`}
-                onClick={() => setContractType("recorrente")}
-              >
-                <strong>Plano recorrente</strong>
-                <small>Menor entrada e acompanhamento contínuo</small>
-              </button>
-              <button
-                type="button"
-                className={`proposal-opt-btn ${contractType === "unico" ? "active" : ""}`}
-                onClick={() => setContractType("unico")}
-              >
-                <strong>Pagamento único</strong>
-                <small>Projeto comprado e manutenção opcional</small>
-              </button>
-            </div>
-          </div>
-
-          <div className="proposal-step-group">
-            <span className="step-num">PASSO 03</span>
-            <h4>Qual endereço na internet você deseja?</h4>
-            <div className="proposal-options-grid">
-              <button
-                type="button"
-                className={`proposal-opt-btn ${domainType === "avancini" ? "active" : ""}`}
-                onClick={() => setDomainType("avancini")}
-              >
-                <strong>Rede Avancini</strong>
-                <small>Endereço incluso na estrutura Avancini</small>
-              </button>
-              <button
-                type="button"
-                className={`proposal-opt-btn ${domainType === "combr" ? "active" : ""}`}
-                onClick={() => setDomainType("combr")}
-              >
-                <strong>Domínio Próprio .com.br</strong>
-                <small>Endereço exclusivo registrado para sua marca</small>
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <div className="proposal-summary-card">
-          <small>SEU PONTO DE PARTIDA</small>
-          <h3>{current.name}</h3>
-          <p>{current.desc}</p>
-          <div className="proposal-price-box"><span>CONTRATAÇÃO</span><strong>{contractType === "recorrente" ? "Plano recorrente" : "Pagamento único"}</strong><span>{domainText}</span></div>
-          <ul>
-            <li>Estratégia, texto e design exclusivo</li>
-            <li>Versão mobile ultrarrápida</li>
-            <li>Hospedagem, SSL e suporte inclusos</li>
-            <li>{domainText}</li>
-          </ul>
-          <a
-            className="proposal-send-btn"
-            href={whatsappFor(msg)}
-            target="_blank"
-            rel="noreferrer"
-          >
-            PEDIR UMA PROPOSTA COERENTE <b>↗</b>
-          </a>
-        </div>
+      <div className="dash-comparison-verdict">
+        <span>O QUE MUDA</span>
+        <p><b>Antes:</b> informação dispersa e uma identidade que não acompanha o nível do atendimento.</p>
+        <p><b>Depois:</b> proposta clara, hierarquia, confiança e caminhos objetivos até o agendamento.</p>
       </div>
     </section>
   );
@@ -534,9 +470,15 @@ export default function Home() {
   const [budgetTransition, setBudgetTransition] = useState<{ title: string } | null>(null);
   const budgetTimerRef = useRef<number | null>(null);
   const leadInputRef = useRef<HTMLInputElement | null>(null);
+  const menuDialogRef = useRef<HTMLDivElement | null>(null);
+  const portfolioDialogRef = useRef<HTMLDivElement | null>(null);
+  const menuCloseRef = useRef<HTMLButtonElement | null>(null);
+  const portfolioCloseRef = useRef<HTMLButtonElement | null>(null);
   const [scrolled, setScrolled] = useState(false);
-  const [fidelityMode, setFidelityMode] = useState<"com-fidelidade" | "sem-fidelidade">("com-fidelidade");
+  const [fidelityMode, setFidelityMode] = useState<"com-fidelidade" | "sem-fidelidade" | "pagamento-unico">("com-fidelidade");
+  const [selectedOfferIndex, setSelectedOfferIndex] = useState(0);
   const [portfolioSpotlight, setPortfolioSpotlight] = useState<PortfolioSpotlightType | null>(null);
+
   const navigateFromMenu = (event: MouseEvent<HTMLAnchorElement>, href: string) => {
     event.preventDefault();
     setMenuOpen(false);
@@ -545,7 +487,9 @@ export default function Home() {
       document.querySelector(href)?.scrollIntoView({ behavior: "auto", block: "start" });
     }, 120);
   };
+
   useEffect(() => {
+    window.scrollTo(0, 0);
     const root = document.documentElement;
     const heroScene = document.querySelector<HTMLElement>(".web-hero-scene");
     const hero = heroScene?.querySelector<HTMLElement>(".hero");
@@ -597,6 +541,7 @@ export default function Home() {
   }, []);
   useEffect(() => {
     if (!portfolioSpotlight && !menuOpen && !leadOpen && !budgetTransition) return;
+    const previouslyFocused = document.activeElement instanceof HTMLElement ? document.activeElement : null;
     document.body.style.overflow = "hidden";
     const onKey = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
@@ -609,11 +554,27 @@ export default function Home() {
         setLeadOpen(false);
         setBudgetTransition(null);
       }
+      if (event.key === "Tab") {
+        const dialog = document.querySelector<HTMLElement>('[role="dialog"][aria-modal="true"]');
+        if (!dialog) return;
+        const focusable = Array.from(dialog.querySelectorAll<HTMLElement>('a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'));
+        if (!focusable.length) return;
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          last.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          first.focus();
+        }
+      }
     };
     window.addEventListener("keydown", onKey);
     return () => {
       document.body.style.overflow = "";
       window.removeEventListener("keydown", onKey);
+      previouslyFocused?.focus({ preventScroll: true });
     };
   }, [portfolioSpotlight, menuOpen, leadOpen, budgetTransition]);
 
@@ -627,12 +588,23 @@ export default function Home() {
     return () => window.cancelAnimationFrame(frame);
   }, [leadOpen]);
 
+  useEffect(() => {
+    if (!menuOpen) return;
+    const frame = window.requestAnimationFrame(() => menuCloseRef.current?.focus({ preventScroll: true }));
+    return () => window.cancelAnimationFrame(frame);
+  }, [menuOpen]);
+
+  useEffect(() => {
+    if (!portfolioSpotlight) return;
+    const frame = window.requestAnimationFrame(() => portfolioCloseRef.current?.focus({ preventScroll: true }));
+    return () => window.cancelAnimationFrame(frame);
+  }, [portfolioSpotlight]);
+
   const activeSpotlight = portfolioSpotlight ? portfolioSpotlights[portfolioSpotlight] : null;
   const openPortfolioItem = (view: string) => {
     trackMarketingEvent("portfolio_open", { project: view });
     setPortfolioSpotlight(view as PortfolioSpotlightType);
   };
-
   const openLead = (intent: string) => {
     setLeadIntent(intent);
     setLeadError("");
@@ -669,9 +641,7 @@ export default function Home() {
       <div className="page-progress" aria-hidden="true" />
       <header className={scrolled ? "header scrolled" : "header"}>
         <a className="logo" href="#inicio" aria-label="Avancini Dash, início">
-          <span className="logo-mark avancini-a-mark" aria-hidden="true">
-            <i />
-          </span>
+          <AvanciniMark variant="dash" className="logo-mark avancini-a-mark" />
           <span>
             <span className="brand-name">
               AVANCINI <b>DASH</b>
@@ -695,10 +665,10 @@ export default function Home() {
         </nav>
         <div className="web-ecosystem-switch" aria-label="Navegar entre as soluções Avancini">
           <Link className="button button-small header-cta header-sync-cta" href="/sync">
-            Avancini Sync <span>↗</span>
+            Avancini Sync <WebArrow />
           </Link>
           <Link className="button button-small header-cta" href="/">
-            Avancini OS <span>↗</span>
+            Avancini OS <WebArrow />
           </Link>
         </div>
         <button
@@ -713,33 +683,51 @@ export default function Home() {
         </button>
       </header>
       {menuOpen && (
-        <div className="web-menu-overlay" role="dialog" aria-modal="true" aria-label="Menu principal">
+        <div ref={menuDialogRef} tabIndex={-1} className="web-menu-overlay" role="dialog" aria-modal="true" aria-label="Menu principal">
           <div className="web-menu-top">
-            <span>NAVEGAÇÃO <i /> 06 SEÇÕES</span>
+            <span>NAVEGAÇÃO <i /> 07 SEÇÕES</span>
             <div className="web-menu-network" aria-label="Ecossistema Avancini">
-              <Link href="/" onClick={() => setMenuOpen(false)}>AVANCINI OS ↗</Link>
-              <Link href="/sync" onClick={() => setMenuOpen(false)}>AVANCINI SYNC ↗</Link>
+              <Link href="/" onClick={() => setMenuOpen(false)}>AVANCINI OS <WebArrow /></Link>
+              <Link href="/sync" onClick={() => setMenuOpen(false)}>AVANCINI SYNC <WebArrow /></Link>
             </div>
-            <button type="button" onClick={() => setMenuOpen(false)}>× <b>FECHAR</b><small>ESC</small></button>
+            <button ref={menuCloseRef} type="button" onClick={() => setMenuOpen(false)}>× <b>FECHAR</b><small>ESC</small></button>
           </div>
           <nav>
             {[
-              ["01", "Início", "#inicio"],
-              ["02", "Portfólio", "#portfolio"],
-              ["03", "Metodologia", "#metodo"],
-              ["04", "Serviços e planos", "#investimento"],
-              ["05", "Dúvidas", "#duvidas"],
-              ["06", "Contato", "#contato"],
-            ].map(([number, label, href]) => <a href={href} key={number} onClick={(event) => navigateFromMenu(event, href)}><small>{number}</small><span>{label}</span><b>↗</b></a>)}
+              ["01", "Início", "Presença que trabalha", "#inicio"],
+              ["02", "Portfólio", "Experiências por segmento", "#portfolio"],
+              ["03", "Antes e depois", "Compare o impacto", "#antes-depois"],
+              ["04", "Metodologia", "Estratégia antes do visual", "#metodo"],
+              ["05", "Serviços e planos", "Encontre o formato certo", "#investimento"],
+              ["06", "Dúvidas", "Decida com segurança", "#duvidas"],
+              ["07", "Contato", "Comece uma conversa", "#contato"],
+            ].map(([number, label, description, href]) => (
+              <a href={href} key={number} onClick={(event) => navigateFromMenu(event, href)}>
+                <small>{number}</small>
+                <span>{label}</span>
+                <em>{description}</em>
+                <WebArrow />
+              </a>
+            ))}
           </nav>
-          <div className="web-menu-bottom"><span><i /> SEU PROJETO PODE COMEÇAR POR UMA CONVERSA</span><button type="button" onClick={() => { setMenuOpen(false); startBudgetConversation("Seu novo site", "Quero solicitar um orçamento para um site profissional da Avancini Dash."); }}>SOLICITAR ORÇAMENTO ↗</button></div>
+          <div className="web-menu-bottom">
+            <span><i /> SEU PROJETO PODE COMEÇAR POR UMA CONVERSA</span>
+            <button
+              type="button"
+              onClick={() => {
+                setMenuOpen(false);
+                startBudgetConversation("Seu novo site", "Quero solicitar um orçamento para um site profissional da Avancini Dash.");
+              }}
+            >
+              SOLICITAR ORÇAMENTO <WebArrow />
+            </button>
+          </div>
         </div>
       )}
-
       <div className="web-hero-scene">
       <section className="hero hero-reference" id="inicio">
         <div className="hero-art-backdrop" aria-hidden="true">
-          <span className="hero-a-mark avancini-a-mark"><i /></span>
+          <AvanciniMark variant="dash" className="hero-a-mark avancini-a-mark" />
           <i className="art-scan" />
           <i className="art-flare" />
         </div>
@@ -773,27 +761,10 @@ export default function Home() {
           </div>
           <div className="hero-actions">
             <button className="button button-primary" type="button" onClick={() => startBudgetConversation("Seu novo site", "Quero solicitar um orçamento para criar ou modernizar o site da minha empresa.")}>
-              Solicitar orçamento <span>↗</span>
+              Solicitar orçamento <WebArrow />
             </button>
             <a className="button button-ghost" href="#portfolio">
-              Ver projetos <span>↓</span>
-            </a>
-          </div>
-          <div className="hero-choice-strip" id="escolhas" aria-label="Opções de site por assinatura">
-            <a href="/site-por-assinatura#plano-landing-page">
-              <small>DOMÍNIO PRÓPRIO · MENOR MENSALIDADE</small>
-              <strong>Landing Pro</strong>
-              <span>Campanha, oferta e captação em uma jornada direta ↗</span>
-            </a>
-            <a href="/site-por-assinatura#plano-site-catalogo">
-              <small>SEM ENTRADA · MESMA QUALIDADE</small>
-              <strong>Landing Start</strong>
-              <span>Comece com endereço Avancini e estrutura completa ↗</span>
-            </a>
-            <a href="/site-por-assinatura#plano-site">
-              <small>EMPRESA · SERVIÇOS · AUTORIDADE</small>
-              <strong>Site Institucional</strong>
-              <span>Apresente a empresa inteira e transmita confiança ↗</span>
+              Ver projetos <WebDownArrow />
             </a>
           </div>
           <div className="hero-trust">
@@ -804,16 +775,15 @@ export default function Home() {
         </div>
       </section>
       </div>
-
       <section className="web-portfolio-first" id="portfolio" aria-labelledby="web-portfolio-title">
         <header>
           <div><span>PORTFÓLIO / PROJETOS & CONCEITOS</span><h2 id="web-portfolio-title">Sites que fazem<br />a marca parecer maior.</h2></div>
           <div className="web-portfolio-guide">
-            <span className="web-portfolio-ref" aria-label="Referência, onze experiências">
-              REF:// CASES · 11 <i aria-hidden="true" />
+            <span className="web-portfolio-ref" aria-label="Referência, oito experiências em destaque">
+              REF:// DESTAQUES · 08 <i aria-hidden="true" />
             </span>
             <p>Veja como estratégia, mensagem e design elevam a percepção de uma empresa e preparam cada clique para virar oportunidade.</p>
-            <span className="web-portfolio-drag-note">PROJETOS EM MOVIMENTO · CLIQUE PARA AMPLIAR <b aria-hidden="true">↗</b></span>
+            <span className="web-portfolio-drag-note">PROJETOS EM MOVIMENTO · CLIQUE PARA AMPLIAR <WebArrow /></span>
           </div>
         </header>
         <div className="web-portfolio-marquee">
@@ -821,39 +791,33 @@ export default function Home() {
             <div className="web-portfolio-row" key={rowIndex}>
               <div className="web-portfolio-track">
                 {[...row, ...row].map((item, index) => (
-                  <button type="button" onClick={() => openPortfolioItem(item.view)} className={`web-portfolio-item ${item.className}`} key={`${item.name}-${index}`} aria-hidden={index >= row.length || undefined} tabIndex={index >= row.length ? -1 : undefined} aria-label={index < row.length ? `Ampliar projeto ${item.name}` : undefined}>
+                  <button
+                    type="button"
+                    onClick={() => openPortfolioItem(item.view)}
+                    className={`web-portfolio-item ${item.className}`}
+                    key={`${item.name}-${index}`}
+                    aria-hidden={index >= row.length || undefined}
+                    tabIndex={index >= row.length ? -1 : undefined}
+                    aria-label={index < row.length ? `Ampliar projeto ${item.name}` : undefined}
+                  >
                     <SiteImage src={item.image} alt={index < row.length ? item.name : ""} sizes="(max-width: 760px) 78vw, 28vw" quality={82} />
-                    <span><strong>{item.name}</strong><em><i />{item.action}</em><b>Ampliar projeto ↗</b></span>
+                    <span><strong>{item.name}</strong><em><i />{item.action}</em><b>Ampliar projeto <WebArrow /></b></span>
                   </button>
                 ))}
               </div>
             </div>
           ))}
         </div>
-        <div className="web-portfolio-all"><strong>Escolha um segmento, amplie e role dentro da experiência completa sem sair da página.</strong><span>11 EXPERIÊNCIAS COMPLETAS ↗</span></div>
-      </section>
-
-      <WebOpportunitySimulator onLead={(message) => startBudgetConversation("Simulação de oportunidade digital", message)} />
-
-      <section className="signal-bar" aria-label="Especialidades da Avancini Dash">
-        <div className="signal-track">
-          {[0, 1].flatMap((copy) => [
-            ["✦", "Design estratégico"], ["◇", "Segurança e clareza"], ["↗", "SEO técnico"], ["▣", "Mobile-first"], ["◎", "Foco em conversão"], ["◉", "Suporte próximo"],
-          ].map(([icon, label]) => <p aria-hidden={copy === 1 || undefined} key={`${copy}-${label}`}><span>{icon}</span>{label}</p>))}
-        </div>
-      </section>
-
-      <section className="web-proof-snapshot" aria-label="O que você pode explorar na Avancini Dash">
-        <a href="#portfolio"><strong>02</strong><span>projetos aplicados<br />para explorar por inteiro</span><b>Ver projetos reais ↗</b></a>
-        <a href="#portfolio"><strong>9</strong><span>conceitos por segmento<br />com experiências navegáveis</span><b>Explorar conceitos ↗</b></a>
-        <a href="#metodo"><strong>7–30</strong><span>dias conforme a<br />complexidade do projeto</span><b>Entender o método ↗</b></a>
-        <a href="#investimento"><strong>4 caminhos</strong><span>recorrente ou pagamento<br />único sob medida</span><b>Comparar opções ↗</b></a>
+        <div className="web-portfolio-all"><strong>Oito experiências diferentes, cada uma construída a partir do problema real do segmento — sem trocar apenas nome e cor.</strong><span>AMPLIE E ROLE POR DENTRO <WebArrow /></span></div>
       </section>
 
       <DashBeforeAfterSlider />
+
+      <WebOpportunitySimulator onLead={(message) => startBudgetConversation("Simulação de oportunidade digital", message)} />
+
       <section className="section web-method" id="metodo">
         <div className="section-heading web-method-heading">
-          <div><span className="section-index">METODOLOGIA / 05 PILARES</span><h2>Site bonito chama atenção.<br />Estratégia transforma em cliente.</h2></div>
+          <div><span className="section-index">METODOLOGIA / 04 PILARES</span><h2>Site bonito chama atenção.<br />Estratégia transforma em cliente.</h2></div>
           <p>Sem estes pilares trabalhando juntos, até um visual impressionante vira apenas decoração.</p>
         </div>
         <div className="web-method-stack">
@@ -862,145 +826,16 @@ export default function Home() {
               <span>{pillar.number}</span>
               <h3>{pillar.title}</h3>
               <p>{pillar.text}</p>
-              <b aria-hidden="true">↗</b>
+              <WebArrow />
             </article>
           ))}
-        </div>
-      </section>
-
-      <section className="section web-diagnostic" id="diagnostico">
-        <div className="web-diagnostic-heading">
-          <span>DIAGNÓSTICO ANTES DO DESIGN</span>
-          <h2>E se você soubesse onde está perdendo clientes antes de investir?</h2>
-          <p>Dá para descobrir. É exatamente por aí que a Avancini começa.</p>
-        </div>
-        <div className="web-diagnostic-grid">
-          <div className="web-diagnostic-copy">
-            <p>Antes de desenhar, analisamos como sua empresa aparece, o que oferece e qual caminho o visitante percorre até o contato.</p>
-            <ul><li><b>Presença e autoridade</b><span>O cliente entende quem você é e por que confiar?</span></li><li><b>Clareza da oferta</b><span>Fica evidente o que você vende e para quem?</span></li><li><b>Caminho até o contato</b><span>WhatsApp, formulário e chamadas aparecem no momento certo?</span></li></ul>
-          </div>
-          <div className="web-diagnostic-panel">
-            <div className="diagnostic-search"><span>⌕</span> clínica de estética <b>SIMULAÇÃO VISUAL</b></div>
-            <div className="diagnostic-head"><span>PALAVRA-CHAVE</span><b>BUSCAS/MÊS</b><em>INTENÇÃO</em></div>
-            {[
-              ["clínica de estética", "6.600", "alta", "72%"],
-              ["limpeza de pele profissional", "4.400", "alta", "63%"],
-              ["harmonização facial", "9.900", "média", "48%"],
-              ["tratamento de pele", "880", "média", "84%"],
-            ].map(([label, metric, intent, width]) => <div className="diagnostic-row" key={label}><span>{label}<i style={{width}} /></span><b>{metric}</b><em>{intent}</em></div>)}
-            <div className="diagnostic-summary"><span><small>DEMANDA SIMULADA</small><b>21.780 buscas/mês</b></span><span><small>OPORTUNIDADE PROJETADA</small><b>Alcance nacional</b></span></div>
-          </div>
-        </div>
-        <div className="web-diagnostic-notes"><article><b>✦ O DIFERENCIAL</b><p>O diagnóstico vira a base da estrutura, do texto e das prioridades do seu projeto. Nada construído no escuro.</p></article><article><b>↗ O RESULTADO</b><p>Você entende o que precisa melhorar antes de escolher entre landing, site institucional ou projeto exclusivo.</p></article></div>
-        <div className="web-diagnostic-cta"><h3>Primeiro você enxerga o caminho. Só depois escolhe como construir.</h3><button type="button" onClick={() => startBudgetConversation("Diagnóstico do projeto", "Quero começar pelo diagnóstico e entender qual estrutura faz mais sentido para minha empresa.")}>COMEÇAR PELO DIAGNÓSTICO <span>↗</span></button></div>
-      </section>
-
-      <section className="section manifesto" id="sobre">
-        <div className="section-index">
-          SOBRE A AVANCINI DASH
-        </div>
-        <div className="manifesto-grid">
-          <h2>
-            O Dash posiciona sua empresa antes da primeira conversa.
-          </h2>
-          <div>
-            <p>
-              A Avancini Dash é a especialização da Avancini OS que transforma
-              empresas em experiências digitais profissionais, rápidas e fáceis
-              de entender.
-            </p>
-            <p className="highlight-line">
-              Não entregamos um modelo genérico. Organizamos sua mensagem,
-              construímos sua presença e deixamos o caminho até o contato claro.
-            </p>
-          </div>
-        </div>
-        <div className="impact-line decision-line" aria-label="Escolha rápida de serviço">
-          <a href="/site-por-assinatura#plano-landing-page" onClick={() => trackMarketingEvent("quick_choice", { choice: "landing" })}>
-            <small>QUERO DIVULGAR UMA OFERTA</small><b>Landing Page</b><span>Ver plano ↗</span>
-          </a>
-          <a href="/site-por-assinatura#plano-site" onClick={() => trackMarketingEvent("quick_choice", { choice: "site" })}>
-            <small>QUERO APRESENTAR A EMPRESA</small><b>Site Profissional</b><span>Ver plano ↗</span>
-          </a>
-          <a href={whatsappFor("Olá! Conheci a Avancini Dash e quero ajuda para escolher entre uma landing page e um site profissional.")} target="_blank" rel="noreferrer" onClick={() => trackLead("duvida_escolha_servico")}>
-            <small>AINDA NÃO SEI QUAL ESCOLHER</small><b>Receber orientação</b><span>Falar no WhatsApp ↗</span>
-          </a>
-        </div>
-      </section>
-
-      <section className="section process" id="processo">
-        <div className="process-intro">
-          <span className="section-index">
-            05 — DO PRIMEIRO CONTATO AO LANÇAMENTO
-          </span>
-          <h2>
-            Um processo claro.
-            <br />
-            Um resultado marcante.
-          </h2>
-          <p>
-            Você acompanha as decisões importantes sem precisar entender de
-            tecnologia. A Avancini Dash transforma seus objetivos em uma
-            experiência digital pronta para crescer.
-          </p>
-          <a
-            className="text-cta"
-            href={whatsappFor("Olá! Vi o processo de criação da Avancini Dash e quero começar um projeto para minha empresa.")}
-            target="_blank"
-            rel="noreferrer"
-            onClick={() => trackLead("processo")}
-          >
-            Começar meu projeto <span>↗</span>
-          </a>
-        </div>
-        <div className="process-steps">
-          <article>
-            <span>01</span>
-            <div>
-              <small>IMERSÃO</small>
-              <h3>Entendemos sua empresa</h3>
-              <p>
-                Objetivos, público, diferenciais e a percepção que sua marca
-                precisa transmitir.
-              </p>
-            </div>
-          </article>
-          <article>
-            <span>02</span>
-            <div>
-              <small>ESTRATÉGIA & DESIGN</small>
-              <h3>Criamos uma presença única</h3>
-              <p>
-                Mensagem, estrutura e visual construídos para orientar e
-                impressionar.
-              </p>
-            </div>
-          </article>
-          <article>
-            <span>03</span>
-            <div>
-              <small>LANÇAMENTO</small>
-              <h3>Seu novo site entra em cena</h3>
-              <p>
-                Responsivo, rápido e preparado para receber seus próximos
-                clientes.
-              </p>
-            </div>
-          </article>
-        </div>
-        <div className="delivery-strip" aria-label="Prazos disponíveis para entrega">
-          <div><small>PRAZO DEFINIDO ANTES DE COMEÇAR</small><strong>Entrega combinada com clareza.</strong></div>
-          <span><b>7 dias</b><small>Estruturas diretas</small></span>
-          <span><b>15 dias</b><small>Projetos intermediários</small></span>
-          <span><b>30 dias</b><small>Estruturas completas</small></span>
-          <em>O prazo começa após o recebimento do conteúdo necessário.</em>
         </div>
       </section>
 
       <section className="section investment" id="investimento">
         <div className="section-heading">
           <div>
-            <span className="section-index">06 — INVESTIMENTO & PRAZO</span>
+            <span className="section-index">SERVIÇOS & CONTRATAÇÃO</span>
             <h2>O investimento precisa fazer sentido antes do primeiro clique.</h2>
           </div>
           <p>
@@ -1009,58 +844,80 @@ export default function Home() {
             contratar.
           </p>
         </div>
-        <div className="offer-guide" aria-label="Comparação entre landing page e site institucional">
-          <article>
-            <i className="offer-guide-icon" aria-hidden="true">◎</i>
-            <span>QUERO VENDER UMA OFERTA</span>
-            <h3>Landing de Conversão</h3>
-            <p>Uma jornada curta para anunciar um serviço, reduzir dúvidas e levar o visitante a uma única ação.</p>
-            <div><b>Anúncios</b><b>Campanhas</b><b>Captação</b></div>
-          </article>
-          <div className="offer-guide-or">OU</div>
-          <article>
-            <i className="offer-guide-icon" aria-hidden="true">▦</i>
-            <span>QUERO APRESENTAR MINHA EMPRESA</span>
-            <h3>Site Institucional</h3>
-            <p>Uma estrutura completa para organizar serviços, diferenciais, conteúdo, autoridade e contatos.</p>
-            <div><b>Presença</b><b>Navegação</b><b>Autoridade</b></div>
-          </article>
+        <div className="offer-product-picker" role="group" aria-label="Escolha a estrutura digital">
+          {offers.map((offer, index) => (
+            <button
+              type="button"
+              key={offer.name}
+              className={selectedOfferIndex === index ? "active" : ""}
+              aria-pressed={selectedOfferIndex === index}
+              onClick={() => setSelectedOfferIndex(index)}
+            >
+              <small>0{index + 1} · {offer.decisionLabel}</small>
+              <strong>{offer.name}</strong>
+              <span>{offer.decisionAnswer}</span>
+            </button>
+          ))}
         </div>
+        <div className="pricing-toggle-wrap">
+          <div className="pricing-billing-toggle" role="group" aria-label="Opção de contratação">
+            <button
+              type="button"
+              className={fidelityMode === "com-fidelidade" ? "active" : ""}
+              aria-pressed={fidelityMode === "com-fidelidade"}
+              onClick={() => setFidelityMode("com-fidelidade")}
+            >
+              <small>RECOMENDADO PARA COMEÇAR</small><strong>Assinatura sem entrada</strong><span className="badge-pill">R$ 0 criação · 6 meses</span>
+            </button>
+            <button
+              type="button"
+              className={fidelityMode === "sem-fidelidade" ? "active" : ""}
+              aria-pressed={fidelityMode === "sem-fidelidade"}
+              onClick={() => setFidelityMode("sem-fidelidade")}
+            >
+              <small>MAIS LIBERDADE</small><strong>Mensal flexível</strong><span className="badge-pill">criação paga · cancele quando quiser</span>
+            </button>
+            <button
+              type="button"
+              className={fidelityMode === "pagamento-unico" ? "active" : ""}
+              aria-pressed={fidelityMode === "pagamento-unico"}
+              onClick={() => setFidelityMode("pagamento-unico")}
+            >
+              <small>PROJETO SEU</small><strong>Pagamento único</strong><span className="badge-pill">sem mensalidade Avancini</span>
+            </button>
+          </div>
+        </div>
+
         <div className="offer-standard" aria-label="O que está presente em toda entrega Avancini Dash">
-          <div><small>EM TODA ENTREGA</small><strong>O essencial não vira adicional.</strong></div>
+          <div><small>O PADRÃO NÃO MUDA</small><strong>A estrutura muda. A qualidade, não.</strong></div>
           <span><b>01</b> Estratégia e texto</span>
           <span><b>02</b> Design adaptado à marca</span>
           <span><b>03</b> Celular e carregamento rápido</span>
           <span><b>04</b> Publicação e contato integrado</span>
         </div>
 
-        <div className="pricing-toggle-wrap">
-          <div className="pricing-billing-toggle" role="group" aria-label="Opção de contratação">
-            <button
-              type="button"
-              className={fidelityMode === "com-fidelidade" ? "active" : ""}
-              onClick={() => setFidelityMode("com-fidelidade")}
-            >
-              ✨ Contrato 6 Meses <span className="badge-pill">R$ 0 Criação</span>
-            </button>
-            <button
-              type="button"
-              className={fidelityMode === "sem-fidelidade" ? "active" : ""}
-              onClick={() => setFidelityMode("sem-fidelidade")}
-            >
-              🔓 Sem Fidelidade <span className="badge-pill">Criação única + menor mensalidade</span>
-            </button>
-          </div>
-        </div>
-
         <div className="offer-grid">
-          {offers.map((offer) => {
+          {[offers[selectedOfferIndex]].map((offer) => {
             const isFidelity = fidelityMode === "com-fidelidade";
-            const currentPrice = isFidelity ? offer.price : offer.priceNoFidelity;
-            const badgeText = isFidelity ? (offer.badge ?? "CONTRATO 6 MESES") : "SEM PERMANÊNCIA";
+            const isOneTime = fidelityMode === "pagamento-unico";
+            const currentPrice = isFidelity ? offer.price : isOneTime ? offer.oneTimePrice : offer.priceNoFidelity;
+            const badgeText = isFidelity ? (offer.badge ?? "CONTRATO 6 MESES") : isOneTime ? "PAGAMENTO ÚNICO" : "SEM PERMANÊNCIA";
             const deadlineText = isFidelity
               ? offer.deadline
-              : `Criação: ${offer.setupNoFidelity} · Cancele quando quiser`;
+              : isOneTime ? offer.oneTimeTerms : `Criação: ${offer.setupNoFidelity} · Cancele quando quiser`;
+            const sharedIncludes = offer.includes.filter((item) => !/\.com\.br|domínio|endereço na rede avancini/i.test(item));
+            const currentIncludes = isOneTime
+              ? [
+                  ...sharedIncludes.filter((item) => !/hospedagem|suporte|ajuste mensal/i.test(item)),
+                  "Projeto entregue pronto para publicação",
+                  "Domínio .com.br incluso, sujeito à disponibilidade e análise",
+                  "Hospedagem e futuras manutenções tratadas separadamente",
+                ]
+              : [
+                  ...sharedIncludes,
+                  ...(isFidelity ? ["Endereço na rede Avancini incluso, sem taxa de criação"] : []),
+                  "Domínio .com.br opcional, sujeito à disponibilidade e análise",
+                ];
             return (
             <article className={offer.featured ? "offer-card featured" : "offer-card"} key={offer.name}>
               <small>{badgeText}</small>
@@ -1069,8 +926,9 @@ export default function Home() {
               <span>{deadlineText}</span>
               <p>{offer.description}</p>
               <em className="offer-ideal">{offer.ideal}</em>
+              <div className="offer-scope"><small>ESCOPO DE REFERÊNCIA</small><span>{offer.scope}</span></div>
               <ul>
-                {offer.includes.map((item) => <li key={item}>{item}</li>)}
+                {currentIncludes.map((item) => <li key={item}>{item}</li>)}
               </ul>
               <div className="offer-actions">
                 <div className="offer-action-head">
@@ -1081,9 +939,9 @@ export default function Home() {
                   <button
                     type="button"
                     className="offer-primary"
-                    onClick={() => startBudgetConversation(offer.name, offer.message.replace("Olá! ", ""))}
+                    onClick={() => startBudgetConversation(offer.name, `Quero conversar sobre ${offer.name}. Vi a condição ${currentPrice}, ${isFidelity ? "com criação R$ 0 e permanência de 6 meses" : isOneTime ? "em pagamento único, sem mensalidade Avancini e com infraestrutura separada" : `com ${offer.setupNoFidelity} de criação e sem fidelidade`}.`)}
                   >
-                    {offer.cta} <b aria-hidden="true">↗</b>
+                    {offer.cta} <WebArrow />
                   </button>
                   <a
                     className="offer-question"
@@ -1100,79 +958,103 @@ export default function Home() {
             );
           })}
         </div>
-        <p className="investment-note">Todos os planos contam com a mesma qualidade de estratégia, texto persuasivo, design exclusivo e desenvolvimento de alta performance. Sem taxa de criação no contrato de 6 meses. O registro do domínio próprio .com.br possui taxa anual de R$ 49,90 no 1º mês (sujeito à consulta prévia de disponibilidade no Registro.br).</p>
+        <p className="investment-note">Todos os formatos mantêm a mesma qualidade de estratégia, texto, design e desenvolvimento. No pagamento único, você compra o projeto, recebe um domínio .com.br incluso e não existe mensalidade Avancini; hospedagem e futuras manutenções são tratadas separadamente. Nos formatos mensais, o .com.br é opcional. Todo domínio depende de disponibilidade e análise.</p>
       </section>
-
-      <ExpressProposalBuilder />
 
       <section className="section web-faq" id="duvidas">
-        <div className="web-faq-intro"><span>PERGUNTAS FREQUENTES</span><h2>Tire suas dúvidas<br /><em>antes de começar.</em></h2><p>As perguntas que mais aparecem antes de iniciar um projeto. Não encontrou a sua?</p><button type="button" onClick={() => openLead("Tenho uma dúvida sobre os serviços da Avancini Dash antes de começar meu projeto.")}>FALAR COM A AVANCINI <b>↗</b></button></div>
+        <div className="web-faq-intro"><span>PERGUNTAS FREQUENTES</span><h2>Tire suas dúvidas<br /><em>antes de começar.</em></h2><p>As perguntas que mais aparecem antes de iniciar um projeto. Não encontrou a sua?</p><button type="button" onClick={() => openLead("Tenho uma dúvida sobre os serviços da Avancini Dash antes de começar meu projeto.")}>FALAR COM A AVANCINI <WebArrow /></button></div>
         <div className="web-faq-list">{webFaqs.map((item)=><details key={item.question}><summary>{item.question}<span>+</span></summary><p>{item.answer}</p></details>)}</div>
-      </section>
-
-      <section className="web-closing-cta">
-        <span>AVANCINI DASH · PRÓXIMO PASSO</span>
-        <h2>Sua empresa não precisa de mais uma página.<br /><em>Precisa de uma presença que trabalhe por ela.</em></h2>
-        <p>Conte o que você vende e onde sente que perde oportunidades. A conversa começa pelo problema, não por um pacote.</p>
-        <button type="button" onClick={() => openLead("Quero entender qual estrutura digital faz sentido para minha empresa.")}>CONVERSAR SOBRE MEU PROJETO <b>↗</b></button>
       </section>
 
       {activeSpotlight && portfolioSpotlight && (
         <div
+          ref={portfolioDialogRef}
+          tabIndex={-1}
           className="niche-modal portfolio-spotlight-modal"
           role="dialog"
           aria-modal="true"
           aria-label={`Projeto ${activeSpotlight.name}`}
         >
+          <button
+            className="portfolio-global-close"
+            ref={portfolioCloseRef}
+            type="button"
+            onClick={() => setPortfolioSpotlight(null)}
+            aria-label="Fechar projeto"
+          >
+            <span>Fechar projeto</span><b aria-hidden="true">×</b>
+          </button>
           <div className="niche-modal-dialog portfolio-spotlight-dialog">
-            <button
-              className="preview-close"
-              type="button"
-              onClick={() => setPortfolioSpotlight(null)}
-              aria-label="Fechar projeto"
-            >
-              ×
-            </button>
             <div className="preview-browser-bar">
               <div><i /><i /><i /></div>
               <span>{activeSpotlight.name}</span>
               <b>{activeSpotlight.kind}</b>
             </div>
             <div className="niche-full-scroll portfolio-case-scroll" role="region" tabIndex={0} aria-label={`Página completa do projeto ${activeSpotlight.name}`}>
-              {portfolioSpotlight === "tapecar" ? (
-                <SiteImage src={activeSpotlight.image} alt={`Página completa do projeto ${activeSpotlight.name}`} sizes="94vw" quality={82} />
+              {portfolioSpotlight === "sandiego" || portfolioSpotlight === "tapecar" ? (
+                <SiteImage src={activeSpotlight.image} alt={`Página completa do projeto ${activeSpotlight.name}`} sizes="94vw" quality={88} />
               ) : <PortfolioConceptPage type={portfolioSpotlight} />}
             </div>
-            <div className="niche-scroll-note">
-              <span>↓</span> Role dentro da tela para navegar pelo projeto
-            </div>
-            <div className="preview-sales-cta">
-              <span>{activeSpotlight.description}</span>
-              <a href={whatsappFor(`Olá! Gostei do projeto ${activeSpotlight.name} e quero conversar sobre uma direção parecida para minha empresa.`)} target="_blank" rel="noreferrer" onClick={() => trackLead("portfolio_spotlight", { project: activeSpotlight.name })}>Quero algo nesse nível <b>↗</b></a>
-            </div>
+            {(portfolioSpotlight === "sandiego" || portfolioSpotlight === "tapecar") && (
+              <>
+                <div className="niche-scroll-note">
+                  <span>↓</span> Role dentro da tela para navegar pelo projeto
+                </div>
+                <div className="preview-sales-cta preview-sales-summary">
+                  <span>{activeSpotlight.description}</span>
+                  <b>PROJETO REAL</b>
+                </div>
+              </>
+            )}
           </div>
         </div>
       )}
 
       <footer id="contato">
         <div className="footer-top">
-          <div className="footer-brand"><a className="logo footer-logo" href="#inicio">
-            <span className="logo-mark avancini-a-mark" aria-hidden="true">
-              <i />
-            </span>
-            <span>
-              <span className="brand-name">
-                AVANCINI <b>DASH</b>
+          <div className="footer-brand">
+            <a className="logo footer-logo" href="#inicio">
+              <AvanciniMark variant="dash" className="logo-mark avancini-a-mark" />
+              <span>
+                <span className="brand-name">
+                  AVANCINI <b>DASH</b>
+                </span>
+                <small>Uma solução Avancini OS</small>
               </span>
-              <small>Uma solução Avancini OS</small>
-            </span>
-          </a><p>Sites com identidade, velocidade e estratégia para transformar presença em oportunidade.</p><a href="https://www.instagram.com/avancinios/" target="_blank" rel="noreferrer">Instagram ↗</a></div>
-          <nav><b>NAVEGAÇÃO</b><a href="#inicio">Início</a><a href="#portfolio">Portfólio</a><a href="#metodo">Metodologia</a><a href="#investimento">Serviços e planos</a><a href="#duvidas">Perguntas frequentes</a><Link href="/">Avancini OS ↗</Link><Link href="/sync">Avancini Sync ↗</Link></nav>
-          <nav><b>SERVIÇOS</b><a href="/site-por-assinatura#plano-landing-page">Landing Page Profissional</a><a href="/site-por-assinatura#plano-site-catalogo">Site Catálogo</a><a href="/site-por-assinatura#plano-site-catalogo">Site Catálogo / Vitrine</a><a href="/site-por-assinatura#plano-combo-os">Combo Avancini OS</a><a href="/site-por-assinatura#projeto-sob-medida">Projeto Sob Medida</a></nav>
-          <div className="footer-contact"><b>CONTATO</b><a href="mailto:ivoavancini@hotmail.com">ivoavancini@hotmail.com</a><a href="tel:+5573981019782">(73) 98101-9782</a><button type="button" onClick={() => startBudgetConversation("Orçamento Avancini Dash", "Quero solicitar um orçamento para um projeto de site com a Avancini Dash.")}>SOLICITAR ORÇAMENTO ↗</button></div>
+            </a>
+            <p>Sites com identidade, velocidade e estratégia para transformar presença em oportunidade.</p>
+            <a href="https://www.instagram.com/avancinios/" target="_blank" rel="noreferrer">Instagram <WebArrow /></a>
+          </div>
+          <nav>
+            <b>NAVEGAÇÃO</b>
+            <a href="#inicio">Início</a>
+            <a href="#portfolio">Portfólio</a>
+            <a href="#antes-depois">Antes e depois</a>
+            <a href="#metodo">Metodologia</a>
+            <a href="#investimento">Serviços e planos</a>
+            <a href="#duvidas">Perguntas frequentes</a>
+            <Link href="/">Avancini OS <WebArrow /></Link>
+            <Link href="/sync">Avancini Sync <WebArrow /></Link>
+          </nav>
+          <nav>
+            <b>SERVIÇOS</b>
+            <a href="#investimento">Landing Page</a>
+            <a href="#investimento">Site Institucional</a>
+            <a href="#investimento">Site Catálogo</a>
+            <a href="#investimento">Loja Virtual</a>
+            <Link href="/sync">Chatbot e Atendente IA <WebArrow /></Link>
+          </nav>
+          <div className="footer-contact">
+            <b>CONTATO</b>
+            <a href="mailto:ivoavancini@hotmail.com">ivoavancini@hotmail.com</a>
+            <a href="tel:+5573981019782">(73) 98101-9782</a>
+            <button type="button" onClick={() => startBudgetConversation("Orçamento Avancini Dash", "Quero solicitar um orçamento para um projeto de site com a Avancini Dash.")}>
+              SOLICITAR ORÇAMENTO <WebArrow />
+            </button>
+          </div>
         </div>
         <div className="footer-bottom">
-          <span>© {new Date().getFullYear()} Avancini OS</span>
+          <span suppressHydrationWarning>© {new Date().getFullYear()} Avancini OS</span>
           <nav aria-label="Informações legais"><a href="/privacidade">Privacidade</a><a href="/termos">Termos</a></nav>
           <a href="#inicio">Voltar ao topo ↑</a>
         </div>
@@ -1189,7 +1071,7 @@ export default function Home() {
       {budgetTransition && (
         <div className="budget-transition" role="status" aria-live="polite">
           <div className="budget-transition-orbit" aria-hidden="true"><i /><i /><i /></div>
-          <span className="budget-transition-mark avancini-a-mark" aria-hidden="true"><i /></span>
+          <AvanciniMark variant="dash" className="budget-transition-mark avancini-a-mark" />
           <div className="budget-transition-copy">
             <small>PREPARANDO UMA CONVERSA SOBRE</small>
             <strong>{budgetTransition.title}</strong>
@@ -1214,7 +1096,7 @@ export default function Home() {
               ×
             </button>
             <header>
-              <span className="lead-logo avancini-a-mark"><i /></span>
+              <AvanciniMark variant="dash" className="lead-logo avancini-a-mark" />
               <div>
                 <strong>
                   Avancini Dash <span>· Especialista em UI Design</span>

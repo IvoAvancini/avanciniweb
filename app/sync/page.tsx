@@ -2,74 +2,73 @@
 
 import Link from "next/link";
 import { useEffect, useRef, useState, type FormEvent } from "react";
+import { AvanciniMark } from "../avancini-mark";
 
 const WHATSAPP_NUMBER = "5573981019782";
 
 const whatsappFor = (message: string) =>
   `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
 
-type SolutionId = "chatbot" | "ia" | "automacao";
+const SyncArrow = ({ size = 12 }: { size?: number }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2.8"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    aria-hidden="true"
+    className="sync-svg-arrow"
+    style={{ display: "inline-block", verticalAlign: "middle", marginLeft: 4 }}
+  >
+    <line x1="5" y1="12" x2="19" y2="12" />
+    <polyline points="12 5 19 12 12 19" />
+  </svg>
+);
+
+const SyncDownArrow = ({ size = 12 }: { size?: number }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2.8"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    aria-hidden="true"
+    className="sync-svg-down-arrow"
+    style={{ display: "inline-block", verticalAlign: "middle", marginLeft: 4 }}
+  >
+    <line x1="12" y1="5" x2="12" y2="19" />
+    <polyline points="19 12 12 19 5 12" />
+  </svg>
+);
+
+type SolutionId = "chatbot" | "ia";
 
 const solutions = {
   chatbot: {
-    platform: "whatsapp",
     index: "01",
     label: "CHATBOT",
-    title: "Organiza, coleta e direciona.",
     description:
       "Um fluxo claro para responder perguntas repetidas, apresentar opções, captar dados e encaminhar cada pessoa para o próximo passo.",
     ideal: "Para empresas que repetem as mesmas respostas todos os dias.",
     promise: "Pare de responder a mesma pergunta pela décima vez.",
     result: "Contato organizado e pronto para sua equipe continuar.",
     steps: ["Responde o que é recorrente", "Coleta as informações certas", "Encaminha para o próximo passo"],
-    benefits: ["Respostas e menus personalizados", "Captação e triagem de contatos", "Transferência para atendimento humano"],
-    messages: [
-      { side: "client", text: "Olá! Quero conhecer os serviços." },
-      { side: "agent", text: "Claro. Você quer solicitar um orçamento, tirar uma dúvida ou falar com uma pessoa?" },
-      { side: "client", text: "Solicitar orçamento." },
-      { side: "agent", text: "Perfeito. Qual serviço você procura? Vou organizar as informações para o atendimento." },
-    ],
-    events: ["Interesse identificado", "Dados solicitados", "Contato encaminhado"],
   },
   ia: {
-    platform: "instagram",
     index: "02",
     label: "ATENDENTE COM IA",
-    title: "Entende a pergunta e responde com contexto.",
     description:
       "Uma IA preparada com as informações da empresa para conversar em linguagem natural, explicar serviços e qualificar oportunidades.",
     ideal: "Para quem precisa responder melhor sem depender de menus rígidos.",
     promise: "Cada pessoa pergunta de um jeito. A IA entende mesmo assim.",
     result: "Conversa contextualizada e oportunidade qualificada.",
     steps: ["Entende a intenção", "Consulta o contexto da empresa", "Responde ou chama uma pessoa"],
-    benefits: ["Base de conhecimento da empresa", "Respostas contextualizadas", "Qualificação e transbordo humano"],
-    messages: [
-      { side: "client", text: "Preciso de uma solução, mas ainda não sei qual combina comigo." },
-      { side: "agent", text: "Posso ajudar. Me conte qual resultado você busca e o que já tentou até agora." },
-      { side: "client", text: "Quero atender mais rápido sem perder o jeito da empresa." },
-      { side: "agent", text: "Nesse caso, um atendente com IA pode assumir dúvidas iniciais e chamar sua equipe quando a conversa exigir uma pessoa." },
-    ],
-    events: ["Intenção compreendida", "Contexto consultado", "Próximo passo sugerido"],
-  },
-  automacao: {
-    platform: "email",
-    index: "03",
-    label: "AUTOMAÇÃO",
-    title: "Executa o trabalho depois da conversa.",
-    description:
-      "Fluxos que registram contatos, criam lembretes, atualizam planilhas, notificam a equipe e conectam as ferramentas que a empresa já utiliza.",
-    ideal: "Para processos manuais que consomem tempo e deixam contatos esfriarem.",
-    promise: "A conversa termina. O trabalho não precisa parar.",
-    result: "Tarefa executada, registrada e acompanhada automaticamente.",
-    steps: ["Recebe o gatilho", "Atualiza a ferramenta certa", "Avisa quem precisa agir"],
-    benefits: ["Gatilhos e tarefas automáticas", "Integração entre ferramentas", "Monitoramento do fluxo"],
-    messages: [
-      { side: "client", text: "Quero agendar para quinta às 15h." },
-      { side: "agent", text: "Agendamento confirmado. Você receberá um lembrete antes do horário." },
-      { side: "system", text: "Contato registrado → agenda atualizada" },
-      { side: "system", text: "Lembrete programado → equipe notificada" },
-    ],
-    events: ["Registro criado", "Agenda atualizada", "Lembrete programado"],
   },
 } as const;
 
@@ -79,16 +78,16 @@ const faqs = [
     answer: "Não. O chatbot segue fluxos e opções definidas. A IA entende perguntas livres, consulta o contexto da empresa e formula respostas. Os dois podem ser contratados separadamente.",
   },
   {
-    question: "Preciso contratar as três soluções?",
-    answer: "Não. O Sync foi organizado para resolver um gargalo por vez. Você pode começar somente pelo chatbot, pela IA ou por uma automação específica.",
+    question: "Preciso contratar Chatbot e Atendente IA juntos?",
+    answer: "Não. Cada solução funciona sozinha. O chatbot organiza perguntas previsíveis; o Atendente IA entende perguntas livres. Você começa somente pelo que resolve seu gargalo atual.",
   },
   {
     question: "Existe taxa de implementação?",
-    answer: "Não na condição de lançamento apresentada nesta página. A configuração inicial do escopo contratado já faz parte da mensalidade, com permanência mínima de 6 meses.",
+    answer: "Você escolhe. Na modalidade com permanência de 6 meses, a configuração inicial custa R$ 0. Na opção mensal sem fidelidade, existe uma configuração inicial. Também há pagamento único pela construção e entrega da solução.",
   },
   {
     question: "Existe permanência mínima?",
-    answer: "Sim. Os valores de lançamento sem taxa de implementação consideram permanência mínima de 6 meses. Assim, a configuração inicial entra na mensalidade sem reduzir a qualidade da entrega.",
+    answer: "Somente na modalidade sem entrada, que considera permanência mínima de 6 meses. A mensalidade flexível pode ser encerrada sem prazo mínimo. No pagamento único, não existe mensalidade Avancini depois da entrega.",
   },
   {
     question: "A IA substitui completamente uma pessoa?",
@@ -109,52 +108,35 @@ const plans = [
     id: "chatbot",
     label: "ORGANIZAR O ATENDIMENTO",
     name: "Chatbot Start",
-    price: "R$ 197,90",
+    contractPrice: "R$ 129,90",
+    flexiblePrice: "R$ 159,90",
+    flexibleSetup: "R$ 299,90 de configuração",
+    oneTimePrice: "R$ 997,00",
+    oneTimeTerms: "Construção, configuração e entrega da solução",
     suffix: "/mês",
     description: "Para responder perguntas recorrentes, captar informações e encaminhar cada contato pelo caminho certo.",
     fit: "Para quem perde tempo repetindo respostas e organizando contatos manualmente.",
     items: ["Um canal principal", "Um fluxo principal personalizado", "Captação e triagem", "Transferência para pessoa", "Monitoramento + 1 ajuste mensal"],
+    oneTimeItems: ["Um canal principal", "Um fluxo principal personalizado", "Captação e triagem", "Transferência para pessoa", "Validação e entrega configurada"],
     featured: false,
   },
   {
     id: "ia",
     label: "RESPONDER COM CONTEXTO",
     name: "Atendente IA",
-    price: "A partir de R$ 397,90",
+    contractPrice: "A partir de R$ 387,90",
+    flexiblePrice: "A partir de R$ 449,90",
+    flexibleSetup: "Configuração a partir de R$ 599,90",
+    oneTimePrice: "A partir de R$ 1.997,00",
+    oneTimeTerms: "Base, comportamento, integração e entrega configurada",
     suffix: "/mês",
     description: "Para conversar em linguagem natural usando as informações, o tom e os limites definidos pela empresa.",
     fit: "Para quem precisa atender perguntas variadas sem transformar tudo em menu e botão.",
     items: ["Um canal principal", "Base inicial da empresa", "Respostas contextualizadas", "Qualificação e transbordo humano", "Franquia inicial + 1 ajuste mensal"],
+    oneTimeItems: ["Um canal principal", "Base inicial da empresa", "Respostas contextualizadas", "Qualificação e transbordo humano", "Validação e entrega configurada"],
     featured: true,
   },
-  {
-    id: "automacao",
-    label: "EXECUTAR TAREFAS",
-    name: "Automação Flow",
-    price: "A partir de R$ 249,90",
-    suffix: "/mês",
-    description: "Para manter um processo repetitivo funcionando, monitorado e conectado às ferramentas do negócio.",
-    fit: "Para quem ainda copia dados, cria lembretes ou avisa a equipe manualmente.",
-    items: ["Um fluxo principal gerenciado", "Até 2 ferramentas conectadas", "Gatilhos e ações automáticas", "Alertas de falha", "Acompanhamento + 1 ajuste mensal"],
-    featured: false,
-  },
 ] as const;
-
-function SolutionDemo({ solution, onLead }: { solution: (typeof solutions)[SolutionId]; onLead: () => void }) {
-  return (
-    <div className="sync-solution-demo" aria-live="polite">
-      <div className="sync-demo-bar"><span><i /> SOLUÇÃO EM FOCO</span><small>{solution.label} · CONTRATAÇÃO INDEPENDENTE</small></div>
-      <div className="sync-demo-copy"><span>{solution.index} / O QUE MUDA</span><h3>{solution.promise}</h3><p>{solution.description}</p></div>
-      <div className="sync-offer-engine">
-        <div className="sync-offer-route" aria-label="Etapas executadas pela solução">
-          {solution.steps.map((step, index) => <article key={step}><small>0{index + 1}</small><i /><strong>{step}</strong><span>{index === 0 ? "ENTRADA" : index === 1 ? "INTELIGÊNCIA" : "AÇÃO"}</span></article>)}
-        </div>
-        <aside><small>RESULTADO PARA A EMPRESA</small><strong>{solution.result}</strong><span><i /> fluxo acompanhado pela Avancini Sync</span></aside>
-      </div>
-      <div className="sync-offer-footer"><div>{solution.benefits.map((benefit) => <span key={benefit}>✓ {benefit}</span>)}</div><button type="button" onClick={onLead}>Quero resolver esse gargalo <b>↗</b></button></div>
-    </div>
-  );
-}
 
 const formatSyncMoney = (value: number) =>
   new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL", maximumFractionDigits: 0 }).format(value);
@@ -162,12 +144,48 @@ const formatSyncMoney = (value: number) =>
 const formatSyncQuantity = (value: number) =>
   value.toLocaleString("pt-BR", { maximumFractionDigits: 1 });
 
-type SyncBottleneck = "repeticao" | "resposta" | "tarefas";
+type SyncBottleneck = "repeticao" | "resposta" | "qualificacao";
 
-const syncRecommendations: Record<SyncBottleneck, { planId: SolutionId; reason: string }> = {
-  repeticao: { planId: "chatbot", reason: "Organiza perguntas recorrentes, coleta os dados certos e entrega o contato pronto para continuar." },
-  resposta: { planId: "ia", reason: "Entende perguntas livres, responde com o contexto da empresa e qualifica a oportunidade enquanto ela está quente." },
-  tarefas: { planId: "automacao", reason: "Executa o próximo passo, atualiza ferramentas e avisa a equipe sem depender de memória ou trabalho manual." },
+const syncRecommendations: Record<SyncBottleneck, {
+  planId: SolutionId;
+  reason: string;
+  status: string;
+  affectedLabel: string;
+  affectedHint: string;
+  rateLabel: string;
+  rateHint: string;
+  route: [string, string, string];
+}> = {
+  repeticao: {
+    planId: "chatbot",
+    reason: "O Chatbot assume perguntas previsíveis, coleta os dados e chama sua equipe somente quando uma pessoa realmente precisa entrar.",
+    status: "TEMPO OPERACIONAL PRESO",
+    affectedLabel: "Quantas conversas repetem as mesmas perguntas?",
+    affectedHint: "preço, horário, endereço, disponibilidade ou serviço",
+    rateLabel: "Quanto tempo cada resposta costuma consumir?",
+    rateHint: "inclua leitura, resposta e organização do contato",
+    route: ["Pergunta recorrente chega", "Equipe interrompe o trabalho", "A mesma resposta é digitada outra vez"],
+  },
+  resposta: {
+    planId: "ia",
+    reason: "O Atendente IA entende perguntas livres, responde com o contexto da empresa e mantém a oportunidade em movimento.",
+    status: "OPORTUNIDADES ESPERANDO",
+    affectedLabel: "Quantos esperam demais ou ficam sem retorno?",
+    affectedHint: "use uma quantidade que você reconhece",
+    rateLabel: "Em cada 10 bons contatos, quantos viram clientes?",
+    rateHint: "pense no seu atendimento atual",
+    route: ["Cliente demonstra interesse", "Resposta ou retorno demora", "Outra empresa responde primeiro"],
+  },
+  qualificacao: {
+    planId: "ia",
+    reason: "O Atendente IA entende o que a pessoa procura, faz as perguntas certas e entrega uma oportunidade mais pronta para sua equipe.",
+    status: "CONTATOS SEM PRIORIDADE",
+    affectedLabel: "Quantos chegam sem as informações necessárias?",
+    affectedHint: "contatos que exigem várias perguntas antes de avançar",
+    rateLabel: "Em cada 10 contatos bem qualificados, quantos viram clientes?",
+    rateHint: "considere somente oportunidades com perfil",
+    route: ["Contato chega sem contexto", "Equipe tenta descobrir a necessidade", "A oportunidade esfria antes da proposta"],
+  },
 };
 
 function SyncLossSimulator({ onLead }: { onLead: (context: string) => void }) {
@@ -185,12 +203,36 @@ function SyncLossSimulator({ onLead }: { onLead: (context: string) => void }) {
   const protectedPotential = Math.round(revenueAtRisk * 0.5);
   const recommendation = syncRecommendations[bottleneck];
   const recommendedPlan = plans.find((plan) => plan.id === recommendation.planId)!;
+  const minutesPerRepeatedAnswer = salesPerTen * 2;
+  const repetitiveHours = Number(((exposedContacts * minutesPerRepeatedAnswer) / 60).toFixed(1));
+  const recoveredHours = Number((repetitiveHours * 0.5).toFixed(1));
+  const isRepetition = bottleneck === "repeticao";
+  const isQualification = bottleneck === "qualificacao";
+  const riskLabel = isRepetition
+    ? "HORAS GASTAS REPETINDO RESPOSTAS"
+    : isQualification
+      ? "VALOR EM CONTATOS MAL QUALIFICADOS"
+      : "VALOR DAS OPORTUNIDADES EXPOSTAS";
+  const riskValue = isRepetition ? `${formatSyncQuantity(repetitiveHours)} h` : formatSyncMoney(revenueAtRisk);
+  const riskUnit = isRepetition ? "/mês da equipe" : "/mês";
+  const riskDescription = isRepetition
+    ? <>Você informou <b>{exposedContacts} conversas repetitivas</b>. Consumindo cerca de <b>{minutesPerRepeatedAnswer} minutos cada</b>, elas ocupam <b>{formatSyncQuantity(repetitiveHours)} horas mensais</b> que poderiam estar em vendas e atendimento humano.</>
+    : isQualification
+      ? <>Você informou <b>{exposedContacts} contatos sem contexto suficiente</b>. Se <b>{salesPerTen} em cada 10</b> oportunidades bem qualificadas viram clientes, até <b>{formatSyncQuantity(exposedSales)} vendas potenciais</b> passam por uma etapa sem prioridade clara.</>
+      : <>Você informou <b>{exposedContacts} conversas com demora</b>. Se <b>{salesPerTen} em cada 10</b> bons contatos costumam virar clientes, cerca de <b>{formatSyncQuantity(exposedSales)} vendas potenciais</b> passam por uma etapa vulnerável.</>;
+  const recoveryLabel = isRepetition ? "SE METADE DAS RESPOSTAS FOR ABSORVIDA" : "SE METADE DAS CONVERSAS FOR RECUPERADA";
+  const recoveryValue = isRepetition ? `${formatSyncQuantity(recoveredHours)} h` : formatSyncMoney(protectedPotential);
+  const recoveryUnit = isRepetition ? "/mês devolvidas" : "/mês protegidos";
+  const recoveryDetail = isRepetition
+    ? <>{recoverableContacts} respostas assumidas pelo fluxo<br /><b>equipe livre para conversas importantes</b></>
+    : <>{recoverableContacts} conversas retomadas<br /><b>{formatSyncQuantity(recoverableSales)} vendas potenciais</b></>;
+  const scenarioName = isRepetition ? "respostas repetitivas" : isQualification ? "qualificação dos contatos" : "demora no atendimento";
 
   return (
-    <section className="sync-loss" aria-labelledby="sync-loss-title">
+    <section className="sync-loss" id="diagnostico" aria-labelledby="sync-loss-title">
       <header>
-        <div><span>SIMULAÇÃO DE OPORTUNIDADES EM RISCO</span><h2 id="sync-loss-title">Seu concorrente não precisa ser melhor.<br /><em>Ele só precisa responder antes.</em></h2></div>
-        <p>Use sua realidade para visualizar quanto a demora, a falta de acompanhamento e as tarefas esquecidas podem representar no fim do mês.</p>
+        <div><span>03 — SIMULAÇÃO DO GARGALO</span><h2 id="sync-loss-title">Seu concorrente não precisa ser melhor.<br /><em>Ele só precisa responder antes.</em></h2></div>
+        <p>Use sua realidade para visualizar quanto a demora, a resposta genérica e a falta de qualificação podem representar no fim do mês.</p>
       </header>
       <div className="sync-loss-console">
         <div className="sync-loss-inputs">
@@ -200,24 +242,23 @@ function SyncLossSimulator({ onLead }: { onLead: (context: string) => void }) {
             <div>
               <button className={bottleneck === "repeticao" ? "active" : ""} type="button" onClick={() => setBottleneck("repeticao")}><span>01</span>Repete respostas</button>
               <button className={bottleneck === "resposta" ? "active" : ""} type="button" onClick={() => setBottleneck("resposta")}><span>02</span>Demora para responder</button>
-              <button className={bottleneck === "tarefas" ? "active" : ""} type="button" onClick={() => setBottleneck("tarefas")}><span>03</span>Esquece o próximo passo</button>
+              <button className={bottleneck === "qualificacao" ? "active" : ""} type="button" onClick={() => setBottleneck("qualificacao")}><span>03</span>Contato chega desqualificado</button>
             </div>
           </fieldset>
           <label><span><b>Mensagens e contatos por mês</b><small>todos os canais</small></span><output>{monthlyMessages}</output><input type="range" min="30" max="2000" step="10" value={monthlyMessages} onChange={(event) => { const value = Number(event.target.value); setMonthlyMessages(value); setLateContacts((current) => Math.min(current, value)); }} /></label>
-          <label><span><b>Quantos esperam demais ou ficam sem retorno?</b><small>use uma quantidade que você reconhece</small></span><output>{exposedContacts}</output><input type="range" min="1" max={monthlyMessages} step="1" value={lateContacts} onChange={(event) => setLateContacts(Number(event.target.value))} /></label>
-          <label><span><b>Em cada 10 bons contatos, quantos viram clientes?</b><small>pense no seu atendimento atual</small></span><output>{salesPerTen} em 10</output><input type="range" min="1" max="6" step="1" value={salesPerTen} onChange={(event) => setSalesPerTen(Number(event.target.value))} /></label>
-          <label><span><b>Valor médio de cada venda</b><small>ticket médio</small></span><output>{formatSyncMoney(averageTicket)}</output><input type="range" min="50" max="10000" step="50" value={averageTicket} onChange={(event) => setAverageTicket(Number(event.target.value))} /></label>
+          <label><span><b>{recommendation.affectedLabel}</b><small>{recommendation.affectedHint}</small></span><output>{exposedContacts}</output><input type="range" min="1" max={monthlyMessages} step="1" value={lateContacts} onChange={(event) => setLateContacts(Number(event.target.value))} /></label>
+          <label><span><b>{recommendation.rateLabel}</b><small>{recommendation.rateHint}</small></span><output>{isRepetition ? `${minutesPerRepeatedAnswer} min` : `${salesPerTen} em 10`}</output><input type="range" min="1" max="6" step="1" value={salesPerTen} onChange={(event) => setSalesPerTen(Number(event.target.value))} /></label>
+          <label><span><b>{isRepetition ? "Valor médio de um cliente atendido" : "Valor médio de cada venda"}</b><small>{isRepetition ? "para comparar o custo de deixar a equipe presa" : "ticket médio"}</small></span><output>{formatSyncMoney(averageTicket)}</output><input type="range" min="50" max="10000" step="50" value={averageTicket} onChange={(event) => setAverageTicket(Number(event.target.value))} /></label>
         </div>
-        <div className="sync-loss-result" aria-live="polite">
-          <div className="sync-loss-status"><span><i /> VAZAMENTO DETECTADO</span><small>SYNC:// DIAGNÓSTICO · AO VIVO</small></div>
-          <div className="sync-loss-risk"><small>VALOR DAS OPORTUNIDADES EXPOSTAS</small><strong>{formatSyncMoney(revenueAtRisk)}<em>/mês</em></strong><p>Você informou <b>{exposedContacts} conversas com demora</b>. Se <b>{salesPerTen} em cada 10</b> bons contatos costumam virar clientes, cerca de <b>{formatSyncQuantity(exposedSales)} vendas potenciais</b> passam por uma etapa vulnerável.</p></div>
-          <div className="sync-loss-route"><span>Cliente demonstrou interesse</span><i>→</i><span>Resposta ou retorno demorou</span><i>→</i><span>Outra empresa respondeu primeiro</span></div>
-          <div className="sync-loss-protected"><div><small>SE METADE DAS CONVERSAS FOR RECUPERADA</small><strong>{formatSyncMoney(protectedPotential)}<em>/mês protegidos</em></strong></div><span>{recoverableContacts} conversas retomadas<br /><b>{formatSyncQuantity(recoverableSales)} vendas potenciais</b></span></div>
+        <div className={`sync-loss-result scenario-${bottleneck}`} key={bottleneck} aria-live="polite">
+          <div className="sync-loss-status"><span><i /> {recommendation.status}</span><small>SYNC:// DIAGNÓSTICO · AO VIVO</small></div>
+          <div className="sync-loss-risk"><small>{riskLabel}</small><strong>{riskValue}<em>{riskUnit}</em></strong><p>{riskDescription}</p></div>
+          <div className="sync-loss-route">{recommendation.route.map((step, index) => <span key={step}>{step}{index < recommendation.route.length - 1 && <i aria-hidden="true">→</i>}</span>)}</div>
+          <div className="sync-loss-protected"><div><small>{recoveryLabel}</small><strong>{recoveryValue}<em>{recoveryUnit}</em></strong></div><span>{recoveryDetail}</span></div>
           <div className="sync-loss-recommendation">
             <div><small>MELHOR PRIMEIRO PASSO PARA ESTE CENÁRIO</small><strong>{recommendedPlan.name}</strong><p>{recommendation.reason}</p></div>
-            <span><b>Escopo definido</b>após entender sua operação</span>
           </div>
-          <button type="button" onClick={() => onLead(`${recommendedPlan.name} como primeiro passo. Na simulação, considerei ${monthlyMessages} contatos por mês, ${exposedContacts} conversas com demora ou sem retorno, ${salesPerTen} clientes a cada 10 bons contatos e ticket médio de ${formatSyncMoney(averageTicket)}`)}>Quero começar por esta recomendação <b>↗</b></button>
+          <button type="button" onClick={() => onLead(`${recommendedPlan.name} como primeiro passo para resolver ${scenarioName}. Na simulação, considerei ${monthlyMessages} contatos por mês, ${exposedContacts} conversas afetadas e ticket médio de ${formatSyncMoney(averageTicket)}`)}>Quero começar por esta recomendação <SyncArrow /></button>
         </div>
       </div>
       <small className="sync-loss-disclaimer">Simulação educativa baseada somente nas quantidades escolhidas por você — sem usar uma média genérica de mercado. Não representa promessa de faturamento.</small>
@@ -226,104 +267,353 @@ function SyncLossSimulator({ onLead }: { onLead: (context: string) => void }) {
 }
 
 
-function InteractiveAiChatDemo() {
+type DemoScenarioId = "clinica" | "veiculos" | "estetica" | "juridico" | "moda";
+type DemoMessage = { side: "user" | "ai"; text: string };
+type DemoReply = { text: string; complete: boolean };
+type DemoScenario = {
+  id: DemoScenarioId;
+  title: string;
+  user: string;
+  ai: string;
+  suggestions: [string[], string[], string[]];
+  closing: string;
+};
+
+const MAX_DEMO_TURNS = 3;
+
+const demoScenarios: DemoScenario[] = [
+  {
+    id: "clinica",
+    title: "Clínica / Saúde",
+    user: "Quero marcar uma avaliação. Tem horário amanhã?",
+    ai: "Consigo ajudar. Primeiro preciso entender o tipo de atendimento: é uma primeira consulta, retorno ou exame?",
+    suggestions: [
+      ["É primeira consulta", "É retorno", "Quero uma avaliação"],
+      ["Prefiro à tarde", "Prefiro de manhã", "Atende convênio?"],
+      ["Pode confirmar", "Quero falar com a recepção", "Qual o valor?"],
+    ],
+    closing: "Perfeito. Registrei o tipo de atendimento, o período e a modalidade. O próximo passo seria apresentar os horários compatíveis ou entregar tudo organizado para a recepção.",
+  },
+  {
+    id: "veiculos",
+    title: "Loja de Carros",
+    user: "Procuro um SUV até R$ 120 mil e tenho carro na troca.",
+    ai: "Perfeito. Já tenho a categoria e a faixa de investimento. Agora preciso entender o perfil: você prefere um SUV compacto ou de sete lugares?",
+    suggestions: [
+      ["Prefiro SUV compacto", "Quero sete lugares", "Aceito seminovo"],
+      ["Tenho carro na troca", "Quero financiar", "Pagamento à vista"],
+      ["Pode mostrar opções", "Falar com consultor", "Até R$ 120 mil"],
+    ],
+    closing: "Perfeito. Registrei categoria, faixa de investimento e forma de negociação. O próximo passo seria mostrar somente os veículos compatíveis ou chamar um consultor com o contexto pronto.",
+  },
+  {
+    id: "estetica",
+    title: "Clínica de Estética",
+    user: "Quero melhorar manchas, mas não sei qual tratamento escolher.",
+    ai: "Vamos começar com segurança. É a primeira avaliação ou você já realizou algum tratamento para essa região?",
+    suggestions: [
+      ["É a primeira vez", "Já fiz tratamento", "Tenho pele sensível"],
+      ["Manchas no rosto", "Prefiro sábado", "Uso ácido"],
+      ["Quero uma avaliação", "Falar com especialista", "Qual o valor?"],
+    ],
+    closing: "Perfeito. Registrei objetivo, histórico e sensibilidade. O próximo passo seria indicar a avaliação adequada e encaminhar o contexto para a especialista, sem prometer um procedimento antes da análise.",
+  },
+  {
+    id: "juridico",
+    title: "Advocacia",
+    user: "Preciso revisar um contrato empresarial com confidencialidade.",
+    ai: "Claro. Sem expor dados sigilosos aqui, preciso identificar o tipo do contrato e a urgência. Existe uma data limite?",
+    suggestions: [
+      ["Prazo esta semana", "Contrato de serviço", "Contrato societário"],
+      ["Como funciona a consulta?", "Tenho urgência", "Posso enviar depois"],
+      ["Pode encaminhar", "Quero agendar", "Falar com advogado"],
+    ],
+    closing: "Perfeito. Registrei o tipo de contrato, a urgência e o prazo sem coletar conteúdo sigiloso. O próximo passo seria encaminhar o caso ao profissional adequado com a triagem pronta.",
+  },
+  {
+    id: "moda",
+    title: "Loja de Roupas",
+    user: "Gostei de uma peça, mas não sei se ainda tem meu tamanho.",
+    ai: "Posso ajudar a localizar. Qual é a peça, o tamanho e a cor desejada? Assim a busca fica objetiva e mostra somente opções compatíveis.",
+    suggestions: [
+      ["Vestido preto M", "Camisa branca G", "Calça tamanho 40"],
+      ["Vocês entregam?", "Quero retirar", "Posso trocar?"],
+      ["Mostrar opções", "Confirmar disponibilidade", "Falar com vendedor"],
+    ],
+    closing: "Perfeito. Registrei peça, tamanho, cor e forma de entrega. O próximo passo seria mostrar apenas os itens disponíveis ou transferir o pedido pronto para um vendedor.",
+  },
+];
+
+const hasAny = (text: string, terms: string[]) => terms.some((term) => text.includes(term));
+
+function buildDemoReply(message: string, scenario: DemoScenario, turn: number): DemoReply {
+  const text = message.toLocaleLowerCase("pt-BR").normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+  const isFinalTurn = turn >= MAX_DEMO_TURNS - 1;
+
+  // 1. Solicitação de Atendente Humano / Especialista
+  if (hasAny(text, ["humano", "pessoa", "atendente", "recepcao", "consultor", "especialista", "advogado", "vendedor", "falar com alguem"])) {
+    return {
+      text: "Contexto organizado. Em uma operação conectada, esta conversa seria transferida agora para a pessoa responsável, junto com o histórico, para você não precisar repetir tudo.",
+      complete: true,
+    };
+  }
+
+  // 2. Confirmação / Conclusão
+  if (hasAny(text, ["obrigad", "valeu", "perfeito", "pode confirmar", "pode agendar", "fechado", "pode encaminhar", "quero esse"])) {
+    return { text: scenario.closing, complete: true };
+  }
+
+  // A terceira resposta sempre fecha a experiência. A demonstração precisa
+  // provar começo, contexto e próximo passo sem virar uma conversa infinita.
+  if (isFinalTurn) return { text: scenario.closing, complete: true };
+
+  // 3. Localização / Endereço / Horário de Funcionamento
+  if (hasAny(text, ["onde fica", "endereco", "localizacao", "onde voces", "horario de funcionamento", "aberto"])) {
+    return {
+      text: "Na operação real, o Sync consulta o endereço e os horários cadastrados pela empresa antes de responder. Para continuar esta simulação, você prefere atendimento presencial ou digital?",
+      complete: false,
+    };
+  }
+
+  // 4. Formas de Pagamento / Parcelamento / Cartão
+  if (hasAny(text, ["forma de pagamento", "cartao", "parcela", "pix", "divide em"])) {
+    return {
+      text: "Na operação real, o Sync apresenta somente as formas de pagamento e condições cadastradas pela empresa. Qual modalidade você gostaria de consultar?",
+      complete: false,
+    };
+  }
+
+  // 5. Inteligência Específica por Segmento
+  if (scenario.id === "clinica") {
+    if (hasAny(text, ["convenio", "plano", "unimed", "bradesco", "sulamerica", "amil", "particular"])) {
+      return {
+        text: "No atendimento real, eu consultaria a lista de convênios cadastrada pela clínica antes de confirmar. Qual é o seu plano e qual especialidade você procura?",
+        complete: false,
+      };
+    }
+    if (hasAny(text, ["valor", "preco", "quanto custa", "tabela"])) {
+      return {
+        text: "O valor depende da especialidade e da modalidade de atendimento. Em produção, eu consultaria a tabela cadastrada pela clínica. Qual atendimento você procura?",
+        complete: false,
+      };
+    }
+    if (hasAny(text, ["manha", "tarde", "noite", "horario", "amanha", "segunda", "terca", "quarta", "quinta", "sexta", "sabado"])) {
+      return {
+        text: "Em produção, eu consultaria a agenda em tempo real e mostraria somente horários disponíveis. Para esta simulação, você prefere manhã ou tarde?",
+        complete: false,
+      };
+    }
+    if (hasAny(text, ["primeira", "retorno", "exame", "avaliacao", "consulta"])) {
+      return {
+        text: "Perfeito. Registrei o tipo de consulta. Agora preciso saber se o atendimento seria particular ou por convênio e qual período você prefere.",
+        complete: false,
+      };
+    }
+    return {
+      text: "Entendido! Já organizei suas preferências. Para finalizarmos a triagem, informe se possui convênio médico e sua preferência de turno (manhã ou tarde).",
+      complete: false,
+    };
+  }
+
+  if (scenario.id === "veiculos") {
+    if (hasAny(text, ["troca", "meu carro", "seminovo", "tabela fipe", "onix", "civic", "corolla", "hb20", "gol", "polo"])) {
+      return {
+        text: "Registrei que existe um veículo na troca. Em produção, o Sync coletaria modelo, ano e quilometragem para entregar o contexto ao avaliador. Você pretende financiar a diferença ou pagar à vista?",
+        complete: false,
+      };
+    }
+    if (hasAny(text, ["financ", "parcela", "entrada", "taxa", "banco", "juros"])) {
+      return {
+        text: "Em uma operação conectada, eu mostraria somente as condições cadastradas pela loja ou pela financeira. Para qual valor de entrada e faixa de parcela você busca uma simulação?",
+        complete: false,
+      };
+    }
+    if (hasAny(text, ["suv", "compacto", "sete lugares", "automatico", "flex", "diesel", "blindado", "corolla cross", "compass", "creta", "renegade", "tracker", "kicks"])) {
+      return {
+        text: "Perfil do veículo entendido. Em produção, eu filtraria o catálogo real e mostraria apenas opções compatíveis. Você prefere receber detalhes dos veículos ou falar com um consultor?",
+        complete: false,
+      };
+    }
+    return {
+      text: "Certo! Já anotei o perfil do veículo procurado. Agora informe se haverá carro na troca ou se prefere uma simulação de financiamento.",
+      complete: false,
+    };
+  }
+
+  if (scenario.id === "estetica") {
+    if (hasAny(text, ["resultado", "comprovado", "garantia", "funciona mesmo"])) {
+      return {
+        text: "O resultado varia conforme avaliação, histórico e resposta individual. O Sync não promete um procedimento: ele organiza o objetivo e encaminha a conversa para avaliação profissional.",
+        complete: false,
+      };
+    }
+    if (hasAny(text, ["sensivel", "alerg", "reacao", "acido", "roacutan", "gestante", "amament"])) {
+      return {
+        text: "Essa informação é importante. Registrei a sensibilidade para que a pessoa responsável avalie o caso antes de qualquer indicação. Qual região você deseja tratar?",
+        complete: false,
+      };
+    }
+    if (hasAny(text, ["botox", "mancha", "melasma", "limpeza", "preenchimento", "harmonizacao", "bioestimulador", "laser", "peeling"])) {
+      return {
+        text: "Entendi o objetivo, mas o procedimento adequado depende de avaliação profissional. Você já realizou algum tratamento nessa região ou seria a primeira vez?",
+        complete: false,
+      };
+    }
+    if (hasAny(text, ["valor", "preco", "quanto"])) {
+      return {
+        text: "Cada protocolo é personalizado após análise do tipo de pele e grau de necessidade. Na consulta avaliativa desenhamos o plano exato. Você prefere atendimento durante a semana ou no sábado?",
+        complete: false,
+      };
+    }
+    return {
+      text: "Perfeito! Histórico e objetivo registrados com cuidado. Deseja agendar sua avaliação facial/corporal durante a semana ou no sábado?",
+      complete: false,
+    };
+  }
+
+  if (scenario.id === "juridico") {
+    if (hasAny(text, ["nda", "confidencial", "sigilo", "dados sigilosos"])) {
+      return {
+        text: "Não é necessário compartilhar conteúdo sigiloso nesta triagem. Em produção, o Sync registra apenas área, urgência e preferência de contato; as condições formais são confirmadas pelo profissional responsável.",
+        complete: false,
+      };
+    }
+    if (hasAny(text, ["prazo", "urgente", "amanha", "esta semana", "audiencia", "intimacao", "liminar"])) {
+      return {
+        text: "Urgência processual registrada com prioridade alta. Sem compartilhar dados sigilosos aqui, trata-se de direito empresarial, trabalhista, civil ou tributário?",
+        complete: false,
+      };
+    }
+    if (hasAny(text, ["contrato", "societario", "trabalhista", "tributario", "civel", "imobiliario", "divorcio", "heranca"])) {
+      return {
+        text: "Área jurídica identificada. Sem coletar conteúdo sigiloso nesta etapa, eu encaminharia o contexto e a urgência ao profissional responsável. Você prefere reunião online ou presencial?",
+        complete: false,
+      };
+    }
+    return {
+      text: "Dados preliminares organizados com sigilo. Para fecharmos o encaminhamento, informe sua preferência de reunião (online ou presencial) e a urgência do caso.",
+      complete: false,
+    };
+  }
+
+  // Segmento Moda / Varejo
+  if (hasAny(text, ["como funciona", "atendimento", "como comprar", "preciso de ajuda"])) {
+    return {
+      text: "Posso ajudar a localizar uma peça, organizar tamanho e cor, explicar as opções cadastradas de entrega ou encaminhar tudo pronto para um vendedor. O que você quer resolver primeiro?",
+      complete: false,
+    };
+  }
+  if (hasAny(text, ["entrega", "frete", "sedex", "motoboy", "envia", "cep", "chega"])) {
+    return {
+      text: "Em produção, eu consultaria as modalidades e prazos configurados pela loja usando o CEP informado. Qual é o seu CEP e qual peça você procura?",
+      complete: false,
+    };
+  }
+  const mentionsSize = /(^|\s)(p|m|g|gg|38|40|42|44)(\s|$)/.test(text);
+  if (mentionsSize || hasAny(text, ["tamanho", "preto", "branco", "nude", "vestido", "camisa", "calca"])) {
+    return {
+      text: "Registrei peça, tamanho e cor. Em produção, eu consultaria o estoque real antes de confirmar disponibilidade. Você prefere entrega ou retirada?",
+      complete: false,
+    };
+  }
+  return {
+    text: "Ótimo! Registrei seu interesse. Agora me informe o tamanho desejado e se prefere entrega a domicílio ou retirada rápida.",
+    complete: false,
+  };
+}
+
+function InteractiveAiChatDemo({ onLead }: { onLead: (context: string) => void }) {
   const [currentScenario, setCurrentScenario] = useState(0);
   const [isTyping, setIsTyping] = useState(false);
   const [customMsg, setCustomMsg] = useState("");
-  const [chatHistory, setChatHistory] = useState([
-    { side: "user", text: "Olá! Gostaria de agendar uma consulta para amanhã." },
-    { side: "ai", text: "Olá! Com certeza. Temos horários disponíveis amanhã às 10h30 e às 15h00. Qual especialidade ou tratamento você busca?" }
+  const [userTurns, setUserTurns] = useState(0);
+  const [demoFinished, setDemoFinished] = useState(false);
+  const typingTimerRef = useRef<number | null>(null);
+  const chatBodyRef = useRef<HTMLDivElement | null>(null);
+  const [chatHistory, setChatHistory] = useState<DemoMessage[]>([
+    { side: "user", text: demoScenarios[0].user },
+    { side: "ai", text: demoScenarios[0].ai },
   ]);
 
-  const scenarios = [
-    {
-      title: "Clínica / Saúde",
-      user: "Olá! Gostaria de agendar uma consulta para amanhã.",
-      ai: "Olá! Com certeza. Temos horários disponíveis amanhã às 10h30 e às 15h00. Qual especialidade ou tratamento você busca?"
-    },
-    {
-      title: "Loja de Carros",
-      user: "Vocês têm a BMW 320i em estoque e aceitam carro na troca?",
-      ai: "Temos sim! A BMW 320i M Sport 2024 branca está disponível no showroom. Aceitamos seu seminovo com avaliação justa na hora. Quer simular a entrada agora?"
-    },
-    {
-      title: "Estética Avançada",
-      user: "Qual o valor do protocolo de bioestimulador de colágeno?",
-      ai: "O valor varia conforme a área e número de ampolas. Realizamos uma avaliação facial 3D prévia para definir o plano ideal. Deseja agendar sua avaliação?"
-    },
-    {
-      title: "Advocacia / Jurídico",
-      user: "Preciso de uma orientação confidencial sobre revisão de contrato empresarial.",
-      ai: "Perfeito. Nossos sócios atendem sob sigilo ético absoluto. Vou colher os dados básicos e direcionar para uma videoconferência com o advogado especialista."
-    }
-  ];
+  useEffect(() => () => {
+    if (typingTimerRef.current !== null) window.clearTimeout(typingTimerRef.current);
+  }, []);
 
-  const handleSelectScenario = (index: number) => {
-    setCurrentScenario(index);
-    setIsTyping(true);
-    const sc = scenarios[index];
-    setChatHistory([{ side: "user", text: sc.user }]);
-    setTimeout(() => {
-      setChatHistory([
-        { side: "user", text: sc.user },
-        { side: "ai", text: sc.ai }
-      ]);
-      setIsTyping(false);
-    }, 700);
+  useEffect(() => {
+    const chatBody = chatBodyRef.current;
+    if (chatBody) chatBody.scrollTop = chatBody.scrollHeight;
+  }, [chatHistory, isTyping, demoFinished]);
+
+  const scheduleReply = (reply: () => void, delay: number) => {
+    if (typingTimerRef.current !== null) window.clearTimeout(typingTimerRef.current);
+    typingTimerRef.current = window.setTimeout(() => {
+      reply();
+      typingTimerRef.current = null;
+    }, delay);
   };
 
-  const handleSendCustom = (e: FormEvent) => {
-    e.preventDefault();
-    if (!customMsg.trim()) return;
-    const text = customMsg;
+  const sendMessage = (message: string) => {
+    const text = message.trim();
+    if (!text || isTyping || demoFinished) return;
+    const answer = buildDemoReply(text, demoScenarios[currentScenario], userTurns);
+    setChatHistory((history) => [...history, { side: "user", text }]);
     setCustomMsg("");
-    setChatHistory(prev => [...prev, { side: "user", text }]);
     setIsTyping(true);
-    const lowerText = text.toLocaleLowerCase("pt-BR");
-    const contextualAnswer = lowerText.includes("preço") || lowerText.includes("valor")
-      ? "Posso te orientar sobre valores. Para indicar a opção certa, me diga qual serviço você procura e quando gostaria de começar."
-      : lowerText.includes("horário") || lowerText.includes("agenda") || lowerText.includes("agendar")
-        ? "Vamos encontrar um horário. Qual dia e período você prefere? Depois confirmo as opções disponíveis e organizo o agendamento."
-        : lowerText.includes("carro") || lowerText.includes("veículo")
-          ? "Claro. Me conte o modelo que procura, a faixa de investimento e se possui veículo para troca. Assim eu filtro as opções certas para você."
-          : "Entendi. Para conduzir você ao próximo passo sem resposta genérica, me conte qual resultado busca e o que já tentou até agora.";
-    setTimeout(() => {
-      setChatHistory(prev => [
-        ...prev,
-        {
-          side: "ai",
-          text: contextualAnswer
-        }
-      ]);
+    scheduleReply(() => {
+      setChatHistory((history) => [...history, { side: "ai", text: answer.text }]);
+      setUserTurns((turns) => turns + 1);
+      setDemoFinished(answer.complete);
       setIsTyping(false);
-    }, 800);
+    }, 620 + Math.min(text.length * 8, 420));
+  };
+
+  const startScenario = (index: number) => {
+    const scenario = demoScenarios[index];
+    if (typingTimerRef.current !== null) window.clearTimeout(typingTimerRef.current);
+    setCurrentScenario(index);
+    setCustomMsg("");
+    setUserTurns(0);
+    setDemoFinished(false);
+    setChatHistory([{ side: "user", text: scenario.user }]);
+    setIsTyping(true);
+    scheduleReply(() => {
+      setChatHistory([{ side: "user", text: scenario.user }, { side: "ai", text: scenario.ai }]);
+      setIsTyping(false);
+    }, 620);
+  };
+
+  const handleSelectScenario = (index: number) => startScenario(index);
+
+  const handleSendCustom = (event: FormEvent) => {
+    event.preventDefault();
+    sendMessage(customMsg);
   };
 
   return (
     <section className="sync-interactive-ai-section" id="portfolio">
       <div className="section-heading" style={{ margin: "0 auto 40px", maxWidth: "1240px" }}>
         <div>
-          <span className="section-index">SIMULADOR AO VIVO · TESTE AGORA</span>
+          <span className="section-index">01 — DEMONSTRAÇÃO AO VIVO</span>
           <h2>Teste uma conversa.<br />Veja o próximo passo nascer.</h2>
         </div>
-        <p>Clique em um dos cenários abaixo ou digite sua pergunta para ver como a IA da Avancini Sync entende o contexto e conduz o cliente ao fechamento.</p>
+        <p>Escolha um segmento e siga uma conversa completa: entender, qualificar e definir o próximo passo. A simulação encerra quando conclui a triagem.</p>
       </div>
 
       <div className="sync-ai-sim-grid">
         <div className="sync-ai-sim-copy">
           <span className="badge"><i /> INTELIGÊNCIA ARTIFICIAL CONVERSACIONAL</span>
-          <h3>Zero respostas robóticas.<br />Linguagem natural 24/7.</h3>
-          <p>O robô não apenas envia menus travados: ele lê o contexto, consulta a base de conhecimento do seu negócio e responde de forma humana e persuasiva.</p>
+          <h3>A pergunta muda.<br />A resposta acompanha.</h3>
+          <p>Esta é uma simulação orientativa. No atendimento real, a IA usa a base, o tom e os limites definidos pela empresa — e chama uma pessoa quando necessário.</p>
           <div className="sync-ai-sim-triggers">
-            {scenarios.map((sc, idx) => (
+            {demoScenarios.map((sc, idx) => (
               <button
                 type="button"
                 key={sc.title}
                 className={currentScenario === idx ? "active" : ""}
                 onClick={() => handleSelectScenario(idx)}
               >
-                <span>{sc.title}: “{sc.user.slice(0, 38)}...”</span>
-                <b>Testar ↗</b>
+                <span>{sc.title}: “{sc.user.slice(0, 40)}...”</span>
+                <b>Testar <SyncArrow /></b>
               </button>
             ))}
           </div>
@@ -337,9 +627,16 @@ function InteractiveAiChatDemo() {
               <small><i /> Ativo agora · Resposta instantânea</small>
             </div>
           </div>
-          <div className="sync-wa-chat-body">
+          <div className="sync-demo-progress" aria-label={`Etapa ${Math.min(userTurns + 1, MAX_DEMO_TURNS)} de ${MAX_DEMO_TURNS}`}>
+            {["Entender", "Qualificar", "Próximo passo"].map((label, index) => (
+              <span key={label} className={index < userTurns || demoFinished ? "done" : index === userTurns ? "active" : ""}>
+                <i>{index + 1}</i>{label}
+              </span>
+            ))}
+          </div>
+          <div className="sync-wa-chat-body" ref={chatBodyRef}>
             {chatHistory.map((m, i) => (
-              <div key={i} className={m.side === "user" ? "sync-msg sync-msg-user" : "sync-msg sync-msg-ai"}>
+              <div key={`${m.side}-${i}-${m.text}`} className={m.side === "user" ? "sync-msg sync-msg-user" : "sync-msg sync-msg-ai"}>
                 {m.side === "ai" && <strong>Avancini Sync IA</strong>}
                 {m.text}
               </div>
@@ -350,15 +647,37 @@ function InteractiveAiChatDemo() {
               </div>
             )}
           </div>
-          <form className="sync-wa-footer" onSubmit={handleSendCustom}>
-            <input
-              type="text"
-              placeholder="Digite uma pergunta de teste..."
-              value={customMsg}
-              onChange={(e) => setCustomMsg(e.target.value)}
-            />
-            <button type="submit" aria-label="Enviar mensagem de teste">➤</button>
-          </form>
+          {demoFinished ? (
+            <div className="sync-demo-complete" role="status">
+              <div>
+                <small>TRIAGEM CONCLUÍDA</small>
+                <strong>Conversa organizada. Próximo passo definido.</strong>
+                <span>{demoScenarios[currentScenario].title} · contexto coletado · equipe pronta para continuar</span>
+              </div>
+              <div className="sync-demo-complete-actions">
+                <button type="button" onClick={() => onLead(`um atendimento inteligente para ${demoScenarios[currentScenario].title.toLocaleLowerCase("pt-BR")}`)}>Quero isso no meu atendimento <SyncArrow /></button>
+                <button type="button" onClick={() => startScenario(currentScenario)}>Reiniciar conversa <b>↻</b></button>
+              </div>
+            </div>
+          ) : (
+            <>
+              <div className="sync-wa-suggestions" aria-label="Sugestões para continuar a conversa">
+                {demoScenarios[currentScenario].suggestions[Math.min(userTurns, MAX_DEMO_TURNS - 1)].map((suggestion) => (
+                  <button type="button" key={suggestion} onClick={() => sendMessage(suggestion)} disabled={isTyping}>{suggestion}</button>
+                ))}
+              </div>
+              <form className="sync-wa-footer" onSubmit={handleSendCustom}>
+                <input
+                  type="text"
+                  placeholder="Digite uma resposta de teste..."
+                  value={customMsg}
+                  onChange={(e) => setCustomMsg(e.target.value)}
+                  disabled={isTyping}
+                />
+                <button type="submit" aria-label="Enviar mensagem de teste" disabled={isTyping || !customMsg.trim()}>➤</button>
+              </form>
+            </>
+          )}
         </div>
       </div>
     </section>
@@ -368,16 +687,17 @@ function InteractiveAiChatDemo() {
 export default function AvanciniSyncPage() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [activeSolution, setActiveSolution] = useState<SolutionId>("ia");
+  const [pricingMode, setPricingMode] = useState<"com-fidelidade" | "sem-fidelidade" | "pagamento-unico">("com-fidelidade");
   const [leadContext, setLeadContext] = useState("");
   const [leadName, setLeadName] = useState("");
   const [leadError, setLeadError] = useState("");
   const leadInputRef = useRef<HTMLInputElement>(null);
+  const menuCloseRef = useRef<HTMLButtonElement>(null);
 
-  const solution = solutions[activeSolution];
   const normalizedLeadContext = leadContext.trim().replace(/[.!?]+$/, "");
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     const updateHeader = () => setScrolled(window.scrollY > 24);
     updateHeader();
     window.addEventListener("scroll", updateHeader, { passive: true });
@@ -386,10 +706,26 @@ export default function AvanciniSyncPage() {
 
   useEffect(() => {
     if (!leadContext && !menuOpen) return;
+    const previouslyFocused = document.activeElement instanceof HTMLElement ? document.activeElement : null;
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         setLeadContext("");
         setMenuOpen(false);
+      }
+      if (event.key === "Tab") {
+        const dialog = document.querySelector<HTMLElement>('[role="dialog"][aria-modal="true"]');
+        if (!dialog) return;
+        const focusable = Array.from(dialog.querySelectorAll<HTMLElement>('a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'));
+        if (!focusable.length) return;
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          last.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          first.focus();
+        }
       }
     };
     const previousOverflow = document.body.style.overflow;
@@ -398,6 +734,7 @@ export default function AvanciniSyncPage() {
     return () => {
       document.body.style.overflow = previousOverflow;
       window.removeEventListener("keydown", onKeyDown);
+      previouslyFocused?.focus({ preventScroll: true });
     };
   }, [leadContext, menuOpen]);
 
@@ -406,6 +743,12 @@ export default function AvanciniSyncPage() {
     const timer = window.setTimeout(() => leadInputRef.current?.focus(), 80);
     return () => window.clearTimeout(timer);
   }, [leadContext]);
+
+  useEffect(() => {
+    if (!menuOpen) return;
+    const frame = window.requestAnimationFrame(() => menuCloseRef.current?.focus({ preventScroll: true }));
+    return () => window.cancelAnimationFrame(frame);
+  }, [menuOpen]);
 
   const openLead = (context: string) => {
     setLeadContext(context);
@@ -427,34 +770,47 @@ export default function AvanciniSyncPage() {
 
   return (
     <main className="sync-page">
-      <header className={`sync-header ${scrolled ? "scrolled" : ""}`}>
-        <a href="#inicio" className="sync-brand" aria-label="Avancini Sync, início">
-          <span className="sync-brand-mark avancini-a-mark" aria-hidden="true"><i /></span>
-          <span><b>AVANCINI <em>SYNC</em></b><small>Uma solução Avancini OS</small></span>
+      <header className={`header sync-shared-header ${scrolled ? "scrolled" : ""}`}>
+        <a href="#inicio" className="logo" aria-label="Avancini Sync, início">
+          <AvanciniMark variant="sync" className="logo-mark avancini-a-mark" />
+          <span><span className="brand-name">AVANCINI <b>SYNC</b></span><small>Atendimento que não esfria</small></span>
         </a>
-        <div className="sync-network-links" aria-label="Ecossistema Avancini"><Link href="/dash">Avancini Dash ↗</Link><Link href="/">Avancini OS ↗</Link></div>
-        <button className="sync-menu-toggle" type="button" aria-label={menuOpen ? "Fechar menu" : "Abrir menu"} aria-expanded={menuOpen} onClick={() => setMenuOpen((open) => !open)}>
-          <i><span /><span /><span /></i><b>{menuOpen ? "Fechar" : "Menu"}</b>
+        <div className="web-ecosystem-switch" aria-label="Ecossistema Avancini">
+          <Link className="button button-small header-cta sync-dash-cta" href="/dash">
+            Avancini Dash <SyncArrow />
+          </Link>
+          <Link className="button button-small header-cta" href="/">
+            Avancini OS <SyncArrow />
+          </Link>
+        </div>
+        <button className="menu-toggle" type="button" aria-label={menuOpen ? "Fechar menu" : "Abrir menu"} aria-expanded={menuOpen} onClick={() => setMenuOpen((open) => !open)}>
+          <i className="menu-glyph" aria-hidden="true"><span /><span /><span /></i><b>{menuOpen ? "Fechar" : "Menu"}</b>
         </button>
       </header>
 
       {menuOpen && <div className="sync-menu" role="dialog" aria-modal="true" aria-label="Menu principal do Avancini Sync">
-        <div className="sync-menu-top"><span>NAVEGAÇÃO <i /> 06 SEÇÕES</span><div><Link href="/" onClick={() => setMenuOpen(false)}>AVANCINI OS ↗</Link><Link href="/dash" onClick={() => setMenuOpen(false)}>AVANCINI DASH ↗</Link></div><button type="button" onClick={() => setMenuOpen(false)}>× <b>FECHAR</b><small>ESC</small></button></div>
-        <nav>{[["01","Início","#inicio"],["02","Central ao vivo","#portfolio"],["03","Soluções","#solucoes"],["04","Planos","#planos"],["05","Método","#metodo"],["06","Dúvidas","#duvidas"]].map(([number,label,href]) => <a href={href} key={number} onClick={() => setMenuOpen(false)}><small>{number}</small><span>{label}</span><b>↗</b></a>)}</nav>
-        <div className="sync-menu-bottom"><span><i /> ATENDIMENTO QUE RESPONDE E OPERA</span><button type="button" onClick={() => { setMenuOpen(false); openLead("uma solução para melhorar meu atendimento"); }}>FALAR SOBRE MEU ATENDIMENTO ↗</button></div>
+        <div className="sync-menu-top"><span>NAVEGAÇÃO <i /> 05 SEÇÕES</span><div><Link href="/" onClick={() => setMenuOpen(false)}>AVANCINI OS <SyncArrow /></Link><Link href="/dash" onClick={() => setMenuOpen(false)}>AVANCINI DASH <SyncArrow /></Link></div><button ref={menuCloseRef} type="button" onClick={() => setMenuOpen(false)}>× <b>FECHAR</b><small>ESC</small></button></div>
+        <nav>{[
+          ["01", "Início", "A oportunidade não espera", "#inicio"],
+          ["02", "Demonstração", "Veja o atendimento acontecer", "#portfolio"],
+          ["03", "Soluções", "Chatbot ou atendente com IA", "#solucoes"],
+          ["04", "Planos", "Escolha pela sua operação", "#planos"],
+          ["05", "Dúvidas", "Decida com clareza", "#duvidas"],
+        ].map(([number,label,description,href]) => <a href={href} key={number} onClick={() => setMenuOpen(false)}><small>{number}</small><span>{label}</span><em>{description}</em><SyncArrow /></a>)}</nav>
+        <div className="sync-menu-bottom"><span><i /> ATENDIMENTO QUE RESPONDE E DIRECIONA</span><button type="button" onClick={() => { setMenuOpen(false); openLead("uma solução para melhorar meu atendimento"); }}>FALAR SOBRE MEU ATENDIMENTO <SyncArrow /></button></div>
       </div>}
 
       <section className="sync-hero" id="inicio">
         <div className="sync-hero-grid" aria-hidden="true" />
         <div className="sync-hero-orbit" aria-hidden="true"><i /><i /><i /></div>
-        <div className="sync-hero-mark avancini-a-mark" aria-hidden="true"><i /></div>
+        <AvanciniMark variant="sync" className="sync-hero-mark avancini-a-mark" />
         <div className="sync-hero-copy">
-          <span className="sync-eyebrow"><i /> CHATBOT · INTELIGÊNCIA ARTIFICIAL · AUTOMAÇÕES</span>
-          <h1>Seu cliente chamou.<br /><em>O Sync responde e faz acontecer.</em></h1>
-          <p>Atenda no WhatsApp e Instagram, organize cada oportunidade e automatize o próximo passo — mesmo quando ninguém da equipe está olhando.</p>
+          <span className="sync-eyebrow"><i /> CHATBOT · ATENDENTE COM INTELIGÊNCIA ARTIFICIAL</span>
+          <h1>Seu cliente chamou.<br /><em>O Sync mantém a conversa viva.</em></h1>
+          <p>Responda no WhatsApp e Instagram com rapidez, contexto e um próximo passo claro — mesmo quando ninguém da equipe pode atender naquele instante.</p>
           <div className="sync-hero-actions">
-            <a href="#portfolio">Ver o Sync funcionando <b>↓</b></a>
-            <button type="button" onClick={() => openLead("parar de perder oportunidades por demora ou falta de acompanhamento")}>Quero parar de perder oportunidades <b>↗</b></button>
+            <a href="#portfolio">Ver o Sync funcionando <SyncDownArrow /></a>
+            <button type="button" onClick={() => openLead("parar de perder oportunidades por demora ou falta de acompanhamento")}>Quero parar de perder oportunidades <SyncArrow /></button>
           </div>
           <div className="sync-hero-proof">
             <span><b>01</b> Responde em segundos</span>
@@ -464,119 +820,92 @@ export default function AvanciniSyncPage() {
         </div>
       </section>
 
-      <section className="sync-value" aria-labelledby="sync-value-title">
-        <div className="sync-value-copy">
-          <span>O QUE O SYNC FAZ POR VOCÊ</span>
-          <h2 id="sync-value-title">Uma mensagem entra.<br /><em>O próximo passo já sai organizado.</em></h2>
-          <p>Em poucos segundos, o Sync entende o contato, registra o que importa e move a oportunidade para a próxima ação.</p>
-          <div><b>Menos demora</b><b>Menos trabalho manual</b><b>Mais oportunidades acompanhadas</b></div>
-          <button type="button" onClick={() => openLead("entender onde o Sync pode reduzir demora e trabalho manual na minha empresa")}>Quero mapear meu atendimento <b>↗</b></button>
-        </div>
-        <div className="sync-opportunity" aria-label="Demonstração de uma oportunidade processada pelo Sync">
-          <header><span><i /> OPORTUNIDADE EM ANDAMENTO</span><small>14:32:08</small></header>
-          <div className="sync-opportunity-message"><small>WHATSAPP · NOVA MENSAGEM</small><strong>“Quero saber o valor e se ainda tem horário esta semana.”</strong><span>recebida agora</span></div>
-          <ol>
-            <li><i>01</i><div><small>14:32:09</small><strong>Interesse identificado</strong><span>Cliente quer preço e disponibilidade</span></div><b>concluído</b></li>
-            <li><i>02</i><div><small>14:32:10</small><strong>Resposta preparada</strong><span>Contexto da empresa consultado</span></div><b>concluído</b></li>
-            <li><i>03</i><div><small>14:32:12</small><strong>Próximo passo executado</strong><span>Agenda consultada e equipe avisada</span></div><b>concluído</b></li>
-          </ol>
-          <footer><span>RESULTADO</span><strong>Conversa atendida. Oportunidade em movimento.</strong><i>12s</i></footer>
-        </div>
-      </section>
-
-      <InteractiveAiChatDemo />
-
-      <SyncLossSimulator onLead={openLead} />
-
-      <section className="sync-signal" aria-label="Benefícios do Avancini Sync">
-        <div><span>◎</span> Resposta mais rápida</div><div><span>◇</span> Atendimento organizado</div><div><span>↗</span> Oportunidade qualificada</div><div><span>⚡</span> Tarefa automatizada</div><div><span>◉</span> Pessoa no momento certo</div>
-      </section>
+      <InteractiveAiChatDemo onLead={openLead} />
 
       <section className="sync-solutions" id="solucoes">
         <header className="sync-section-heading">
-          <div><span>02 — ESCOLHA PELO GARGALO</span><h2>Três soluções.<br />Nenhuma venda casada.</h2></div>
-          <p>Chatbot, IA e automação não são nomes diferentes para a mesma coisa. Cada um resolve uma etapa — e você contrata somente a etapa que precisa melhorar.</p>
+          <div><span>02 — ESCOLHA PELO ATENDIMENTO</span><h2>Duas soluções.<br />Cada uma funciona sozinha.</h2></div>
+          <p>Chatbot organiza caminhos previsíveis. O Atendente IA entende perguntas livres. Você escolhe somente o nível de conversa que sua empresa precisa.</p>
         </header>
-        <div className="sync-solution-layout">
-          <div className="sync-solution-tabs" role="tablist" aria-label="Soluções do Avancini Sync">
-            {(Object.keys(solutions) as SolutionId[]).map((id) => {
-              const item = solutions[id];
-              return (
-                <button className={activeSolution === id ? "active" : ""} type="button" role="tab" aria-selected={activeSolution === id} onClick={() => setActiveSolution(id)} key={id}>
-                  <span>{item.index}</span><div><small>{item.label}</small><strong>{item.title}</strong><p>{item.ideal}</p></div><b>↗</b>
-                </button>
-              );
-            })}
-          </div>
-          <SolutionDemo solution={solution} onLead={() => openLead(`${solution.label.toLocaleLowerCase("pt-BR")}: ${solution.promise}`)} />
+        <div className="sync-choice-grid" aria-label="Comparação entre Chatbot e Atendente IA">
+          {(Object.keys(solutions) as SolutionId[]).map((id) => {
+            const item = solutions[id];
+            return (
+              <article className={id === "ia" ? "featured" : ""} key={id}>
+                <div className="sync-choice-top"><span>{item.index}</span><small>{item.label}</small></div>
+                <h3>{item.promise}</h3>
+                <p>{item.description}</p>
+                <strong>{item.ideal}</strong>
+                <ol>{item.steps.map((step) => <li key={step}>{step}</li>)}</ol>
+                <footer><span>{item.result}</span><button type="button" onClick={() => openLead(`${item.label.toLocaleLowerCase("pt-BR")}: ${item.promise}`)}>Quero esta solução <SyncArrow /></button></footer>
+              </article>
+            );
+          })}
         </div>
       </section>
 
+      <SyncLossSimulator onLead={openLead} />
+
       <section className="sync-pricing" id="planos">
         <header className="sync-section-heading">
-          <div><span>03 — MENSALIDADES</span><h2>Comece pelo gargalo.<br />Não por um pacote.</h2></div>
-          <p>Três pontos de entrada independentes, com configuração incluída e qualidade completa desde o primeiro dia.</p>
+          <div><span>04 — FORMAS DE CONTRATAÇÃO</span><h2>Comece pelo gargalo.<br />Não por um pacote.</h2></div>
+          <p>Comece sem entrada, use uma mensalidade flexível ou compre a construção da solução. A qualidade continua a mesma; muda o acompanhamento depois da entrega.</p>
         </header>
-        <div className="sync-pricing-conditions" aria-label="Condições dos planos Sync">
-          <div><small>ENTRADA</small><strong>R$ 0</strong><span>sem taxa de implementação</span></div>
-          <div><small>PERMANÊNCIA</small><strong>6 meses</strong><span>condição mínima de lançamento</span></div>
-          <div><small>ESCOPO</small><strong>Definido antes</strong><span>canal, fluxo e franquia sem surpresa</span></div>
+        <div className="sync-pricing-toggle" role="group" aria-label="Forma de contratação do Avancini Sync">
+          <button type="button" aria-pressed={pricingMode === "com-fidelidade"} className={pricingMode === "com-fidelidade" ? "active" : ""} onClick={() => setPricingMode("com-fidelidade")}><small>RECOMENDADO PARA COMEÇAR</small><strong>Mensal sem entrada</strong><span>R$ 0 para ativar · permanência de 6 meses</span></button>
+          <button type="button" aria-pressed={pricingMode === "sem-fidelidade"} className={pricingMode === "sem-fidelidade" ? "active" : ""} onClick={() => setPricingMode("sem-fidelidade")}><small>MAIS LIBERDADE</small><strong>Mensal flexível</strong><span>ativação paga · cancele quando quiser</span></button>
+          <button type="button" aria-pressed={pricingMode === "pagamento-unico"} className={pricingMode === "pagamento-unico" ? "active" : ""} onClick={() => setPricingMode("pagamento-unico")}><small>SOLUÇÃO ENTREGUE</small><strong>Pagamento único</strong><span>sem mensalidade Avancini</span></button>
+        </div>
+        <div className="sync-pricing-conditions" aria-label="O que compõe o investimento">
+          <div><small>MENSALIDADE AVANCINI</small><strong>Estrutura + acompanhamento</strong><span>Construção, monitoramento e ajustes conforme a modalidade.</span></div>
+          <div><small>CANAIS E CONSUMO</small><strong>Custos externos separados</strong><span>WhatsApp, APIs e uso de IA variam conforme provedor e volume.</span></div>
+          <div><small>SEM SURPRESA</small><strong>Limites definidos antes</strong><span>Canal, volume e escopo são validados antes da contratação.</span></div>
         </div>
         <div className="sync-plan-grid">
           {plans.map((plan, index) => {
+            const isContract = pricingMode === "com-fidelidade";
+            const isOneTime = pricingMode === "pagamento-unico";
+            const currentPrice = isContract ? plan.contractPrice : isOneTime ? plan.oneTimePrice : plan.flexiblePrice;
+            const currentSuffix = isOneTime ? "" : plan.suffix;
+            const currentItems = isOneTime ? plan.oneTimeItems : plan.items;
             return (
             <article className={plan.featured ? "featured" : ""} key={plan.id}>
               <div className="sync-plan-top"><span>0{index + 1}</span><small>{plan.label}</small>{plan.featured && <b>MAIS COMPLETO</b>}</div>
-              <h3>{plan.name}</h3><strong>{plan.price}<em>{plan.suffix}</em></strong><i>CONDIÇÃO DE LANÇAMENTO · SEM TAXA DE IMPLEMENTAÇÃO</i><p>{plan.description}</p>
+              <h3>{plan.name}</h3><strong>{currentPrice}<em>{currentSuffix}</em></strong><div className="sync-plan-contract"><b>{isContract ? "R$ 0 para ativar" : isOneTime ? "Sem mensalidade Avancini" : plan.flexibleSetup}</b><span>{isContract ? "permanência de 6 meses" : isOneTime ? plan.oneTimeTerms : "sem fidelidade"}</span></div><p>{plan.description}</p>
               <p className="sync-plan-fit"><b>Faz mais sentido para você se:</b>{plan.fit}</p>
               <small className="sync-plan-includes">O QUE ENTRA</small>
-              <ul>{plan.items.map((item) => <li key={item}>{item}</li>)}</ul>
-              <button type="button" onClick={() => openLead(`${plan.name} por ${plan.price}${plan.suffix}`)}>Quero esta solução <b>↗</b></button>
+              <ul>{currentItems.map((item) => <li key={item}>{item}</li>)}</ul>
+              <button type="button" onClick={() => openLead(`${plan.name} por ${currentPrice}${currentSuffix}, na modalidade ${isContract ? "sem entrada e com permanência de 6 meses" : isOneTime ? "pagamento único pela construção e entrega, com custos de canais e consumo separados" : `sem fidelidade, com ${plan.flexibleSetup.toLowerCase()}`}`)}>Quero esta solução <SyncArrow /></button>
             </article>
             );
           })}
         </div>
-        <div className="sync-pricing-note"><span>NÃO SABE QUAL ESCOLHER?</span><strong>Conte onde sua operação trava. A Avancini identifica o menor começo capaz de gerar resultado — sem empurrar ferramenta ou pacote desnecessário.</strong><button type="button" onClick={() => openLead("um diagnóstico para montar uma solução mensal compatível com minha operação")}>Quero uma recomendação direta <b>↗</b></button></div>
-        <p className="sync-usage-note">Condição de lançamento com permanência mínima de 6 meses. Custos de WhatsApp, APIs, ferramentas externas e consumo acima da franquia são apresentados e aprovados antes da ativação. Novos canais, fluxos ou mudanças fora do escopo recebem orçamento separado.</p>
-      </section>
-
-      <section className="sync-method" id="metodo">
-        <header className="sync-section-heading dark">
-          <div><span>04 — COMO COLOCAMOS NO AR</span><h2>Do gargalo ao fluxo funcionando.</h2></div>
-          <p>Sem projeto inflado. Primeiro entendemos o que trava, depois colocamos no ar o menor fluxo capaz de resolver.</p>
-        </header>
-        <div className="sync-method-stack">
-          <article><span>01</span><div><small>DIAGNÓSTICO</small><h3>Encontramos o gargalo.</h3><p>Perguntas repetidas, demora, contatos sem retorno ou tarefas manuais: começamos pelo problema que realmente custa tempo.</p></div><b>ENTENDER</b></article>
-          <article><span>02</span><div><small>DESENHO DA EXPERIÊNCIA</small><h3>Definimos conversa, limites e próximo passo.</h3><p>O que o Sync responde, o que coleta, quando chama uma pessoa e o que acontece depois de cada decisão.</p></div><b>ORGANIZAR</b></article>
-          <article><span>03</span><div><small>CONFIGURAÇÃO</small><h3>Conectamos somente o necessário.</h3><p>Canal, informações da empresa e ferramentas entram no fluxo sem criar uma estrutura maior do que o negócio precisa.</p></div><b>CONECTAR</b></article>
-          <article><span>04</span><div><small>ACOMPANHAMENTO</small><h3>O fluxo entra no ar e continua sendo observado.</h3><p>Monitoramos o funcionamento e ajustamos o que precisa ficar mais claro, rápido ou útil ao longo do uso.</p></div><b>EVOLUIR</b></article>
-        </div>
+        <p className="sync-usage-note">A construção mantém o mesmo padrão nos três formatos. No pagamento único, não existe mensalidade Avancini depois da entrega; custos inevitáveis de WhatsApp, APIs, inteligência artificial, hospedagem ou volume de uso continuam sendo pagos diretamente aos respectivos provedores.</p>
       </section>
 
       <section className="sync-faq" id="duvidas">
-        <div><span>05 — PERGUNTAS FREQUENTES</span><h2>Entenda antes<br />de automatizar.</h2><p>Sem promessa mágica e sem empurrar uma estrutura que a empresa não precisa.</p><button type="button" onClick={() => openLead("uma dúvida sobre o Avancini Sync")}>Falar com a Avancini <b>↗</b></button></div>
+        <div><span>05 — PERGUNTAS FREQUENTES</span><h2>Entenda antes<br />de escolher.</h2><p>Sem promessa mágica e sem empurrar uma estrutura que a empresa não precisa.</p><button type="button" onClick={() => openLead("uma dúvida sobre o Avancini Sync")}>Falar com a Avancini <SyncArrow /></button></div>
         <div>{faqs.map((item) => <details key={item.question}><summary>{item.question}<span>+</span></summary><p>{item.answer}</p></details>)}</div>
       </section>
 
       <section className="sync-final">
-        <div className="sync-final-mark avancini-a-mark" aria-hidden="true"><i /></div>
-        <span>AVANCINI SYNC / PRÓXIMO PASSO</span><h2>Seu cliente já está falando.<br />Agora sua operação precisa acompanhar.</h2><p>Conte onde o atendimento trava. A gente identifica se o melhor começo é chatbot, IA ou automação.</p><button type="button" onClick={() => openLead("um diagnóstico para descobrir por onde automatizar")}>Descobrir por onde começar <b>↗</b></button>
+        <AvanciniMark variant="sync" className="sync-final-mark avancini-a-mark" />
+        <span>AVANCINI SYNC / PRÓXIMO PASSO</span><h2>Seu cliente já está falando.<br />A resposta não pode parecer genérica.</h2><p>Conte onde o atendimento trava. A gente identifica se o melhor começo é Chatbot ou Atendente IA.</p><button type="button" onClick={() => openLead("um diagnóstico para escolher entre chatbot e atendente IA")}>Descobrir por onde começar <SyncArrow /></button>
       </section>
 
-      <footer className="sync-footer"><Link href="/" className="sync-brand"><span className="sync-brand-mark avancini-a-mark" aria-hidden="true"><i /></span><span><b>AVANCINI <em>SYNC</em></b><small>Uma solução Avancini OS</small></span></Link><p>Chatbots, atendentes com IA e automações construídos conforme a realidade de cada empresa.</p><nav><a href="#portfolio">Central ao vivo</a><a href="#solucoes">Soluções</a><a href="#planos">Planos</a><Link href="/dash">Avancini Dash</Link></nav><div><a href="mailto:ivoavancini@hotmail.com">ivoavancini@hotmail.com</a><a href="https://www.instagram.com/avancinios/" target="_blank" rel="noreferrer">Instagram ↗</a></div><small>© 2026 AVANCINI OS · TODOS OS DIREITOS RESERVADOS</small></footer>
+      <footer className="sync-footer"><Link href="/" className="sync-brand"><AvanciniMark variant="sync" className="sync-brand-mark avancini-a-mark" /><span><b>AVANCINI <em>SYNC</em></b><small>Uma solução Avancini OS</small></span></Link><p>Chatbots e atendentes com IA para responder com rapidez, contexto e um próximo passo claro.</p><nav><a href="#portfolio">Demonstração</a><a href="#solucoes">Soluções</a><a href="#planos">Planos</a><Link href="/dash">Avancini Dash <SyncArrow /></Link></nav><div><a href="mailto:ivoavancini@hotmail.com">ivoavancini@hotmail.com</a><a href="https://www.instagram.com/avancinios/" target="_blank" rel="noreferrer">Instagram <SyncArrow /></a></div><small>© 2026 AVANCINI OS · TODOS OS DIREITOS RESERVADOS</small></footer>
 
       <button className="whatsapp-float sync-whatsapp-float" type="button" aria-label="Conversar sobre o Avancini Sync no WhatsApp" onClick={() => openLead("uma solução do Avancini Sync")}>
         <span className="whatsapp-icon" aria-hidden="true" />
         <i className="whatsapp-notification" aria-hidden="true">1</i>
       </button>
-
       {leadContext && (
         <div className="web-lead-modal sync-web-lead-modal" role="dialog" aria-modal="true" aria-label="Iniciar conversa pelo WhatsApp">
           <form onSubmit={submitLead}>
             <button className="web-lead-close" type="button" onClick={() => setLeadContext("")} aria-label="Fechar">×</button>
             <header>
-              <span className="lead-logo avancini-a-mark" aria-hidden="true"><i /></span>
-              <div><strong>Avancini Sync <span>· Automação &amp; IA</span></strong><b><i /> atendimento direto · mensagem contextualizada</b></div>
+              <AvanciniMark variant="sync" className="lead-logo avancini-a-mark" />
+              <div><strong>Avancini Sync <span>· Chatbot &amp; IA</span></strong><b><i /> atendimento direto · mensagem contextualizada</b></div>
             </header>
             <p className="lead-promise">Quero conversar sobre {normalizedLeadContext}.</p>
             <label className="lead-name-field">

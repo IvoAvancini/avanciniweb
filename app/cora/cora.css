@@ -1,0 +1,1215 @@
+/* =========================================================================
+   CORA IMÓVEIS — DESIGN SYSTEM & LUXURY EDITORIAL REAL ESTATE
+   ========================================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap');
+
+:root {
+  /* Brand Palette */
+  --cora-ink: #151515;
+  --cora-black: #0c0c0c;
+  --cora-cream: #f6f3ee;
+  --cora-surface: #fbfaf8;
+  --cora-white: #ffffff;
+  --cora-stone: #e7e1d8;
+  --cora-stone-light: #f0ece5;
+  --cora-stone-dark: #d5cdc0;
+  --cora-muted: #77736d;
+  --cora-muted-light: #9e9a93;
+  --cora-muted-dark: #524f4b;
+  --cora-accent: #9b624c;
+  --cora-accent-dark: #744636;
+  --cora-accent-light: #b87a62;
+  --cora-accent-soft: rgba(155, 98, 76, 0.1);
+  --cora-border: rgba(21, 21, 21, 0.09);
+  --cora-border-light: rgba(255, 255, 255, 0.15);
+
+  /* Typography */
+  --cora-font-display: 'Playfair Display', Georgia, serif;
+  --cora-font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --cora-font-accent: 'Cinzel', serif;
+
+  /* Layout & Spacing */
+  --cora-container: 1440px;
+  --cora-header-height: 80px;
+
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+  --space-3xl: 72px;
+  --space-4xl: 104px;
+
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 22px;
+  --radius-full: 999px;
+
+  /* Shadows */
+  --cora-shadow-subtle: 0 4px 20px rgba(12, 12, 12, 0.04);
+  --cora-shadow-soft: 0 12px 40px rgba(12, 12, 12, 0.06);
+  --cora-shadow-floating: 0 24px 60px rgba(12, 12, 12, 0.12);
+  --cora-shadow-card: 0 8px 30px rgba(12, 12, 12, 0.05);
+
+  /* Transitions */
+  --cora-ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --cora-duration: 0.35s;
+}
+
+/* APP WRAPPER SCOPED */
+.cora-app {
+  min-height: 100vh;
+  background-color: var(--cora-surface);
+  color: var(--cora-ink);
+  font-family: var(--cora-font-sans);
+  font-size: 15px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  position: relative;
+}
+
+.cora-app * {
+  box-sizing: border-box;
+}
+
+.cora-container {
+  max-width: var(--cora-container);
+  margin: 0 auto;
+  padding: 0 5vw;
+  width: 100%;
+}
+
+/* =========================================================================
+   TYPOGRAPHY
+   ========================================================================= */
+
+.cora-app h1,
+.cora-app h2,
+.cora-app h3,
+.cora-app h4 {
+  font-family: var(--cora-font-display);
+  font-weight: 600;
+  color: var(--cora-ink);
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+
+.cora-app .cora-hero-title,
+.cora-hero h1,
+.cora-app .cora-hero h1 {
+  font-family: var(--cora-font-display);
+  font-size: clamp(38px, 5.2vw, 76px);
+  line-height: 1.04;
+  letter-spacing: -0.035em;
+  font-weight: 600;
+  color: #ffffff !important;
+  text-shadow: 0 4px 30px rgba(0, 0, 0, 0.8), 0 2px 10px rgba(0, 0, 0, 0.95);
+}
+
+.cora-section-title {
+  font-size: clamp(28px, 3.8vw, 50px);
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+}
+
+.cora-property-title {
+  font-family: var(--cora-font-sans);
+  font-size: clamp(17px, 1.3vw, 21px);
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: -0.015em;
+}
+
+.cora-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--cora-font-sans);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--cora-accent);
+  margin-bottom: 12px;
+}
+
+.cora-eyebrow::before {
+  content: "";
+  display: inline-block;
+  width: 18px;
+  height: 1.5px;
+  background-color: currentColor;
+}
+
+/* =========================================================================
+   BUTTONS & ACTIONS
+   ========================================================================= */
+
+.cora-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 0 24px;
+  min-height: 50px;
+  border-radius: var(--radius-sm);
+  font-family: var(--cora-font-sans);
+  font-size: 13.5px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all var(--cora-duration) var(--cora-ease);
+  user-select: none;
+}
+
+.cora-btn-primary {
+  background-color: var(--cora-accent);
+  color: var(--cora-white);
+  box-shadow: 0 4px 16px rgba(155, 98, 76, 0.25);
+}
+
+.cora-btn-primary:hover {
+  background-color: var(--cora-accent-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(155, 98, 76, 0.35);
+}
+
+.cora-btn-secondary {
+  background-color: var(--cora-white);
+  color: var(--cora-ink);
+  border-color: var(--cora-border);
+  box-shadow: var(--cora-shadow-subtle);
+}
+
+.cora-btn-secondary:hover {
+  border-color: var(--cora-ink);
+  background-color: var(--cora-surface);
+  transform: translateY(-2px);
+}
+
+.cora-btn-dark {
+  background-color: var(--cora-ink);
+  color: var(--cora-white);
+}
+
+.cora-btn-dark:hover {
+  background-color: var(--cora-black);
+  transform: translateY(-2px);
+}
+
+.cora-btn-outline-white {
+  background-color: transparent;
+  color: var(--cora-white);
+  border-color: rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(8px);
+}
+
+.cora-btn-outline-white:hover {
+  background-color: var(--cora-white);
+  color: var(--cora-ink);
+  border-color: var(--cora-white);
+}
+
+.cora-btn-icon-only {
+  width: 44px;
+  height: 44px;
+  min-height: 44px;
+  padding: 0;
+  border-radius: var(--radius-sm);
+  background: var(--cora-white);
+  border: 1px solid var(--cora-border);
+  color: var(--cora-ink);
+  display: grid;
+  place-items: center;
+}
+
+.cora-btn-icon-only:hover {
+  border-color: var(--cora-accent);
+  color: var(--cora-accent);
+}
+
+/* =========================================================================
+   HEADER
+   ========================================================================= */
+
+.cora-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--cora-header-height);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  transition: all 0.4s var(--cora-ease);
+  background: transparent;
+  color: var(--cora-white);
+}
+
+.cora-header.is-scrolled,
+.cora-header.is-solid {
+  background-color: rgba(251, 250, 248, 0.94);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--cora-border);
+  color: var(--cora-ink);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+}
+
+.cora-header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.cora-brand-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.cora-brand-logo {
+  font-family: var(--cora-font-display);
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.cora-brand-tagline {
+  font-family: var(--cora-font-sans);
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  opacity: 0.75;
+  display: block;
+}
+
+.cora-nav-desktop {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.cora-nav-link {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: inherit;
+  text-decoration: none;
+  position: relative;
+  padding: 8px 0;
+  transition: color 0.2s;
+  opacity: 0.88;
+}
+
+.cora-nav-link:hover,
+.cora-nav-link.is-active {
+  opacity: 1;
+  color: var(--cora-accent);
+}
+
+.cora-nav-link.is-active::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: var(--cora-accent);
+  border-radius: 2px;
+}
+
+.cora-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.cora-action-icon-btn {
+  position: relative;
+  width: 42px;
+  height: 42px;
+  border-radius: var(--radius-full);
+  display: grid;
+  place-items: center;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: inherit;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.cora-header.is-scrolled .cora-action-icon-btn,
+.cora-header.is-solid .cora-action-icon-btn {
+  background: var(--cora-stone-light);
+  border-color: var(--cora-stone);
+  color: var(--cora-ink);
+}
+
+.cora-action-icon-btn:hover {
+  background: var(--cora-accent);
+  border-color: var(--cora-accent);
+  color: var(--cora-white);
+  transform: translateY(-1px);
+}
+
+.cora-badge-count {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  background-color: var(--cora-accent);
+  color: var(--cora-white);
+  font-size: 9px;
+  font-weight: 800;
+  min-width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  padding: 0 4px;
+  border: 2px solid var(--cora-white);
+}
+
+.cora-menu-toggle-btn {
+  display: none;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: inherit;
+  cursor: pointer;
+  place-items: center;
+}
+
+.cora-header.is-scrolled .cora-menu-toggle-btn,
+.cora-header.is-solid .cora-menu-toggle-btn {
+  background: var(--cora-stone-light);
+  border-color: var(--cora-stone);
+  color: var(--cora-ink);
+}
+
+/* =========================================================================
+   HERO SECTION
+   ========================================================================= */
+
+.cora-hero {
+  position: relative;
+  min-height: 90svh;
+  display: flex;
+  align-items: center;
+  padding: 130px 0 80px;
+  background-color: var(--cora-black);
+  overflow: hidden;
+}
+
+.cora-hero-bg-wrapper {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.cora-hero-bg-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  filter: brightness(0.65) contrast(1.05);
+  transform: scale(1.02);
+  transition: transform 12s ease-out;
+}
+
+.cora-hero:hover .cora-hero-bg-image {
+  transform: scale(1.05);
+}
+
+.cora-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(12, 12, 12, 0.65) 0%,
+    rgba(12, 12, 12, 0.48) 50%,
+    rgba(12, 12, 12, 0.92) 100%
+  );
+}
+
+.cora-hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 980px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.cora-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 18px;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.16);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.cora-hero-subtitle {
+  font-size: clamp(16px, 1.5vw, 20px);
+  line-height: 1.6;
+  color: #f1ede8 !important;
+  max-width: 720px;
+  margin: 22px auto 38px;
+  font-weight: 400;
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.85);
+}
+
+/* =========================================================================
+   SEARCH BOX (HERO & GLOBAL)
+   ========================================================================= */
+
+.cora-search-box-card {
+  position: relative;
+  z-index: 10;
+  max-width: 1080px;
+  margin: -50px auto 0;
+  background: var(--cora-white);
+  border-radius: var(--radius-md);
+  box-shadow: var(--cora-shadow-floating);
+  border: 1px solid var(--cora-border);
+  overflow: hidden;
+}
+
+.cora-search-tabs {
+  display: flex;
+  background: var(--cora-surface);
+  border-bottom: 1px solid var(--cora-border);
+}
+
+.cora-search-tab-btn {
+  padding: 14px 28px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: transparent;
+  border: none;
+  color: var(--cora-muted);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.cora-search-tab-btn.is-active {
+  background: var(--cora-white);
+  color: var(--cora-accent);
+  box-shadow: inset 0 2px 0 var(--cora-accent);
+}
+
+.cora-search-fields-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr auto;
+  gap: 16px;
+  padding: 20px 24px;
+  align-items: center;
+}
+
+.cora-search-field {
+  display: grid;
+  gap: 4px;
+  text-align: left;
+}
+
+.cora-search-label {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--cora-muted);
+}
+
+.cora-search-input,
+.cora-search-select {
+  width: 100%;
+  height: 48px;
+  padding: 0 14px;
+  background: var(--cora-surface);
+  border: 1px solid var(--cora-border);
+  border-radius: var(--radius-sm);
+  font-family: var(--cora-font-sans);
+  font-size: 14px;
+  color: var(--cora-ink);
+  transition: border-color 0.2s;
+  outline: none;
+}
+
+.cora-search-input:focus,
+.cora-search-select:focus {
+  border-color: var(--cora-accent);
+  background: var(--cora-white);
+}
+
+/* =========================================================================
+   PROPERTY CARD
+   ========================================================================= */
+
+.cora-property-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: var(--cora-white);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--cora-border);
+  overflow: hidden;
+  box-shadow: var(--cora-shadow-card);
+  transition: transform var(--cora-duration) var(--cora-ease), box-shadow var(--cora-duration) var(--cora-ease);
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+}
+
+.cora-property-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--cora-shadow-floating);
+}
+
+.cora-property-card-media {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background-color: var(--cora-stone);
+}
+
+.cora-property-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s var(--cora-ease);
+}
+
+.cora-property-card:hover .cora-property-card-img {
+  transform: scale(1.035);
+}
+
+.cora-card-badge-container {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  z-index: 2;
+}
+
+.cora-badge {
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  font-size: 9.5px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: rgba(12, 12, 12, 0.75);
+  backdrop-filter: blur(8px);
+  color: var(--cora-white);
+}
+
+.cora-badge-accent {
+  background: var(--cora-accent);
+  color: var(--cora-white);
+}
+
+.cora-card-favorite-btn {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(8px);
+  border: none;
+  color: var(--cora-ink);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  z-index: 3;
+  transition: all 0.2s;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.cora-card-favorite-btn:hover {
+  transform: scale(1.1);
+  background: var(--cora-white);
+}
+
+.cora-card-favorite-btn.is-active {
+  color: #dc2626;
+  background: var(--cora-white);
+}
+
+.cora-property-card-body {
+  padding: 20px 22px 22px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 12px;
+}
+
+.cora-property-location {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--cora-muted);
+  font-weight: 600;
+}
+
+.cora-property-specs-strip {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+  border-top: 1px solid var(--cora-border);
+  border-bottom: 1px solid var(--cora-border);
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--cora-muted-dark);
+}
+
+.cora-property-specs-strip span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.cora-property-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+  padding-top: 4px;
+}
+
+.cora-property-price-box {
+  display: grid;
+  gap: 2px;
+}
+
+.cora-property-price-label {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--cora-muted);
+}
+
+.cora-property-price-value {
+  font-family: var(--cora-font-sans);
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--cora-ink);
+  letter-spacing: -0.02em;
+}
+
+.cora-property-card-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cora-compare-toggle-btn {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--cora-muted);
+  background: transparent;
+  border: 1px solid var(--cora-border);
+  border-radius: var(--radius-sm);
+  padding: 6px 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.cora-compare-toggle-btn:hover,
+.cora-compare-toggle-btn.is-active {
+  border-color: var(--cora-accent);
+  color: var(--cora-accent);
+  background: var(--cora-accent-soft);
+}
+
+/* =========================================================================
+   PROPERTY GRID
+   ========================================================================= */
+
+.cora-property-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
+  gap: 28px;
+}
+
+/* =========================================================================
+   LIFESTYLE CARDS
+   ========================================================================= */
+
+.cora-lifestyle-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+  gap: 24px;
+}
+
+.cora-lifestyle-card {
+  position: relative;
+  height: 380px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  text-decoration: none;
+  color: var(--cora-white);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 28px;
+  background-color: var(--cora-black);
+  cursor: pointer;
+}
+
+.cora-lifestyle-card-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.7);
+  transition: transform 0.7s var(--cora-ease), filter 0.7s var(--cora-ease);
+}
+
+.cora-lifestyle-card:hover .cora-lifestyle-card-img {
+  transform: scale(1.06);
+  filter: brightness(0.8);
+}
+
+.cora-lifestyle-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 30%, rgba(12, 12, 12, 0.9) 100%);
+}
+
+.cora-lifestyle-card-content {
+  position: relative;
+  z-index: 2;
+}
+
+.cora-lifestyle-card h3 {
+  color: var(--cora-white);
+  font-size: 24px;
+  margin-bottom: 6px;
+}
+
+.cora-lifestyle-card p {
+  color: var(--cora-stone-light);
+  font-size: 13px;
+  margin: 0;
+}
+
+/* =========================================================================
+   NEIGHBORHOOD CARDS
+   ========================================================================= */
+
+.cora-neighborhood-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 360px), 1fr));
+  gap: 24px;
+}
+
+.cora-neighborhood-card {
+  position: relative;
+  height: 320px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  text-decoration: none;
+  color: var(--cora-white);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 24px;
+  background-color: var(--cora-black);
+  cursor: pointer;
+}
+
+.cora-neighborhood-card-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.65);
+  transition: transform 0.7s var(--cora-ease);
+}
+
+.cora-neighborhood-card:hover .cora-neighborhood-card-img {
+  transform: scale(1.05);
+}
+
+.cora-neighborhood-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 40%, rgba(12, 12, 12, 0.92) 100%);
+}
+
+.cora-neighborhood-card-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* =========================================================================
+   PDP — PROPERTY DETAIL PAGE
+   ========================================================================= */
+
+.cora-pdp-gallery-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 14px;
+  height: 520px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  position: relative;
+  margin: 28px 0 40px;
+}
+
+.cora-gallery-main {
+  position: relative;
+  height: 100%;
+  cursor: pointer;
+}
+
+.cora-gallery-main img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s;
+}
+
+.cora-gallery-side {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  gap: 14px;
+  height: 100%;
+}
+
+.cora-gallery-side-item {
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.cora-gallery-side-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s;
+}
+
+.cora-gallery-main:hover img,
+.cora-gallery-side-item:hover img {
+  transform: scale(1.03);
+}
+
+.cora-gallery-trigger-btn {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  background: rgba(12, 12, 12, 0.85);
+  backdrop-filter: blur(10px);
+  color: var(--cora-white);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--radius-sm);
+  padding: 10px 18px;
+  font-size: 12.5px;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  z-index: 5;
+  transition: all 0.2s;
+}
+
+.cora-gallery-trigger-btn:hover {
+  background: var(--cora-black);
+  border-color: var(--cora-white);
+}
+
+.cora-pdp-layout {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 56px;
+  align-items: start;
+}
+
+.cora-pdp-sidebar-card {
+  position: sticky;
+  top: 100px;
+  background: var(--cora-white);
+  border: 1px solid var(--cora-border);
+  border-radius: var(--radius-md);
+  padding: 28px;
+  box-shadow: var(--cora-shadow-soft);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* =========================================================================
+   MODALS & DRAWERS
+   ========================================================================= */
+
+.cora-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(12, 12, 12, 0.65);
+  backdrop-filter: blur(8px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: coraFadeIn 0.25s ease-out;
+}
+
+.cora-modal-card {
+  background: var(--cora-white);
+  border-radius: var(--radius-lg);
+  max-width: min(100% - 24px, 720px);
+  max-height: 90dvh;
+  width: 100%;
+  overflow-y: auto;
+  box-shadow: var(--cora-shadow-floating);
+  border: 1px solid var(--cora-border);
+  position: relative;
+  animation: coraSlideUp 0.3s var(--cora-ease);
+}
+
+.cora-modal-close-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--cora-stone-light);
+  border: none;
+  color: var(--cora-ink);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.2s;
+}
+
+.cora-modal-close-btn:hover {
+  background: var(--cora-stone);
+  color: var(--cora-black);
+}
+
+/* =========================================================================
+   COMPARISON BAR DOCK
+   ========================================================================= */
+
+.cora-comparison-dock {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 90;
+  background: var(--cora-ink);
+  color: var(--cora-white);
+  padding: 12px 24px;
+  border-radius: var(--radius-full);
+  box-shadow: var(--cora-shadow-floating);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  backdrop-filter: blur(12px);
+  animation: coraDockSlideUp 0.35s var(--cora-ease);
+}
+
+/* =========================================================================
+   WHATSAPP FLOATING CONCIERGE
+   ========================================================================= */
+
+.cora-whatsapp-float-btn {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #25d366;
+  color: #fff;
+  border: none;
+  box-shadow: 0 10px 30px rgba(37, 211, 102, 0.35);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  z-index: 95;
+  transition: transform 0.25s;
+}
+
+.cora-whatsapp-float-btn:hover {
+  transform: scale(1.08) translateY(-2px);
+}
+
+/* =========================================================================
+   FOOTER
+   ========================================================================= */
+
+.cora-footer {
+  background: var(--cora-black);
+  color: var(--cora-stone-light);
+  padding: 80px 0 40px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.cora-footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1.5fr;
+  gap: 48px;
+  margin-bottom: 60px;
+}
+
+.cora-footer-column h4 {
+  color: var(--cora-white);
+  font-family: var(--cora-font-sans);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.cora-footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 12px;
+}
+
+.cora-footer-links a {
+  color: var(--cora-muted-light);
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.2s;
+}
+
+.cora-footer-links a:hover {
+  color: var(--cora-white);
+}
+
+.cora-footer-bottom {
+  padding-top: 32px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12px;
+  color: var(--cora-muted);
+}
+
+/* =========================================================================
+   ANIMATIONS & KEYFRAMES
+   ========================================================================= */
+
+@keyframes coraFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes coraSlideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes coraDockSlideUp {
+  from { opacity: 0; transform: translate(-50%, 30px); }
+  to { opacity: 1; transform: translate(-50%, 0); }
+}
+
+/* =========================================================================
+   RESPONSIVENESS (MOBILE & TABLET BREAKPOINTS)
+   ========================================================================= */
+
+@media (max-width: 1024px) {
+  .cora-nav-desktop {
+    display: none;
+  }
+  .cora-menu-toggle-btn {
+    display: grid;
+  }
+  .cora-search-fields-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .cora-search-fields-grid .cora-btn-primary {
+    grid-column: 1 / -1;
+  }
+  .cora-pdp-layout {
+    grid-template-columns: 1fr;
+  }
+  .cora-pdp-gallery-grid {
+    height: 420px;
+  }
+  .cora-footer-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --cora-header-height: 70px;
+  }
+  .cora-hero {
+    min-height: 85svh;
+    padding: 100px 0 60px;
+  }
+  .cora-search-box-card {
+    margin: 24px 0 0;
+  }
+  .cora-search-fields-grid {
+    grid-template-columns: 1fr;
+  }
+  .cora-pdp-gallery-grid {
+    grid-template-columns: 1fr;
+    height: 320px;
+  }
+  .cora-gallery-side {
+    display: none;
+  }
+  .cora-footer-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .cora-footer-bottom {
+    flex-direction: column;
+    gap: 12px;
+    text-align: center;
+  }
+}

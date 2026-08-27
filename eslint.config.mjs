@@ -13,6 +13,7 @@ const eslintConfig = defineConfig([
     "dist/**",
     "out/**",
     "build/**",
+    "avancini-os-site/**",
     "next-env.d.ts",
   ]),
   eslint.configs.recommended,

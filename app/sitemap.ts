@@ -1,39 +1,35 @@
 import type { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
+  const siteUrl = "https://www.avancini.me";
+
   return [
     {
-      url: "https://avanciniweb.vercel.app",
+      url: siteUrl,
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 1,
     },
     {
-      url: "https://avanciniweb.vercel.app/dash",
+      url: `${siteUrl}/dash`,
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.9,
     },
     {
-      url: "https://avanciniweb.vercel.app/sync",
+      url: `${siteUrl}/sync`,
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.9,
     },
     {
-      url: "https://avanciniweb.vercel.app/site-por-assinatura",
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.9,
-    },
-    {
-      url: "https://avanciniweb.vercel.app/privacidade",
+      url: `${siteUrl}/privacidade`,
       lastModified: new Date(),
       changeFrequency: "yearly",
       priority: 0.3,
     },
     {
-      url: "https://avanciniweb.vercel.app/termos",
+      url: `${siteUrl}/termos`,
       lastModified: new Date(),
       changeFrequency: "yearly",
       priority: 0.3,

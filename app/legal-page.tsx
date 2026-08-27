@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { AvanciniMark } from "./avancini-mark";
 
 type LegalSection = {
   title: string;
@@ -17,11 +18,11 @@ export function LegalPage({ eyebrow, title, intro, sections }: LegalPageProps) {
   return (
     <main className="legal-page">
       <header className="legal-header">
-        <Link className="logo" href="/dash" aria-label="Avancini Dash, página principal">
-          <span className="logo-mark" aria-hidden="true"><i /></span>
-          <span><span className="brand-name">AVANCINI <b>DASH</b></span><small>Uma solução Avancini OS</small></span>
+        <Link className="logo" href="/" aria-label="Avancini OS, página principal">
+          <AvanciniMark variant="os" className="logo-mark avancini-a-mark" />
+          <span><span className="brand-name">AVANCINI <b>OS</b></span><small>Tecnologia com identidade</small></span>
         </Link>
-        <Link className="legal-back" href="/dash"><span aria-hidden="true">←</span> Voltar para o site</Link>
+        <Link className="legal-back" href="/"><span aria-hidden="true">←</span> Voltar para a Avancini OS</Link>
       </header>
       <article className="legal-content">
         <div className="legal-intro">

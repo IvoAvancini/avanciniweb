@@ -1,11 +1,9 @@
 import type { Metadata } from "next";
 import { Manrope, Space_Grotesk } from "next/font/google";
-import { Analytics } from "@vercel/analytics/next";
 import { MarketingScripts } from "./marketing-scripts";
 import "./globals.css";
 
-// Trocar para https://web.avancini.me quando o subdomínio estiver conectado na Vercel.
-const siteUrl = "https://avanciniweb.vercel.app";
+const siteUrl = "https://www.avancini.me";
 
 const manrope = Manrope({
   subsets: ["latin"],
@@ -26,7 +24,7 @@ export const metadata: Metadata = {
     template: "%s | Avancini OS",
   },
   description:
-    "Avancini Dash e Avancini Sync: presença digital, atendimento com IA e automações contratadas de forma independente.",
+    "Tecnologia para sua empresa ser encontrada e não perder oportunidades enquanto o cliente espera.",
   keywords: [
     "Avancini OS",
     "criação de sites",
@@ -34,11 +32,16 @@ export const metadata: Metadata = {
     "site institucional",
     "chatbot para WhatsApp",
     "atendimento com inteligência artificial",
-    "automação de atendimento",
+    "atendimento digital",
     "Avancini Dash",
     "Avancini Sync",
   ],
   alternates: { canonical: "/" },
+  icons: {
+    icon: "/icon",
+    shortcut: "/icon",
+    apple: "/icon",
+  },
   openGraph: {
     type: "website",
     locale: "pt_BR",
@@ -46,22 +49,22 @@ export const metadata: Metadata = {
     siteName: "Avancini OS",
     title: "Avancini OS | Tecnologia com identidade",
     description:
-      "Encontre o gargalo que custa oportunidades e entre direto na solução certa: Avancini Dash ou Avancini Sync.",
+      "Duas soluções independentes: Avancini Dash para presença digital e Avancini Sync para atendimento com IA.",
     images: [
       {
-        url: "/og.png",
-        width: 1200,
-        height: 630,
+        url: "/social/avancini-os-perfil-v2.png",
+        width: 1254,
+        height: 1254,
         alt: "Avancini OS — tecnologia com identidade",
       },
     ],
   },
   twitter: {
-    card: "summary_large_image",
+    card: "summary",
     title: "Avancini OS | Tecnologia com identidade",
     description:
-      "Avancini Dash e Avancini Sync: soluções independentes para presença digital, atendimento e automação.",
-    images: ["/og.png"],
+      "Avancini Dash e Avancini Sync: duas soluções independentes para presença digital e atendimento com IA.",
+    images: ["/social/avancini-os-perfil-v2.png"],
   },
   robots: { index: true, follow: true },
 };
@@ -82,8 +85,8 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       "@type": "OfferCatalog",
       name: "Soluções Avancini",
       itemListElement: [
-        { "@type": "Offer", itemOffered: { "@type": "Service", name: "Avancini Dash", description: "Criação de landings, sites institucionais e projetos digitais." } },
-        { "@type": "Offer", itemOffered: { "@type": "Service", name: "Avancini Sync", description: "Chatbots, atendentes com IA e automações." } },
+        { "@type": "Offer", itemOffered: { "@type": "Service", name: "Avancini Dash", description: "Criação de landing pages, sites institucionais, catálogos e lojas virtuais." } },
+        { "@type": "Offer", itemOffered: { "@type": "Service", name: "Avancini Sync", description: "Chatbots e atendentes com inteligência artificial." } },
       ],
     },
   };
@@ -97,7 +100,6 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
         <MarketingScripts />
-        <Analytics />
       </body>
     </html>
   );

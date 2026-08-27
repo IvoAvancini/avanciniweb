@@ -18,30 +18,33 @@ const sections = [
     title: "Serviços disponíveis",
     items: [
       "Landing de Conversão para divulgar uma oferta, campanha ou serviço específico.",
-      "Site Institucional para apresentar a empresa, serviços, diferenciais, contatos e, quando contratado, um catálogo de produtos ou serviços.",
-      "Projeto Sob Medida para loja virtual, catálogo avançado, integrações, agendamento ou outras necessidades definidas em orçamento individual.",
+      "Site Institucional para apresentar a empresa, serviços, diferenciais e contatos.",
+      "Site Catálogo para exibir produtos ou serviços e encaminhar pedidos ou orçamentos ao WhatsApp.",
+      "Loja Virtual para operações que exigem catálogo, carrinho, pagamento, entrega e gestão de pedidos.",
     ],
   },
   {
     title: "Implantação, hospedagem e suporte",
     paragraphs: [
-      "Na condição de lançamento, a Landing Pro possui implantação de R$ 399,90 e hospedagem com suporte de R$ 49,90 por mês. A Landing Start não possui taxa de implantação, custa R$ 89,90 por mês, utiliza endereço Avancini e exige permanência mínima de 6 meses.",
-      "Landing Start e Landing Pro recebem o mesmo padrão de estratégia, texto, design, versão mobile e desenvolvimento. A diferença entre elas é o endereço utilizado e a forma de contratação.",
-      "O Site Institucional possui implantação a partir de R$ 599,90 e hospedagem com suporte a partir de R$ 79,90 por mês. O valor final depende das páginas, catálogo, integrações e funcionalidades definidas no briefing.",
+      "Na modalidade com R$ 0 de taxa de criação, a Landing Page custa R$ 79,90 por mês e exige permanência mínima de 6 meses. Na opção sem fidelidade, a criação custa R$ 399,90 e a hospedagem com suporte custa R$ 49,90 por mês.",
+      "As duas modalidades recebem o mesmo padrão de estratégia, texto, design, versão mobile e desenvolvimento. A diferença está na forma de contratação e no endereço escolhido, não na qualidade da entrega.",
+      "O Site Institucional custa R$ 109,90 por mês na modalidade sem taxa de criação e contrato de 6 meses. Na opção sem fidelidade, a criação começa em R$ 599,90 e a hospedagem com suporte custa R$ 69,90 por mês.",
+      "O Site Catálogo custa R$ 139,00 por mês na modalidade sem taxa de criação e contrato de 6 meses. Na opção sem fidelidade, a criação começa em R$ 790,00 e a hospedagem com suporte custa R$ 89,90 por mês.",
+      "A Loja Virtual recebe proposta após a análise do catálogo, das formas de pagamento, da entrega e da rotina de pedidos.",
       "A contratação recorrente inclui hospedagem, SSL, suporte e um pequeno ajuste mensal. Novas seções, integrações, funcionalidades ou reformulações podem receber orçamento separado.",
     ],
   },
   {
     title: "Pagamento único",
     paragraphs: [
-      "Landing, Site Institucional ou Projeto Sob Medida podem ser contratados por pagamento único, com valor definido após o briefing e de acordo com o escopo aprovado.",
+      "Landing, Site Institucional, Site Catálogo ou Loja Virtual podem ser contratados por pagamento único, com valor definido após o briefing e de acordo com o escopo aprovado.",
       "No pagamento único não existe mensalidade Avancini. Domínio e hospedagem são contratados e pagos pelo cliente, a manutenção é opcional depois da entrega e a proposta registra quais arquivos do projeto serão transferidos após a quitação.",
     ],
   },
   {
     title: "Domínio e continuidade",
     paragraphs: [
-      "Na Landing Pro e no Site Institucional, conectamos um domínio próprio fornecido pelo cliente. Na Landing Start, é utilizado um endereço Avancini. O registro e a renovação de um domínio próprio são pagos pelo cliente e permanecem em seu nome.",
+      "Na modalidade recorrente, pode ser utilizado um endereço Avancini incluso. Um domínio próprio já existente pode ser conectado sem taxa adicional, e um novo .com.br fica sujeito à análise e disponibilidade. Na modalidade de pagamento único, um domínio .com.br é incluído no projeto, também sujeito à disponibilidade; as condições de renovação são apresentadas na proposta.",
       "O cancelamento da contratação recorrente desativa hospedagem, suporte e publicação, respeitando o período mínimo quando aplicável. Conteúdos fornecidos pelo cliente e domínios registrados em seu nome continuam pertencendo a ele. Os arquivos do projeto não são transferidos em uma contratação recorrente, salvo quando uma condição diferente estiver expressamente registrada na proposta.",
     ],
   },

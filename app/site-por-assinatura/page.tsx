@@ -3,15 +3,56 @@
 import { useState, type FormEvent } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { AvanciniMark } from "../avancini-mark";
 import { trackLead, trackMarketingEvent } from "../marketing-events";
+
+const SubArrow = ({ size = 12 }: { size?: number }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2.8"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    aria-hidden="true"
+    className="dash-svg-arrow"
+    style={{ display: "inline-block", verticalAlign: "middle", marginLeft: 4 }}
+  >
+    <line x1="5" y1="12" x2="19" y2="12" />
+    <polyline points="12 5 19 12 12 19" />
+  </svg>
+);
+
+const SubDownArrow = ({ size = 12 }: { size?: number }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2.8"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    aria-hidden="true"
+    className="dash-svg-down-arrow"
+    style={{ display: "inline-block", verticalAlign: "middle", marginLeft: 4 }}
+  >
+    <line x1="12" y1="5" x2="12" y2="19" />
+    <polyline points="19 12 12 19 5 12" />
+  </svg>
+);
 
 const plans = [
   {
     id: "landing-page",
     name: "Landing Page Profissional",
-    price: "89,90",
+    decisionLabel: "OFERTA DIRETA",
+    decisionAnswer: "Uma página para levar a uma única ação.",
+    price: "79,90",
     priceNoFidelity: "49,90",
-    setupNoFidelity: "R$ 490,00",
+    setupNoFidelity: "R$ 399,90",
     suffix: "/mês",
     contract: "R$ 0 de taxa de criação · Contrato de 6 meses",
     ideal: "Para serviços, consultores e ofertas diretas",
@@ -21,71 +62,78 @@ const plans = [
       "Formulário e botão de WhatsApp integrados",
       "Versão mobile ultrarrápida, performance e publicação",
       "Endereço na rede Avancini incluso (R$ 0 de entrada)",
-      "Opção de .com.br próprio (+ R$ 49,90 no 1º mês sob consulta de disponibilidade)",
+      "Opção de domínio .com.br próprio, sujeita à disponibilidade e análise",
       "Hospedagem de alta velocidade, SSL, suporte e 1 ajuste mensal",
     ],
     cta: "Quero a Landing Page",
+    featured: false,
+  },
+  {
+    id: "site-institucional",
+    name: "Site Institucional",
+    decisionLabel: "EMPRESA COMPLETA",
+    decisionAnswer: "Marca, serviços, autoridade e contatos organizados.",
+    price: "109,99",
+    priceNoFidelity: "69,90",
+    setupNoFidelity: "A partir de R$ 599,90",
+    suffix: "/mês",
+    contract: "R$ 0 de taxa de criação · Contrato de 6 meses",
+    ideal: "Para apresentar a empresa, os serviços e a autoridade da marca",
+    description: "Um site completo para explicar o negócio, organizar serviços e preparar o cliente antes do contato.",
+    features: [
+      "Páginas institucionais e navegação completa",
+      "Serviços, diferenciais, equipe e contatos organizados",
+      "Formulários e WhatsApp com contexto",
+      "Opção de domínio .com.br próprio, sujeita à disponibilidade e análise",
+      "Hospedagem, SSL, publicação, suporte e atualizações",
+    ],
+    cta: "Quero um Site Institucional",
     featured: true,
   },
   {
     id: "site-catalogo",
-    name: "Site Catálogo / Vitrine",
-    price: "A partir de 179,90",
-    priceNoFidelity: "A partir de 79,90",
+    name: "Site Catálogo",
+    decisionLabel: "VITRINE + WHATSAPP",
+    decisionAnswer: "Variedade visível e pedidos enviados para a conversa.",
+    price: "139,00",
+    priceNoFidelity: "89,90",
     setupNoFidelity: "A partir de R$ 790,00",
     suffix: "/mês",
     contract: "R$ 0 de taxa de criação · Contrato de 6 meses",
-    ideal: "Para empresas com múltiplos produtos ou catálogo de serviços",
-    description: "Estrutura completa com vitrine de produtos, fotos, detalhes e orçamentos diretos no WhatsApp.",
+    ideal: "Para exibir vários produtos sem vender diretamente pelo site",
+    description: "Uma vitrine organizada com fotos, detalhes, filtros essenciais e pedidos ou orçamentos enviados ao WhatsApp.",
     features: [
-      "Apresentação completa de múltiplos produtos ou serviços",
-      "Catálogo dinâmico com fotos e especificações",
-      "Botão de orçamento ou simulação no WhatsApp em cada item",
-      "Opção de .com.br próprio (+ R$ 49,90 no 1º mês sob consulta de disponibilidade)",
+      "Catálogo visual de produtos ou serviços",
+      "Fotos, características e categorias",
+      "Pedido ou orçamento pelo WhatsApp em cada item",
+      "Sem carrinho, pagamento ou gestão de estoque",
       "Hospedagem, SSL, publicação, suporte e atualizações",
     ],
-    cta: "Planejar meu Catálogo",
+    cta: "Quero um Site Catálogo",
     featured: false,
   },
   {
-    id: "combo-chatbot",
-    name: "Combo Site + Chatbot",
-    price: "A partir de 249,90",
-    priceNoFidelity: "A partir de 149,90",
-    setupNoFidelity: "A partir de R$ 690,00",
-    suffix: "/mês",
-    contract: "6 meses · Vitrine + WhatsApp Automático",
-    ideal: "Para quem quer atrair no site e triar no WhatsApp 24/7",
-    description: "Sua landing page profissional integrada ao fluxo de chatbot inteligente do Avancini Sync no WhatsApp.",
+    id: "loja-virtual",
+    name: "Loja Virtual",
+    decisionLabel: "VENDA ONLINE",
+    decisionAnswer: "Carrinho, pagamento, entrega e pedidos no próprio site.",
+    price: "Avaliação da operação",
+    priceNoFidelity: "Avaliação da operação",
+    setupNoFidelity: "Definida após entender o catálogo",
+    suffix: "",
+    contract: "Catálogo, pagamento, entrega e rotina definidos antes da proposta",
+    ideal: "Para vender e receber pagamentos diretamente pelo site",
+    description: "Uma operação de venda online com catálogo, carrinho, pagamento, entrega e gestão de pedidos compatíveis com o negócio.",
     features: [
-      "Landing Page Profissional completa",
-      "Chatbot WhatsApp com triagem e respostas automáticas 24/7",
-      "Encaminhamento inteligente de contatos",
-      "Domínio e hospedagem inclusos",
-      "Suporte e 1 ajuste mensal no site e no bot",
+      "Produtos, variações e carrinho",
+      "Pagamento online e confirmação de pedido",
+      "Regras de entrega, retirada ou frete",
+      "Painel de pedidos e estoque conforme a operação",
+      "Implantação e mensalidade definidas com clareza",
     ],
-    cta: "Quero o Combo Chatbot",
+    cta: "Avaliar minha Loja Virtual",
     featured: false,
-  },
-  {
-    id: "combo-ia",
-    name: "Combo Site + Atendente IA",
-    price: "A partir de 397,90",
-    priceNoFidelity: "A partir de 249,90",
-    setupNoFidelity: "A partir de R$ 990,00",
-    suffix: "/mês",
-    contract: "6 meses · Vitrine + Inteligência Artificial 24/7",
-    ideal: "Para empresas que buscam máxima autoridade e atendimento com IA",
-    description: "Sua vitrine de alta conversão integrada ao atendente com IA treinado na sua base para qualificar oportunidades em tempo real.",
-    features: [
-      "Site ou Landing Page completa de alto padrão",
-      "Atendente com Inteligência Artificial no WhatsApp/Instagram",
-      "Respostas contextualizadas e qualificação de leads",
-      "Transbordo humano quando o cliente estiver pronto",
-      "Hospedagem, suporte, acompanhamento e evolução contínua",
-    ],
-    cta: "Quero o Combo com IA",
-    featured: true,
+    quoteOnly: true,
   },
 ] as const;
 
@@ -93,22 +141,26 @@ type ContractModel = "Assinatura mensal" | "Pagamento único" | "Quero entender 
 
 const planOptions: Record<ContractModel, readonly string[]> = {
   "Assinatura mensal": [
-    "Landing Pro — R$ 399,90 + R$ 49,90/mês",
-    "Landing Start — R$ 89,90/mês sem implantação · 6 meses",
-    "Site Institucional — a partir de R$ 599,90 + R$ 79,90/mês",
-    "Projeto Sob Medida — catálogo, loja ou função especial",
+    "Landing Page Profissional",
+    "Site Institucional",
+    "Site Catálogo",
+    "Loja Virtual",
+    "Quero combinar Dash + Chatbot ou IA",
     "Quero ajuda para escolher o plano",
   ],
   "Pagamento único": [
     "Landing de Conversão — solicitar orçamento",
     "Site Institucional — solicitar orçamento",
-    "Projeto Sob Medida — solicitar orçamento",
+    "Site Catálogo — solicitar orçamento",
+    "Loja Virtual — avaliar operação",
     "Quero explicar minha necessidade",
   ],
   "Quero entender as duas opções": [
     "Landing de Conversão",
     "Site Institucional",
-    "Projeto Sob Medida — catálogo, loja ou função especial",
+    "Site Catálogo",
+    "Loja Virtual",
+    "Quero combinar Dash + Chatbot ou IA",
     "Ainda não sei",
   ],
 };
@@ -139,9 +191,9 @@ const whatsappFor = (message: string) =>
 export default function SubscriptionPage() {
   const [fidelityMode, setFidelityMode] = useState<"com-fidelidade" | "sem-fidelidade">("com-fidelidade");
   const [model, setModel] = useState<ContractModel>("Assinatura mensal");
-  const [plan, setPlan] = useState("Landing Pro — R$ 399,90 + R$ 49,90/mês");
+  const [plan, setPlan] = useState("Landing Page Profissional");
   const [segment, setSegment] = useState("");
-  const [domain, setDomain] = useState("Quero conectar meu domínio próprio");
+  const [domain, setDomain] = useState("Quero usar o endereço Avancini incluso");
   const [timeline, setTimeline] = useState("Em até 15 dias");
 
   const changeModel = (nextModel: ContractModel) => {
@@ -157,24 +209,24 @@ export default function SubscriptionPage() {
   const choosePlan = (selected: string) => {
     setModel("Assinatura mensal");
     setPlan(selected);
-    setDomain(selected.includes("Start") ? "Quero usar o endereço Avancini incluso" : "Quero conectar meu domínio próprio");
+    setDomain(fidelityMode === "com-fidelidade" ? "Quero usar o endereço Avancini incluso" : "Quero conectar meu domínio próprio");
     trackMarketingEvent("plan_selected", { plan: selected });
     moveToBriefing();
   };
 
   const chooseInstitutional = () => {
     setModel("Assinatura mensal");
-    setPlan("Site Institucional — a partir de R$ 599,90 + R$ 79,90/mês");
-    setDomain("Quero conectar meu domínio próprio");
+    setPlan("Site Institucional");
+    setDomain(fidelityMode === "com-fidelidade" ? "Quero usar o endereço Avancini incluso" : "Quero conectar meu domínio próprio");
     trackMarketingEvent("institutional_plan_selected");
     moveToBriefing();
   };
 
-  const chooseCustom = () => {
-    setModel("Pagamento único");
-    setPlan("Projeto Sob Medida — solicitar orçamento");
-    setDomain(domainOptions["Pagamento único"][0]);
-    trackMarketingEvent("custom_quote_selected");
+  const chooseStore = () => {
+    setModel("Quero entender as duas opções");
+    setPlan("Loja Virtual");
+    setDomain(domainOptions["Quero entender as duas opções"][0]);
+    trackMarketingEvent("store_quote_selected");
     moveToBriefing();
   };
 
@@ -184,6 +236,7 @@ export default function SubscriptionPage() {
     const message = [
       "Olá! Vim pela página da Avancini Dash e quero começar meu projeto.",
       `Modelo: ${model}`,
+      model === "Assinatura mensal" ? `Condição: ${fidelityMode === "com-fidelidade" ? "R$ 0 de criação e contrato de 6 meses" : "criação paga, mensalidade menor e sem fidelidade"}` : "Condição: pagamento único, sem mensalidade Avancini",
       `Plano/necessidade: ${plan}`,
       `Segmento: ${segment || "Vou explicar pelo WhatsApp"}`,
       `Domínio: ${domain}`,
@@ -196,39 +249,33 @@ export default function SubscriptionPage() {
     <main className="sub-page">
       <header className="sub-header">
         <Link className="logo" href="/dash" aria-label="Avancini Dash, página principal">
-          <span className="logo-mark avancini-a-mark" aria-hidden="true"><i /></span>
+          <AvanciniMark variant="dash" className="logo-mark avancini-a-mark" />
           <span><span className="brand-name">AVANCINI <b>DASH</b></span><small>Uma solução Avancini OS</small></span>
         </Link>
         <nav className="sub-header-actions" aria-label="Navegação da página de planos">
           <Link href="/dash" className="sub-back-link"><b aria-hidden="true">←</b><span>Voltar para o site</span></Link>
-          <a href="#planos" className="sub-header-link"><span>Ver planos</span><b aria-hidden="true">↓</b></a>
+          <a href="#planos" className="sub-header-link"><span>Ver planos</span><SubDownArrow /></a>
         </nav>
       </header>
 
       <section className="sub-hero">
-        <div className="sub-art" aria-hidden="true"><span className="sub-a-mark avancini-a-mark"><i /></span></div>
+        <div className="sub-art" aria-hidden="true"><AvanciniMark variant="dash" className="sub-a-mark avancini-a-mark" /></div>
         <div className="sub-hero-copy">
           <span className="sub-kicker"><i /> Condições de lançamento</span>
-          <h1>Comece do jeito que cabe agora. Cresça sem trocar de estrutura.</h1>
-          <p>Escolha domínio próprio, entrada zero, site institucional com catálogo ou um projeto sob medida. A qualidade de estratégia, design e desenvolvimento permanece a mesma.</p>
+          <h1>Escolha a estrutura certa. A qualidade não muda.</h1>
+          <p>Landing, site institucional, catálogo ou loja virtual. O que muda é o objetivo e a operação — não o padrão de estratégia, design e desenvolvimento.</p>
           <div className="sub-actions">
-            <a href="#planos" className="button button-primary" onClick={() => trackMarketingEvent("hero_subscription_click")}>Comparar opções <span>↗</span></a>
+            <a href="#planos" className="button button-primary" onClick={() => trackMarketingEvent("hero_subscription_click")}>Comparar opções <SubArrow /></a>
             <button type="button" className="button button-ghost" onClick={chooseInstitutional}>Quero um site completo</button>
           </div>
           <div className="sub-price-line">
-            <div><small>LANDING PAGE</small><strong>R$ 89,90</strong><em>por mês</em><span>R$ 0 criação · 6 meses</span></div>
-            <div><small>CATÁLOGO / VITRINE</small><strong>A partir de R$ 179,90</strong><em>por mês</em><span>múltiplos produtos e serviços</span></div>
-            <div><small>COMBO CHATBOT</small><strong>A partir de R$ 249,90</strong><em>por mês</em><span>site + WhatsApp automático</span></div>
-            <div><small>COMBO IA</small><strong>A partir de R$ 397,90</strong><em>por mês</em><span>site + Atendente IA 24/7</span></div>
+            <div><small>LANDING PAGE</small><strong>Uma oferta</strong><span>Captação e conversão</span></div>
+            <div><small>SITE INSTITUCIONAL</small><strong>Sua empresa</strong><span>Presença e autoridade</span></div>
+            <div><small>SITE CATÁLOGO</small><strong>Sua vitrine</strong><span>Pedido pelo WhatsApp</span></div>
+            <div><small>LOJA VIRTUAL</small><strong>Venda online</strong><span>Carrinho e pagamento</span></div>
           </div>
           <div className="sub-microproof"><span>Mesma qualidade em todas as opções</span><span>Hospedagem e SSL inclusos</span><span>Domínio próprio ou endereço Avancini</span></div>
         </div>
-      </section>
-
-      <section className="sub-benefits">
-        <div><b>01</b><span>Você envia as informações</span></div>
-        <div><b>02</b><span>A Avancini cria e publica</span></div>
-        <div><b>03</b><span>Você recebe contatos</span></div>
       </section>
 
       <section className="sub-portfolio-first" aria-labelledby="portfolio-first-title">
@@ -238,39 +285,36 @@ export default function SubscriptionPage() {
           <p>Um redesign para uma empresa que já tinha site e uma criação completa para outra que começou do zero.</p>
         </div>
         <div className="sub-portfolio-rail">
-          <a href="#cases" className="sub-portfolio-card portfolio-san">
+          <Link href="/dash#portfolio" className="sub-portfolio-card portfolio-san">
             <Image src="/projects/san-diego.jpg" alt="Projeto de redesign Clínica San Diego" width={1264} height={840} sizes="(max-width: 760px) 92vw, 47vw" quality={82} />
-            <span><small>01 / REDESIGN</small><strong>Clínica San Diego</strong><b>Explorar projeto ↗</b></span>
-          </a>
-          <a href="#cases" className="sub-portfolio-card portfolio-tape">
+            <span><small>01 / REDESIGN</small><strong>Clínica San Diego</strong><b>Explorar projeto <SubArrow /></b></span>
+          </Link>
+          <Link href="/dash#portfolio" className="sub-portfolio-card portfolio-tape">
             <Image src="/projects/tape-car.png" alt="Projeto criado do zero para Tape Car" width={1264} height={840} sizes="(max-width: 760px) 92vw, 47vw" quality={82} />
-            <span><small>02 / CRIAÇÃO DO ZERO</small><strong>Tape Car</strong><b>Explorar projeto ↗</b></span>
-          </a>
+            <span><small>02 / CRIAÇÃO DO ZERO</small><strong>Tape Car</strong><b>Explorar projeto <SubArrow /></b></span>
+          </Link>
         </div>
-        <a className="sub-portfolio-more" href="#cases">Ver os projetos completos e rolar por dentro das telas <span>↓</span></a>
+        <Link className="sub-portfolio-more" href="/dash#portfolio">Abrir o portfólio completo da Avancini Dash <SubArrow /></Link>
       </section>
 
       <section className="sub-fit" aria-labelledby="sub-fit-title">
         <div>
-          <span>LANDING OU SITE: QUAL FAZ SENTIDO PARA VOCÊ?</span>
+          <span>QUATRO ESTRUTURAS, QUATRO OBJETIVOS</span>
           <h2 id="sub-fit-title">A escolha começa pelo que você quer alcançar.</h2>
           <p>Não escolha pela quantidade de páginas. Escolha pela forma como o cliente precisa conhecer e contratar sua empresa.</p>
         </div>
-        <div className="sub-fit-grid">
-          <article>
-            <small>ESCOLHA LANDING SE...</small>
-            <h3>Landing de Conversão</h3>
-            <p>Você quer divulgar uma oferta específica e levar a pessoa direto para uma ação, como pedir orçamento, agendar ou chamar no WhatsApp.</p>
-            <div><span>Clínica divulgando avaliação</span><span>Energia solar captando simulações</span><span>Serviço local recebendo pedidos</span></div>
-          </article>
-          <article>
-            <small>ESCOLHA SITE SE...</small>
-            <h3>Site Institucional</h3>
-            <p>Você precisa apresentar a empresa inteira, explicar vários serviços e construir autoridade antes do cliente entrar em contato.</p>
-            <div><span>Escritório apresentando atuações</span><span>Imobiliária exibindo portfólio</span><span>Clínica mostrando equipe e estrutura</span></div>
-          </article>
+        <div className="sub-fit-grid sub-fit-pricing-grid">
+          {plans.map((item, index) => {
+            const quoteOnly = "quoteOnly" in item && item.quoteOnly;
+            const price = fidelityMode === "com-fidelidade" ? item.price : item.priceNoFidelity;
+            return <article key={item.id}>
+              <span className="sub-fit-index">0{index + 1}</span>
+              <div><small>{item.decisionLabel}</small><h3>{item.name}</h3><p>{item.decisionAnswer}</p></div>
+              <strong>{quoteOnly ? "Sob avaliação" : `R$ ${price}/mês`}</strong>
+            </article>;
+          })}
         </div>
-        <p className="sub-fit-decision"><b>Em uma frase:</b> landing vende uma oferta; site apresenta e fortalece a empresa.</p>
+        <p className="sub-fit-decision"><b>Em uma linha:</b> landing capta; site apresenta; catálogo exibe; loja conclui a venda.</p>
       </section>
 
       <section className="sub-section" id="planos">
@@ -291,14 +335,14 @@ export default function SubscriptionPage() {
               className={fidelityMode === "com-fidelidade" ? "active" : ""}
               onClick={() => setFidelityMode("com-fidelidade")}
             >
-              ✨ Contrato 6 Meses <span className="badge-pill">R$ 0 Criação</span>
+              <small>MENOR CUSTO PARA COMEÇAR</small><strong>Mensal sem entrada</strong><span className="badge-pill">R$ 0 criação · 6 meses</span>
             </button>
             <button
               type="button"
               className={fidelityMode === "sem-fidelidade" ? "active" : ""}
               onClick={() => setFidelityMode("sem-fidelidade")}
             >
-              🔓 Sem Fidelidade <span className="badge-pill">Criação única + menor mensalidade</span>
+              <small>MAIS LIBERDADE</small><strong>Mensal flexível</strong><span className="badge-pill">criação paga · cancele quando quiser</span>
             </button>
           </div>
         </div>
@@ -307,7 +351,10 @@ export default function SubscriptionPage() {
           {plans.map((item, index) => {
             const isFidelity = fidelityMode === "com-fidelidade";
             const currentPrice = isFidelity ? item.price : item.priceNoFidelity;
-            const contractText = isFidelity
+            const quoteOnly = "quoteOnly" in item && item.quoteOnly;
+            const contractText = quoteOnly
+              ? item.contract
+              : isFidelity
               ? item.contract
               : `Criação única: ${item.setupNoFidelity} à vista · Sem permanência`;
             return (
@@ -317,11 +364,13 @@ export default function SubscriptionPage() {
               <em className="sub-plan-ideal">{item.ideal}</em>
               <h3>{item.name}</h3>
               <p>{item.description}</p>
-              <div className="sub-plan-price"><sup>R$</sup><strong>{currentPrice}</strong><span>{item.suffix}</span></div>
+              <div className={quoteOnly ? "sub-plan-price quote-only" : "sub-plan-price"}>
+                {!quoteOnly && <sup>R$</sup>}<strong>{currentPrice}</strong><span>{item.suffix}</span>
+              </div>
               <small className="sub-contract">{contractText}</small>
               <ul>{item.features.map((feature) => <li key={feature}>{feature}</li>)}</ul>
               <div className="sub-plan-actions">
-                <button type="button" onClick={() => choosePlan(`${item.name} — R$ ${item.price}${item.suffix === "/mês" ? "/mês" : " de implantação"}`)}>{item.cta} <span>↗</span></button>
+                <button type="button" onClick={() => quoteOnly ? chooseStore() : choosePlan(item.name)}>{item.cta} <SubArrow /></button>
                 <a href={whatsappFor(`Olá! Tenho uma dúvida sobre a ${item.name} e suas condições de implantação, hospedagem e suporte.`)} target="_blank" rel="noreferrer" onClick={() => trackLead("duvida_plano_assinatura", { plan: item.name })}>Tirar uma dúvida</a>
               </div>
             </article>
@@ -329,35 +378,7 @@ export default function SubscriptionPage() {
           })}
 
         </div>
-        <div className="custom-offer" id="projeto-sob-medida">
-          <div><small>NÃO CABE EM UM PLANO FECHADO?</small><h3>Projeto Sob Medida</h3><p>Catálogo avançado, loja virtual, agendamento, integrações ou uma necessidade específica. Montamos escopo, prazo e investimento de acordo com a realidade e o momento da sua empresa.</p></div>
-          <button type="button" onClick={chooseCustom}>Montar meu projeto <b>↗</b></button>
-        </div>
-        <section className="sub-comparison" aria-labelledby="comparison-title">
-          <header>
-            <small>COMPARAÇÃO DIRETA</small>
-            <h3 id="comparison-title">O padrão é o mesmo. Veja exatamente o que muda.</h3>
-            <p>Sem esconder implantação, endereço ou permanência. Você escolhe pela realidade da empresa — nunca por diferença de qualidade.</p>
-          </header>
-          <div className="sub-comparison-scroll">
-            <table>
-              <thead><tr><th>O que comparar</th><th>Landing Pro</th><th>Landing Start</th><th>Site Institucional</th></tr></thead>
-              <tbody>
-                <tr><th>Qualidade de criação</th><td>Estratégia, texto e design personalizados</td><td><b>A mesma qualidade da Pro</b></td><td>Estratégia, texto e design personalizados</td></tr>
-                <tr><th>Implantação</th><td>R$ 399,90</td><td><b>Sem entrada</b></td><td>A partir de R$ 599,90</td></tr>
-                <tr><th>Hospedagem e suporte</th><td>R$ 49,90/mês</td><td>R$ 89,90/mês</td><td>A partir de R$ 79,90/mês</td></tr>
-                <tr><th>Endereço</th><td>Domínio próprio do cliente</td><td>Endereço Avancini incluso</td><td>Domínio próprio do cliente</td></tr>
-                <tr><th>Permanência mínima</th><td>Não</td><td><b>6 meses</b></td><td>Não, salvo condição definida na proposta</td></tr>
-                <tr><th>Produtos e serviços</th><td>Uma oferta principal</td><td>Uma oferta principal</td><td>Vários serviços e catálogo, quando necessário</td></tr>
-              </tbody>
-            </table>
-          </div>
-          <div className="sub-comparison-notes">
-            <p><b>1 pequeno ajuste mensal inclui:</b> trocar texto, imagem, telefone, horário ou informação já existente.</p>
-            <p><b>Recebe orçamento separado:</b> nova seção, nova página, integração, funcionalidade ou reformulação.</p>
-          </div>
-        </section>
-        <div className="sub-domain-note"><b>Você escolhe o endereço:</b> Endereço na rede Avancini incluso (R$ 0 de entrada) ou <strong>Domínio Próprio .com.br</strong> (+ taxa de registro anual de R$ 49,90 no 1º mês, sob consulta prévia de disponibilidade do nome desejado no Registro.br). Caso você já possua um domínio registrado, a conexão é 100% gratuita.</div>
+        <div className="sub-domain-note"><b>Você escolhe o endereço:</b> Endereço na rede Avancini incluso ou <strong>domínio próprio .com.br</strong>, sujeito à análise e à disponibilidade do nome desejado. Caso você já possua um domínio registrado, a conexão não possui taxa adicional.</div>
         <div className="sub-delivery" aria-label="Etapas e prazos de entrega">
           <div><small>CONTEÚDO PRONTO, CRIAÇÃO EM MOVIMENTO</small><strong>Prazo combinado antes do início.</strong><p>A contagem começa depois que textos, imagens e informações necessárias forem enviados.</p></div>
           <span><b>7 dias</b><small>Estrutura direta</small></span>
@@ -366,87 +387,17 @@ export default function SubscriptionPage() {
         </div>
       </section>
 
-      <section className="sub-section sub-choice">
-        <div className="sub-heading compact">
-          <span>DUAS FORMAS DE CONTRATAR</span>
-          <h2>A qualidade é a mesma. O que muda é o endereço e como você paga.</h2>
-        </div>
-        <div className="sub-choice-grid">
-          <article>
-            <span>CONTRATO 6 MESES · ENTRADA R$ 0</span><h3>Assinatura com fidelidade</h3>
-            <p>Você não paga nada pela taxa de criação do site. Apenas a mensalidade a partir de R$ 89,90/mês com hospedagem, SSL, suporte e manutenção contínua inclusos.</p>
-            <ul><li>Taxa de criação: R$ 0</li><li>Hospedagem e SSL de alta velocidade inclusos</li><li>1 ajuste/atualização mensal gratuita</li><li>Domínio próprio .com.br ou endereço Avancini</li></ul>
-            <a href="#planos">Ver os planos anuais <b>↗</b></a>
-          </article>
-          <article>
-            <span>SEM FIDELIDADE · CANCELE QUANDO QUISER</span><h3>Opção sem fidelidade</h3>
-            <p>Para quem prefere não ter contrato de permanência: taxa única de criação de <strong>R$ 490,00 à vista</strong> + <strong>R$ 89,90/mês</strong> de hospedagem e suporte com cancelamento livre a qualquer momento.</p>
-            <ul><li>Taxa única de criação: R$ 490,00 à vista</li><li>Mensalidade avulsa: R$ 89,90/mês</li><li>Sem permanência mínima · Cancele quando quiser</li><li>Manutenção e suporte ativos enquanto assinar</li></ul>
-            <button type="button" onClick={chooseCustom}>Contratar sem fidelidade (R$ 490 + R$ 89,90/mês) <b>↗</b></button>
-          </article>
-        </div>
-      </section>
-
-      <section className="sub-section sub-projects" id="cases">
-        <div className="sub-heading compact">
-          <span>VEJA A ESTRUTURA, NÃO APENAS UMA IMAGEM</span>
-          <h2>Dois projetos. Dois pontos de partida.</h2>
-          <p>Role dentro de cada tela para acompanhar a estrutura completa dos projetos.</p>
-        </div>
-        <div className="sub-project-list">
-          <article className="sub-project-card sandiego">
-            <div className="sub-project-copy">
-              <span>01 / REDESIGN</span>
-              <h3>Clínica San Diego</h3>
-              <p>Uma nova proposta criada a partir do site anterior da clínica, reorganizando especialidades, equipe e agendamento.</p>
-              <div><b>Saúde</b><b>Autoridade</b><b>Agendamento</b></div>
-              <a href="https://clinicasandiego.com.br/" target="_blank" rel="noreferrer">Ver o site anterior para comparar <strong>↗</strong></a>
-            </div>
-            <div className="sub-project-screen">
-              <div className="device-browser">
-                <div className="device-top"><i /><i /><i /><span>avancini.dash / redesign san diego</span><b>ROLE ↓</b></div>
-                {/* Região rolável precisa receber foco para também funcionar por teclado. */}
-                {/* eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex */}
-                <div className="project-scroll" role="region" tabIndex={0} aria-label="Demonstração rolável completa do projeto Clínica San Diego">
-                  <Image src="/projects/san-diego-full.png" alt="Captura completa da proposta de redesign da Clínica San Diego" width={1264} height={6720} sizes="(max-width: 760px) 92vw, 56vw" quality={82} />
-                </div>
-              </div>
-              <div className="scroll-hint">Role dentro da tela <span>↓</span></div>
-            </div>
-          </article>
-          <article className="sub-project-card tapecar">
-            <div className="sub-project-copy">
-              <span>02 / CRIAÇÃO DO ZERO</span>
-              <h3>Tape Car</h3>
-              <p>Uma presença digital construída do zero para organizar os serviços, fortalecer a marca local e facilitar o contato.</p>
-              <div><b>Automotivo</b><b>Marca local</b><b>WhatsApp</b></div>
-              <small>A EMPRESA NÃO POSSUÍA SITE ANTERIOR</small>
-            </div>
-            <div className="sub-project-screen">
-              <div className="device-browser">
-                <div className="device-top"><i /><i /><i /><span>avancini.dash / projeto tape car</span><b>ROLE ↓</b></div>
-                {/* Região rolável precisa receber foco para também funcionar por teclado. */}
-                {/* eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex */}
-                <div className="project-scroll" role="region" tabIndex={0} aria-label="Demonstração rolável completa do projeto Tape Car">
-                  <Image src="/projects/tape-car-full.png" alt="Captura completa do projeto Tape Car" width={1264} height={5388} sizes="(max-width: 760px) 92vw, 56vw" quality={82} />
-                </div>
-              </div>
-              <div className="scroll-hint">Role dentro da tela <span>↓</span></div>
-            </div>
-          </article>
-        </div>
-      </section>
-
       <section className="sub-section sub-faq">
         <div className="sub-heading compact"><span>SEM LETRA MIÚDA ESCONDIDA</span><h2>Dúvidas antes de começar</h2></div>
         <div className="sub-faq-grid">
-          <details name="subscription-faq" open><summary>Como funciona o domínio?</summary><p>Na Landing Pro e no Site Institucional, conectamos um domínio próprio fornecido por você. Na Landing Start, usamos um endereço dentro da estrutura Avancini. Um domínio novo é registrado e renovado pelo cliente, sempre em seu nome.</p></details>
+          <details name="subscription-faq" open><summary>Como funciona o domínio?</summary><p>Nos planos recorrentes sem taxa de criação, você pode começar com um endereço dentro da estrutura Avancini. Se preferir um .com.br próprio, conectamos um domínio que já seja seu ou registramos um novo à parte, sempre em seu nome.</p></details>
           <details name="subscription-faq"><summary>Posso pedir alterações?</summary><p>A contratação recorrente inclui um pequeno ajuste mensal, como trocar texto, imagem, telefone ou informação existente. Novas seções, funcionalidades ou reformulações recebem orçamento separado. No pagamento único, alterações posteriores entram na manutenção opcional.</p></details>
           <details name="subscription-faq"><summary>Posso pagar diretamente pelo site?</summary><p>Sim. Depois de confirmarmos plano, domínio, conteúdo e contrato, você recebe um link seguro para pagamento. Assim nenhuma cobrança acontece antes de validarmos que a opção escolhida atende sua empresa.</p></details>
-          <details name="subscription-faq"><summary>Existe permanência mínima?</summary><p>Somente a Landing Start, que não possui taxa de implantação, exige permanência mínima de 6 meses. As demais condições são informadas claramente na proposta antes da contratação.</p></details>
-          <details name="subscription-faq"><summary>O que acontece se eu cancelar?</summary><p>Ao encerrar um plano recorrente, hospedagem, suporte e publicação são desativados. Na Landing Start, isso acontece depois dos 6 meses mínimos. O domínio registrado pelo cliente e todo material fornecido por ele continuam sendo dele. A transferência dos arquivos do projeto faz parte apenas do pagamento único quando estiver prevista na proposta.</p></details>
-          <details name="subscription-faq"><summary>A Landing Start tem qualidade inferior?</summary><p>Não. Landing Start e Landing Pro recebem a mesma estratégia, texto, design, versão mobile e cuidado de desenvolvimento. A diferença é somente o endereço e a forma de contratação: a Start usa um endereço Avancini; a Pro utiliza o domínio próprio do cliente.</p></details>
-          <details name="subscription-faq"><summary>Posso ter produtos no site?</summary><p>Sim. O Site Institucional pode apresentar produtos ou serviços em catálogo e levar o pedido ao WhatsApp. Carrinho, pagamento, estoque e frete fazem parte de uma Loja Virtual sob medida.</p></details>
+          <details name="subscription-faq"><summary>Existe permanência mínima?</summary><p>Sim, na modalidade com R$ 0 de taxa de criação existe permanência mínima de 6 meses. Na opção com criação paga e mensalidade menor, não há fidelidade. A condição escolhida aparece com clareza antes da contratação.</p></details>
+          <details name="subscription-faq"><summary>O que acontece se eu cancelar?</summary><p>Ao encerrar um plano recorrente, hospedagem, suporte e publicação são desativados depois do período mínimo contratado. O domínio registrado pelo cliente e todo material fornecido por ele continuam sendo dele. A transferência dos arquivos faz parte apenas do pagamento único quando estiver prevista na proposta.</p></details>
+          <details name="subscription-faq"><summary>A opção sem entrada tem qualidade inferior?</summary><p>Não. A estratégia, o texto, o design, a versão mobile e o cuidado de desenvolvimento são os mesmos. O que muda é a forma de contratação e o endereço escolhido, não a qualidade entregue.</p></details>
+          <details name="subscription-faq"><summary>Qual a diferença entre Site Catálogo e Loja Virtual?</summary><p>No Site Catálogo, o cliente vê produtos e envia o pedido ou orçamento pelo WhatsApp. Na Loja Virtual, ele adiciona ao carrinho, paga, escolhe entrega ou retirada e conclui a compra dentro do site.</p></details>
+          <details name="subscription-faq"><summary>Preciso contratar o Sync junto?</summary><p>Não. O Dash funciona sozinho. Chatbot ou Atendente IA são opcionais e só entram quando sua empresa também precisa responder, qualificar ou acompanhar mais contatos.</p></details>
           <details name="subscription-faq"><summary>Como funciona o pagamento único?</summary><p>Você paga uma vez pela criação, sem mensalidade Avancini. Domínio e hospedagem são contratados e pagos diretamente pelo cliente, a manutenção fica opcional e a proposta informa claramente quais arquivos serão entregues depois da quitação.</p></details>
           <details name="subscription-faq"><summary>Em quanto tempo fica pronto?</summary><p>Trabalhamos com prazos de 7, 15 ou até 30 dias, definidos antes do início conforme a estrutura escolhida. A contagem começa após o envio dos textos, imagens e informações necessárias.</p></details>
         </div>
@@ -464,16 +415,16 @@ export default function SubscriptionPage() {
           <label><span>Segmento da empresa</span><input value={segment} onChange={(event) => setSegment(event.target.value)} placeholder="Ex.: clínica, restaurante, escritório" /></label>
           <label><span>Domínio</span><select value={domain} onChange={(event) => setDomain(event.target.value)}>{domainOptions[model].map((option) => <option key={option}>{option}</option>)}</select></label>
           <label><span>Prazo desejado</span><select value={timeline} onChange={(event) => setTimeline(event.target.value)}><option>Em até 7 dias</option><option>Em até 15 dias</option><option>Em até 30 dias</option></select></label>
-          <button type="submit">Continuar pelo WhatsApp <span>↗</span></button>
+          <button type="submit">Continuar pelo WhatsApp <SubArrow /></button>
           <small>Sem compromisso · conversa direta</small>
         </form>
       </section>
 
       <footer className="sub-footer">
-        <Link className="logo" href="/dash"><span className="logo-mark avancini-a-mark" aria-hidden="true"><i /></span><span><span className="brand-name">AVANCINI <b>DASH</b></span><small>Uma solução Avancini OS</small></span></Link>
-        <span>Landings de conversão · Sites institucionais · Atendimento em todo o Brasil</span>
+        <Link className="logo" href="/dash"><AvanciniMark variant="dash" className="logo-mark avancini-a-mark" /><span><span className="brand-name">AVANCINI <b>DASH</b></span><small>Uma solução Avancini OS</small></span></Link>
+        <span>Landing pages · Sites institucionais · Catálogos · Lojas virtuais</span>
         <nav className="sub-footer-legal" aria-label="Informações legais"><Link href="/privacidade">Privacidade</Link><Link href="/termos">Termos</Link></nav>
-        <Link href="/dash">Conhecer a Avancini Dash <b>↗</b></Link>
+        <Link href="/dash">Conhecer a Avancini Dash <SubArrow /></Link>
       </footer>
     </main>
   );

@@ -30,7 +30,6 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
-!.env.example
 
 # vercel
 .vercel
@@ -39,14 +38,3 @@ yarn-error.log*
 /.wrangler/
 /outputs/
 /work/
-
-# local visual QA and generated archives
-/*.png
-/*.tar.gz
-/([{}]clientHeight
-/public/projects/san-diego-full.jpg
-/public/projects/tape-car.jpg
-
-_archive/
-*.tsbuildinfo
-tsconfig.tsbuildinfo
