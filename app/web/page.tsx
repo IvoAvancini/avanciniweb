@@ -98,20 +98,20 @@ const whatsappFor = (message: string) =>
 
 const portfolioRows = [
   [
-    { name: "Solaris Energia", kind: "ENERGIA SOLAR & FINANCIAMENTO 96X", image: "/concepts/solaris/hero.jpg", view: "solar", className: "web-port-solar", action: "SIMULAÇÃO · PROJETO · FINANCIAMENTO" },
-    { name: "MOTORA // Ecossistema", kind: "CONCESSIONÁRIA PREMIUM & SEMINOVOS", image: "/concepts/apex-cars.jpg", view: "cars", className: "web-port-cars", action: "ESTOQUE · COMPARADOR · FINANCIAMENTO" },
-    { name: "Vértice // E-commerce", kind: "MODA ESPORTIVA & STREETWEAR", image: "/concepts/nike-hero.jpg", view: "fashion", className: "web-port-noma", action: "COLEÇÃO 2026 · SACOLA VIP" },
-    { name: "Cora Imóveis", kind: "MANSÕES & PENTHOUSES", image: "/concepts/cora-penthouse.jpg", view: "realestate", className: "web-port-atlas", action: "RADAR · SIMULADOR SAC" },
-    { name: "Tape Car Elite", kind: "PROJETO REAL · PPF & ESTÉTICA", image: "/concepts/tapecar-studio.jpg", view: "tapecar", className: "web-port-tape", action: "PROTEÇÃO · PPF · CERÂMICA 9H" },
-    { name: "Clínica San Diego", kind: "PROJETO REAL · CLÍNICA MÉDICA", image: "/projects/san-diego-preview.webp", view: "sandiego", className: "web-port-san", action: "CUIDADO · PREVENÇÃO" },
+    { name: "Solaris Energia", kind: "ENERGIA SOLAR & FINANCIAMENTO", image: "/concepts/solaris/hero.jpg", view: "solar", className: "web-port-solar", action: "SIMULAÇÃO · PROJETO · FINANCIAMENTO" },
+    { name: "MOTORA // Ecossistema", kind: "CONCESSIONÁRIA PREMIUM", image: "/concepts/apex-cars.jpg", view: "cars", className: "web-port-cars", action: "ESTOQUE · COMPARADOR · FINANCIAMENTO" },
+    { name: "Nexo Odonto", kind: "ODONTOLOGIA ESTÉTICA", image: "/concepts/nexo-dental.webp", view: "dentistry", className: "web-port-nexo", action: "TRATAMENTOS · CONFIANÇA · AGENDA" },
+    { name: "Lumina", kind: "CLÍNICA DE ESTÉTICA AVANÇADA", image: "/concepts/lumina-clinic.jpg", view: "aesthetics", className: "web-port-lumina", action: "PROTOCOLOS · AVALIAÇÃO · CUIDADO" },
+    { name: "Cora Imóveis", kind: "MANSÕES & PENTHOUSES", image: "/concepts/cora-penthouse.jpg", view: "realestate", className: "web-port-atlas", action: "RADAR · SIMULADOR SAC · VISITA" },
+    { name: "Clínica San Diego", kind: "PROJETO REAL · CLÍNICA MÉDICA", image: "/projects/san-diego-preview.webp", view: "sandiego", className: "web-port-san", action: "CUIDADO · PREVENÇÃO · CONFIANÇA" },
   ],
   [
-    { name: "Dr. Augusto Moreira", kind: "PORTFÓLIO · ADVOCACIA EMPRESARIAL", image: "/concepts/moreira-law-v2.webp", view: "moreira", className: "web-port-law", action: "DIAGNÓSTICO · CONTRATOS · SOCIETÁRIO" },
-    { name: "Auréa Atelier", kind: "SALÃO DE BELEZA & VISAGISMO", image: "/concepts/aurea-salon-v3.webp", view: "salon", className: "web-port-salon", action: "VISAGISMO · MECHAS · CONCIERGE" },
-    { name: "Lumina Clinic", kind: "CLÍNICA DE ESTÉTICA AVANÇADA", image: "/concepts/lumina-clinic.jpg", view: "aesthetics", className: "web-port-lumina", action: "HARMONIZAÇÃO · ULTRAFORMER · LASER" },
-    { name: "Nexo Odontologia", kind: "ODONTOLOGIA ESTÉTICA & IMPLANTES", image: "/concepts/nexo-dental.webp", view: "dentistry", className: "web-port-nexo", action: "LENTES 3D · CLAREAMENTO · IMPLANTES" },
-    { name: "Caio Move", kind: "CONSULTORIA ESPORTIVA & PERSONAL", image: "/concepts/caio-move.webp", view: "autonomous", className: "web-port-caio", action: "TREINO · EMAGRECIMENTO · APP EXCLUSIVO" },
-    { name: "Torque Lab", kind: "OFICINA ESPECIALIZADA & DIAGNÓSTICO", image: "/concepts/torque-mechanic.webp", view: "mechanic", className: "web-port-torque", action: "TELEMETRIA DE OS · SCANNER · REVISÃO" },
+    { name: "Caio Move", kind: "CONSULTORIA ESPORTIVA & PERSONAL", image: "/concepts/caio-move.webp", view: "autonomous", className: "web-port-caio", action: "MÉTODO · PROGRAMAS · AGENDA" },
+    { name: "Dr. Augusto Moreira", kind: "PORTFÓLIO · ADVOCACIA EMPRESARIAL", image: "/concepts/moreira-law-v2.webp", view: "moreira", className: "web-port-law", action: "ATUAÇÃO · MÉTODO · CONSULTA" },
+    { name: "Auréa Atelier", kind: "SALÃO DE BELEZA & VISAGISMO", image: "/concepts/aurea-salon-v3.webp", view: "salon", className: "web-port-salon", action: "AGENDA · SERVIÇOS · CURADORIA" },
+    { name: "Vértice // E-commerce", kind: "MODA ESPORTIVA & STREETWEAR", image: "/concepts/nike-hero.jpg", view: "fashion", className: "web-port-noma", action: "COLEÇÃO 2026 · SACOLA VIP" },
+    { name: "Torque Lab", kind: "OFICINA ESPECIALIZADA & DIAGNÓSTICO", image: "/concepts/torque-mechanic.webp", view: "mechanic", className: "web-port-torque", action: "TELEMETRIA · SCANNER · REVISÃO" },
+    { name: "Tape Car", kind: "PROJETO REAL · ESTÉTICA AUTOMOTIVA", image: "/projects/tape-car-preview.webp", view: "tapecar", className: "web-port-tape", action: "PROTEÇÃO · ESTÉTICA · CUIDADO" },
   ],
 ] as const;
 
@@ -170,9 +170,9 @@ const portfolioSpotlights = {
   },
   tapecar: {
     name: "Tape Car",
-    kind: "Demonstração interativa · estética automotiva & PPF",
-    image: "/concepts/tapecar-studio.jpg",
-    description: "PPF autorregenerativo, vitrificação cerâmica 9H, antes e depois interativo e simulador de valorização patrimonial.",
+    kind: "Projeto real · estética automotiva",
+    image: "/projects/tape-car-full.png",
+    description: "Climatização, insulfilm, som e acessórios automotivos com acabamento cuidadoso e orientação direta sem complicação.",
   },
   dentistry: {
     name: "Nexo Odonto",
@@ -323,7 +323,7 @@ const offers = [
 ] as const;
 
 function PortfolioConceptPage({ type }: { type: PortfolioSpotlightType }) {
-  if (type === "sandiego") return null;
+  if (type === "sandiego" || type === "tapecar") return null;
   const sectorType: SectorShowcaseType = type === "moreira" ? "law" : (type as SectorShowcaseType);
   return <SectorShowcasePage type={sectorType} />;
 }
