@@ -793,8 +793,8 @@ export default function Home() {
         <header>
           <div><span>PORTFÓLIO / PROJETOS & CONCEITOS</span><h2 id="web-portfolio-title">Sites que fazem<br />a marca parecer maior.</h2></div>
           <div className="web-portfolio-guide">
-            <span className="web-portfolio-ref" aria-label="Referência, oito experiências em destaque">
-              REF:// DESTAQUES · 08 <i aria-hidden="true" />
+            <span className="web-portfolio-ref" aria-label="Referência, dez experiências em destaque">
+              REF:// DESTAQUES · 10 <i aria-hidden="true" />
             </span>
             <p>Veja como estratégia, mensagem e design elevam a percepção de uma empresa e preparam cada clique para virar oportunidade.</p>
             <span className="web-portfolio-drag-note">PROJETOS EM MOVIMENTO · CLIQUE PARA AMPLIAR <WebArrow /></span>
@@ -804,7 +804,7 @@ export default function Home() {
           {portfolioRows.map((row, rowIndex) => (
             <div className="web-portfolio-row" key={rowIndex}>
               <div className="web-portfolio-track">
-                {[...row, ...row].map((item, index) => (
+                {[...row, ...row, ...row, ...row].map((item, index) => (
                   <button
                     type="button"
                     onClick={() => openPortfolioItem(item.view)}
@@ -822,7 +822,7 @@ export default function Home() {
             </div>
           ))}
         </div>
-        <div className="web-portfolio-all"><strong>Oito experiências diferentes, cada uma construída a partir do problema real do segmento, não apenas com outro nome e outra cor.</strong><span>AMPLIE E ROLE POR DENTRO <WebArrow /></span></div>
+        <div className="web-portfolio-all"><strong>Dez experiências diferentes, cada uma construída a partir do problema real do segmento, não apenas com outro nome e outra cor.</strong><span>AMPLIE E ROLE POR DENTRO <WebArrow /></span></div>
       </section>
 
       <DashBeforeAfterSlider />

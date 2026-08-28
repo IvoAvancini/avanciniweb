@@ -2771,7 +2771,6 @@ body:has(.web-page) .page-progress{background:linear-gradient(90deg,#43c85d,#a9f
 
 .web-page .web-portfolio-first>header{margin-bottom:44px}
 .web-page .web-portfolio-marquee{padding-bottom:8px}
-.web-page .web-portfolio-row:nth-child(n+2){display:none}
 .web-page .web-portfolio-all{margin-top:26px}
 .web-page :is(.hero-actions button,.hero-actions a,.offer-primary,.web-faq-intro button,.web-closing-cta button){font-size:11px}
 .web-page .offer-standard{margin-top:4px}
