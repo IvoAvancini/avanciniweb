@@ -64,6 +64,10 @@ const imageDimensions = {
   "/concepts/marina-realty.webp": { width: 1536, height: 1024 },
   "/concepts/aurea-salon-v3.webp": { width: 1672, height: 941 },
   "/concepts/moreira-law-v2.webp": { width: 1672, height: 941 },
+  "/concepts/solaris/hero.jpg": { width: 1600, height: 1000 },
+  "/concepts/cora-penthouse.jpg": { width: 1600, height: 1000 },
+  "/concepts/nike-hero.jpg": { width: 1600, height: 1000 },
+  "/concepts/tapecar-studio.jpg": { width: 1600, height: 1000 },
   "/projects/san-diego-full.png": { width: 1264, height: 6720 },
   "/projects/tape-car-full.png": { width: 1264, height: 5388 },
   "/projects/san-diego-preview.webp": { width: 1400, height: 900 },
@@ -91,16 +95,23 @@ function SiteImage({ src, sizes, quality, ...props }: SiteImageProps & { sizes?:
 
 const whatsappFor = (message: string) =>
   `https://wa.me/5573981019782?text=${encodeURIComponent(message)}`;
+
 const portfolioRows = [
   [
-    { name: "Solaris Energia", kind: "ENERGIA SOLAR & SIMULADOR DE ECONOMIA", image: "/concepts/solaris/hero.jpg", view: "solar", className: "web-port-solar", action: "SIMULAÇÃO · PROJETO · FINANCIAMENTO" },
-    { name: "MOTORA // Ecossistema Automotivo", kind: "CONCESSIONÁRIA PREMIUM & SEMINOVOS", image: "/concepts/apex-cars.jpg", view: "cars", className: "web-port-cars", action: "ESTOQUE · COMPARADOR · FINANCIAMENTO" },
+    { name: "Solaris Energia", kind: "ENERGIA SOLAR & FINANCIAMENTO 96X", image: "/concepts/solaris/hero.jpg", view: "solar", className: "web-port-solar", action: "SIMULAÇÃO · PROJETO · FINANCIAMENTO" },
+    { name: "MOTORA // Ecossistema", kind: "CONCESSIONÁRIA PREMIUM & SEMINOVOS", image: "/concepts/apex-cars.jpg", view: "cars", className: "web-port-cars", action: "ESTOQUE · COMPARADOR · FINANCIAMENTO" },
     { name: "Vértice // E-commerce", kind: "MODA ESPORTIVA & STREETWEAR", image: "/concepts/nike-hero.jpg", view: "fashion", className: "web-port-noma", action: "COLEÇÃO 2026 · SACOLA VIP" },
     { name: "Cora Imóveis", kind: "MANSÕES & PENTHOUSES", image: "/concepts/cora-penthouse.jpg", view: "realestate", className: "web-port-atlas", action: "RADAR · SIMULADOR SAC" },
+    { name: "Tape Car Elite", kind: "PROJETO REAL · PPF & ESTÉTICA", image: "/concepts/tapecar-studio.jpg", view: "tapecar", className: "web-port-tape", action: "PROTEÇÃO · PPF · CERÂMICA 9H" },
     { name: "Clínica San Diego", kind: "PROJETO REAL · CLÍNICA MÉDICA", image: "/projects/san-diego-preview.webp", view: "sandiego", className: "web-port-san", action: "CUIDADO · PREVENÇÃO" },
-    { name: "Tape Car", kind: "PROJETO REAL · ESTÉTICA AUTOMOTIVA", image: "/projects/tape-car-preview.webp", view: "tapecar", className: "web-port-tape", action: "PROTEÇÃO · ESTÉTICA · CUIDADO" },
-    { name: "Dr. Augusto Moreira", kind: "PORTFÓLIO · ADVOCACIA EMPRESARIAL", image: "/concepts/moreira-law-v2.webp", view: "moreira", className: "web-port-law", action: "TRAJETÓRIA · ATUAÇÃO · AUTORIDADE" },
-    { name: "Auréa Atelier", kind: "SALÃO & EXPERIÊNCIA DE BELEZA", image: "/concepts/aurea-salon-v3.webp", view: "salon", className: "web-port-salon", action: "AGENDA · SERVIÇOS · CURADORIA" },
+  ],
+  [
+    { name: "Dr. Augusto Moreira", kind: "PORTFÓLIO · ADVOCACIA EMPRESARIAL", image: "/concepts/moreira-law-v2.webp", view: "moreira", className: "web-port-law", action: "DIAGNÓSTICO · CONTRATOS · SOCIETÁRIO" },
+    { name: "Auréa Atelier", kind: "SALÃO DE BELEZA & VISAGISMO", image: "/concepts/aurea-salon-v3.webp", view: "salon", className: "web-port-salon", action: "VISAGISMO · MECHAS · CONCIERGE" },
+    { name: "Lumina Clinic", kind: "CLÍNICA DE ESTÉTICA AVANÇADA", image: "/concepts/lumina-clinic.jpg", view: "aesthetics", className: "web-port-lumina", action: "HARMONIZAÇÃO · ULTRAFORMER · LASER" },
+    { name: "Nexo Odontologia", kind: "ODONTOLOGIA ESTÉTICA & IMPLANTES", image: "/concepts/nexo-dental.webp", view: "dentistry", className: "web-port-nexo", action: "LENTES 3D · CLAREAMENTO · IMPLANTES" },
+    { name: "Caio Move", kind: "CONSULTORIA ESPORTIVA & PERSONAL", image: "/concepts/caio-move.webp", view: "autonomous", className: "web-port-caio", action: "TREINO · EMAGRECIMENTO · APP EXCLUSIVO" },
+    { name: "Torque Lab", kind: "OFICINA ESPECIALIZADA & DIAGNÓSTICO", image: "/concepts/torque-mechanic.webp", view: "mechanic", className: "web-port-torque", action: "TELEMETRIA DE OS · SCANNER · REVISÃO" },
   ],
 ] as const;
 
@@ -115,7 +126,6 @@ const webFaqs = [
   { question: "Como funciona o processo de criação?", answer: "Começamos entendendo sua empresa, o público e o objetivo do site. Depois alinhamos estrutura, mensagem e direção visual antes do desenvolvimento e da publicação." },
   { question: "Landing page e site institucional são a mesma coisa?", answer: "Não. A landing concentra o visitante em uma oferta e uma ação. O site institucional apresenta a empresa inteira, organiza serviços e constrói autoridade." },
   { question: "O site funciona bem no celular?", answer: "Sim. A experiência é planejada para celular, computador e outras telas, com atenção a legibilidade, velocidade e facilidade para entrar em contato." },
-
   { question: "Posso usar meu próprio domínio?", answer: "Sim. Conectamos um domínio que já seja seu. Se precisar registrar um novo .com.br, verificamos disponibilidade e condições antes do início." },
   { question: "Quanto tempo demora para ficar pronto?", answer: "O prazo depende da estrutura e do conteúdo disponível. Como referência, projetos diretos podem levar 7 dias e estruturas completas até 30 dias, sempre combinado antes do início." },
   { question: "A opção sem entrada tem qualidade inferior?", answer: "Não. Estratégia, texto, design, versão mobile e acabamento seguem o mesmo padrão. O que muda é a forma de contratação e o endereço escolhido, nunca o cuidado com a entrega." },
@@ -144,7 +154,7 @@ const portfolioSpotlights = {
     name: "Solaris Energia",
     kind: "Demonstração interativa · energia solar",
     image: "/concepts/solaris/hero.jpg",
-    description: "Orçamento guiado, simulador de economia, financiamento, processo e projetos apresentados em uma jornada de alta conversão.",
+    description: "Orçamento guiado, simulador de economia, financiamento em até 96x, processo e projetos apresentados em uma jornada de alta conversão.",
   },
   cars: {
     name: "Apex Motors",
@@ -160,27 +170,33 @@ const portfolioSpotlights = {
   },
   tapecar: {
     name: "Tape Car",
-    kind: "Projeto real · estética automotiva",
-    image: "/projects/tape-car-full.png",
-    description: "Climatização, insulfilm, som e acessórios automotivos com acabamento cuidadoso e orientação direta sem complicação.",
+    kind: "Demonstração interativa · estética automotiva & PPF",
+    image: "/concepts/tapecar-studio.jpg",
+    description: "PPF autorregenerativo, vitrificação cerâmica 9H, antes e depois interativo e simulador de valorização patrimonial.",
   },
   dentistry: {
     name: "Nexo Odonto",
-    kind: "Demonstração interativa · odontologia",
+    kind: "Demonstração interativa · odontologia estética",
     image: "/concepts/nexo-dental.webp",
-    description: "Uma jornada que reduz insegurança, explica possibilidades e conduz à avaliação correta.",
+    description: "Avaliação 3D do sorriso, lentes, implantes e sedação consciente sem dor com triagem interativa para WhatsApp.",
   },
   aesthetics: {
-    name: "Lumina",
+    name: "Lumina Clinic",
     kind: "Demonstração interativa · estética avançada",
     image: "/concepts/lumina-clinic.jpg",
-    description: "Tratamentos, objetivos e avaliação apresentados com elegância e sem promessas exageradas.",
+    description: "Protocolos exclusivos ANVISA, harmonização, Ultraformer e simulador estético de avaliação imediata.",
   },
   autonomous: {
     name: "Caio Move",
-    kind: "Demonstração interativa · profissional autônomo",
+    kind: "Demonstração interativa · consultoria esportiva & personal",
     image: "/concepts/caio-move.webp",
-    description: "Marca pessoal, método, programas e agenda capazes de explicar valor antes da conversa sobre preço.",
+    description: "Metodologia de treino inteligente, app exclusivo, acompanhamento postural e simulador de metas no WhatsApp.",
+  },
+  mechanic: {
+    name: "Torque Lab",
+    kind: "Demonstração interativa · oficina mecânica especializada",
+    image: "/concepts/torque-mechanic.webp",
+    description: "Telemetria de OS em tempo real, scanner eletrônico, laudo de fotos/vídeos e aprovação item por item.",
   },
   realestate: {
     name: "Cora Imóveis",
@@ -192,13 +208,13 @@ const portfolioSpotlights = {
     name: "Dr. Augusto Moreira",
     kind: "Portfólio profissional · advocacia empresarial",
     image: "/concepts/moreira-law-v2.webp",
-    description: "Trajetória, áreas de atuação, casos selecionados e uma demonstração clara de como o advogado conduz decisões empresariais.",
+    description: "Trajetória, áreas de atuação, mesa de decisão estratégica e simulador de diagnóstico jurídico imediato.",
   },
   salon: {
     name: "Auréa Atelier",
-    kind: "Demonstração interativa · salão de beleza",
+    kind: "Demonstração interativa · salão de beleza & visagismo",
     image: "/concepts/aurea-salon-v3.webp",
-    description: "Serviços, profissionais e agenda organizados em uma experiência elegante, rápida e fácil de entender.",
+    description: "Visagismo autoral, mechas exclusivas, concierge e simulador de rituais com reserva no WhatsApp.",
   },
   fashion: {
     name: "Nike Lab // Aether",
@@ -307,10 +323,11 @@ const offers = [
 ] as const;
 
 function PortfolioConceptPage({ type }: { type: PortfolioSpotlightType }) {
-  if (type === "sandiego" || type === "tapecar") return null;
-  const sectorType: SectorShowcaseType = type === "moreira" ? "law" : type;
+  if (type === "sandiego") return null;
+  const sectorType: SectorShowcaseType = type === "moreira" ? "law" : (type as SectorShowcaseType);
   return <SectorShowcasePage type={sectorType} />;
 }
+
 const formatMoney = (value: number) =>
   new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL", maximumFractionDigits: 0 }).format(value);
 

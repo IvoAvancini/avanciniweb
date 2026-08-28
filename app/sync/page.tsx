@@ -65,83 +65,91 @@ const formatSyncPlanMoney = (value: number) => new Intl.NumberFormat("pt-BR", {
 const solutions = {
   chatbot: {
     index: "01",
-    label: "CHATBOT",
+    label: "CHATBOT & AUTOMAÇÃO INTELIGENTE",
     description:
-      "Um fluxo claro para responder perguntas repetidas, apresentar opções, captar dados e encaminhar cada pessoa para o próximo passo.",
-    ideal: "Para empresas que repetem as mesmas respostas todos os dias.",
-    promise: "Pare de responder a mesma pergunta pela décima vez.",
-    result: "Contato organizado e pronto para sua equipe continuar.",
-    steps: ["Responde o que é recorrente", "Coleta as informações certas", "Encaminha para o próximo passo"],
+      "Respostas em 3 segundos, envio instantâneo de catálogos e orçamentos, agendamento de consultas ou serviços no piloto automático e triagem sem filas para o vendedor certo.",
+    ideal: "Indispensável para clínicas, escritórios, salões, lojas e empresas que recebem alto volume de mensagens e perdem vendas pela demora em responder.",
+    promise: "Automatize seu WhatsApp e feche vendas 24h sem depender de equipe online.",
+    result: "Zero clientes esperando, atendimento padronizado em 100% dos contatos e sua equipe focada apenas no fechamento.",
+    steps: [
+      "Atendimento imediato em menos de 3 segundos (24h por dia)",
+      "Qualifica a necessidade, apresenta valores/catálogo e coleta os dados",
+      "Agenda horários ou entrega o cliente pronto para o fechamento",
+    ],
   },
   ia: {
     index: "02",
-    label: "ATENDENTE COM IA",
+    label: "ATENDENTE COM IA GENERATIVA",
     description:
-      "Uma IA preparada com as informações da empresa para conversar em linguagem natural, explicar serviços e qualificar oportunidades.",
-    ideal: "Para quem precisa responder melhor sem depender de menus rígidos.",
-    promise: "Cada pessoa pergunta de um jeito. A IA entende mesmo assim.",
-    result: "Conversa contextualizada e oportunidade qualificada.",
-    steps: ["Entende a intenção", "Consulta o contexto da empresa", "Responde ou chama uma pessoa"],
+      "Inteligência artificial avançada treinada exclusivamente no seu negócio. Conversa com empatia humana, compreende áudios e perguntas abertas, quebra objeções difíceis e conduz o cliente até o fechamento com alto valor percebido.",
+    ideal: "Perfeito para empresas que vendem serviços consultivos, alto padrão, clínicas estéticas, saúde, advocacia, imobiliárias e vendas complexas.",
+    promise: "Uma consultora de vendas com IA treinada para negociar, tirar dúvidas e vender.",
+    result: "Vendas acontecendo de madrugada e nos finais de semana, com tom de voz sofisticado e 100% humanizado.",
+    steps: [
+      "Entende texto e áudios com linguagem natural e acolhedora",
+      "Consulta todo o conhecimento da sua empresa e quebra objeções na hora",
+      "Conduz a negociação com estratégia e fecha agendamentos ou vendas",
+    ],
   },
 } as const;
 
 const faqs = [
   {
     question: "Chatbot e atendente com IA são a mesma coisa?",
-    answer: "Não. O chatbot segue fluxos definidos e a IA entende perguntas livres. Cada solução tem uma mensalidade própria e pode ser contratada separadamente.",
+    answer: "Não. O chatbot segue fluxos definidos com menus e botões, enquanto a IA entende perguntas abertas, áudios e contexto em linguagem natural. Cada solução pode ser contratada separadamente.",
   },
   {
     question: "Preciso contratar chatbot e inteligência artificial juntos?",
-    answer: "Não. Você escolhe a solução que resolve seu gargalo atual. Se a operação evoluir, avaliamos a combinação depois.",
+    answer: "Não. Você pode começar com o Chatbot para organizar a demanda ou direto com a IA para uma experiência consultiva.",
   },
   {
     question: "Existe taxa de ativação?",
-    answer: "Não. A configuração inicial do Sync está incluída na assinatura.",
+    answer: "Não. A configuração inicial do Sync está totalmente inclusa na assinatura.",
   },
   {
     question: "Como funcionam os ciclos de pagamento?",
-    answer: "Não no plano mensal. Você escolhe entre cobrança mensal recorrente, semestral ou anual. Nos ciclos antecipados, o serviço permanece ativo durante todo o período contratado.",
+    answer: "Você pode escolher entre mensal recorrente, semestral com 20% de economia ou anual com 30% de economia.",
   },
   {
     question: "A IA substitui completamente uma pessoa?",
-    answer: "Não é essa a proposta. Ela assume perguntas e etapas repetitivas e encaminha para uma pessoa quando a conversa exige decisão, negociação ou cuidado humano.",
+    answer: "Ela assume a triagem, qualificação, dúvidas repetitivas e agendamentos, encaminhando para seu time quando o fechamento final exigir toque humano.",
   },
   {
     question: "Posso usar meu número atual do WhatsApp?",
-    answer: "A possibilidade depende da estrutura atual do número e da solução escolhida. Isso é verificado antes da contratação para evitar qualquer mudança inesperada.",
+    answer: "Sim, realizamos a integração mantendo o histórico e a operação do seu número corporativo com total segurança.",
   },
   {
     question: "Existem custos de mensagens ou ferramentas externas?",
-    answer: "Alguns canais e ferramentas cobram conforme a utilização. Quando isso for necessário, os custos e limites serão apresentados antes da ativação, sem surpresa depois.",
+    answer: "Alguns canais cobram por consumo de API oficial. Todos os limites e projeções são alinhados com total transparência antes do início.",
   },
 ] as const;
 
 const syncPlans = [
   {
     id: "chatbot",
-    label: "RESPOSTAS GUIADAS",
-    name: "Chatbot Start",
+    label: "AUTOMAÇÃO & AGENDAMENTO",
+    name: "Chatbot Pro",
     price: "A partir de R$ 149,90",
     cyclePrices: { monthly: 149.9, semiannual: 719.9, annual: 1259.9 },
     suffix: "/mês",
-    description: "Um chatbot com perguntas, botões e caminhos definidos para responder o que se repete e organizar cada contato.",
-    definition: "Conversa guiada por opções e regras previamente configuradas.",
-    fit: "Clínicas, salões, lojas e prestadores que recebem as mesmas dúvidas sobre preço, horário, endereço, serviços ou disponibilidade.",
-    example: "A pessoa escolhe o serviço, informa os dados e chega pronta para a equipe continuar.",
-    items: ["Um canal principal", "Um fluxo personalizado", "Respostas e opções guiadas", "Captação e triagem", "Transferência para uma pessoa", "Acompanhamento e 1 ajuste mensal"],
+    description: "Estrutura completa de automação com menus inteligentes, catálogo, agendamento de horários e encaminhamento direto para o vendedor certo.",
+    definition: "Atendimento imediato que elimina filas e não deixa nenhum cliente esfriar.",
+    fit: "Clínicas, consultórios, salões, lojas, oficinas e negócios locais com alto volume de contatos diários.",
+    example: "O cliente chama às 23h, escolhe o serviço, tira dúvidas de valor, envia os dados e já recebe a confirmação na hora.",
+    items: ["Um canal principal (WhatsApp/Insta)", "Fluxo estratégico de alta conversão", "Envio de orçamentos e catálogos", "Captação e triagem sem filas", "Transbordo para atendente humano", "Acompanhamento e 1 ajuste mensal"],
   },
   {
     id: "ia",
-    label: "ATENDIMENTO COM IA",
-    name: "Atendente IA",
+    label: "INTELIGÊNCIA ARTIFICIAL DE ELITE",
+    name: "Atendente IA Ultra",
     price: "A partir de R$ 297,90",
     cyclePrices: { monthly: 297.9, semiannual: 1429.9, annual: 2499.9 },
     suffix: "/mês",
-    description: "Uma atendente virtual treinada com as informações da empresa para entender perguntas abertas e responder com contexto.",
-    definition: "Conversa livre, sem obrigar a pessoa a seguir menus ou escolher botões.",
-    fit: "Clínicas, consultórios, imobiliárias, lojas e empresas com serviços variados, dúvidas consultivas ou contatos que precisam ser qualificados.",
-    example: "A pessoa explica o que precisa com as próprias palavras. A IA orienta e chama alguém quando necessário.",
-    items: ["Um canal principal", "Base inicial da empresa", "Respostas contextualizadas", "Qualificação de contatos", "Transferência para uma pessoa", "Acompanhamento e 1 ajuste mensal"],
+    description: "Agente de IA generativa treinada exclusivamente no seu negócio para atender em linguagem natural, quebrar objeções complexas e vender 24 horas por dia.",
+    definition: "Conversa 100% natural e persuasiva, sem travar o cliente em menus engessados.",
+    fit: "Marcas premium, clínicas médicas/estéticas, advocacia, imobiliárias e serviços de alto ticket que exigem atendimento impecável.",
+    example: "O cliente manda um áudio com uma dúvida difícil. A IA compreende, responde no tom da sua marca e agenda a consulta.",
+    items: ["IA generativa treinada na sua empresa", "Compreensão de áudios e textos livres", "Quebra de objeções e persuasão", "Qualificação aprofundada de contatos", "Transferência ágil para seu time", "Evolução e ajuste mensal contínuo"],
   },
 ] as const;
 
@@ -830,10 +838,10 @@ export default function AvanciniSyncPage() {
       </section>
 
       <section className="sync-entry-paths" id="planos-rapidos" aria-labelledby="sync-entry-title">
-        <header><span>ESCOLHA PELO PROBLEMA</span><h2 id="sync-entry-title">Sua equipe não precisa responder tudo sozinha.<br />O Sync assume o que mais atrasa.</h2><p>Escolha entre respostas rápidas para perguntas recorrentes ou conversas com IA que entendem o contexto. Você contrata somente o que resolve seu gargalo hoje.</p></header>
+        <header><span>ESCOLHA PELO SEU OBJETIVO</span><h2 id="sync-entry-title">Pare de perder clientes para a concorrência.<br />O Sync atende no segundo em que eles chamam.</h2><p>Escolha entre automação instantânea com fluxos guiados ou uma atendente de IA generativa que negocia e quebra objeções 24 horas por dia.</p></header>
         <div>
-          <a href="#planos" onClick={() => setSelectedPlanIndex(0)}><small>01 · PERGUNTAS REPETIDAS</small><strong>Respostas guiadas</strong><p>Responde na hora, coleta os dados certos e entrega o contato organizado para sua equipe continuar.</p><div><em>Ver Chatbot Start <SyncArrow /></em></div></a>
-          <a href="#planos" onClick={() => setSelectedPlanIndex(1)}><small>02 · CONVERSAS QUE EXIGEM CONTEXTO</small><strong>Atendimento com IA</strong><p>Conversa com naturalidade, entende o interesse e conduz cada oportunidade até o próximo passo.</p><div><em>Ver Atendente IA <SyncArrow /></em></div></a>
+          <a href="#planos" onClick={() => setSelectedPlanIndex(0)}><small>01 · AUTOMAÇÃO & AGENDAMENTO</small><strong>Chatbot Pro</strong><p>Responde em 3 segundos, envia orçamentos/catálogos, agenda horários e entrega o lead pronto para o fechamento.</p><div><em>Ver Chatbot Pro <SyncArrow /></em></div></a>
+          <a href="#planos" onClick={() => setSelectedPlanIndex(1)}><small>02 · VENDAS CONSULTIVAS COM IA</small><strong>Atendente IA Ultra</strong><p>Conversa com naturalidade humana, compreende áudios, quebra objeções e atende como seu melhor vendedor 24/7.</p><div><em>Ver Atendente IA Ultra <SyncArrow /></em></div></a>
         </div>
       </section>
 
