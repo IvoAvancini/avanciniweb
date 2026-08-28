@@ -4560,4 +4560,166 @@ body:has(.web-page) .page-progress{background:linear-gradient(90deg,#43c85d,#a9f
   }
 }
 
+/* ==========================================================================
+   AVANCINI DASH — HERO ELEGANTE, BOTÕES PROMINENTES & ALINHAMENTO IMPECÁVEL
+   ========================================================================== */
+.web-page .hero {
+  min-height: calc(100svh - 80px) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: flex-start !important;
+  padding: 100px 5.5vw 40px !important;
+  position: relative !important;
+}
+
+.web-page .hero-copy {
+  max-width: 680px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 14px !important;
+  position: relative !important;
+  z-index: 5 !important;
+  text-align: left !important;
+}
+
+.web-page .hero-typewriter {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  font-size: 11.5px !important;
+  font-weight: 800 !important;
+  color: #86efac !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.08em !important;
+  margin-bottom: 2px !important;
+}
+
+.web-page .hero h1 {
+  font-size: clamp(38px, 4.3vw, 56px) !important;
+  font-weight: 850 !important;
+  line-height: 1.06 !important;
+  letter-spacing: -0.04em !important;
+  color: #ffffff !important;
+  margin: 0 !important;
+}
+
+.web-page .hero h1 em {
+  font-style: normal !important;
+  background: linear-gradient(90deg, #86efac 0%, #22c55e 100%) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+}
+
+.web-page .hero-copy > p {
+  font-size: 15.5px !important;
+  line-height: 1.65 !important;
+  color: #94a3b8 !important;
+  margin: 4px 0 6px !important;
+  max-width: 580px !important;
+}
+
+.web-page .hero-brand-promise {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  padding: 7px 16px !important;
+  border-radius: 9999px !important;
+  background: rgba(34, 197, 94, 0.07) !important;
+  border: 1px solid rgba(34, 197, 94, 0.22) !important;
+  font-size: 11px !important;
+  font-weight: 750 !important;
+  color: #e2e8f0 !important;
+  width: max-content !important;
+  margin: 6px 0 10px !important;
+}
+
+.web-page .hero-brand-promise strong {
+  color: #4ade80 !important;
+}
+
+.web-page .hero-brand-promise i {
+  display: inline-block !important;
+  width: 6px !important;
+  height: 6px !important;
+  border-radius: 50% !important;
+  background: #22c55e !important;
+  box-shadow: 0 0 10px #22c55e !important;
+}
+
+.web-page .hero-actions {
+  display: flex !important;
+  align-items: center !important;
+  gap: 14px !important;
+  margin-top: 8px !important;
+}
+
+.web-page .hero-actions .button {
+  min-height: 56px !important;
+  padding: 0 32px !important;
+  font-size: 15px !important;
+  border-radius: 12px !important;
+  font-weight: 800 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 10px !important;
+  cursor: pointer !important;
+  text-decoration: none !important;
+  transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1) !important;
+}
+
+.web-page .hero-actions .button-primary {
+  background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%) !important;
+  color: #021a0a !important;
+  border: 0 !important;
+  box-shadow: 0 10px 30px rgba(34, 197, 94, 0.35) !important;
+}
+
+.web-page .hero-actions .button-primary:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 16px 42px rgba(34, 197, 94, 0.5) !important;
+}
+
+.web-page .hero-actions .button-ghost {
+  background: rgba(255, 255, 255, 0.04) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.18) !important;
+  color: #f8fafc !important;
+  min-height: 56px !important;
+  padding: 0 28px !important;
+  font-size: 15px !important;
+}
+
+.web-page .hero-actions .button-ghost:hover {
+  border-color: rgba(34, 197, 94, 0.5) !important;
+  background: rgba(34, 197, 94, 0.08) !important;
+  color: #ffffff !important;
+  transform: translateY(-2px) !important;
+}
+
+.web-page .hero-trust {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 8px 18px !important;
+  margin-top: 14px !important;
+  font-size: 11.5px !important;
+  color: #64748b !important;
+  font-weight: 600 !important;
+}
+
+.web-page .hero-trust span {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+}
+
+.web-page .hero-trust span::before {
+  content: "•" !important;
+  color: #22c55e !important;
+  font-weight: 900 !important;
+}
+
 
