@@ -4827,10 +4827,10 @@ body:has(.web-page) .page-progress{background:linear-gradient(90deg,#43c85d,#a9f
 
 .web-menu-overlay nav a {
   display: grid !important;
-  grid-template-columns: 50px auto 1fr !important;
-  align-items: baseline !important;
+  grid-template-columns: 50px auto 1fr auto !important;
+  align-items: center !important;
   gap: 20px !important;
-  padding: 12px 0 !important;
+  padding: 14px 0 !important;
   border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
   text-decoration: none !important;
   transition: all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1) !important;
