@@ -837,14 +837,6 @@ export default function AvanciniSyncPage() {
         </div>
       </section>
 
-      <section className="sync-entry-paths" id="planos-rapidos" aria-labelledby="sync-entry-title">
-        <header><span>ESCOLHA PELO SEU OBJETIVO</span><h2 id="sync-entry-title">Pare de perder clientes para a concorrência.<br />O Sync atende no segundo em que eles chamam.</h2><p>Escolha entre automação instantânea com fluxos guiados ou uma atendente de IA generativa que negocia e quebra objeções 24 horas por dia.</p></header>
-        <div>
-          <a href="#planos" onClick={() => setSelectedPlanIndex(0)}><small>01 · AUTOMAÇÃO & AGENDAMENTO</small><strong>Chatbot Pro</strong><p>Responde em 3 segundos, envia orçamentos/catálogos, agenda horários e entrega o lead pronto para o fechamento.</p><div><em>Ver Chatbot Pro <SyncArrow /></em></div></a>
-          <a href="#planos" onClick={() => setSelectedPlanIndex(1)}><small>02 · VENDAS CONSULTIVAS COM IA</small><strong>Atendente IA Ultra</strong><p>Conversa com naturalidade humana, compreende áudios, quebra objeções e atende como seu melhor vendedor 24/7.</p><div><em>Ver Atendente IA Ultra <SyncArrow /></em></div></a>
-        </div>
-      </section>
-
       <InteractiveAiChatDemo onLead={openLead} />
 
       <section className="sync-solutions" id="solucoes">

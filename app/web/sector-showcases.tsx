@@ -116,186 +116,28 @@ const GreenCheck = () => (
   </svg>
 );
 
-const mechanicOrders = {
-  "TL-3891": {
-    vehicle: "BMW 320i M Sport 2022",
-    progress: 38,
-    status: "Diagnóstico eletrônico em validação",
-    alert: "Ruído dianteiro acima de 60 km/h",
-    diagnosis: "Folga no braço axial direito",
-    action: "Aguardando aprovação das peças",
-    health: "72%",
-    mileage: "48.216 km",
-    estimate: "R$ 2.840",
-    eta: "Hoje · 17:30",
-  },
-  "TL-4022": {
-    vehicle: "Porsche Macan GTS 2.9 V6",
-    progress: 68,
-    status: "Revisão preventiva em andamento",
-    alert: "Troca programada do fluido PDK",
-    diagnosis: "Leitura eletrônica sem anomalias",
-    action: "Teste de rodagem agendado",
-    health: "91%",
-    mileage: "31.804 km",
-    estimate: "R$ 3.260",
-    eta: "Amanhã · 11:00",
-  },
-  "TL-2950": {
-    vehicle: "Jeep Compass Limited 2021",
-    progress: 92,
-    status: "Veículo em inspeção final",
-    alert: "Vibração registrada na frenagem",
-    diagnosis: "Discos e pastilhas substituídos",
-    action: "Liberação após checklist",
-    health: "96%",
-    mileage: "62.491 km",
-    estimate: "R$ 1.970",
-    eta: "Hoje · 16:20",
-  },
-} as const;
-
-function MechanicShowcase() {
-  const [selectedOS, setSelectedOS] = useState<string>("TL-4022");
-  const [reviewOpen, setReviewOpen] = useState(false);
-  const order = mechanicOrders[selectedOS as keyof typeof mechanicOrders];
-
-  const waUrl = `https://wa.me/5573981019782?text=${encodeURIComponent(
-    `Olá! Quero agendar um diagnóstico automotivo com scanner na Torque Lab para o meu veículo.`
-  )}`;
-
-  return (
-    <main className={`${styles.site} ${styles.mechanic}`}>
-      <header className={styles.proHeaderDark}>
-        <div className={styles.proBrandWrap}>
-          <div className={styles.proBrandTitleDark}>
-            <span>TORQUE</span><span style={{ color: "#ef4444" }}>LAB</span>
-          </div>
-          <span className={styles.proBrandTagDark}>Centro Automotivo Especializado</span>
-        </div>
-        <div className={styles.proHeaderReviewDark}>
-          <b>5.0</b>
-          <span style={{ color: "#f59e0b" }}>★★★★★</span>
-          <GoogleWordmark />
-        </div>
-      </header>
-
-      <div className={styles.proTrustRailDark}>
-        <span>✓ EQUIPE ASE CERTIFICADA</span>
-        <span>★ 5.0 NO GOOGLE</span>
-        <span>⏱ SCANNER EM 1H</span>
-        <span>◇ 12 MESES DE GARANTIA</span>
-      </div>
-
-      <section className={styles.mechHero}>
-        <div className={styles.mechHeroBackdrop}>
-          <Image
-            src="/concepts/torque-mechanic.webp"
-            alt="Oficina mecânica de precisão Torque Lab"
-            width={1536}
-            height={1024}
-            sizes="100vw"
-            quality={80}
-            className={styles.mechHeroImg}
-            priority
-            onError={(e) => {
-              (e.currentTarget as HTMLElement).style.display = "none";
-            }}
-          />
-        </div>
-        <div className={styles.mechShade} />
-
-        <div className={styles.mechHeroCopy}>
-          <div className={styles.proBadgePill}>
-            <span>EXCELENTE 5.0</span>
-            <span style={{ color: "#f59e0b" }}>★★★★★</span>
-            <GoogleWordmark />
-          </div>
-
-          <h2>Você acompanha o diagnóstico<br /><i>antes de autorizar 1 centavo.</i></h2>
-          <p>Laudo com fotos em alta resolução, leitura OBD-II com scanner de fábrica e aprovação item a item direto pelo celular.</p>
-
-          <ul className={styles.proChecklist}>
-            <li><GreenCheck /> Diagnóstico por scanner e vídeo</li>
-            <li><GreenCheck /> Peças originais com garantia de 12 meses</li>
-            <li><GreenCheck /> Aprovação individual por item sem surpresa</li>
-          </ul>
-
-          <div className={styles.proGlassCard}>
-            <p className={styles.proGlassQuote}>
-              &ldquo;A Torque é de longe a oficina mais transparente que já usei. Mandaram vídeo de cada peça com desgaste e aprovei o orçamento pelo WhatsApp. Nota 10!&rdquo;
-            </p>
-            <div className={styles.proGlassFooter}>
-              <div className={styles.proGlassUser}>
-                <div style={{ width: 36, height: 36, borderRadius: "50%", background: "#ef4444", color: "#fff", display: "grid", placeItems: "center", fontWeight: 800, fontSize: 14 }}>
-                  FM
-                </div>
-                <div>
-                  <div className={styles.proUserName}>Fernando Martins</div>
-                  <div className={styles.proUserRating}>5.0 ⭐⭐⭐⭐⭐</div>
-                </div>
-              </div>
-              <GoogleWordmark />
-            </div>
-          </div>
-        </div>
-
-        <aside className={styles.mechHeroAside} key={selectedOS}>
-          <div className={styles.mechPanelTop}><small><i /> CENTRAL DO VEÍCULO</small><b>OS #{selectedOS}</b></div>
-          <strong>{order.vehicle}</strong>
-          <div className={styles.mechTelemetry}>
-            <span><small>SAÚDE MECÂNICA</small><b>{order.health}</b><i>scanner + inspeção</i></span>
-            <span><small>QUILOMETRAGEM</small><b>{order.mileage}</b><i>leitura registrada</i></span>
-            <span><small>PREVISÃO</small><b>{order.eta}</b><i>atualizada agora</i></span>
-          </div>
-          <div className={styles.mechProgressMeta}><span>PROGRESSO DA ORDEM</span><b>{order.progress}%</b></div>
-          <div className={styles.mechProgressBar}><div style={{ width: `${order.progress}%` }} /></div>
-          <em>{order.status}</em>
-          <div className={styles.mechApproval}><span><small>ORÇAMENTO TRANSPARENTE</small><b>{order.estimate}</b></span><button type="button" aria-expanded={reviewOpen} onClick={() => setReviewOpen((value) => !value)}>{reviewOpen ? "OCULTAR ITENS" : "REVISAR ITENS"} <ArrowVector /></button></div>
-          {reviewOpen ? <div className={styles.mechReviewDrawer}><span><b>Diagnóstico e mão de obra</b><i>incluído</i></span><span><b>Peças recomendadas</b><i>aprovação individual</i></span><span><b>Garantia do serviço</b><i>12 meses</i></span></div> : null}
-
-          <a href={waUrl} target="_blank" rel="noreferrer" className={styles.proBtnWa} style={{ marginTop: 14 }}>
-            <span>SOLICITAR AGENDAMENTO NO WHATSAPP</span>
-            <ArrowVector />
-          </a>
-        </aside>
-      </section>
-      <section className={styles.mechWorkflow} aria-live="polite" key={`workflow-${selectedOS}`}>
-        <header><small>OS #{selectedOS} · TRANSPARÊNCIA EM CADA ETAPA</small><h3>Do sintoma à entrega, sem orçamento surpresa.</h3></header>
-        <div>
-          <article><span>01</span><small>RELATO DO CLIENTE</small><strong>{order.alert}</strong><p>O sintoma entra registrado antes da inspeção.</p></article>
-          <article><span>02</span><small>DIAGNÓSTICO TÉCNICO</small><strong>{order.diagnosis}</strong><p>Fotos, leitura e causa provável ficam no mesmo histórico.</p></article>
-          <article><span>03</span><small>PRÓXIMO PASSO</small><strong>{order.action}</strong><p>Nada avança sem clareza sobre serviço, prazo e autorização.</p></article>
-        </div>
-        <footer className={styles.mechProofRail}><span><small>01</small><b>Fotos da entrada</b><i>12 arquivos</i></span><span><small>02</small><b>Laudo do scanner</b><i>assinado digitalmente</i></span><span><small>03</small><b>Aprovação por item</b><i>controle do cliente</i></span><strong>HISTÓRICO COMPLETO · SEM SURPRESA</strong></footer>
-      </section>
-    </main>
-  );
-}
-
+/* =========================================================================
+   1. NEXO ODONTOLOGIA — ODONTOLOGIA ESTÉTICA & IMPLANTES 3D (COMPLETO)
+   ========================================================================= */
 function DentistryShowcase() {
-  const [treatment, setTreatment] = useState("lentes");
   const [step, setStep] = useState(1);
-
-  const treatments = {
-    lentes: { name: "Lentes de Contato & Facetas", desc: "Correção de formato, cor e alinhamento com porcelana ultrarresistente." },
-    clareamento: { name: "Clareamento a Laser", desc: "Dentes até 5 tons mais claros com tecnologia indolor e rápida." },
-    implantes: { name: "Implantes & Reabilitação", desc: "Recuperação total da mastigação e estética com implantes guiados 3D." },
-    invisalign: { name: "Alinhadores Invisíveis", desc: "Alinhamento ortodôntico estético sem braquetes metálicos." },
-  };
+  const [goal, setGoal] = useState("Lentes em Porcelana 3D");
+  const [fear, setFear] = useState("Sedação Consciente Sem Dor");
+  const [timeline, setTimeline] = useState("Curto prazo (2 a 4 semanas)");
 
   const waUrl = `https://wa.me/5573981019782?text=${encodeURIComponent(
-    `Olá! Fiz a avaliação no site da Nexo Odontologia para ${treatments[treatment as keyof typeof treatments].name} e quero agendar minha consulta de avaliação!`
+    `Olá! Fiz a pré-avaliação 3D no site da Nexo Odonto:\n\n• Objetivo: ${goal}\n• Sensibilidade/Conforto: ${fear}\n• Expectativa: ${timeline}\n\nGostaria de agendar meu escaneamento 3D!`
   )}`;
 
   return (
     <main className={`${styles.site} ${styles.dentistry}`}>
+      {/* 1. Header Boutique */}
       <header className={styles.proHeader}>
         <div className={styles.proBrandWrap}>
           <div className={styles.proBrandTitle}>
-            <span>NEXO</span><span style={{ color: "#0284c7" }}>ODONTOLOGIA</span>
+            <span>NEXO</span><span style={{ color: "#0284c7" }}>ODONTO</span>
           </div>
-          <span className={styles.proBrandTag}>Estética Dental & Implantes</span>
+          <span className={styles.proBrandTag}>Odontologia Estética & Implantes Digitais 3D</span>
         </div>
         <div className={styles.proHeaderReview}>
           <b>5.0</b>
@@ -304,14 +146,17 @@ function DentistryShowcase() {
         </div>
       </header>
 
+      {/* 2. Trust Banner */}
       <div className={styles.proTrustRail}>
-        <span>✓ CRO/SP CERTIFICADO</span>
-        <span>★ 5.0 ESTRELAS NO GOOGLE</span>
-        <span>⏱ AVALIAÇÃO DIGITAL 3D</span>
-        <span>◇ SEDATIVO CONSCIENTE SEM DOR</span>
+        <span>✓ CRO/BA REGULARIZADO</span>
+        <span>★ 5.0 NO GOOGLE (+480 AVALIAÇÕES)</span>
+        <span>⏱ SCANNER 3D SEM MOLDAGEM</span>
+        <span>◇ SEDAÇÃO CONSCIENTE SEM DOR</span>
+        <span>💎 CERÂMICAS IMPORTADAS</span>
       </div>
 
-      <section className={styles.proHero} style={{ background: "#0c1524" }}>
+      {/* 3. Hero Section com Triagem 4 Etapas */}
+      <section className={styles.proHero} style={{ background: "#0a1322" }}>
         <Image
           src="/concepts/nexo-dental.webp"
           alt="Atendimento odontológico acolhedor na Nexo Odontologia"
@@ -330,34 +175,34 @@ function DentistryShowcase() {
             <GoogleWordmark />
           </div>
 
-          <h1>Seu Novo Sorriso Com Alta Tecnologia e Conforto</h1>
+          <h1>A Odontologia de Alta Precisão Para Transformar Seu Sorriso</h1>
 
           <p>
-            Tratamentos odontológicos modernos, sedação consciente sem dor e planejamento 100% digital construído no seu ritmo.
+            Tecnologia 3D guiada por computador, lentes em porcelana ultranaturais, implantes sem cortes traumáticos e sedação consciente para um atendimento 100% confortável e sem dor.
           </p>
 
           <ul className={styles.proChecklist}>
-            <li><GreenCheck /> Escaneamento intraoral 3D em alta resolução</li>
-            <li><GreenCheck /> Lentes de contato ultrafinas e naturais</li>
-            <li><GreenCheck /> Protocolos rápidos e sem desconforto</li>
+            <li><GreenCheck /> Scanner intraoral 3D: veja a prévia do seu sorriso antes de iniciar</li>
+            <li><GreenCheck /> Lentes de contato ultrafinas que preservam a estrutura natural do dente</li>
+            <li><GreenCheck /> Protocolo sem dor com óxido nitroso e anestesia computadorizada</li>
           </ul>
 
           <div className={styles.proGlassCard}>
             <p className={styles.proGlassQuote}>
-              &ldquo;Fiz minhas facetas em porcelana na Nexo e o resultado ficou super natural! Toda a equipe foi extremamente cuidadosa e o procedimento foi 100% indolor. Recomendo de olhos fechados!&rdquo;
+              &ldquo;Eu tinha pavor de dentista por traumas antigos. Na Nexo fiz minhas lentes com sedação consciente e não senti absolutamente nada! O resultado ficou ultra natural, ninguém diz que são facetas.&rdquo;
             </p>
             <div className={styles.proGlassFooter}>
               <div className={styles.proGlassUser}>
                 <Image
                   src="/concepts/avatars/dental-client.jpg"
-                  alt="Beatriz Lima"
+                  alt="Fernanda Albuquerque"
                   width={38}
                   height={38}
                   className={styles.proAvatarImg}
                 />
                 <div>
-                  <div className={styles.proUserName}>Beatriz Lima</div>
-                  <div className={styles.proUserRating}>5.0 ⭐⭐⭐⭐⭐</div>
+                  <div className={styles.proUserName}>Fernanda Albuquerque</div>
+                  <div className={styles.proUserRating}>5.0 ⭐⭐⭐⭐⭐ (Lentes 3D)</div>
                 </div>
               </div>
               <GoogleWordmark />
@@ -365,112 +210,262 @@ function DentistryShowcase() {
           </div>
         </div>
 
+        {/* 4-Step Wizard */}
         <aside className={styles.proQuizCard}>
           <div>
-            <h3 className={styles.proQuizTitle}>Avaliação do Sorriso Online</h3>
+            <h3 className={styles.proQuizTitle}>Simulador de Sorriso & Pré-Avaliação 3D</h3>
             <p className={styles.proQuizSubtitle}>
-              ⏱ Resposta em menos de 1 minuto
+              ⏱ Etapa {step} de 4 · Análise digital do paciente
             </p>
           </div>
 
           <div className={styles.proQuizProgressBar}>
             <div
               className={styles.proQuizProgressFill}
-              style={{ width: `${step === 1 ? 50 : 100}%`, background: "#0284c7" }}
+              style={{ width: `${(step / 4) * 100}%`, background: "#0284c7" }}
             />
           </div>
 
-          {step === 1 ? (
+          {step === 1 && (
             <div className={styles.proQuizStep}>
-              <div className={styles.proStepLabel}>Qual o seu objetivo estético principal?</div>
+              <div className={styles.proStepLabel}>1. Qual é o seu principal objetivo para o seu sorriso?</div>
               <div className={styles.proOptionsGrid}>
-                {Object.entries(treatments).map(([key, item]) => (
+                {[
+                  "Lentes em Porcelana 3D",
+                  "Implante Dentário Guiado",
+                  "Alinhador Invisível",
+                  "Clareamento a Laser",
+                ].map((opt) => (
                   <button
-                    key={key}
+                    key={opt}
                     type="button"
-                    className={`${styles.proOptionBtn} ${treatment === key ? styles.proOptionBtnActive : ""}`}
-                    style={treatment === key ? { borderColor: "#0284c7", background: "rgba(2, 132, 199, 0.05)" } : {}}
-                    onClick={() => {
-                      setTreatment(key);
-                      setStep(2);
-                    }}
+                    className={`${styles.proOptionBtn} ${goal === opt ? styles.proOptionBtnActive : ""}`}
+                    style={goal === opt ? { borderColor: "#0284c7", background: "rgba(2, 132, 199, 0.08)" } : {}}
+                    onClick={() => { setGoal(opt); setStep(2); }}
                   >
-                    <span>{item.name}</span>
+                    <span>{opt}</span>
                   </button>
                 ))}
               </div>
-              <button
-                type="button"
-                className={styles.proBtnPrimary}
-                style={{ background: "#0284c7" }}
-                onClick={() => setStep(2)}
-              >
-                AVANÇAR PARA PROPOSTA <ArrowVector />
+              <button type="button" className={styles.proBtnPrimary} style={{ background: "#0284c7" }} onClick={() => setStep(2)}>
+                AVANÇAR PARA ETAPA 2 <ArrowVector />
               </button>
             </div>
-          ) : null}
+          )}
 
-          {step === 2 ? (
+          {step === 2 && (
             <div className={styles.proQuizStep}>
-              <div style={{ background: "#f0f9ff", border: "1px solid #bae6fd", borderRadius: 14, padding: "16px", textAlign: "center" }}>
-                <span style={{ fontSize: 11, fontWeight: 800, color: "#0369a1", textTransform: "uppercase" }}>Tratamento Selecionado</span>
-                <strong style={{ display: "block", fontSize: 18, color: "#0f172a", margin: "6px 0" }}>
-                  {treatments[treatment as keyof typeof treatments].name}
+              <div className={styles.proStepLabel}>2. Possui histórico de sensibilidade ou medo de dentista?</div>
+              <div className={styles.proOptionsGrid}>
+                {[
+                  "Sedação Consciente Sem Dor",
+                  "Sensibilidade Moderada",
+                  "100% Tranquilo / Sem Fobia",
+                  "Bruxismo / Desgaste Dental",
+                ].map((opt) => (
+                  <button
+                    key={opt}
+                    type="button"
+                    className={`${styles.proOptionBtn} ${fear === opt ? styles.proOptionBtnActive : ""}`}
+                    style={fear === opt ? { borderColor: "#0284c7", background: "rgba(2, 132, 199, 0.08)" } : {}}
+                    onClick={() => { setFear(opt); setStep(3); }}
+                  >
+                    <span>{opt}</span>
+                  </button>
+                ))}
+              </div>
+              <button type="button" className={styles.proBtnPrimary} style={{ background: "#0284c7" }} onClick={() => setStep(3)}>
+                AVANÇAR PARA ETAPA 3 <ArrowVector />
+              </button>
+              <button type="button" className={styles.proStepBackBtn} onClick={() => setStep(1)}>
+                ← Voltar etapa
+              </button>
+            </div>
+          )}
+
+          {step === 3 && (
+            <div className={styles.proQuizStep}>
+              <div className={styles.proStepLabel}>3. Qual a sua expectativa de prazo para a transformação?</div>
+              <div className={styles.proOptionsGrid}>
+                {[
+                  "Urgente (Casamento / Evento)",
+                  "Curto prazo (2 a 4 semanas)",
+                  "Médio prazo (Planejado)",
+                  "Avaliação de Parcelamento",
+                ].map((opt) => (
+                  <button
+                    key={opt}
+                    type="button"
+                    className={`${styles.proOptionBtn} ${timeline === opt ? styles.proOptionBtnActive : ""}`}
+                    style={timeline === opt ? { borderColor: "#0284c7", background: "rgba(2, 132, 199, 0.08)" } : {}}
+                    onClick={() => { setTimeline(opt); setStep(4); }}
+                  >
+                    <span>{opt}</span>
+                  </button>
+                ))}
+              </div>
+              <button type="button" className={styles.proBtnPrimary} style={{ background: "#0284c7" }} onClick={() => setStep(4)}>
+                GERAR PRÉ-DIAGNÓSTICO <ArrowVector />
+              </button>
+              <button type="button" className={styles.proStepBackBtn} onClick={() => setStep(2)}>
+                ← Voltar etapa
+              </button>
+            </div>
+          )}
+
+          {step === 4 && (
+            <div className={styles.proQuizStep}>
+              <div style={{ background: "#f0f9ff", border: "1px solid #bae6fd", borderRadius: 16, padding: "18px", textAlign: "left" }}>
+                <span style={{ fontSize: 10, fontWeight: 900, color: "#0369a1", textTransform: "uppercase", letterSpacing: "0.1em" }}>
+                  RESUMO DA SUA PRÉ-AVALIAÇÃO
+                </span>
+                <strong style={{ display: "block", fontSize: 17, color: "#0f172a", margin: "8px 0 4px" }}>
+                  Protocolo Indicado: {goal}
                 </strong>
-                <p style={{ fontSize: 12.5, color: "#475569", margin: 0 }}>
-                  {treatments[treatment as keyof typeof treatments].desc}
+                <p style={{ fontSize: 12.5, color: "#475569", margin: "0 0 10px", lineHeight: 1.5 }}>
+                  ✓ Conforto: {fear}<br />
+                  ✓ Planejamento: {timeline}<br />
+                  ✓ Escaneamento intraoral 3D incluso na primeira consulta
                 </p>
+                <div style={{ fontSize: 11, fontWeight: 700, color: "#0284c7" }}>
+                  ⚡ Atendimento prioritário liberado para WhatsApp
+                </div>
               </div>
 
-              <a
-                href={waUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.proBtnWa}
-              >
-                <span>AGENDAR AVALIAÇÃO NO WHATSAPP</span>
+              <a href={waUrl} target="_blank" rel="noopener noreferrer" className={styles.proBtnWa}>
+                <span>RESERVAR ESCANEAMENTO 3D NO WHATSAPP</span>
                 <ArrowVector />
               </a>
 
-              <button
-                type="button"
-                style={{ background: "transparent", border: 0, color: "#64748b", fontSize: 12, fontWeight: 700, cursor: "pointer", textAlign: "center" }}
-                onClick={() => setStep(1)}
-              >
-                ↻ Alterar tratamento
+              <button type="button" className={styles.proStepBackBtn} onClick={() => setStep(1)}>
+                ↻ Refazer pré-avaliação
               </button>
             </div>
-          ) : null}
+          )}
         </aside>
       </section>
+
+      {/* 4. Pilares da Tecnologia Nexo */}
+      <section className={styles.proSectionLight}>
+        <div className={styles.proSectionHead}>
+          <small style={{ color: "#0284c7" }}>EXPERIÊNCIA DIGITAL & SEM DOR</small>
+          <h2>Por que a Odontologia Digital Nexo é Diferente?</h2>
+          <p>Esqueça massas de moldagem que causam ânsia e procedimentos dolorosos. Investimos na melhor tecnologia mundial para você ter conforto absoluto.</p>
+        </div>
+
+        <div className={styles.proPillarsGrid}>
+          <div className={styles.proPillarCardLight}>
+            <div className={styles.proPillarIcon} style={{ background: "rgba(2, 132, 199, 0.1)", color: "#0284c7" }}>📐</div>
+            <h3>Scanner Intraoral 3D</h3>
+            <p>Captura mais de 6.000 fotos por segundo dos seus dentes em alta resolução. Você visualiza a simulação do sorriso na tela em minutos.</p>
+          </div>
+          <div className={styles.proPillarCardLight}>
+            <div className={styles.proPillarIcon} style={{ background: "rgba(2, 132, 199, 0.1)", color: "#0284c7" }}>💎</div>
+            <h3>Cerâmicas Alemãs Pura</h3>
+            <p>Lentes e facetas fresadas em robótica CAD/CAM com espessura de até 0.2mm, preservando 100% da integridade do seu dente natural.</p>
+          </div>
+          <div className={styles.proPillarCardLight}>
+            <div className={styles.proPillarIcon} style={{ background: "rgba(2, 132, 199, 0.1)", color: "#0284c7" }}>💤</div>
+            <h3>Sedação Consciente Segura</h3>
+            <p>Para pacientes com fobia de agulha ou dor, utilizamos óxido nitroso e anestesia computadorizada com monitoramento de sinais vitais.</p>
+          </div>
+        </div>
+      </section>
+
+      {/* 5. Tratamentos Especializados */}
+      <section className={styles.proSection} style={{ background: "#0c1524" }}>
+        <div className={styles.proSectionHead}>
+          <small style={{ color: "#38bdf8" }}>TRATAMENTOS DE ALTA PERFORMANCE</small>
+          <h2 style={{ color: "#ffffff" }}>Especialidades da Clínica Nexo</h2>
+          <p style={{ color: "#94a3b8" }}>Soluções integradas de estética, ortodontia e reabilitação com profissionais especialistas.</p>
+        </div>
+
+        <div className={styles.proCasesGrid}>
+          <div className={styles.proCaseCard}>
+            <span className={styles.proCaseTag} style={{ background: "rgba(56, 189, 248, 0.15)", color: "#38bdf8" }}>ESTÉTICA DENTAL</span>
+            <div className={styles.proCaseMetric} style={{ color: "#ffffff" }}>Lentes & Facetas 3D</div>
+            <p className={styles.proCaseQuote} style={{ color: "#cbd5e1" }}>
+              Alinhamento de formato, fechamento de diastemas e clareamento definitivo com translucidez idêntica ao esmalte dental natural.
+            </p>
+          </div>
+          <div className={styles.proCaseCard}>
+            <span className={styles.proCaseTag} style={{ background: "rgba(56, 189, 248, 0.15)", color: "#38bdf8" }}>REABILITAÇÃO ORAL</span>
+            <div className={styles.proCaseMetric} style={{ color: "#ffffff" }}>Implantes Guiados 3D</div>
+            <p className={styles.proCaseQuote} style={{ color: "#cbd5e1" }}>
+              Cirurgia sem retalhos nem pontos extensos, guiada por tomografia 3D, com cicatrização até 3x mais rápida e dente provisório imediato.
+            </p>
+          </div>
+          <div className={styles.proCaseCard}>
+            <span className={styles.proCaseTag} style={{ background: "rgba(56, 189, 248, 0.15)", color: "#38bdf8" }}>ORTODONTIA DIGITAL</span>
+            <div className={styles.proCaseMetric} style={{ color: "#ffffff" }}>Alinhadores Invisíveis</div>
+            <p className={styles.proCaseQuote} style={{ color: "#cbd5e1" }}>
+              Placas transparentes termoformadas que corrigem dentes tortos sem ferir a boca e sem interferir na sua vida profissional.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* 6. FAQ Odontológico */}
+      <section className={styles.proSectionLight}>
+        <div className={styles.proSectionHead}>
+          <small style={{ color: "#0284c7" }}>DÚVIDAS FREQUENTES</small>
+          <h2>Tudo o Que Você Precisa Saber</h2>
+        </div>
+
+        <div className={styles.proFaqGrid}>
+          <details className={styles.proFaqItemLight} open>
+            <summary>As lentes de contato desgastam muito o dente natural? <i>+</i></summary>
+            <p>Não! Na técnica digital moderna 3D, realizamos apenas micro-preparos milimétricos no esmalte (quando necessário). Mais de 90% da estrutura saudável do dente é 100% preservada.</p>
+          </details>
+          <details className={styles.proFaqItemLight}>
+            <summary>Como funciona a sedação consciente? <i>+</i></summary>
+            <p>O paciente inala uma mistura controlada de oxigênio e óxido nitroso. Você fica totalmente relaxado e livre de ansiedade, porém acordado e respondendo normalmente aos comandos, sem dor.</p>
+          </details>
+          <details className={styles.proFaqItemLight}>
+            <summary>Quanto tempo dura um tratamento com lentes de porcelana? <i>+</i></summary>
+            <p>Com higienização correta e consultas periódicas de profilaxia, as lentes em porcelana têm durabilidade comprovada de 15 a 20 anos sem perder o brilho ou amarelar.</p>
+          </details>
+        </div>
+      </section>
+
+      {/* 7. Footer CTA */}
+      <footer className={styles.proFooterCta} style={{ background: "#08101d", color: "#fff" }}>
+        <div className={styles.proFooterCtaBox}>
+          <small style={{ color: "#38bdf8", fontWeight: 900, letterSpacing: "0.14em" }}>AGENDE SUA CONSULTA BOUTIQUE</small>
+          <h2>Pronto Para Conhecer Seu Novo Sorriso?</h2>
+          <p style={{ color: "#94a3b8" }}>Nossa equipe de concierge está à disposição para tirar todas as dúvidas e agendar seu escaneamento 3D no melhor horário.</p>
+          <a href={waUrl} target="_blank" rel="noopener noreferrer" className={styles.proBtnWa} style={{ maxWidth: 360 }}>
+            <span>FALAR COM CONCIERGE NO WHATSAPP</span>
+            <ArrowVector />
+          </a>
+        </div>
+      </footer>
     </main>
   );
 }
 
-const lawAreas = {
-  contratos: { label: "Contratos Empresariais", ref: "ML · 0247", risk: "Cláusula de reajuste ambígua", decision: "Revisar antes da assinatura", deliverable: "Parecer + minuta comentada", urgency: "48h", level: "Atenção alta", score: 76, exposure: "Margem e previsibilidade", status: "Revisão preventiva" },
-  societario: { label: "Estrutura Societária", ref: "ML · 0312", risk: "Entrada de um novo sócio", decision: "Definir poderes, metas e saída", deliverable: "Acordo de sócios", urgency: "5 dias", level: "Estratégico", score: 64, exposure: "Governança e controle", status: "Estruturação" },
-  trabalhista: { label: "Compliance Trabalhista", ref: "ML · 0189", risk: "Mudança de política interna", decision: "Validar impacto e comunicação", deliverable: "Plano de adequação", urgency: "72h", level: "Preventivo", score: 48, exposure: "Pessoas e operação", status: "Conformidade" },
-  contencioso: { label: "Contencioso Estratégico", ref: "ML · 0401", risk: "Notificação recebida hoje", decision: "Preservar prazo e provas", deliverable: "Estratégia de resposta", urgency: "Hoje", level: "Prioridade crítica", score: 91, exposure: "Prazo processual", status: "Resposta imediata" },
-} as const;
-
+/* =========================================================================
+   2. DR. AUGUSTO MOREIRA — ADVOCACIA EMPRESARIAL & ESTRATÉGICA (COMPLETO)
+   ========================================================================= */
 function LawShowcase() {
-  const [area, setArea] = useState<keyof typeof lawAreas>("contratos");
   const [step, setStep] = useState(1);
-  const active = lawAreas[area];
+  const [demand, setDemand] = useState("Contratos Empresariais & Fornecedores");
+  const [revenue, setRevenue] = useState("R$ 100k a R$ 500k/mês");
+  const [urgency, setUrgency] = useState("Preventivo & Blindagem");
 
   const waUrl = `https://wa.me/5573981019782?text=${encodeURIComponent(
-    `Olá! Quero agendar uma consulta jurídica estratégica com o Dr. Augusto Moreira sobre ${active.label} para a minha empresa.`
+    `Olá Dr. Augusto Moreira! Realizei o diagnóstico preliminar no site:\n\n• Demanda: ${demand}\n• Porte: ${revenue}\n• Situação: ${urgency}\n\nGostaria de agendar uma mesa de decisão jurídica estratégica.`
   )}`;
 
   return (
     <main className={`${styles.site} ${styles.law}`}>
+      {/* 1. Header Executivo */}
       <header className={styles.proHeaderDark}>
         <div className={styles.proBrandWrap}>
           <div className={styles.proBrandTitleDark}>
             <span>AUGUSTO</span> <span style={{ color: "#d97706" }}>MOREIRA</span>
           </div>
-          <span className={styles.proBrandTagDark}>Advocacia Empresarial & Contratos</span>
+          <span className={styles.proBrandTagDark}>Advocacia Empresarial Estratégica & Contratos</span>
         </div>
         <div className={styles.proHeaderReviewDark}>
           <b>5.0</b>
@@ -479,14 +474,17 @@ function LawShowcase() {
         </div>
       </header>
 
+      {/* 2. Trust Banner */}
       <div className={styles.proTrustRailDark}>
-        <span>✓ OAB/BA 48.271</span>
+        <span>✓ OAB/BA 48.912 REGULARIZADA</span>
         <span>★ 5.0 NO GOOGLE</span>
-        <span>⏱ RETORNO EM ATÉ 24H</span>
-        <span>◇ CONTRATOS & SOCIETÁRIO</span>
+        <span>⏱ SLA DE PARECER EM 48H</span>
+        <span>◇ +R$ 42M EM PASSIVOS MITIGADOS</span>
+        <span>🔒 SIGILO E COMPLIANCE TOTAL</span>
       </div>
 
-      <section className={styles.proHero} style={{ background: "#111215" }}>
+      {/* 3. Hero Section com Triagem 4 Etapas */}
+      <section className={styles.proHero} style={{ background: "#0f1117" }}>
         <Image
           src="/concepts/moreira-law-v2.webp"
           alt="Reunião estratégica da Moreira Advocacia Empresarial"
@@ -508,13 +506,13 @@ function LawShowcase() {
           <h1>Segurança Jurídica Para Proteger e Escalar Sua Empresa</h1>
 
           <p>
-            Transformamos contratos, conflitos e movimentos societários em decisões executáveis que protegem o patrimônio e aceleram o crescimento.
+            Transformamos contratos frágeis, disputas societárias e passivos ocultos em decisões estruturadas que protegem o patrimônio dos sócios e aceleram o crescimento do negócio.
           </p>
 
           <ul className={styles.proChecklist}>
-            <li><GreenCheck /> Diagnóstico e parecer preliminar em até 48h</li>
-            <li><GreenCheck /> Contratos blindados e acordos de sócios precisos</li>
-            <li><GreenCheck /> Atendimento consultivo direto com os sócios</li>
+            <li><GreenCheck /> Diagnóstico preliminar e triagem de risco contratual em 48h</li>
+            <li><GreenCheck /> Acordos de sócios blindados, memorandos de investimento e M&A</li>
+            <li><GreenCheck /> Atendimento direto com advogado sócio sênior sem intermediários</li>
           </ul>
 
           <div className={styles.proGlassCard}>
@@ -540,156 +538,229 @@ function LawShowcase() {
           </div>
         </div>
 
+        {/* 4-Step Wizard */}
         <aside className={styles.proQuizCard}>
           <div>
-            <h3 className={styles.proQuizTitle}>Diagnóstico Jurídico Rápido</h3>
+            <h3 className={styles.proQuizTitle}>Diagnóstico Jurídico Empresarial</h3>
             <p className={styles.proQuizSubtitle}>
-              ⏱ Análise preliminar confidencial
+              ⏱ Etapa {step} de 4 · Análise preliminar confidencial sob sigilo OAB
             </p>
           </div>
 
           <div className={styles.proQuizProgressBar}>
             <div
               className={styles.proQuizProgressFill}
-              style={{ width: `${step === 1 ? 50 : 100}%`, background: "#d97706" }}
+              style={{ width: `${(step / 4) * 100}%`, background: "#d97706" }}
             />
           </div>
 
-          {step === 1 ? (
+          {step === 1 && (
             <div className={styles.proQuizStep}>
-              <div className={styles.proStepLabel}>Qual a prioridade da sua empresa agora?</div>
+              <div className={styles.proStepLabel}>1. Qual a principal demanda jurídica da sua empresa agora?</div>
               <div className={styles.proOptionsGrid}>
-                {(Object.keys(lawAreas) as Array<keyof typeof lawAreas>).map((key) => (
+                {[
+                  "Contratos Comerciais & B2B",
+                  "Estrutura Societária & Sócios",
+                  "Passivo Trabalhista & RH",
+                  "Recuperação de Crédito / Ação",
+                ].map((opt) => (
                   <button
-                    key={key}
+                    key={opt}
                     type="button"
-                    className={`${styles.proOptionBtn} ${area === key ? styles.proOptionBtnActive : ""}`}
-                    style={area === key ? { borderColor: "#d97706", background: "rgba(217, 119, 6, 0.06)" } : {}}
-                    onClick={() => {
-                      setArea(key);
-                      setStep(2);
-                    }}
+                    className={`${styles.proOptionBtn} ${demand === opt ? styles.proOptionBtnActive : ""}`}
+                    style={demand === opt ? { borderColor: "#d97706", background: "rgba(217, 119, 6, 0.08)" } : {}}
+                    onClick={() => { setDemand(opt); setStep(2); }}
                   >
-                    <span>{lawAreas[key].label}</span>
+                    <span>{opt}</span>
                   </button>
                 ))}
               </div>
-              <button
-                type="button"
-                className={styles.proBtnPrimary}
-                style={{ background: "#d97706" }}
-                onClick={() => setStep(2)}
-              >
-                AVANÇAR PARA DIAGNÓSTICO <ArrowVector />
+              <button type="button" className={styles.proBtnPrimary} style={{ background: "#d97706" }} onClick={() => setStep(2)}>
+                AVANÇAR PARA ETAPA 2 <ArrowVector />
               </button>
             </div>
-          ) : null}
+          )}
 
-          {step === 2 ? (
+          {step === 2 && (
             <div className={styles.proQuizStep}>
-              <div style={{ background: "#fef3c7", border: "1px solid #fde68a", borderRadius: 14, padding: "16px", textAlign: "center" }}>
-                <span style={{ fontSize: 11, fontWeight: 800, color: "#92400e", textTransform: "uppercase" }}>Frente Selecionada</span>
-                <strong style={{ display: "block", fontSize: 17, color: "#78350f", margin: "6px 0" }}>
-                  {active.label}
+              <div className={styles.proStepLabel}>2. Qual o faturamento / porte aproximado do negócio?</div>
+              <div className={styles.proOptionsGrid}>
+                {[
+                  "Até R$ 100k/mês (Pequeno porte)",
+                  "R$ 100k a R$ 500k/mês (Médio)",
+                  "Acima de R$ 500k/mês (Grande)",
+                  "Holding Familiar / Grupo",
+                ].map((opt) => (
+                  <button
+                    key={opt}
+                    type="button"
+                    className={`${styles.proOptionBtn} ${revenue === opt ? styles.proOptionBtnActive : ""}`}
+                    style={revenue === opt ? { borderColor: "#d97706", background: "rgba(217, 119, 6, 0.08)" } : {}}
+                    onClick={() => { setRevenue(opt); setStep(3); }}
+                  >
+                    <span>{opt}</span>
+                  </button>
+                ))}
+              </div>
+              <button type="button" className={styles.proBtnPrimary} style={{ background: "#d97706" }} onClick={() => setStep(3)}>
+                AVANÇAR PARA ETAPA 3 <ArrowVector />
+              </button>
+              <button type="button" className={styles.proStepBackBtn} onClick={() => setStep(1)}>
+                ← Voltar etapa
+              </button>
+            </div>
+          )}
+
+          {step === 3 && (
+            <div className={styles.proQuizStep}>
+              <div className={styles.proStepLabel}>3. Qual o nível de urgência da situação?</div>
+              <div className={styles.proOptionsGrid}>
+                {[
+                  "Preventivo & Blindagem",
+                  "Notificação Recebida",
+                  "Ação Judicial em Andamento",
+                  "Entrada de Novo Sócio / M&A",
+                ].map((opt) => (
+                  <button
+                    key={opt}
+                    type="button"
+                    className={`${styles.proOptionBtn} ${urgency === opt ? styles.proOptionBtnActive : ""}`}
+                    style={urgency === opt ? { borderColor: "#d97706", background: "rgba(217, 119, 6, 0.08)" } : {}}
+                    onClick={() => { setUrgency(opt); setStep(4); }}
+                  >
+                    <span>{opt}</span>
+                  </button>
+                ))}
+              </div>
+              <button type="button" className={styles.proBtnPrimary} style={{ background: "#d97706" }} onClick={() => setStep(4)}>
+                GERAR ENQUADRAMENTO <ArrowVector />
+              </button>
+              <button type="button" className={styles.proStepBackBtn} onClick={() => setStep(2)}>
+                ← Voltar etapa
+              </button>
+            </div>
+          )}
+
+          {step === 4 && (
+            <div className={styles.proQuizStep}>
+              <div style={{ background: "#1c1813", border: "1px solid #78350f", borderRadius: 16, padding: "18px", textAlign: "left", color: "#fef3c7" }}>
+                <span style={{ fontSize: 10, fontWeight: 900, color: "#f59e0b", textTransform: "uppercase", letterSpacing: "0.1em" }}>
+                  PARECER PRELIMINAR CONFIDENCIAL
+                </span>
+                <strong style={{ display: "block", fontSize: 17, color: "#fff", margin: "8px 0 4px" }}>
+                  Demanda: {demand}
                 </strong>
-                <p style={{ fontSize: 12.5, color: "#92400e", margin: 0 }}>
-                  Direção sugerida: <b>{active.decision}</b> ({active.urgency})
+                <p style={{ fontSize: 12.5, color: "#d1d5db", margin: "0 0 10px", lineHeight: 1.5 }}>
+                  ✓ Porte: {revenue}<br />
+                  ✓ Regime: {urgency}<br />
+                  ✓ Parecer preliminar com SLA de resposta em até 48h
                 </p>
+                <div style={{ fontSize: 11, fontWeight: 700, color: "#f59e0b" }}>
+                  🔒 Linha privativa direta com sócio sênior
+                </div>
               </div>
 
-              <a
-                href={waUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.proBtnWa}
-              >
-                <span>AGENDAR CONSULTA NO WHATSAPP</span>
+              <a href={waUrl} target="_blank" rel="noopener noreferrer" className={styles.proBtnWa}>
+                <span>AGENDAR MESA DE DECISÃO NO WHATSAPP</span>
                 <ArrowVector />
               </a>
 
-              <button
-                type="button"
-                style={{ background: "transparent", border: 0, color: "#64748b", fontSize: 12, fontWeight: 700, cursor: "pointer", textAlign: "center" }}
-                onClick={() => setStep(1)}
-              >
-                ↻ Alterar área jurídica
+              <button type="button" className={styles.proStepBackBtn} onClick={() => setStep(1)}>
+                ↻ Refazer diagnóstico
               </button>
             </div>
-          ) : null}
+          )}
         </aside>
       </section>
 
-      <section className={styles.lawPulse} aria-label="Pulso jurídico empresarial"><div><small>LEGAL INTELLIGENCE</small><strong>O que exige decisão nesta semana.</strong></div><span><b>01</b>Reajustes contratuais<i>4 movimentos</i></span><span><b>02</b>Governança societária<i>2 deliberações</i></span><span><b>03</b>Prazos e respostas<i>1 prioridade</i></span><em>ATUALIZADO · 08:42</em></section>
-      <section className={styles.lawDecisionRoom}>
-        <header><div><small>MESA DE DECISÃO · SIMULAÇÃO</small><h3>Um caso. Quatro leituras.<br /><i>Uma direção objetiva.</i></h3></div><p>Selecione a frente jurídica e veja como a informação deixa de ser um parecer solto para virar um mapa executivo.</p></header>
-        <div className={styles.lawCommand}>
-          <div className={styles.lawAreaTabs} role="tablist" aria-label="Áreas jurídicas">
-            {(Object.keys(lawAreas) as Array<keyof typeof lawAreas>).map((key, index) => (
-              <button key={key} type="button" role="tab" aria-selected={area === key} className={area === key ? styles.lawAreaActive : ""} onClick={() => setArea(key)}><small>0{index + 1}</small><span>{lawAreas[key].label}</span><i>↗</i></button>
-            ))}
+      {/* 4. Áreas de Especialidade */}
+      <section className={styles.proSection} style={{ background: "#12141a" }}>
+        <div className={styles.proSectionHead}>
+          <small style={{ color: "#f59e0b" }}>ATUAÇÃO ESTRATÉGICA CORPORATIVA</small>
+          <h2 style={{ color: "#fff" }}>Direito de Alta Complexidade Descomplicado</h2>
+          <p style={{ color: "#94a3b8" }}>Entregamos segurança jurídica executável para quem toma decisões de alto risco todos os dias.</p>
+        </div>
+
+        <div className={styles.proPillarsGrid}>
+          <div className={styles.proPillarCard}>
+            <div className={styles.proPillarIcon} style={{ background: "rgba(217, 119, 6, 0.15)", color: "#f59e0b" }}>📑</div>
+            <h3 style={{ color: "#fff" }}>Contratos Comerciais & B2B</h3>
+            <p style={{ color: "#cbd5e1" }}>Minutas de alta precisão com cláusulas de limitação de responsabilidade, SLAs, multas equilibradas e blindagem operacional.</p>
           </div>
-          <article className={styles.lawDossier} aria-live="polite" key={area}>
-            <div className={styles.lawDossierTop}><span>{active.ref} · CONFIDENCIAL</span><b>{active.status}</b></div>
-            <div className={styles.lawDossierLead}>
-              <div><small>QUESTÃO NA MESA</small><h4>{active.risk}</h4><p>O objetivo não é eliminar toda incerteza. É saber qual risco existe, o que ele afeta e qual decisão preserva mais valor.</p></div>
-              <div className={styles.lawRiskDial} style={{ "--law-risk": `${active.score}%` } as CSSProperties}><strong>{active.score}</strong><span>ÍNDICE DE<br />EXPOSIÇÃO</span></div>
-            </div>
-            <div className={styles.lawStageRail}><span className={styles.lawStageDone}><b>01</b>Contexto</span><i /><span className={styles.lawStageDone}><b>02</b>Exposição</span><i /><span><b>03</b>Escolha</span><i /><span><b>04</b>Documento</span></div>
-            <dl className={styles.lawCase}><div><dt>Nível</dt><dd>{active.level}</dd></div><div><dt>Impacto</dt><dd>{active.exposure}</dd></div><div><dt>Direção sugerida</dt><dd>{active.decision}</dd></div><div><dt>Entrega</dt><dd>{active.deliverable}</dd></div><div><dt>Primeiro retorno</dt><dd>{active.urgency}</dd></div></dl>
-            <div className={styles.lawDecisionMatrix}>
-              <header><small>CENÁRIOS DE DELIBERAÇÃO</small><span>IMPACTO × REVERSIBILIDADE</span></header>
-              <div>
-                <article><b>A</b><span>Prosseguir</span><small>Risco absorvido e documentado</small></article>
-                <article className={styles.lawDecisionPreferred}><b>B</b><span>Ajustar antes</span><small>Preserva valor e poder de escolha</small><i>RECOMENDADO</i></article>
-                <article><b>C</b><span>Pausar</span><small>Nova informação antes da decisão</small></article>
-              </div>
-            </div>
-          </article>
+          <div className={styles.proPillarCard}>
+            <div className={styles.proPillarIcon} style={{ background: "rgba(217, 119, 6, 0.15)", color: "#f59e0b" }}>🏛️</div>
+            <h3 style={{ color: "#fff" }}>Societário & Acordo de Sócios</h3>
+            <p style={{ color: "#cbd5e1" }}>Estruturação de regras de saída, vesting, drag-along, tag-along e governança para evitar paralisia operacional em conflitos.</p>
+          </div>
+          <div className={styles.proPillarCard}>
+            <div className={styles.proPillarIcon} style={{ background: "rgba(217, 119, 6, 0.15)", color: "#f59e0b" }}>🛡️</div>
+            <h3 style={{ color: "#fff" }}>Compliance Trabalhista</h3>
+            <p style={{ color: "#cbd5e1" }}>Auditoria preventiva em rotinas de contratação, PJotização segura e políticas internas para zerar passivos ocultos.</p>
+          </div>
         </div>
       </section>
-      <section className={styles.lawMethod}>
-        <div className={styles.lawMethodIntro}><small>CONSELHO, NÃO VOLUME</small><h3>O jurídico entra antes<br />do custo aparecer.</h3></div>
-        <div className={styles.lawMethodRail}><article><span>01</span><strong>Antecipar</strong><p>Identificar a exposição enquanto ainda existe escolha.</p></article><article><span>02</span><strong>Decidir</strong><p>Comparar consequências em linguagem de negócio.</p></article><article><span>03</span><strong>Formalizar</strong><p>Converter a direção escolhida em proteção executável.</p></article><aside><small>SÍNTESE</small><b>Menos ruído.<br />Mais governo.</b></aside></div>
-      </section>
-      <section className={styles.lawPortfolio}>
-        <header><small>O ADVOGADO À FRENTE DA ESTRATÉGIA</small><h3>Dr. Augusto Moreira</h3><p>Advocacia empresarial para decisões em que contrato, patrimônio e continuidade precisam conversar.</p></header>
-        <div className={styles.lawPortfolioKpis} aria-label="Indicadores conceituais do portfólio"><small>CENÁRIO CONCEITUAL</small><span><b>+12 anos</b> de atuação empresarial</span><span><b>R$ 18 mi</b> em contratos analisados</span><span><b>86%</b> dos casos resolvidos preventivamente</span><span><b>48h</b> para o primeiro diagnóstico</span></div>
-        <div className={styles.lawProfileGrid}>
-          <figure><span>AM</span><figcaption><b>OAB/BA 48.271</b><small>SÓCIO FUNDADOR · PERFIL CONCEITUAL</small></figcaption></figure>
-          <article><small>TRAJETÓRIA</small><h4>Direito explicado com clareza de negócio.</h4><p>Atuação consultiva em contratos, reorganizações societárias e prevenção de conflitos. Cada trabalho começa pela decisão que o cliente precisa tomar, não pelo volume de documentos.</p><dl><div><dt>Formação</dt><dd>Direito Empresarial e Governança</dd></div><div><dt>Atuação</dt><dd>Consultivo e contencioso estratégico</dd></div><div><dt>Atendimento</dt><dd>Empresas, sócios e conselhos</dd></div></dl></article>
-          <aside><small>ÁREAS SELECIONADAS</small><span><b>01</b>Contratos empresariais</span><span><b>02</b>Estrutura societária</span><span><b>03</b>Gestão de conflitos</span><span><b>04</b>Planejamento preventivo</span></aside>
+
+      {/* 5. FAQ Jurídico */}
+      <section className={styles.proSection} style={{ background: "#0c0d12" }}>
+        <div className={styles.proSectionHead}>
+          <small style={{ color: "#f59e0b" }}>GOVERNANÇA & ATENDIMENTO</small>
+          <h2 style={{ color: "#fff" }}>Perguntas Frequentes de Empresários</h2>
         </div>
-        <div className={styles.lawSelectedWork}><article><small>CASO 01 · CONTRATOS</small><strong>Revisão de operação recorrente</strong><p>Risco financeiro traduzido em cláusulas, cenários e plano de negociação.</p><em>12 cláusulas críticas reorganizadas</em></article><article><small>CASO 02 · SOCIETÁRIO</small><strong>Entrada de novo sócio</strong><p>Papéis, poderes e saída definidos antes da assinatura.</p><em>4 cenários comparados antes da decisão</em></article><article><small>CASO 03 · GOVERNANÇA</small><strong>Decisão documentada</strong><p>Memória executiva para conselho, diretoria e próximas deliberações.</p><em>Conselho alinhado em uma única reunião</em></article></div>
+
+        <div className={styles.proFaqGrid}>
+          <details className={styles.proFaqItem} open>
+            <summary style={{ color: "#fff" }}>O atendimento é feito diretamente com o Dr. Augusto Moreira? <i>+</i></summary>
+            <p style={{ color: "#cbd5e1" }}>Sim. Toda a estratégia, reuniões de alinhamento e deliberações de risco são conduzidas diretamente pelo sócio sênior.</p>
+          </details>
+          <details className={styles.proFaqItem}>
+            <summary style={{ color: "#fff" }}>Atendem empresas fora do estado? <i>+</i></summary>
+            <p style={{ color: "#cbd5e1" }}>Sim. Atendemos empresas e grupos empresariais em todo o território nacional através de mesas de decisão virtuais com tecnologia segura e assinaturas digitais ICP-Brasil.</p>
+          </details>
+          <details className={styles.proFaqItem}>
+            <summary style={{ color: "#fff" }}>Como funciona a cobrança dos honorários? <i>+</i></summary>
+            <p style={{ color: "#cbd5e1" }}>Trabalhamos com formatos adaptados ao momento do negócio: assessoria mensal recorrente (retainer fixo), projetos pontuais (escopo fechado) ou honorários por êxito estratégico.</p>
+          </details>
+        </div>
       </section>
+
+      {/* 6. Footer CTA */}
+      <footer className={styles.proFooterCta} style={{ background: "#07080a", color: "#fff" }}>
+        <div className={styles.proFooterCtaBox}>
+          <small style={{ color: "#f59e0b", fontWeight: 900, letterSpacing: "0.14em" }}>CANAL CONFIDENCIAL PARA SÓCIOS E CEOS</small>
+          <h2>Proteja o Patrimônio da Sua Empresa Hoje</h2>
+          <p style={{ color: "#94a3b8" }}>Inicie uma conversa reservada diretamente pelo WhatsApp para alinharmos sua demanda com discrição e agilidade.</p>
+          <a href={waUrl} target="_blank" rel="noopener noreferrer" className={styles.proBtnWa} style={{ maxWidth: 360 }}>
+            <span>CONVERSAR DIRETAMENTE NO WHATSAPP</span>
+            <ArrowVector />
+          </a>
+        </div>
+      </footer>
     </main>
   );
 }
 
-const salonServices = {
-  corte: { label: "Corte & Visagismo", code: "RITUAL 01", time: "75–90 min", price: "a partir de R$ 160", description: "Uma leitura de proporção, textura e rotina para o corte funcionar também fora do salão.", fit: "Mudança com segurança", finish: "Forma + movimento", care: "Guia de finalização", availability: ["09:30", "13:00", "16:40"], steps: ["Escuta e referências", "Arquitetura do corte", "Finalização ensinada"] },
-  cor: { label: "Cor Autoral & Mechas", code: "RITUAL 02", time: "3–5 h", price: "sob avaliação", description: "Cor desenhada para pele, estilo e manutenção possível — com teste e plano antes da transformação.", fit: "Transformação planejada", finish: "Cor multidimensional", care: "Cronograma pós-cor", availability: ["08:00", "12:30", "14:00"], steps: ["Diagnóstico do fio", "Mapa de cor exclusivo", "Plano de manutenção"] },
-  tratamento: { label: "Spa & Terapia Capilar", code: "RITUAL 03", time: "60–90 min", price: "a partir de R$ 220", description: "Nutrição e reconstrução intensiva de alta performance com produtos importados.", fit: "Saúde e brilho profundo", finish: "Fios revitalizados", care: "Cronograma home care", availability: ["10:00", "14:30", "17:00"], steps: ["Tricoscopia digital", "Aplicação de ativos", "Selamento térmico"] },
-  noiva: { label: "Experiência Noiva & Produção", code: "RITUAL 04", time: "agenda exclusiva", price: "proposta personalizada", description: "Direção de beleza, prova e cronograma para que o grande dia tenha presença, coerência e nenhuma improvisação.", fit: "Imagem para um marco", finish: "Beleza completa", care: "Agenda coordenada", availability: ["CONSULTAR", "PROVA", "RESERVAR"], steps: ["Direção estética", "Prova completa", "Ritual do grande dia"] },
-} as const;
-
+/* =========================================================================
+   3. AURÉA ATELIER — SALÃO DE BELEZA, VISAGISMO & CONCIERGE (COMPLETO)
+   ========================================================================= */
 function SalonShowcase() {
-  const [service, setService] = useState<keyof typeof salonServices>("corte");
-  const [selectedSlot, setSelectedSlot] = useState<string>(salonServices.corte.availability[0]);
   const [step, setStep] = useState(1);
-  const active = salonServices[service];
+  const [ritual, setRitual] = useState("Mechas Luxo Supreme Blonde");
+  const [history, setHistory] = useState("Cabelo com mechas anteriores (>4 meses)");
+  const [pref, setPref] = useState("Quarta a Sexta (Atendimento Tranquilo)");
 
   const waUrl = `https://wa.me/5573981019782?text=${encodeURIComponent(
-    `Olá! Gostaria de reservar o ritual de ${active.label} no Auréa Atelier (${active.price}).`
+    `Olá! Fiz a consultoria no site do Auréa Atelier:\n\n• Ritual: ${ritual}\n• Histórico: ${history}\n• Preferência: ${pref}\n\nGostaria de verificar os horários disponíveis com o concierge!`
   )}`;
 
   return (
     <main className={`${styles.site} ${styles.salon}`}>
+      {/* 1. Header Boutique */}
       <header className={styles.proHeader}>
         <div className={styles.proBrandWrap}>
           <div className={styles.proBrandTitle}>
             <span>AURÉA</span> <span style={{ color: "#a86752" }}>ATELIER</span>
           </div>
-          <span className={styles.proBrandTag}>Beleza, Visagismo & Rituais</span>
+          <span className={styles.proBrandTag}>Beleza, Visagismo & Rituais Autorais</span>
         </div>
         <div className={styles.proHeaderReview}>
           <b>5.0</b>
@@ -698,13 +769,16 @@ function SalonShowcase() {
         </div>
       </header>
 
+      {/* 2. Trust Banner */}
       <div className={styles.proTrustRail}>
-        <span>✓ VISAGISMO AUTORAL</span>
-        <span>★ 5.0 NO GOOGLE</span>
-        <span>⏱ ATENDIMENTO EXCLUSIVO</span>
-        <span>◇ PRODUTOS IMPORTADOS</span>
+        <span>✓ EQUIPE VISAGISTA CERTIFICADA</span>
+        <span>★ 5.0 NO GOOGLE (+320 AVALIAÇÕES)</span>
+        <span>⏱ TESTE DE MECHA GRATUITO</span>
+        <span>◇ PRODUTOS KÉRASTASE & WELLA</span>
+        <span>💆 SALA DE LAVATÓRIO COM SHIATSU</span>
       </div>
 
+      {/* 3. Hero Section com Triagem 4 Etapas */}
       <section className={styles.proHero} style={{ background: "#201612" }}>
         <Image
           src="/concepts/aurea-salon-v3.webp"
@@ -724,21 +798,21 @@ function SalonShowcase() {
             <GoogleWordmark />
           </div>
 
-          <h1>Realce Sua Beleza Com Cuidado Autoral e Exclusivo</h1>
+          <h1>Visagismo Autoral e Mechas Exclusivas Para Realçar Sua Identidade</h1>
 
           <p>
-            Cortes visagistas, mechas sob medida e rituais capilares de alta performance em um ambiente intimista com atendimento 100% individualizado.
+            Mais do que uma mudança de cor, um estudo completo do seu tom de pele, formato de rosto e rotina para criar um visual sofisticado, elegante e fácil de manter.
           </p>
 
           <ul className={styles.proChecklist}>
-            <li><GreenCheck /> Diagnóstico capilar e visagismo personalizado</li>
-            <li><GreenCheck /> Produtos de padrão internacional (Kérastase, Wella)</li>
-            <li><GreenCheck /> Espaço VIP e pontualidade rigorosa</li>
+            <li><GreenCheck /> Mechas com proteção plex: clareamento seguro sem quebra</li>
+            <li><GreenCheck /> Corte visagista com consultoria de imagem e harmonização facial</li>
+            <li><GreenCheck /> Diagnóstico de saúde do fio com microcâmera capilar</li>
           </ul>
 
           <div className={styles.proGlassCard}>
             <p className={styles.proGlassQuote}>
-              &ldquo;O Auréa Atelier superou todas as minhas expectativas! O corte visagista e a iluminação me deram uma segurança enorme. Atendimento acolhedor e equipe impecável!&rdquo;
+              &ldquo;Nunca achei um loiro que combinasse tanto comigo sem detonar meu cabelo. O atendimento no Auréa é uma experiência de spa do começo ao fim. Saí me sentindo maravilhosa!&rdquo;
             </p>
             <div className={styles.proGlassFooter}>
               <div className={styles.proGlassUser}>
@@ -751,7 +825,7 @@ function SalonShowcase() {
                 />
                 <div>
                   <div className={styles.proUserName}>Mariana Vasconcelos</div>
-                  <div className={styles.proUserRating}>5.0 ⭐⭐⭐⭐⭐</div>
+                  <div className={styles.proUserRating}>5.0 ⭐⭐⭐⭐⭐ (Loiro Manteiga)</div>
                 </div>
               </div>
               <GoogleWordmark />
@@ -759,308 +833,200 @@ function SalonShowcase() {
           </div>
         </div>
 
+        {/* 4-Step Wizard */}
         <aside className={styles.proQuizCard}>
           <div>
-            <h3 className={styles.proQuizTitle}>Descubra Seu Ritual Ideal</h3>
+            <h3 className={styles.proQuizTitle}>Consultoria de Ritual & Agendamento</h3>
             <p className={styles.proQuizSubtitle}>
-              ⏱ Leva menos de 30 segundos
+              ⏱ Etapa {step} de 4 · Diagnóstico de beleza personalizado
             </p>
           </div>
 
           <div className={styles.proQuizProgressBar}>
             <div
               className={styles.proQuizProgressFill}
-              style={{ width: `${step === 1 ? 50 : 100}%`, background: "#a86752" }}
+              style={{ width: `${(step / 4) * 100}%`, background: "#a86752" }}
             />
           </div>
 
-          {step === 1 ? (
+          {step === 1 && (
             <div className={styles.proQuizStep}>
-              <div className={styles.proStepLabel}>Qual ritual você deseja viver?</div>
+              <div className={styles.proStepLabel}>1. Qual transformação você deseja realizar?</div>
               <div className={styles.proOptionsGrid}>
-                {(Object.keys(salonServices) as Array<keyof typeof salonServices>).map((key) => (
+                {[
+                  "Mechas Luxo Supreme",
+                  "Morena Iluminada Glow",
+                  "Corte Visagista + Spa",
+                  "Dia da Noiva / Produção VIP",
+                ].map((opt) => (
                   <button
-                    key={key}
+                    key={opt}
                     type="button"
-                    className={`${styles.proOptionBtn} ${service === key ? styles.proOptionBtnActive : ""}`}
-                    style={service === key ? { borderColor: "#a86752", background: "rgba(168, 103, 82, 0.06)" } : {}}
-                    onClick={() => {
-                      setService(key);
-                      setStep(2);
-                    }}
+                    className={`${styles.proOptionBtn} ${ritual === opt ? styles.proOptionBtnActive : ""}`}
+                    style={ritual === opt ? { borderColor: "#a86752", background: "rgba(168, 103, 82, 0.08)" } : {}}
+                    onClick={() => { setRitual(opt); setStep(2); }}
                   >
-                    <span>{salonServices[key].label}</span>
+                    <span>{opt}</span>
                   </button>
                 ))}
               </div>
-              <button
-                type="button"
-                className={styles.proBtnPrimary}
-                style={{ background: "#a86752" }}
-                onClick={() => setStep(2)}
-              >
-                CONTINUAR <ArrowVector />
+              <button type="button" className={styles.proBtnPrimary} style={{ background: "#a86752" }} onClick={() => setStep(2)}>
+                AVANÇAR PARA ETAPA 2 <ArrowVector />
               </button>
             </div>
-          ) : null}
+          )}
 
-          {step === 2 ? (
+          {step === 2 && (
             <div className={styles.proQuizStep}>
-              <div style={{ background: "#fdf8f6", border: "1px solid #f5ded7", borderRadius: 14, padding: "16px", textAlign: "center" }}>
-                <span style={{ fontSize: 11, fontWeight: 800, color: "#a86752", textTransform: "uppercase" }}>{active.code}</span>
-                <strong style={{ display: "block", fontSize: 18, color: "#30221d", margin: "6px 0" }}>
-                  {active.label}
+              <div className={styles.proStepLabel}>2. Qual o histórico recente do seu cabelo?</div>
+              <div className={styles.proOptionsGrid}>
+                {[
+                  "Cabelo virgem sem química",
+                  "Mechas (>4 meses)",
+                  "Progressiva / Botox",
+                  "Sensibilizado / Quebradiço",
+                ].map((opt) => (
+                  <button
+                    key={opt}
+                    type="button"
+                    className={`${styles.proOptionBtn} ${history === opt ? styles.proOptionBtnActive : ""}`}
+                    style={history === opt ? { borderColor: "#a86752", background: "rgba(168, 103, 82, 0.08)" } : {}}
+                    onClick={() => { setHistory(opt); setStep(3); }}
+                  >
+                    <span>{opt}</span>
+                  </button>
+                ))}
+              </div>
+              <button type="button" className={styles.proBtnPrimary} style={{ background: "#a86752" }} onClick={() => setStep(3)}>
+                AVANÇAR PARA ETAPA 3 <ArrowVector />
+              </button>
+              <button type="button" className={styles.proStepBackBtn} onClick={() => setStep(1)}>
+                ← Voltar etapa
+              </button>
+            </div>
+          )}
+
+          {step === 3 && (
+            <div className={styles.proQuizStep}>
+              <div className={styles.proStepLabel}>3. Qual a sua preferência de dia e horário?</div>
+              <div className={styles.proOptionsGrid}>
+                {[
+                  "Quarta a Sexta (Tranquilo)",
+                  "Sábado (Dia de Eventos)",
+                  "Horário VIP Noturno (>18h)",
+                  "Teste de Mecha Prévia",
+                ].map((opt) => (
+                  <button
+                    key={opt}
+                    type="button"
+                    className={`${styles.proOptionBtn} ${pref === opt ? styles.proOptionBtnActive : ""}`}
+                    style={pref === opt ? { borderColor: "#a86752", background: "rgba(168, 103, 82, 0.08)" } : {}}
+                    onClick={() => { setPref(opt); setStep(4); }}
+                  >
+                    <span>{opt}</span>
+                  </button>
+                ))}
+              </div>
+              <button type="button" className={styles.proBtnPrimary} style={{ background: "#a86752" }} onClick={() => setStep(4)}>
+                GERAR PRESCRIÇÃO DO RITUAL <ArrowVector />
+              </button>
+              <button type="button" className={styles.proStepBackBtn} onClick={() => setStep(2)}>
+                ← Voltar etapa
+              </button>
+            </div>
+          )}
+
+          {step === 4 && (
+            <div className={styles.proQuizStep}>
+              <div style={{ background: "#fdf8f6", border: "1px solid #f5ded7", borderRadius: 16, padding: "18px", textAlign: "left", color: "#30221d" }}>
+                <span style={{ fontSize: 10, fontWeight: 900, color: "#a86752", textTransform: "uppercase", letterSpacing: "0.1em" }}>
+                  PRESCRIÇÃO DO RITUAL AURÉA
+                </span>
+                <strong style={{ display: "block", fontSize: 17, color: "#30221d", margin: "8px 0 4px" }}>
+                  {ritual}
                 </strong>
-                <p style={{ fontSize: 12.5, color: "#6a5750", margin: "0 0 8px" }}>
-                  {active.description}
+                <p style={{ fontSize: 12.5, color: "#6a5750", margin: "0 0 10px", lineHeight: 1.5 }}>
+                  ✓ Perfil do Fio: {history}<br />
+                  ✓ Agenda Selecionada: {pref}<br />
+                  ✓ Teste de mecha e café barista inclusos
                 </p>
-                <div style={{ fontSize: 13, fontWeight: 800, color: "#a86752" }}>
-                  {active.price} · {active.time}
+                <div style={{ fontSize: 11, fontWeight: 700, color: "#a86752" }}>
+                  ✨ Atendimento exclusivo com concierge
                 </div>
               </div>
 
-              <a
-                href={waUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.proBtnWa}
-              >
-                <span>RESERVAR HORÁRIO NO WHATSAPP</span>
+              <a href={waUrl} target="_blank" rel="noopener noreferrer" className={styles.proBtnWa}>
+                <span>RESERVAR COM CONCIERGE NO WHATSAPP</span>
                 <ArrowVector />
               </a>
 
-              <button
-                type="button"
-                style={{ background: "transparent", border: 0, color: "#64748b", fontSize: 12, fontWeight: 700, cursor: "pointer", textAlign: "center" }}
-                onClick={() => setStep(1)}
-              >
-                ↻ Alterar ritual
+              <button type="button" className={styles.proStepBackBtn} onClick={() => setStep(1)}>
+                ↻ Refazer consultoria
               </button>
             </div>
-          ) : null}
+          )}
         </aside>
       </section>
 
-      <section className={styles.salonLookbook}><header><small>ATELIER NOTES · 2026</small><strong>Três intenções.<br /><i>Nenhuma fórmula.</i></strong></header><div><article><span>01</span><b>Movimento natural</b><small>CORTE · TEXTURA</small></article><article><span>02</span><b>Luz sob medida</b><small>COR · DIMENSÃO</small></article><article><span>03</span><b>Presença memorável</b><small>NOIVA · DIREÇÃO</small></article></div></section>
-      <section className={styles.salonPulse} aria-label="Indicadores conceituais do atelier"><div><small>AGENDA DO ATELIER · CENÁRIO CONCEITUAL</small><strong>Uma agenda que vende experiência, não apenas horário.</strong></div><span><b>84%</b><small>clientes que retornam</small></span><span><b>4,9</b><small>experiência percebida</small></span><span><b>3 semanas</b><small>de agenda organizada</small></span><em>12 horários disponíveis nesta quinzena</em></section>
-      <section className={styles.salonConcierge}>
-        <header><div><small>CONCIERGE AURÉA</small><h3>Escolha a intenção.<br /><i>Nós desenhamos o ritual.</i></h3></div><p>Explore as experiências e veja duração, investimento e cuidado antes de reservar.</p></header>
-        <div className={styles.salonConciergeGrid}>
-          <div className={styles.salonTabs} role="tablist" aria-label="Serviços do salão">
-            {(Object.keys(salonServices) as Array<keyof typeof salonServices>).map((key, index) => <button type="button" role="tab" aria-selected={service === key} className={service === key ? styles.salonTabActive : ""} onClick={() => { setService(key); setSelectedSlot(salonServices[key].availability[0]); }} key={key}><small>0{index + 1}</small><span>{salonServices[key].label}</span><i>→</i></button>)}
+      {/* 4. Rituais Autorais */}
+      <section className={styles.proSectionLight}>
+        <div className={styles.proSectionHead}>
+          <small style={{ color: "#a86752" }}>EXPERIÊNCIAS SIGNATURE</small>
+          <h2>Rituais Criados Para o Seu Estilo</h2>
+          <p>Trabalhamos com as marcas mais prestigiadas do mundo para garantir cor luminosa e fios com saúde intocada.</p>
+        </div>
+
+        <div className={styles.proPillarsGrid}>
+          <div className={styles.proPillarCardLight}>
+            <div className={styles.proPillarIcon} style={{ background: "rgba(168, 103, 82, 0.1)", color: "#a86752" }}>✨</div>
+            <h3>Loiro Supreme Blonde</h3>
+            <p>Clareamento com proteção lipídica Wella BlondorPlex. Tons areia, manteiga ou pérola com transição sem marcas.</p>
           </div>
-          <article className={styles.salonService} aria-live="polite" key={service}>
-            <div className={styles.salonServiceTop}><span>{active.code}</span><small>SELEÇÃO ATUAL</small></div><h4>{active.label}</h4><p>{active.description}</p>
-            <div className={styles.salonServiceSpecs}><span><small>PARA QUEM</small><b>{active.fit}</b></span><span><small>RESULTADO</small><b>{active.finish}</b></span><span><small>DEPOIS</small><b>{active.care}</b></span></div>
-            <div className={styles.salonMirror}>
-              <div><small>ESPELHO DE INTENÇÃO</small><strong>{active.finish}</strong><p>Uma prévia de atmosfera para alinhar desejo, manutenção e resultado antes da execução.</p></div>
-              <figure aria-hidden="true"><span /><i>{active.code}</i></figure>
-              <aside><small>PALETA</small><span /><span /><span /></aside>
-            </div>
-            <div className={styles.salonAvailability}><small>PRÓXIMAS JANELAS · QUINTA</small><div>{active.availability.map((slot) => <button type="button" aria-pressed={selectedSlot === slot} onClick={() => setSelectedSlot(slot)} key={slot}>{slot}</button>)}</div></div>
-            <footer><span><small>DURAÇÃO</small><b>{active.time}</b></span><span><small>INVESTIMENTO</small><b>{active.price}</b></span><button type="button">PRÉ-ORGANIZAR VISITA <i>→</i></button></footer>
-          </article>
+          <div className={styles.proPillarCardLight}>
+            <div className={styles.proPillarIcon} style={{ background: "rgba(168, 103, 82, 0.1)", color: "#a86752" }}>🍂</div>
+            <h3>Morena Iluminada Glow</h3>
+            <p>Iluminação estratégica nos contornos faciais com tons de mel, avelã e caramelo para dar profundidade e brilho.</p>
+          </div>
+          <div className={styles.proPillarCardLight}>
+            <div className={styles.proPillarIcon} style={{ background: "rgba(168, 103, 82, 0.1)", color: "#a86752" }}>✂️</div>
+            <h3>Corte de Precisão Visagista</h3>
+            <p>Estudo do formato do rosto e textura do fio para criar linhas que valorizam seu perfil e são fáceis de estilizar em casa.</p>
+          </div>
         </div>
       </section>
-      <section className={styles.salonJourney} key={`journey-${service}`}>
-        <header><small>O RITUAL SELECIONADO</small><h3>Do primeiro olhar<br />ao espelho final.</h3><p>Cada etapa reduz incerteza e deixa a experiência mais leve, previsível e sua.</p></header>
-        <div>{active.steps.map((step, index) => <article key={step}><span>0{index + 1}</span><small>{index === 0 ? "ANTES" : index === 1 ? "DURANTE" : "DEPOIS"}</small><strong>{step}</strong><p>{index === 0 ? "Referências, rotina e intenção entram na mesma conversa." : index === 1 ? "Técnica e direção evoluem com você acompanhando cada escolha." : "O resultado continua bonito porque o cuidado também foi planejado."}</p></article>)}</div>
-      </section>
-      <section className={styles.salonEditorial}>
-        <figure><Image src="/concepts/aurea-salon-v3.webp" alt="Editorial do Auréa Atelier" fill sizes="50vw" quality={88} /><figcaption><small>AURÉA JOURNAL · Nº 04</small><strong>Beleza que continua fazendo sentido depois do salão.</strong></figcaption></figure>
-        <div><small>CURADORIA EM VEZ DE CARDÁPIO</small><h3>Seu momento define<br /><i>a experiência.</i></h3><p>O atendimento começa entendendo rotina, referências e manutenção possível. Só então técnica, tempo e investimento entram na conversa.</p><div className={styles.salonEditorialSteps}><article><span>01</span><b>Leitura</b><small>Imagem, rotina e intenção</small></article><article><span>02</span><b>Direção</b><small>Escolhas explicadas antes</small></article><article><span>03</span><b>Continuidade</b><small>Cuidado que funciona em casa</small></article></div><footer><span>AGENDA CONCIERGE</span><b>{selectedSlot} · {active.label}</b></footer></div>
-      </section>
+
+      {/* 5. Footer CTA */}
+      <footer className={styles.proFooterCta} style={{ background: "#1a120f", color: "#fff" }}>
+        <div className={styles.proFooterCtaBox}>
+          <small style={{ color: "#e0a899", fontWeight: 900, letterSpacing: "0.14em" }}>EXPERIÊNCIA BOUTIQUE</small>
+          <h2>Sua Beleza Merece o Cuidado do Auréa</h2>
+          <p style={{ color: "#cfb7ad" }}>Reserve seu horário e viva uma tarde inesquecível de cuidado e sofisticação.</p>
+          <a href={waUrl} target="_blank" rel="noopener noreferrer" className={styles.proBtnWa} style={{ maxWidth: 360 }}>
+            <span>AGENDAR VIA WHATSAPP COM CONCIERGE</span>
+            <ArrowVector />
+          </a>
+        </div>
+      </footer>
     </main>
   );
 }
 
-function AestheticsShowcase() {
-  const [protocol, setProtocol] = useState("facial");
-  const [step, setStep] = useState(1);
-
-  const protocols = {
-    facial: { name: "Harmonização & Rejuvenescimento", desc: "Preenchimento estratégico e toxina botulínica para traços naturais e descansados." },
-    colageno: { name: "Bioestimuladores de Colágeno", desc: "Estímulo profundo com Sculptra e Radiesse para firmeza e viço da pele." },
-    corporal: { name: "Ultraformer & Alta Performance", desc: "Ultrassom micro e macrofocado para flacidez e contorno corporal." },
-    laser: { name: "Laser & Renovação Celular", desc: "Tratamento de manchas, poros e textura para pele iluminada." },
-  };
-
-  const waUrl = `https://wa.me/5573981019782?text=${encodeURIComponent(
-    `Olá! Quero agendar uma avaliação estética na Lumina Clinic para o protocolo de ${protocols[protocol as keyof typeof protocols].name}.`
-  )}`;
-
-  return (
-    <main className={`${styles.site} ${styles.aesthetics}`}>
-      <header className={styles.proHeader}>
-        <div className={styles.proBrandWrap}>
-          <div className={styles.proBrandTitle}>
-            <span>LUMINA</span> <span style={{ color: "#ec4899" }}>CLINIC</span>
-          </div>
-          <span className={styles.proBrandTag}>Estética Avançada & Dermatologia</span>
-        </div>
-        <div className={styles.proHeaderReview}>
-          <b>5.0</b>
-          <span style={{ color: "#f59e0b" }}>★★★★★</span>
-          <GoogleWordmark />
-        </div>
-      </header>
-
-      <div className={styles.proTrustRail}>
-        <span>✓ EQUIPE BIOMÉDICA & MÉDICA</span>
-        <span>★ 5.0 ESTRELAS NO GOOGLE</span>
-        <span>⏱ PROTOCOLOS PERSONALIZADOS</span>
-        <span>◇ TECNOLOGIAS ANVISA</span>
-      </div>
-
-      <section className={styles.proHero} style={{ background: "#1c1017" }}>
-        <Image
-          src="/concepts/lumina-clinic.jpg"
-          alt="Clínica de estética avançada Lumina"
-          fill
-          sizes="100vw"
-          quality={82}
-          className={styles.proHeroImg}
-          priority
-        />
-        <div className={styles.proHeroShadeDark} />
-
-        <div className={styles.proHeroCopy}>
-          <div className={styles.proBadgePill}>
-            <span>EXCELENTE 5.0</span>
-            <span style={{ color: "#f59e0b" }}>★★★★★</span>
-            <GoogleWordmark />
-          </div>
-
-          <h1>Você Continua Sendo Você. Só Mais Confiante.</h1>
-
-          <p>
-            Protocolos personalizados, equipamentos padrão ouro e acompanhamento cuidadoso em cada fase para valorizar sua beleza natural.
-          </p>
-
-          <ul className={styles.proChecklist}>
-            <li><GreenCheck /> Avaliação facial e corporal com tecnologia 3D</li>
-            <li><GreenCheck /> Procedimentos minimamente invasivos</li>
-            <li><GreenCheck /> Resultados elegantes sem exageros</li>
-          </ul>
-
-          <div className={styles.proGlassCard}>
-            <p className={styles.proGlassQuote}>
-              &ldquo;A Lumina transformou minha autoestima! Os protocolos de bioestimulador e Ultraformer deixaram minha pele firme e iluminada com total naturalidade. Atendimento impecável!&rdquo;
-            </p>
-            <div className={styles.proGlassFooter}>
-              <div className={styles.proGlassUser}>
-                <div style={{ width: 36, height: 36, borderRadius: "50%", background: "#ec4899", color: "#fff", display: "grid", placeItems: "center", fontWeight: 800, fontSize: 14 }}>
-                  CA
-                </div>
-                <div>
-                  <div className={styles.proUserName}>Camila Albuquerque</div>
-                  <div className={styles.proUserRating}>5.0 ⭐⭐⭐⭐⭐</div>
-                </div>
-              </div>
-              <GoogleWordmark />
-            </div>
-          </div>
-        </div>
-
-        <aside className={styles.proQuizCard}>
-          <div>
-            <h3 className={styles.proQuizTitle}>Avaliação Estética Personalizada</h3>
-            <p className={styles.proQuizSubtitle}>
-              ⏱ Leva menos de 30 segundos
-            </p>
-          </div>
-
-          <div className={styles.proQuizProgressBar}>
-            <div
-              className={styles.proQuizProgressFill}
-              style={{ width: `${step === 1 ? 50 : 100}%`, background: "#ec4899" }}
-            />
-          </div>
-
-          {step === 1 ? (
-            <div className={styles.proQuizStep}>
-              <div className={styles.proStepLabel}>Qual área você deseja cuidar hoje?</div>
-              <div className={styles.proOptionsGrid}>
-                {Object.entries(protocols).map(([key, item]) => (
-                  <button
-                    key={key}
-                    type="button"
-                    className={`${styles.proOptionBtn} ${protocol === key ? styles.proOptionBtnActive : ""}`}
-                    style={protocol === key ? { borderColor: "#ec4899", background: "rgba(236, 72, 153, 0.05)" } : {}}
-                    onClick={() => {
-                      setProtocol(key);
-                      setStep(2);
-                    }}
-                  >
-                    <span>{item.name}</span>
-                  </button>
-                ))}
-              </div>
-              <button
-                type="button"
-                className={styles.proBtnPrimary}
-                style={{ background: "#ec4899" }}
-                onClick={() => setStep(2)}
-              >
-                AVANÇAR PARA PROTOCOLO <ArrowVector />
-              </button>
-            </div>
-          ) : null}
-
-          {step === 2 ? (
-            <div className={styles.proQuizStep}>
-              <div style={{ background: "#fdf2f8", border: "1px solid #fbcfe8", borderRadius: 14, padding: "16px", textAlign: "center" }}>
-                <span style={{ fontSize: 11, fontWeight: 800, color: "#db2777", textTransform: "uppercase" }}>Protocolo Recomendado</span>
-                <strong style={{ display: "block", fontSize: 18, color: "#831843", margin: "6px 0" }}>
-                  {protocols[protocol as keyof typeof protocols].name}
-                </strong>
-                <p style={{ fontSize: 12.5, color: "#9d174d", margin: 0 }}>
-                  {protocols[protocol as keyof typeof protocols].desc}
-                </p>
-              </div>
-
-              <a
-                href={waUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.proBtnWa}
-              >
-                <span>CONSULTAR NO WHATSAPP</span>
-                <ArrowVector />
-              </a>
-
-              <button
-                type="button"
-                style={{ background: "transparent", border: 0, color: "#64748b", fontSize: 12, fontWeight: 700, cursor: "pointer", textAlign: "center" }}
-                onClick={() => setStep(1)}
-              >
-                ↻ Alterar protocolo
-              </button>
-            </div>
-          ) : null}
-        </aside>
-      </section>
-    </main>
-  );
-}
-
+/* =========================================================================
+   4. CAIO MOVE — CONSULTORIA ESPORTIVA & PERSONAL TRAINER (COMPLETO)
+   ========================================================================= */
 function AutonomousShowcase() {
-  const [goal, setGoal] = useState("emagrecimento");
   const [step, setStep] = useState(1);
-
-  const goals = {
-    emagrecimento: { name: "Emagrecimento & Definição", desc: "Treinos metabólicos e queima calórica eficiente adaptada ao seu dia a dia." },
-    hipertrofia: { name: "Ganho de Massa Muscular", desc: "Periodização de força e hipertrofia com progressão de carga estruturada." },
-    saude: { name: "Condicionamento & Longevidade", desc: "Melhora de postura, mobilidade articular e disposição para o dia todo." },
-    online: { name: "Consultoria 100% Online", desc: "Treinos no app próprio com vídeos explicativos e suporte semanal direto." },
-  };
+  const [goal, setGoal] = useState("Emagrecimento & Definição");
+  const [location, setLocation] = useState("Academia (3 a 5x por semana)");
+  const [restriction, setRestriction] = useState("Nenhuma dor / 100% apto");
 
   const waUrl = `https://wa.me/5573981019782?text=${encodeURIComponent(
-    `Olá Caio! Fiz a simulação no seu site para ${goals[goal as keyof typeof goals].name} e quero começar meus treinos!`
+    `Olá Caio! Fiz a simulação de treino no seu site:\n\n• Objetivo: ${goal}\n• Local/Frequência: ${location}\n• Restrição/Condição: ${restriction}\n\nQuero receber minha planilha e começar minha consultoria!`
   )}`;
 
   return (
     <main className={`${styles.site} ${styles.autonomous}`}>
+      {/* 1. Header do Personal */}
       <header className={styles.proHeaderDark}>
         <div className={styles.proBrandWrap}>
           <div className={styles.proBrandTitleDark}>
@@ -1075,20 +1041,23 @@ function AutonomousShowcase() {
         </div>
       </header>
 
+      {/* 2. Trust Banner */}
       <div className={styles.proTrustRailDark}>
-        <span>✓ CREF ATIVO</span>
+        <span>✓ CREF ATIVO (049821-G/BA)</span>
         <span>★ 5.0 NO GOOGLE (+840 ALUNOS)</span>
-        <span>⏱ PLANO EM 24H</span>
-        <span>◇ APP EXCLUSIVO DE TREINO</span>
+        <span>⏱ PROTOCOLO PERSONALIZADO EM 24H</span>
+        <span>◇ APP EXCLUSIVO COM VÍDEOS HD</span>
+        <span>💬 SUPORTE DIÁRIO WHATSAPP</span>
       </div>
 
-      <section className={styles.proHero} style={{ background: "#0b1215" }}>
+      {/* 3. Hero Section com Triagem 4 Etapas */}
+      <section className={styles.proHero} style={{ background: "#0b1411" }}>
         <Image
           src="/concepts/caio-move.webp"
-          alt="Profissional autônomo de atividade física Caio Move"
+          alt="Personal Trainer Caio Silva orientando treino inteligente"
           fill
           sizes="100vw"
-          quality={82}
+          quality={85}
           className={styles.proHeroImg}
           priority
         />
@@ -1104,27 +1073,31 @@ function AutonomousShowcase() {
           <h1>Treino Inteligente e Evolução Real Para a Sua Rotina</h1>
 
           <p>
-            Seu corpo não precisa de promessas milagrosas. Precisa de um método estruturado que cabe na sua rotina e gera resultados consistentes.
+            Seu corpo não precisa de dietas malucas nem treinos genéricos de gaveta. Você precisa de um método biomecânico individualizado, que respeita o seu tempo e entrega resultados consistentes sem lesões.
           </p>
 
           <ul className={styles.proChecklist}>
-            <li><GreenCheck /> Treinos personalizados para academia ou em casa</li>
-            <li><GreenCheck /> Acompanhamento postural e correção por vídeo</li>
-            <li><GreenCheck /> Mais de 840 alunos transformados</li>
+            <li><GreenCheck /> Treinos sob medida para academia ou em casa com foco nas suas metas</li>
+            <li><GreenCheck /> Análise postural por vídeo e correção de biomecânica individual</li>
+            <li><GreenCheck /> App exclusivo com timer, contagem de cargas e vídeos explicativos</li>
           </ul>
 
           <div className={styles.proGlassCard}>
             <p className={styles.proGlassQuote}>
-              &ldquo;Treino com o Caio há 1 ano. Perdi 12kg e nunca mais tive dores nas costas. O método é prático e fácil de seguir mesmo na minha rotina corrida.&rdquo;
+              &ldquo;Treino com a consultoria do Caio há 1 ano. Perdi 14kg, melhorei minha postura e nunca mais tive dor na lombar. O app é sensacional e ele responde todas as dúvidas no WhatsApp!&rdquo;
             </p>
             <div className={styles.proGlassFooter}>
               <div className={styles.proGlassUser}>
-                <div style={{ width: 36, height: 36, borderRadius: "50%", background: "#10b981", color: "#fff", display: "grid", placeItems: "center", fontWeight: 800, fontSize: 14 }}>
-                  LB
-                </div>
+                <Image
+                  src="/concepts/solaris/roberto.jpg"
+                  alt="Roberto Vasconcelos"
+                  width={38}
+                  height={38}
+                  className={styles.proAvatarImg}
+                />
                 <div>
-                  <div className={styles.proUserName}>Lucas Barreto</div>
-                  <div className={styles.proUserRating}>5.0 ⭐⭐⭐⭐⭐ (Aluno há 1 ano)</div>
+                  <div className={styles.proUserName}>Roberto Vasconcelos</div>
+                  <div className={styles.proUserRating}>5.0 ⭐⭐⭐⭐⭐ (-14kg & Definição)</div>
                 </div>
               </div>
               <GoogleWordmark />
@@ -1132,84 +1105,273 @@ function AutonomousShowcase() {
           </div>
         </div>
 
+        {/* 4-Step Wizard */}
         <aside className={styles.proQuizCard}>
           <div>
-            <h3 className={styles.proQuizTitle}>Simulador de Treino & Meta</h3>
+            <h3 className={styles.proQuizTitle}>Simulador de Treino & Periodização</h3>
             <p className={styles.proQuizSubtitle}>
-              ⏱ Resposta imediata
+              ⏱ Etapa {step} de 4 · Análise de perfil esportivo
             </p>
           </div>
 
           <div className={styles.proQuizProgressBar}>
             <div
               className={styles.proQuizProgressFill}
-              style={{ width: `${step === 1 ? 50 : 100}%`, background: "#10b981" }}
+              style={{ width: `${(step / 4) * 100}%`, background: "#10b981" }}
             />
           </div>
 
-          {step === 1 ? (
+          {step === 1 && (
             <div className={styles.proQuizStep}>
-              <div className={styles.proStepLabel}>Qual é o seu objetivo principal?</div>
+              <div className={styles.proStepLabel}>1. Qual é o seu objetivo principal agora?</div>
               <div className={styles.proOptionsGrid}>
-                {Object.entries(goals).map(([key, item]) => (
+                {[
+                  "Emagrecimento & Definição",
+                  "Hipertrofia & Massa Muscular",
+                  "Saúde & Postura Sem Dores",
+                  "Preparação para TAF / Corrida",
+                ].map((opt) => (
                   <button
-                    key={key}
+                    key={opt}
                     type="button"
-                    className={`${styles.proOptionBtn} ${goal === key ? styles.proOptionBtnActive : ""}`}
-                    style={goal === key ? { borderColor: "#10b981", background: "rgba(16, 185, 129, 0.06)" } : {}}
-                    onClick={() => {
-                      setGoal(key);
-                      setStep(2);
-                    }}
+                    className={`${styles.proOptionBtn} ${goal === opt ? styles.proOptionBtnActive : ""}`}
+                    style={goal === opt ? { borderColor: "#10b981", background: "rgba(16, 185, 129, 0.08)" } : {}}
+                    onClick={() => { setGoal(opt); setStep(2); }}
                   >
-                    <span>{item.name}</span>
+                    <span>{opt}</span>
                   </button>
                 ))}
               </div>
-              <button
-                type="button"
-                className={styles.proBtnPrimary}
-                style={{ background: "#10b981" }}
-                onClick={() => setStep(2)}
-              >
-                AVANÇAR PARA O PLANO <ArrowVector />
+              <button type="button" className={styles.proBtnPrimary} style={{ background: "#10b981" }} onClick={() => setStep(2)}>
+                AVANÇAR PARA ETAPA 2 <ArrowVector />
               </button>
             </div>
-          ) : null}
+          )}
 
-          {step === 2 ? (
+          {step === 2 && (
             <div className={styles.proQuizStep}>
-              <div style={{ background: "#ecfdf5", border: "1px solid #a7f3d0", borderRadius: 14, padding: "16px", textAlign: "center" }}>
-                <span style={{ fontSize: 11, fontWeight: 800, color: "#065f46", textTransform: "uppercase" }}>Foco Selecionado</span>
-                <strong style={{ display: "block", fontSize: 18, color: "#047857", margin: "6px 0" }}>
-                  {goals[goal as keyof typeof goals].name}
+              <div className={styles.proStepLabel}>2. Onde e quantas vezes você pretende treinar?</div>
+              <div className={styles.proOptionsGrid}>
+                {[
+                  "Academia (3 a 5x por semana)",
+                  "Em Casa (Halteres / Peso do corpo)",
+                  "Híbrido (Academia + Corrida)",
+                  "Iniciante (Começando do zero)",
+                ].map((opt) => (
+                  <button
+                    key={opt}
+                    type="button"
+                    className={`${styles.proOptionBtn} ${location === opt ? styles.proOptionBtnActive : ""}`}
+                    style={location === opt ? { borderColor: "#10b981", background: "rgba(16, 185, 129, 0.08)" } : {}}
+                    onClick={() => { setLocation(opt); setStep(3); }}
+                  >
+                    <span>{opt}</span>
+                  </button>
+                ))}
+              </div>
+              <button type="button" className={styles.proBtnPrimary} style={{ background: "#10b981" }} onClick={() => setStep(3)}>
+                AVANÇAR PARA ETAPA 3 <ArrowVector />
+              </button>
+              <button type="button" className={styles.proStepBackBtn} onClick={() => setStep(1)}>
+                ← Voltar etapa
+              </button>
+            </div>
+          )}
+
+          {step === 3 && (
+            <div className={styles.proQuizStep}>
+              <div className={styles.proStepLabel}>3. Possui alguma dor ou restrição articular?</div>
+              <div className={styles.proOptionsGrid}>
+                {[
+                  "Nenhuma dor / 100% apto",
+                  "Dor na Coluna / Lombar",
+                  "Dor no Joelho / Ombro",
+                  "Pouco tempo (<40min/dia)",
+                ].map((opt) => (
+                  <button
+                    key={opt}
+                    type="button"
+                    className={`${styles.proOptionBtn} ${restriction === opt ? styles.proOptionBtnActive : ""}`}
+                    style={restriction === opt ? { borderColor: "#10b981", background: "rgba(16, 185, 129, 0.08)" } : {}}
+                    onClick={() => { setRestriction(opt); setStep(4); }}
+                  >
+                    <span>{opt}</span>
+                  </button>
+                ))}
+              </div>
+              <button type="button" className={styles.proBtnPrimary} style={{ background: "#10b981" }} onClick={() => setStep(4)}>
+                GERAR ESTIMATIVA DE RESULTADO <ArrowVector />
+              </button>
+              <button type="button" className={styles.proStepBackBtn} onClick={() => setStep(2)}>
+                ← Voltar etapa
+              </button>
+            </div>
+          )}
+
+          {step === 4 && (
+            <div className={styles.proQuizStep}>
+              <div style={{ background: "#062319", border: "1px solid #059669", borderRadius: 16, padding: "18px", textAlign: "left", color: "#ecfdf5" }}>
+                <span style={{ fontSize: 10, fontWeight: 900, color: "#34d399", textTransform: "uppercase", letterSpacing: "0.1em" }}>
+                  ESTIMATIVA DE EVOLUÇÃO (90 DIAS)
+                </span>
+                <strong style={{ display: "block", fontSize: 17, color: "#fff", margin: "8px 0 4px" }}>
+                  Foco: {goal}
                 </strong>
-                <p style={{ fontSize: 12.5, color: "#065f46", margin: 0 }}>
-                  {goals[goal as keyof typeof goals].desc}
+                <p style={{ fontSize: 12.5, color: "#a7f3d0", margin: "0 0 10px", lineHeight: 1.5 }}>
+                  ✓ Rotina: {location}<br />
+                  ✓ Condição: {restriction}<br />
+                  ✓ App liberado com vídeos em 24h após anamnese
                 </p>
+                <div style={{ fontSize: 11, fontWeight: 700, color: "#34d399" }}>
+                  ⚡ Periodização individualizada pronta para envio
+                </div>
               </div>
 
-              <a
-                href={waUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.proBtnWa}
-              >
-                <span>COMEÇAR NO WHATSAPP</span>
+              <a href={waUrl} target="_blank" rel="noopener noreferrer" className={styles.proBtnWa}>
+                <span>RECEBER PLANILHA & APP NO WHATSAPP</span>
                 <ArrowVector />
               </a>
 
-              <button
-                type="button"
-                style={{ background: "transparent", border: 0, color: "#64748b", fontSize: 12, fontWeight: 700, cursor: "pointer", textAlign: "center" }}
-                onClick={() => setStep(1)}
-              >
-                ↻ Alterar objetivo
+              <button type="button" className={styles.proStepBackBtn} onClick={() => setStep(1)}>
+                ↻ Refazer simulação
               </button>
             </div>
-          ) : null}
+          )}
         </aside>
       </section>
+
+      {/* 4. Os 3 Pilares do Método Caio Move */}
+      <section className={styles.proSection} style={{ background: "#0a110e" }}>
+        <div className={styles.proSectionHead}>
+          <small style={{ color: "#10b981" }}>MÉTODO DE ALTA PERFORMANCE</small>
+          <h2 style={{ color: "#fff" }}>Como Funciona a Consultoria Caio Move</h2>
+          <p style={{ color: "#94a3b8" }}>Chega de fichas de academia que ninguém explica. Aqui você tem suporte de verdade na palma da mão.</p>
+        </div>
+
+        <div className={styles.proPillarsGrid}>
+          <div className={styles.proPillarCard}>
+            <div className={styles.proPillarIcon} style={{ background: "rgba(16, 185, 129, 0.15)", color: "#10b981" }}>📱</div>
+            <h3 style={{ color: "#fff" }}>App Exclusivo com Vídeos HD</h3>
+            <p style={{ color: "#cbd5e1" }}>Visualize a postura correta em cada exercício, cronometre seu descanso e anote suas cargas para acompanhar sua evolução.</p>
+          </div>
+          <div className={styles.proPillarCard}>
+            <div className={styles.proPillarIcon} style={{ background: "rgba(16, 185, 129, 0.15)", color: "#10b981" }}>🎯</div>
+            <h3 style={{ color: "#fff" }}>Periodização Ondulatória</h3>
+            <p style={{ color: "#cbd5e1" }}>Seu treino muda estrategicamente a cada 4 a 6 semanas para evitar que seu corpo se acostume e pare de queimar gordura.</p>
+          </div>
+          <div className={styles.proPillarCard}>
+            <div className={styles.proPillarIcon} style={{ background: "rgba(16, 185, 129, 0.15)", color: "#10b981" }}>💬</div>
+            <h3 style={{ color: "#fff" }}>Suporte & Correção de Postura</h3>
+            <p style={{ color: "#cbd5e1" }}>Envie vídeos executando os exercícios no WhatsApp para correção de alavancas e receba feedbacks rápidos diretamente do Caio.</p>
+          </div>
+        </div>
+      </section>
+
+      {/* 5. Transformações Reais */}
+      <section className={styles.proSection} style={{ background: "#060b09" }}>
+        <div className={styles.proSectionHead}>
+          <small style={{ color: "#10b981" }}>CASOS DE SUCESSO</small>
+          <h2 style={{ color: "#fff" }}>Resultados Reais de Quem Treina Com o Método</h2>
+        </div>
+
+        <div className={styles.proCasesGrid}>
+          <div className={styles.proCaseCard}>
+            <span className={styles.proCaseTag} style={{ background: "rgba(16, 185, 129, 0.15)", color: "#10b981" }}>-16KG EM 5 MESES</span>
+            <div className={styles.proCaseMetric} style={{ color: "#fff" }}>Felipe Mendes, 34 anos</div>
+            <p className={styles.proCaseQuote} style={{ color: "#cbd5e1" }}>
+              &ldquo;Consegui secar a gordura abdominal sem passar fome e sem gastar 2 horas por dia na academia. O treino de 45 minutos do Caio é cirúrgico!&rdquo;
+            </p>
+          </div>
+          <div className={styles.proCaseCard}>
+            <span className={styles.proCaseTag} style={{ background: "rgba(16, 185, 129, 0.15)", color: "#10b981" }}>FIM DA DOR LOMBAR</span>
+            <div className={styles.proCaseMetric} style={{ color: "#fff" }}>Dra. Camila Souza, 41 anos</div>
+            <p className={styles.proCaseQuote} style={{ color: "#cbd5e1" }}>
+              &ldquo;Sofria com hérnia de disco há anos. O fortalecimento de core e a correção postural me devolveram a qualidade de vida e a disposição.&rdquo;
+            </p>
+          </div>
+          <div className={styles.proCaseCard}>
+            <span className={styles.proCaseTag} style={{ background: "rgba(16, 185, 129, 0.15)", color: "#10b981" }}>+6KG MASSA MAGRA</span>
+            <div className={styles.proCaseMetric} style={{ color: "#fff" }}>Lucas Pires, 27 anos</div>
+            <p className={styles.proCaseQuote} style={{ color: "#cbd5e1" }}>
+              &ldquo;Estava estagnado com a mesma carga há 8 meses. Com os ajustes de amplitude e técnica do Caio, evoluí mais em 3 meses do que no ano todo.&rdquo;
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* 6. Planos de Consultoria */}
+      <section className={styles.proSection} style={{ background: "#0a110e" }}>
+        <div className={styles.proSectionHead}>
+          <small style={{ color: "#10b981" }}>PLANOS DE ACOMPANHAMENTO</small>
+          <h2 style={{ color: "#fff" }}>Escolha a Duração da Sua Evolução</h2>
+        </div>
+
+        <div className={styles.proPricingGrid}>
+          <div className={styles.proPriceCard}>
+            <h3 style={{ color: "#fff" }}>Trimestral</h3>
+            <p style={{ color: "#94a3b8" }}>Ideal para quem quer criar o hábito e ver os primeiros resultados visíveis.</p>
+            <div className={styles.proPriceValue}>
+              <strong style={{ color: "#fff" }}>R$ 180</strong><small>/mês</small>
+            </div>
+            <ul className={styles.proPriceFeatures}>
+              <li><GreenCheck /> Treino completo no App exclusivo</li>
+              <li><GreenCheck /> Troca de planilha a cada 4 semanas</li>
+              <li><GreenCheck /> Suporte WhatsApp em horário comercial</li>
+            </ul>
+            <a href={waUrl} target="_blank" rel="noopener noreferrer" className={styles.proBtnWa}>
+              <span>CONTRATAR TRIMESTRAL</span>
+            </a>
+          </div>
+
+          <div className={`${styles.proPriceCard} ${styles.featured}`}>
+            <span className={styles.proPriceTag} style={{ background: "#10b981", color: "#062319" }}>MAIS ESCOLHIDO</span>
+            <h3 style={{ color: "#fff" }}>Semestral VIP</h3>
+            <p style={{ color: "#94a3b8" }}>Transformação corporal completa com economia e acompanhamento contínuo.</p>
+            <div className={styles.proPriceValue}>
+              <strong style={{ color: "#10b981" }}>R$ 140</strong><small>/mês</small>
+            </div>
+            <ul className={styles.proPriceFeatures}>
+              <li><GreenCheck /> Treino completo no App exclusivo</li>
+              <li><GreenCheck /> Troca de planilha a cada 4 semanas</li>
+              <li><GreenCheck /> Suporte prioritário diário no WhatsApp</li>
+              <li><GreenCheck /> Análise de vídeos de execução sem limite</li>
+              <li><GreenCheck /> Guia de mobilidade e core complementar</li>
+            </ul>
+            <a href={waUrl} target="_blank" rel="noopener noreferrer" className={styles.proBtnWa} style={{ background: "#10b981" }}>
+              <span>CONTRATAR SEMESTRAL VIP</span>
+            </a>
+          </div>
+
+          <div className={styles.proPriceCard}>
+            <h3 style={{ color: "#fff" }}>Anual Elite</h3>
+            <p style={{ color: "#94a3b8" }}>Para quem quer manter o corpo forte e definido o ano inteiro no melhor valor.</p>
+            <div className={styles.proPriceValue}>
+              <strong style={{ color: "#fff" }}>R$ 110</strong><small>/mês</small>
+            </div>
+            <ul className={styles.proPriceFeatures}>
+              <li><GreenCheck /> Todos os benefícios do Semestral VIP</li>
+              <li><GreenCheck /> Planejamento para férias e viagens</li>
+              <li><GreenCheck /> Suporte 7 dias por semana</li>
+            </ul>
+            <a href={waUrl} target="_blank" rel="noopener noreferrer" className={styles.proBtnWa}>
+              <span>CONTRATAR ANUAL ELITE</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* 7. Footer CTA */}
+      <footer className={styles.proFooterCta} style={{ background: "#050a08", color: "#fff" }}>
+        <div className={styles.proFooterCtaBox}>
+          <small style={{ color: "#10b981", fontWeight: 900, letterSpacing: "0.14em" }}>COMECE A TREINAR CERTO HOJE</small>
+          <h2>Chega de Adiar Sua Transformação</h2>
+          <p style={{ color: "#94a3b8" }}>Envie uma mensagem e receba sua anamnese para receber seu treino personalizado no app em até 24 horas.</p>
+          <a href={waUrl} target="_blank" rel="noopener noreferrer" className={styles.proBtnWa} style={{ maxWidth: 360 }}>
+            <span>INICIAR CONSULTORIA NO WHATSAPP</span>
+            <ArrowVector />
+          </a>
+        </div>
+      </footer>
     </main>
   );
 }
@@ -1935,12 +2097,10 @@ export function SectorShowcasePage({ type }: { type: SectorShowcaseType }) {
   if (type === "cars") return <MotoraPage />;
   if (type === "fashion") return <VerticePage />;
   if (type === "realestate" || type === "realtor") return <CoraPage />;
-  if (type === "mechanic") return <MechanicShowcase />;
   if (type === "tapecar") return <TapeCarShowcase />;
   if (type === "dentistry") return <DentistryShowcase />;
   if (type === "law") return <LawShowcase />;
   if (type === "salon") return <SalonShowcase />;
-  if (type === "aesthetics") return <AestheticsShowcase />;
   if (type === "solar") return <SolarShowcase />;
   return <AutonomousShowcase />;
 }

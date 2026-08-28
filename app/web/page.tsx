@@ -105,10 +105,10 @@ const portfolioRows = [
     { name: "Clínica San Diego", kind: "PROJETO REAL · CLÍNICA MÉDICA", image: "/projects/san-diego-preview.webp", view: "sandiego", className: "web-port-san", action: "CUIDADO · PREVENÇÃO · CONFIANÇA" },
   ],
   [
-    { name: "Dr. Augusto Moreira", kind: "PORTFÓLIO · ADVOCACIA EMPRESARIAL", image: "/concepts/moreira-law-v2.webp", view: "moreira", className: "web-port-law", action: "ATUAÇÃO · MÉTODO · CONSULTA" },
-    { name: "Auréa Atelier", kind: "SALÃO DE BELEZA & VISAGISMO", image: "/concepts/aurea-salon-v3.webp", view: "salon", className: "web-port-salon", action: "AGENDA · SERVIÇOS · CURADORIA" },
     { name: "Caio Move", kind: "CONSULTORIA ESPORTIVA & PERSONAL", image: "/concepts/caio-move.webp", view: "autonomous", className: "web-port-caio", action: "MÉTODO · PROGRAMAS · AGENDA" },
-    { name: "Torque Lab", kind: "OFICINA ESPECIALIZADA & DIAGNÓSTICO", image: "/concepts/torque-mechanic.webp", view: "mechanic", className: "web-port-torque", action: "TELEMETRIA · SCANNER · REVISÃO" },
+    { name: "Dr. Augusto Moreira", kind: "PORTFÓLIO · ADVOCACIA EMPRESARIAL", image: "/concepts/moreira-law-v2.webp", view: "moreira", className: "web-port-law", action: "ATUAÇÃO · MÉTODO · CONSULTA" },
+    { name: "Nexo Odonto", kind: "ODONTOLOGIA ESTÉTICA & IMPLANTES", image: "/concepts/nexo-dental.webp", view: "dentistry", className: "web-port-nexo", action: "TRATAMENTOS · CONFIANÇA · AGENDA" },
+    { name: "Auréa Atelier", kind: "SALÃO DE BELEZA & VISAGISMO", image: "/concepts/aurea-salon-v3.webp", view: "salon", className: "web-port-salon", action: "AGENDA · SERVIÇOS · CURADORIA" },
     { name: "Vértice // E-commerce", kind: "MODA ESPORTIVA & STREETWEAR", image: "/concepts/nike-hero.jpg", view: "fashion", className: "web-port-noma", action: "COLEÇÃO 2026 · SACOLA VIP" },
   ],
 ] as const;
@@ -178,11 +178,11 @@ const portfolioSpotlights = {
     image: "/concepts/caio-move.webp",
     description: "Metodologia de treino inteligente, app exclusivo, acompanhamento postural e simulador de metas no WhatsApp.",
   },
-  mechanic: {
-    name: "Torque Lab",
-    kind: "Demonstração interativa · oficina mecânica especializada",
-    image: "/concepts/torque-mechanic.webp",
-    description: "Telemetria de OS em tempo real, scanner eletrônico, laudo de fotos/vídeos e aprovação item por item.",
+  dentistry: {
+    name: "Nexo Odonto",
+    kind: "Demonstração interativa · odontologia estética & implantes 3D",
+    image: "/concepts/nexo-dental.webp",
+    description: "Lentes de contato em porcelana 3D, implantes guiados por computador, sedação consciente sem dor e pré-diagnóstico digital.",
   },
   realestate: {
     name: "Cora Imóveis",
@@ -756,8 +756,8 @@ export default function Home() {
             <button className="button button-primary" type="button" onClick={() => startBudgetConversation("Seu novo site", "Quero solicitar um orçamento para criar ou modernizar o site da minha empresa.")}>
               Solicitar orçamento <WebArrow />
             </button>
-            <a className="button button-ghost" href="#configurar-plano">
-              Ver planos <WebDownArrow />
+            <a className="button button-ghost" href="#portfolio">
+              Ver projetos <WebDownArrow />
             </a>
           </div>
           <div className="hero-trust">
@@ -768,27 +768,7 @@ export default function Home() {
         </div>
       </section>
       </div>
-      <section className="dash-entry-paths" id="planos-rapidos" aria-labelledby="dash-entry-title">
-        <header>
-          <span>COMECE PELO SEU OBJETIVO</span>
-          <h2 id="dash-entry-title">Você não precisa entender de site.<br />Só precisa saber o que quer conquistar.</h2>
-          <p>Escolha o cenário mais próximo do seu negócio. A gente organiza o restante.</p>
-        </header>
-        <div>
-          {offers.map((offer, index) => (
-            <a href="#configurar-plano" key={offer.name} onClick={() => setSelectedOfferIndex(index)}>
-              <small>0{index + 1} · {offer.decisionLabel}</small>
-              <strong>{offer.name}</strong>
-              <span>{offer.decisionAnswer}</span>
-              <span className="dash-entry-prices">
-                <b><small>ASSINATURA</small>{offer.flexiblePrice}</b>
-                <b><small>TAXA DE CRIAÇÃO</small>{offer.flexibleCreationFee}</b>
-              </span>
-              <span className="dash-entry-action"><em>Comparar e escolher <WebArrow /></em></span>
-            </a>
-          ))}
-        </div>
-      </section>
+
       <section className="web-portfolio-first" id="portfolio" aria-labelledby="web-portfolio-title">
         <header>
           <div><span>PORTFÓLIO / PROJETOS & CONCEITOS</span><h2 id="web-portfolio-title">Sites que fazem<br />a marca parecer maior.</h2></div>
@@ -823,6 +803,28 @@ export default function Home() {
           ))}
         </div>
         <div className="web-portfolio-all"><strong>Dez experiências diferentes, cada uma construída a partir do problema real do segmento, não apenas com outro nome e outra cor.</strong><span>AMPLIE E ROLE POR DENTRO <WebArrow /></span></div>
+      </section>
+
+      <section className="dash-entry-paths" id="planos-rapidos" aria-labelledby="dash-entry-title">
+        <header>
+          <span>COMECE PELO SEU OBJETIVO</span>
+          <h2 id="dash-entry-title">Você não precisa entender de site.<br />Só precisa saber o que quer conquistar.</h2>
+          <p>Escolha o cenário mais próximo do seu negócio. A gente organiza o restante.</p>
+        </header>
+        <div>
+          {offers.map((offer, index) => (
+            <a href="#configurar-plano" key={offer.name} onClick={() => setSelectedOfferIndex(index)}>
+              <small>0{index + 1} · {offer.decisionLabel}</small>
+              <strong>{offer.name}</strong>
+              <span>{offer.decisionAnswer}</span>
+              <span className="dash-entry-prices">
+                <b><small>ASSINATURA</small>{offer.flexiblePrice}</b>
+                <b><small>TAXA DE CRIAÇÃO</small>{offer.flexibleCreationFee}</b>
+              </span>
+              <span className="dash-entry-action"><em>Comparar e escolher <WebArrow /></em></span>
+            </a>
+          ))}
+        </div>
       </section>
 
       <DashBeforeAfterSlider />
