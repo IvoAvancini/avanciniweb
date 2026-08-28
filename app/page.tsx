@@ -1,76 +1,23 @@
-import { BrandMark } from "./BrandMark";
-import { MotionLayer } from "./MotionLayer";
+import type { Metadata } from "next";
+import { OSHubClient } from "./os-hub-client";
 
-const webUrl = "http://localhost:3001/web";
-const syncUrl = "http://localhost:3001/sync";
-const instagramUrl = "https://www.instagram.com/avancinios/";
-const whatsappUrl =
-  "https://wa.me/5573981019782?text=Ol%C3%A1%2C%20Ivo!%20Vim%20pelo%20site%20da%20Avancini%20OS%20e%20quero%20conhecer%20uma%20das%20especializa%C3%A7%C3%B5es.";
+export const metadata: Metadata = {
+  title: { absolute: "Avancini OS — Tecnologia com identidade" },
+  description:
+    "Tecnologia para sua empresa não perder clientes antes do clique nem depois da mensagem.",
+  openGraph: {
+    title: "Avancini OS — Tecnologia com identidade",
+    description: "Avancini Dash e Avancini Sync: duas soluções independentes para não perder oportunidades.",
+    images: [{ url: "/social/avancini-os-perfil-v2.png", width: 1254, height: 1254, alt: "Símbolo oficial Avancini OS" }],
+  },
+  twitter: {
+    card: "summary",
+    title: "Avancini OS — Tecnologia com identidade",
+    description: "Avancini Dash e Avancini Sync: duas soluções independentes para não perder oportunidades.",
+    images: ["/social/avancini-os-perfil-v2.png"],
+  },
+};
 
-export default function Home() {
-  return (
-    <main className="showcase-shell">
-      <MotionLayer />
-
-      <header className="showcase-header">
-        <a className="brand" href="#inicio" aria-label="Avancini OS — início">
-          <BrandMark />
-          <span className="brand-copy">
-            <b>AVANCINI OS</b>
-            <small>TECNOLOGIA COM IDENTIDADE</small>
-          </span>
-        </a>
-
-        <nav aria-label="Contato">
-          <a href={instagramUrl} target="_blank" rel="noreferrer">Instagram</a>
-          <a className="showcase-contact" href={whatsappUrl} target="_blank" rel="noreferrer">Falar conosco</a>
-        </nav>
-      </header>
-
-      <section className="showcase-main" id="inicio">
-        <div className="showcase-intro" data-reveal>
-          <div className="showcase-title">
-            <span>AVANCINI OS</span>
-            <h1>Seu negócio não nasceu para ser comum<br /><em>Sua tecnologia também não</em></h1>
-          </div>
-
-          <div className="showcase-statement">
-            <BrandMark />
-            <p>A Avancini OS transforma a forma como sua empresa aparece, atende e cresce</p>
-          </div>
-        </div>
-
-        <div className="showcase-choice" data-reveal data-delay="1">
-          <div className="choice-heading">
-            <span>ESCOLHA ONDE AVANÇAR</span>
-            <i />
-          </div>
-
-          <div className="showcase-cards">
-            <a className="showcase-card showcase-web" data-letter="W" href={webUrl} target="_blank" rel="noreferrer" aria-label="Abrir Avancini Web">
-              <iframe src={webUrl} title="Prévia da Avancini Web" tabIndex={-1} aria-hidden="true" />
-              <div className="card-shade" />
-              <div className="showcase-card-copy">
-                <small>PRESENÇA DIGITAL</small>
-                <h2>Avancini Web</h2>
-                <p>Sites autorais para ser encontrado, transmitir confiança e transformar atenção em oportunidade</p>
-                <span>Abrir experiência</span>
-              </div>
-            </a>
-
-            <a className="showcase-card showcase-sync" data-letter="S" href={syncUrl} target="_blank" rel="noreferrer" aria-label="Abrir Avancini Sync">
-              <iframe src={syncUrl} title="Prévia da Avancini Sync" tabIndex={-1} aria-hidden="true" />
-              <div className="card-shade" />
-              <div className="showcase-card-copy">
-                <small>AUTOMAÇÃO & IA</small>
-                <h2>Avancini Sync</h2>
-                <p>IA e automações para responder, organizar e acompanhar cada conversa sem deixar oportunidades esfriarem</p>
-                <span>Abrir experiência</span>
-              </div>
-            </a>
-          </div>
-        </div>
-      </section>
-    </main>
-  );
+export default function AvanciniOS() {
+  return <OSHubClient />;
 }

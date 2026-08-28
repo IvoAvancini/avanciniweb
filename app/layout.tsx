@@ -1,46 +1,105 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Manrope, Space_Grotesk } from "next/font/google";
+import { MarketingScripts } from "./marketing-scripts";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const siteUrl = "https://www.avancini.me";
+
+const manrope = Manrope({
   subsets: ["latin"],
+  variable: "--font-manrope",
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
+  variable: "--font-space",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("http://localhost:3000"),
-  title: "Avancini OS — Tecnologia com identidade",
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: "Avancini OS | Tecnologia com identidade",
+    template: "%s | Avancini OS",
+  },
   description:
-    "Avancini Web e Avancini Sync: duas especializações independentes para fortalecer sua presença digital e automatizar seu atendimento com IA.",
+    "Tecnologia para sua empresa ser encontrada e não perder oportunidades enquanto o cliente espera.",
+  keywords: [
+    "Avancini OS",
+    "criação de sites",
+    "landing page profissional",
+    "site institucional",
+    "chatbot para WhatsApp",
+    "atendimento com inteligência artificial",
+    "atendimento digital",
+    "Avancini Dash",
+    "Avancini Sync",
+  ],
+  alternates: { canonical: "/" },
+  icons: {
+    icon: "/icon",
+    shortcut: "/icon",
+    apple: "/icon",
+  },
   openGraph: {
-    title: "Avancini OS — Tecnologia com identidade",
-    description: "Sua empresa não pode parecer menor do que ela é. Conheça Avancini Web e Avancini Sync.",
-    images: ["/og-ws.png"],
+    type: "website",
+    locale: "pt_BR",
+    url: siteUrl,
+    siteName: "Avancini OS",
+    title: "Avancini OS | Tecnologia com identidade",
+    description:
+      "Duas soluções independentes: Avancini Dash para presença digital e Avancini Sync para atendimento com IA.",
+    images: [
+      {
+        url: "/social/avancini-os-perfil-v2.png",
+        width: 1254,
+        height: 1254,
+        alt: "Avancini OS — tecnologia com identidade",
+      },
+    ],
   },
   twitter: {
-    card: "summary_large_image",
-    title: "Avancini OS — Tecnologia com identidade",
-    description: "Sua empresa não pode parecer menor do que ela é. Conheça Avancini Web e Avancini Sync.",
-    images: ["/og-ws.png"],
+    card: "summary",
+    title: "Avancini OS | Tecnologia com identidade",
+    description:
+      "Avancini Dash e Avancini Sync: duas soluções independentes para presença digital e atendimento com IA.",
+    images: ["/social/avancini-os-perfil-v2.png"],
   },
+  robots: { index: true, follow: true },
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "Avancini OS",
+    url: siteUrl,
+    description:
+      "Empresa de tecnologia responsável pelas soluções independentes Avancini Dash e Avancini Sync.",
+    areaServed: "Brasil",
+    telephone: "+55 73 98101-9782",
+    email: "ivoavancini@hotmail.com",
+    sameAs: ["https://www.instagram.com/avancinios/"],
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: "Soluções Avancini",
+      itemListElement: [
+        { "@type": "Offer", itemOffered: { "@type": "Service", name: "Avancini Dash", description: "Criação de landing pages, sites institucionais, catálogos e lojas virtuais." } },
+        { "@type": "Offer", itemOffered: { "@type": "Service", name: "Avancini Sync", description: "Chatbots e atendentes com inteligência artificial." } },
+      ],
+    },
+  };
+
   return (
     <html lang="pt-BR">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className={`${manrope.variable} ${spaceGrotesk.variable}`}>
         {children}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
+        <MarketingScripts />
       </body>
     </html>
   );
