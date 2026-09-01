@@ -98,18 +98,18 @@ const whatsappFor = (message: string) =>
 
 const portfolioRows = [
   [
-    { name: "Solaris Energia", kind: "ENERGIA SOLAR & FINANCIAMENTO", image: "/concepts/solaris/hero.jpg", view: "solar", className: "web-port-solar", action: "SIMULAÇÃO · PROJETO · FINANCIAMENTO" },
-    { name: "MOTORA // Ecossistema", kind: "CONCESSIONÁRIA PREMIUM", image: "/concepts/apex-cars.jpg", view: "cars", className: "web-port-cars", action: "ESTOQUE · COMPARADOR · FINANCIAMENTO" },
-    { name: "Cora Imóveis", kind: "MANSÕES & PENTHOUSES", image: "/concepts/cora-penthouse.jpg", view: "realestate", className: "web-port-atlas", action: "RADAR · SIMULADOR SAC · VISITA" },
-    { name: "Tape Car", kind: "PROJETO REAL · ESTÉTICA AUTOMOTIVA", image: "/projects/tape-car-preview.webp", view: "tapecar", className: "web-port-tape", action: "PROTEÇÃO · ESTÉTICA · CUIDADO" },
-    { name: "Clínica San Diego", kind: "PROJETO REAL · CLÍNICA MÉDICA", image: "/projects/san-diego-preview.webp", view: "sandiego", className: "web-port-san", action: "CUIDADO · PREVENÇÃO · CONFIANÇA" },
+    { name: "Solaris Energia", domain: "solarisenergia.com.br", badge: "ENERGIA SOLAR", kind: "ENERGIA SOLAR & FINANCIAMENTO", image: "/concepts/solaris/hero.jpg", view: "solar", className: "web-port-solar", action: "SIMULAÇÃO · PROJETO · FINANCIAMENTO" },
+    { name: "MOTORA // Ecossistema", domain: "motora.com.br", badge: "CONCESSIONÁRIA", kind: "CONCESSIONÁRIA PREMIUM", image: "/concepts/apex-cars.jpg", view: "cars", className: "web-port-cars", action: "ESTOQUE · COMPARADOR · FINANCIAMENTO" },
+    { name: "Cora Imóveis", domain: "coraimoveis.com.br", badge: "IMOBILIÁRIA", kind: "MANSÕES & PENTHOUSES", image: "/concepts/cora-penthouse.jpg", view: "realestate", className: "web-port-atlas", action: "RADAR · SIMULADOR SAC · VISITA" },
+    { name: "Tape Car", domain: "tapecar.com.br", badge: "PROJETO REAL", kind: "PROJETO REAL · ESTÉTICA AUTOMOTIVA", image: "/projects/tape-car-preview.webp", view: "tapecar", className: "web-port-tape", action: "PROTEÇÃO · ESTÉTICA · CUIDADO" },
+    { name: "Clínica San Diego", domain: "sandiegoclinica.com.br", badge: "PROJETO REAL", kind: "PROJETO REAL · CLÍNICA MÉDICA", image: "/projects/san-diego-preview.webp", view: "sandiego", className: "web-port-san", action: "CUIDADO · PREVENÇÃO · CONFIANÇA" },
   ],
   [
-    { name: "Caio Move", kind: "CONSULTORIA ESPORTIVA & PERSONAL", image: "/concepts/caio-move.webp", view: "autonomous", className: "web-port-caio", action: "MÉTODO · PROGRAMAS · AGENDA" },
-    { name: "Dr. Augusto Moreira", kind: "PORTFÓLIO · ADVOCACIA EMPRESARIAL", image: "/concepts/moreira-law-v2.webp", view: "moreira", className: "web-port-law", action: "ATUAÇÃO · MÉTODO · CONSULTA" },
-    { name: "Nexo Odonto", kind: "ODONTOLOGIA ESTÉTICA & IMPLANTES", image: "/concepts/nexo-dental.webp", view: "dentistry", className: "web-port-nexo", action: "TRATAMENTOS · CONFIANÇA · AGENDA" },
-    { name: "Auréa Atelier", kind: "SALÃO DE BELEZA & VISAGISMO", image: "/concepts/aurea-salon-v3.webp", view: "salon", className: "web-port-salon", action: "AGENDA · SERVIÇOS · CURADORIA" },
-    { name: "Vértice // E-commerce", kind: "MODA ESPORTIVA & STREETWEAR", image: "/concepts/nike-hero.jpg", view: "fashion", className: "web-port-noma", action: "COLEÇÃO 2026 · SACOLA VIP" },
+    { name: "Caio Move", domain: "caiomove.com.br", badge: "ALTA PERFORMANCE", kind: "CONSULTORIA ESPORTIVA & PERSONAL", image: "/concepts/caio-move.webp", view: "autonomous", className: "web-port-caio", action: "MÉTODO · PROGRAMAS · AGENDA" },
+    { name: "Dr. Augusto Moreira", domain: "moreiraadvocacia.com.br", badge: "ADVOCACIA", kind: "PORTFÓLIO · ADVOCACIA EMPRESARIAL", image: "/concepts/moreira-law-v2.webp", view: "moreira", className: "web-port-law", action: "ATUAÇÃO · MÉTODO · CONSULTA" },
+    { name: "Nexo Odonto", domain: "nexoodonto.com.br", badge: "ODONTOLOGIA", kind: "ODONTOLOGIA ESTÉTICA & IMPLANTES", image: "/concepts/nexo-dental.webp", view: "dentistry", className: "web-port-nexo", action: "TRATAMENTOS · CONFIANÇA · AGENDA" },
+    { name: "Auréa Atelier", domain: "aureasalon.com.br", badge: "BELEZA & ESTILO", kind: "SALÃO DE BELEZA & VISAGISMO", image: "/concepts/aurea-salon-v3.webp", view: "salon", className: "web-port-salon", action: "AGENDA · SERVIÇOS · CURADORIA" },
+    { name: "Vértice // E-commerce", domain: "verticestore.com.br", badge: "E-COMMERCE", kind: "MODA ESPORTIVA & STREETWEAR", image: "/concepts/nike-hero.jpg", view: "fashion", className: "web-port-noma", action: "COLEÇÃO 2026 · SACOLA VIP" },
   ],
 ] as const;
 
@@ -454,10 +454,139 @@ function DashBeforeAfterSlider() {
   );
 }
 
+const countriesList = [
+  { code: "BR", name: "Brasil", ddi: "+55", placeholder: "(11) 99999-9999" },
+  { code: "US", name: "Estados Unidos", ddi: "+1", placeholder: "(555) 000-0000" },
+  { code: "PT", name: "Portugal", ddi: "+351", placeholder: "912 345 678" },
+  { code: "MX", name: "México", ddi: "+52", placeholder: "55 1234 5678" },
+  { code: "AR", name: "Argentina", ddi: "+54", placeholder: "11 1234-5678" },
+  { code: "GB", name: "Reino Unido", ddi: "+44", placeholder: "7911 123456" },
+  { code: "ES", name: "Espanha", ddi: "+34", placeholder: "612 34 56 78" },
+  { code: "FR", name: "França", ddi: "+33", placeholder: "06 12 34 56 78" },
+  { code: "DE", name: "Alemanha", ddi: "+49", placeholder: "151 12345678" },
+  { code: "IT", name: "Itália", ddi: "+39", placeholder: "312 345 6789" },
+  { code: "CA", name: "Canadá", ddi: "+1", placeholder: "(555) 000-0000" },
+  { code: "CL", name: "Chile", ddi: "+56", placeholder: "9 1234 5678" },
+  { code: "CO", name: "Colômbia", ddi: "+57", placeholder: "300 123 4567" },
+  { code: "UY", name: "Uruguai", ddi: "+598", placeholder: "99 123 456" },
+  { code: "PY", name: "Paraguai", ddi: "+595", placeholder: "981 123456" },
+  { code: "JP", name: "Japão", ddi: "+81", placeholder: "90 1234 5678" },
+  { code: "CH", name: "Suíça", ddi: "+41", placeholder: "78 123 45 67" },
+  { code: "AU", name: "Austrália", ddi: "+61", placeholder: "412 345 678" },
+];
+
+function CountryFlagIcon({ code }: { code: string }) {
+  if (code === "BR") {
+    return (
+      <svg viewBox="0 0 32 32" width="18" height="18" className="country-flag-svg" aria-hidden="true">
+        <circle cx="16" cy="16" r="16" fill="#009b3a" />
+        <polygon points="16,5 28,16 16,27 4,16" fill="#fedf00" />
+        <circle cx="16" cy="16" r="6" fill="#002776" />
+        <path d="M10.8 17.2 C13 14.8 19 14.8 21.2 17.2" stroke="#ffffff" strokeWidth="1.2" fill="none" />
+      </svg>
+    );
+  }
+  if (code === "US") {
+    return (
+      <svg viewBox="0 0 32 32" width="18" height="18" className="country-flag-svg" aria-hidden="true">
+        <circle cx="16" cy="16" r="16" fill="#b22234" />
+        <path d="M0 10h32M0 16h32M0 22h32" stroke="#ffffff" strokeWidth="3" />
+        <path d="M0 0h16v16H0z" fill="#3c3b6e" />
+        <circle cx="8" cy="8" r="3.5" fill="#ffffff" />
+      </svg>
+    );
+  }
+  if (code === "PT") {
+    return (
+      <svg viewBox="0 0 32 32" width="18" height="18" className="country-flag-svg" aria-hidden="true">
+        <circle cx="16" cy="16" r="16" fill="#ff0000" />
+        <path d="M0 0 A16 16 0 0 0 0 32 L13 32 L13 0 Z" fill="#006600" />
+        <circle cx="13" cy="16" r="4.5" fill="#ffff00" stroke="#002776" strokeWidth="1" />
+      </svg>
+    );
+  }
+  if (code === "MX") {
+    return (
+      <svg viewBox="0 0 32 32" width="18" height="18" className="country-flag-svg" aria-hidden="true">
+        <circle cx="16" cy="16" r="16" fill="#ffffff" />
+        <path d="M0 0 A16 16 0 0 0 0 32 L11 32 L11 0 Z" fill="#006847" />
+        <path d="M32 0 A16 16 0 0 1 32 32 L21 32 L21 0 Z" fill="#ce1126" />
+        <circle cx="16" cy="16" r="2.5" fill="#a0522d" />
+      </svg>
+    );
+  }
+  if (code === "AR") {
+    return (
+      <svg viewBox="0 0 32 32" width="18" height="18" className="country-flag-svg" aria-hidden="true">
+        <circle cx="16" cy="16" r="16" fill="#74acdf" />
+        <rect x="0" y="11" width="32" height="10" fill="#ffffff" />
+        <circle cx="16" cy="16" r="3" fill="#f6b40e" />
+      </svg>
+    );
+  }
+  if (code === "GB") {
+    return (
+      <svg viewBox="0 0 32 32" width="18" height="18" className="country-flag-svg" aria-hidden="true">
+        <circle cx="16" cy="16" r="16" fill="#012169" />
+        <path d="M0 0L32 32M32 0L0 32" stroke="#ffffff" strokeWidth="4" />
+        <path d="M0 0L32 32M32 0L0 32" stroke="#c8102e" strokeWidth="2" />
+        <path d="M16 0v32M0 16h32" stroke="#ffffff" strokeWidth="6" />
+        <path d="M16 0v32M0 16h32" stroke="#c8102e" strokeWidth="3.5" />
+      </svg>
+    );
+  }
+  if (code === "ES") {
+    return (
+      <svg viewBox="0 0 32 32" width="18" height="18" className="country-flag-svg" aria-hidden="true">
+        <circle cx="16" cy="16" r="16" fill="#aa151b" />
+        <rect x="0" y="8" width="32" height="16" fill="#f1bf00" />
+      </svg>
+    );
+  }
+  if (code === "FR") {
+    return (
+      <svg viewBox="0 0 32 32" width="18" height="18" className="country-flag-svg" aria-hidden="true">
+        <circle cx="16" cy="16" r="16" fill="#ffffff" />
+        <path d="M0 0 A16 16 0 0 0 0 32 L11 32 L11 0 Z" fill="#002654" />
+        <path d="M32 0 A16 16 0 0 1 32 32 L21 32 L21 0 Z" fill="#ed2939" />
+      </svg>
+    );
+  }
+  if (code === "DE") {
+    return (
+      <svg viewBox="0 0 32 32" width="18" height="18" className="country-flag-svg" aria-hidden="true">
+        <circle cx="16" cy="16" r="16" fill="#ffce00" />
+        <path d="M0 0 A16 16 0 0 1 32 0 L32 11 L0 11 Z" fill="#000000" />
+        <rect x="0" y="11" width="32" height="10" fill="#dd0000" />
+      </svg>
+    );
+  }
+  if (code === "IT") {
+    return (
+      <svg viewBox="0 0 32 32" width="18" height="18" className="country-flag-svg" aria-hidden="true">
+        <circle cx="16" cy="16" r="16" fill="#ffffff" />
+        <path d="M0 0 A16 16 0 0 0 0 32 L11 32 L11 0 Z" fill="#009246" />
+        <path d="M32 0 A16 16 0 0 1 32 32 L21 32 L21 0 Z" fill="#ce2b37" />
+      </svg>
+    );
+  }
+  return (
+    <svg viewBox="0 0 32 32" width="18" height="18" className="country-flag-svg" aria-hidden="true">
+      <circle cx="16" cy="16" r="16" fill="#1e293b" />
+      <path d="M16 2a14 14 0 1 0 14 14A14 14 0 0 0 16 2Zm0 2a12 12 0 1 1-12 12A12 12 0 0 1 16 4Z" fill="#38bdf8" />
+    </svg>
+  );
+}
+
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [leadOpen, setLeadOpen] = useState(false);
   const [leadName, setLeadName] = useState("");
+  const [leadPhone, setLeadPhone] = useState("");
+  const [selectedCountry, setSelectedCountry] = useState(countriesList[0]);
+  const [ddiDropdownOpen, setDdiDropdownOpen] = useState(false);
+  const [ddiSearch, setDdiSearch] = useState("");
+  const [leadSubmitting, setLeadSubmitting] = useState(false);
   const [leadError, setLeadError] = useState("");
   const [leadIntent, setLeadIntent] = useState("Quero solicitar um orçamento para um site profissional da Avancini Dash.");
   const [budgetTransition, setBudgetTransition] = useState<{ title: string } | null>(null);
@@ -622,12 +751,42 @@ export default function Home() {
       setLeadError("Digite seu nome para continuar.");
       return;
     }
+    const cleanPhone = leadPhone.trim();
+    const fullPhone = cleanPhone ? `${selectedCountry.ddi} ${cleanPhone}` : "";
     setLeadError("");
-    trackLead("whatsapp_modal", { name: cleanName });
-    const message = `Olá! Meu nome é ${cleanName}. ${leadIntent}`;
+    setLeadSubmitting(true);
+    trackLead("whatsapp_modal", { name: cleanName, phone: fullPhone });
+
+    // Envio seguro para a API interna em background (salva localmente e dispara webhook)
+    try {
+      fetch("/api/lead", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: cleanName,
+          phone: fullPhone,
+          intent: leadIntent,
+          source: "dash_modal",
+          page: "/dash",
+        }),
+      }).catch(() => {});
+    } catch {}
+
+    const phoneText = fullPhone ? ` Meu WhatsApp é ${fullPhone}.` : "";
+    const message = `Olá! Meu nome é ${cleanName}.${phoneText} ${leadIntent}`;
     window.open(whatsappFor(message), "_blank", "noopener,noreferrer");
+    setLeadSubmitting(false);
     setLeadOpen(false);
+    setLeadName("");
+    setLeadPhone("");
+    setDdiDropdownOpen(false);
   };
+
+  const filteredCountries = countriesList.filter((c) => {
+    const q = ddiSearch.toLowerCase().trim();
+    if (!q) return true;
+    return c.name.toLowerCase().includes(q) || c.ddi.includes(q) || c.code.toLowerCase().includes(q);
+  });
 
   return (
     <main className="web-page">
@@ -642,20 +801,6 @@ export default function Home() {
             <small>Presença que trabalha</small>
           </span>
         </a>
-        <nav className="nav" aria-label="Navegação principal">
-          <a href="#configurar-plano" onClick={() => setMenuOpen(false)}>
-            Serviços
-          </a>
-          <a href="#portfolio" onClick={() => setMenuOpen(false)}>
-            Projetos
-          </a>
-          <a href="#metodo" onClick={() => setMenuOpen(false)}>
-            Método
-          </a>
-          <a href="#contato" onClick={() => setMenuOpen(false)}>
-            Orçamento
-          </a>
-        </nav>
         <div className="web-ecosystem-switch" aria-label="Navegar entre as soluções Avancini">
           <Link className="button button-small header-cta header-sync-cta" href="/sync">
             Avancini Sync <WebArrow />
@@ -726,7 +871,30 @@ export default function Home() {
         </div>
         <div className="hero-glow glow-one" />
         <div className="hero-glow glow-two" />
-        <div className="red-sweep" aria-hidden="true" />
+        <div className="hero-soundwaves left" aria-hidden="true">
+          <span style={{ '--d': '0.1s', '--h': '65%' } as any} />
+          <span style={{ '--d': '0.35s', '--h': '85%' } as any} />
+          <span style={{ '--d': '0.2s', '--h': '45%' } as any} />
+          <span style={{ '--d': '0.5s', '--h': '95%' } as any} />
+          <span style={{ '--d': '0.15s', '--h': '70%' } as any} />
+          <span style={{ '--d': '0.4s', '--h': '80%' } as any} />
+          <span style={{ '--d': '0.25s', '--h': '55%' } as any} />
+          <span style={{ '--d': '0.6s', '--h': '90%' } as any} />
+          <span style={{ '--d': '0.3s', '--h': '60%' } as any} />
+          <span style={{ '--d': '0.45s', '--h': '75%' } as any} />
+        </div>
+        <div className="hero-soundwaves right" aria-hidden="true">
+          <span style={{ '--d': '0.3s', '--h': '75%' } as any} />
+          <span style={{ '--d': '0.1s', '--h': '90%' } as any} />
+          <span style={{ '--d': '0.45s', '--h': '60%' } as any} />
+          <span style={{ '--d': '0.2s', '--h': '85%' } as any} />
+          <span style={{ '--d': '0.55s', '--h': '50%' } as any} />
+          <span style={{ '--d': '0.15s', '--h': '95%' } as any} />
+          <span style={{ '--d': '0.35s', '--h': '70%' } as any} />
+          <span style={{ '--d': '0.5s', '--h': '80%' } as any} />
+          <span style={{ '--d': '0.25s', '--h': '65%' } as any} />
+          <span style={{ '--d': '0.4s', '--h': '85%' } as any} />
+        </div>
         <div className="kinetic-lines" aria-hidden="true">
           <i />
           <i />
@@ -760,11 +928,6 @@ export default function Home() {
               Ver projetos <WebDownArrow />
             </a>
           </div>
-          <div className="hero-trust">
-            <span>Opção sem entrada</span>
-            <span>Hospedagem e suporte inclusos</span>
-            <span>Mesma qualidade em todas as opções</span>
-          </div>
         </div>
       </section>
       </div>
@@ -794,8 +957,29 @@ export default function Home() {
                     tabIndex={index >= row.length ? -1 : undefined}
                     aria-label={index < row.length ? `Ampliar projeto ${item.name}` : undefined}
                   >
-                    <SiteImage src={item.image} alt={index < row.length ? item.name : ""} sizes="(max-width: 760px) 78vw, 28vw" quality={82} />
-                    <span><strong>{item.name}</strong><em><i />{item.action}</em><b>Ampliar projeto <WebArrow /></b></span>
+                    <div className="web-portfolio-window-bar" aria-hidden="true">
+                      <span className="web-portfolio-window-dots">
+                        <i className="dot-red" />
+                        <i className="dot-yellow" />
+                        <i className="dot-green" />
+                      </span>
+                      <span className="web-portfolio-window-url">
+                        <svg viewBox="0 0 16 16" fill="currentColor" width="9" height="9">
+                          <path fillRule="evenodd" d="M8 1a3.5 3.5 0 0 0-3.5 3.5V7A1.5 1.5 0 0 0 3 8.5v5A1.5 1.5 0 0 0 4.5 15h7a1.5 1.5 0 0 0 1.5-1.5v-5A1.5 1.5 0 0 0 11.5 7V4.5A3.5 3.5 0 0 0 8 1Zm2 6V4.5a2 2 0 1 0-4 0V7h4Z" clipRule="evenodd"/>
+                        </svg>
+                        {item.domain}
+                      </span>
+                      <span className="web-portfolio-window-badge">{item.badge}</span>
+                    </div>
+                    <div className="web-portfolio-media">
+                      <SiteImage src={item.image} alt={index < row.length ? item.name : ""} sizes="(max-width: 760px) 78vw, 28vw" quality={82} />
+                    </div>
+                    <span>
+                      <small>{item.kind}</small>
+                      <strong>{item.name}</strong>
+                      <em><i />{item.action}</em>
+                      <b>Ampliar projeto <WebArrow /></b>
+                    </span>
                   </button>
                 ))}
               </div>
@@ -812,18 +996,67 @@ export default function Home() {
           <p>Escolha o cenário mais próximo do seu negócio. A gente organiza o restante.</p>
         </header>
         <div>
-          {offers.map((offer, index) => (
-            <a href="#configurar-plano" key={offer.name} onClick={() => setSelectedOfferIndex(index)}>
-              <small>0{index + 1} · {offer.decisionLabel}</small>
-              <strong>{offer.name}</strong>
-              <span>{offer.decisionAnswer}</span>
-              <span className="dash-entry-prices">
-                <b><small>ASSINATURA</small>{offer.flexiblePrice}</b>
-                <b><small>TAXA DE CRIAÇÃO</small>{offer.flexibleCreationFee}</b>
-              </span>
-              <span className="dash-entry-action"><em>Comparar e escolher <WebArrow /></em></span>
-            </a>
-          ))}
+          {offers.map((offer, index) => {
+            const offerBadges = ["ALTA CONVERSÃO", "MAIS ESCOLHIDO", "CATÁLOGO & VENDAS"];
+            const offerHighlights = [
+              [
+                "Design exclusivo focado em conversão",
+                "Botão direto para WhatsApp e formulário",
+                "Hospedagem rápida, SSL e suporte contínuo",
+              ],
+              [
+                "Estrutura completa de autoridade e serviços",
+                "Apresentação profissional da sua marca",
+                "Hospedagem de alta performance e domínio",
+              ],
+              [
+                "Catálogo de produtos com variações e fotos",
+                "Carrinho e checkout de pagamento integrados",
+                "Gestão simplificada de pedidos e frete",
+              ],
+            ];
+            const currentHighlights = offerHighlights[index] ?? offer.includes.slice(0, 3);
+            const currentBadge = offerBadges[index] ?? offer.badge;
+
+            return (
+              <a href="#configurar-plano" key={offer.name} className="dash-entry-card" onClick={() => setSelectedOfferIndex(index)}>
+                <div className="dash-entry-card-top">
+                  <small>0{index + 1} · {offer.decisionLabel}</small>
+                  {currentBadge && <span className="dash-entry-badge">{currentBadge}</span>}
+                </div>
+                <h3 className="dash-entry-card-title">{offer.name}</h3>
+                <p className="dash-entry-desc">{offer.decisionAnswer}</p>
+                
+                <div className="dash-entry-price-wrap">
+                  <div className="dash-entry-price-amount">
+                    {offer.flexiblePrice}
+                  </div>
+                  <div className="dash-entry-perk-row">
+                    <span className="dash-entry-perk-pill">
+                      <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+                        <path fillRule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clipRule="evenodd" />
+                      </svg>
+                      Taxa de criação zero no anual
+                    </span>
+                  </div>
+                </div>
+
+                <ul className="dash-entry-features">
+                  {currentHighlights.map((highlight, hIdx) => (
+                    <li key={hIdx}>
+                      <i aria-hidden="true" />
+                      <span>{highlight}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                <div className="dash-entry-action">
+                  <span>Escolher este modelo</span>
+                  <WebArrow />
+                </div>
+              </a>
+            );
+          })}
         </div>
       </section>
 
@@ -1100,47 +1333,133 @@ export default function Home() {
           aria-label="Iniciar conversa pelo WhatsApp"
         >
           <form onSubmit={submitLead}>
-            <button
-              className="web-lead-close"
-              type="button"
-              onClick={() => setLeadOpen(false)}
-              aria-label="Fechar"
-            >
-              ×
-            </button>
-            <header>
-              <AvanciniMark variant="dash" className="lead-logo avancini-a-mark" />
-              <div>
-                <strong>
-                  Avancini Dash <span>· Especialista em UI Design</span>
-                </strong>
-                <b><i /> atendimento direto · mensagem contextualizada</b>
+            <header className="lead-modal-header">
+              <div className="lead-avatar-wrap">
+                <div className="lead-avatar-img">
+                  <AvanciniMark variant="dash" className="lead-logo-mark" />
+                </div>
+                <span className="lead-status-dot" aria-label="Online" />
               </div>
+              <div className="lead-header-info">
+                <strong className="lead-title">José Avancini - Web Designer &amp; UX</strong>
+                <div className="lead-status-row">
+                  <span className="lead-online-badge">online</span>
+                  <span className="lead-response-time"> - responde em minutos</span>
+                </div>
+              </div>
+              <button
+                className="web-lead-close"
+                type="button"
+                onClick={() => setLeadOpen(false)}
+                aria-label="Fechar"
+              >
+                ✕
+              </button>
             </header>
-            <p className="lead-promise">
-              {leadIntent}
-            </p>
-            <label className="lead-name-field">
-              <span aria-hidden="true">✦</span>
-              <input
-                required
-                ref={leadInputRef}
-                minLength={2}
-                maxLength={60}
-                value={leadName}
-                onChange={(event) => { setLeadName(event.target.value); if (leadError) setLeadError(""); }}
-                placeholder="Seu nome"
-                autoComplete="name"
-                aria-label="Seu nome"
-                aria-invalid={Boolean(leadError)}
-                aria-describedby={leadError ? "lead-name-error" : undefined}
-              />
-            </label>
+            <div className="lead-fields-wrap">
+              <div className="lead-input-row">
+                <div className="lead-field-name">
+                  <span className="field-icon" aria-hidden="true">
+                    <svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16">
+                      <path d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" />
+                    </svg>
+                  </span>
+                  <input
+                    required
+                    ref={leadInputRef}
+                    minLength={2}
+                    maxLength={60}
+                    value={leadName}
+                    onChange={(event) => { setLeadName(event.target.value); if (leadError) setLeadError(""); }}
+                    placeholder="Seu nome"
+                    autoComplete="name"
+                    aria-label="Seu nome"
+                    aria-invalid={Boolean(leadError)}
+                    aria-describedby={leadError ? "lead-name-error" : undefined}
+                  />
+                </div>
+              </div>
+              <div className="lead-input-row lead-phone-row">
+                <div className="lead-ddi-container">
+                  <button
+                    type="button"
+                    className="lead-country-badge"
+                    onClick={() => setDdiDropdownOpen(!ddiDropdownOpen)}
+                    aria-expanded={ddiDropdownOpen}
+                    aria-label={`País selecionado: ${selectedCountry.name}, código ${selectedCountry.ddi}`}
+                  >
+                    <CountryFlagIcon code={selectedCountry.code} />
+                    <span className="country-code">{selectedCountry.ddi}</span>
+                    <span className="country-caret">⌵</span>
+                  </button>
+                  {ddiDropdownOpen && (
+                    <div className="lead-ddi-dropdown" role="listbox">
+                      <div className="lead-ddi-search">
+                        <svg viewBox="0 0 20 20" fill="currentColor" width="13" height="13">
+                          <path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd" />
+                        </svg>
+                        <input
+                          type="text"
+                          placeholder="Buscar país..."
+                          value={ddiSearch}
+                          onChange={(e) => setDdiSearch(e.target.value)}
+                          autoFocus
+                          aria-label="Buscar país"
+                        />
+                      </div>
+                      <div className="lead-ddi-list">
+                        {filteredCountries.map((c) => (
+                          <button
+                            type="button"
+                            key={c.code}
+                            className={`lead-ddi-option ${selectedCountry.code === c.code ? "active" : ""}`}
+                            onClick={() => {
+                              setSelectedCountry(c);
+                              setDdiDropdownOpen(false);
+                              setDdiSearch("");
+                            }}
+                          >
+                            <CountryFlagIcon code={c.code} />
+                            <span className="country-name">{c.name}</span>
+                            <span className="country-ddi-code">{c.ddi}</span>
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+                <div className="lead-field-phone">
+                  <input
+                    type="tel"
+                    value={leadPhone}
+                    onChange={(event) => {
+                      let v = event.target.value.replace(/\D/g, "");
+                      if (selectedCountry.code === "BR") {
+                        if (v.length > 11) v = v.slice(0, 11);
+                        if (v.length > 10) {
+                          v = `(${v.slice(0, 2)}) ${v.slice(2, 7)}-${v.slice(7)}`;
+                        } else if (v.length > 6) {
+                          v = `(${v.slice(0, 2)}) ${v.slice(2, 6)}-${v.slice(6)}`;
+                        } else if (v.length > 2) {
+                          v = `(${v.slice(0, 2)}) ${v.slice(2)}`;
+                        }
+                      }
+                      setLeadPhone(v);
+                    }}
+                    placeholder={selectedCountry.placeholder}
+                    autoComplete="tel"
+                    aria-label="Seu WhatsApp"
+                  />
+                </div>
+              </div>
+            </div>
             {leadError && <p className="lead-error" id="lead-name-error" role="alert">{leadError}</p>}
-            <button className="lead-submit" type="submit">
-              ABRIR CONVERSA NO WHATSAPP
+            <button className="lead-submit" type="submit" disabled={leadSubmitting}>
+              {leadSubmitting ? "CONECTANDO..." : "INICIAR CONVERSA"}
             </button>
-            <small>A mensagem já está organizada e você pode editá-la antes de enviar.</small>
+            <p className="lead-footer-note">
+              Você será direcionado pro WhatsApp com a mensagem pronta.
+            </p>
           </form>
         </div>
       )}
