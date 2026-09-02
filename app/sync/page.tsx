@@ -112,678 +112,297 @@ const SyncDownArrow = () => (
   </svg>
 );
 
-type SyncPaymentCycle = "monthly" | "semiannual" | "annual";
-
-type SyncPlan = {
-  id: string;
-  name: string;
-  label: string;
-  price: string;
-  suffix: string;
-  description: string;
-  definition: string;
-  fit: string;
-  example: string;
-  items: string[];
-  cyclePrices: Record<SyncPaymentCycle, number>;
-};
-
-const syncPaymentCycles: { id: SyncPaymentCycle; label: string; detail: string; discount: string }[] = [
-  { id: "monthly", label: "Mensal", detail: "Sem fidelidade longa", discount: "" },
-  { id: "semiannual", label: "Semestral", detail: "10% de economia", discount: "10% OFF" },
-  { id: "annual", label: "Anual", detail: "20% de economia", discount: "20% OFF" },
-];
-
-const syncPlans: SyncPlan[] = [
+/* --------------------------------------------------------------------------
+   DADOS DE JORNADA COMERCIAL: PRÉ-VENDA, VENDA, PÓS-VENDA & OPERAÇÃO
+   -------------------------------------------------------------------------- */
+const commercialJourney = [
   {
-    id: "especialista",
-    name: "Agente IA Especialista",
-    label: "OPERAÇÃO COMERCIAL OU ATENDIMENTO",
-    price: "R$ 490",
-    suffix: "/mês",
-    description: "1 Agente de IA autônomo treinado no seu negócio para qualificar leads, tirar dúvidas e agendar compromissos 24 horas por dia.",
-    definition: "Agente inteligente treinado exclusivamente com a base de conhecimento da sua empresa.",
-    fit: "Para empresas, consultórios e prestadores de serviços que perdem oportunidades por demora no primeiro contato.",
-    example: "Um lead chama no WhatsApp às 23h. O Agente entende o perfil, tira dúvidas técnicas e agenda uma reunião no Google Calendar.",
-    items: [
-      "1 Agente de IA dedicado (Vendas ou Suporte)",
-      "Treinamento na base de conhecimento da sua empresa (PDFs, regras, FAQs)",
-      "Integração nativa com 1 número de WhatsApp",
-      "Agendamento autônomo no Google Calendar / Calendly",
-      "Transbordo inteligente para atendente humano com resumo pronto",
-      "Painel de controle com histórico e relatórios de conversão",
-      "Suporte e calibragem contínua inclusos",
+    id: "pre-venda",
+    phase: "01 / PRÉ-VENDA",
+    title: "Velocidade & Qualificação",
+    badge: "PRIMEIRO CONTATO",
+    summary: "Seu cliente não fica 1 minuto esperando. A IA atende na hora, qualifica o perfil e separa compradores reais de curiosos.",
+    points: [
+      "Tempo de resposta inferior a 2 segundos",
+      "Identifica faturamento, orçamento ou urgência",
+      "Responde textos ou áudios com linguagem natural",
+      "Direciona leads qualificados para seu time",
     ],
-    cyclePrices: {
-      monthly: 490,
-      semiannual: 2646,
-      annual: 4704,
-    },
+    metricLabel: "Impacto no funil",
+    metricValue: "Redução de até 90% no tempo de espera do lead",
   },
   {
-    id: "multi-agente",
-    name: "Agente IA Multi-Operação",
-    label: "VENDAS + SUPORTE + CRM (MAIS ESCOLHIDO)",
-    price: "R$ 890",
-    suffix: "/mês",
-    description: "2 Agentes de IA trabalhando juntos (SDR Comercial + Atendente de Suporte) com compreensão de áudio e sincronização automática de CRM.",
-    definition: "Ecossistema completo com agentes especialistas trabalhando de forma coordenada no WhatsApp.",
-    fit: "Para clínicas, imobiliárias, escritórios, e-commerces e empresas com volume diário de novos contatos.",
-    example: "O Agente de Vendas qualifica o lead, ouve áudios do cliente, salva os dados no RD Station/HubSpot e avisa seu vendedor no WhatsApp.",
-    items: [
-      "2 Agentes de IA especialistas (SDR Comercial + Suporte/Pós-Venda)",
-      "Compreensão de áudios de clientes (transcrição instantânea Whisper)",
-      "Envio de respostas em áudio com voz natural humanizada (opcional)",
-      "Integração direta com CRM (RD Station, HubSpot, ActiveCampaign ou Planilhas)",
-      "Reativação ativa de leads que pararam de responder (Follow-up inteligente)",
-      "Geração de links de pagamento Pix / Cartão dentro da conversa",
-      "Regras avançadas anti-alucinação e segurança de dados RAG",
-      "Onboarding dedicado e acompanhamento semanal de performance",
+    id: "venda",
+    phase: "02 / VENDA & FECHAMENTO",
+    title: "Apresentação & Follow-up Ativo",
+    badge: "CONVERSÃO",
+    summary: "Apresenta propostas, tira dúvidas técnicas, contorna objeções frequentes e agenda reuniões direto no Google Calendar.",
+    points: [
+      "Apresenta catálogo, planos e formas de pagamento",
+      "Consulta horários livres e agenda reuniões",
+      "Faz follow-up inteligente com quem parou de responder",
+      "Envia link Pix ou cartão dentro da conversa",
     ],
-    cyclePrices: {
-      monthly: 890,
-      semiannual: 4806,
-      annual: 8544,
-    },
+    metricLabel: "Impacto no funil",
+    metricValue: "Pode acelerar a taxa de reuniões agendadas",
+  },
+  {
+    id: "pos-venda",
+    phase: "03 / PÓS-VENDA & SUPORTE",
+    title: "Retenção & Resolução Imediata",
+    badge: "RELACIONAMENTO",
+    summary: "Resolve dúvidas frequentes, emite 2ª via de faturas, informa status de serviços e reativa clientes antigos no momento certo.",
+    points: [
+      "Consulta status de pedidos e serviços em tempo real",
+      "Resolução de dúvidas sem necessidade de fila",
+      "Coleta feedback e satisfação do atendimento",
+      "Reativação proativa de clientes inativos",
+    ],
+    metricLabel: "Impacto no funil",
+    metricValue: "Pode desafogar até 70% dos chamados repetitivos",
+  },
+  {
+    id: "operacao",
+    phase: "04 / OPERAÇÃO INTEGRADA",
+    title: "Sincronização & Transbordo",
+    badge: "PRODUTIVIDADE",
+    summary: "Tudo o que a IA conversa é gravado no seu CRM. Quando o humano precisa intervir, recebe um resumo pronto e estruturado.",
+    points: [
+      "Integração com RD Station, HubSpot e Google Sheets",
+      "Transbordo inteligente para humanos com histórico",
+      "Conexão estável com WhatsApp via QR Code",
+      "Sem falhas de comunicação ou dados perdidos",
+    ],
+    metricLabel: "Impacto no funil",
+    metricValue: "Equipe rende mais focando apenas no fechamento",
+  },
+];
+
+/* --------------------------------------------------------------------------
+   COMPARATIVO FINANCEIRO: CUSTO DE FUNCIONÁRIO VS. AGENTE DE IA
+   -------------------------------------------------------------------------- */
+const financialComparison = {
+  employee: {
+    title: "Ampliar Equipe Tradicional",
+    subtitle: "Custo total de contratação física para tarefas repetitivas",
+    items: [
+      { label: "Salário base + encargos", detail: "CLT adiciona ~60% a 70% em encargos, FGTS e impostos" },
+      { label: "Benefícios obrigatórios", detail: "Vale transporte, alimentação, 13º salário e férias proporcionais" },
+      { label: "Tempo & Custo de Treinamento", detail: "Semanas para ambientação e risco frequente de rotatividade (turnover)" },
+      { label: "Limitação de horário", detail: "Trabalho restrito a 8h/dia em dias úteis — noites e finais de semana sem cobertura" },
+      { label: "Gargalo de capacidade", detail: "Um humano atende apenas 1 a 3 clientes por vez com lentidão no pico" },
+    ],
+    verdict: "Custo alto e difícil de escalar rapidamente",
+  },
+  aiAgent: {
+    title: "Força de Trabalho Digital (IA)",
+    subtitle: "Um colaborador de IA treinado para assumir o volume repetitivo",
+    items: [
+      { label: "Investimento fixo e previsível", detail: "Apenas uma mensalidade acessível, sem encargos ou passivos trabalhistas" },
+      { label: "Disponibilidade 24 horas por dia", detail: "Atende noites, madrugadas, sábados, domingos e feriados sem pausas" },
+      { label: "Treinamento sob medida incluso", detail: "A IA é calibrada com as regras e dados da sua empresa antes de operar" },
+      { label: "Escala simultânea ilimitada", detail: "Atende 1, 50 ou 500 clientes ao mesmo tempo sem criar fila de espera" },
+      { label: "Alívio imediato para sua equipe", detail: "Seus funcionários atuais focam em estratégias, vendas complexas e negociações" },
+    ],
+    verdict: "Pode custar menos de 20% de uma nova contratação",
+  },
+};
+
+/* --------------------------------------------------------------------------
+   NICHOS COM AÇÕES ESPECÍFICAS & VALOR COMERCIAL
+   -------------------------------------------------------------------------- */
+const nicheSolutions = [
+  {
+    id: "advocacia",
+    title: "Advocacia & Jurídico",
+    icon: "⚖️",
+    badge: "SEGURANÇA & PRIVACIDADE",
+    role: "Triagem preliminar, qualificação de causas e agendamento de consultas com tratamento seguro e sigiloso de dados.",
+    tasks: [
+      "Triagem inicial de clientes e identificação da área do Direito",
+      "Coleta preliminar de informações e histórico do caso",
+      "Agendamento de consultas e reuniões na grade dos advogados",
+      "Respostas para dúvidas frequentes de honorários e atendimento",
+      "Encaminhamento para o advogado responsável com ficha pronta",
+      "Atendimento inicial 24 horas para quem procura auxílio urgente",
+    ],
+  },
+  {
+    id: "oficinas",
+    title: "Mecânicas & Oficinas",
+    icon: "🔧",
+    badge: "AGENDAMENTO & PÓS-SERVIÇO",
+    role: "Agendamento de manutenções, envio de status do veículo e lembretes preventivos que trazem o cliente de volta.",
+    tasks: [
+      "Agendamento de revisões, alinhamento e trocas de peças",
+      "Orientações preliminares de orçamentos e prazos",
+      "Informar status do veículo em manutenção com rapidez",
+      "Lembretes de manutenção preventiva (ex: troca de óleo e correia)",
+      "Follow-up e pesquisa de satisfação pós-retirada do carro",
+      "Recuperação de clientes que não realizam serviços há meses",
+    ],
+  },
+  {
+    id: "clinicas",
+    title: "Clínicas Médicas & Odonto",
+    icon: "🏥",
+    badge: "REDUÇÃO DE FALTAS",
+    role: "Triagem administrativa, marcação de consultas e confirmação ativa que diminui faltas e desafoga a recepção.",
+    tasks: [
+      "Agendamento automático de consultas e exames na agenda médica",
+      "Confirmação ativa de comparecimento com lembretes inteligentes",
+      "Orientações pré-exame (jejum, preparo e documentação necessária)",
+      "Tira-dúvidas sobre convênios aceitos e formas de pagamento",
+      "Acolhimento humanizado e triagem administrativa dos pacientes",
+      "Recuperação de pacientes para retorno ou revisão periódica",
+    ],
+  },
+  {
+    id: "imobiliarias",
+    title: "Imobiliárias & Construtoras",
+    icon: "🏢",
+    badge: "QUALIFICAÇÃO DE COMPRADORES",
+    role: "Qualificação instantânea para que o corretor só gaste tempo atendendo leads com real potencial de fechamento.",
+    tasks: [
+      "Qualificação do cliente: perfil de compra, locação e teto financeiro",
+      "Filtro inteligente de bairros, metragem e características do imóvel",
+      "Envio imediato de opções do catálogo com fotos e ficha técnica",
+      "Agendamento de visitas presenciais direto na agenda do corretor",
+      "Follow-up contínuo com clientes que deixaram de responder",
+      "Reativação de leads parados nos portais imobiliários",
+    ],
+  },
+  {
+    id: "ecommerce",
+    title: "E-commerce & Varejo",
+    icon: "🛍️",
+    badge: "RESOLUÇÃO EM SEGUNDOS",
+    role: "Atendimento imediato para dúvidas de produtos, status de entrega e recuperação de compras não finalizadas.",
+    tasks: [
+      "Consulta instantânea de status de pedido e código de rastreio",
+      "Tira-dúvidas sobre tamanhos, prazos de entrega e especificações",
+      "Geração de chave Pix e link de pagamento na conversa",
+      "Recuperação proativa de clientes com pedidos pendentes",
+      "Apoio ao pós-venda, trocas e garantias com regras claras",
+      "Atendimento contínuo nos horários de pico noturnos",
+    ],
+  },
+  {
+    id: "b2b",
+    title: "Serviços B2B & Consultorias",
+    icon: "💼",
+    badge: "SDR COMERCIAL AUTÔNOMO",
+    role: "SDR de IA que aborda, qualifica porte/faturamento e entrega reuniões de proposta prontas para os executivos.",
+    tasks: [
+      "Qualifica porte da empresa, faturamento e dor principal",
+      "Elimina curiosos e leads desqualificados antes da equipe",
+      "Apresenta visão geral de serviços e propostas formatadas",
+      "Agenda reuniões no Google Meet com links automáticos",
+      "Notifica o consultor no WhatsApp com resumo executivo pronto",
+      "Sincroniza todas as informações direto no CRM da empresa",
+    ],
+  },
+];
+
+/* --------------------------------------------------------------------------
+   PLANOS RADICALMENTE SIMPLIFICADOS (TODAS AS IAs SÃO COMPLETAS)
+   -------------------------------------------------------------------------- */
+type SyncPlanSimple = {
+  id: string;
+  name: string;
+  badge: string;
+  monthlyPrice: number;
+  annualPriceMonthly: number;
+  tagline: string;
+  idealFor: string;
+  keyHighlights: string[];
+  ctaText: string;
+};
+
+const simplifiedPlans: SyncPlanSimple[] = [
+  {
+    id: "essencial",
+    name: "Agente IA Essencial",
+    badge: "PARA COMEÇAR",
+    monthlyPrice: 490,
+    annualPriceMonthly: 392,
+    tagline: "1 Agente de IA completo dedicado à sua operação de vendas ou atendimento.",
+    idealFor: "Para profissionais liberais, consultórios e empresas que querem eliminar filas no primeiro contato.",
+    keyHighlights: [
+      "1 Agente de IA com inteligência total",
+      "Treinado exclusivamente na base da sua empresa",
+      "Conexão com 1 WhatsApp (QR Code rápido)",
+      "Agendamento no Google Calendar / Calendly",
+      "Transbordo para humano com resumo pronto",
+      "Setup e calibração inclusos (sem taxa de criação)",
+    ],
+    ctaText: "Começar com Plano Essencial",
+  },
+  {
+    id: "operacao-pro",
+    name: "Agente IA Operação Pro",
+    badge: "MAIS ESCOLHIDO",
+    monthlyPrice: 890,
+    annualPriceMonthly: 712,
+    tagline: "2 Agentes de IA coordenados (SDR Comercial + Atendimento) com compreensão de áudio e CRM.",
+    idealFor: "Para clínicas, imobiliárias, escritórios e empresas com volume diário constante de contatos.",
+    keyHighlights: [
+      "2 Agentes de IA trabalhando de forma coordenada",
+      "Compreensão de áudios de clientes (Whisper)",
+      "Respostas em áudio humanizado (opcional)",
+      "Sincronização com CRM (RD Station, HubSpot, Sheets)",
+      "Follow-up ativo de recuperação de leads",
+      "Geração de links Pix / pagamento no chat",
+    ],
+    ctaText: "Contratar Operação Pro",
   },
   {
     id: "enterprise",
     name: "Ecossistema Custom AI",
-    label: "MULTICANAL + BANCO DE DADOS + ERP",
-    price: "R$ 1.590",
-    suffix: "/mês",
-    description: "Operação corporativa com múltiplos Agentes de IA no WhatsApp, Instagram e Site, integrados com banco de dados interno e ERP.",
-    definition: "Arquitetura avançada de inteligência artificial desenvolvida sob medida para operações de alta escala.",
-    fit: "Para operações com múltiplos atendentes, redes de franquias, grandes clínicas e empresas com sistemas proprietários.",
-    example: "A IA consulta o estoque/sistema do ERP em tempo real, emite status de pedidos, agenda em múltiplos consultórios e orquestra a equipe.",
-    items: [
-      "Agentes de IA ilimitados e multicanais (WhatsApp, Instagram Direct e Site)",
-      "Integração profunda com APIs privadas, ERPs e bancos de dados SQL",
-      "Automações complexas via Webhooks (n8n, Make, Evolution API)",
-      "Roteamento avançado de leads por região, vendedor ou especialidade",
-      "SLA de atendimento prioritário e treinamento contínuo da equipe",
-      "Relatórios executivos e auditoria de inteligência artificial",
+    badge: "OPERAÇÕES COMPLEXAS",
+    monthlyPrice: 1590,
+    annualPriceMonthly: 1272,
+    tagline: "Arquitetura avançada de IA multicanal para empresas com sistemas proprietários ou ERP.",
+    idealFor: "Para redes de franquias, grandes clínicas, concessionárias e empresas com regras complexas.",
+    keyHighlights: [
+      "Agentes de IA ilimitados e múltiplos fluxos",
+      "Conexão multicanal (WhatsApp, Instagram e Site)",
+      "Integração profunda com ERPs e bancos de dados",
+      "Automações sob medida via Webhooks (n8n, Make)",
+      "Roteamento inteligente de leads por departamento",
+      "SLA corporativo com calibragem semanal dedicada",
     ],
-    cyclePrices: {
-      monthly: 1590,
-      semiannual: 8586,
-      annual: 15264,
-    },
+    ctaText: "Estruturar Solução Custom",
   },
 ];
 
-const formatSyncPlanMoney = (value: number) =>
-  new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL", maximumFractionDigits: 0 }).format(value);
+const formatMoney = (val: number) =>
+  new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL", maximumFractionDigits: 0 }).format(val);
 
-type AgentScenario = {
-  id: string;
-  name: string;
-  role: string;
-  segment: string;
-  tools: string[];
-  metrics: string;
-  reasoning: string;
-  floatingTags: string[];
-  messages: {
-    sender: "client" | "agent";
-    time: string;
-    text?: string;
-    isAudio?: boolean;
-    audioDuration?: string;
-    actionNote?: string;
-  }[];
-};
-
-const agentScenarios: AgentScenario[] = [
+const faqsCommercial = [
   {
-    id: "sdr-vendas",
-    name: "Agente SDR Comercial",
-    role: "Qualificação & Vendas B2B",
-    segment: "Empresas de Serviços, Tecnologia e Consultoria",
-    tools: ["Google Calendar", "RD Station CRM", "Qualificador de Ticket", "WhatsApp API"],
-    metrics: "Tempo de resposta: 1.2s · Taxa de qualificação: 88%",
-    reasoning: "Lead demonstrou interesse em modernização. Agente verificou porte da empresa, extraiu necessidade e marcou reunião de proposta na agenda do consultor.",
-    floatingTags: ["Qualificar Lead B2B", "Consultar Google Calendar", "Sincronizar com CRM", "Follow-up Ativo"],
-    messages: [
-      {
-        sender: "client",
-        time: "21:42",
-        text: "Boa noite! Vocês fazem automação para escritório de contabilidade? Estamos perdendo muitos contatos no WhatsApp.",
-      },
-      {
-        sender: "agent",
-        time: "21:42",
-        text: "Olá! Sim, atendemos escritórios de contabilidade com Agentes de IA sob medida. 🚀\n\nPara eu te passar o melhor direcionamento: quantos contatos vocês recebem por mês e qual o principal gargalo atual?",
-      },
-      {
-        sender: "client",
-        time: "21:44",
-        text: "Recebemos cerca de 300 contatos/mês. O problema é que a equipe demora para responder e os clientes acabam fechando com outros.",
-      },
-      {
-        sender: "agent",
-        time: "21:44",
-        text: "Entendi perfeitamente. Nesse volume, o Agente de IA reduz o tempo de resposta para menos de 2 segundos e já qualifica o regime tributário da empresa antes de passar para seu time.\n\nTenho disponibilidade com nosso especialista amanhã às 10h ou às 15h para te mostrar uma demonstração ao vivo. Qual horário fica melhor para você?",
-        actionNote: "💡 Ação: Verificou slots livres no Google Calendar do consultor.",
-      },
-      {
-        sender: "client",
-        time: "21:45",
-        text: "Amanhã às 15h fica ótimo!",
-      },
-      {
-        sender: "agent",
-        time: "21:45",
-        text: "Perfeito! Reunião confirmada para amanhã às 15:00. 📅\n\nEnviei o convite com o link da chamada para seu e-mail e nosso consultor já recebeu o histórico do seu escritório.",
-        actionNote: "✅ Ação: Agendou no Google Calendar e criou oportunidade no CRM.",
-      },
-    ],
+    question: "O que significa dizer que o Agente de IA é uma equipe digital?",
+    answer: "Diferente de um chatbot que apenas aperta botões pré-programados, o Agente de IA raciocina sobre as informações da sua empresa. Ele entende textos livres e áudios, extrai dados importantes, qualifica o perfil do lead, agenda compromissos na sua grade e até consulta bancos de dados para dar respostas exatas — operando como um verdadeiro colaborador digital.",
   },
   {
-    id: "clinica-saude",
-    name: "Agente Clínico & Saúde",
-    role: "Triagem & Agendamento Médico",
-    segment: "Clínicas Médicas, Odontológicas e Estética",
-    tools: ["Agenda Médica", "Protocolos de Triagem", "Instruções Pré-Exame", "Transcrição de Áudio"],
-    metrics: "Tempo de resposta: 0.9s · Agendamentos automáticos: 94%",
-    reasoning: "Agente acolheu a paciente, esclareceu sobre o procedimento de harmonização, transcreveu o áudio da cliente e reservou o horário com a Dra. Mariana.",
-    floatingTags: ["Transcrever Áudio (Whisper)", "Consultar Agenda Médica", "Triagem de Sintomas", "Disparar Lembrete"],
-    messages: [
-      {
-        sender: "client",
-        time: "19:15",
-        text: "Oi, gostaria de saber quanto custa a harmonização facial e se vocês têm horário para essa semana.",
-      },
-      {
-        sender: "agent",
-        time: "19:15",
-        text: "Olá! Seja muito bem-vinda à Clínica Avancini Saúde. ✨\n\nOs procedimentos são 100% personalizados após uma avaliação detalhada com a Dra. Mariana para analisar sua estrutura facial.",
-      },
-      {
-        sender: "client",
-        time: "19:16",
-        isAudio: true,
-        audioDuration: "0:22",
-        text: "Áudio: 'Entendi! E a consulta de avaliação é muito demorada? Eu só consigo no final da tarde por causa do trabalho.'",
-      },
-      {
-        sender: "agent",
-        time: "19:17",
-        text: "A avaliação dura em média 45 minutos com planejamento 3D. 💆‍♀️\n\nTemos um horário especial nesta Quinta-feira às 18h30 com a Dra. Mariana. Gostaria que eu reservasse para você?",
-        actionNote: "💡 Ação: Transcreveu o áudio e filtrou horários de final de tarde.",
-      },
-      {
-        sender: "client",
-        time: "19:18",
-        text: "Pode agendar sim, por favor!",
-      },
-      {
-        sender: "agent",
-        time: "19:18",
-        text: "Excelente! Agendamento confirmado para Quinta-feira às 18h30. Já registrei sua ficha e enviaremos o lembrete de localização no dia. Até breve! ✨",
-        actionNote: "✅ Ação: Reserva gravada no sistema da clínica e lembrete programado.",
-      },
-    ],
+    question: "A IA substitui completamente os meus funcionários?",
+    answer: "O objetivo principal não é demitir funcionários, e sim fazer sua equipe atual render muito mais. A IA assume o trabalho maçante, repetitivo e o atendimento inicial 24 horas por dia. Quando surge uma negociação complexa ou uma situação que exige empatia humana, a IA transfere o cliente com um resumo pronto de toda a conversa.",
   },
   {
-    id: "imobiliario",
-    name: "Agente Imobiliário",
-    role: "Filtro de Imóveis & Agendamento",
-    segment: "Imobiliárias, Construtoras e Corretores",
-    tools: ["Banco de Imóveis", "Filtro de Bairros", "Agenda de Corretores", "Catálogo com Fotos"],
-    metrics: "Tempo de resposta: 1.5s · Envio de portfólio instantâneo",
-    reasoning: "Lead procurou apartamento de 3 quartos. Agente filtrou no acervo, enviou opções com fotos e agendou visita com o corretor responsável.",
-    floatingTags: ["Filtrar Catálogo", "Enviar Fotos do Imóvel", "Notificar Corretor", "Agendar Visita Presencial"],
-    messages: [
-      {
-        sender: "client",
-        time: "14:02",
-        text: "Vi uma placa no bairro Jardins. Vocês têm apartamento de 3 quartos para compra até R$ 900 mil?",
-      },
-      {
-        sender: "agent",
-        time: "14:02",
-        text: "Olá! Temos sim excelentes opções nos Jardins com esse perfil. 🏢\n\nVocê busca imóvel pronto para morar ou lançamento na planta? E precisa de quantas vagas de garagem?",
-      },
-      {
-        sender: "client",
-        time: "14:03",
-        text: "Pronto para morar, com pelo menos 2 vagas.",
-      },
-      {
-        sender: "agent",
-        time: "14:03",
-        text: "Perfeito! Selecionei 2 opções ideais:\n\n1️⃣ Edifício Jardins Privilege: 112m², 3 suítes, 2 vagas, varanda gourmet — R$ 870.000\n2️⃣ Residencial Bella Vista: 98m², 3 quartos (1 suíte), lazer completo — R$ 790.000\n\nPodemos marcar uma visita presencial para amanhã às 14h?",
-        actionNote: "💡 Ação: Filtrou catálogo interno e cruzou requisitos de vagas e metragem.",
-      },
-      {
-        sender: "client",
-        time: "14:04",
-        text: "Gostei do Jardins Privilege! Amanhã às 14h dá certo.",
-      },
-      {
-        sender: "agent",
-        time: "14:04",
-        text: "Excelente escolha! Visita agendada para amanhã às 14h. Nosso corretor especialista Ricardo estará te esperando no local com as chaves.",
-        actionNote: "✅ Ação: Notificou o corretor Ricardo no WhatsApp com ficha do cliente.",
-      },
-    ],
+    question: "Como funciona a conexão com o WhatsApp?",
+    answer: "A conexão é simples e rápida via leitura de QR Code diretamente no seu sistema ou celular, semelhante ao WhatsApp Web. Não há burocracia complexa e a tecnologia mantém a conexão estável com suporte a webhooks e automação de conversas.",
   },
   {
-    id: "suporte-operacional",
-    name: "Agente Suporte & Operações",
-    role: "Resolução Técnica & Pedidos",
-    segment: "E-commerce, SaaS, Cursos e Plataformas",
-    tools: ["Consulta de Pedidos", "Emissão de 2ª via Pix", "Status de Envio", "API de Logística"],
-    metrics: "Tempo de resposta: 0.8s · Resolução no 1º contato: 91%",
-    reasoning: "Cliente solicitou código de rastreio e 2ª via de fatura. Agente consultou o sistema em tempo real e entregou a solução em 15 segundos.",
-    floatingTags: ["Consultar ERP / Pedidos", "Gerar Chave Pix", "Rastreio em Tempo Real", "Zero Fila de Espera"],
-    messages: [
-      {
-        sender: "client",
-        time: "11:20",
-        text: "Olá, fiz o pedido #48291 semana passada e ainda não recebi o código de rastreamento.",
-      },
-      {
-        sender: "agent",
-        time: "11:20",
-        text: "Olá, Carlos! Deixe-me consultar seu pedido #48291 em nosso sistema agora mesmo... 🔍",
-        actionNote: "💡 Ação: Consulta à API de logística do e-commerce.",
-      },
-      {
-        sender: "agent",
-        time: "11:21",
-        text: "Localizei aqui! Seu pedido foi despachado ontem pela transportadora Jadlog.\n\n📦 Código de Rastreio: BR892109482\n🚚 Previsão de entrega: até Sexta-feira\n\nVocê pode acompanhar pelo link oficial: rastreio.avancini.com/BR892109482. Posso ajudar com mais alguma dúvida?",
-      },
-      {
-        sender: "client",
-        time: "11:22",
-        text: "Nossa, que rapidez! Era só isso mesmo, muito obrigado!",
-      },
-      {
-        sender: "agent",
-        time: "11:22",
-        text: "Por nada, Carlos! Estamos sempre à disposição. Tenha um excelente dia! 🚀",
-      },
-    ],
-  },
-];
-
-/* --------------------------------------------------------------------------
-   KNOWLEDGE BASE SOURCES (INSPIRADO NO GPTMAKER)
-   -------------------------------------------------------------------------- */
-const knowledgeSources = [
-  {
-    id: "pdf",
-    icon: "📄",
-    title: "Documentos e PDFs",
-    subtitle: "Catálogos, manuais e regras",
-    desc: "Envie PDFs de catálogos de produtos, tabelas de preço, manuais técnicos, cardápios ou políticas de garantia. O Agente extrai as respostas em segundos.",
-    sample: "manual_de_servicos_2026.pdf (142 páginas indexadas)",
-    status: "Indexado com precisão 100%",
+    question: "Todas as versões de IA são boas ou a primeira é limitada?",
+    answer: "Todas as nossas versões utilizam inteligência artificial de ponta e são treinadas rigorosamente com a base de conhecimento da sua empresa. O que muda de um plano para o outro são recursos operacionais adicionais (como múltiplos agentes trabalhando juntos, compreensão de áudio, integração profunda com CRMs/ERPs e volume de canais).",
   },
   {
-    id: "urls",
-    icon: "🌐",
-    title: "Links e Páginas Web",
-    subtitle: "Seu site sempre sincronizado",
-    desc: "Basta colar o link do seu site institucional ou e-commerce. A IA faz a leitura profunda de todas as páginas e se atualiza quando houver novidades.",
-    sample: "https://suaempresa.com.br/* (48 páginas sincronizadas)",
-    status: "Atualização automática contínua",
+    question: "A IA pode falar bobagens ou inventar informações?",
+    answer: "Nossos Agentes utilizam arquitetura de proteção RAG (Retrieval-Augmented Generation) com diretrizes rígidas. Eles respondem estritamente com base nos documentos, manuais, tabelas e regras que sua empresa fornecer. Se houver alguma pergunta fora das diretrizes, o Agente informa educadamente ou aciona sua equipe humana.",
   },
   {
-    id: "scripts",
-    icon: "💬",
-    title: "Scripts Comerciais & FAQs",
-    subtitle: "A voz dos seus melhores vendedores",
-    desc: "Cadastre as perguntas mais frequentes, argumentos de venda, regras de parcelamento e o tom de voz da sua marca para a IA responder com empatia.",
-    sample: "script_comercial_objeções_v3.txt (64 pares Pergunta/Resposta)",
-    status: "Tom de voz humanizado ativo",
-  },
-  {
-    id: "sheets",
-    icon: "📊",
-    title: "Planilhas e Dados Vivos",
-    subtitle: "Google Sheets, Notion e SQL",
-    desc: "Conecte planilhas de estoque, tabelas de honorários médicos ou bases no Notion. Quando você alterar uma célula, o Agente já responde atualizado.",
-    sample: "Planilha_Estoque_e_Precos_AoVivo (Sincronização 3s)",
-    status: "Conexão bi-direcional em tempo real",
-  },
-];
-
-/* --------------------------------------------------------------------------
-   INTEGRATIONS (ECOSSISTEMA OMNICHANNEL)
-   -------------------------------------------------------------------------- */
-const integrationCategories = [
-  {
-    category: "Canais de Atendimento",
-    items: [
-      { name: "WhatsApp Oficial", detail: "Meta Cloud API sem risco de banimento", tag: "Principal" },
-      { name: "Instagram Direct", detail: "Atende DMs e respostas de stories", tag: "Social" },
-      { name: "Webchat no Site", detail: "Widget flutuante para seu site", tag: "Web" },
-      { name: "Telegram", detail: "Grupos e canais corporativos", tag: "Chat" },
-    ],
-  },
-  {
-    category: "Agendas & Agendamento",
-    items: [
-      { name: "Google Calendar", detail: "Checa horários livres e cria convites", tag: "Google" },
-      { name: "Calendly", detail: "Sincronização instantânea de agenda", tag: "Agenda" },
-      { name: "Outlook Calendar", detail: "Operação corporativa Microsoft", tag: "MS" },
-    ],
-  },
-  {
-    category: "CRMs & Automação",
-    items: [
-      { name: "RD Station", detail: "Criação de leads e transbordo", tag: "CRM" },
-      { name: "HubSpot", detail: "Pipeline e histórico completo", tag: "CRM" },
-      { name: "ActiveCampaign", detail: "Disparo de tags e sequências", tag: "E-mail" },
-      { name: "Webhooks (n8n/Make)", detail: "Conecte a qualquer ERP ou banco", tag: "API" },
-    ],
-  },
-  {
-    category: "Voz & Inteligência",
-    items: [
-      { name: "Whisper (OpenAI)", detail: "Transcrição perfeita de áudios de clientes", tag: "Áudio" },
-      { name: "ElevenLabs", detail: "Respostas com voz humanizada indistinguível", tag: "Voz" },
-      { name: "Proteção RAG", detail: "Zero alucinações — dados 100% seguros", tag: "Segurança" },
-    ],
-  },
-];
-
-/* --------------------------------------------------------------------------
-   NICHE USE CASES (PARA QUEM É O AVANCINI SYNC)
-   -------------------------------------------------------------------------- */
-const nicheUseCases = [
-  {
-    niche: "Clínicas Médicas & Odonto",
-    icon: "🏥",
-    badge: "SAÚDE & BEM-ESTAR",
-    headline: "Atendimento humanizado 24h sem sobrecarregar a recepção.",
-    points: [
-      "Triagem prévia de sintomas e orientações de preparo",
-      "Agendamento automático na grade dos médicos",
-      "Confirmação ativa de consulta reduzindo faltas em 70%",
-    ],
-    metric: "94% das consultas agendadas direto pelo WhatsApp",
-  },
-  {
-    niche: "Imobiliárias & Construtoras",
-    icon: "🏢",
-    badge: "IMOBILIÁRIO & ALTO PADRÃO",
-    headline: "Qualificação instantânea para o corretor só falar com comprador real.",
-    points: [
-      "Filtro inteligente de metragem, bairro e teto orçamentário",
-      "Envio de fotos e fichas técnicas dos imóveis do acervo",
-      "Agendamento direto da visita com o corretor responsável",
-    ],
-    metric: "Resposta em 2s para leads de portais (Zap/VivaReal)",
-  },
-  {
-    niche: "Escritórios & Serviços B2B",
-    icon: "⚖️",
-    badge: "ADVOCACIA, CONTABILIDADE & B2B",
-    headline: "SDR Comercial autônomo agendando reuniões no Google Meet.",
-    points: [
-      "Qualifica faturamento, regime tributário e urgência do lead",
-      "Elimina curiosos e encaminha propostas formatadas",
-      "Notifica o consultor com resumo pronto da conversa",
-    ],
-    metric: "+68% de reuniões marcadas para o time comercial",
-  },
-  {
-    niche: "E-commerces & Negócios Locais",
-    icon: "🛍️",
-    badge: "VAREJO & OPERAÇÃO",
-    headline: "Resolução de dúvidas em 15 segundos e emissão de Pix.",
-    points: [
-      "Consulta status de envio e rastreio em tempo real",
-      "Gera código Pix e link de pagamento dentro do chat",
-      "Reativa clientes que abandonaram o carrinho",
-    ],
-    metric: "91% das dúvidas resolvidas sem atendente humano",
-  },
-];
-
-function AutonomousAgentShowcase({ onLead }: { onLead: (context: string) => void }) {
-  const [activeScenarioIndex, setActiveScenarioIndex] = useState(0);
-  const scenario = agentScenarios[activeScenarioIndex];
-
-  return (
-    <section className="sync-agent-showcase" id="demonstracao" aria-labelledby="sync-showcase-title">
-      <header className="sync-section-heading">
-        <div>
-          <span>01 / DEMONSTRAÇÃO AO VIVO</span>
-          <h2 id="sync-showcase-title">Veja como o Agente de IA<br />conversa, decide e fecha vendas.</h2>
-        </div>
-        <p>Sem menus engessados de botões. O Agente de IA compreende a linguagem natural do cliente, ouve áudios, executa ações no sistema e agenda compromissos.</p>
-      </header>
-
-      <div className="agent-scenario-picker" role="tablist" aria-label="Cenários de Agentes de IA">
-        {agentScenarios.map((item, index) => (
-          <button
-            type="button"
-            key={item.id}
-            role="tab"
-            aria-selected={activeScenarioIndex === index}
-            className={`agent-scenario-btn ${activeScenarioIndex === index ? "active" : ""}`}
-            onClick={() => setActiveScenarioIndex(index)}
-          >
-            <span className="scenario-idx">0{index + 1}</span>
-            <div className="scenario-btn-info">
-              <strong>{item.name}</strong>
-              <small>{item.role}</small>
-            </div>
-          </button>
-        ))}
-      </div>
-
-      <div className="agent-showcase-grid">
-        {/* Mockup do WhatsApp com tags flutuantes inspiradas no GPTMaker */}
-        <div className="agent-chat-wrapper">
-          {/* Tags flutuantes interativas ao redor do celular */}
-          <div className="agent-floating-tags-track" aria-hidden="true">
-            {scenario.floatingTags.map((tag, idx) => (
-              <span key={idx} className={`agent-floating-tag tag-pos-${idx + 1}`}>
-                <i>⚡</i> {tag}
-              </span>
-            ))}
-          </div>
-
-          <div className="agent-chat-mockup">
-            <div className="agent-chat-phone-bar">
-              <span>10:10</span>
-              <div className="phone-notch" />
-              <div className="phone-signals">
-                <span className="sig-bar" />
-                <span className="sig-bar" />
-                <span className="sig-bar" />
-                <span className="phone-battery" />
-              </div>
-            </div>
-
-            <div className="agent-chat-header">
-              <div className="agent-chat-avatar">
-                <AvanciniMark variant="sync" className="agent-avatar-mark" />
-                <span className="agent-live-dot" aria-label="Online" />
-              </div>
-              <div className="agent-chat-info">
-                <strong>{scenario.name}</strong>
-                <span className="agent-chat-status">
-                  <i>●</i> Agente IA Ativo · Responde em 1.2s
-                </span>
-              </div>
-              <span className="agent-segment-pill">{scenario.segment.split(",")[0]}</span>
-            </div>
-
-            <div className="agent-chat-body">
-              {scenario.messages.map((msg, i) => (
-                <div key={i} className={`chat-bubble-row ${msg.sender}`}>
-                  <div className={`chat-bubble ${msg.sender}`}>
-                    {msg.isAudio ? (
-                      <div className="chat-audio-player">
-                        <button type="button" className="audio-play-btn" aria-label="Reproduzir áudio">▶</button>
-                        <div className="audio-waveform">
-                          <span /><span /><span /><span /><span /><span /><span /><span />
-                        </div>
-                        <span className="audio-time">{msg.audioDuration}</span>
-                      </div>
-                    ) : null}
-                    <p>{msg.text}</p>
-                    <span className="bubble-time">{msg.time} {msg.sender === "agent" && <i className="check-marks">✓✓</i>}</span>
-                  </div>
-                  {msg.actionNote && (
-                    <div className="agent-action-badge">
-                      <span>{msg.actionNote}</span>
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
-
-            <footer className="agent-chat-footer">
-              <span className="agent-tools-label">⚡ FERRAMENTAS INTEGRADAS:</span>
-              <div className="agent-tools-tags">
-                {scenario.tools.map((tool) => (
-                  <span key={tool} className="agent-tool-tag">{tool}</span>
-                ))}
-              </div>
-            </footer>
-          </div>
-        </div>
-
-        <div className="agent-brain-panel">
-          <div className="agent-brain-card">
-            <div className="brain-header">
-              <span className="brain-tag">🧠 CÉREBRO DO AGENTE DE IA</span>
-              <small>{scenario.metrics}</small>
-            </div>
-            <h3>O que a inteligência artificial executou nesta conversa:</h3>
-            <p className="brain-reasoning">{scenario.reasoning}</p>
-
-            <div className="brain-capabilities-list">
-              <div className="brain-cap-item">
-                <span className="cap-icon">01</span>
-                <div>
-                  <strong>Compreensão Contextual Livre</strong>
-                  <p>Entendeu a real intenção e ouviu o áudio do cliente sem exigir menus engessados.</p>
-                </div>
-              </div>
-              <div className="brain-cap-item">
-                <span className="cap-icon">02</span>
-                <div>
-                  <strong>Execução Autônoma de Ações</strong>
-                  <p>Consultou disponibilidade de agenda, gravou no sistema e sincronizou com o CRM.</p>
-                </div>
-              </div>
-              <div className="brain-cap-item">
-                <span className="cap-icon">03</span>
-                <div>
-                  <strong>Tom de Voz Humanizado</strong>
-                  <p>Manteve cordialidade, empatia e alinhamento com a postura da sua marca.</p>
-                </div>
-              </div>
-            </div>
-
-            <button
-              type="button"
-              className="agent-cta-btn"
-              onClick={() => onLead(`um Agente de IA para ${scenario.role} no segmento de ${scenario.segment}`)}
-            >
-              Quero um Agente como esse na minha empresa <SyncArrow />
-            </button>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-const comparisonPoints = [
-  {
-    topic: "Experiência do Cliente",
-    oldChatbot: "Menus rígidos ('digite 1 para vendas, 2 para suporte'). Se o cliente digitar qualquer frase livre, o bot trava e não responde.",
-    aiAgent: "Conversação 100% livre e humana por texto e áudio. Entende gírias, perguntas complexas e responde com empatia imediata.",
-  },
-  {
-    topic: "Compreensão de Áudio",
-    oldChatbot: "Ignora completamente áudios ou responde com mensagem automática pedindo para 'digitar apenas texto'.",
-    aiAgent: "Ouve áudios longos com tecnologia Whisper, transcreve em milissegundos e pode responder em áudio com voz humanizada.",
-  },
-  {
-    topic: "Resolução de Problemas",
-    oldChatbot: "Repete links genéricos do site e frequentemente deixa o cliente sem resposta ou manda esperar atendente.",
-    aiAgent: "Executa ações reais: agenda reuniões no Google Calendar, consulta estoque/pedidos e emite links de pagamento Pix.",
-  },
-  {
-    topic: "Qualificação de Vendas (SDR)",
-    oldChatbot: "Coleta formulários chatos com dezenas de campos que o cliente abandona pela metade.",
-    aiAgent: "Faz perguntas fluidas em tom de conversa, descobre orçamento, faturamento ou urgência e entrega o lead pronto para o vendedor.",
-  },
-  {
-    topic: "Aprendizado e Atualização",
-    oldChatbot: "Exige reprogramar fluxogramas gigantescos toda vez que um preço ou serviço muda.",
-    aiAgent: "Aprende lendo seus documentos, PDFs e catálogos. Se sua regra mudar, basta atualizar a base de conhecimento.",
-  },
-];
-
-const capabilities = [
-  {
-    number: "01",
-    title: "Cérebro Treinado na Sua Empresa",
-    description: "Seu Agente de IA lê manuais, tabelas de preços, regras de contratação e histórico de atendimento para responder rigorosamente dentro das suas diretrizes.",
-  },
-  {
-    number: "02",
-    title: "Compreensão & Envio de Áudio",
-    description: "Mais de 60% dos brasileiros preferem mandar áudio no WhatsApp. Seu Agente escuta áudios de qualquer tamanho e responde com voz natural e clara.",
-  },
-  {
-    number: "03",
-    title: "Agendamento de Reuniões Autônomo",
-    description: "Conectado ao Google Calendar ou Calendly, ele checa horários livres, negocia o melhor momento com o cliente e envia o convite com link de chamada.",
-  },
-  {
-    number: "04",
-    title: "Qualificação Cirúrgica de Leads (SDR)",
-    description: "Identifica se o cliente tem orçamento, necessidade e urgência antes de envolver seu time, garantindo que seus vendedores só falem com quem tem potencial de compra.",
-  },
-  {
-    number: "05",
-    title: "Integração Direta com CRM & APIs",
-    description: "Envia os dados capturados direto para o RD Station, HubSpot, ActiveCampaign, Notion ou Google Sheets, mantendo seu funil de vendas 100% atualizado.",
-  },
-  {
-    number: "06",
-    title: "Transbordo Humano Inteligente",
-    description: "Quando o caso exige um atendente humano, o Agente notifica seu vendedor no WhatsApp com um resumo executivo de tudo o que o cliente falou.",
-  },
-];
-
-const faqs = [
-  {
-    question: "O que diferencia um Agente de IA de um chatbot tradicional?",
-    answer: "Um chatbot tradicional usa regras estáticas de botões e árvores engessadas (se o cliente não clicar exatamente na opção, ele trava). Um Agente de IA da Avancini utiliza modelos de linguagem modernos para raciocinar, interpretar áudio ou texto, consultar bases de dados em tempo real e executar tarefas reais (como agendar compromissos e atualizar seu CRM).",
-  },
-  {
-    question: "O Agente de IA pode inventar informações (alucinar)?",
-    answer: "Não. Nossos Agentes são calibrados com rigorosas camadas de segurança RAG (Retrieval-Augmented Generation) e System Prompts blindados. Eles respondem estritamente com base nos documentos, manuais e regras da sua empresa. Se um cliente fizer uma pergunta fora do escopo, o Agente informa com educação ou transfere para um humano.",
-  },
-  {
-    question: "Preciso trocar de número de WhatsApp?",
-    answer: "Não. É possível conectar o Agente de IA diretamente ao seu número de WhatsApp atual ou configurar um novo número exclusivo para a operação de atendimento e vendas.",
-  },
-  {
-    question: "Como o Agente aprende sobre os meus produtos e serviços?",
-    answer: "Basta nos fornecer os materiais da sua empresa (PDFs, catálogo, site, regras comerciais, dúvidas frequentes ou planilhas). Nossa equipe processa esses dados, estrutura a base de conhecimento e calibra o Agente antes de colocar no ar.",
-  },
-  {
-    question: "O que acontece quando o cliente precisa falar com uma pessoa?",
-    answer: "O Agente detecta quando o cliente solicita atendimento humano ou quando atinge critérios estratégicos (como um lead de alto valor pronto para fechar). Ele pausa o atendimento automático e notifica sua equipe pelo WhatsApp com um resumo executivo pronto de toda a conversa.",
-  },
-  {
-    question: "Existe taxa de criação ou contrato de fidelidade?",
-    answer: "Não há taxa de criação ou setup inicial nas condições de lançamento. O plano mensal pode ser cancelado a qualquer momento sem multa. Para planos semestrais e anuais, você conta com descontos exclusivos de 10% e 20%.",
+    question: "Existe taxa de criação (setup) ou fidelidade obrigatória?",
+    answer: "Não há taxa de criação nas condições atuais. A calibração inicial e estruturação da base de conhecimento já estão inclusas. Você pode optar pelo plano mensal sem fidelidade ou escolher o ciclo anual para economizar 20% no valor.",
   },
 ];
 
@@ -791,9 +410,11 @@ export default function AvanciniSyncPage() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [leadContext, setLeadContext] = useState("");
-  const [selectedPlanIndex, setSelectedPlanIndex] = useState(1);
-  const [paymentCycle, setPaymentCycle] = useState<SyncPaymentCycle>("monthly");
-  const [activeKnowledgeSource, setActiveKnowledgeSource] = useState(0);
+  const [billingPeriod, setBillingPeriod] = useState<"monthly" | "annual">("monthly");
+  const [activeJourneyIndex, setActiveJourneyIndex] = useState(0);
+  const [activeNicheIndex, setActiveNicheIndex] = useState(0);
+
+  // Lead modal states
   const [leadName, setLeadName] = useState("");
   const [leadPhone, setLeadPhone] = useState("");
   const [selectedCountry, setSelectedCountry] = useState(countriesList[0]);
@@ -810,7 +431,7 @@ export default function AvanciniSyncPage() {
     setMenuOpen(false);
     window.setTimeout(() => {
       window.history.replaceState(null, "", href);
-      document.querySelector(href)?.scrollIntoView({ behavior: "auto", block: "start" });
+      document.querySelector(href)?.scrollIntoView({ behavior: "smooth", block: "start" });
     }, 120);
   };
 
@@ -818,7 +439,7 @@ export default function AvanciniSyncPage() {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    const updateHeader = () => setScrolled(window.scrollY > 24);
+    const updateHeader = () => setScrolled(window.scrollY > 20);
     updateHeader();
     window.addEventListener("scroll", updateHeader, { passive: true });
     return () => window.removeEventListener("scroll", updateHeader);
@@ -826,20 +447,18 @@ export default function AvanciniSyncPage() {
 
   useEffect(() => {
     if (!leadContext && !menuOpen) return;
-    const previouslyFocused = document.activeElement instanceof HTMLElement ? document.activeElement : null;
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         setLeadContext("");
         setMenuOpen(false);
       }
     };
-    const previousOverflow = document.body.style.overflow;
+    const prev = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     window.addEventListener("keydown", onKeyDown);
     return () => {
-      document.body.style.overflow = previousOverflow;
+      document.body.style.overflow = prev;
       window.removeEventListener("keydown", onKeyDown);
-      previouslyFocused?.focus({ preventScroll: true });
     };
   }, [leadContext, menuOpen]);
 
@@ -848,12 +467,6 @@ export default function AvanciniSyncPage() {
     const timer = window.setTimeout(() => leadInputRef.current?.focus(), 80);
     return () => window.clearTimeout(timer);
   }, [leadContext]);
-
-  useEffect(() => {
-    if (!menuOpen) return;
-    const frame = window.requestAnimationFrame(() => menuCloseRef.current?.focus({ preventScroll: true }));
-    return () => window.cancelAnimationFrame(frame);
-  }, [menuOpen]);
 
   const openLead = (context: string) => {
     setLeadContext(context);
@@ -882,14 +495,14 @@ export default function AvanciniSyncPage() {
           name,
           phone: fullPhone,
           intent: `Quero conversar sobre ${normalizedLeadContext}`,
-          source: "sync_modal",
+          source: "sync_commercial",
           page: "/sync",
         }),
       }).catch(() => {});
     } catch {}
 
     const phoneText = fullPhone ? ` Meu WhatsApp é ${fullPhone}.` : "";
-    const message = `Olá! Meu nome é ${name}.${phoneText} Conheci a Avancini Sync e quero conversar sobre ${normalizedLeadContext}.`;
+    const message = `Olá! Meu nome é ${name}.${phoneText} Conheci o Avancini Sync e quero saber mais sobre ${normalizedLeadContext}.`;
     window.open(whatsappFor(message), "_blank", "noopener,noreferrer");
     setLeadSubmitting(false);
     setLeadContext("");
@@ -905,13 +518,14 @@ export default function AvanciniSyncPage() {
   });
 
   return (
-    <main className="sync-page">
+    <main className="sync-page sync-commercial-layout">
+      {/* Header Compacto de Navegação */}
       <header className={`header sync-shared-header ${scrolled ? "scrolled" : ""}`}>
         <a href="#inicio" className="logo" aria-label="Avancini Sync, início">
           <AvanciniMark variant="sync" className="logo-mark avancini-a-mark" />
           <span>
             <span className="brand-name">AVANCINI <b>SYNC</b></span>
-            <small>Agentes de IA Autônomos</small>
+            <small>Equipe Digital de IA</small>
           </span>
         </a>
         <div className="web-ecosystem-switch" aria-label="Ecossistema Avancini">
@@ -927,6 +541,7 @@ export default function AvanciniSyncPage() {
         </button>
       </header>
 
+      {/* Menu Overlay */}
       {menuOpen && (
         <div
           ref={menuDialogRef}
@@ -937,7 +552,7 @@ export default function AvanciniSyncPage() {
           aria-label="Menu principal do Avancini Sync"
         >
           <div className="sync-menu-top">
-            <span>NAVEGAÇÃO <i /> 07 SEÇÕES</span>
+            <span>NAVEGAÇÃO COMERCIAL <i /> AVANCINI SYNC</span>
             <div className="sync-menu-network" aria-label="Ecossistema Avancini">
               <Link href="/" onClick={() => setMenuOpen(false)}>
                 AVANCINI OS <SyncArrow />
@@ -952,13 +567,13 @@ export default function AvanciniSyncPage() {
           </div>
           <nav>
             {[
-              ["01", "Início", "Inteligência Artificial que vende", "#inicio"],
-              ["02", "Demonstração", "Agentes em ação ao vivo", "#demonstracao"],
-              ["03", "Treinamento", "Como o Agente aprende", "#treinamento"],
-              ["04", "Para quem é", "Casos de uso por nicho", "#para-quem"],
-              ["05", "Integrações", "Canais e ecossistema conectado", "#integracoes"],
-              ["06", "Comparativo", "Chatbot antigo vs. Agente IA", "#comparativo"],
-              ["07", "Planos e preços", "Implantação e acompanhamento", "#planos"],
+              ["01", "Início", "Equipe digital que vende", "#inicio"],
+              ["02", "Jornada da IA", "Pré-venda, Venda e Pós-venda", "#jornada"],
+              ["03", "Custo vs. Retorno", "IA x Ampliar equipe humana", "#retorno"],
+              ["04", "Segmentos & Nichos", "Aplicações reais por nicho", "#nichos"],
+              ["05", "Planos Simplificados", "Sem taxa de criação", "#planos"],
+              ["06", "Conexão WhatsApp", "Integração rápida via QR Code", "#conexao"],
+              ["07", "Dúvidas Frequentes", "Respostas diretas", "#duvidas"],
             ].map(([number, label, description, href]) => (
               <a href={href} key={number} onClick={(event) => navigateFromMenu(event, href)}>
                 <small>{number}</small>
@@ -969,379 +584,408 @@ export default function AvanciniSyncPage() {
             ))}
           </nav>
           <div className="sync-menu-bottom">
-            <span><i /> SEU ATENDIMENTO PODE COMEÇAR POR UMA CONVERSA</span>
+            <span><i /> FAÇA SUA EQUIPE RENDER MAIS ANTES DE CONTRATAR MAIS GENTE</span>
             <button
               type="button"
               onClick={() => {
                 setMenuOpen(false);
-                openLead("a implantação de um Agente de IA na minha empresa");
+                openLead("uma demonstração de como a IA pode atender minha empresa");
               }}
             >
-              SOLICITAR ORÇAMENTO <SyncArrow />
+              SOLICITAR DEMONSTRAÇÃO <SyncArrow />
             </button>
           </div>
         </div>
       )}
 
-      {/* Hero Section — Inspirado na proposta comercial magnética do GPTMaker */}
-      <section className="sync-hero" id="inicio">
+      {/* 1. HERO COM FOCO EM VALOR, ESCALA E REDUÇÃO DE SOBRECARGA */}
+      <section className="sync-hero sync-hero-compact" id="inicio">
         <div className="sync-hero-grid" aria-hidden="true" />
         <div className="sync-hero-orbit" aria-hidden="true"><i /><i /><i /></div>
         <AvanciniMark variant="sync" className="sync-hero-mark avancini-a-mark" />
+        
         <div className="sync-hero-copy">
           <div className="sync-hero-badge-row">
-            <span className="sync-eyebrow"><i /> AGENTE DE IA AUTÔNOMO · ATENDIMENTO &amp; VENDAS 24/7</span>
-            <span className="sync-hero-live-pill"><i /> WHATSAPP META API · PROTEÇÃO ANTI-ALUCINAÇÃO</span>
-          </div>
-          <h1>Equipe de atendimento sobrecarregada?<br /><em>Dê superpoderes com um Agente de IA que pensa, atende e vende.</em></h1>
-          <p>Esqueça menus lentos de &ldquo;digite 1 ou 2&rdquo;. Tenha um colaborador de IA dedicado 24 horas por dia executando tarefas, compreendendo áudios livres, qualificando clientes e agendando compromissos com precisão cirúrgica.</p>
-          
-          <div className="sync-hero-actions">
-            <a href="#demonstracao">Ver Agentes em ação <SyncDownArrow /></a>
-            <a className="sync-plans-shortcut" href="#planos">Ver planos <SyncDownArrow /></a>
-            <button type="button" onClick={() => openLead("implantar um Agente de IA para automatizar meu atendimento e vendas")}>Quero um Agente de IA na minha empresa <SyncArrow /></button>
+            <span className="sync-eyebrow"><i /> FORÇA DE TRABALHO DIGITAL · ATENDIMENTO &amp; VENDAS</span>
+            <span className="sync-hero-live-pill"><i /> OPERAÇÃO 24/7 · RESPOSTA EM &lt; 2S</span>
           </div>
 
-          {/* ROI Stats Bar — Inspirada nas estatísticas de alto impacto do GPTMaker */}
-          <div className="sync-hero-stats-grid">
-            <div className="hero-stat-card">
-              <span className="hero-stat-number">+68%</span>
-              <p>Mais chances de concretizar uma venda respondendo no primeiro minuto</p>
-            </div>
+          <h1>Sua empresa crescendo sem precisar<br /><em>inchar a equipe para atender clientes.</em></h1>
+          
+          <p>
+            Um Agente de IA autônomo treinado no seu negócio que assume tarefas repetitivas, atende noites e finais de semana, qualifica leads e agenda reuniões — por uma fração do custo de uma nova contratação.
+          </p>
+
+          <div className="sync-hero-actions">
+            <a href="#retorno">Comparar com funcionário <SyncDownArrow /></a>
+            <a className="sync-plans-shortcut" href="#planos">Ver planos simples <SyncDownArrow /></a>
+            <button type="button" onClick={() => openLead("implantar um Agente de IA na minha empresa")}>
+              Quero uma demonstração na prática <SyncArrow />
+            </button>
+          </div>
+
+          {/* 4 Pilares Comerciais em Destaque */}
+          <div className="sync-hero-stats-grid sync-commercial-stats">
             <div className="hero-stat-card">
               <span className="hero-stat-number">&lt; 2s</span>
-              <p>Tempo de resposta imediata sem nenhuma fila de espera no WhatsApp</p>
-            </div>
-            <div className="hero-stat-card">
-              <span className="hero-stat-number">94%</span>
-              <p>De dúvidas e agendamentos resolvidos 100% no automático pela IA</p>
+              <p>Tempo de resposta imediato para nenhum lead desistir por demora</p>
             </div>
             <div className="hero-stat-card">
               <span className="hero-stat-number">24/7</span>
-              <p>Operação ativa dia e noite, finais de semana e feriados sem pausas</p>
+              <p>Operação ativa sem pausas, cobrindo horários em que ninguém atende</p>
+            </div>
+            <div className="hero-stat-card">
+              <span className="hero-stat-number">Ilimitado</span>
+              <p>Capacidade de atender centenas de clientes simultaneamente sem fila</p>
+            </div>
+            <div className="hero-stat-card">
+              <span className="hero-stat-number">Produtividade</span>
+              <p>Sua equipe atual rende muito mais focando apenas no fechamento</p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Interactive Showcase com WhatsApp Simulator e Floating Action Tags */}
-      <AutonomousAgentShowcase onLead={openLead} />
-
-      {/* NOVA SEÇÃO: Como seu Agente Aprende (Knowledge Base) — Inspirada no GPTMaker */}
-      <section className="sync-training-section" id="treinamento" aria-labelledby="sync-training-title">
+      {/* 2. A JORNADA DA IA: PRÉ-VENDA → VENDA → PÓS-VENDA → OPERAÇÃO */}
+      <section className="sync-commercial-section" id="jornada" aria-labelledby="sync-journey-title">
         <header className="sync-section-heading">
           <div>
-            <span>02 / BASE DE CONHECIMENTO</span>
-            <h2 id="sync-training-title">Simples de treinar,<br />cirúrgico no resultado.</h2>
+            <span>01 / A FORÇA DE TRABALHO DIGITAL</span>
+            <h2 id="sync-journey-title">Você não contrata só um chatbot.<br />Você contrata um colaborador digital.</h2>
           </div>
-          <p>Você fornece os materiais da sua empresa e a tecnologia Avancini calibra o Agente para responder com fidelidade absoluta, sem inventar dados.</p>
+          <p>A IA atua em todas as etapas da sua empresa, reduzindo tarefas repetitivas e aumentando a conversão.</p>
         </header>
 
-        <div className="training-sources-container">
-          <div className="training-sources-list">
-            {knowledgeSources.map((source, idx) => (
+        <div className="commercial-journey-container">
+          <div className="journey-tabs-list" role="tablist" aria-label="Etapas de atuação da IA">
+            {commercialJourney.map((stage, idx) => (
               <button
                 type="button"
-                key={source.id}
-                className={`training-source-card ${activeKnowledgeSource === idx ? "active" : ""}`}
-                onClick={() => setActiveKnowledgeSource(idx)}
+                key={stage.id}
+                role="tab"
+                aria-selected={activeJourneyIndex === idx}
+                className={`journey-tab-btn ${activeJourneyIndex === idx ? "active" : ""}`}
+                onClick={() => setActiveJourneyIndex(idx)}
               >
-                <div className="source-card-header">
-                  <span className="source-icon">{source.icon}</span>
-                  <div>
-                    <strong>{source.title}</strong>
-                    <small>{source.subtitle}</small>
+                <span className="journey-tab-phase">{stage.phase}</span>
+                <strong>{stage.title}</strong>
+              </button>
+            ))}
+          </div>
+
+          <div className="journey-display-card">
+            {(() => {
+              const current = commercialJourney[activeJourneyIndex];
+              return (
+                <div className="journey-content-wrapper">
+                  <div className="journey-header">
+                    <span className="journey-badge">{current.badge}</span>
+                    <h3>{current.title}</h3>
+                    <p>{current.summary}</p>
                   </div>
+                  <ul className="journey-points-list">
+                    {current.points.map((pt, i) => (
+                      <li key={i}>
+                        <i>⚡</i>
+                        <span>{pt}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="journey-metric-callout">
+                    <small>{current.metricLabel}:</small>
+                    <strong>{current.metricValue}</strong>
+                  </div>
+                  <button
+                    type="button"
+                    className="journey-cta-btn"
+                    onClick={() => openLead(`a atuação da IA em ${current.title}`)}
+                  >
+                    Ver demonstração para {current.title.split("&")[0]} <SyncArrow />
+                  </button>
                 </div>
-                <p>{source.desc}</p>
-                <span className="source-card-status">
-                  <i>●</i> {source.status}
-                </span>
-              </button>
-            ))}
-          </div>
-
-          <div className="training-preview-terminal">
-            <div className="terminal-header">
-              <span className="terminal-dots"><i /><i /><i /></span>
-              <span className="terminal-title">AVANCINI BRAIN CORE // INGESTÃO DE CONHECIMENTO</span>
-              <span className="terminal-badge">RAG ATIVO</span>
-            </div>
-            <div className="terminal-body">
-              <div className="terminal-line"><span className="term-prompt">&gt;</span> Fonte selecionada: <b>{knowledgeSources[activeKnowledgeSource].title}</b></div>
-              <div className="terminal-line"><span className="term-prompt">&gt;</span> Arquivo de exemplo: <code>{knowledgeSources[activeKnowledgeSource].sample}</code></div>
-              <div className="terminal-line"><span className="term-prompt">&gt;</span> Processamento semântico: 100% concluído em milissegundos</div>
-              <div className="terminal-line term-success"><span className="term-prompt">&gt;</span> Status: Proteção anti-alucinação validada. A IA só responderá o que estiver documentado.</div>
-              <div className="terminal-knowledge-box">
-                <small>FRAGMENTO EXTRAÍDO PELA IA:</small>
-                <p>&ldquo;Horário de atendimento: Segunda a Sexta das 8h às 19h. Pagamentos via Pix têm 5% de desconto. Reuniões de avaliação têm duração média de 45 minutos.&rdquo;</p>
-              </div>
-            </div>
-            <footer className="terminal-footer">
-              <span>💡 Proteção corporativa: seus dados nunca são compartilhados ou usados para treinar modelos de terceiros.</span>
-            </footer>
+              );
+            })()}
           </div>
         </div>
       </section>
 
-      {/* NOVA SEÇÃO: Para quem é o Avancini Sync (Segmentos & Nichos) — Inspirada no GPTMaker */}
-      <section className="sync-niches-section" id="para-quem" aria-labelledby="sync-niches-title">
+      {/* 3. COMPARATIVO FINANCEIRO: CUSTO DE FUNCIONÁRIO VS. AGENTE DE IA */}
+      <section className="sync-commercial-section sync-cost-comparison" id="retorno" aria-labelledby="sync-cost-title">
         <header className="sync-section-heading">
           <div>
-            <span>03 / CASOS DE USO POR NICHO</span>
-            <h2 id="sync-niches-title">Feito para quem não aceita<br />perder clientes por demora.</h2>
+            <span>02 / IMPACTO FINANCEIRO &amp; RETORNO</span>
+            <h2 id="sync-cost-title">Quanto custa aumentar a equipe?<br />Faça sua empresa render antes de contratar.</h2>
           </div>
-          <p>Veja como empresas de diferentes segmentos transformaram seu WhatsApp em uma máquina previsível de novos negócios.</p>
+          <p>Entenda por que uma solução de inteligência artificial oferece escala sem gerar custos trabalhistas desproporcionais.</p>
         </header>
 
-        <div className="niches-grid">
-          {nicheUseCases.map((niche, i) => (
-            <article className="niche-card" key={i}>
-              <div className="niche-card-top">
-                <span className="niche-icon">{niche.icon}</span>
-                <span className="niche-badge">{niche.badge}</span>
-              </div>
-              <h3>{niche.niche}</h3>
-              <p className="niche-headline">{niche.headline}</p>
-              <ul className="niche-points">
-                {niche.points.map((pt, idx) => (
-                  <li key={idx}><i>✓</i> {pt}</li>
-                ))}
-              </ul>
-              <div className="niche-metric-bar">
-                <small>RESULTADO PRÁTICO:</small>
-                <strong>{niche.metric}</strong>
-              </div>
-              <button
-                type="button"
-                className="niche-cta-btn"
-                onClick={() => openLead(`um Agente de IA especializado em ${niche.niche}`)}
-              >
-                Quero para {niche.niche.split("&")[0]} <SyncArrow />
-              </button>
-            </article>
+        <div className="financial-comparison-grid">
+          {/* Card Funcionário Tradicional */}
+          <div className="fin-card fin-card-employee">
+            <div className="fin-card-top">
+              <span className="fin-badge fin-badge-alt">OPERAÇÃO TRADICIONAL</span>
+              <h3>{financialComparison.employee.title}</h3>
+              <p>{financialComparison.employee.subtitle}</p>
+            </div>
+            <ul className="fin-list">
+              {financialComparison.employee.items.map((item, i) => (
+                <li key={i}>
+                  <strong className="fin-negative">✕ {item.label}</strong>
+                  <small>{item.detail}</small>
+                </li>
+              ))}
+            </ul>
+            <div className="fin-verdict fin-verdict-alt">
+              <small>CENÁRIO:</small>
+              <strong>{financialComparison.employee.verdict}</strong>
+            </div>
+          </div>
+
+          {/* Card Agente de IA */}
+          <div className="fin-card fin-card-ai">
+            <div className="fin-card-top">
+              <span className="fin-badge">SOLUÇÃO AVANCINI SYNC</span>
+              <h3>{financialComparison.aiAgent.title}</h3>
+              <p>{financialComparison.aiAgent.subtitle}</p>
+            </div>
+            <ul className="fin-list">
+              {financialComparison.aiAgent.items.map((item, i) => (
+                <li key={i}>
+                  <strong className="fin-positive">✓ {item.label}</strong>
+                  <small>{item.detail}</small>
+                </li>
+              ))}
+            </ul>
+            <div className="fin-verdict fin-verdict-positive">
+              <small>VANTAGEM ECONÔMICA:</small>
+              <strong>{financialComparison.aiAgent.verdict}</strong>
+            </div>
+          </div>
+        </div>
+
+        <div className="fin-closing-note">
+          <p>
+            💡 <strong>Importante:</strong> Não prometemos milagres nem demissão em massa. Nosso foco é <em>produtividade real</em>: permitir que a mesma equipe atenda 5x mais clientes e cresça sem elevar a folha de pagamento na mesma proporção.
+          </p>
+        </div>
+      </section>
+
+      {/* 4. NICHOS: O QUE A IA EXECUTA EM CADA SEGMENTO */}
+      <section className="sync-commercial-section" id="nichos" aria-labelledby="sync-niches-title">
+        <header className="sync-section-heading">
+          <div>
+            <span>03 / ADAPTAÇÃO POR SEGMENTO</span>
+            <h2 id="sync-niches-title">Não vendemos IA genérica.<br />Configuramos a IA para o seu negócio.</h2>
+          </div>
+          <p>Cada segmento possui rotinas e necessidades específicas. Veja exatamente o que o Agente executa na sua área:</p>
+        </header>
+
+        <div className="niche-selector-tabs" role="tablist" aria-label="Nichos atendidos">
+          {nicheSolutions.map((item, idx) => (
+            <button
+              type="button"
+              key={item.id}
+              role="tab"
+              aria-selected={activeNicheIndex === idx}
+              className={`niche-tab-pill ${activeNicheIndex === idx ? "active" : ""}`}
+              onClick={() => setActiveNicheIndex(idx)}
+            >
+              <span>{item.icon}</span>
+              <strong>{item.title}</strong>
+            </button>
           ))}
         </div>
-      </section>
 
-      {/* NOVA SEÇÃO: Ecossistema de Integrações Omnichannel — Inspirada no GPTMaker */}
-      <section className="sync-integrations-section" id="integracoes" aria-labelledby="sync-integrations-title">
-        <header className="sync-section-heading">
-          <div>
-            <span>04 / ECOSSISTEMA OMNICHANNEL</span>
-            <h2 id="sync-integrations-title">Conectado a tudo que<br />sua empresa já utiliza.</h2>
-          </div>
-          <p>O Agente de IA atua de forma unificada no WhatsApp, Instagram e Site, sincronizando tudo com seu CRM, agenda e ferramentas de cobrança.</p>
-        </header>
+        {(() => {
+          const niche = nicheSolutions[activeNicheIndex];
+          return (
+            <div className="niche-detail-panel">
+              <div className="niche-detail-header">
+                <div>
+                  <span className="niche-tag-badge">{niche.badge}</span>
+                  <h3>{niche.icon} {niche.title}</h3>
+                </div>
+                <p>{niche.role}</p>
+              </div>
 
-        <div className="integrations-showcase-grid">
-          {integrationCategories.map((cat, idx) => (
-            <div className="integration-category-card" key={idx}>
-              <h4>{cat.category}</h4>
-              <div className="integration-items-list">
-                {cat.items.map((item, i) => (
-                  <div className="integration-item-row" key={i}>
-                    <div className="integration-item-info">
-                      <strong>{item.name}</strong>
-                      <small>{item.detail}</small>
-                    </div>
-                    <span className="integration-tag">{item.tag}</span>
+              <div className="niche-tasks-grid">
+                {niche.tasks.map((task, i) => (
+                  <div className="niche-task-item" key={i}>
+                    <span className="niche-task-num">0{i + 1}</span>
+                    <p>{task}</p>
                   </div>
                 ))}
               </div>
-            </div>
-          ))}
-        </div>
-      </section>
 
-      {/* Comparison Section: Old Chatbot vs. Modern AI Agent */}
-      <section className="sync-comparison-section" id="comparativo">
-        <header className="sync-section-heading">
-          <div>
-            <span>05 / A EVOLUÇÃO DO ATENDIMENTO</span>
-            <h2>Chatbot Antigo vs.<br />Agente de IA Avancini.</h2>
-          </div>
-          <p>Entenda por que menus engessados perdem clientes e como um Agente de IA autônomo eleva a taxa de conversão da sua empresa.</p>
-        </header>
-
-        <div className="comparison-table-wrap">
-          <div className="comparison-table-header">
-            <div className="col-aspect">ASPECTO</div>
-            <div className="col-old">❌ CHATBOT TRADICIONAL</div>
-            <div className="col-new">⚡ AGENTE DE IA SYNC</div>
-          </div>
-          <div className="comparison-table-rows">
-            {comparisonPoints.map((pt, i) => (
-              <div className="comparison-row" key={i}>
-                <div className="col-aspect"><strong>{pt.topic}</strong></div>
-                <div className="col-old"><p>{pt.oldChatbot}</p></div>
-                <div className="col-new"><p>{pt.aiAgent}</p></div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Capabilities & Superpowers Section */}
-      <section className="sync-capabilities-section" id="recursos">
-        <header className="sync-section-heading">
-          <div>
-            <span>06 / RECURSOS E TECNOLOGIA</span>
-            <h2>Tudo o que seu Agente de IA<br />é capaz de executar.</h2>
-          </div>
-          <p>Construído sobre modelos de linguagem de última geração com arquitetura segura anti-alucinação e conexão em tempo real.</p>
-        </header>
-
-        <div className="capabilities-grid">
-          {capabilities.map((cap) => (
-            <article className="capability-card" key={cap.number}>
-              <span className="cap-number">{cap.number}</span>
-              <h3>{cap.title}</h3>
-              <p>{cap.description}</p>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      {/* Pricing Section */}
-      <section className="sync-pricing" id="planos">
-        <header className="sync-section-heading">
-          <div><span>07 / PLANOS &amp; IMPLANTAÇÃO</span><h2>Invista em produtividade.<br />Sem taxa de criação inicial.</h2></div>
-          <p>Escolha a estrutura de Agentes de IA que sua operação necessita. Todos os planos incluem treinamento e acompanhamento especializado.</p>
-        </header>
-        <div className="sync-offer-proof" aria-label="Por que começar com o Avancini Sync">
-          <article><small>01 · SEM TAXA DE CRIAÇÃO</small><strong>Setup e calibração inclusos</strong><span>Construímos a base de conhecimento e calibramos o agente sem custo extra.</span></article>
-          <article><small>02 · RETORNO IMEDIATO</small><strong>Zero leads perdidos</strong><span>Seu atendimento responde em segundos, dia e noite, aumentando a conversão.</span></article>
-          <article><small>03 · SEGURANÇA TOTAL</small><strong>Diretrizes anti-alucinação</strong><span>A IA responde estritamente o que sua empresa autorizar e orientar.</span></article>
-        </div>
-        <div className="sync-plan-configurator sync-single-plan-configurator">
-          <div className="sync-plan-configurator-body">
-            <div className="sync-plan-picker" role="group" aria-label="Escolha um plano Sync">
-              {syncPlans.map((plan, index) => (
+              <footer className="niche-detail-footer">
+                <span>Quer ver como fica no fluxo exato da sua empresa?</span>
                 <button
                   type="button"
-                  key={plan.name}
-                  className={selectedPlanIndex === index ? "active" : ""}
-                  aria-pressed={selectedPlanIndex === index}
-                  onClick={() => setSelectedPlanIndex(index)}
+                  className="niche-cta-highlight"
+                  onClick={() => openLead(`a implantação da IA para ${niche.title}`)}
                 >
-                  <small>0{index + 1} · {plan.label}</small>
-                  <strong>{plan.name}</strong>
-                  <span>{plan.definition}</span>
+                  Configurar IA para {niche.title.split("&")[0]} <SyncArrow />
                 </button>
-              ))}
-              <div className="sync-price-promise">
-                <small>CONDIÇÃO DE LANÇAMENTO</small>
-                <strong>Setup, calibração e suporte inclusos.</strong>
-                <span>Sem taxa de criação</span>
-              </div>
+              </footer>
             </div>
-            <div className="sync-plan-grid">
-              {[syncPlans[selectedPlanIndex]].map((plan) => {
-                const selectedCycle = syncPaymentCycles.find((item) => item.id === paymentCycle) ?? syncPaymentCycles[0];
-                const total = plan.cyclePrices[paymentCycle];
-                const priceLabel = paymentCycle === "monthly"
-                  ? `${plan.price}${plan.suffix}`
-                  : `A partir de ${formatSyncPlanMoney(total)}${paymentCycle === "semiannual" ? "/semestre" : "/ano"}`;
-                return (
-                  <article className={selectedPlanIndex === 1 ? "featured" : ""} key={plan.name}>
-                    <div className="sync-plan-top">
-                      <span>0{selectedPlanIndex + 1}</span>
-                      <small>{plan.label}</small>
-                      <b>SEM TAXA DE CRIAÇÃO</b>
-                    </div>
-                    <h3>{plan.name}</h3>
-                    <strong>{priceLabel}</strong>
-                    <p>{plan.description}</p>
-                    <div className="sync-plan-clarity">
-                      <div><b>O que é</b><span>{plan.definition}</span></div>
-                      <div><b>Para quem serve</b><span>{plan.fit}</span></div>
-                      <div><b>Na prática</b><span>{plan.example}</span></div>
-                    </div>
-                    <small className="sync-plan-includes">O QUE ESTÁ INCLUSO</small>
-                    <ul>{plan.items.map((item) => <li key={item}>{item}</li>)}</ul>
-                    <div className="sync-plan-closing">
-                      <div className="payment-cycle-block sync-payment-cycle-block">
-                        <div className="payment-cycle-heading">
-                          <span>ESCOLHA O CICLO DE PAGAMENTO</span>
-                          <small>Flexibilidade total para sua empresa</small>
-                        </div>
-                        <div className="payment-cycle-options" role="group" aria-label="Frequência de pagamento do Sync">
-                          {syncPaymentCycles.map((option) => (
-                            <button
-                              type="button"
-                              key={option.id}
-                              className={paymentCycle === option.id ? "active" : ""}
-                              aria-pressed={paymentCycle === option.id}
-                              onClick={() => setPaymentCycle(option.id)}
-                            >
-                              <strong>{option.label}{option.id !== "monthly" && <i>{option.detail}</i>}</strong>
-                              <span>
-                                {option.id === "monthly"
-                                  ? `${formatSyncPlanMoney(plan.cyclePrices.monthly)} por mês`
-                                  : option.id === "semiannual"
-                                  ? `${formatSyncPlanMoney(plan.cyclePrices.semiannual)} a cada 6 meses`
-                                  : `${formatSyncPlanMoney(plan.cyclePrices.annual)} à vista`}
-                              </span>
-                            </button>
-                          ))}
-                        </div>
-                        <p className="card-limit-note">No mensal, apenas o valor daquele mês é cobrado. Semestral e anual são cobrados antecipadamente com descontos especiais.</p>
-                      </div>
-                      <button className="sync-plan-cta" type="button" onClick={() => openLead(`${plan.name} por ${priceLabel}, no ciclo ${selectedCycle.label.toLowerCase()} e sem taxa de criação`)}>
-                        <span><strong>Contratar {plan.name}</strong><small>Validar meu fluxo e iniciar calibração do Agente</small></span>
-                        <SyncArrow />
-                      </button>
-                      <small className="sync-plan-contact-note">Nenhum pagamento agora. Primeiro estruturamos o seu caso de uso.</small>
-                    </div>
-                  </article>
-                );
-              })}
+          );
+        })()}
+      </section>
+
+      {/* 5. PLANOS SIMPLIFICADOS (TODAS AS IAs SÃO COMPLETAS) */}
+      <section className="sync-commercial-section" id="planos" aria-labelledby="sync-plans-title">
+        <header className="sync-section-heading">
+          <div>
+            <span>04 / INVESTIMENTO TRANSPARENTE</span>
+            <h2 id="sync-plans-title">Três formatos simples.<br />Todas as versões são completas.</h2>
+          </div>
+          <p>A inteligência e calibração são sempre avançadas. O que muda é a complexidade operacional e o volume de fluxos.</p>
+        </header>
+
+        {/* Toggle Mensal / Anual */}
+        <div className="plan-cycle-toggle-wrapper">
+          <div className="plan-cycle-toggle">
+            <button
+              type="button"
+              className={billingPeriod === "monthly" ? "active" : ""}
+              onClick={() => setBillingPeriod("monthly")}
+            >
+              Mensal (Sem fidelidade)
+            </button>
+            <button
+              type="button"
+              className={billingPeriod === "annual" ? "active" : ""}
+              onClick={() => setBillingPeriod("annual")}
+            >
+              Anual <em>20% de economia</em>
+            </button>
+          </div>
+          <small className="plan-cycle-note">
+            Condição de lançamento: <strong>Zero taxa de criação inicial (Setup incluso)</strong>.
+          </small>
+        </div>
+
+        <div className="simplified-plans-grid">
+          {simplifiedPlans.map((plan) => {
+            const price = billingPeriod === "monthly" ? plan.monthlyPrice : plan.annualPriceMonthly;
+            const isPro = plan.id === "operacao-pro";
+            return (
+              <article className={`simple-plan-card ${isPro ? "featured" : ""}`} key={plan.id}>
+                {isPro && <span className="simple-plan-pill-tag">RECOMENDADO</span>}
+                <div className="plan-card-top">
+                  <small className="plan-badge-label">{plan.badge}</small>
+                  <h3>{plan.name}</h3>
+                  <div className="plan-price-display">
+                    <strong>{formatMoney(price)}</strong>
+                    <span>/mês</span>
+                  </div>
+                  <p className="plan-tagline">{plan.tagline}</p>
+                </div>
+
+                <div className="plan-ideal-for">
+                  <small>IDEAL PARA:</small>
+                  <p>{plan.idealFor}</p>
+                </div>
+
+                <ul className="plan-features-list">
+                  {plan.keyHighlights.map((feat, i) => (
+                    <li key={i}>
+                      <i>✓</i> {feat}
+                    </li>
+                  ))}
+                </ul>
+
+                <button
+                  type="button"
+                  className="plan-direct-cta"
+                  onClick={() => openLead(`${plan.name} (${billingPeriod === "monthly" ? "Mensal" : "Anual"})`)}
+                >
+                  {plan.ctaText} <SyncArrow />
+                </button>
+                <small className="plan-secure-subnote">Sem fidelidade no mensal · Atendimento humano de apoio</small>
+              </article>
+            );
+          })}
+        </div>
+      </section>
+
+      {/* 6. CONEXÃO WHATSAPP E INFRAESTRUTURA DESCOMPLICADA */}
+      <section className="sync-commercial-section sync-whatsapp-infra" id="conexao" aria-labelledby="sync-conn-title">
+        <div className="infra-banner">
+          <div className="infra-banner-copy">
+            <span className="infra-badge">CONEXÃO DIRETA &amp; ESTÁVEL</span>
+            <h2 id="sync-conn-title">Conecte seu WhatsApp em minutos.<br />Sem burocracia ou gambiarras.</h2>
+            <p>
+              Gere o QR Code, escaneie e deixe a IA começar a responder. Compatível com seu número comercial atual, com envio estável, suporte a webhooks e transbordo seguro para seus atendentes humanos.
+            </p>
+            <div className="infra-features-pills">
+              <span>📱 QR Code instantâneo</span>
+              <span>⚡ Múltiplos atendentes</span>
+              <span>🔄 Webhooks &amp; Automação</span>
+              <span>🔒 Segurança e privacidade</span>
             </div>
+          </div>
+          <div className="infra-banner-action">
+            <button
+              type="button"
+              className="infra-btn"
+              onClick={() => openLead("como funciona a conexão com WhatsApp")}
+            >
+              Testar conexão no meu número <SyncArrow />
+            </button>
           </div>
         </div>
       </section>
 
-      {/* FAQ Section */}
-      <section className="sync-faq" id="duvidas">
-        <div>
-          <span>08 / PERGUNTAS FREQUENTES</span>
-          <h2>Tudo o que você precisa<br />saber sobre o Agente IA.</h2>
-          <p>Sem jargões técnicos complicados. Entenda como funciona na prática.</p>
-          <button type="button" onClick={() => openLead("tirar dúvidas sobre a implantação de um Agente de IA")}>Tirar dúvidas com especialista <SyncArrow /></button>
-        </div>
-        <div>
-          {faqs.map((item) => (
-            <details key={item.question}>
-              <summary>{item.question}<span>+</span></summary>
-              <p>{item.answer}</p>
+      {/* 7. DÚVIDAS FREQUENTES */}
+      <section className="sync-commercial-section" id="duvidas" aria-labelledby="sync-faq-title">
+        <header className="sync-section-heading">
+          <div>
+            <span>05 / ESCLARECIMENTOS</span>
+            <h2 id="sync-faq-title">Dúvidas frequentes de quem<br />vai contratar um Agente de IA.</h2>
+          </div>
+          <p>Transparência total para você tomar a melhor decisão para o seu negócio.</p>
+        </header>
+
+        <div className="commercial-faq-list">
+          {faqsCommercial.map((faq, i) => (
+            <details key={i} className="commercial-faq-item">
+              <summary>
+                <span>{faq.question}</span>
+                <i>+</i>
+              </summary>
+              <p>{faq.answer}</p>
             </details>
           ))}
         </div>
       </section>
 
-      {/* Final CTA Section */}
-      <section className="sync-final">
+      {/* 8. CTA FINAL COMERCIAL */}
+      <section className="sync-final-commercial">
         <AvanciniMark variant="sync" className="sync-final-mark avancini-a-mark" />
-        <span>AVANCINI SYNC / TRANSFORMAÇÃO DIGITAL</span>
-        <h2>Seus concorrentes ainda deixam clientes esperando.<br />Coloque um Agente de IA trabalhando hoje.</h2>
-        <p>Converse com nosso time e veja em poucos minutos como um Agente de IA sob medida pode assumir o atendimento e acelerar as vendas da sua empresa.</p>
-        <button type="button" onClick={() => openLead("estruturar um Agente de IA para minha empresa")}>Quero um Agente de IA na minha empresa <SyncArrow /></button>
+        <span>AVANCINI SYNC // FORÇA DE TRABALHO DIGITAL</span>
+        <h2>Faça sua empresa crescer sem aumentar custos na mesma proporção.</h2>
+        <p>Converse com nosso time agora mesmo. Vamos entender sua rotina e mostrar uma demonstração funcionando na prática.</p>
+        <button
+          type="button"
+          onClick={() => openLead("solicitar demonstração da equipe digital de IA")}
+        >
+          Solicitar Demonstração Gratuita <SyncArrow />
+        </button>
       </section>
 
-      {/* Footer */}
+      {/* Footer Conciso */}
       <footer className="sync-footer">
         <Link href="/" className="sync-brand">
           <AvanciniMark variant="sync" className="sync-brand-mark avancini-a-mark" />
-          <span><b>AVANCINI <em>SYNC</em></b><small>Agentes de IA Autônomos</small></span>
+          <span><b>AVANCINI <em>SYNC</em></b><small>Equipe Digital de IA</small></span>
         </Link>
-        <p>Inteligência Artificial e Agentes Autônomos para empresas que não aceitam perder clientes por demora no atendimento.</p>
+        <p>Inteligência Artificial comercial para empresas que querem atender 24/7 e escalar vendas sem inchar a equipe.</p>
         <nav>
-          <a href="#demonstracao">Demonstração</a>
-          <a href="#treinamento">Treinamento</a>
-          <a href="#para-quem">Para quem é</a>
-          <a href="#integracoes">Integrações</a>
-          <a href="#comparativo">Chatbot vs IA</a>
+          <a href="#inicio">Início</a>
+          <a href="#jornada">Jornada</a>
+          <a href="#retorno">Custo x Retorno</a>
+          <a href="#nichos">Nichos</a>
           <a href="#planos">Planos</a>
           <Link href="/dash">Avancini Dash <SyncArrow /></Link>
         </nav>
@@ -1352,13 +996,18 @@ export default function AvanciniSyncPage() {
         <small>© 2026 AVANCINI OS · TODOS OS DIREITOS RESERVADOS</small>
       </footer>
 
-      {/* Floating WhatsApp Action Button */}
-      <button className="whatsapp-float sync-whatsapp-float" type="button" aria-label="Conversar sobre Agentes de IA no WhatsApp" onClick={() => openLead("um Agente de IA para automatizar meu atendimento")}>
+      {/* Botão Flutuante de WhatsApp */}
+      <button
+        className="whatsapp-float sync-whatsapp-float"
+        type="button"
+        aria-label="Conversar sobre Agentes de IA no WhatsApp"
+        onClick={() => openLead("tirar dúvidas sobre a equipe de IA")}
+      >
         <span className="whatsapp-icon" aria-hidden="true" />
         <i className="whatsapp-notification" aria-hidden="true">1</i>
       </button>
 
-      {/* WhatsApp Lead Modal */}
+      {/* Modal Comercial de WhatsApp com DDI */}
       {leadContext && (
         <div className="web-lead-modal sync-web-lead-modal" role="dialog" aria-modal="true" aria-label="Iniciar conversa pelo WhatsApp">
           <form onSubmit={submitLead}>
@@ -1368,26 +1017,26 @@ export default function AvanciniSyncPage() {
             <header>
               <AvanciniMark variant="sync" className="lead-logo avancini-a-mark" />
               <div>
-                <strong>AVANCINI SYNC // AGENTE DE IA</strong>
-                <b><i>●</i> OPERAÇÃO INTELIGENTE 24/7</b>
+                <strong>AVANCINI SYNC // EQUIPE DIGITAL DE IA</strong>
+                <b><i>●</i> ATENDIMENTO &amp; VENDAS 24/7</b>
               </div>
             </header>
             <p className="lead-modal-context">
               Você selecionou: <strong>{normalizedLeadContext}</strong>.
             </p>
             <label>
-              <span>NOME</span>
+              <span>SEU NOME OU EMPRESA</span>
               <input
                 ref={leadInputRef}
                 type="text"
-                placeholder="Seu nome ou da sua empresa"
+                placeholder="Ex: João da Silva / Clínica Dental"
                 value={leadName}
                 onChange={(e) => setLeadName(e.target.value)}
                 required
               />
             </label>
             <label className="phone-input-label">
-              <span>WHATSAPP</span>
+              <span>WHATSAPP PARA CONTATO</span>
               <div className="ddi-selector-wrapper">
                 <button
                   type="button"
@@ -1405,7 +1054,7 @@ export default function AvanciniSyncPage() {
                     <div className="ddi-search-box">
                       <input
                         type="text"
-                        placeholder="Buscar país ou código..."
+                        placeholder="Buscar país..."
                         value={ddiSearch}
                         onChange={(e) => setDdiSearch(e.target.value)}
                         autoFocus
@@ -1442,9 +1091,9 @@ export default function AvanciniSyncPage() {
             </label>
             {leadError && <p className="lead-error">{leadError}</p>}
             <button className="lead-submit sync-lead-submit" type="submit" disabled={leadSubmitting}>
-              {leadSubmitting ? "CONECTANDO..." : "CONVERSAR NO WHATSAPP COM O AGENTE"} <SyncArrow />
+              {leadSubmitting ? "CONECTANDO..." : "CONVERSAR NO WHATSAPP COM O ESPECIALISTA"} <SyncArrow />
             </button>
-            <small>Ao clicar, você será direcionado para o WhatsApp da Avancini Sync.</small>
+            <small>Ao clicar, você iniciará uma conversa direta no WhatsApp da Avancini Sync.</small>
           </form>
         </div>
       )}
