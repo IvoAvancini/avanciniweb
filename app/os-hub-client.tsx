@@ -5,119 +5,131 @@ import { AvanciniMark } from "./avancini-mark";
 import "./os-hub.css";
 
 const WHATSAPP_NUMBER = "5573981019782";
-const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("Olá! Vim pela Avancini OS e gostaria de conversar.")}`;
+const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("Olá! Vim pela Avancini OS e gostaria de conversar sobre as soluções.")}`;
 
 function Arrow() {
   return (
-    <span className="gateway-arrow" aria-hidden="true">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-        <line x1="7" y1="17" x2="17" y2="7" />
-        <polyline points="7 7 17 7 17 17" />
-      </svg>
-    </span>
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <line x1="7" y1="17" x2="17" y2="7" />
+      <polyline points="7 7 17 7 17 17" />
+    </svg>
   );
 }
 
 export function OSHubClient() {
   return (
-    <main className="oshub-gateway">
-      {/* Dynamic Symmetrical Ambient Glow (Emerald Green & Cyber Cyan) */}
-      <div className="gateway-ambient" aria-hidden="true">
-        <span className="glow-dash" />
-        <span className="glow-sync" />
-        <div className="gateway-radar">
+    <main className="oshub-viewport">
+      {/* Dynamic Ambient Background with Dual Aurora Glow */}
+      <div className="portal-ambient" aria-hidden="true">
+        <span className="ambient-beam beam-left" />
+        <span className="ambient-beam beam-right" />
+        <span className="ambient-center-flare" />
+        <div className="ambient-circles">
           <i /><i /><i />
         </div>
       </div>
 
-      {/* Header */}
-      <header className="gateway-header">
-        <Link className="gateway-brand" href="/" aria-label="Avancini OS">
-          <AvanciniMark variant="os" className="gateway-brand-mark" />
+      {/* Top Header Bar */}
+      <header className="portal-header">
+        <Link className="portal-brand" href="/" aria-label="Avancini OS">
+          <AvanciniMark variant="os" className="portal-brand-mark" />
           <span>
             <b>AVANCINI <em>OS</em></b>
             <small>ECOSSISTEMA DE TECNOLOGIA</small>
           </span>
         </Link>
 
-        <nav className="gateway-nav">
-          <Link href="/dash" className="gateway-nav-dash">
-            <span className="dot dot-dash" /> Avancini Dash
-          </Link>
-          <Link href="/sync" className="gateway-nav-sync">
-            <span className="dot dot-sync" /> Avancini Sync
-          </Link>
-          <a href={whatsappUrl} target="_blank" rel="noreferrer" className="gateway-nav-whatsapp">
-            Falar conosco <Arrow />
-          </a>
-        </nav>
+        <a href={whatsappUrl} target="_blank" rel="noreferrer" className="portal-contact-link">
+          <span>Falar com especialista</span>
+          <Arrow />
+        </a>
       </header>
 
-      {/* Main Gateway Hub */}
-      <div className="gateway-container">
-        <div className="gateway-hero">
-          <span className="gateway-badge">
-            <i /> UMA EMPRESA · DUAS SOLUÇÕES
-          </span>
-          <h1>
-            Onde sua empresa quer<br />
-            <em>acelerar hoje?</em>
-          </h1>
-          <p>
-            Presença digital que transmite autoridade e inteligência artificial que fecha vendas.
-          </p>
-        </div>
+      {/* Central Interactive Split Portals (Fills 100vh without scroll) */}
+      <section className="portal-stage">
+        {/* Left Portal: DASH */}
+        <Link href="/dash" className="portal-panel panel-dash" aria-label="Entrar na Avancini Dash">
+          <div className="panel-bg" aria-hidden="true" />
+          <div className="panel-glow" aria-hidden="true" />
+          
+          <div className="panel-header">
+            <span className="panel-tag tag-dash">
+              <i className="status-dot dot-dash" /> PRESENÇA &amp; PERFORMANCE
+            </span>
+            <span className="panel-index">01</span>
+          </div>
 
-        {/* Dual Master Cards */}
-        <div className="gateway-cards">
-          {/* Card Dash */}
-          <Link href="/dash" className="gateway-card card-dash" aria-label="Acessar Avancini Dash">
-            <div className="card-top">
-              <span className="card-tag tag-dash">01 · PRESENÇA DIGITAL</span>
-              <span className="card-status-indicator">Sites de Alta Performance</span>
-            </div>
-            <div className="card-content">
-              <h2>Avancini Dash</h2>
-              <p>
-                Sites e páginas sob medida, ultrarrápidas e desenhadas para posicionar sua marca com autoridade imediata.
-              </p>
-            </div>
-            <div className="card-action">
+          <div className="panel-content">
+            <h2 className="panel-title">
+              Avancini <em>Dash</em>
+            </h2>
+            <p className="panel-desc">
+              Websites de altíssimo padrão visual e técnico. Projetados sob medida para posicionar sua marca com autoridade imediata e gerar novos clientes.
+            </p>
+          </div>
+
+          <div className="panel-footer">
+            <span className="panel-btn btn-dash">
               <span>Acessar Dash</span>
               <Arrow />
-            </div>
-          </Link>
+            </span>
+            <span className="panel-hint">Sites exclusivos · Sem templates</span>
+          </div>
+        </Link>
 
-          {/* Card Sync */}
-          <Link href="/sync" className="gateway-card card-sync" aria-label="Acessar Avancini Sync">
-            <div className="card-top">
-              <span className="card-tag tag-sync">02 · INTELIGÊNCIA ARTIFICIAL</span>
-              <span className="card-status-indicator">Atendimento 24/7 no WhatsApp</span>
-            </div>
-            <div className="card-content">
-              <h2>Avancini Sync</h2>
-              <p>
-                Agentes de IA autônomos que ouvem áudio, entendem mensagens livres, qualificam leads e agendam reuniões.
-              </p>
-            </div>
-            <div className="card-action">
-              <span>Acessar Sync</span>
-              <Arrow />
-            </div>
-          </Link>
+        {/* Center Split Divider */}
+        <div className="portal-divider" aria-hidden="true">
+          <span className="divider-line" />
+          <span className="divider-core">
+            <AvanciniMark variant="os" className="divider-mark" />
+          </span>
+          <span className="divider-line" />
         </div>
 
-        {/* Minimal Footer */}
-        <footer className="gateway-footer">
-          <p>© 2026 AVANCINI OS · Todos os direitos reservados</p>
-          <div className="gateway-footer-links">
-            <a href="https://www.instagram.com/avancinios/" target="_blank" rel="noreferrer">Instagram</a>
-            <a href={whatsappUrl} target="_blank" rel="noreferrer">WhatsApp</a>
-            <Link href="/privacidade">Privacidade</Link>
-            <Link href="/termos">Termos</Link>
+        {/* Right Portal: SYNC */}
+        <Link href="/sync" className="portal-panel panel-sync" aria-label="Entrar no Avancini Sync">
+          <div className="panel-bg" aria-hidden="true" />
+          <div className="panel-glow" aria-hidden="true" />
+
+          <div className="panel-header">
+            <span className="panel-tag tag-sync">
+              <i className="status-dot dot-sync" /> INTELIGÊNCIA ARTIFICIAL
+            </span>
+            <span className="panel-index">02</span>
           </div>
-        </footer>
-      </div>
+
+          <div className="panel-content">
+            <h2 className="panel-title">
+              Avancini <em>Sync</em>
+            </h2>
+            <p className="panel-desc">
+              Agentes de IA autônomos que operam 24/7 no WhatsApp. Ouvem áudios, entendem o contexto da sua empresa, qualificam leads e agendam reuniões.
+            </p>
+          </div>
+
+          <div className="panel-footer">
+            <span className="panel-btn btn-sync">
+              <span>Acessar Sync</span>
+              <Arrow />
+            </span>
+            <span className="panel-hint">Atendimento autônomo · Responde em 2s</span>
+          </div>
+        </Link>
+      </section>
+
+      {/* Discreet Bottom Bar */}
+      <footer className="portal-footer">
+        <p>© 2026 AVANCINI OS · Tecnologia com Identidade</p>
+        <div className="portal-footer-nav">
+          <Link href="/dash">Dash</Link>
+          <span className="footer-sep">/</span>
+          <Link href="/sync">Sync</Link>
+          <span className="footer-sep">/</span>
+          <a href="https://www.instagram.com/avancinios/" target="_blank" rel="noreferrer">Instagram</a>
+          <span className="footer-sep">/</span>
+          <a href={whatsappUrl} target="_blank" rel="noreferrer">WhatsApp</a>
+        </div>
+      </footer>
     </main>
   );
 }
