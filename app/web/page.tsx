@@ -218,95 +218,84 @@ const portfolioSpotlights = {
 
 type PortfolioSpotlightType = keyof typeof portfolioSpotlights;
 
-type PaymentCycle = "monthly" | "semiannual" | "annual";
+type PaymentCycle = "monthly" | "annual";
 
-const paymentCycleOptions = [
-  { id: "monthly", label: "Mensal", detail: "Cobrança recorrente" },
-  { id: "semiannual", label: "Semestral", detail: "20% de economia" },
-  { id: "annual", label: "Anual à vista", detail: "30% de economia" },
-] as const;
+type DashPlan = {
+  id: string;
+  name: string;
+  badge: string;
+  monthlyPrice: number;
+  annualMonthlyPrice: number;
+  monthlySetup: number;
+  tagline: string;
+  idealFor: string;
+  keyHighlights: string[];
+  ctaText: string;
+  featured?: boolean;
+};
 
-const formatPlanMoney = (value: number) => new Intl.NumberFormat("pt-BR", {
-  style: "currency",
-  currency: "BRL",
-  minimumFractionDigits: 2,
-}).format(value);
-
-const offers = [
+const dashPlans: DashPlan[] = [
   {
+    id: "landing",
     name: "Landing Page Profissional",
-    startingAt: false,
-    decisionLabel: "CAPTAR PARA UMA OFERTA",
-    decisionAnswer: "Uma página · uma ação principal",
-    flexiblePrice: "R$ 59,90/mês",
-    flexibleCyclePrices: { monthly: 59.9, semiannual: 289.9, annual: 499.9 },
-    flexibleCreationFee: "R$ 299,90",
-    creationFeeAmount: 299.9,
-    description: "Uma landing criada no padrão Avancini Dash com alta conversão para atrair contatos e agendamentos.",
-    scope: "1 página estratégica · 1 objetivo principal · conteúdo alinhado no briefing",
-    includes: [
-      "Estratégia, texto persuasivo e design exclusivo",
-      "Formulário e WhatsApp integrados",
+    badge: "ALTA CONVERSÃO",
+    monthlyPrice: 59,
+    annualMonthlyPrice: 49,
+    monthlySetup: 299,
+    tagline: "Uma landing page estratégica de alta conversão criada para transformar visitantes em contatos e agendamentos no WhatsApp.",
+    idealFor: "Para profissionais liberais, consultores, clínicas e ofertas diretas focadas em captação rápida.",
+    keyHighlights: [
+      "1 Página estratégica orientada para conversão",
+      "Textos persuasivos e design exclusivo adaptado à marca",
+      "Botão de WhatsApp e formulário de captação integrados",
       "Versão mobile ultrarrápida e responsiva",
-      "Endereço na rede Avancini incluso (R$ 0 de entrada)",
-      "Opção de domínio .com.br próprio, sujeita à disponibilidade e análise",
-      "Hospedagem, SSL, suporte e 1 ajuste mensal",
+      "Domínio .com.br incluso no plano anual",
+      "Hospedagem de alta performance, SSL e suporte contínuo",
     ],
-    ideal: "Para serviços, consultores e ofertas diretas",
-    cta: "Quero minha Landing Page",
-    question: "Olá! Tenho uma dúvida sobre a Landing Page Profissional.",
-    badge: "MAIS ESCOLHIDO",
-    featured: false,
+    ctaText: "Quero minha Landing Page",
+    featured: true,
   },
   {
+    id: "institucional",
     name: "Site Institucional",
-    startingAt: true,
-    decisionLabel: "APRESENTAR A EMPRESA",
-    decisionAnswer: "Autoridade · serviços · contatos",
-    flexiblePrice: "A partir de R$ 79,90/mês",
-    flexibleCyclePrices: { monthly: 79.9, semiannual: 379.9, annual: 669.9 },
-    flexibleCreationFee: "A partir de R$ 399,90",
-    creationFeeAmount: 399.9,
-    description: "Uma presença completa para apresentar a empresa, organizar serviços e transmitir autoridade antes da conversa.",
-    scope: "Estrutura inicial de até 5 páginas · escopo ampliável após o briefing",
-    includes: [
-      "Estrutura institucional com páginas e navegação",
-      "Serviços, diferenciais, contatos e chamadas para ação",
-      "Opção de domínio .com.br próprio, sujeita à disponibilidade e análise",
-      "Hospedagem de alta velocidade, SSL e suporte contínuo",
+    badge: "AUTORIDADE & PRESENÇA",
+    monthlyPrice: 79,
+    annualMonthlyPrice: 69,
+    monthlySetup: 399,
+    tagline: "Presença digital completa para apresentar sua empresa, organizar serviços e transmitir máxima credibilidade.",
+    idealFor: "Para empresas estabelecidas, escritórios, consultorias e negócios com múltiplos serviços.",
+    keyHighlights: [
+      "Estrutura institucional completa de até 5 páginas",
+      "Apresentação detalhada de serviços, diferenciais e equipe",
+      "Página de contato com Google Maps e WhatsApp",
+      "Otimização básica para mecanismos de busca (SEO)",
+      "Domínio .com.br incluso no plano anual",
+      "Hospedagem veloz, SSL e manutenção técnica inclusa",
     ],
-    ideal: "Para empresas que precisam apresentar sua estrutura com clareza",
-    cta: "Planejar meu Site",
-    message: "Olá! Quero conversar sobre um Site Institucional da Avancini Dash.",
-    question: "Olá! Tenho uma dúvida sobre o Site Institucional.",
-    badge: "PRESENÇA COMPLETA",
+    ctaText: "Planejar meu Site",
     featured: false,
   },
   {
-    name: "Loja Virtual",
-    startingAt: true,
-    decisionLabel: "VENDER PELO SITE",
-    decisionAnswer: "Carrinho · pagamento · pedidos",
-    flexiblePrice: "A partir de R$ 119,90/mês",
-    flexibleCyclePrices: { monthly: 119.9, semiannual: 579.9, annual: 999.9 },
-    flexibleCreationFee: "A partir de R$ 599,90",
-    creationFeeAmount: 599.9,
-    description: "Para vender dentro do site com carrinho, pagamento, entrega e gestão dos pedidos.",
-    scope: "Escopo definido por catálogo, pagamento, frete, estoque e plataforma escolhida",
-    includes: [
-      "Catálogo com variações de produto",
-      "Carrinho e pagamento integrados",
-      "Configuração de entrega ou retirada",
-      "Orientação para estoque, pedidos e plataforma",
+    id: "loja",
+    name: "Loja Virtual & E-commerce",
+    badge: "CATÁLOGO & VENDAS",
+    monthlyPrice: 119,
+    annualMonthlyPrice: 99,
+    monthlySetup: 599,
+    tagline: "Para vender produtos físicos ou digitais dentro do site com carrinho de compras, cálculo de frete e pagamento seguro.",
+    idealFor: "Para marcas de roupas, cosméticos, acessórios e produtos que necessitam de catálogo e checkout.",
+    keyHighlights: [
+      "Catálogo dinâmico com variações de produto (tamanho, cor)",
+      "Carrinho de compras e checkout transparente integrado",
+      "Pagamentos via Pix instantâneo e cartão de crédito",
+      "Cálculo automático de frete dos Correios / transportadoras",
+      "Painel administrativo para gestão de pedidos e estoque",
+      "Orientação para cadastro de produtos e suporte contínuo",
     ],
-    ideal: "Para roupas, acessórios, cosméticos, brinquedos e outros produtos físicos",
-    cta: "Planejar minha Loja",
-    message: "Olá! Quero conversar sobre uma Loja Virtual da Avancini Dash.",
-    question: "Olá! Tenho uma dúvida sobre Loja Virtual, catálogo, pagamento e entrega.",
-    badge: "VENDA DENTRO DO SITE",
+    ctaText: "Planejar minha Loja",
     featured: false,
   },
-] as const;
+];
 
 function PortfolioConceptPage({ type }: { type: PortfolioSpotlightType }) {
   if (type === "sandiego" || type === "tapecar") return null;
@@ -597,7 +586,6 @@ export default function Home() {
   const menuCloseRef = useRef<HTMLButtonElement | null>(null);
   const portfolioCloseRef = useRef<HTMLButtonElement | null>(null);
   const [scrolled, setScrolled] = useState(false);
-  const [selectedOfferIndex, setSelectedOfferIndex] = useState(0);
   const [paymentCycle, setPaymentCycle] = useState<PaymentCycle>("monthly");
   const [portfolioSpotlight, setPortfolioSpotlight] = useState<PortfolioSpotlightType | null>(null);
 
@@ -996,67 +984,44 @@ export default function Home() {
           <p>Escolha o cenário mais próximo do seu negócio. A gente organiza o restante.</p>
         </header>
         <div>
-          {offers.map((offer, index) => {
-            const offerBadges = ["ALTA CONVERSÃO", "MAIS ESCOLHIDO", "CATÁLOGO & VENDAS"];
-            const offerHighlights = [
-              [
-                "Design exclusivo focado em conversão",
-                "Botão direto para WhatsApp e formulário",
-                "Hospedagem rápida, SSL e suporte contínuo",
-              ],
-              [
-                "Estrutura completa de autoridade e serviços",
-                "Apresentação profissional da sua marca",
-                "Hospedagem de alta performance e domínio",
-              ],
-              [
-                "Catálogo de produtos com variações e fotos",
-                "Carrinho e checkout de pagamento integrados",
-                "Gestão simplificada de pedidos e frete",
-              ],
-            ];
-            const currentHighlights = offerHighlights[index] ?? offer.includes.slice(0, 3);
-            const currentBadge = offerBadges[index] ?? offer.badge;
-
-            return (
-              <a href="#configurar-plano" key={offer.name} className="dash-entry-card" onClick={() => setSelectedOfferIndex(index)}>
-                <div className="dash-entry-card-top">
-                  <small>0{index + 1} · {offer.decisionLabel}</small>
-                  {currentBadge && <span className="dash-entry-badge">{currentBadge}</span>}
+          {dashPlans.map((plan, index) => (
+            <a href="#investimento" key={plan.id} className="dash-entry-card">
+              <div className="dash-entry-card-top">
+                <small>0{index + 1} · FORMATO</small>
+                <span className="dash-entry-badge">{plan.badge}</span>
+              </div>
+              <h3 className="dash-entry-card-title">{plan.name}</h3>
+              <p className="dash-entry-desc">{plan.idealFor}</p>
+              
+              <div className="dash-entry-price-wrap">
+                <div className="dash-entry-price-amount">
+                  A partir de R$ {plan.annualMonthlyPrice}/mês
                 </div>
-                <h3 className="dash-entry-card-title">{offer.name}</h3>
-                <p className="dash-entry-desc">{offer.decisionAnswer}</p>
-                
-                <div className="dash-entry-price-wrap">
-                  <div className="dash-entry-price-amount">
-                    {offer.flexiblePrice}
-                  </div>
-                  <div className="dash-entry-perk-row">
-                    <span className="dash-entry-perk-pill">
-                      <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
-                        <path fillRule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clipRule="evenodd" />
-                      </svg>
-                      Taxa de criação zero no anual
-                    </span>
-                  </div>
+                <div className="dash-entry-perk-row">
+                  <span className="dash-entry-perk-pill">
+                    <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+                      <path fillRule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clipRule="evenodd" />
+                    </svg>
+                    Taxa de criação zero no anual
+                  </span>
                 </div>
+              </div>
 
-                <ul className="dash-entry-features">
-                  {currentHighlights.map((highlight, hIdx) => (
-                    <li key={hIdx}>
-                      <i aria-hidden="true" />
-                      <span>{highlight}</span>
-                    </li>
-                  ))}
-                </ul>
+              <ul className="dash-entry-features">
+                {plan.keyHighlights.slice(0, 3).map((highlight, hIdx) => (
+                  <li key={hIdx}>
+                    <i aria-hidden="true" />
+                    <span>{highlight}</span>
+                  </li>
+                ))}
+              </ul>
 
-                <div className="dash-entry-action">
-                  <span>Escolher este modelo</span>
-                  <WebArrow />
-                </div>
-              </a>
-            );
-          })}
+              <div className="dash-entry-action">
+                <span>Ver planos e contratar</span>
+                <WebArrow />
+              </div>
+            </a>
+          ))}
         </div>
       </section>
 
@@ -1081,123 +1046,103 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section investment" id="investimento">
+      <section className="section investment dash-investment-fluid" id="investimento">
         <div className="section-heading">
           <div>
-            <span className="section-index">CONDIÇÃO DE LANÇAMENTO · PLANOS RECORRENTES</span>
-            <h2>Três formas de colocar<br />sua empresa no nível certo.</h2>
+            <span className="section-index">04 / INVESTIMENTO TRANSPARENTE</span>
+            <h2 id="configurar-plano">Três formatos simples.<br />Tudo incluso para colocar sua empresa no ar.</h2>
           </div>
           <p>
-            Escolha a estrutura mais próxima do seu objetivo. Sua mensagem já
-            chega organizada no WhatsApp para confirmarmos o melhor começo.
+            Compare as estruturas digitais lado a lado. Todas incluem hospedagem de alta velocidade,
+            certificado de segurança SSL, suporte contínuo e acompanhamento técnico.
           </p>
         </div>
-        <div className="dash-plan-configurator" id="configurar-plano">
-        <div className="dash-plan-configurator-body">
-        <div className="offer-product-picker" role="group" aria-label="Escolha a estrutura digital">
-          {offers.map((offer, index) => (
+
+        {/* Toggle Mensal / Anual */}
+        <div className="plan-cycle-toggle-wrapper">
+          <div className="plan-cycle-toggle dash-cycle-toggle">
             <button
               type="button"
-              key={offer.name}
-              className={selectedOfferIndex === index ? "active" : ""}
-              aria-pressed={selectedOfferIndex === index}
-              onClick={() => setSelectedOfferIndex(index)}
+              className={paymentCycle === "monthly" ? "active" : ""}
+              onClick={() => setPaymentCycle("monthly")}
             >
-              <small>0{index + 1} · {offer.decisionLabel}</small>
-              <strong>{offer.name}</strong>
-              <span>{offer.decisionAnswer}</span>
+              Mensal (Sem fidelidade)
             </button>
-          ))}
+            <button
+              type="button"
+              className={paymentCycle === "annual" ? "active" : ""}
+              onClick={() => setPaymentCycle("annual")}
+            >
+              Anual <em>Taxa de criação R$ 0</em>
+            </button>
+          </div>
+
+          <div className="plan-transparency-box dash-transparency-box">
+            <p>
+              🔒 <strong>Compromisso transparente no anual:</strong> Cobrança recorrente mês a mês <strong>sem comprometer o limite total do seu cartão</strong>. Taxa de criação 100% zerada (R$ 0 de setup). Se precisar cancelar antes de 12 meses, você não paga os meses restantes: apenas ajusta a diferença do desconto dos meses utilizados. Simples e justo.
+            </p>
+          </div>
         </div>
-        <div className="offer-grid">
-          {[offers[selectedOfferIndex]].map((offer) => {
-            const currentPrice = offer.flexiblePrice;
-            const selectedCycle = paymentCycleOptions.find((item) => item.id === paymentCycle) ?? paymentCycleOptions[0];
-            const cycleTotal = offer.flexibleCyclePrices[paymentCycle];
-            const cyclePriceLabel = paymentCycle === "monthly"
-              ? currentPrice
-              : `${offer.startingAt ? "A partir de " : ""}${formatPlanMoney(cycleTotal)}${paymentCycle === "semiannual" ? "/semestre" : "/ano"}`;
-            const creationFeeAmount = paymentCycle === "annual"
-              ? 0
-              : paymentCycle === "semiannual"
-                ? Math.floor(offer.creationFeeAmount / 2) + 0.9
-                : offer.creationFeeAmount;
-            const regularCreationFeeAmount = offer.creationFeeAmount + 100;
-            const regularCreationFee = `${offer.startingAt ? "A partir de " : ""}${formatPlanMoney(regularCreationFeeAmount)}`;
-            const currentCreationFee = creationFeeAmount === 0
-              ? "R$ 0"
-              : `${offer.startingAt ? "A partir de " : ""}${formatPlanMoney(creationFeeAmount)}`;
-            const creationCondition = paymentCycle === "annual"
-              ? "Taxa de criação zerada no ciclo anual"
-              : paymentCycle === "semiannual"
-                ? "50% de economia na taxa de criação"
-                : "R$ 100 de economia na condição de lançamento";
-            const sharedIncludes = offer.includes.filter((item) => !/\.com\.br|domínio|endereço na rede avancini/i.test(item));
-            const currentIncludes = [
-              ...sharedIncludes,
-              "Endereço na rede Avancini incluso",
-              "Domínio .com.br opcional, sujeito à disponibilidade e análise",
-            ];
+
+        {/* Grid de 3 Planos Fluidos Lado a Lado */}
+        <div className="simplified-plans-grid dash-plans-grid">
+          {dashPlans.map((plan) => {
+            const price = paymentCycle === "monthly" ? plan.monthlyPrice : plan.annualMonthlyPrice;
+            const isFeatured = plan.featured;
+
             return (
-            <article className={offer.featured ? "offer-card featured" : "offer-card"} key={offer.name}>
-              <small>{offer.badge ?? "ASSINATURA RECORRENTE"}</small>
-              <h3>{offer.name}</h3>
-              <strong>{cyclePriceLabel}</strong>
-              <div className="dash-promo-deal is-promotional">
-                <small>CONDIÇÃO DE LANÇAMENTO</small>
-                <div><del>{regularCreationFee}</del><strong>{currentCreationFee}</strong><span> de taxa de criação</span></div>
-                <b>{creationCondition}</b>
-              </div>
-              <p>{offer.description}</p>
-              <em className="offer-ideal">{offer.ideal}</em>
-              <div className="offer-scope"><small>ESCOPO INICIAL</small><span>{offer.scope}</span></div>
-              <ul>
-                {currentIncludes.map((item) => <li key={item}>{item}</li>)}
-              </ul>
-              <div className="payment-cycle-block">
-                <div className="payment-cycle-heading"><span>ESCOLHA O CICLO</span><small>A entrega é a mesma. Muda apenas a forma de cobrança.</small></div>
-                <div className="payment-cycle-options" role="group" aria-label="Frequência de pagamento">
-                  {paymentCycleOptions.map((option) => (
-                    <button type="button" key={option.id} className={paymentCycle === option.id ? "active" : ""} aria-pressed={paymentCycle === option.id} onClick={() => setPaymentCycle(option.id)}>
-                      <strong>{option.label}{option.id !== "monthly" && <i>{option.detail}</i>}</strong>
-                      <span>{option.id === "monthly" ? `${formatPlanMoney(offer.flexibleCyclePrices.monthly)} por mês` : option.id === "semiannual" ? `${formatPlanMoney(offer.flexibleCyclePrices.semiannual)} a cada 6 meses` : `${formatPlanMoney(offer.flexibleCyclePrices.annual)} à vista`}</span>
-                      <b>{option.id === "monthly" ? "Taxa promocional" : option.id === "semiannual" ? "Criação pela metade" : "R$ 0 de criação"}</b>
-                    </button>
+              <article className={`simple-plan-card dash-plan-card ${isFeatured ? "featured" : ""}`} key={plan.id}>
+                {isFeatured && <span className="simple-plan-pill-tag dash-pill-tag">MAIS ESCOLHIDO</span>}
+                <div className="plan-card-top">
+                  <div className="plan-badge-row">
+                    <small className="plan-badge-label">{plan.badge}</small>
+                    <span className="plan-volume-badge dash-setup-badge">
+                      {paymentCycle === "annual" ? "Setup R$ 0 (Isento)" : `Criação R$ ${plan.monthlySetup}`}
+                    </span>
+                  </div>
+                  <h3>{plan.name}</h3>
+                  <div className="plan-price-display">
+                    <strong>R$ {price}</strong>
+                    <span>/mês</span>
+                  </div>
+                  <p className="plan-tagline">{plan.tagline}</p>
+                </div>
+
+                <div className="plan-ideal-for">
+                  <small>IDEAL PARA:</small>
+                  <p>{plan.idealFor}</p>
+                </div>
+
+                <ul className="plan-features-list">
+                  {plan.keyHighlights.map((feat, i) => (
+                    <li key={i}>
+                      <i>✓</i> {feat}
+                    </li>
                   ))}
-                </div>
-                <p className="card-limit-note">No mensal, somente a mensalidade do mês é lançada no cartão e o valor total não ocupa o limite. Semestral e anual são cobrados antecipadamente.</p>
-              </div>
-              <div className="offer-actions">
-                <div className="offer-action-head">
-                  <span>PRÓXIMO PASSO</span>
-                  <small>Conversa direta e sem compromisso</small>
-                </div>
-                <div className="offer-action-row">
-                  <button
-                    type="button"
-                    className="offer-primary"
-                    onClick={() => startBudgetConversation(offer.name, `Quero conversar sobre ${offer.name}. Escolhi o ciclo ${selectedCycle.label.toLowerCase()} por ${cyclePriceLabel}, com taxa de criação ${currentCreationFee}.`)}
-                  >
-                    <span><strong>{offer.cta}</strong><small>Confirmar se esta opção combina com meu negócio</small></span>
-                    <WebArrow />
-                  </button>
-                  <a
-                    className="offer-question"
-                    href={whatsappFor(offer.question)}
-                    target="_blank"
-                    rel="noreferrer"
-                    onClick={() => trackLead("duvida_plano", { offer: offer.name })}
-                  >
-                    Tirar uma dúvida
-                  </a>
-                </div>
-              </div>
-            </article>
+                </ul>
+
+                <button
+                  type="button"
+                  className="plan-direct-cta dash-direct-cta"
+                  onClick={() =>
+                    startBudgetConversation(
+                      plan.name,
+                      `Quero conversar sobre o plano ${plan.name} da Avancini Dash no ciclo ${paymentCycle === "monthly" ? "Mensal (R$ " + plan.monthlyPrice + "/mês)" : "Anual (R$ " + plan.annualMonthlyPrice + "/mês com taxa de criação zerada)"}.`
+                    )
+                  }
+                >
+                  {plan.ctaText} <WebArrow />
+                </button>
+                <small className="plan-secure-subnote">
+                  {paymentCycle === "annual"
+                    ? "Taxa de criação zerada · Hospedagem e suporte inclusos"
+                    : "Sem fidelidade · Hospedagem e suporte inclusos"}
+                </small>
+              </article>
             );
           })}
         </div>
-        </div>
-        </div>
+
         <div className="offer-standard" aria-label="O que está presente em toda entrega Avancini Dash">
           <div><small>O PADRÃO NÃO MUDA</small><strong>A estrutura muda. A qualidade, não.</strong></div>
           <span><b>01</b> Estratégia e texto</span>
@@ -1205,7 +1150,7 @@ export default function Home() {
           <span><b>03</b> Celular e carregamento rápido</span>
           <span><b>04</b> Publicação e contato integrado</span>
         </div>
-        <p className="investment-note">Valores de lançamento para escopos iniciais. Todos os ciclos mantêm a mesma qualidade e incluem publicação, hospedagem, SSL, suporte e acompanhamento. O domínio .com.br é opcional e depende de disponibilidade e análise.</p>
+        <p className="investment-note">Valores de lançamento para escopos iniciais. Todos os ciclos mantêm a mesma qualidade e incluem publicação, hospedagem de alta velocidade, SSL, suporte e acompanhamento.</p>
       </section>
 
       <section className="section web-faq" id="duvidas">

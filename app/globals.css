@@ -8449,6 +8449,75 @@ body:has(.web-page) .page-progress{background:linear-gradient(90deg,#43c85d,#a9f
   margin-top: 8px;
 }
 
+/* 6.1 Variações dos Planos Fluidos para Avancini Dash (Tema Verde / Obsidian) */
+.dash-investment-fluid {
+  position: relative;
+}
+
+.dash-investment-fluid .section-heading {
+  margin-bottom: 24px;
+}
+
+.dash-cycle-toggle {
+  background: rgba(10, 16, 26, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+}
+
+.dash-cycle-toggle button {
+  color: #94a3b8;
+}
+
+.dash-cycle-toggle button.active {
+  background: #22c55e;
+  color: #03140a;
+  font-weight: 800;
+}
+
+.dash-transparency-box {
+  background: rgba(10, 20, 32, 0.94);
+  border: 1px solid rgba(34, 197, 94, 0.3);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
+  color: #cbd5e1;
+}
+
+.dash-transparency-box strong {
+  color: #86efac;
+}
+
+.dash-plan-card:hover {
+  border-color: rgba(34, 197, 94, 0.35);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5), 0 0 25px rgba(34, 197, 94, 0.1);
+}
+
+.dash-plan-card.featured {
+  border-color: #22c55e;
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.6), 0 0 35px rgba(34, 197, 94, 0.2);
+}
+
+.dash-pill-tag {
+  background: linear-gradient(135deg, #16a34a 0%, #22c55e 100%);
+  color: #021207;
+  box-shadow: 0 4px 14px rgba(34, 197, 94, 0.4);
+}
+
+.dash-setup-badge {
+  color: #86efac;
+  background: rgba(34, 197, 94, 0.12);
+  border: 1px solid rgba(34, 197, 94, 0.28);
+}
+
+.dash-plan-card.featured .plan-direct-cta {
+  background: linear-gradient(135deg, #16a34a 0%, #22c55e 100%);
+  color: #021207;
+  box-shadow: 0 6px 20px rgba(34, 197, 94, 0.35);
+}
+
+.dash-plan-card.featured .plan-direct-cta:hover {
+  filter: brightness(1.12);
+  box-shadow: 0 8px 26px rgba(34, 197, 94, 0.5);
+}
+
 /* 7. Banner de Conexão WhatsApp */
 .sync-whatsapp-infra {
   padding: 40px 5.5vw;
