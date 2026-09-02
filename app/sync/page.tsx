@@ -1024,71 +1024,78 @@ export default function AvanciniSyncPage() {
             <p className="lead-modal-context">
               Você selecionou: <strong>{normalizedLeadContext}</strong>.
             </p>
-            <label>
-              <span>SEU NOME OU EMPRESA</span>
+            <div className="sync-modal-field">
+              <label htmlFor="sync-lead-name">SEU NOME OU EMPRESA</label>
               <input
+                id="sync-lead-name"
                 ref={leadInputRef}
                 type="text"
+                className="sync-modal-input"
                 placeholder="Ex: João da Silva / Clínica Dental"
                 value={leadName}
                 onChange={(e) => setLeadName(e.target.value)}
                 required
               />
-            </label>
-            <label className="phone-input-label">
-              <span>WHATSAPP PARA CONTATO</span>
-              <div className="ddi-selector-wrapper">
-                <button
-                  type="button"
-                  className="ddi-trigger-btn"
-                  onClick={() => setDdiDropdownOpen(!ddiDropdownOpen)}
-                  aria-expanded={ddiDropdownOpen}
-                  aria-label="Selecionar país do telefone"
-                >
-                  <CountryFlagIcon code={selectedCountry.code} />
-                  <b>{selectedCountry.ddi}</b>
-                  <i className="ddi-arrow">▼</i>
-                </button>
-                {ddiDropdownOpen && (
-                  <div className="ddi-dropdown-menu">
-                    <div className="ddi-search-box">
-                      <input
-                        type="text"
-                        placeholder="Buscar país..."
-                        value={ddiSearch}
-                        onChange={(e) => setDdiSearch(e.target.value)}
-                        autoFocus
-                      />
+            </div>
+
+            <div className="sync-modal-field">
+              <label htmlFor="sync-lead-phone">WHATSAPP PARA CONTATO</label>
+              <div className="sync-phone-control">
+                <div className="ddi-selector-wrapper">
+                  <button
+                    type="button"
+                    className="ddi-trigger-btn"
+                    onClick={() => setDdiDropdownOpen(!ddiDropdownOpen)}
+                    aria-expanded={ddiDropdownOpen}
+                    aria-label="Selecionar país do telefone"
+                  >
+                    <CountryFlagIcon code={selectedCountry.code} />
+                    <b>{selectedCountry.ddi}</b>
+                    <i className="ddi-arrow">▼</i>
+                  </button>
+                  {ddiDropdownOpen && (
+                    <div className="ddi-dropdown-menu">
+                      <div className="ddi-search-box">
+                        <input
+                          type="text"
+                          placeholder="Buscar país..."
+                          value={ddiSearch}
+                          onChange={(e) => setDdiSearch(e.target.value)}
+                          autoFocus
+                        />
+                      </div>
+                      <ul className="ddi-list-options">
+                        {filteredCountries.map((country) => (
+                          <li key={country.code}>
+                            <button
+                              type="button"
+                              className={`ddi-option-item ${selectedCountry.code === country.code ? "selected" : ""}`}
+                              onClick={() => {
+                                setSelectedCountry(country);
+                                setDdiDropdownOpen(false);
+                                setDdiSearch("");
+                              }}
+                            >
+                              <CountryFlagIcon code={country.code} />
+                              <span className="country-name">{country.name}</span>
+                              <span className="country-code">{country.ddi}</span>
+                            </button>
+                          </li>
+                        ))}
+                      </ul>
                     </div>
-                    <ul className="ddi-list-options">
-                      {filteredCountries.map((country) => (
-                        <li key={country.code}>
-                          <button
-                            type="button"
-                            className={`ddi-option-item ${selectedCountry.code === country.code ? "selected" : ""}`}
-                            onClick={() => {
-                              setSelectedCountry(country);
-                              setDdiDropdownOpen(false);
-                              setDdiSearch("");
-                            }}
-                          >
-                            <CountryFlagIcon code={country.code} />
-                            <span className="country-name">{country.name}</span>
-                            <span className="country-code">{country.ddi}</span>
-                          </button>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
+                  )}
+                </div>
+                <input
+                  id="sync-lead-phone"
+                  type="tel"
+                  className="sync-modal-input sync-phone-input"
+                  placeholder={selectedCountry.placeholder}
+                  value={leadPhone}
+                  onChange={(e) => setLeadPhone(e.target.value)}
+                />
               </div>
-              <input
-                type="tel"
-                placeholder={selectedCountry.placeholder}
-                value={leadPhone}
-                onChange={(e) => setLeadPhone(e.target.value)}
-              />
-            </label>
+            </div>
             {leadError && <p className="lead-error">{leadError}</p>}
             <button className="lead-submit sync-lead-submit" type="submit" disabled={leadSubmitting}>
               {leadSubmitting ? "CONECTANDO..." : "CONVERSAR NO WHATSAPP COM O ESPECIALISTA"} <SyncArrow />
