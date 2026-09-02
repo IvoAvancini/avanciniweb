@@ -713,30 +713,6 @@ footer{padding:70px 6vw 28px;background:#050609}
 
 /* FAQ claro com accordions escuros */
 .web-faq{display:grid;grid-template-columns:.72fr 1.28fr;gap:8vw;align-items:start;background:#f5f4f0;color:#10221d}.web-faq-intro{position:sticky;top:110px}.web-faq-intro>span{display:inline-block;padding:8px 11px;border-radius:5px;background:#1b0d11;color:#fff;font-size:7px;font-weight:900;letter-spacing:.12em}.web-faq-intro h2{margin:25px 0 20px;font-size:clamp(45px,5vw,68px);line-height:.96}.web-faq-intro h2 em{color:#9aa7a3;font-style:normal}.web-faq-intro p{max-width:430px;color:#6f7b77;font-size:14px;line-height:1.7}.web-faq-intro button{display:flex;align-items:center;gap:16px;margin-top:30px;padding:14px 17px;border:0;border-radius:999px;background:#170b0f;color:#fff;font-size:8px;font-weight:900;cursor:pointer}.web-faq-intro button b{display:grid;width:31px;height:31px;place-items:center;border-radius:50%;background:#ff1838}.web-faq-list{display:grid;gap:11px}.web-faq-list details{overflow:hidden;border-radius:14px;background:#170b0f;color:#fff}.web-faq-list summary{display:flex;min-height:68px;align-items:center;justify-content:space-between;gap:20px;padding:0 22px;cursor:pointer;font-size:14px;font-weight:800;list-style:none}.web-faq-list summary span{display:grid;width:32px;height:32px;place-items:center;border-radius:50%;background:rgba(255,255,255,.1);font-size:18px}.web-faq-list details[open] summary span{transform:rotate(45deg)}.web-faq-list p{margin:0;padding:0 22px 23px;color:#c2babc;font-size:12px;line-height:1.7}
-
-/* Rodapé e captação pelo WhatsApp */
-.web-page footer{margin:55px 6px 6px;padding:72px 4vw 28px;border-radius:42px;background:#090404}.web-page .footer-top{grid-template-columns:1.15fr .72fr .8fr 1fr;gap:55px;padding-bottom:70px}.footer-brand>p{max-width:310px;margin:24px 0;color:#aaa2a5;font-size:12px;line-height:1.8}.footer-brand>a:last-child{color:#ff5369;font-size:9px;font-weight:800}.web-page .footer-top>nav,.footer-contact{display:flex;flex-direction:column;align-items:flex-start;gap:16px}.web-page .footer-top>nav>b,.footer-contact>b{margin-bottom:8px;color:#ff5369;font-size:8px;letter-spacing:.13em}.web-page .footer-top>nav>a,.footer-contact>a{color:#8f878a;font-size:10px}.footer-contact button{margin-top:15px;padding:14px 17px;border:0;border-radius:999px;background:#f5f2f1;color:#150d0f;font-size:8px;font-weight:900;cursor:pointer}.web-page .whatsapp-float{border-color:rgba(255,255,255,.16);background:#160a0e;color:#fff;cursor:pointer}.web-page .whatsapp-float span{color:#24d06f}.web-lead-modal{position:fixed;z-index:1500;inset:0;display:grid;place-items:center;padding:20px;background:rgba(5,4,5,.72);backdrop-filter:blur(15px)}.web-lead-modal form{position:relative;width:min(410px,94vw);padding:20px;border:1px solid rgba(255,255,255,.12);border-radius:22px;background:#11080b;color:#fff;box-shadow:0 40px 110px rgba(0,0,0,.65);animation:modalRise .35s ease both}.web-lead-close{position:absolute;right:15px;top:14px;border:0;background:none;color:#aaa2a5;font-size:25px;cursor:pointer}.web-lead-modal header{display:flex;align-items:center;gap:13px;padding-bottom:16px;border-bottom:1px solid rgba(255,255,255,.09)}.lead-logo{width:39px;height:44px;flex:0 0 39px}.web-lead-modal header>div{display:grid;gap:5px}.web-lead-modal header strong{font:700 14px var(--font-space)}.web-lead-modal header b{color:#8b8386;font-size:8px}.web-lead-modal header b i{display:inline-block;width:7px;height:7px;margin-right:5px;border-radius:50%;background:#32d271;box-shadow:0 0 10px #32d271}.web-lead-modal label{display:flex;height:43px;align-items:center;margin-top:10px;border-radius:8px;background:#24181c}.web-lead-modal label>span{padding:0 12px;color:#ff5369;font-size:10px}.web-lead-modal label input{min-width:0;flex:1;height:100%;border:0;outline:0;background:transparent;color:#fff;font-size:11px}.lead-submit{width:100%;margin-top:14px;padding:14px;border:0;border-radius:999px;background:linear-gradient(135deg,#ff3450,#b8001c);color:#fff;font-size:9px;font-weight:900;cursor:pointer}.web-lead-modal form>small{display:block;margin-top:11px;color:#746d70;font-size:8px;text-align:center}
-
-@media(max-width:900px){.web-page .header-cta{margin-left:auto}.web-page .menu-toggle{display:flex}.web-menu-overlay{padding:22px 24px}.web-menu-overlay>nav a{min-height:72px}.web-menu-bottom{right:24px;left:24px}.web-diagnostic-grid,.web-faq{grid-template-columns:1fr}.web-diagnostic-notes{grid-template-columns:1fr}.web-diagnostic-cta{align-items:flex-start;flex-direction:column}.web-faq-intro{position:relative;top:auto}.web-page .footer-top{grid-template-columns:1fr 1fr}.footer-brand{grid-column:1/-1}}
-@media(max-width:600px){.web-page .header-cta{display:none}.web-page .menu-toggle{margin-left:auto}.web-menu-overlay>nav a{grid-template-columns:34px 1fr 20px;min-height:68px}.web-menu-overlay>nav span{font-size:35px}.web-menu-bottom>span{display:none}.web-menu-bottom{justify-content:flex-end}.web-page .signal-bar{overflow-x:auto}.web-page .signal-bar div{min-width:210px}.web-diagnostic{padding-top:90px}.web-diagnostic-heading h2{font-size:43px}.web-diagnostic-grid{margin-top:40px}.diagnostic-row{grid-template-columns:1fr 70px}.diagnostic-row>em{display:none}.web-diagnostic-cta h3{font-size:29px}.web-diagnostic-cta button{white-space:normal}.web-page .offer-card{min-height:660px}.web-faq{padding-top:90px}.web-faq-intro h2{font-size:43px}.web-faq-list summary{font-size:12px}.web-page footer{margin:25px 4px 4px;padding:55px 25px 90px;border-radius:30px}.web-page .footer-top{grid-template-columns:1fr}.footer-brand{grid-column:auto}.web-page .footer-bottom{gap:14px}.web-page .whatsapp-float{right:14px;bottom:14px}}
-
-/* Avancini Web — fluxo editorial alinhado à referência aprovada */
-.web-page .web-proof-snapshot,.web-page .process,.web-page .final-cta{display:none}
-.web-page .header{height:80px;padding:0 4.5vw;background:rgba(6,5,5,.82);backdrop-filter:blur(18px)}
-.web-page .header-cta{margin-left:auto;border-color:rgba(255,255,255,.15);border-radius:999px;background:rgba(255,255,255,.04);color:#fff}
-.hero-reference h1{max-width:920px;font-size:clamp(58px,6.5vw,94px);font-weight:720;line-height:.92;letter-spacing:-.055em}
-.hero-reference .hero-copy>p{max-width:690px}
-.hero-reference .hero-actions .button{min-width:210px;justify-content:center}
-.web-page .button-primary{border:0;cursor:pointer}
-.web-page .web-portfolio-first{padding-bottom:96px}
-.web-page .web-portfolio-marquee{height:auto}
-.web-page .web-portfolio-row{height:340px;overflow:hidden}
-.web-page .web-portfolio-marquee .web-portfolio-item{height:340px;min-height:0}
-.web-page .web-method{padding-top:92px;padding-bottom:105px}
-.web-page .web-method-heading{margin-bottom:40px}
-.web-page .web-method-stack{gap:12px}
-.web-page .web-method-stack article{min-height:140px;padding:24px 34px}
-.web-page .manifesto{min-height:980px;background:#f5f4f0;color:#11211d}
 .web-page .manifesto .section-index{color:#d50025}
 .web-page .manifesto-grid>div>p{color:#65716d}
 .web-page .manifesto .highlight-line{border-color:rgba(17,33,29,.14);color:#1b2a26}
@@ -7246,6 +7222,172 @@ body:has(.web-page) .page-progress{background:linear-gradient(90deg,#43c85d,#a9f
   line-height: 1.6;
   margin: 0;
 }
+
+/* ==========================================================================
+   AVANCINI DASH — SHRINKING TRANSLUCENT HEADER & 100% SCREEN PORTFOLIO MARQUEE
+   ========================================================================== */
+
+/* 1. Header encolhendo e ficando transparente ao rolar */
+.web-page .header {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 100 !important;
+  height: 76px !important;
+  padding: 0 4.5vw !important;
+  background: rgba(3, 7, 5, 0.85) !important;
+  backdrop-filter: blur(18px) !important;
+  -webkit-backdrop-filter: blur(18px) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
+  transition: height 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              background 0.3s ease,
+              backdrop-filter 0.3s ease,
+              border-color 0.3s ease,
+              box-shadow 0.3s ease,
+              padding 0.3s ease !important;
+}
+
+.web-page .header.scrolled {
+  height: 52px !important;
+  background: rgba(2, 6, 4, 0.45) !important;
+  backdrop-filter: blur(24px) !important;
+  -webkit-backdrop-filter: blur(24px) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.55) !important;
+}
+
+.web-page .header.scrolled .logo {
+  gap: 8px !important;
+}
+
+.web-page .header.scrolled .logo-mark,
+.web-page .header.scrolled .logo-mark.avancini-mark,
+.web-page .header.scrolled .logo-mark.avancini-a-mark {
+  width: 28px !important;
+  height: 28px !important;
+  flex: 0 0 28px !important;
+  transform: scale(0.9) !important;
+  transition: all 0.3s ease !important;
+}
+
+.web-page .header.scrolled .brand-name {
+  font-size: 13px !important;
+  transition: font-size 0.3s ease !important;
+}
+
+.web-page .header.scrolled .logo small {
+  display: none !important;
+}
+
+.web-page .header.scrolled .button-small,
+.web-page .header.scrolled .header-cta {
+  padding: 5px 13px !important;
+  font-size: 11px !important;
+  transition: all 0.3s ease !important;
+}
+
+.web-page .header.scrolled .menu-toggle {
+  padding: 5px 12px !important;
+  font-size: 11px !important;
+  transition: all 0.3s ease !important;
+}
+
+/* 2. Seção de Portfólio: cabendo as duas faixas na tela ao mesmo tempo (100% visível) */
+.web-page .web-portfolio-first {
+  padding: clamp(36px, 5vh, 54px) 5vw clamp(28px, 4vh, 44px) !important;
+}
+
+.web-page .web-portfolio-first > header {
+  margin-bottom: clamp(14px, 2vh, 20px) !important;
+}
+
+.web-page .web-portfolio-first > header h2 {
+  font-size: clamp(24px, 2.8vw, 36px) !important;
+  line-height: 1.05 !important;
+  margin: 4px 0 0 !important;
+}
+
+.web-page .web-portfolio-first > header p {
+  font-size: clamp(12px, 1.2vw, 13.5px) !important;
+  line-height: 1.45 !important;
+  max-width: 440px !important;
+}
+
+.web-page .web-portfolio-marquee {
+  gap: 12px !important;
+  height: auto !important;
+}
+
+.web-page .web-portfolio-row {
+  height: clamp(210px, 25.5vh, 248px) !important;
+  overflow: hidden !important;
+}
+
+.web-page .web-portfolio-marquee .web-portfolio-item {
+  height: clamp(210px, 25.5vh, 248px) !important;
+  width: clamp(270px, 22vw, 340px) !important;
+  min-height: 0 !important;
+  border-radius: 14px !important;
+  flex: 0 0 auto !important;
+}
+
+.web-page .web-portfolio-window-bar {
+  height: 22px !important;
+  padding: 0 10px !important;
+}
+
+.web-page .web-portfolio-window-dots i {
+  width: 5px !important;
+  height: 5px !important;
+}
+
+.web-page .web-portfolio-window-url {
+  font-size: 8px !important;
+}
+
+.web-page .web-portfolio-window-badge {
+  font-size: 7.5px !important;
+  padding: 2px 6px !important;
+}
+
+.web-page .web-portfolio-item > span {
+  position: absolute !important;
+  z-index: 3 !important;
+  right: 14px !important;
+  bottom: 12px !important;
+  left: 14px !important;
+  min-height: auto !important;
+  padding: 0 !important;
+}
+
+.web-page .web-portfolio-item > span small {
+  font-size: 7.5px !important;
+  margin-bottom: 2px !important;
+  letter-spacing: 0.08em !important;
+}
+
+.web-page .web-portfolio-item > span strong {
+  font-size: clamp(15px, 1.4vw, 18px) !important;
+  margin: 0 0 3px !important;
+  line-height: 1.15 !important;
+}
+
+.web-page .web-portfolio-item > span em {
+  font-size: 9px !important;
+  margin-bottom: 6px !important;
+  gap: 5px !important;
+}
+
+.web-page .web-portfolio-item > span b {
+  padding: 3px 10px !important;
+  font-size: 8px !important;
+}
+
+.web-page .web-portfolio-all {
+  margin-top: 10px !important;
+  padding-top: 8px !important;
+  font-size: 10.5px !important;
+}
+
 
 
 
