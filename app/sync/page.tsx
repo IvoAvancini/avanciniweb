@@ -1115,7 +1115,7 @@ export default function AvanciniSyncPage() {
               <button
                 type="button"
                 className="niche-cta-btn"
-                onClick={() => onLead(`um Agente de IA especializado em ${niche.niche}`)}
+                onClick={() => openLead(`um Agente de IA especializado em ${niche.niche}`)}
               >
                 Quero para {niche.niche.split("&")[0]} <SyncArrow />
               </button>
