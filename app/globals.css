@@ -7468,50 +7468,221 @@ body:has(.web-page) .page-progress{background:linear-gradient(90deg,#43c85d,#a9f
   box-shadow: 0 0 10px #22c55e;
 }
 
-.sync-commercial-stats {
+/* 1.1 Cockpit Interativo do Supervisor Multiagente (Substitui os 4 cards estáticos) */
+.supervisor-live-cockpit {
+  width: 100%;
+  max-width: 980px;
+  margin: 36px auto 0;
+  border-radius: 20px;
+  background: rgba(6, 15, 30, 0.75);
+  border: 1px solid rgba(56, 189, 248, 0.28);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), 0 0 35px rgba(56, 189, 248, 0.1);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  overflow: hidden;
+  text-align: left;
+}
+
+.cockpit-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 22px;
+  background: rgba(10, 24, 48, 0.85);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.cockpit-status-dot {
+  position: relative;
+  width: 12px;
+  height: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cockpit-status-dot .pulse-ring {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: #22c55e;
+  opacity: 0.75;
+  animation: cockpitPing 1.8s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+.cockpit-status-dot .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 10px #22c55e;
+}
+
+@keyframes cockpitPing {
+  75%, 100% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+}
+
+.cockpit-title {
+  flex: 1;
+}
+
+.cockpit-title strong {
+  display: block;
+  font-size: 11.5px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  color: #f8fafc;
+}
+
+.cockpit-title small {
+  display: block;
+  font-size: 10px;
+  color: #94a3b8;
+  margin-top: 1px;
+}
+
+.cockpit-live-tag {
+  font-size: 8.5px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(34, 197, 94, 0.15);
+  border: 1px solid rgba(34, 197, 94, 0.35);
+  color: #86efac;
+  white-space: nowrap;
+}
+
+.cockpit-tabs-row {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 14px;
-  margin-top: 36px;
-  width: 100%;
-  max-width: 1100px;
+  background: rgba(4, 10, 22, 0.6);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
-.hero-stat-card {
+.cockpit-agent-btn {
+  padding: 12px 14px;
+  background: transparent;
+  border: none;
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
+  cursor: pointer;
   display: flex;
   flex-direction: column;
-  padding: 16px 18px;
-  border-radius: 16px;
-  background: rgba(8, 19, 36, 0.6);
-  border: 1px solid rgba(34, 211, 238, 0.12);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  align-items: flex-start;
+  gap: 3px;
+  transition: background 0.2s ease, border-color 0.2s ease;
+  position: relative;
   text-align: left;
-  transition: transform 0.25s ease, border-color 0.25s ease;
 }
 
-.hero-stat-card:hover {
-  transform: translateY(-2px);
-  border-color: rgba(34, 211, 238, 0.35);
+.cockpit-agent-btn:last-child {
+  border-right: none;
 }
 
-.hero-stat-number {
-  font-size: clamp(20px, 2vw, 26px);
-  font-weight: 800;
-  font-family: var(--font-space), sans-serif;
-  line-height: 1;
-  margin-bottom: 6px;
-  background: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-
-.hero-stat-card p {
+.cockpit-agent-btn strong {
   font-size: 11.5px;
-  line-height: 1.4;
+  font-weight: 700;
   color: #94a3b8;
+  transition: color 0.2s ease;
+}
+
+.cockpit-agent-btn small {
+  font-size: 9.5px;
+  color: #64748b;
+  transition: color 0.2s ease;
+}
+
+.cockpit-agent-btn:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.cockpit-agent-btn:hover strong {
+  color: #f1f5f9;
+}
+
+.cockpit-agent-btn.active {
+  background: rgba(56, 189, 248, 0.12);
+}
+
+.cockpit-agent-btn.active strong {
+  color: #38bdf8;
+}
+
+.cockpit-agent-btn.active small {
+  color: #86efac;
+}
+
+.cockpit-agent-btn.active::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: #38bdf8;
+  box-shadow: 0 0 10px #38bdf8;
+}
+
+.cockpit-body {
+  padding: 16px 22px 18px;
+  background: rgba(5, 12, 26, 0.95);
+}
+
+.cockpit-log-line {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+
+.log-badge {
+  font-size: 8px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: rgba(56, 189, 248, 0.2);
+  color: #38bdf8;
+  border: 1px solid rgba(56, 189, 248, 0.35);
+}
+
+.log-role {
+  font-size: 11px;
+  font-weight: 700;
+  color: #cbd5e1;
+}
+
+.log-status {
+  font-size: 11px;
+  color: #86efac;
+  font-weight: 600;
+  margin-left: auto;
+}
+
+.cockpit-action-box {
+  padding: 12px 16px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.cockpit-action-box p {
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: #e2e8f0;
   margin: 0;
+}
+
+.cockpit-action-box em {
+  font-style: normal;
+  color: #38bdf8;
+  font-weight: 700;
+  margin-right: 4px;
 }
 
 /* 2. Seções Comerciais Gerais */
@@ -7863,8 +8034,8 @@ body:has(.web-page) .page-progress{background:linear-gradient(90deg,#43c85d,#a9f
 }
 
 .niche-detail-panel {
-  padding: 30px;
-  border-radius: 18px;
+  padding: 26px 28px;
+  border-radius: 20px;
   background: rgba(8, 18, 34, 0.75);
   border: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow: 0 20px 45px rgba(0, 0, 0, 0.35);
@@ -7875,7 +8046,7 @@ body:has(.web-page) .page-progress{background:linear-gradient(90deg,#43c85d,#a9f
   justify-content: space-between;
   align-items: flex-start;
   gap: 20px;
-  margin-bottom: 22px;
+  margin-bottom: 20px;
   padding-bottom: 16px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
@@ -7939,46 +8110,70 @@ body:has(.web-page) .page-progress{background:linear-gradient(90deg,#43c85d,#a9f
   margin: 0;
 }
 
-.niche-detail-footer {
+/* Novo rodapé de nicho integrado e sofisticado (elimina a faixa preta desproporcional) */
+.niche-integrated-cta-bar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-top: 16px;
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  gap: 20px;
+  padding: 16px 20px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.08) 0%, rgba(15, 34, 60, 0.6) 100%);
+  border: 1px solid rgba(56, 189, 248, 0.25);
 }
 
-.niche-detail-footer span {
-  font-size: 12px;
+.cta-bar-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.cta-bar-icon {
+  font-size: 24px;
+}
+
+.cta-bar-info strong {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  color: #f8fafc;
+}
+
+.cta-bar-info small {
+  display: block;
+  font-size: 11px;
   color: #94a3b8;
+  margin-top: 1px;
 }
 
 .niche-cta-highlight {
+  white-space: nowrap;
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 9px 18px;
+  padding: 10px 20px;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  color: #f8fafc;
+  background: linear-gradient(135deg, #0284c7 0%, #38bdf8 100%);
+  color: #020b17;
   font-size: 11px;
   font-weight: 800;
+  border: none;
   cursor: pointer;
+  box-shadow: 0 6px 18px rgba(56, 189, 248, 0.25);
   transition: all 0.2s ease;
 }
 
 .niche-cta-highlight:hover {
-  background: #38bdf8;
-  color: #020b17;
-  border-color: #38bdf8;
+  filter: brightness(1.15);
+  transform: translateY(-2px);
 }
 
-/* 6. Planos Radicalmente Simplificados */
+/* 6. Planos Claros com Arquitetura Multiagente */
 .plan-cycle-toggle-wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
+  gap: 14px;
   margin-top: 24px;
   margin-bottom: 24px;
 }
@@ -7992,12 +8187,12 @@ body:has(.web-page) .page-progress{background:linear-gradient(90deg,#43c85d,#a9f
 }
 
 .plan-cycle-toggle button {
-  padding: 7px 18px;
+  padding: 8px 20px;
   border-radius: 999px;
   background: transparent;
   border: none;
   color: #94a3b8;
-  font-size: 11px;
+  font-size: 11.5px;
   font-weight: 700;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -8008,10 +8203,10 @@ body:has(.web-page) .page-progress{background:linear-gradient(90deg,#43c85d,#a9f
 
 .plan-cycle-toggle button em {
   font-style: normal;
-  font-size: 8px;
+  font-size: 8.5px;
   background: rgba(34, 197, 94, 0.2);
   color: #86efac;
-  padding: 1px 6px;
+  padding: 1px 7px;
   border-radius: 999px;
 }
 
@@ -8025,9 +8220,25 @@ body:has(.web-page) .page-progress{background:linear-gradient(90deg,#43c85d,#a9f
   color: #38bdf8;
 }
 
-.plan-cycle-note {
-  font-size: 11px;
-  color: #94a3b8;
+/* Caixa de Transparência do Plano Anual */
+.plan-transparency-box {
+  max-width: 780px;
+  padding: 12px 18px;
+  border-radius: 12px;
+  background: rgba(56, 189, 248, 0.06);
+  border: 1px solid rgba(56, 189, 248, 0.2);
+  text-align: center;
+}
+
+.plan-transparency-box p {
+  font-size: 11.5px;
+  line-height: 1.55;
+  color: #cbd5e1;
+  margin: 0;
+}
+
+.plan-transparency-box strong {
+  color: #38bdf8;
 }
 
 .sync-page #planos,
@@ -8051,15 +8262,11 @@ body:has(.web-page) .page-progress{background:linear-gradient(90deg,#43c85d,#a9f
   color: #38bdf8 !important;
 }
 
-.plan-cycle-note strong {
-  color: #86efac;
-}
-
 .simplified-plans-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 18px;
-  margin-top: 10px;
+  margin-top: 12px;
 }
 
 .simple-plan-card {
@@ -8101,13 +8308,29 @@ body:has(.web-page) .page-progress{background:linear-gradient(90deg,#43c85d,#a9f
   margin-bottom: 16px;
 }
 
+.plan-badge-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
 .plan-badge-label {
-  display: block;
   font-size: 7.5px;
   font-weight: 900;
   letter-spacing: 0.1em;
   color: #38bdf8;
-  margin-bottom: 6px;
+}
+
+.plan-volume-badge {
+  font-size: 8px;
+  font-weight: 800;
+  color: #86efac;
+  background: rgba(34, 197, 94, 0.12);
+  border: 1px solid rgba(34, 197, 94, 0.25);
+  padding: 2px 7px;
+  border-radius: 999px;
 }
 
 .plan-card-top h3 {
@@ -8202,6 +8425,7 @@ body:has(.web-page) .page-progress{background:linear-gradient(90deg,#43c85d,#a9f
   color: #f8fafc;
   font-size: 11px;
   font-weight: 800;
+  border: none;
   cursor: pointer;
   transition: all 0.2s ease;
 }
@@ -8348,50 +8572,76 @@ body:has(.web-page) .page-progress{background:linear-gradient(90deg,#43c85d,#a9f
   margin: 12px 0 0;
 }
 
-/* 9. CTA Final Comercial */
-.sync-final-commercial {
-  padding: clamp(60px, 9vh, 90px) 5.5vw;
+/* 9. CTA Final Comercial V2 — Moderno, Vibrante & Sem Vazio */
+.sync-final-commercial-v2 {
+  padding: clamp(60px, 8vh, 90px) 5.5vw;
+  position: relative;
+  background: #020713;
+  display: flex;
+  justify-content: center;
+}
+
+.final-glow-container {
+  width: 100%;
+  max-width: 860px;
+  border-radius: 24px;
+  padding: clamp(36px, 5vw, 56px) clamp(24px, 4vw, 48px);
+  background: radial-gradient(circle at 50% 0%, rgba(56, 189, 248, 0.16), transparent 70%),
+              linear-gradient(180deg, #07152b 0%, #030a16 100%);
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.7), 0 0 50px rgba(56, 189, 248, 0.15);
   text-align: center;
   position: relative;
-  background: radial-gradient(circle at 50% 50%, rgba(56, 189, 248, 0.12), transparent 50%), #030712;
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  overflow: hidden;
 }
 
-.sync-final-commercial .sync-final-mark {
-  margin: 0 auto 12px;
+.final-mark-symbol {
+  width: 44px;
+  height: 48px;
+  margin: 0 auto 14px;
+  filter: drop-shadow(0 0 16px rgba(56, 189, 248, 0.5));
 }
 
-.sync-final-commercial span {
+.final-eyebrow {
   display: block;
   font-size: 8.5px;
   font-weight: 900;
   letter-spacing: 0.12em;
   color: #38bdf8;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 
-.sync-final-commercial h2 {
-  font-size: clamp(24px, 2.8vw, 38px);
+.final-glow-container h2 {
+  font-size: clamp(22px, 2.5vw, 34px);
   font-weight: 800;
   color: #f8fafc;
+  line-height: 1.25;
   margin: 0 auto 14px;
-  max-width: 750px;
-  line-height: 1.2;
+  max-width: 680px;
 }
 
-.sync-final-commercial p {
-  font-size: 14px;
+.final-glow-container p {
+  font-size: 13.5px;
+  line-height: 1.6;
   color: #94a3b8;
-  max-width: 600px;
-  margin: 0 auto 24px;
-  line-height: 1.5;
+  max-width: 580px;
+  margin: 0 auto 26px;
 }
 
-.sync-final-commercial button {
+.final-buttons-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-bottom: 22px;
+}
+
+.final-cta-main {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 13px 26px;
+  padding: 13px 28px;
   border-radius: 999px;
   background: linear-gradient(135deg, #0284c7 0%, #38bdf8 100%);
   color: #020b17;
@@ -8399,18 +8649,119 @@ body:has(.web-page) .page-progress{background:linear-gradient(90deg,#43c85d,#a9f
   font-weight: 800;
   border: none;
   cursor: pointer;
-  box-shadow: 0 10px 25px rgba(56, 189, 248, 0.25);
+  box-shadow: 0 10px 30px rgba(56, 189, 248, 0.35);
   transition: all 0.2s ease;
 }
 
-.sync-final-commercial button:hover {
+.final-cta-main:hover {
   filter: brightness(1.15);
   transform: translateY(-2px);
+  box-shadow: 0 14px 40px rgba(56, 189, 248, 0.45);
+}
+
+.final-cta-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 12px 22px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #cbd5e1;
+  font-size: 11.5px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.final-cta-secondary:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #f8fafc;
+}
+
+.final-proof-badges {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.final-proof-badges span {
+  font-size: 11px;
+  font-weight: 700;
+  color: #86efac;
+}
+
+/* 10. Footer V2 Refinado */
+.sync-footer-v2 {
+  padding: 36px 5.5vw 28px;
+  background: #030814;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.footer-top-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  flex-wrap: wrap;
+}
+
+.footer-links-nav {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.footer-links-nav a {
+  font-size: 12px;
+  color: #94a3b8;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.footer-links-nav a:hover {
+  color: #38bdf8;
+}
+
+.footer-bottom-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding-top: 20px;
+  flex-wrap: wrap;
+}
+
+.footer-bottom-row small {
+  font-size: 11px;
+  color: #64748b;
+}
+
+.footer-contacts {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.footer-contacts a {
+  font-size: 11.5px;
+  color: #94a3b8;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.footer-contacts a:hover {
+  color: #f1f5f9;
 }
 
 /* Responsividade Comercial */
 @media (max-width: 1080px) {
-  .sync-commercial-stats {
+  .cockpit-tabs-row {
     grid-template-columns: repeat(2, 1fr);
   }
   .commercial-journey-container {
@@ -8432,7 +8783,7 @@ body:has(.web-page) .page-progress{background:linear-gradient(90deg,#43c85d,#a9f
 }
 
 @media (max-width: 650px) {
-  .sync-commercial-stats {
+  .cockpit-tabs-row {
     grid-template-columns: 1fr;
   }
   .niche-tasks-grid {
@@ -8441,10 +8792,9 @@ body:has(.web-page) .page-progress{background:linear-gradient(90deg,#43c85d,#a9f
   .niche-detail-header {
     flex-direction: column;
   }
-  .niche-detail-footer {
+  .niche-integrated-cta-bar {
     flex-direction: column;
     align-items: flex-start;
-    gap: 12px;
   }
 }
 
