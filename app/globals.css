@@ -7388,6 +7388,643 @@ body:has(.web-page) .page-progress{background:linear-gradient(90deg,#43c85d,#a9f
   font-size: 10.5px !important;
 }
 
+/* ==========================================================================
+   AVANCINI SYNC — ELEVATED AI AGENT SUITE (INSPIRADO NO GPTMAKER.AI)
+   ========================================================================== */
+
+/* 1. Hero com Proposta de Alto Impacto & Métricas de ROI */
+.sync-hero-badge-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.sync-hero-live-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 14px;
+  border-radius: 999px;
+  background: rgba(34, 197, 94, 0.1);
+  border: 1px solid rgba(34, 197, 94, 0.28);
+  color: #86efac;
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.sync-hero-live-pill i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 10px #22c55e;
+  animation: syncPulse 1.8s infinite;
+}
+
+.sync-hero-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-top: 48px;
+  width: 100%;
+}
+
+.hero-stat-card {
+  display: flex;
+  flex-direction: column;
+  padding: 18px 20px;
+  border-radius: 16px;
+  background: rgba(6, 17, 34, 0.55);
+  border: 1px solid rgba(34, 211, 238, 0.12);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.25);
+  text-align: left;
+  transition: transform 0.25s ease, border-color 0.25s ease;
+}
+
+.hero-stat-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(34, 211, 238, 0.35);
+}
+
+.hero-stat-number {
+  font-size: clamp(26px, 2.8vw, 36px);
+  font-weight: 800;
+  font-family: var(--font-space), sans-serif;
+  line-height: 1;
+  margin-bottom: 8px;
+  background: linear-gradient(135deg, #38bdf8 0%, #22d3ee 50%, #c084fc 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  letter-spacing: -0.04em;
+}
+
+.hero-stat-card p {
+  font-size: 11.5px;
+  line-height: 1.45;
+  color: #94a3b8;
+  margin: 0;
+}
+
+/* 2. Simulador de WhatsApp com Tags Flutuantes de Ação */
+.agent-chat-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.agent-floating-tags-track {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 14px;
+  width: 100%;
+}
+
+.agent-floating-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 13px;
+  border-radius: 999px;
+  background: rgba(8, 20, 38, 0.85);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: #bae6fd;
+  font-size: 9.5px;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+  transition: transform 0.25s ease, border-color 0.25s ease;
+}
+
+.agent-floating-tag:hover {
+  border-color: #38bdf8;
+  transform: translateY(-2px);
+}
+
+.agent-floating-tag i {
+  color: #38bdf8;
+  font-style: normal;
+}
+
+.agent-chat-phone-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 18px 4px;
+  font-size: 10px;
+  color: #94a3b8;
+  font-weight: 700;
+  background: #070e17;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.phone-notch {
+  width: 90px;
+  height: 12px;
+  border-radius: 999px;
+  background: #02060c;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.phone-signals {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.sig-bar {
+  display: inline-block;
+  width: 3px;
+  border-radius: 1px;
+  background: #94a3b8;
+}
+.sig-bar:nth-child(1) { height: 6px; }
+.sig-bar:nth-child(2) { height: 9px; }
+.sig-bar:nth-child(3) { height: 12px; }
+
+.phone-battery {
+  display: inline-block;
+  width: 16px;
+  height: 9px;
+  border: 1px solid #94a3b8;
+  border-radius: 2px;
+  position: relative;
+  margin-left: 2px;
+}
+.phone-battery::after {
+  content: "";
+  position: absolute;
+  right: -3px;
+  top: 2px;
+  width: 2px;
+  height: 3px;
+  background: #94a3b8;
+  border-radius: 0 1px 1px 0;
+}
+
+/* 3. Base de Conhecimento e Treinamento (Inspirado no GPTMaker) */
+.sync-training-section {
+  padding: clamp(70px, 9vh, 110px) 5.5vw;
+  background: radial-gradient(circle at 80% 30%, rgba(168, 85, 247, 0.1), transparent 35%),
+              radial-gradient(circle at 15% 70%, rgba(34, 211, 238, 0.08), transparent 30%),
+              #030712;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.training-sources-container {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: 28px;
+  align-items: start;
+  margin-top: 36px;
+}
+
+.training-sources-list {
+  display: grid;
+  gap: 12px;
+}
+
+.training-source-card {
+  display: flex;
+  flex-direction: column;
+  padding: 18px 20px;
+  border-radius: 16px;
+  background: rgba(9, 19, 36, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.training-source-card:hover {
+  background: rgba(14, 29, 52, 0.65);
+  border-color: rgba(56, 189, 248, 0.3);
+  transform: translateX(4px);
+}
+
+.training-source-card.active {
+  background: rgba(15, 34, 60, 0.85);
+  border-color: #38bdf8;
+  box-shadow: 0 12px 30px rgba(56, 189, 248, 0.15);
+}
+
+.source-card-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 8px;
+}
+
+.source-icon {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.06);
+  font-size: 18px;
+}
+
+.source-card-header strong {
+  font-size: 14px;
+  color: #f1f5f9;
+  display: block;
+}
+
+.source-card-header small {
+  font-size: 9.5px;
+  color: #94a3b8;
+}
+
+.training-source-card p {
+  font-size: 12px;
+  line-height: 1.5;
+  color: #cbd5e1;
+  margin: 0 0 10px;
+}
+
+.source-card-status {
+  font-size: 9px;
+  font-weight: 800;
+  color: #38bdf8;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.source-card-status i {
+  color: #22c55e;
+}
+
+.training-preview-terminal {
+  border-radius: 18px;
+  overflow: hidden;
+  background: #02060d;
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6), 0 0 30px rgba(56, 189, 248, 0.08);
+}
+
+.terminal-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 18px;
+  background: #06111f;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.terminal-dots {
+  display: flex;
+  gap: 6px;
+}
+
+.terminal-dots i {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+.terminal-dots i:nth-child(1) { background: #ef4444; }
+.terminal-dots i:nth-child(2) { background: #f59e0b; }
+.terminal-dots i:nth-child(3) { background: #10b981; }
+
+.terminal-title {
+  font-family: monospace;
+  font-size: 9px;
+  color: #94a3b8;
+  letter-spacing: 0.08em;
+  flex: 1;
+}
+
+.terminal-badge {
+  font-size: 8px;
+  font-weight: 900;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: rgba(34, 197, 94, 0.15);
+  border: 1px solid rgba(34, 197, 94, 0.35);
+  color: #86efac;
+}
+
+.terminal-body {
+  padding: 22px;
+  font-family: monospace;
+  font-size: 11.5px;
+  line-height: 1.6;
+  color: #cbd5e1;
+}
+
+.terminal-line {
+  margin-bottom: 10px;
+}
+
+.term-prompt {
+  color: #38bdf8;
+  font-weight: bold;
+  margin-right: 8px;
+}
+
+.terminal-line code {
+  color: #facc15;
+  background: rgba(250, 204, 21, 0.1);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.term-success {
+  color: #86efac;
+  font-weight: 600;
+}
+
+.terminal-knowledge-box {
+  margin-top: 18px;
+  padding: 14px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.04);
+  border-left: 3px solid #38bdf8;
+}
+
+.terminal-knowledge-box small {
+  display: block;
+  font-size: 8px;
+  color: #38bdf8;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  margin-bottom: 6px;
+}
+
+.terminal-knowledge-box p {
+  margin: 0;
+  color: #e2e8f0;
+  font-size: 11px;
+  line-height: 1.5;
+  font-style: italic;
+}
+
+.terminal-footer {
+  padding: 12px 20px;
+  background: rgba(6, 17, 31, 0.7);
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  font-size: 10px;
+  color: #94a3b8;
+}
+
+/* 4. Casos de Uso por Nicho (Para quem é) */
+.sync-niches-section {
+  padding: clamp(70px, 9vh, 110px) 5.5vw;
+  background: #040914;
+}
+
+.niches-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-top: 36px;
+}
+
+.niche-card {
+  display: flex;
+  flex-direction: column;
+  padding: 24px 22px;
+  border-radius: 20px;
+  background: rgba(8, 18, 34, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.niche-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(56, 189, 248, 0.4);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.4);
+}
+
+.niche-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.niche-icon {
+  font-size: 26px;
+}
+
+.niche-badge {
+  font-size: 7.5px;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: rgba(56, 189, 248, 0.12);
+  color: #38bdf8;
+  border: 1px solid rgba(56, 189, 248, 0.25);
+}
+
+.niche-card h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #f8fafc;
+  margin: 0 0 8px;
+}
+
+.niche-headline {
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: #94a3b8;
+  margin: 0 0 16px;
+}
+
+.niche-points {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 18px;
+  display: grid;
+  gap: 8px;
+}
+
+.niche-points li {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 11px;
+  line-height: 1.4;
+  color: #cbd5e1;
+}
+
+.niche-points li i {
+  color: #22c55e;
+  font-weight: bold;
+  font-style: normal;
+}
+
+.niche-metric-bar {
+  margin-top: auto;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  margin-bottom: 14px;
+}
+
+.niche-metric-bar small {
+  display: block;
+  font-size: 7.5px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: #94a3b8;
+  margin-bottom: 2px;
+}
+
+.niche-metric-bar strong {
+  display: block;
+  font-size: 11px;
+  color: #38bdf8;
+}
+
+.niche-cta-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.05);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.niche-cta-btn:hover {
+  background: #38bdf8;
+  color: #020b17;
+  border-color: #38bdf8;
+}
+
+/* 5. Ecossistema Omnichannel de Integrações */
+.sync-integrations-section {
+  padding: clamp(70px, 9vh, 110px) 5.5vw;
+  background: #030712;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.integrations-showcase-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-top: 36px;
+}
+
+.integration-category-card {
+  padding: 22px;
+  border-radius: 18px;
+  background: rgba(9, 19, 36, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.integration-category-card h4 {
+  font-size: 13px;
+  font-weight: 800;
+  color: #e2e8f0;
+  margin: 0 0 16px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  letter-spacing: 0.04em;
+}
+
+.integration-items-list {
+  display: grid;
+  gap: 10px;
+}
+
+.integration-item-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: all 0.2s ease;
+}
+
+.integration-item-row:hover {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(56, 189, 248, 0.3);
+}
+
+.integration-item-info strong {
+  display: block;
+  font-size: 11.5px;
+  color: #f1f5f9;
+}
+
+.integration-item-info small {
+  display: block;
+  font-size: 9px;
+  color: #94a3b8;
+}
+
+.integration-tag {
+  font-size: 7.5px;
+  font-weight: 800;
+  padding: 2px 7px;
+  border-radius: 999px;
+  background: rgba(56, 189, 248, 0.1);
+  color: #38bdf8;
+  border: 1px solid rgba(56, 189, 248, 0.2);
+}
+
+/* Responsividade para Tablets e Mobile */
+@media (max-width: 1100px) {
+  .sync-hero-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .training-sources-container {
+    grid-template-columns: 1fr;
+  }
+  .niches-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .integrations-showcase-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .agent-floating-tags-track {
+    display: none; /* remove floating absolute tags on narrow layouts to prevent overlapping */
+  }
+}
+
+@media (max-width: 650px) {
+  .sync-hero-stats-grid {
+    grid-template-columns: 1fr;
+  }
+  .niches-grid {
+    grid-template-columns: 1fr;
+  }
+  .integrations-showcase-grid {
+    grid-template-columns: 1fr;
+  }
+  .sync-hero-live-pill {
+    font-size: 7px;
+  }
+}
+
+
 
 
 
