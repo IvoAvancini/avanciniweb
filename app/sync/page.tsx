@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { useEffect, useRef, useState, type FormEvent, type MouseEvent } from "react";
 import { AvanciniMark } from "../avancini-mark";
 
@@ -56,68 +55,11 @@ function CountryFlagIcon({ code }: { code: string }) {
       </svg>
     );
   }
-  if (code === "MX") {
-    return (
-      <svg viewBox="0 0 32 32" width="18" height="18" className="country-flag-svg" aria-hidden="true">
-        <circle cx="16" cy="16" r="16" fill="#ffffff" />
-        <path d="M0 0 A16 16 0 0 0 0 32 L11 32 L11 0 Z" fill="#006847" />
-        <path d="M32 0 A16 16 0 0 1 32 32 L21 32 L21 0 Z" fill="#ce1126" />
-        <circle cx="16" cy="16" r="2.5" fill="#a0522d" />
-      </svg>
-    );
-  }
-  if (code === "AR") {
-    return (
-      <svg viewBox="0 0 32 32" width="18" height="18" className="country-flag-svg" aria-hidden="true">
-        <circle cx="16" cy="16" r="16" fill="#74acdf" />
-        <rect x="0" y="11" width="32" height="10" fill="#ffffff" />
-        <circle cx="16" cy="16" r="3" fill="#f6b40e" />
-      </svg>
-    );
-  }
-  if (code === "GB") {
-    return (
-      <svg viewBox="0 0 32 32" width="18" height="18" className="country-flag-svg" aria-hidden="true">
-        <circle cx="16" cy="16" r="16" fill="#012169" />
-        <path d="M0 0L32 32M32 0L0 32" stroke="#ffffff" strokeWidth="4" />
-        <path d="M0 0L32 32M32 0L0 32" stroke="#c8102e" strokeWidth="2" />
-        <path d="M16 0v32M0 16h32" stroke="#ffffff" strokeWidth="6" />
-        <path d="M16 0v32M0 16h32" stroke="#c8102e" strokeWidth="3.5" />
-      </svg>
-    );
-  }
   if (code === "ES") {
     return (
       <svg viewBox="0 0 32 32" width="18" height="18" className="country-flag-svg" aria-hidden="true">
         <circle cx="16" cy="16" r="16" fill="#aa151b" />
         <rect x="0" y="8" width="32" height="16" fill="#f1bf00" />
-      </svg>
-    );
-  }
-  if (code === "FR") {
-    return (
-      <svg viewBox="0 0 32 32" width="18" height="18" className="country-flag-svg" aria-hidden="true">
-        <circle cx="16" cy="16" r="16" fill="#ffffff" />
-        <path d="M0 0 A16 16 0 0 0 0 32 L11 32 L11 0 Z" fill="#002654" />
-        <path d="M32 0 A16 16 0 0 1 32 32 L21 32 L21 0 Z" fill="#ed2939" />
-      </svg>
-    );
-  }
-  if (code === "DE") {
-    return (
-      <svg viewBox="0 0 32 32" width="18" height="18" className="country-flag-svg" aria-hidden="true">
-        <circle cx="16" cy="16" r="16" fill="#ffce00" />
-        <path d="M0 0 A16 16 0 0 1 32 0 L32 11 L0 11 Z" fill="#000000" />
-        <rect x="0" y="11" width="32" height="10" fill="#dd0000" />
-      </svg>
-    );
-  }
-  if (code === "IT") {
-    return (
-      <svg viewBox="0 0 32 32" width="18" height="18" className="country-flag-svg" aria-hidden="true">
-        <circle cx="16" cy="16" r="16" fill="#ffffff" />
-        <path d="M0 0 A16 16 0 0 0 0 32 L11 32 L11 0 Z" fill="#009246" />
-        <path d="M32 0 A16 16 0 0 1 32 32 L21 32 L21 0 Z" fill="#ce2b37" />
       </svg>
     );
   }
@@ -148,687 +90,544 @@ const SyncArrow = ({ size = 12 }: { size?: number }) => (
     className="sync-svg-arrow"
     style={{ display: "inline-block", verticalAlign: "middle", marginLeft: 4 }}
   >
-    <line x1="5" y1="12" x2="19" y2="12" />
-    <polyline points="12 5 19 12 12 19" />
+    <line x1="7" y1="17" x2="17" y2="7" />
+    <polyline points="7 7 17 7 17 17" />
   </svg>
 );
 
-const SyncDownArrow = ({ size = 12 }: { size?: number }) => (
+const SyncDownArrow = () => (
   <svg
-    width={size}
-    height={size}
+    width="11"
+    height="11"
     viewBox="0 0 24 24"
     fill="none"
     stroke="currentColor"
-    strokeWidth="2.8"
+    strokeWidth="3"
     strokeLinecap="round"
     strokeLinejoin="round"
     aria-hidden="true"
-    className="sync-svg-down-arrow"
     style={{ display: "inline-block", verticalAlign: "middle", marginLeft: 4 }}
   >
-    <line x1="12" y1="5" x2="12" y2="19" />
-    <polyline points="19 12 12 19 5 12" />
+    <polyline points="6 9 12 15 18 9" />
   </svg>
 );
 
-type SolutionId = "chatbot" | "ia";
 type SyncPaymentCycle = "monthly" | "semiannual" | "annual";
 
-const syncPaymentCycles = [
-  { id: "monthly", label: "Mensal", detail: "Cobrança recorrente" },
-  { id: "semiannual", label: "Semestral", detail: "20% de economia" },
-  { id: "annual", label: "Anual à vista", detail: "30% de economia" },
-] as const;
-
-const formatSyncPlanMoney = (value: number) => new Intl.NumberFormat("pt-BR", {
-  style: "currency",
-  currency: "BRL",
-  minimumFractionDigits: 2,
-}).format(value);
-
-const solutions = {
-  chatbot: {
-    index: "01",
-    label: "CHATBOT & AUTOMAÇÃO INTELIGENTE",
-    description:
-      "Respostas em 3 segundos, envio instantâneo de catálogos e orçamentos, agendamento de consultas ou serviços no piloto automático e triagem sem filas para o vendedor certo.",
-    ideal: "Indispensável para clínicas, escritórios, salões, lojas e empresas que recebem alto volume de mensagens e perdem vendas pela demora em responder.",
-    promise: "Automatize seu WhatsApp e feche vendas 24h sem depender de equipe online.",
-    result: "Zero clientes esperando, atendimento padronizado em 100% dos contatos e sua equipe focada apenas no fechamento.",
-    steps: [
-      "Atendimento imediato em menos de 3 segundos (24h por dia)",
-      "Qualifica a necessidade, apresenta valores/catálogo e coleta os dados",
-      "Agenda horários ou entrega o cliente pronto para o fechamento",
-    ],
-  },
-  ia: {
-    index: "02",
-    label: "ATENDENTE COM IA GENERATIVA",
-    description:
-      "Inteligência artificial avançada treinada exclusivamente no seu negócio. Conversa com empatia humana, compreende áudios e perguntas abertas, quebra objeções difíceis e conduz o cliente até o fechamento com alto valor percebido.",
-    ideal: "Perfeito para empresas que vendem serviços consultivos, alto padrão, clínicas estéticas, saúde, advocacia, imobiliárias e vendas complexas.",
-    promise: "Uma consultora de vendas com IA treinada para negociar, tirar dúvidas e vender.",
-    result: "Vendas acontecendo de madrugada e nos finais de semana, com tom de voz sofisticado e 100% humanizado.",
-    steps: [
-      "Entende texto e áudios com linguagem natural e acolhedora",
-      "Consulta todo o conhecimento da sua empresa e quebra objeções na hora",
-      "Conduz a negociação com estratégia e fecha agendamentos ou vendas",
-    ],
-  },
-} as const;
-
-const faqs = [
-  {
-    question: "Chatbot e atendente com IA são a mesma coisa?",
-    answer: "Não. O chatbot segue fluxos definidos com menus e botões, enquanto a IA entende perguntas abertas, áudios e contexto em linguagem natural. Cada solução pode ser contratada separadamente.",
-  },
-  {
-    question: "Preciso contratar chatbot e inteligência artificial juntos?",
-    answer: "Não. Você pode começar com o Chatbot para organizar a demanda ou direto com a IA para uma experiência consultiva.",
-  },
-  {
-    question: "Existe taxa de ativação?",
-    answer: "Não. A configuração inicial do Sync está totalmente inclusa na assinatura.",
-  },
-  {
-    question: "Como funcionam os ciclos de pagamento?",
-    answer: "Você pode escolher entre mensal recorrente, semestral com 20% de economia ou anual com 30% de economia.",
-  },
-  {
-    question: "A IA substitui completamente uma pessoa?",
-    answer: "Ela assume a triagem, qualificação, dúvidas repetitivas e agendamentos, encaminhando para seu time quando o fechamento final exigir toque humano.",
-  },
-  {
-    question: "Posso usar meu número atual do WhatsApp?",
-    answer: "Sim, realizamos a integração mantendo o histórico e a operação do seu número corporativo com total segurança.",
-  },
-  {
-    question: "Existem custos de mensagens ou ferramentas externas?",
-    answer: "Alguns canais cobram por consumo de API oficial. Todos os limites e projeções são alinhados com total transparência antes do início.",
-  },
-] as const;
-
-const syncPlans = [
-  {
-    id: "chatbot",
-    label: "AUTOMAÇÃO & AGENDAMENTO",
-    name: "Chatbot Pro",
-    price: "A partir de R$ 149,90",
-    cyclePrices: { monthly: 149.9, semiannual: 719.9, annual: 1259.9 },
-    suffix: "/mês",
-    description: "Estrutura completa de automação com menus inteligentes, catálogo, agendamento de horários e encaminhamento direto para o vendedor certo.",
-    definition: "Atendimento imediato que elimina filas e não deixa nenhum cliente esfriar.",
-    fit: "Clínicas, consultórios, salões, lojas, oficinas e negócios locais com alto volume de contatos diários.",
-    example: "O cliente chama às 23h, escolhe o serviço, tira dúvidas de valor, envia os dados e já recebe a confirmação na hora.",
-    items: ["Um canal principal (WhatsApp/Insta)", "Fluxo estratégico de alta conversão", "Envio de orçamentos e catálogos", "Captação e triagem sem filas", "Transbordo para atendente humano", "Acompanhamento e 1 ajuste mensal"],
-  },
-  {
-    id: "ia",
-    label: "INTELIGÊNCIA ARTIFICIAL DE ELITE",
-    name: "Atendente IA Ultra",
-    price: "A partir de R$ 297,90",
-    cyclePrices: { monthly: 297.9, semiannual: 1429.9, annual: 2499.9 },
-    suffix: "/mês",
-    description: "Agente de IA generativa treinada exclusivamente no seu negócio para atender em linguagem natural, quebrar objeções complexas e vender 24 horas por dia.",
-    definition: "Conversa 100% natural e persuasiva, sem travar o cliente em menus engessados.",
-    fit: "Marcas premium, clínicas médicas/estéticas, advocacia, imobiliárias e serviços de alto ticket que exigem atendimento impecável.",
-    example: "O cliente manda um áudio com uma dúvida difícil. A IA compreende, responde no tom da sua marca e agenda a consulta.",
-    items: ["IA generativa treinada na sua empresa", "Compreensão de áudios e textos livres", "Quebra de objeções e persuasão", "Qualificação aprofundada de contatos", "Transferência ágil para seu time", "Evolução e ajuste mensal contínuo"],
-  },
-] as const;
-
-const formatSyncMoney = (value: number) =>
-  new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL", maximumFractionDigits: 0 }).format(value);
-
-const formatSyncQuantity = (value: number) =>
-  value.toLocaleString("pt-BR", { maximumFractionDigits: 1 });
-
-type SyncBottleneck = "repeticao" | "resposta" | "qualificacao";
-
-const syncRecommendations: Record<SyncBottleneck, {
-  planId: SolutionId;
-  reason: string;
-  status: string;
-  affectedLabel: string;
-  affectedHint: string;
-  rateLabel: string;
-  rateHint: string;
-  route: [string, string, string];
-}> = {
-  repeticao: {
-    planId: "chatbot",
-    reason: "O Chatbot assume perguntas previsíveis, coleta os dados e chama sua equipe somente quando uma pessoa realmente precisa entrar.",
-    status: "TEMPO OPERACIONAL PRESO",
-    affectedLabel: "Quantas conversas repetem as mesmas perguntas?",
-    affectedHint: "preço, horário, endereço, disponibilidade ou serviço",
-    rateLabel: "Quanto tempo cada resposta costuma consumir?",
-    rateHint: "inclua leitura, resposta e organização do contato",
-    route: ["Pergunta recorrente chega", "Equipe interrompe o trabalho", "A mesma resposta é digitada outra vez"],
-  },
-  resposta: {
-    planId: "ia",
-    reason: "O Atendente IA entende perguntas livres, responde com o contexto da empresa e mantém a oportunidade em movimento.",
-    status: "OPORTUNIDADES ESPERANDO",
-    affectedLabel: "Quantos esperam demais ou ficam sem retorno?",
-    affectedHint: "use uma quantidade que você reconhece",
-    rateLabel: "Em cada 10 bons contatos, quantos viram clientes?",
-    rateHint: "pense no seu atendimento atual",
-    route: ["Cliente demonstra interesse", "Resposta ou retorno demora", "Outra empresa responde primeiro"],
-  },
-  qualificacao: {
-    planId: "ia",
-    reason: "O Atendente IA entende o que a pessoa procura, faz as perguntas certas e entrega uma oportunidade mais pronta para sua equipe.",
-    status: "CONTATOS SEM PRIORIDADE",
-    affectedLabel: "Quantos chegam sem as informações necessárias?",
-    affectedHint: "contatos que exigem várias perguntas antes de avançar",
-    rateLabel: "Em cada 10 contatos bem qualificados, quantos viram clientes?",
-    rateHint: "considere somente oportunidades com perfil",
-    route: ["Contato chega sem contexto", "Equipe tenta descobrir a necessidade", "A oportunidade esfria antes da proposta"],
-  },
+type SyncPlan = {
+  id: string;
+  name: string;
+  label: string;
+  price: string;
+  suffix: string;
+  description: string;
+  definition: string;
+  fit: string;
+  example: string;
+  items: string[];
+  cyclePrices: Record<SyncPaymentCycle, number>;
 };
 
-function SyncLossSimulator({ onLead }: { onLead: (context: string) => void }) {
-  const [monthlyMessages, setMonthlyMessages] = useState(160);
-  const [lateContacts, setLateContacts] = useState(24);
-  const [salesPerTen, setSalesPerTen] = useState(2);
-  const [averageTicket, setAverageTicket] = useState(500);
-  const [bottleneck, setBottleneck] = useState<SyncBottleneck>("resposta");
+const syncPaymentCycles: { id: SyncPaymentCycle; label: string; detail: string; discount: string }[] = [
+  { id: "monthly", label: "Mensal", detail: "Sem fidelidade longa", discount: "" },
+  { id: "semiannual", label: "Semestral", detail: "10% de economia", discount: "10% OFF" },
+  { id: "annual", label: "Anual", detail: "20% de economia", discount: "20% OFF" },
+];
 
-  const exposedContacts = Math.min(monthlyMessages, lateContacts);
-  const exposedSales = exposedContacts * (salesPerTen / 10);
-  const revenueAtRisk = Math.round(exposedSales * averageTicket);
-  const recoverableContacts = Math.round(exposedContacts * 0.5);
-  const recoverableSales = Number((exposedSales * 0.5).toFixed(1));
-  const protectedPotential = Math.round(revenueAtRisk * 0.5);
-  const recommendation = syncRecommendations[bottleneck];
-  const recommendedPlan = syncPlans.find((plan) => plan.id === recommendation.planId)!;
-  const minutesPerRepeatedAnswer = salesPerTen * 2;
-  const repetitiveHours = Number(((exposedContacts * minutesPerRepeatedAnswer) / 60).toFixed(1));
-  const recoveredHours = Number((repetitiveHours * 0.5).toFixed(1));
-  const isRepetition = bottleneck === "repeticao";
-  const isQualification = bottleneck === "qualificacao";
-  const riskLabel = isRepetition
-    ? "HORAS GASTAS REPETINDO RESPOSTAS"
-    : isQualification
-      ? "VALOR EM CONTATOS MAL QUALIFICADOS"
-      : "VALOR DAS OPORTUNIDADES EXPOSTAS";
-  const riskValue = isRepetition ? `${formatSyncQuantity(repetitiveHours)} h` : formatSyncMoney(revenueAtRisk);
-  const riskUnit = isRepetition ? "/mês da equipe" : "/mês";
-  const riskDescription = isRepetition
-    ? <>Você informou <b>{exposedContacts} conversas repetitivas</b>. Consumindo cerca de <b>{minutesPerRepeatedAnswer} minutos cada</b>, elas ocupam <b>{formatSyncQuantity(repetitiveHours)} horas mensais</b> que poderiam estar em vendas e atendimento humano.</>
-    : isQualification
-      ? <>Você informou <b>{exposedContacts} contatos sem contexto suficiente</b>. Se <b>{salesPerTen} em cada 10</b> oportunidades bem qualificadas viram clientes, até <b>{formatSyncQuantity(exposedSales)} vendas potenciais</b> passam por uma etapa sem prioridade clara.</>
-      : <>Você informou <b>{exposedContacts} conversas com demora</b>. Se <b>{salesPerTen} em cada 10</b> bons contatos costumam virar clientes, cerca de <b>{formatSyncQuantity(exposedSales)} vendas potenciais</b> passam por uma etapa vulnerável.</>;
-  const recoveryLabel = isRepetition ? "SE METADE DAS RESPOSTAS FOR ABSORVIDA" : "SE METADE DAS CONVERSAS FOR RECUPERADA";
-  const recoveryValue = isRepetition ? `${formatSyncQuantity(recoveredHours)} h` : formatSyncMoney(protectedPotential);
-  const recoveryUnit = isRepetition ? "/mês devolvidas" : "/mês protegidos";
-  const recoveryDetail = isRepetition
-    ? <>{recoverableContacts} respostas assumidas pelo fluxo<br /><b>equipe livre para conversas importantes</b></>
-    : <>{recoverableContacts} conversas retomadas<br /><b>{formatSyncQuantity(recoverableSales)} vendas potenciais</b></>;
-  const scenarioName = isRepetition ? "respostas repetitivas" : isQualification ? "qualificação dos contatos" : "demora no atendimento";
-
-  return (
-    <section className="sync-loss" id="diagnostico" aria-labelledby="sync-loss-title">
-      <header>
-        <div><span>03 / SIMULAÇÃO DO GARGALO</span><h2 id="sync-loss-title">Seu concorrente não precisa ser melhor.<br /><em>Ele só precisa responder antes.</em></h2></div>
-        <p>Use sua realidade para visualizar quanto a demora, a resposta genérica e a falta de qualificação podem representar no fim do mês.</p>
-      </header>
-      <div className="sync-loss-console">
-        <div className="sync-loss-inputs">
-          <div className="sync-loss-live"><i /> CENÁRIO EDITÁVEL <small>SEM MÉDIA GENÉRICA DE MERCADO</small></div>
-          <fieldset className="sync-loss-choice">
-            <legend>Onde sua operação trava mais hoje?</legend>
-            <div>
-              <button className={bottleneck === "repeticao" ? "active" : ""} type="button" onClick={() => setBottleneck("repeticao")}><span>01</span>Repete respostas</button>
-              <button className={bottleneck === "resposta" ? "active" : ""} type="button" onClick={() => setBottleneck("resposta")}><span>02</span>Demora para responder</button>
-              <button className={bottleneck === "qualificacao" ? "active" : ""} type="button" onClick={() => setBottleneck("qualificacao")}><span>03</span>Contato chega desqualificado</button>
-            </div>
-          </fieldset>
-          <label><span><b>Mensagens e contatos por mês</b><small>todos os canais</small></span><output>{monthlyMessages}</output><input type="range" min="30" max="2000" step="10" value={monthlyMessages} onChange={(event) => { const value = Number(event.target.value); setMonthlyMessages(value); setLateContacts((current) => Math.min(current, value)); }} /></label>
-          <label><span><b>{recommendation.affectedLabel}</b><small>{recommendation.affectedHint}</small></span><output>{exposedContacts}</output><input type="range" min="1" max={monthlyMessages} step="1" value={lateContacts} onChange={(event) => setLateContacts(Number(event.target.value))} /></label>
-          <label><span><b>{recommendation.rateLabel}</b><small>{recommendation.rateHint}</small></span><output>{isRepetition ? `${minutesPerRepeatedAnswer} min` : `${salesPerTen} em 10`}</output><input type="range" min="1" max="6" step="1" value={salesPerTen} onChange={(event) => setSalesPerTen(Number(event.target.value))} /></label>
-          <label><span><b>{isRepetition ? "Valor médio de um cliente atendido" : "Valor médio de cada venda"}</b><small>{isRepetition ? "para comparar o custo de deixar a equipe presa" : "ticket médio"}</small></span><output>{formatSyncMoney(averageTicket)}</output><input type="range" min="50" max="10000" step="50" value={averageTicket} onChange={(event) => setAverageTicket(Number(event.target.value))} /></label>
-        </div>
-        <div className={`sync-loss-result scenario-${bottleneck}`} key={bottleneck} aria-live="polite">
-          <div className="sync-loss-status"><span><i /> {recommendation.status}</span><small>SYNC:// DIAGNÓSTICO · AO VIVO</small></div>
-          <div className="sync-loss-risk"><small>{riskLabel}</small><strong>{riskValue}<em>{riskUnit}</em></strong><p>{riskDescription}</p></div>
-          <div className="sync-loss-route">{recommendation.route.map((step, index) => <span key={step}>{step}{index < recommendation.route.length - 1 && <i aria-hidden="true">→</i>}</span>)}</div>
-          <div className="sync-loss-protected"><div><small>{recoveryLabel}</small><strong>{recoveryValue}<em>{recoveryUnit}</em></strong></div><span>{recoveryDetail}</span></div>
-          <div className="sync-loss-recommendation">
-            <div><small>MELHOR PRIMEIRO PASSO PARA ESTE CENÁRIO</small><strong>{recommendedPlan.name}</strong><p>{recommendation.reason}</p></div>
-          </div>
-          <button type="button" onClick={() => onLead(`${recommendedPlan.name} como primeiro passo para resolver ${scenarioName}. Na simulação, considerei ${monthlyMessages} contatos por mês, ${exposedContacts} conversas afetadas e ticket médio de ${formatSyncMoney(averageTicket)}`)}>Quero começar por esta recomendação <SyncArrow /></button>
-        </div>
-      </div>
-      <small className="sync-loss-disclaimer">Simulação educativa baseada somente nas quantidades escolhidas por você, sem usar uma média genérica de mercado. Não representa promessa de faturamento.</small>
-    </section>
-  );
-}
-
-
-type DemoScenarioId = "clinica" | "veiculos" | "estetica" | "juridico" | "moda";
-type DemoMessage = { side: "user" | "ai"; text: string };
-type DemoReply = { text: string; complete: boolean };
-type DemoScenario = {
-  id: DemoScenarioId;
-  title: string;
-  user: string;
-  ai: string;
-  suggestions: [string[], string[], string[]];
-  closing: string;
-};
-
-const MAX_DEMO_TURNS = 3;
-
-const demoScenarios: DemoScenario[] = [
+const syncPlans: SyncPlan[] = [
   {
-    id: "clinica",
-    title: "Clínica / Saúde",
-    user: "Quero marcar uma avaliação. Tem horário amanhã?",
-    ai: "Consigo ajudar. Primeiro preciso entender o tipo de atendimento: é uma primeira consulta, retorno ou exame?",
-    suggestions: [
-      ["É primeira consulta", "É retorno", "Quero uma avaliação"],
-      ["Prefiro à tarde", "Prefiro de manhã", "Atende convênio?"],
-      ["Pode confirmar", "Quero falar com a recepção", "Qual o valor?"],
+    id: "especialista",
+    name: "Agente IA Especialista",
+    label: "OPERAÇÃO COMERCIAL OU ATENDIMENTO",
+    price: "R$ 490",
+    suffix: "/mês",
+    description: "1 Agente de IA autônomo treinado no seu negócio para qualificar leads, tirar dúvidas e agendar compromissos 24 horas por dia.",
+    definition: "Agente inteligente treinado exclusivamente com a base de conhecimento da sua empresa.",
+    fit: "Para empresas, consultórios e prestadores de serviços que perdem oportunidades por demora no primeiro contato.",
+    example: "Um lead chama no WhatsApp às 23h. O Agente entende o perfil, tira dúvidas técnicas e agenda uma reunião no Google Calendar.",
+    items: [
+      "1 Agente de IA dedicado (Vendas ou Suporte)",
+      "Treinamento na base de conhecimento da sua empresa (PDFs, regras, FAQs)",
+      "Integração nativa com 1 número de WhatsApp",
+      "Agendamento autônomo no Google Calendar / Calendly",
+      "Transbordo inteligente para atendente humano com resumo pronto",
+      "Painel de controle com histórico e relatórios de conversão",
+      "Suporte e calibragem contínua inclusos",
     ],
-    closing: "Perfeito. Registrei o tipo de atendimento, o período e a modalidade. O próximo passo seria apresentar os horários compatíveis ou entregar tudo organizado para a recepção.",
+    cyclePrices: {
+      monthly: 490,
+      semiannual: 2646,
+      annual: 4704,
+    },
   },
   {
-    id: "veiculos",
-    title: "Loja de Carros",
-    user: "Procuro um SUV até R$ 120 mil e tenho carro na troca.",
-    ai: "Perfeito. Já tenho a categoria e a faixa de investimento. Agora preciso entender o perfil: você prefere um SUV compacto ou de sete lugares?",
-    suggestions: [
-      ["Prefiro SUV compacto", "Quero sete lugares", "Aceito seminovo"],
-      ["Tenho carro na troca", "Quero financiar", "Pagamento à vista"],
-      ["Pode mostrar opções", "Falar com consultor", "Até R$ 120 mil"],
+    id: "multi-agente",
+    name: "Agente IA Multi-Operação",
+    label: "VENDAS + SUPORTE + CRM (MAIS ESCOLHIDO)",
+    price: "R$ 890",
+    suffix: "/mês",
+    description: "2 Agentes de IA trabalhando juntos (SDR Comercial + Atendente de Suporte) com compreensão de áudio e sincronização automática de CRM.",
+    definition: "Ecossistema completo com agentes especialistas trabalhando de forma coordenada no WhatsApp.",
+    fit: "Para clínicas, imobiliárias, escritórios, e-commerces e empresas com volume diário de novos contatos.",
+    example: "O Agente de Vendas qualifica o lead, ouve áudios do cliente, salva os dados no RD Station/HubSpot e avisa seu vendedor no WhatsApp.",
+    items: [
+      "2 Agentes de IA especialistas (SDR Comercial + Suporte/Pós-Venda)",
+      "Compreensão de áudios de clientes (transcrição instantânea)",
+      "Envio de respostas em áudio com voz natural humanizada (opcional)",
+      "Integração direta com CRM (RD Station, HubSpot, Notion ou Planilhas)",
+      "Reativação ativa de leads que pararam de responder (Follow-up inteligente)",
+      "Geração de links de pagamento Pix / Cartão dentro da conversa",
+      "Regras avançadas anti-alucinação e segurança de dados",
+      "Onboarding dedicado e acompanhamento semanal de performance",
     ],
-    closing: "Perfeito. Registrei categoria, faixa de investimento e forma de negociação. O próximo passo seria mostrar somente os veículos compatíveis ou chamar um consultor com o contexto pronto.",
+    cyclePrices: {
+      monthly: 890,
+      semiannual: 4806,
+      annual: 8544,
+    },
   },
   {
-    id: "estetica",
-    title: "Clínica de Estética",
-    user: "Quero melhorar manchas, mas não sei qual tratamento escolher.",
-    ai: "Vamos começar com segurança. É a primeira avaliação ou você já realizou algum tratamento para essa região?",
-    suggestions: [
-      ["É a primeira vez", "Já fiz tratamento", "Tenho pele sensível"],
-      ["Manchas no rosto", "Prefiro sábado", "Uso ácido"],
-      ["Quero uma avaliação", "Falar com especialista", "Qual o valor?"],
+    id: "enterprise",
+    name: "Ecossistema Custom AI",
+    label: "MULTICANAL + BANCO DE DADOS + ERP",
+    price: "R$ 1.590",
+    suffix: "/mês",
+    description: "Operação corporativa com múltiplos Agentes de IA no WhatsApp, Instagram e Site, integrados com banco de dados interno e ERP.",
+    definition: "Arquitetura avançada de inteligência artificial desenvolvida sob medida para operações de alta escala.",
+    fit: "Para operações com múltiplos atendentes, redes de franquias, grandes clínicas e empresas com sistemas proprietários.",
+    example: "A IA consulta o estoque/sistema do ERP em tempo real, emite status de pedidos, agenda em múltiplos consultórios e orquestra a equipe.",
+    items: [
+      "Agentes de IA ilimitados e multicanais (WhatsApp, Instagram Direct e Site)",
+      "Integração profunda com APIs privadas, ERPs e bancos de dados SQL",
+      "Automações complexas via Webhooks (n8n, Make, Evolution API)",
+      "Roteamento avançado de leads por região, vendedor ou especialidade",
+      "SLA de atendimento prioritário e treinamento contínuo da equipe",
+      "Relatórios executivos e auditoria de inteligência artificial",
     ],
-    closing: "Perfeito. Registrei objetivo, histórico e sensibilidade. O próximo passo seria indicar a avaliação adequada e encaminhar o contexto para a especialista, sem prometer um procedimento antes da análise.",
-  },
-  {
-    id: "juridico",
-    title: "Advocacia",
-    user: "Preciso revisar um contrato empresarial com confidencialidade.",
-    ai: "Claro. Sem expor dados sigilosos aqui, preciso identificar o tipo do contrato e a urgência. Existe uma data limite?",
-    suggestions: [
-      ["Prazo esta semana", "Contrato de serviço", "Contrato societário"],
-      ["Como funciona a consulta?", "Tenho urgência", "Posso enviar depois"],
-      ["Pode encaminhar", "Quero agendar", "Falar com advogado"],
-    ],
-    closing: "Perfeito. Registrei o tipo de contrato, a urgência e o prazo sem coletar conteúdo sigiloso. O próximo passo seria encaminhar o caso ao profissional adequado com a triagem pronta.",
-  },
-  {
-    id: "moda",
-    title: "Loja de Roupas",
-    user: "Gostei de uma peça, mas não sei se ainda tem meu tamanho.",
-    ai: "Posso ajudar a localizar. Qual é a peça, o tamanho e a cor desejada? Assim a busca fica objetiva e mostra somente opções compatíveis.",
-    suggestions: [
-      ["Vestido preto M", "Camisa branca G", "Calça tamanho 40"],
-      ["Vocês entregam?", "Quero retirar", "Posso trocar?"],
-      ["Mostrar opções", "Confirmar disponibilidade", "Falar com vendedor"],
-    ],
-    closing: "Perfeito. Registrei peça, tamanho, cor e forma de entrega. O próximo passo seria mostrar apenas os itens disponíveis ou transferir o pedido pronto para um vendedor.",
+    cyclePrices: {
+      monthly: 1590,
+      semiannual: 8586,
+      annual: 15264,
+    },
   },
 ];
 
-const hasAny = (text: string, terms: string[]) => terms.some((term) => text.includes(term));
+const formatSyncPlanMoney = (value: number) =>
+  new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL", maximumFractionDigits: 0 }).format(value);
 
-function buildDemoReply(message: string, scenario: DemoScenario, turn: number): DemoReply {
-  const text = message.toLocaleLowerCase("pt-BR").normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-  const isFinalTurn = turn >= MAX_DEMO_TURNS - 1;
+type AgentScenario = {
+  id: string;
+  name: string;
+  role: string;
+  segment: string;
+  tools: string[];
+  metrics: string;
+  reasoning: string;
+  messages: {
+    sender: "client" | "agent";
+    time: string;
+    text?: string;
+    isAudio?: boolean;
+    audioDuration?: string;
+    actionNote?: string;
+  }[];
+};
 
-  // 1. Solicitação de Atendente Humano / Especialista
-  if (hasAny(text, ["humano", "pessoa", "atendente", "recepcao", "consultor", "especialista", "advogado", "vendedor", "falar com alguem"])) {
-    return {
-      text: "Contexto organizado. Em uma operação conectada, esta conversa seria transferida agora para a pessoa responsável, junto com o histórico, para você não precisar repetir tudo.",
-      complete: true,
-    };
-  }
+const agentScenarios: AgentScenario[] = [
+  {
+    id: "sdr-vendas",
+    name: "Agente SDR Comercial",
+    role: "Qualificação & Vendas B2B",
+    segment: "Empresas de Serviços, Tecnologia e Consultoria",
+    tools: ["Google Calendar", "RD Station CRM", "Qualificador de Ticket"],
+    metrics: "Tempo de resposta: 1.2s · Taxa de qualificação: 88%",
+    reasoning: "Lead demonstrou interesse em modernização. Agente verificou porte da empresa, extraiu necessidade e marcou reunião de proposta na agenda do consultor.",
+    messages: [
+      {
+        sender: "client",
+        time: "21:42",
+        text: "Boa noite! Vocês fazem automação para escritório de contabilidade? Estamos perdendo muitos contatos no WhatsApp.",
+      },
+      {
+        sender: "agent",
+        time: "21:42",
+        text: "Olá! Sim, atendemos escritórios de contabilidade com Agentes de IA sob medida. 🚀\n\nPara eu te passar o melhor direcionamento: quantos contatos vocês recebem por mês e qual o principal gargalo atual?",
+      },
+      {
+        sender: "client",
+        time: "21:44",
+        text: "Recebemos cerca de 300 contatos/mês. O problema é que a equipe demora para responder e os clientes acabam fechando com outros.",
+      },
+      {
+        sender: "agent",
+        time: "21:44",
+        text: "Entendi perfeitamente. Nesse volume, um Agente de IA reduz o tempo de resposta para menos de 3 segundos e já qualifica o regime tributário da empresa antes de passar para seu time.\n\nTenho disponibilidade com nosso especialista amanhã às 10h ou às 15h para te mostrar uma demonstração ao vivo. Qual horário fica melhor para você?",
+        actionNote: "💡 Ação: Verificou slots livres no Google Calendar do consultor comercial.",
+      },
+      {
+        sender: "client",
+        time: "21:45",
+        text: "Amanhã às 15h fica ótimo!",
+      },
+      {
+        sender: "agent",
+        time: "21:45",
+        text: "Perfeito! Reunião confirmada para amanhã (Quarta-feira) às 15:00. 📅\n\nEnviei o convite com o link da chamada para seu e-mail e nosso consultor já recebeu o histórico do seu escritório.",
+        actionNote: "✅ Ação: Agendou no Google Calendar e criou oportunidade no CRM.",
+      },
+    ],
+  },
+  {
+    id: "clinica-saude",
+    name: "Agente Clínico & Saúde",
+    role: "Triagem & Agendamento Médico",
+    segment: "Clínicas Médicas, Odontológicas e Estética",
+    tools: ["Agenda Médica", "Protocolos de Triagem", "Instruções Pré-Exame"],
+    metrics: "Tempo de resposta: 0.9s · Agendamentos automáticos: 94%",
+    reasoning: "Agente acolheu a paciente, esclareceu sobre o procedimento de harmonização, informou valores médios de avaliação e reservou o horário com a Dra. Mariana.",
+    messages: [
+      {
+        sender: "client",
+        time: "19:15",
+        text: "Oi, gostaria de saber quanto custa a harmonização facial e se vocês têm horário para essa semana.",
+      },
+      {
+        sender: "agent",
+        time: "19:15",
+        text: "Olá! Seja muito bem-vinda à Clínica Avancini Saúde. ✨\n\nOs procedimentos de harmonização são 100% personalizados após uma avaliação facial detalhada com a Dra. Mariana para analisar a estrutura e os produtos ideais.",
+      },
+      {
+        sender: "client",
+        time: "19:16",
+        isAudio: true,
+        audioDuration: "0:22",
+        text: "Áudio: 'Entendi! E a consulta de avaliação é muito demorada? Eu só consigo no final da tarde por causa do trabalho.'",
+      },
+      {
+        sender: "agent",
+        time: "19:17",
+        text: "A avaliação dura em média 45 minutos, com mapeamento facial completo e planejamento 3D. 💆‍♀️\n\nTemos um horário especial nesta Quinta-feira às 18h30 com a Dra. Mariana. Gostaria que eu reservasse para você?",
+        actionNote: "💡 Ação: Transcreveu o áudio e consultou horários de final de tarde.",
+      },
+      {
+        sender: "client",
+        time: "19:18",
+        text: "Pode agendar sim, por favor!",
+      },
+      {
+        sender: "agent",
+        time: "19:18",
+        text: "Excelente! Seu agendamento está confirmado para Quinta-feira às 18h30. Já registrei sua ficha e enviaremos o lembrete de localização no dia. Até breve! ✨",
+        actionNote: "✅ Ação: Reserva gravada no sistema da clínica e lembrete programado.",
+      },
+    ],
+  },
+  {
+    id: "imobiliario",
+    name: "Agente Imobiliário",
+    role: "Filtro de Imóveis & Agendamento",
+    segment: "Imobiliárias, Construtoras e Corretores",
+    tools: ["Banco de Imóveis", "Filtro de Bairros", "Agenda de Corretores"],
+    metrics: "Tempo de resposta: 1.5s · Envio de portfólio instantâneo",
+    reasoning: "Lead procurou apartamento de 3 quartos. Agente filtrou no acervo, enviou opções com fotos e agendou visita com o corretor responsável.",
+    messages: [
+      {
+        sender: "client",
+        time: "14:02",
+        text: "Vi uma placa no bairro Jardins. Vocês têm apartamento de 3 quartos para compra até R$ 900 mil?",
+      },
+      {
+        sender: "agent",
+        time: "14:02",
+        text: "Olá! Temos sim excelentes opções nos Jardins com esse perfil. 🏢\n\nVocê busca imóvel pronto para morar ou lançamento na planta? E precisa de quantas vagas de garagem?",
+      },
+      {
+        sender: "client",
+        time: "14:03",
+        text: "Pronto para morar, com pelo menos 2 vagas.",
+      },
+      {
+        sender: "agent",
+        time: "14:03",
+        text: "Perfeito! Selecionei 2 opções ideais:\n\n1️⃣ Edifício Jardins Privilege: 112m², 3 suítes, 2 vagas, varanda gourmet — R$ 870.000\n2️⃣ Residencial Bella Vista: 98m², 3 quartos (1 suíte), lazer completo — R$ 790.000\n\nPodemos marcar uma visita presencial para amanhã às 14h?",
+        actionNote: "💡 Ação: Filtrou catálogo interno e cruzou requisitos de vagas e metragem.",
+      },
+      {
+        sender: "client",
+        time: "14:04",
+        text: "Gostei do Jardins Privilege! Amanhã às 14h dá certo.",
+      },
+      {
+        sender: "agent",
+        time: "14:04",
+        text: "Excelente escolha! Visita agendada para amanhã às 14h. Nosso corretor especialista Ricardo estará te esperando no local com as chaves.",
+        actionNote: "✅ Ação: Notificou o corretor Ricardo no WhatsApp com ficha do cliente.",
+      },
+    ],
+  },
+  {
+    id: "suporte-operacional",
+    name: "Agente Suporte & Operações",
+    role: "Resolução Técnica & Pedidos",
+    segment: "E-commerce, SaaS, Cursos e Plataformas",
+    tools: ["Consulta de Pedidos", "Emissão de 2ª via Pix", "Status de Envio"],
+    metrics: "Tempo de resposta: 0.8s · Resolução no 1º contato: 91%",
+    reasoning: "Cliente solicitou código de rastreio e 2ª via de fatura. Agente consultou o sistema em tempo real e entregou a solução em 15 segundos.",
+    messages: [
+      {
+        sender: "client",
+        time: "11:20",
+        text: "Olá, fiz o pedido #48291 semana passada e ainda não recebi o código de rastreamento.",
+      },
+      {
+        sender: "agent",
+        time: "11:20",
+        text: "Olá, Carlos! Deixe-me consultar seu pedido #48291 em nosso sistema agora mesmo... 🔍",
+        actionNote: "💡 Ação: Consulta à API de logística do e-commerce.",
+      },
+      {
+        sender: "agent",
+        time: "11:21",
+        text: "Localizei aqui! Seu pedido foi despachado ontem pela transportadora Jadlog.\n\n📦 Código de Rastreio: BR892109482\n🚚 Previsão de entrega: até Sexta-feira (05/09)\n\nVocê pode acompanhar em tempo real pelo link: rastreio.avancini.com/BR892109482. Posso ajudar com mais alguma dúvida?",
+      },
+      {
+        sender: "client",
+        time: "11:22",
+        text: "Nossa, que rapidez! Era só isso mesmo, muito obrigado!",
+      },
+      {
+        sender: "agent",
+        time: "11:22",
+        text: "Por nada, Carlos! Estamos sempre à disposição. Tenha um excelente dia! 🚀",
+      },
+    ],
+  },
+];
 
-  // 2. Confirmação / Conclusão
-  if (hasAny(text, ["obrigad", "valeu", "perfeito", "pode confirmar", "pode agendar", "fechado", "pode encaminhar", "quero esse"])) {
-    return { text: scenario.closing, complete: true };
-  }
-
-  // A terceira resposta sempre fecha a experiência. A demonstração precisa
-  // provar começo, contexto e próximo passo sem virar uma conversa infinita.
-  if (isFinalTurn) return { text: scenario.closing, complete: true };
-
-  // 3. Localização / Endereço / Horário de Funcionamento
-  if (hasAny(text, ["onde fica", "endereco", "localizacao", "onde voces", "horario de funcionamento", "aberto"])) {
-    return {
-      text: "Na operação real, o Sync consulta o endereço e os horários cadastrados pela empresa antes de responder. Para continuar esta simulação, você prefere atendimento presencial ou digital?",
-      complete: false,
-    };
-  }
-
-  // 4. Formas de Pagamento / Parcelamento / Cartão
-  if (hasAny(text, ["forma de pagamento", "cartao", "parcela", "pix", "divide em"])) {
-    return {
-      text: "Na operação real, o Sync apresenta somente as formas de pagamento e condições cadastradas pela empresa. Qual modalidade você gostaria de consultar?",
-      complete: false,
-    };
-  }
-
-  // 5. Inteligência Específica por Segmento
-  if (scenario.id === "clinica") {
-    if (hasAny(text, ["convenio", "plano", "unimed", "bradesco", "sulamerica", "amil", "particular"])) {
-      return {
-        text: "No atendimento real, eu consultaria a lista de convênios cadastrada pela clínica antes de confirmar. Qual é o seu plano e qual especialidade você procura?",
-        complete: false,
-      };
-    }
-    if (hasAny(text, ["valor", "preco", "quanto custa", "tabela"])) {
-      return {
-        text: "O valor depende da especialidade e da modalidade de atendimento. Em produção, eu consultaria a tabela cadastrada pela clínica. Qual atendimento você procura?",
-        complete: false,
-      };
-    }
-    if (hasAny(text, ["manha", "tarde", "noite", "horario", "amanha", "segunda", "terca", "quarta", "quinta", "sexta", "sabado"])) {
-      return {
-        text: "Em produção, eu consultaria a agenda em tempo real e mostraria somente horários disponíveis. Para esta simulação, você prefere manhã ou tarde?",
-        complete: false,
-      };
-    }
-    if (hasAny(text, ["primeira", "retorno", "exame", "avaliacao", "consulta"])) {
-      return {
-        text: "Perfeito. Registrei o tipo de consulta. Agora preciso saber se o atendimento seria particular ou por convênio e qual período você prefere.",
-        complete: false,
-      };
-    }
-    return {
-      text: "Entendido! Já organizei suas preferências. Para finalizarmos a triagem, informe se possui convênio médico e sua preferência de turno (manhã ou tarde).",
-      complete: false,
-    };
-  }
-
-  if (scenario.id === "veiculos") {
-    if (hasAny(text, ["troca", "meu carro", "seminovo", "tabela fipe", "onix", "civic", "corolla", "hb20", "gol", "polo"])) {
-      return {
-        text: "Registrei que existe um veículo na troca. Em produção, o Sync coletaria modelo, ano e quilometragem para entregar o contexto ao avaliador. Você pretende financiar a diferença ou pagar à vista?",
-        complete: false,
-      };
-    }
-    if (hasAny(text, ["financ", "parcela", "entrada", "taxa", "banco", "juros"])) {
-      return {
-        text: "Em uma operação conectada, eu mostraria somente as condições cadastradas pela loja ou pela financeira. Para qual valor de entrada e faixa de parcela você busca uma simulação?",
-        complete: false,
-      };
-    }
-    if (hasAny(text, ["suv", "compacto", "sete lugares", "automatico", "flex", "diesel", "blindado", "corolla cross", "compass", "creta", "renegade", "tracker", "kicks"])) {
-      return {
-        text: "Perfil do veículo entendido. Em produção, eu filtraria o catálogo real e mostraria apenas opções compatíveis. Você prefere receber detalhes dos veículos ou falar com um consultor?",
-        complete: false,
-      };
-    }
-    return {
-      text: "Certo! Já anotei o perfil do veículo procurado. Agora informe se haverá carro na troca ou se prefere uma simulação de financiamento.",
-      complete: false,
-    };
-  }
-
-  if (scenario.id === "estetica") {
-    if (hasAny(text, ["resultado", "comprovado", "garantia", "funciona mesmo"])) {
-      return {
-        text: "O resultado varia conforme avaliação, histórico e resposta individual. O Sync não promete um procedimento: ele organiza o objetivo e encaminha a conversa para avaliação profissional.",
-        complete: false,
-      };
-    }
-    if (hasAny(text, ["sensivel", "alerg", "reacao", "acido", "roacutan", "gestante", "amament"])) {
-      return {
-        text: "Essa informação é importante. Registrei a sensibilidade para que a pessoa responsável avalie o caso antes de qualquer indicação. Qual região você deseja tratar?",
-        complete: false,
-      };
-    }
-    if (hasAny(text, ["botox", "mancha", "melasma", "limpeza", "preenchimento", "harmonizacao", "bioestimulador", "laser", "peeling"])) {
-      return {
-        text: "Entendi o objetivo, mas o procedimento adequado depende de avaliação profissional. Você já realizou algum tratamento nessa região ou seria a primeira vez?",
-        complete: false,
-      };
-    }
-    if (hasAny(text, ["valor", "preco", "quanto"])) {
-      return {
-        text: "Cada protocolo é personalizado após análise do tipo de pele e grau de necessidade. Na consulta avaliativa desenhamos o plano exato. Você prefere atendimento durante a semana ou no sábado?",
-        complete: false,
-      };
-    }
-    return {
-      text: "Perfeito! Histórico e objetivo registrados com cuidado. Deseja agendar sua avaliação facial/corporal durante a semana ou no sábado?",
-      complete: false,
-    };
-  }
-
-  if (scenario.id === "juridico") {
-    if (hasAny(text, ["nda", "confidencial", "sigilo", "dados sigilosos"])) {
-      return {
-        text: "Não é necessário compartilhar conteúdo sigiloso nesta triagem. Em produção, o Sync registra apenas área, urgência e preferência de contato; as condições formais são confirmadas pelo profissional responsável.",
-        complete: false,
-      };
-    }
-    if (hasAny(text, ["prazo", "urgente", "amanha", "esta semana", "audiencia", "intimacao", "liminar"])) {
-      return {
-        text: "Urgência processual registrada com prioridade alta. Sem compartilhar dados sigilosos aqui, trata-se de direito empresarial, trabalhista, civil ou tributário?",
-        complete: false,
-      };
-    }
-    if (hasAny(text, ["contrato", "societario", "trabalhista", "tributario", "civel", "imobiliario", "divorcio", "heranca"])) {
-      return {
-        text: "Área jurídica identificada. Sem coletar conteúdo sigiloso nesta etapa, eu encaminharia o contexto e a urgência ao profissional responsável. Você prefere reunião online ou presencial?",
-        complete: false,
-      };
-    }
-    return {
-      text: "Dados preliminares organizados com sigilo. Para fecharmos o encaminhamento, informe sua preferência de reunião (online ou presencial) e a urgência do caso.",
-      complete: false,
-    };
-  }
-
-  // Segmento Moda / Varejo
-  if (hasAny(text, ["como funciona", "atendimento", "como comprar", "preciso de ajuda"])) {
-    return {
-      text: "Posso ajudar a localizar uma peça, organizar tamanho e cor, explicar as opções cadastradas de entrega ou encaminhar tudo pronto para um vendedor. O que você quer resolver primeiro?",
-      complete: false,
-    };
-  }
-  if (hasAny(text, ["entrega", "frete", "sedex", "motoboy", "envia", "cep", "chega"])) {
-    return {
-      text: "Em produção, eu consultaria as modalidades e prazos configurados pela loja usando o CEP informado. Qual é o seu CEP e qual peça você procura?",
-      complete: false,
-    };
-  }
-  const mentionsSize = /(^|\s)(p|m|g|gg|38|40|42|44)(\s|$)/.test(text);
-  if (mentionsSize || hasAny(text, ["tamanho", "preto", "branco", "nude", "vestido", "camisa", "calca"])) {
-    return {
-      text: "Registrei peça, tamanho e cor. Em produção, eu consultaria o estoque real antes de confirmar disponibilidade. Você prefere entrega ou retirada?",
-      complete: false,
-    };
-  }
-  return {
-    text: "Ótimo! Registrei seu interesse. Agora me informe o tamanho desejado e se prefere entrega a domicílio ou retirada rápida.",
-    complete: false,
-  };
-}
-
-function InteractiveAiChatDemo({ onLead }: { onLead: (context: string) => void }) {
-  const [currentScenario, setCurrentScenario] = useState(0);
-  const [isTyping, setIsTyping] = useState(false);
-  const [customMsg, setCustomMsg] = useState("");
-  const [userTurns, setUserTurns] = useState(0);
-  const [demoFinished, setDemoFinished] = useState(false);
-  const typingTimerRef = useRef<number | null>(null);
-  const chatBodyRef = useRef<HTMLDivElement | null>(null);
-  const [chatHistory, setChatHistory] = useState<DemoMessage[]>([
-    { side: "user", text: demoScenarios[0].user },
-    { side: "ai", text: demoScenarios[0].ai },
-  ]);
-
-  useEffect(() => () => {
-    if (typingTimerRef.current !== null) window.clearTimeout(typingTimerRef.current);
-  }, []);
-
-  useEffect(() => {
-    const chatBody = chatBodyRef.current;
-    if (chatBody) chatBody.scrollTop = chatBody.scrollHeight;
-  }, [chatHistory, isTyping, demoFinished]);
-
-  const scheduleReply = (reply: () => void, delay: number) => {
-    if (typingTimerRef.current !== null) window.clearTimeout(typingTimerRef.current);
-    typingTimerRef.current = window.setTimeout(() => {
-      reply();
-      typingTimerRef.current = null;
-    }, delay);
-  };
-
-  const sendMessage = (message: string) => {
-    const text = message.trim();
-    if (!text || isTyping || demoFinished) return;
-    const answer = buildDemoReply(text, demoScenarios[currentScenario], userTurns);
-    setChatHistory((history) => [...history, { side: "user", text }]);
-    setCustomMsg("");
-    setIsTyping(true);
-    scheduleReply(() => {
-      setChatHistory((history) => [...history, { side: "ai", text: answer.text }]);
-      setUserTurns((turns) => turns + 1);
-      setDemoFinished(answer.complete);
-      setIsTyping(false);
-    }, 620 + Math.min(text.length * 8, 420));
-  };
-
-  const startScenario = (index: number) => {
-    const scenario = demoScenarios[index];
-    if (typingTimerRef.current !== null) window.clearTimeout(typingTimerRef.current);
-    setCurrentScenario(index);
-    setCustomMsg("");
-    setUserTurns(0);
-    setDemoFinished(false);
-    setChatHistory([{ side: "user", text: scenario.user }]);
-    setIsTyping(true);
-    scheduleReply(() => {
-      setChatHistory([{ side: "user", text: scenario.user }, { side: "ai", text: scenario.ai }]);
-      setIsTyping(false);
-    }, 620);
-  };
-
-  const handleSelectScenario = (index: number) => startScenario(index);
-
-  const handleSendCustom = (event: FormEvent) => {
-    event.preventDefault();
-    sendMessage(customMsg);
-  };
+function AutonomousAgentShowcase({ onLead }: { onLead: (context: string) => void }) {
+  const [activeScenarioIndex, setActiveScenarioIndex] = useState(0);
+  const scenario = agentScenarios[activeScenarioIndex];
 
   return (
-    <section className="sync-interactive-ai-section" id="portfolio">
-      <div className="section-heading" style={{ margin: "0 auto 40px", maxWidth: "1240px" }}>
+    <section className="sync-agent-showcase" id="demonstracao" aria-labelledby="sync-showcase-title">
+      <header className="sync-section-heading">
         <div>
-          <span className="section-index">01 / DEMONSTRAÇÃO AO VIVO</span>
-          <h2>Teste uma conversa.<br />Veja o próximo passo nascer.</h2>
+          <span>01 / AGENTES EM AÇÃO</span>
+          <h2 id="sync-showcase-title">Veja como o Agente de IA<br />atende como um humano.</h2>
         </div>
-        <p>Escolha um segmento e siga uma conversa completa: entender, qualificar e definir o próximo passo. A simulação encerra quando conclui a triagem.</p>
+        <p>Explore cenários reais de atendimento autônomo. Sem menus de botões — a IA compreende a linguagem do cliente, executa ações e fecha compromissos.</p>
+      </header>
+
+      <div className="agent-scenario-picker" role="tablist" aria-label="Cenários de Agentes de IA">
+        {agentScenarios.map((item, index) => (
+          <button
+            type="button"
+            key={item.id}
+            role="tab"
+            aria-selected={activeScenarioIndex === index}
+            className={`agent-scenario-btn ${activeScenarioIndex === index ? "active" : ""}`}
+            onClick={() => setActiveScenarioIndex(index)}
+          >
+            <span className="scenario-idx">0{index + 1}</span>
+            <div className="scenario-btn-info">
+              <strong>{item.name}</strong>
+              <small>{item.role}</small>
+            </div>
+          </button>
+        ))}
       </div>
 
-      <div className="sync-ai-sim-grid">
-        <div className="sync-ai-sim-copy">
-          <span className="badge"><i /> INTELIGÊNCIA ARTIFICIAL CONVERSACIONAL</span>
-          <h3>A pergunta muda.<br />A resposta acompanha.</h3>
-          <p>Esta é uma simulação orientativa. No atendimento real, a IA usa a base, o tom e os limites definidos pela empresa. Quando necessário, chama uma pessoa.</p>
-          <div className="sync-ai-sim-triggers">
-            {demoScenarios.map((sc, idx) => (
-              <button
-                type="button"
-                key={sc.title}
-                className={currentScenario === idx ? "active" : ""}
-                onClick={() => handleSelectScenario(idx)}
-              >
-                <span>{sc.title}: “{sc.user.slice(0, 40)}...”</span>
-                <b>Testar <SyncArrow /></b>
-              </button>
+      <div className="agent-showcase-grid">
+        <div className="agent-chat-mockup">
+          <div className="agent-chat-header">
+            <div className="agent-chat-avatar">
+              <AvanciniMark variant="sync" className="agent-avatar-mark" />
+              <span className="agent-live-dot" aria-label="Online" />
+            </div>
+            <div className="agent-chat-info">
+              <strong>{scenario.name}</strong>
+              <span className="agent-chat-status">
+                <i>●</i> Agente IA Ativo · Responde em segundos
+              </span>
+            </div>
+            <span className="agent-segment-pill">{scenario.segment.split(",")[0]}</span>
+          </div>
+
+          <div className="agent-chat-body">
+            {scenario.messages.map((msg, i) => (
+              <div key={i} className={`chat-bubble-row ${msg.sender}`}>
+                <div className={`chat-bubble ${msg.sender}`}>
+                  {msg.isAudio ? (
+                    <div className="chat-audio-player">
+                      <button type="button" className="audio-play-btn" aria-label="Reproduzir áudio">▶</button>
+                      <div className="audio-waveform">
+                        <span /><span /><span /><span /><span /><span /><span /><span />
+                      </div>
+                      <span className="audio-time">{msg.audioDuration}</span>
+                    </div>
+                  ) : null}
+                  <p>{msg.text}</p>
+                  <span className="bubble-time">{msg.time} {msg.sender === "agent" && <i className="check-marks">✓✓</i>}</span>
+                </div>
+                {msg.actionNote && (
+                  <div className="agent-action-badge">
+                    <span>{msg.actionNote}</span>
+                  </div>
+                )}
+              </div>
             ))}
           </div>
+
+          <footer className="agent-chat-footer">
+            <span className="agent-tools-label">⚡ FERRAMENTAS CONECTADAS:</span>
+            <div className="agent-tools-tags">
+              {scenario.tools.map((tool) => (
+                <span key={tool} className="agent-tool-tag">{tool}</span>
+              ))}
+            </div>
+          </footer>
         </div>
 
-        <div className="sync-wa-phone">
-          <div className="sync-wa-phone-top">
-            <div className="sync-wa-avatar">AI</div>
-            <div className="sync-wa-meta">
-              <strong>Atendente Inteligente · Avancini Sync</strong>
-              <small><i /> Ativo agora · Resposta instantânea</small>
+        <div className="agent-brain-panel">
+          <div className="agent-brain-card">
+            <div className="brain-header">
+              <span className="brain-tag">🧠 CÉREBRO DO AGENTE DE IA</span>
+              <small>{scenario.metrics}</small>
             </div>
-          </div>
-          <div className="sync-demo-progress" aria-label={`Etapa ${Math.min(userTurns + 1, MAX_DEMO_TURNS)} de ${MAX_DEMO_TURNS}`}>
-            {["Entender", "Qualificar", "Próximo passo"].map((label, index) => (
-              <span key={label} className={index < userTurns || demoFinished ? "done" : index === userTurns ? "active" : ""}>
-                <i>{index + 1}</i>{label}
-              </span>
-            ))}
-          </div>
-          <div className="sync-wa-chat-body" ref={chatBodyRef}>
-            {chatHistory.map((m, i) => (
-              <div key={`${m.side}-${i}-${m.text}`} className={m.side === "user" ? "sync-msg sync-msg-user" : "sync-msg sync-msg-ai"}>
-                {m.side === "ai" && <strong>Avancini Sync IA</strong>}
-                {m.text}
+            <h3>O que a inteligência artificial fez nesta conversa:</h3>
+            <p className="brain-reasoning">{scenario.reasoning}</p>
+
+            <div className="brain-capabilities-list">
+              <div className="brain-cap-item">
+                <span className="cap-icon">01</span>
+                <div>
+                  <strong>Compreensão Contextual</strong>
+                  <p>Entendeu a real intenção sem exigir que o cliente clique em botões engessados.</p>
+                </div>
               </div>
-            ))}
-            {isTyping && (
-              <div className="sync-typing-indicator">
-                <span /><span /><span />
+              <div className="brain-cap-item">
+                <span className="cap-icon">02</span>
+                <div>
+                  <strong>Execução Autônoma de Tarefas</strong>
+                  <p>Consultou disponibilidade, gravou no sistema e sincronizou com a equipe.</p>
+                </div>
               </div>
-            )}
-          </div>
-          {demoFinished ? (
-            <div className="sync-demo-complete" role="status">
-              <div>
-                <small>TRIAGEM CONCLUÍDA</small>
-                <strong>Conversa organizada. Próximo passo definido.</strong>
-                <span>{demoScenarios[currentScenario].title} · contexto coletado · equipe pronta para continuar</span>
-              </div>
-              <div className="sync-demo-complete-actions">
-                <button type="button" onClick={() => onLead(`um atendimento inteligente para ${demoScenarios[currentScenario].title.toLocaleLowerCase("pt-BR")}`)}>Quero isso no meu atendimento <SyncArrow /></button>
-                <button type="button" onClick={() => startScenario(currentScenario)}>Reiniciar conversa <b>↻</b></button>
+              <div className="brain-cap-item">
+                <span className="cap-icon">03</span>
+                <div>
+                  <strong>Tom de Voz Humanizado</strong>
+                  <p>Manteve cordialidade, empatia e alinhamento com a postura da sua marca.</p>
+                </div>
               </div>
             </div>
-          ) : (
-            <>
-              <div className="sync-wa-suggestions" aria-label="Sugestões para continuar a conversa">
-                {demoScenarios[currentScenario].suggestions[Math.min(userTurns, MAX_DEMO_TURNS - 1)].map((suggestion) => (
-                  <button type="button" key={suggestion} onClick={() => sendMessage(suggestion)} disabled={isTyping}>{suggestion}</button>
-                ))}
-              </div>
-              <form className="sync-wa-footer" onSubmit={handleSendCustom}>
-                <input
-                  type="text"
-                  placeholder="Digite uma resposta de teste..."
-                  value={customMsg}
-                  onChange={(e) => setCustomMsg(e.target.value)}
-                  disabled={isTyping}
-                />
-                <button type="submit" aria-label="Enviar mensagem de teste" disabled={isTyping || !customMsg.trim()}>➤</button>
-              </form>
-            </>
-          )}
+
+            <button
+              type="button"
+              className="agent-cta-btn"
+              onClick={() => onLead(`um Agente de IA para ${scenario.role} no segmento de ${scenario.segment}`)}
+            >
+              Quero um Agente como esse na minha empresa <SyncArrow />
+            </button>
+          </div>
         </div>
       </div>
     </section>
   );
 }
+
+const comparisonPoints = [
+  {
+    topic: "Experiência do Cliente",
+    oldChatbot: "Menus rígidos ('digite 1 para vendas, 2 para suporte'). Se o cliente digitar outra coisa, o bot trava e não responde.",
+    aiAgent: "Conversação 100% livre e humana por texto e áudio. Entende gírias, perguntas complexas e responde com empatia imediata.",
+  },
+  {
+    topic: "Compreensão de Áudio",
+    oldChatbot: "Ignora completamente áudios ou responde com mensagem de erro pedindo para 'digitar apenas texto'.",
+    aiAgent: "Ouve áudios longos, transcreve em milissegundos e pode responder em áudio com voz humanizada indistinguível.",
+  },
+  {
+    topic: "Resolução de Problemas",
+    oldChatbot: "Repete links genéricos do site e frequentemente deixa o cliente sem resposta.",
+    aiAgent: "Executa ações reais: agenda reuniões no Google Calendar, consulta pedidos no sistema e emite links de pagamento.",
+  },
+  {
+    topic: "Qualificação de Vendas (SDR)",
+    oldChatbot: "Coleta formulários chatos que o cliente abandona pela metade.",
+    aiAgent: "Faz perguntas fluidas em tom de conversa, descobre orçamento, regime ou urgência e entrega o lead pronto para o vendedor.",
+  },
+  {
+    topic: "Aprendizado e Atualização",
+    oldChatbot: "Exige reprogramar fluxogramas gigantescos toda vez que um preço ou serviço muda.",
+    aiAgent: "Aprende lendo seus documentos, PDFs e catálogos. Se sua regra mudar, basta atualizar a base de conhecimento.",
+  },
+];
+
+const capabilities = [
+  {
+    number: "01",
+    title: "Cérebro Treinado na Sua Empresa",
+    description: "Seu Agente de IA lê manuais, tabelas de preços, regras de contratação e histórico de atendimento para responder rigorosamente dentro das suas diretrizes.",
+  },
+  {
+    number: "02",
+    title: "Compreensão & Envio de Áudio",
+    description: "Mais de 60% dos brasileiros preferem mandar áudio no WhatsApp. Seu Agente escuta áudios de qualquer tamanho e responde com voz natural e clara.",
+  },
+  {
+    number: "03",
+    title: "Agendamento de Reuniões Autônomo",
+    description: "Conectado ao Google Calendar ou Calendly, ele checa horários livres, negocia o melhor momento com o cliente e envia o convite com link de chamada.",
+  },
+  {
+    number: "04",
+    title: "Qualificação Cirúrgica de Leads (SDR)",
+    description: "Identifica se o cliente tem orçamento, necessidade e urgência antes de envolver seu time, garantindo que seus vendedores só falem com quem tem potencial de compra.",
+  },
+  {
+    number: "05",
+    title: "Integração Direta com CRM & APIs",
+    description: "Envia os dados capturados direto para o RD Station, HubSpot, ActiveCampaign, Notion ou Google Sheets, mantendo seu funil de vendas 100% atualizado.",
+  },
+  {
+    number: "06",
+    title: "Transbordo Humano Inteligente",
+    description: "Quando o caso exige um atendente humano, o Agente notifica seu vendedor no WhatsApp com um resumo executivo de tudo o que o cliente falou.",
+  },
+];
+
+const faqs = [
+  {
+    question: "O que diferencia um Agente de IA de um chatbot tradicional?",
+    answer: "Um chatbot tradicional usa regras estáticas de botões e 'árvores de decisão' (se o cliente não clicar exatamente no botão, ele trava). Um Agente de IA da Avancini utiliza inteligência artificial avançada para raciocinar, interpretar linguagem natural em áudio ou texto, consultar bases de dados em tempo real e executar tarefas reais (como agendar compromissos e atualizar seu CRM).",
+  },
+  {
+    question: "O Agente de IA pode inventar informações (alucinar)?",
+    answer: "Não. Nossos Agentes são calibrados com rigorosas camadas de segurança (System Prompts e RAG). Eles respondem estritamente com base nos documentos, manuais e regras da sua empresa. Se um cliente fizer uma pergunta fora do escopo, o Agente informa com educação ou transfere para um humano.",
+  },
+  {
+    question: "Preciso trocar de número de WhatsApp?",
+    answer: "Não. É possível conectar o Agente de IA diretamente ao seu número de WhatsApp atual ou configurar um novo número exclusivo para a operação de atendimento e vendas.",
+  },
+  {
+    question: "Como o Agente aprende sobre os meus produtos e serviços?",
+    answer: "Nossa equipe realiza um onboarding guiado onde você nos fornece informações sobre seu negócio (PDFs, catálogo, site, regras comerciais, dúvidas frequentes). Nós processamos esses dados, estruturamos a base de conhecimento e calibramos a IA antes de colocar no ar.",
+  },
+  {
+    question: "O que acontece quando o cliente precisa falar com uma pessoa?",
+    answer: "O Agente detecta quando o cliente solicita atendimento humano ou quando atinge critérios estratégicos (como um lead de alto valor pronto para fechar). Ele pausa o atendimento automático e notifica sua equipe pelo WhatsApp com um resumo executivo pronto de toda a conversa.",
+  },
+  {
+    question: "Existe taxa de criação ou contrato de fidelidade?",
+    answer: "Não há taxa de criação ou setup inicial nas condições de lançamento. O plano mensal pode ser cancelado a qualquer momento sem multa. Para planos semestrais e anuais, você conta com descontos exclusivos de 10% e 20%.",
+  },
+];
 
 export default function AvanciniSyncPage() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [leadContext, setLeadContext] = useState("");
-  const [selectedPlanIndex, setSelectedPlanIndex] = useState(0);
+  const [selectedPlanIndex, setSelectedPlanIndex] = useState(1);
   const [paymentCycle, setPaymentCycle] = useState<SyncPaymentCycle>("monthly");
   const [leadName, setLeadName] = useState("");
   const [leadPhone, setLeadPhone] = useState("");
@@ -867,21 +666,6 @@ export default function AvanciniSyncPage() {
       if (event.key === "Escape") {
         setLeadContext("");
         setMenuOpen(false);
-      }
-      if (event.key === "Tab") {
-        const dialog = document.querySelector<HTMLElement>('[role="dialog"][aria-modal="true"]');
-        if (!dialog) return;
-        const focusable = Array.from(dialog.querySelectorAll<HTMLElement>('a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'));
-        if (!focusable.length) return;
-        const first = focusable[0];
-        const last = focusable[focusable.length - 1];
-        if (event.shiftKey && document.activeElement === first) {
-          event.preventDefault();
-          last.focus();
-        } else if (!event.shiftKey && document.activeElement === last) {
-          event.preventDefault();
-          first.focus();
-        }
       }
     };
     const previousOverflow = document.body.style.overflow;
@@ -925,7 +709,6 @@ export default function AvanciniSyncPage() {
     setLeadError("");
     setLeadSubmitting(true);
 
-    // Envio seguro em background para a API de leads
     try {
       fetch("/api/lead", {
         method: "POST",
@@ -961,7 +744,10 @@ export default function AvanciniSyncPage() {
       <header className={`header sync-shared-header ${scrolled ? "scrolled" : ""}`}>
         <a href="#inicio" className="logo" aria-label="Avancini Sync, início">
           <AvanciniMark variant="sync" className="logo-mark avancini-a-mark" />
-          <span><span className="brand-name">AVANCINI <b>SYNC</b></span><small>Atendimento que não esfria</small></span>
+          <span>
+            <span className="brand-name">AVANCINI <b>SYNC</b></span>
+            <small>Agentes de IA Autônomos</small>
+          </span>
         </a>
         <div className="web-ecosystem-switch" aria-label="Ecossistema Avancini">
           <Link className="button button-small header-cta sync-dash-cta" href="/dash">
@@ -1001,12 +787,12 @@ export default function AvanciniSyncPage() {
           </div>
           <nav>
             {[
-              ["01", "Início", "A oportunidade não espera", "#inicio"],
-              ["02", "Demonstração", "Veja o atendimento acontecer", "#portfolio"],
-              ["03", "Soluções", "Chatbot ou atendente com IA", "#solucoes"],
-              ["04", "Simulação", "Calcule o retorno do Sync", "#diagnostico"],
-              ["05", "Planos e preços", "Compare e escolha o formato", "#planos"],
-              ["06", "Dúvidas", "Decida com clareza", "#duvidas"],
+              ["01", "Início", "Inteligência Artificial que vende", "#inicio"],
+              ["02", "Demonstração", "Agentes em ação ao vivo", "#demonstracao"],
+              ["03", "Comparativo", "Chatbot vs. Agente de IA", "#comparativo"],
+              ["04", "Capacidades", "Recursos e superpoderes", "#recursos"],
+              ["05", "Planos e preços", "Implantação e acompanhamento", "#planos"],
+              ["06", "Dúvidas", "Segurança e funcionamento", "#duvidas"],
             ].map(([number, label, description, href]) => (
               <a href={href} key={number} onClick={(event) => navigateFromMenu(event, href)}>
                 <small>{number}</small>
@@ -1022,7 +808,7 @@ export default function AvanciniSyncPage() {
               type="button"
               onClick={() => {
                 setMenuOpen(false);
-                openLead("um orçamento para implantação do Avancini Sync no meu atendimento");
+                openLead("a implantação de um Agente de IA na minha empresa");
               }}
             >
               SOLICITAR ORÇAMENTO <SyncArrow />
@@ -1031,127 +817,234 @@ export default function AvanciniSyncPage() {
         </div>
       )}
 
+      {/* Hero Section */}
       <section className="sync-hero" id="inicio">
         <div className="sync-hero-grid" aria-hidden="true" />
         <div className="sync-hero-orbit" aria-hidden="true"><i /><i /><i /></div>
         <AvanciniMark variant="sync" className="sync-hero-mark avancini-a-mark" />
         <div className="sync-hero-copy">
-          <span className="sync-eyebrow"><i /> CHATBOT · ATENDENTE COM INTELIGÊNCIA ARTIFICIAL</span>
-          <h1>Seu cliente chamou.<br /><em>O Sync mantém a conversa viva.</em></h1>
-          <p>Responda no WhatsApp e Instagram com rapidez, contexto e um próximo passo claro, mesmo quando ninguém da equipe puder atender naquele instante.</p>
+          <span className="sync-eyebrow"><i /> AGENTE DE IA AUTÔNOMO · ATENDIMENTO &amp; VENDAS 24/7</span>
+          <h1>Não é um chatbot com menus.<br /><em>É um Agente de IA que pensa, atende e fecha vendas.</em></h1>
+          <p>Esqueça menus de &ldquo;digite 1 ou 2&rdquo;. O Agente de IA da Avancini compreende áudios e textos livres, consulta seus dados, qualifica clientes e agenda reuniões no automático — 24 horas por dia.</p>
           <div className="sync-hero-actions">
-            <a href="#portfolio">Ver o Sync funcionando <SyncDownArrow /></a>
+            <a href="#demonstracao">Explorar Agentes em ação <SyncDownArrow /></a>
             <a className="sync-plans-shortcut" href="#planos">Ver planos <SyncDownArrow /></a>
-            <button type="button" onClick={() => openLead("parar de perder oportunidades por demora ou falta de acompanhamento")}>Quero parar de perder oportunidades <SyncArrow /></button>
+            <button type="button" onClick={() => openLead("implantar um Agente de IA para automatizar meu atendimento e vendas")}>Quero um Agente de IA na minha empresa <SyncArrow /></button>
           </div>
           <div className="sync-hero-proof">
-            <span><b>01</b> Responde em segundos</span>
-            <span><b>02</b> Pode atender 24 horas</span>
-            <span><b>03</b> Chama uma pessoa na hora certa</span>
+            <span><b>01</b> 100% Autônomo · Responde em segundos</span>
+            <span><b>02</b> Ouve e fala com voz natural humanizada</span>
+            <span><b>03</b> Integra com WhatsApp, Agenda e CRM</span>
           </div>
         </div>
       </section>
 
-      <InteractiveAiChatDemo onLead={openLead} />
+      {/* Interactive Showcase with Pre-made Real Scenarios */}
+      <AutonomousAgentShowcase onLead={openLead} />
 
-      <section className="sync-solutions" id="solucoes">
+      {/* Comparison Section: Old Chatbot vs. Modern AI Agent */}
+      <section className="sync-comparison-section" id="comparativo">
         <header className="sync-section-heading">
-          <div><span>02 / ESCOLHA PELO ATENDIMENTO</span><h2>Duas soluções.<br />Cada uma funciona sozinha.</h2></div>
-          <p>Chatbot organiza caminhos previsíveis. O Atendente IA entende perguntas livres. Você escolhe somente o nível de conversa que sua empresa precisa.</p>
+          <div>
+            <span>02 / A EVOLUÇÃO DO ATENDIMENTO</span>
+            <h2>Chatbot Antigo vs.<br />Agente de IA Avancini.</h2>
+          </div>
+          <p>Entenda por que menus engessados perdem clientes e como um Agente de IA autônomo eleva a taxa de conversão da sua empresa.</p>
         </header>
-        <div className="sync-choice-grid" aria-label="Comparação entre Chatbot e Atendente IA">
-          {(Object.keys(solutions) as SolutionId[]).map((id) => {
-            const item = solutions[id];
-            return (
-              <article className={id === "ia" ? "featured" : ""} key={id}>
-                <div className="sync-choice-top"><span>{item.index}</span><small>{item.label}</small></div>
-                <h3>{item.promise}</h3>
-                <p>{item.description}</p>
-                <strong>{item.ideal}</strong>
-                <ol>{item.steps.map((step) => <li key={step}>{step}</li>)}</ol>
-                <footer><span>{item.result}</span><button type="button" onClick={() => { setSelectedPlanIndex(id === "ia" ? 1 : 0); document.getElementById("planos")?.scrollIntoView({ behavior: "smooth", block: "start" }); }}>Ver preço e detalhes <SyncArrow /></button></footer>
-              </article>
-            );
-          })}
+
+        <div className="comparison-table-wrap">
+          <div className="comparison-table-header">
+            <div className="col-aspect">ASPECTO</div>
+            <div className="col-old">❌ CHATBOT TRADICIONAL</div>
+            <div className="col-new">⚡ AGENTE DE IA SYNC</div>
+          </div>
+          <div className="comparison-table-rows">
+            {comparisonPoints.map((pt, i) => (
+              <div className="comparison-row" key={i}>
+                <div className="col-aspect"><strong>{pt.topic}</strong></div>
+                <div className="col-old"><p>{pt.oldChatbot}</p></div>
+                <div className="col-new"><p>{pt.aiAgent}</p></div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
-      <SyncLossSimulator onLead={openLead} />
+      {/* Capabilities & Superpowers Section */}
+      <section className="sync-capabilities-section" id="recursos">
+        <header className="sync-section-heading">
+          <div>
+            <span>03 / RECURSOS E TECNOLOGIA</span>
+            <h2>Tudo o que seu Agente de IA<br />é capaz de executar.</h2>
+          </div>
+          <p>Construído sobre modelos de linguagem de última geração com arquitetura segura anti-alucinação e conexão em tempo real.</p>
+        </header>
 
+        <div className="capabilities-grid">
+          {capabilities.map((cap) => (
+            <article className="capability-card" key={cap.number}>
+              <span className="cap-number">{cap.number}</span>
+              <h3>{cap.title}</h3>
+              <p>{cap.description}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      {/* Pricing Section */}
       <section className="sync-pricing" id="planos">
         <header className="sync-section-heading">
-          <div><span>04 / PLANOS SYNC</span><h2>Duas soluções.<br />Um preço claro para cada uma.</h2></div>
-          <p>Escolha o nível de atendimento que resolve seu gargalo. Ambos incluem configuração e acompanhamento, sem taxa de criação.</p>
+          <div><span>04 / PLANOS &amp; IMPLANTAÇÃO</span><h2>Invista em produtividade.<br />Sem taxa de criação inicial.</h2></div>
+          <p>Escolha a estrutura de Agentes de IA que sua operação necessita. Todos os planos incluem treinamento e acompanhamento especializado.</p>
         </header>
         <div className="sync-offer-proof" aria-label="Por que começar com o Avancini Sync">
-          <article><small>01 · COMEÇO SEGURO</small><strong>Sem taxa de criação</strong><span>Configuração inicial incluída na assinatura escolhida.</span></article>
-          <article><small>02 · VALOR PERCEBIDO</small><strong>Menos contato esfriando</strong><span>O investimento entra onde a demora hoje custa oportunidades.</span></article>
-          <article><small>03 · DECISÃO ASSISTIDA</small><strong>Primeiro validamos o cenário</strong><span>Nenhum pagamento antes de confirmar canal, fluxo e limites.</span></article>
+          <article><small>01 · SEM TAXA DE CRIAÇÃO</small><strong>Setup e calibração inclusos</strong><span>Construímos a base de conhecimento e calibramos o agente sem custo extra.</span></article>
+          <article><small>02 · RETORNO IMEDIATO</small><strong>Zero leads perdidos</strong><span>Seu atendimento responde em segundos, dia e noite, aumentando a conversão.</span></article>
+          <article><small>03 · SEGURANÇA TOTAL</small><strong>Diretrizes anti-alucinação</strong><span>A IA responde estritamente o que sua empresa autorizar e orientar.</span></article>
         </div>
         <div className="sync-plan-configurator sync-single-plan-configurator">
-        <div className="sync-plan-configurator-body">
-          <div className="sync-plan-picker" role="group" aria-label="Escolha uma solução Sync">
-            {syncPlans.map((plan, index) => <button type="button" key={plan.name} className={selectedPlanIndex === index ? "active" : ""} aria-pressed={selectedPlanIndex === index} onClick={() => setSelectedPlanIndex(index)}><small>0{index + 1} · {plan.label}</small><strong>{plan.name}</strong><span>{plan.definition}</span></button>)}
-            <div className="sync-price-promise"><small>CONDIÇÃO DE LANÇAMENTO</small><strong>Configuração e acompanhamento inclusos.</strong><span>Sem taxa de criação</span></div>
-          </div>
-        <div className="sync-plan-grid">
-            {[syncPlans[selectedPlanIndex]].map((plan) => {
-              const selectedCycle = syncPaymentCycles.find((item) => item.id === paymentCycle) ?? syncPaymentCycles[0];
-              const total = plan.cyclePrices[paymentCycle];
-              const priceLabel = paymentCycle === "monthly"
-                ? `${plan.price}${plan.suffix}`
-                : `A partir de ${formatSyncPlanMoney(total)}${paymentCycle === "semiannual" ? "/semestre" : "/ano"}`;
-              return <article className={selectedPlanIndex === 1 ? "featured" : ""} key={plan.name}>
-              <div className="sync-plan-top"><span>0{selectedPlanIndex + 1}</span><small>{plan.label}</small><b>SEM TAXA DE CRIAÇÃO</b></div>
-              <h3>{plan.name}</h3><strong>{priceLabel}</strong><p>{plan.description}</p>
-              <div className="sync-plan-clarity">
-                <div><b>O que é</b><span>{plan.definition}</span></div>
-                <div><b>Para quem serve</b><span>{plan.fit}</span></div>
-                <div><b>Na prática</b><span>{plan.example}</span></div>
-              </div>
-              <small className="sync-plan-includes">O QUE ENTRA</small>
-              <ul>{plan.items.map((item) => <li key={item}>{item}</li>)}</ul>
-              <div className="sync-plan-closing">
-                <div className="payment-cycle-block sync-payment-cycle-block">
-                  <div className="payment-cycle-heading"><span>ESCOLHA O CICLO</span><small>Uma solução, três formas simples de pagamento</small></div>
-                  <div className="payment-cycle-options" role="group" aria-label="Frequência de pagamento do Sync">
-                    {syncPaymentCycles.map((option) => <button type="button" key={option.id} className={paymentCycle === option.id ? "active" : ""} aria-pressed={paymentCycle === option.id} onClick={() => setPaymentCycle(option.id)}><strong>{option.label}{option.id !== "monthly" && <i>{option.detail}</i>}</strong><span>{option.id === "monthly" ? `${formatSyncPlanMoney(plan.cyclePrices.monthly)} por mês` : option.id === "semiannual" ? `${formatSyncPlanMoney(plan.cyclePrices.semiannual)} a cada 6 meses` : `${formatSyncPlanMoney(plan.cyclePrices.annual)} à vista`}</span></button>)}
-                  </div>
-                  <p className="card-limit-note">No mensal, somente a mensalidade do mês é lançada no cartão e o valor total não ocupa o limite. Semestral e anual são cobrados antecipadamente.</p>
-                </div>
-                <button className="sync-plan-cta" type="button" onClick={() => openLead(`${plan.name} por ${priceLabel}, no ciclo ${selectedCycle.label.toLowerCase()} e sem taxa de criação`)}>
-                  <span><strong>Conversar sobre {plan.name}</strong><small>Validar meu canal e entender o melhor fluxo</small></span>
-                  <SyncArrow />
+          <div className="sync-plan-configurator-body">
+            <div className="sync-plan-picker" role="group" aria-label="Escolha um plano Sync">
+              {syncPlans.map((plan, index) => (
+                <button
+                  type="button"
+                  key={plan.name}
+                  className={selectedPlanIndex === index ? "active" : ""}
+                  aria-pressed={selectedPlanIndex === index}
+                  onClick={() => setSelectedPlanIndex(index)}
+                >
+                  <small>0{index + 1} · {plan.label}</small>
+                  <strong>{plan.name}</strong>
+                  <span>{plan.definition}</span>
                 </button>
-                <small className="sync-plan-contact-note">Nenhum pagamento agora. Primeiro validamos o seu cenário.</small>
+              ))}
+              <div className="sync-price-promise">
+                <small>CONDIÇÃO DE LANÇAMENTO</small>
+                <strong>Setup, calibração e suporte inclusos.</strong>
+                <span>Sem taxa de criação</span>
               </div>
-            </article>})}
+            </div>
+            <div className="sync-plan-grid">
+              {[syncPlans[selectedPlanIndex]].map((plan) => {
+                const selectedCycle = syncPaymentCycles.find((item) => item.id === paymentCycle) ?? syncPaymentCycles[0];
+                const total = plan.cyclePrices[paymentCycle];
+                const priceLabel = paymentCycle === "monthly"
+                  ? `${plan.price}${plan.suffix}`
+                  : `A partir de ${formatSyncPlanMoney(total)}${paymentCycle === "semiannual" ? "/semestre" : "/ano"}`;
+                return (
+                  <article className={selectedPlanIndex === 1 ? "featured" : ""} key={plan.name}>
+                    <div className="sync-plan-top">
+                      <span>0{selectedPlanIndex + 1}</span>
+                      <small>{plan.label}</small>
+                      <b>SEM TAXA DE CRIAÇÃO</b>
+                    </div>
+                    <h3>{plan.name}</h3>
+                    <strong>{priceLabel}</strong>
+                    <p>{plan.description}</p>
+                    <div className="sync-plan-clarity">
+                      <div><b>O que é</b><span>{plan.definition}</span></div>
+                      <div><b>Para quem serve</b><span>{plan.fit}</span></div>
+                      <div><b>Na prática</b><span>{plan.example}</span></div>
+                    </div>
+                    <small className="sync-plan-includes">O QUE ESTÁ INCLUSO</small>
+                    <ul>{plan.items.map((item) => <li key={item}>{item}</li>)}</ul>
+                    <div className="sync-plan-closing">
+                      <div className="payment-cycle-block sync-payment-cycle-block">
+                        <div className="payment-cycle-heading">
+                          <span>ESCOLHA O CICLO DE PAGAMENTO</span>
+                          <small>Flexibilidade total para sua empresa</small>
+                        </div>
+                        <div className="payment-cycle-options" role="group" aria-label="Frequência de pagamento do Sync">
+                          {syncPaymentCycles.map((option) => (
+                            <button
+                              type="button"
+                              key={option.id}
+                              className={paymentCycle === option.id ? "active" : ""}
+                              aria-pressed={paymentCycle === option.id}
+                              onClick={() => setPaymentCycle(option.id)}
+                            >
+                              <strong>{option.label}{option.id !== "monthly" && <i>{option.detail}</i>}</strong>
+                              <span>
+                                {option.id === "monthly"
+                                  ? `${formatSyncPlanMoney(plan.cyclePrices.monthly)} por mês`
+                                  : option.id === "semiannual"
+                                  ? `${formatSyncPlanMoney(plan.cyclePrices.semiannual)} a cada 6 meses`
+                                  : `${formatSyncPlanMoney(plan.cyclePrices.annual)} à vista`}
+                              </span>
+                            </button>
+                          ))}
+                        </div>
+                        <p className="card-limit-note">No mensal, apenas o valor daquele mês é cobrado. Semestral e anual são cobrados antecipadamente com descontos especiais.</p>
+                      </div>
+                      <button className="sync-plan-cta" type="button" onClick={() => openLead(`${plan.name} por ${priceLabel}, no ciclo ${selectedCycle.label.toLowerCase()} e sem taxa de criação`)}>
+                        <span><strong>Contratar {plan.name}</strong><small>Validar meu fluxo e iniciar calibração do Agente</small></span>
+                        <SyncArrow />
+                      </button>
+                      <small className="sync-plan-contact-note">Nenhum pagamento agora. Primeiro estruturamos o seu caso de uso.</small>
+                    </div>
+                  </article>
+                );
+              })}
+            </div>
+          </div>
         </div>
-        </div>
-        </div>
-        <div className="sync-pricing-conditions" aria-label="O que compõe o investimento">
-          <div><small>INCLUÍDO NA MENSALIDADE</small><strong>Solução, configuração e acompanhamento</strong><span>O Sync é preparado para sua operação e acompanhado durante a assinatura.</span></div>
-          <div><small>VALIDADO ANTES</small><strong>Canal, consumo e limites externos</strong><span>WhatsApp, APIs ou uso de IA só entram na proposta quando forem realmente necessários.</span></div>
-        </div>
-        <p className="sync-usage-note">Condições de lançamento sem taxa de criação. O mensal é recorrente; semestral e anual são antecipados. Custos de WhatsApp, APIs, inteligência artificial ou volume de uso são validados antes e apresentados com clareza quando forem necessários.</p>
       </section>
 
+      {/* FAQ Section */}
       <section className="sync-faq" id="duvidas">
-        <div><span>05 / PERGUNTAS FREQUENTES</span><h2>Entenda antes<br />de escolher.</h2><p>Sem promessa mágica ou estrutura desnecessária.</p><button type="button" onClick={() => openLead("uma dúvida sobre o Avancini Sync")}>Falar com a Avancini <SyncArrow /></button></div>
-        <div>{faqs.map((item) => <details key={item.question}><summary>{item.question}<span>+</span></summary><p>{item.answer}</p></details>)}</div>
+        <div>
+          <span>05 / PERGUNTAS FREQUENTES</span>
+          <h2>Tudo o que você precisa<br />saber sobre o Agente IA.</h2>
+          <p>Sem jargões técnicos complicados. Entenda como funciona na prática.</p>
+          <button type="button" onClick={() => openLead("tirar dúvidas sobre a implantação de um Agente de IA")}>Tirar dúvidas com especialista <SyncArrow /></button>
+        </div>
+        <div>
+          {faqs.map((item) => (
+            <details key={item.question}>
+              <summary>{item.question}<span>+</span></summary>
+              <p>{item.answer}</p>
+            </details>
+          ))}
+        </div>
       </section>
 
+      {/* Final CTA Section */}
       <section className="sync-final">
         <AvanciniMark variant="sync" className="sync-final-mark avancini-a-mark" />
-        <span>AVANCINI SYNC / PRÓXIMO PASSO</span><h2>Seu cliente já está falando.<br />A resposta não pode parecer genérica.</h2><p>Conte onde o atendimento trava. A gente identifica se o melhor começo é Chatbot ou Atendente IA.</p><button type="button" onClick={() => openLead("um diagnóstico para escolher entre chatbot e atendente IA")}>Descobrir por onde começar <SyncArrow /></button>
+        <span>AVANCINI SYNC / TRANSFORMAÇÃO DIGITAL</span>
+        <h2>Seus concorrentes ainda usam menus lentos.<br />Coloque um Agente de IA trabalhando hoje.</h2>
+        <p>Converse com nosso time e veja em poucos minutos como um Agente de IA sob medida pode assumir o atendimento da sua empresa.</p>
+        <button type="button" onClick={() => openLead("estruturar um Agente de IA para minha empresa")}>Quero um Agente de IA na minha empresa <SyncArrow /></button>
       </section>
 
-      <footer className="sync-footer"><Link href="/" className="sync-brand"><AvanciniMark variant="sync" className="sync-brand-mark avancini-a-mark" /><span><b>AVANCINI <em>SYNC</em></b><small>Uma solução Avancini OS</small></span></Link><p>Chatbots e atendentes com IA para responder com rapidez, contexto e um próximo passo claro.</p><nav><a href="#portfolio">Demonstração</a><a href="#solucoes">Soluções</a><a href="#planos">Planos</a><Link href="/dash">Avancini Dash <SyncArrow /></Link></nav><div><a href="mailto:ivoavancini@hotmail.com">ivoavancini@hotmail.com</a><a href="https://www.instagram.com/avancinios/" target="_blank" rel="noreferrer">Instagram <SyncArrow /></a></div><small>© 2026 AVANCINI OS · TODOS OS DIREITOS RESERVADOS</small></footer>
+      {/* Footer */}
+      <footer className="sync-footer">
+        <Link href="/" className="sync-brand">
+          <AvanciniMark variant="sync" className="sync-brand-mark avancini-a-mark" />
+          <span><b>AVANCINI <em>SYNC</em></b><small>Agentes de IA Autônomos</small></span>
+        </Link>
+        <p>Inteligência Artificial e Agentes Autônomos para empresas que não aceitam perder clientes por demora no atendimento.</p>
+        <nav>
+          <a href="#demonstracao">Demonstração</a>
+          <a href="#comparativo">Chatbot vs IA</a>
+          <a href="#recursos">Recursos</a>
+          <a href="#planos">Planos</a>
+          <Link href="/dash">Avancini Dash <SyncArrow /></Link>
+        </nav>
+        <div>
+          <a href="mailto:ivoavancini@hotmail.com">ivoavancini@hotmail.com</a>
+          <a href="https://www.instagram.com/avancinios/" target="_blank" rel="noreferrer">Instagram <SyncArrow /></a>
+        </div>
+        <small>© 2026 AVANCINI OS · TODOS OS DIREITOS RESERVADOS</small>
+      </footer>
 
-      <button className="whatsapp-float sync-whatsapp-float" type="button" aria-label="Conversar sobre o Avancini Sync no WhatsApp" onClick={() => openLead("uma solução do Avancini Sync")}>
+      {/* Floating WhatsApp Action Button */}
+      <button className="whatsapp-float sync-whatsapp-float" type="button" aria-label="Conversar sobre Agentes de IA no WhatsApp" onClick={() => openLead("um Agente de IA para automatizar meu atendimento")}>
         <span className="whatsapp-icon" aria-hidden="true" />
         <i className="whatsapp-notification" aria-hidden="true">1</i>
       </button>
+
+      {/* WhatsApp Lead Modal */}
       {leadContext && (
         <div className="web-lead-modal sync-web-lead-modal" role="dialog" aria-modal="true" aria-label="Iniciar conversa pelo WhatsApp">
           <form onSubmit={submitLead}>
@@ -1163,7 +1056,7 @@ export default function AvanciniSyncPage() {
                 <span className="lead-status-dot" aria-label="Online" />
               </div>
               <div className="lead-header-info">
-                <strong className="lead-title">José Avancini - Automação &amp; IA</strong>
+                <strong className="lead-title">José Avancini - Agentes &amp; IA</strong>
                 <div className="lead-status-row">
                   <span className="lead-online-badge">online</span>
                   <span className="lead-response-time"> - responde em minutos</span>
