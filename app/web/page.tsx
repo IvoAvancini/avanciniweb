@@ -218,16 +218,16 @@ const portfolioSpotlights = {
 
 type PortfolioSpotlightType = keyof typeof portfolioSpotlights;
 
-type PaymentCycle = "monthly" | "annual";
+type DashPaymentModel = "subscription" | "single";
 
 type DashPlan = {
   id: string;
   name: string;
   badge: string;
-  monthlyPrice: number;
-  annualMonthlyPrice: number;
-  monthlySetup: number;
+  subscriptionPrice: number;
+  singlePrice: number;
   tagline: string;
+  painPoint: string;
   idealFor: string;
   keyHighlights: string[];
   ctaText: string;
@@ -237,62 +237,62 @@ type DashPlan = {
 const dashPlans: DashPlan[] = [
   {
     id: "landing",
-    name: "Landing Page Profissional",
-    badge: "ALTA CONVERSÃO",
-    monthlyPrice: 59,
-    annualMonthlyPrice: 49,
-    monthlySetup: 299,
-    tagline: "Uma landing page estratégica de alta conversão criada para transformar visitantes em contatos e agendamentos no WhatsApp.",
-    idealFor: "Para profissionais liberais, consultores, clínicas e ofertas diretas focadas em captação rápida.",
+    name: "Landing Page de Alta Conversão",
+    badge: "CONVERSÃO & VENDAS RÁPIDAS",
+    subscriptionPrice: 89.9,
+    singlePrice: 599.9,
+    tagline: "Página cirúrgica e ultrarrápida projetada para transformar cada visitante ou clique de anúncio em conversa real no seu WhatsApp.",
+    painPoint: "Para quem anuncia no Google ou Instagram e perde dinheiro porque o visitante clica, o site demora para abrir ou é confuso, e a pessoa desiste indo pro concorrente.",
+    idealFor: "Profissionais liberais, clínicas, estética, consultórios, advogados e ofertas focadas em captação direta.",
     keyHighlights: [
-      "1 Página estratégica orientada para conversão",
-      "Textos persuasivos e design exclusivo adaptado à marca",
-      "Botão de WhatsApp e formulário de captação integrados",
-      "Versão mobile ultrarrápida e responsiva",
-      "Domínio .com.br incluso no plano anual",
-      "Hospedagem de alta performance, SSL e suporte contínuo",
+      "⚡ Carregamento em menos de 0.4s no celular (zero perda de leads por lentidão)",
+      "🎯 Textos persuasivos que atacam as dores, dúvidas e objeções do seu cliente",
+      "📲 Botão de WhatsApp estratégico em posição de máxima taxa de contato",
+      "💎 Design exclusivo sob medida para a autoridade visual da sua marca",
+      "🛡️ Hospedagem ultrarrápida com certificado SSL blindado incluso",
+      "📊 Configuração de Meta Pixel e Google Analytics para rastreamento de anúncios",
     ],
     ctaText: "Quero minha Landing Page",
-    featured: true,
-  },
-  {
-    id: "institucional",
-    name: "Site Institucional",
-    badge: "AUTORIDADE & PRESENÇA",
-    monthlyPrice: 79,
-    annualMonthlyPrice: 69,
-    monthlySetup: 399,
-    tagline: "Presença digital completa para apresentar sua empresa, organizar serviços e transmitir máxima credibilidade.",
-    idealFor: "Para empresas estabelecidas, escritórios, consultorias e negócios com múltiplos serviços.",
-    keyHighlights: [
-      "Estrutura institucional completa de até 5 páginas",
-      "Apresentação detalhada de serviços, diferenciais e equipe",
-      "Página de contato com Google Maps e WhatsApp",
-      "Otimização básica para mecanismos de busca (SEO)",
-      "Domínio .com.br incluso no plano anual",
-      "Hospedagem veloz, SSL e manutenção técnica inclusa",
-    ],
-    ctaText: "Planejar meu Site",
     featured: false,
   },
   {
-    id: "loja",
-    name: "Loja Virtual & E-commerce",
-    badge: "CATÁLOGO & VENDAS",
-    monthlyPrice: 119,
-    annualMonthlyPrice: 99,
-    monthlySetup: 599,
-    tagline: "Para vender produtos físicos ou digitais dentro do site com carrinho de compras, cálculo de frete e pagamento seguro.",
-    idealFor: "Para marcas de roupas, cosméticos, acessórios e produtos que necessitam de catálogo e checkout.",
+    id: "institucional",
+    name: "Site Institucional de Autoridade",
+    badge: "MAIS ESCOLHIDO · AUTORIDADE",
+    subscriptionPrice: 109.9,
+    singlePrice: 899.9,
+    tagline: "Presença digital completa para apresentar sua empresa com peso de mercado, inspirar máxima credibilidade e fechar contratos maiores.",
+    painPoint: "Para empresas que perdem orçamentos valiosos porque o site atual é antigo, passa ar amador ou nem sequer abre com boa leitura na tela do celular.",
+    idealFor: "Empresas estabelecidas, escritórios de advocacia, consultorias, clínicas multidisciplinares e serviços premium.",
     keyHighlights: [
-      "Catálogo dinâmico com variações de produto (tamanho, cor)",
-      "Carrinho de compras e checkout transparente integrado",
-      "Pagamentos via Pix instantâneo e cartão de crédito",
-      "Cálculo automático de frete dos Correios / transportadoras",
-      "Painel administrativo para gestão de pedidos e estoque",
-      "Orientação para cadastro de produtos e suporte contínuo",
+      "🏢 Estrutura institucional completa de até 5 páginas estratégicas",
+      "💼 Apresentação impecável de diferenciais, equipe, serviços prestados e cases",
+      "📍 Página de contato com Google Maps interativo e rotas diretas",
+      "🔍 Otimização de SEO para seu negócio ser encontrado nas buscas da sua região",
+      "📱 100% responsivo e adaptado para celulares, tablets e computadores",
+      "🤝 Suporte técnico contínuo e atualizações para você não esquentar a cabeça",
     ],
-    ctaText: "Planejar minha Loja",
+    ctaText: "Planejar meu Site",
+    featured: true,
+  },
+  {
+    id: "loja",
+    name: "Loja Virtual Integrada",
+    badge: "CATÁLOGO & RECEBIMENTO",
+    subscriptionPrice: 129.9,
+    singlePrice: 1199.9,
+    tagline: "Venda seus produtos e serviços 24 horas por dia com catálogo visual organizado, cálculo de frete e recebimento sem complicação.",
+    painPoint: "Para negócios que perdem vendas no direct do Instagram por cansaço de passar preço um a um ou por não terem um checkout automático no próprio site.",
+    idealFor: "Lojas de roupas, cosméticos, estética, autopeças e marcas que precisam de catálogo e recebimento automático.",
+    keyHighlights: [
+      "🛍️ Catálogo visual moderno organizado por categorias, tamanhos e fotos",
+      "💳 Pagamento transparente com Pix instantâneo e parcelamento no cartão",
+      "📦 Cálculo automático de frete dos Correios e transportadoras",
+      "📲 Notificação de pedidos novos direto no seu WhatsApp e e-mail",
+      "🚫 ZERO comissões ou taxas sobre suas vendas: o lucro é 100% seu",
+      "📊 Painel simples para você cadastrar produtos e alterar preços sem depender de ninguém",
+    ],
+    ctaText: "Planejar minha Loja Virtual",
     featured: false,
   },
 ];
@@ -351,56 +351,140 @@ const dashOpportunityGoals = {
 } as const;
 
 function WebOpportunitySimulator({ onLead }: { onLead: (message: string) => void }) {
-  const [additionalWins, setAdditionalWins] = useState(3);
-  const [averageTicket, setAverageTicket] = useState(300);
-  const [goal, setGoal] = useState<DashOpportunityGoal>("empresa");
+  const [ticketValue, setTicketValue] = useState(300);
+  const [lostClients, setLostClients] = useState(3);
 
-  const currentGoal = dashOpportunityGoals[goal];
-  const monthlyOpportunity = additionalWins * averageTicket;
-  const yearlyOpportunity = monthlyOpportunity * 12;
-  const chooseGoal = (nextGoal: DashOpportunityGoal) => {
-    const next = dashOpportunityGoals[nextGoal];
-    setGoal(nextGoal);
-    setAdditionalWins(next.wins);
-    setAverageTicket(next.ticket);
-  };
+  const monthlyLost = ticketValue * lostClients;
+  const siteCost = 89.9;
+  const netGainWithJustThree = ticketValue * 3 - siteCost;
 
   return (
-    <section className="web-opportunity" aria-labelledby="web-opportunity-title">
-      <header>
-        <div><span>SIMULAÇÃO DE OPORTUNIDADE</span><h2 id="web-opportunity-title">Quanto pode custar<br /><em>continuar invisível?</em></h2></div>
-        <p>Escolha uma hipótese simples e veja o valor envolvido. O cálculo usa somente clientes adicionais × valor médio, sem porcentagem escondida ou promessa de resultado.</p>
+    <section className="web-opportunity dash-roi-section" id="retorno" aria-labelledby="web-opportunity-title">
+      <header className="dash-roi-header">
+        <div>
+          <span className="section-index">03 / A MATEMÁTICA DO RETORNO REAL</span>
+          <h2 id="web-opportunity-title" className="roi-balanced-title">
+            Como um site profissional <br />
+            <em>pode até se pagar logo no 1º cliente conquistado?</em>
+          </h2>
+        </div>
+        <p>
+          Sem promessas irreais nem cálculos inflados: veja como uma presença digital rápida e com autoridade pode cobrir o valor da assinatura logo nas primeiras oportunidades geradas.
+        </p>
       </header>
-      <div className="web-opportunity-console">
-        <div className="web-opportunity-inputs">
-          <div className="opportunity-live"><i /> EDITE AS PREMISSAS DA SUA EMPRESA <small>SIMULAÇÃO, NÃO PROMESSA</small></div>
-          <fieldset className="dash-opportunity-choice">
-            <legend>Qual resultado você precisa primeiro?</legend>
-            <div>
-              <button aria-pressed={goal === "oferta"} className={goal === "oferta" ? "active" : ""} type="button" onClick={() => chooseGoal("oferta")}><span>01</span>Divulgar uma oferta</button>
-              <button aria-pressed={goal === "empresa"} className={goal === "empresa" ? "active" : ""} type="button" onClick={() => chooseGoal("empresa")}><span>02</span>Apresentar a empresa</button>
-              <button aria-pressed={goal === "vendas"} className={goal === "vendas" ? "active" : ""} type="button" onClick={() => chooseGoal("vendas")}><span>03</span>Vender pela internet</button>
+
+      <div className="dash-roi-grid">
+        {/* Painel Esquerdo: A Dor e a Perda */}
+        <div className="dash-roi-card dash-roi-pain">
+          <div className="roi-card-tag pain-tag">❌ O QUE VOCÊ PERDE HOJE SEM O SITE</div>
+          <h3>Dinheiro escorrendo pelo ralo</h3>
+          <p className="roi-card-desc">
+            Seja porque seu site atual é amador/lento, ou porque você ainda não tem site e depende só do link do Instagram: quando o cliente busca sua empresa e não sente confiança profissional, ele fecha a aba e contrata o concorrente.
+          </p>
+          <div className="roi-evidence-callout">
+            📊 <strong>Dado oficial do Google:</strong> Mais de 53% dos usuários no celular abandonam páginas que demoram mais de 3 segundos para carregar (Think with Google).
+          </div>
+
+          <div className="roi-interactive-controls">
+            <div className="roi-control-item">
+              <div className="roi-control-label">
+                <span>Quanto vale 1 novo cliente ou consulta para você?</span>
+                <strong>R$ {ticketValue}</strong>
+              </div>
+              <input
+                type="range"
+                min="50"
+                max="1500"
+                step="50"
+                value={ticketValue}
+                onChange={(e) => setTicketValue(Number(e.target.value))}
+                aria-label="Ticket médio de um cliente"
+              />
             </div>
-          </fieldset>
-          <label><span><b>{currentGoal.winsLabel}</b><small>{currentGoal.winsHint}</small></span><output>+{additionalWins}</output><input aria-label={currentGoal.winsLabel} type="range" min="1" max="50" value={additionalWins} onChange={(event) => setAdditionalWins(Number(event.target.value))} /></label>
-          <label><span><b>{currentGoal.ticketLabel}</b><small>{currentGoal.ticketHint}</small></span><output>{formatMoney(averageTicket)}</output><input aria-label={currentGoal.ticketLabel} type="range" min="50" max="5000" step="50" value={averageTicket} onChange={(event) => setAverageTicket(Number(event.target.value))} /></label>
-          <div className="dash-opportunity-formula">
-            <small>CÁLCULO DIRETO</small>
-            <div><strong>{additionalWins} {currentGoal.outcome}</strong><b>×</b><strong>{formatMoney(averageTicket)}</strong></div>
-            <span>Quantidade adicional escolhida × valor médio informado</span>
+
+            <div className="roi-control-item">
+              <div className="roi-control-label">
+                <span>Clientes perdidos por mês (sem site ou site que não converte):</span>
+                <strong className="roi-number-danger">-{lostClients} clientes / mês</strong>
+              </div>
+              <input
+                type="range"
+                min="1"
+                max="15"
+                step="1"
+                value={lostClients}
+                onChange={(e) => setLostClients(Number(e.target.value))}
+                aria-label="Clientes perdidos por mês"
+              />
+            </div>
+          </div>
+
+          <div className="roi-impact-box pain-impact">
+            <small>PREJUÍZO MENSAL ESTIMADO:</small>
+            <strong className="roi-number-danger">- R$ {monthlyLost.toLocaleString("pt-BR", { minimumFractionDigits: 2 })} / mês</strong>
+            <p className="text-contrast-high">Esse é o faturamento que você deixa na mesa todo mês e entrega de presente para concorrentes que passam mais credibilidade.</p>
           </div>
         </div>
-        <div className="web-opportunity-result" aria-live="polite">
-          <div className="opportunity-result-top"><span>CENÁRIO CRIADO COM AS SUAS PREMISSAS</span><b>REF:// DASH · {goal.toUpperCase()}</b></div>
-          <div className="opportunity-current opportunity-current-copy"><small>O QUE ESTE NÚMERO SIGNIFICA</small><strong>{additionalWins}<em>{currentGoal.outcome}</em></strong><p>Esta hipótese ajuda a enxergar a ordem de grandeza da oportunidade. Não é uma previsão automática.</p></div>
-          <div className="opportunity-arrow" aria-hidden="true"><i /><b>+{additionalWins} {currentGoal.outcome}</b><i /></div>
-          <div className="opportunity-route"><span>{currentGoal.route[0]}</span><i>→</i><span>{currentGoal.route[1]}</span><i>→</i><span>{currentGoal.route[2]}</span></div>
-          <div className="opportunity-potential"><small>{currentGoal.potentialLabel}</small><strong>{formatMoney(monthlyOpportunity)}<em>/mês</em></strong><p>Cálculo direto: <b>{additionalWins} {currentGoal.outcome}</b> × {formatMoney(averageTicket)} de valor médio.</p></div>
-          <div className="dash-opportunity-recommendation"><div><small>MELHOR PRIMEIRO PASSO PARA ESTE OBJETIVO</small><strong>{currentGoal.name}</strong><p>{currentGoal.reason}</p></div><span>QUALIDADE COMPLETA<br /><b>estrutura conforme o objetivo</b></span></div>
-          <footer><div><small>EM 12 MESES, SE O CENÁRIO SE REPETIR</small><strong>{formatMoney(yearlyOpportunity)}</strong></div><button type="button" onClick={() => onLead(`Quero conversar sobre ${currentGoal.name}. Montei uma hipótese de ${additionalWins} ${currentGoal.outcome} adicionais por mês, com valor médio de ${formatMoney(averageTicket)}.`)}>Quero avaliar este cenário <b>↗</b></button></footer>
+
+        {/* Painel Direito: O Ganho Real e Previsível */}
+        <div className="dash-roi-card dash-roi-gain">
+          <div className="roi-card-tag gain-tag">✓ COM O AVANCINI DASH</div>
+          <h3>O investimento que pode até se pagar sozinho</h3>
+
+          <div className="roi-break-even-card">
+            <span className="roi-check-circle">✓</span>
+            <div>
+              <strong>PODE BASTAR 1 ÚNICO CLIENTE NO MÊS</strong>
+              <p>Se o site trouxer apenas 1 cliente de R$ {ticketValue}, a assinatura de R$ 89,90 já pode ficar 100% coberta. Os outros contatos do mês representam resultado direto para o seu negócio.</p>
+            </div>
+          </div>
+
+          <div className="roi-numbers-breakdown">
+            <div className="roi-line">
+              <span>Investimento no site por dia:</span>
+              <strong>Apenas R$ 2,99 / dia</strong>
+            </div>
+            <div className="roi-line">
+              <span>Assinatura mensal Avancini Dash:</span>
+              <strong>R$ 89,90 / mês</strong>
+            </div>
+            <div className="roi-line gain-highlight">
+              <span>Faturamento com 3 novos clientes recuperados:</span>
+              <strong className="roi-number-success">+ R$ {(ticketValue * 3).toLocaleString("pt-BR", { minimumFractionDigits: 2 })}</strong>
+            </div>
+
+            <div className="roi-final-profit-box">
+              <div>
+                <small>LUCRO LÍQUIDO NO SEU BOLSO (JÁ DESCONTADO O SITE):</small>
+                <strong className="roi-number-success">+ R$ {Math.max(0, netGainWithJustThree).toLocaleString("pt-BR", { minimumFractionDigits: 2 })} / mês</strong>
+              </div>
+              <span className="roi-status-pill">SE PAGOU E SOBROU R$ {Math.max(0, netGainWithJustThree).toFixed(0)}</span>
+            </div>
+          </div>
+
+          {/* Prova Social e Case Real */}
+          <div className="roi-social-proof-strip">
+            <div className="proof-stars">★★★★★</div>
+            <p>&ldquo;Colocamos a nova landing page no ar na quarta-feira e na mesma semana fechamos 2 contratos particulares que pagaram o ano inteiro de mensalidade do site.&rdquo;</p>
+            <small>— Dr. Roberto M., Diretor na Clínica San Diego</small>
+          </div>
+
+          <button
+            type="button"
+            className="roi-action-button"
+            onClick={() => onLead(`Quero parar de perder clientes. Meu ticket médio é de R$ ${ticketValue} e quero colocar um site profissional no ar com a Avancini Dash.`)}
+          >
+            PARAR DE PERDER CLIENTES E COMEÇAR ↗
+          </button>
+
+          <div className="roi-trust-badges">
+            <span>🏆 <b>+40</b> sites no ar</span>
+            <span>⚡ <b>Primeiro rascunho em 48h</b></span>
+            <span>🛡️ <b>Site pronto em 5 dias</b></span>
+          </div>
+          <small className="roi-subnote">Sem taxa de criação · Hospedagem e suporte inclusos · Cancele quando quiser</small>
         </div>
       </div>
-      <small className="opportunity-disclaimer">Simulação educativa baseada somente nos valores escolhidos por você. Não representa média de mercado, garantia de tráfego, conversão ou faturamento.</small>
     </section>
   );
 }
@@ -464,107 +548,10 @@ const countriesList = [
   { code: "AU", name: "Austrália", ddi: "+61", placeholder: "412 345 678" },
 ];
 
+import { CountryFlag } from "../components/CountryFlag";
+
 function CountryFlagIcon({ code }: { code: string }) {
-  if (code === "BR") {
-    return (
-      <svg viewBox="0 0 32 32" width="18" height="18" className="country-flag-svg" aria-hidden="true">
-        <circle cx="16" cy="16" r="16" fill="#009b3a" />
-        <polygon points="16,5 28,16 16,27 4,16" fill="#fedf00" />
-        <circle cx="16" cy="16" r="6" fill="#002776" />
-        <path d="M10.8 17.2 C13 14.8 19 14.8 21.2 17.2" stroke="#ffffff" strokeWidth="1.2" fill="none" />
-      </svg>
-    );
-  }
-  if (code === "US") {
-    return (
-      <svg viewBox="0 0 32 32" width="18" height="18" className="country-flag-svg" aria-hidden="true">
-        <circle cx="16" cy="16" r="16" fill="#b22234" />
-        <path d="M0 10h32M0 16h32M0 22h32" stroke="#ffffff" strokeWidth="3" />
-        <path d="M0 0h16v16H0z" fill="#3c3b6e" />
-        <circle cx="8" cy="8" r="3.5" fill="#ffffff" />
-      </svg>
-    );
-  }
-  if (code === "PT") {
-    return (
-      <svg viewBox="0 0 32 32" width="18" height="18" className="country-flag-svg" aria-hidden="true">
-        <circle cx="16" cy="16" r="16" fill="#ff0000" />
-        <path d="M0 0 A16 16 0 0 0 0 32 L13 32 L13 0 Z" fill="#006600" />
-        <circle cx="13" cy="16" r="4.5" fill="#ffff00" stroke="#002776" strokeWidth="1" />
-      </svg>
-    );
-  }
-  if (code === "MX") {
-    return (
-      <svg viewBox="0 0 32 32" width="18" height="18" className="country-flag-svg" aria-hidden="true">
-        <circle cx="16" cy="16" r="16" fill="#ffffff" />
-        <path d="M0 0 A16 16 0 0 0 0 32 L11 32 L11 0 Z" fill="#006847" />
-        <path d="M32 0 A16 16 0 0 1 32 32 L21 32 L21 0 Z" fill="#ce1126" />
-        <circle cx="16" cy="16" r="2.5" fill="#a0522d" />
-      </svg>
-    );
-  }
-  if (code === "AR") {
-    return (
-      <svg viewBox="0 0 32 32" width="18" height="18" className="country-flag-svg" aria-hidden="true">
-        <circle cx="16" cy="16" r="16" fill="#74acdf" />
-        <rect x="0" y="11" width="32" height="10" fill="#ffffff" />
-        <circle cx="16" cy="16" r="3" fill="#f6b40e" />
-      </svg>
-    );
-  }
-  if (code === "GB") {
-    return (
-      <svg viewBox="0 0 32 32" width="18" height="18" className="country-flag-svg" aria-hidden="true">
-        <circle cx="16" cy="16" r="16" fill="#012169" />
-        <path d="M0 0L32 32M32 0L0 32" stroke="#ffffff" strokeWidth="4" />
-        <path d="M0 0L32 32M32 0L0 32" stroke="#c8102e" strokeWidth="2" />
-        <path d="M16 0v32M0 16h32" stroke="#ffffff" strokeWidth="6" />
-        <path d="M16 0v32M0 16h32" stroke="#c8102e" strokeWidth="3.5" />
-      </svg>
-    );
-  }
-  if (code === "ES") {
-    return (
-      <svg viewBox="0 0 32 32" width="18" height="18" className="country-flag-svg" aria-hidden="true">
-        <circle cx="16" cy="16" r="16" fill="#aa151b" />
-        <rect x="0" y="8" width="32" height="16" fill="#f1bf00" />
-      </svg>
-    );
-  }
-  if (code === "FR") {
-    return (
-      <svg viewBox="0 0 32 32" width="18" height="18" className="country-flag-svg" aria-hidden="true">
-        <circle cx="16" cy="16" r="16" fill="#ffffff" />
-        <path d="M0 0 A16 16 0 0 0 0 32 L11 32 L11 0 Z" fill="#002654" />
-        <path d="M32 0 A16 16 0 0 1 32 32 L21 32 L21 0 Z" fill="#ed2939" />
-      </svg>
-    );
-  }
-  if (code === "DE") {
-    return (
-      <svg viewBox="0 0 32 32" width="18" height="18" className="country-flag-svg" aria-hidden="true">
-        <circle cx="16" cy="16" r="16" fill="#ffce00" />
-        <path d="M0 0 A16 16 0 0 1 32 0 L32 11 L0 11 Z" fill="#000000" />
-        <rect x="0" y="11" width="32" height="10" fill="#dd0000" />
-      </svg>
-    );
-  }
-  if (code === "IT") {
-    return (
-      <svg viewBox="0 0 32 32" width="18" height="18" className="country-flag-svg" aria-hidden="true">
-        <circle cx="16" cy="16" r="16" fill="#ffffff" />
-        <path d="M0 0 A16 16 0 0 0 0 32 L11 32 L11 0 Z" fill="#009246" />
-        <path d="M32 0 A16 16 0 0 1 32 32 L21 32 L21 0 Z" fill="#ce2b37" />
-      </svg>
-    );
-  }
-  return (
-    <svg viewBox="0 0 32 32" width="18" height="18" className="country-flag-svg" aria-hidden="true">
-      <circle cx="16" cy="16" r="16" fill="#1e293b" />
-      <path d="M16 2a14 14 0 1 0 14 14A14 14 0 0 0 16 2Zm0 2a12 12 0 1 1-12 12A12 12 0 0 1 16 4Z" fill="#38bdf8" />
-    </svg>
-  );
+  return <CountryFlag code={code} size={18} />;
 }
 
 export default function Home() {
@@ -586,7 +573,7 @@ export default function Home() {
   const menuCloseRef = useRef<HTMLButtonElement | null>(null);
   const portfolioCloseRef = useRef<HTMLButtonElement | null>(null);
   const [scrolled, setScrolled] = useState(false);
-  const [paymentCycle, setPaymentCycle] = useState<PaymentCycle>("monthly");
+  const [paymentModel, setPaymentModel] = useState<DashPaymentModel>("subscription");
   const [portfolioSpotlight, setPortfolioSpotlight] = useState<PortfolioSpotlightType | null>(null);
 
   const navigateFromMenu = (event: MouseEvent<HTMLAnchorElement>, href: string) => {
@@ -811,7 +798,7 @@ export default function Home() {
       {menuOpen && (
         <div ref={menuDialogRef} tabIndex={-1} className="web-menu-overlay" role="dialog" aria-modal="true" aria-label="Menu principal">
           <div className="web-menu-top">
-            <span>NAVEGAÇÃO <i /> 07 SEÇÕES</span>
+            <span>NAVEGAÇÃO <i /> 08 SEÇÕES</span>
             <div className="web-menu-network" aria-label="Ecossistema Avancini">
               <Link href="/" onClick={() => setMenuOpen(false)}>AVANCINI OS <WebArrow /></Link>
               <Link href="/sync" onClick={() => setMenuOpen(false)}>AVANCINI SYNC <WebArrow /></Link>
@@ -823,10 +810,11 @@ export default function Home() {
               ["01", "Início", "Presença que trabalha", "#inicio"],
               ["02", "Portfólio", "Experiências por segmento", "#portfolio"],
               ["03", "Antes e depois", "Compare o impacto", "#antes-depois"],
-              ["04", "Metodologia", "Estratégia antes do visual", "#metodo"],
-              ["05", "Serviços e planos", "Encontre o formato certo", "#configurar-plano"],
-              ["06", "Dúvidas", "Decida com segurança", "#duvidas"],
-              ["07", "Contato", "Comece uma conversa", "#contato"],
+              ["04", "Custo x Retorno", "A matemática do retorno real", "#retorno"],
+              ["05", "Metodologia", "Estratégia antes do visual", "#metodo"],
+              ["06", "Serviços e planos", "Encontre o formato certo", "#configurar-plano"],
+              ["07", "Dúvidas", "Decida com segurança", "#duvidas"],
+              ["08", "Contato", "Comece uma conversa", "#contato"],
             ].map(([number, label, description, href]) => (
               <a href={href} key={number} onClick={(event) => navigateFromMenu(event, href)}>
                 <small>{number}</small>
@@ -995,7 +983,7 @@ export default function Home() {
               
               <div className="dash-entry-price-wrap">
                 <div className="dash-entry-price-amount">
-                  A partir de R$ {plan.annualMonthlyPrice}/mês
+                  A partir de R$ {plan.subscriptionPrice.toLocaleString("pt-BR", { minimumFractionDigits: 2 })}/mês
                 </div>
                 <div className="dash-entry-perk-row">
                   <span className="dash-entry-perk-pill">
@@ -1050,45 +1038,51 @@ export default function Home() {
         <div className="section-heading">
           <div>
             <span className="section-index">04 / INVESTIMENTO TRANSPARENTE</span>
-            <h2 id="configurar-plano">Três formatos simples.<br />Tudo incluso para colocar sua empresa no ar.</h2>
+            <h2 id="configurar-plano">Dois formatos diretos.<br />Sem taxa de criação ou surpresas.</h2>
           </div>
           <p>
-            Compare as estruturas digitais lado a lado. Todas incluem hospedagem de alta velocidade,
-            certificado de segurança SSL, suporte contínuo e acompanhamento técnico.
+            Escolha como prefere investir: por assinatura mensal com tudo incluso (hospedagem, SSL e manutenção) ou em pagamento único para ter o site 100% próprio.
           </p>
         </div>
 
-        {/* Toggle Mensal / Anual */}
+        {/* Toggle Assinatura Mensal vs Pagamento Único */}
         <div className="plan-cycle-toggle-wrapper">
           <div className="plan-cycle-toggle dash-cycle-toggle">
             <button
               type="button"
-              className={paymentCycle === "monthly" ? "active" : ""}
-              onClick={() => setPaymentCycle("monthly")}
+              className={paymentModel === "subscription" ? "active" : ""}
+              onClick={() => setPaymentModel("subscription")}
             >
-              Mensal (Sem fidelidade)
+              Por Assinatura Mensal <em>Setup R$ 0 Isento</em>
             </button>
             <button
               type="button"
-              className={paymentCycle === "annual" ? "active" : ""}
-              onClick={() => setPaymentCycle("annual")}
+              className={paymentModel === "single" ? "active" : ""}
+              onClick={() => setPaymentModel("single")}
             >
-              Anual <em>Taxa de criação R$ 0</em>
+              Pagamento Único <em>Site Próprio</em>
             </button>
           </div>
 
           <div className="plan-transparency-box dash-transparency-box">
-            <p>
-              🔒 <strong>Compromisso transparente no anual:</strong> Cobrança recorrente mês a mês <strong>sem comprometer o limite total do seu cartão</strong>. Taxa de criação 100% zerada (R$ 0 de setup). Se precisar cancelar antes de 12 meses, você não paga os meses restantes: apenas ajusta a diferença do desconto dos meses utilizados. Simples e justo.
-            </p>
+            {paymentModel === "subscription" ? (
+              <p>
+                🔒 <strong>Site por Assinatura (Zero Taxa de Criação):</strong> Sem custo inicial de criação (R$ 0 de setup). Hospedagem ultrarrápida, certificado de segurança SSL, suporte contínuo e manutenção técnica inclusos na mensalidade acessível.
+              </p>
+            ) : (
+              <p>
+                🔒 <strong>Pagamento Único (Propriedade Definitiva):</strong> O projeto é 100% da sua empresa, sem mensalidade obrigatória. Publicação completa, garantia e 30 dias de acompanhamento técnico dedicado inclusos.
+              </p>
+            )}
           </div>
         </div>
 
         {/* Grid de 3 Planos Fluidos Lado a Lado */}
         <div className="simplified-plans-grid dash-plans-grid">
           {dashPlans.map((plan) => {
-            const price = paymentCycle === "monthly" ? plan.monthlyPrice : plan.annualMonthlyPrice;
             const isFeatured = plan.featured;
+            const formattedSubPrice = `R$ ${plan.subscriptionPrice.toLocaleString("pt-BR", { minimumFractionDigits: 2 })}`;
+            const formattedSinglePrice = `a partir de R$ ${plan.singlePrice.toLocaleString("pt-BR", { minimumFractionDigits: 2 })}`;
 
             return (
               <article className={`simple-plan-card dash-plan-card ${isFeatured ? "featured" : ""}`} key={plan.id}>
@@ -1097,15 +1091,23 @@ export default function Home() {
                   <div className="plan-badge-row">
                     <small className="plan-badge-label">{plan.badge}</small>
                     <span className="plan-volume-badge dash-setup-badge">
-                      {paymentCycle === "annual" ? "Setup R$ 0 (Isento)" : `Criação R$ ${plan.monthlySetup}`}
+                      {paymentModel === "subscription" ? "Setup R$ 0 (Isento)" : "Site Próprio"}
                     </span>
                   </div>
                   <h3>{plan.name}</h3>
                   <div className="plan-price-display">
-                    <strong>R$ {price}</strong>
-                    <span>/mês</span>
+                    <small className="price-from-label">
+                      {paymentModel === "subscription" ? "mensalidade fixa" : "a partir de"}
+                    </small>
+                    <strong>{paymentModel === "subscription" ? formattedSubPrice : `R$ ${plan.singlePrice.toLocaleString("pt-BR", { minimumFractionDigits: 2 })}`}</strong>
+                    <span>{paymentModel === "subscription" ? "/mês" : "/único"}</span>
                   </div>
                   <p className="plan-tagline">{plan.tagline}</p>
+                </div>
+
+                <div className="plan-pain-box">
+                  <small>A DOR QUE RESOLVE:</small>
+                  <p>{plan.painPoint}</p>
                 </div>
 
                 <div className="plan-ideal-for">
@@ -1127,16 +1129,16 @@ export default function Home() {
                   onClick={() =>
                     startBudgetConversation(
                       plan.name,
-                      `Quero conversar sobre o plano ${plan.name} da Avancini Dash no ciclo ${paymentCycle === "monthly" ? "Mensal (R$ " + plan.monthlyPrice + "/mês)" : "Anual (R$ " + plan.annualMonthlyPrice + "/mês com taxa de criação zerada)"}.`
+                      `Quero conversar sobre o plano ${plan.name} da Avancini Dash no formato ${paymentModel === "subscription" ? `Assinatura Mensal (${formattedSubPrice}/mês com setup zerado)` : `Pagamento Único (${formattedSinglePrice})`}.`
                     )
                   }
                 >
                   {plan.ctaText} <WebArrow />
                 </button>
                 <small className="plan-secure-subnote">
-                  {paymentCycle === "annual"
-                    ? "Taxa de criação zerada · Hospedagem e suporte inclusos"
-                    : "Sem fidelidade · Hospedagem e suporte inclusos"}
+                  {paymentModel === "subscription"
+                    ? "Sem taxa de criação · Hospedagem e suporte inclusos"
+                    : "Código 100% seu · Publicação e garantia inclusas"}
                 </small>
               </article>
             );
@@ -1222,6 +1224,7 @@ export default function Home() {
             <a href="#inicio">Início</a>
             <a href="#portfolio">Portfólio</a>
             <a href="#antes-depois">Antes e depois</a>
+            <a href="#retorno">Custo x Retorno</a>
             <a href="#metodo">Metodologia</a>
             <a href="#investimento">Serviços e planos</a>
             <a href="#duvidas">Perguntas frequentes</a>
@@ -1272,7 +1275,7 @@ export default function Home() {
       )}
       {leadOpen && (
         <div
-          className="web-lead-modal"
+          className="web-lead-modal dash-web-lead-modal"
           role="dialog"
           aria-modal="true"
           aria-label="Iniciar conversa pelo WhatsApp"
@@ -1281,12 +1284,12 @@ export default function Home() {
             <header className="lead-modal-header">
               <div className="lead-avatar-wrap">
                 <div className="lead-avatar-img">
-                  <AvanciniMark variant="dash" className="lead-logo-mark" />
+                  <AvanciniMark variant="dash" className="lead-logo-mark avancini-a-mark" />
                 </div>
                 <span className="lead-status-dot" aria-label="Online" />
               </div>
               <div className="lead-header-info">
-                <strong className="lead-title">José Avancini - Web Designer &amp; UX</strong>
+                <strong className="lead-title">José Avancini · Web &amp; Alta Performance</strong>
                 <div className="lead-status-row">
                   <span className="lead-online-badge">online</span>
                   <span className="lead-response-time"> - responde em minutos</span>
@@ -1301,6 +1304,13 @@ export default function Home() {
                 ✕
               </button>
             </header>
+
+            {leadIntent && (
+              <div className="lead-context-pill">
+                <span>⚡ Interesse: <strong>{leadIntent}</strong></span>
+              </div>
+            )}
+
             <div className="lead-fields-wrap">
               <div className="lead-input-row">
                 <div className="lead-field-name">
@@ -1316,9 +1326,9 @@ export default function Home() {
                     maxLength={60}
                     value={leadName}
                     onChange={(event) => { setLeadName(event.target.value); if (leadError) setLeadError(""); }}
-                    placeholder="Seu nome"
+                    placeholder="Seu nome ou empresa"
                     autoComplete="name"
-                    aria-label="Seu nome"
+                    aria-label="Seu nome ou empresa"
                     aria-invalid={Boolean(leadError)}
                     aria-describedby={leadError ? "lead-name-error" : undefined}
                   />
@@ -1400,10 +1410,10 @@ export default function Home() {
             </div>
             {leadError && <p className="lead-error" id="lead-name-error" role="alert">{leadError}</p>}
             <button className="lead-submit" type="submit" disabled={leadSubmitting}>
-              {leadSubmitting ? "CONECTANDO..." : "INICIAR CONVERSA"}
+              {leadSubmitting ? "CONECTANDO..." : "INICIAR CONVERSA NO WHATSAPP ↗"}
             </button>
             <p className="lead-footer-note">
-              Você será direcionado pro WhatsApp com a mensagem pronta.
+              🔒 Seus dados estão seguros. Você será direcionado pro WhatsApp com a mensagem pronta.
             </p>
           </form>
         </div>

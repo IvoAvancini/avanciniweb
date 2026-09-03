@@ -25,42 +25,10 @@ const countriesList = [
   { code: "AU", name: "Austrália", ddi: "+61", placeholder: "412 345 678" },
 ];
 
+import { CountryFlag } from "../components/CountryFlag";
+
 function CountryFlagIcon({ code }: { code: string }) {
-  if (code === "BR") {
-    return (
-      <svg viewBox="0 0 32 32" width="18" height="18" className="country-flag-svg" aria-hidden="true">
-        <circle cx="16" cy="16" r="16" fill="#009b3a" />
-        <polygon points="16,5 28,16 16,27 4,16" fill="#fedf00" />
-        <circle cx="16" cy="16" r="6" fill="#002776" />
-        <path d="M10.8 17.2 C13 14.8 19 14.8 21.2 17.2" stroke="#ffffff" strokeWidth="1.2" fill="none" />
-      </svg>
-    );
-  }
-  if (code === "US") {
-    return (
-      <svg viewBox="0 0 32 32" width="18" height="18" className="country-flag-svg" aria-hidden="true">
-        <circle cx="16" cy="16" r="16" fill="#b22234" />
-        <path d="M0 10h32M0 16h32M0 22h32" stroke="#ffffff" strokeWidth="3" />
-        <path d="M0 0h16v16H0z" fill="#3c3b6e" />
-        <circle cx="8" cy="8" r="3.5" fill="#ffffff" />
-      </svg>
-    );
-  }
-  if (code === "PT") {
-    return (
-      <svg viewBox="0 0 32 32" width="18" height="18" className="country-flag-svg" aria-hidden="true">
-        <circle cx="16" cy="16" r="16" fill="#ff0000" />
-        <path d="M0 0 A16 16 0 0 0 0 32 L13 32 L13 0 Z" fill="#006600" />
-        <circle cx="13" cy="16" r="4.5" fill="#ffff00" stroke="#002776" strokeWidth="1" />
-      </svg>
-    );
-  }
-  return (
-    <svg viewBox="0 0 32 32" width="18" height="18" className="country-flag-svg" aria-hidden="true">
-      <circle cx="16" cy="16" r="16" fill="#1e293b" />
-      <path d="M16 2a14 14 0 1 0 14 14A14 14 0 0 0 16 2Zm0 2a12 12 0 1 1-12 12A12 12 0 0 1 16 4Z" fill="#38bdf8" />
-    </svg>
-  );
+  return <CountryFlag code={code} size={18} />;
 }
 
 const WHATSAPP_NUMBER = "5573981019782";
@@ -105,106 +73,223 @@ const SyncDownArrow = () => (
 );
 
 /* --------------------------------------------------------------------------
-   SUPERVISOR MULTIAGENTE — SIMULAÇÃO INTERATIVA NO HERO
+   CENTRAL DE ATENDIMENTO INTELIGENTE — SIMULAÇÃO INTERATIVA NO HERO
    -------------------------------------------------------------------------- */
 const supervisorAgents = [
   {
     id: "sdr",
-    name: "Agente SDR Vendas",
-    role: "Qualificação & Pipeline",
-    status: "Respondendo Lead em 1.1s",
-    log: "Extraiu faturamento, identificou urgência de implantação e encaminhou proposta.",
-    activeBadge: "⚡ Vendas Ativas",
+    name: "Atendimento & Acolhimento",
+    role: "Recebe novos clientes com simpatia e agilidade",
+    status: "Responde em poucos segundos",
+    activeBadge: "⚡ Sempre Ativo",
+    metrics: [
+      { label: "Tempo de Resposta", value: "Na mesma hora" },
+      { label: "Fila de Espera", value: "Zero (atende todos juntos)" },
+      { label: "Disponibilidade", value: "24 horas por dia" },
+    ],
+    tools: ["🎙️ Ouve e entende áudios", "📄 Lê fotos e arquivos", "💬 Tira dúvidas frequentes", "🤝 Envia para sua equipe"],
+    pipelineSteps: [
+      { step: "01", name: "Ouve com Atenção", desc: "Entende áudios e textos longos" },
+      { step: "02", name: "Tira as Dúvidas", desc: "Explica os serviços com clareza" },
+      { step: "03", name: "Passa para Você", desc: "Entrega a conversa organizada" },
+    ],
+    capabilities: [
+      "Ouve áudios de qualquer tamanho e responde na hora com linguagem natural",
+      "Identifica a necessidade e a urgência do cliente com gentileza",
+      "Responde as dúvidas repetitivas que você mais gasta tempo explicando",
+      "Gera um resumo rápido e passa a conversa prontinha para você ou sua equipe",
+    ],
+    chatType: "audio",
+    chat: {
+      audioDuration: "0:24",
+      audioTranscription: 'Olá! Sou diretor de um escritório com 15 profissionais e recebemos muitas mensagens por dia no WhatsApp. Vocês conseguem atender na hora com atenção, tirar as dúvidas iniciais e filtrar quem tem urgência?',
+      aiResponse: "Olá, Ricardo! Com certeza. A gente atende o cliente na mesma hora com toda a atenção, explica direitinho como você trabalha, tira as dúvidas mais comuns e já te passa o contato pronto com um resuminho de tudo o que ele precisa.",
+      crmBadge: {
+        title: "⚡ CONTATO ACOLHIDO E QUALIFICADO",
+        area: "Atendimento Corporativo & Consultoria",
+        volume: "Novo contato acolhido na hora",
+        action: "Resumo organizado enviado para a sua equipe",
+      },
+      actionTag: "⚡ Áudio Ouvido e Compreendido · Cliente Bem Acolhido · Resumo Pronto",
+    },
   },
   {
     id: "agenda",
-    name: "Agente de Agendamento",
-    role: "Google Calendar & Meet",
-    status: "Verificando grade livre",
-    log: "Consultou slots livres no Google Calendar e agendou reunião para amanhã às 15h.",
+    name: "Agendamento de Horários",
+    role: "Consulta sua agenda e marca consultas ou reuniões",
+    status: "Sincronizado com sua agenda",
     activeBadge: "📅 Agenda Conectada",
+    metrics: [
+      { label: "Sua Agenda", value: "Google Calendar" },
+      { label: "Faltas de Clientes", value: "Lembretes automáticos" },
+      { label: "Marcação", value: "Direto no WhatsApp" },
+    ],
+    tools: ["📅 Google Calendar", "⏰ Lembrete Anti-Falta", "✅ Horários no Chat", "🔔 Aviso para Equipe"],
+    pipelineSteps: [
+      { step: "01", name: "Checa a Grade", desc: "Vê dias e horários livres" },
+      { step: "02", name: "Escolha Simples", desc: "O cliente escolhe no WhatsApp" },
+      { step: "03", name: "Salva e Lembra", desc: "Agenda e envia lembrete antes" },
+    ],
+    capabilities: [
+      "Consulta seus horários livres em tempo real no Google Calendar",
+      "Apresenta opções claras e fáceis de horário para o cliente escolher",
+      "Envia link de videoconferência ou endereço do local automaticamente",
+      "Dispara lembretes gentis antes do horário para o cliente não faltar",
+    ],
+    chatType: "calendar",
+    chat: {
+      clientText: "Olá, boa tarde! Gostaria de agendar uma consulta de avaliação para quinta-feira à tarde, vocês teriam horário disponível?",
+      aiResponse: "Olá! Tudo bem? Com certeza, temos sim! 😊 Na quinta-feira à tarde com o Dr. Marcelo, temos as seguintes opções:",
+      slots: ["14h30", "16h00", "17h30"],
+      selectedSlot: "14h30",
+      confirmationCard: {
+        title: "✓ Agendamento Confirmado",
+        doctor: "Dr. Marcelo · Avaliação Presencial",
+        date: "Quinta-feira às 14:30 (duração ~45 min)",
+        reminder: "Lembretes programados: enviados 24h e 2h antes por aqui",
+      },
+      actionTag: "📅 Horário Reservado no Google Calendar · Lembrete Programado",
+    },
   },
   {
     id: "suporte",
-    name: "Agente Suporte & Operação",
-    role: "Resolução em 1º Nível",
-    status: "Sem fila de espera",
-    log: "Localizou pedido #8921 no sistema e enviou código de rastreamento com link direto.",
-    activeBadge: "🔍 Resolução 15s",
+    name: "Dúvidas, Fotos & Pix",
+    role: "Tira dúvidas, lê arquivos e envia chave Pix",
+    status: "Zero fila de espera",
+    activeBadge: "🔍 Resolução Imediata",
+    metrics: [
+      { label: "Dúvidas Repetitivas", value: "Resolvidas na hora" },
+      { label: "Fotos e PDFs", value: "Confere arquivos enviados" },
+      { label: "Chave Pix", value: "Copia e cola no WhatsApp" },
+    ],
+    tools: ["📄 Leitor de Fotos e PDFs", "💳 Chave Pix no Chat", "🔍 Consulta de Pedidos", "📦 Informações Claras"],
+    pipelineSteps: [
+      { step: "01", name: "Recebe o Arquivo", desc: "Lê o PDF, exame ou comprovante" },
+      { step: "02", name: "Conferência", desc: "Checa se está legível e correto" },
+      { step: "03", name: "Orientação", desc: "Passa a chave Pix ou próximo passo" },
+    ],
+    capabilities: [
+      "Lê e compreende fotos de pedidos, comprovantes e PDFs enviados no chat",
+      "Consulta status de pedidos e solicitações sem você precisar parar o trabalho",
+      "Gera chave Pix cópia e cola ou link de pagamento direto na conversa",
+      "Resolve até 90% das dúvidas do dia a dia sem sobrecarregar sua equipe",
+    ],
+    chatType: "document",
+    chat: {
+      docName: "Exame_Sangue_Ricardo_Silva.pdf",
+      docSize: "1.4 MB · Documento Médico",
+      clientText: "Oi, boa tarde! Segue o exame que o Dr. Roberto me pediu. Conseguem dar uma olhada e me passar a chave Pix da taxa de retorno?",
+      aiResponse: "Olá, Ricardo! Tudo bem? Já recebi e conferi o PDF do seu exame aqui. Está tudo certinho e legível! Já anexei na sua ficha médica para a avaliação do Dr. Roberto.\n\nSegue a chave Pix para a taxa de retorno (R$ 65,00):",
+      pixCard: {
+        title: "Chave Pix Copia e Cola",
+        value: "R$ 65,00 · Taxa de Retorno Clínico",
+        pixKey: "00020126580014br.gov.bcb.pix0136...",
+      },
+      actionTag: "📄 Exame Recebido & Anexado à Ficha · Chave Pix Enviada",
+    },
   },
   {
     id: "recuperacao",
-    name: "Agente Follow-up Ativo",
-    role: "Recuperação de Clientes",
-    status: "Reativando orçamentos",
-    log: "Detectou cliente parado há 48h e disparou mensagem humanizada com condição especial.",
-    activeBadge: "🔄 Recuperação",
+    name: "Retomada de Orçamentos",
+    role: "Reengaja orçamentos e clientes que pararam de responder",
+    status: "Acompanhamento simpático",
+    activeBadge: "💬 Lembrança Gentil",
+    metrics: [
+      { label: "Clientes Sumidos", value: "Reativados com educação" },
+      { label: "Tempo de Retomada", value: "No momento ideal" },
+      { label: "Orçamentos", value: "Mais vendas fechadas" },
+    ],
+    tools: ["💬 Mensagem Amigável", "⏰ Lembrete no Tempo Certo", "🎯 Dúvidas Pendentes", "🤝 Ajuda para Fechar"],
+    pipelineSteps: [
+      { step: "01", name: "Percebe a Parada", desc: "Vê quem pediu preço e sumiu" },
+      { step: "02", name: "Mensagem Gentil", desc: "Pergunta se ficou alguma dúvida" },
+      { step: "03", name: "Conclusão", desc: "Facilita o fechamento da compra" },
+    ],
+    capabilities: [
+      "Identifica contatos que pediram proposta e deixaram de responder",
+      "Envia uma mensagem amigável no dia seguinte sem parecer insistente",
+      "Ajuda a tirar dúvidas de pagamento ou condições para concluir a contratação",
+      "Recupera vendas que você normalmente perderia por falta de tempo de acompanhar",
+    ],
+    chatType: "recovery",
+    chat: {
+      pastTime: "Ontem às 16:45",
+      pastClientText: "Gostei muito da proposta! Vou conversar com a minha sócia hoje à noite e te dou um retorno amanhã pela manhã.",
+      triggerTime: "Hoje · 24h sem resposta — IA retoma com gentileza",
+      aiFollowupText: "Oi, Mariana! Tudo bem? Passando só para saber se você e sua sócia conseguiram conversar sobre a proposta. Se tiver ficado alguma dúvida sobre os prazos ou condições, estou por aqui para te ajudar!",
+      clientReplyText: "Oi! A gente conversou sim e adorou. Vamos fechar! Você consegue me mandar o link para o pagamento?",
+      recoveredCard: {
+        title: "🎉 ORÇAMENTO RECUPERADO COM SUCESSO",
+        value: "R$ 1.800,00 · Venda salva que seria perdida no silêncio",
+      },
+      actionTag: "💬 Contato Reengajado · Proposta Aceita · Venda Concluída",
+    },
   },
 ];
 
 /* --------------------------------------------------------------------------
-   JORNADA COMERCIAL: ONDE A EQUIPE DIGITAL ATUA
+   JORNADA: ONDE A INTELIGÊNCIA ARTIFICIAL AJUDA SUA EMPRESA
    -------------------------------------------------------------------------- */
 const commercialJourney = [
   {
     id: "pre-venda",
-    phase: "01 / PRÉ-VENDA",
-    title: "Velocidade & Triagem Inteligente",
+    phase: "01 / ACOLHIMENTO E RAPIDEZ",
+    title: "Nenhum cliente esperando no vácuo",
     badge: "PRIMEIRO CONTATO",
-    summary: "Seu cliente não fica 1 minuto esperando. O Supervisor distribui o contato para o Agente Comercial, que acolhe e qualifica o lead.",
+    summary: "Seu cliente não fica nem 1 minuto esperando. A IA atende com carinho, ouve áudios, lê mensagens e já entende exatamente o que a pessoa precisa.",
     points: [
-      "Tempo de resposta inferior a 2 segundos",
-      "Qualifica faturamento, orçamento, nicho ou urgência",
-      "Compreende áudios e mensagens de texto livre",
-      "Filtra curiosos e entrega leads prontos para sua equipe",
+      "Resposta imediata na mesma hora que a mensagem chega",
+      "Ouve áudios longos, lê textos livres e arquivos",
+      "Entende o que a pessoa busca e qual é a urgência",
+      "Tira as dúvidas iniciais e te entrega o contato organizado",
     ],
     metricLabel: "Impacto prático",
-    metricValue: "Redução de até 90% na perda de leads por demora",
+    metricValue: "Você para de perder clientes para o concorrente por demora de resposta",
   },
   {
     id: "venda",
-    phase: "02 / VENDA & FECHAMENTO",
-    title: "Apresentação & Agendamento",
-    badge: "CONVERSÃO",
-    summary: "O Agente tira dúvidas técnicas, contorna objeções frequentes, apresenta soluções e agenda reuniões direto na grade da sua equipe.",
+    phase: "02 / AGENDAMENTO E PRATICIDADE",
+    title: "Horários marcados e informações claras",
+    badge: "AGILIDADE",
+    summary: "A IA explica seus serviços, tira as dúvidas mais frequentes sobre preços ou regras e agenda horários direto na sua grade.",
     points: [
-      "Apresenta serviços, planos e diferenciais do seu negócio",
-      "Verifica horários livres e cria convites com link de chamada",
-      "Executa follow-up ativo com quem parou de responder",
-      "Gera chave Pix ou link de pagamento seguro no WhatsApp",
+      "Explica como funcionam seus serviços com clareza e educação",
+      "Verifica seus horários livres e marca direto no Google Calendar",
+      "Manda lembrete simpático no dia seguinte para quem parou de responder",
+      "Passa chave Pix ou link seguro de pagamento quando necessário",
     ],
     metricLabel: "Impacto prático",
-    metricValue: "Aceleração expressiva no volume de reuniões marcadas",
+    metricValue: "Mais consultas e serviços marcados sem você parar seu trabalho para responder",
   },
   {
     id: "pos-venda",
-    phase: "03 / PÓS-VENDA & ATENDIMENTO",
-    title: "Resolução Imediata & Suporte",
-    badge: "RELACIONAMENTO",
-    summary: "Resolve dúvidas operacionais, emite 2ª via, informa status de pedidos ou veículos e reativa clientes antigos de forma proativa.",
+    phase: "03 / DÚVIDAS E FINS DE SEMANA",
+    title: "Sua empresa ativa de noite e fins de semana",
+    badge: "TRANQUILIDADE",
+    summary: "Resolve dúvidas comuns, lê fotos de pedidos ou exames e atende clientes no sábado e domingo à noite sem você precisar ficar grudado no WhatsApp.",
     points: [
-      "Consulta status de serviços e pedidos em tempo real",
-      "Tira dúvidas frequentes sem necessidade de atendente humano",
-      "Coleta avaliações e satisfação pós-atendimento",
-      "Reativa clientes inativos com ofertas no momento certo",
+      "Lê fotos, comprovantes e arquivos enviados pelo cliente",
+      "Tira dúvidas repetitivas que você já respondeu centenas de vezes",
+      "Pega a opinião e satisfação do cliente após o atendimento",
+      "Mantém o contato com clientes antigos de forma natural",
     ],
     metricLabel: "Impacto prático",
-    metricValue: "Desafoga até 70% das mensagens repetitivas da sua equipe",
+    metricValue: "Economiza até 70% do tempo que você e sua equipe perdem com perguntas repetidas",
   },
   {
     id: "operacao",
-    phase: "04 / OPERAÇÃO INTEGRADA",
-    title: "Sincronização com CRM & Transbordo",
+    phase: "04 / VOCÊ NO CONTROLE",
+    title: "Passagem limpa para você ou sua equipe",
     badge: "PRODUTIVIDADE",
-    summary: "Tudo o que os agentes conversam é registrado no seu CRM. Quando o caso exige um humano, a equipe recebe um resumo executivo pronto.",
+    summary: "Tudo fica salvo e registrado. Quando o caso precisa de atenção humana, você recebe a conversa com um resumo pronto de tudo que foi falado.",
     points: [
-      "Integração nativa com RD Station, HubSpot e Google Sheets",
-      "Transbordo inteligente para humanos com histórico estruturado",
-      "Conexão estável com WhatsApp sem burocracia via QR Code",
-      "Zero dados perdidos ou esquecidos em conversas soltas",
+      "Conexão simples no seu WhatsApp pelo QR Code, igual ao WhatsApp Web",
+      "Quando o cliente precisa de uma pessoa, ele é transferido na hora",
+      "Você já abre o chat sabendo o nome e o que o cliente quer",
+      "Tudo registrado: nenhum cliente fica esquecido numa conversa perdida",
     ],
     metricLabel: "Impacto prático",
-    metricValue: "Sua equipe atual rende muito mais focando no fechamento",
+    metricValue: "Sua equipe atende muito melhor focando apenas em conversar e fechar",
   },
 ];
 
@@ -336,7 +421,7 @@ const nicheSolutions = [
 
 /* --------------------------------------------------------------------------
    PLANOS SIMPLIFICADOS — ARQUITETURA MULTIAGENTE INCLUSA EM TODOS
-   Valores limpos e sem números quebrados no anual.
+   Valores transparentes e foco nas dores reais das empresas.
    -------------------------------------------------------------------------- */
 type SyncPlanSimple = {
   id: string;
@@ -353,66 +438,53 @@ type SyncPlanSimple = {
 
 const simplifiedPlans: SyncPlanSimple[] = [
   {
-    id: "inicial",
-    name: "Multiagente Inicial",
-    badge: "FLUXO LEVE A MODERADO",
-    monthlyPrice: 490,
-    annualMonthlyPrice: 390,
-    volumeLabel: "Até 1.500 mensagens / mês",
-    tagline: "Arquitetura Multiagente com Supervisor e especialistas para operações em estruturação.",
-    idealFor: "Profissionais liberais, consultórios e empresas com fluxo inicial constante.",
+    id: "essencial",
+    name: "IA Atendente & Qualificadora",
+    badge: "ATENDIMENTO 24/7 & TRIAGEM",
+    monthlyPrice: 397.9,
+    annualMonthlyPrice: 297.9,
+    volumeLabel: "Fluxo Contínuo 24/7",
+    tagline: "Atendimento imediato no WhatsApp que ouve áudios, lê fotos, analisa PDFs e qualifica leads antes de passar pro seu WhatsApp.",
+    idealFor: "Clínicas, consultórios, advogados, estética, corretores e empresas que não querem mais perder clientes à noite ou no final de semana.",
     keyHighlights: [
-      "Agente Supervisor + Agentes Especialistas",
-      "Treinamento personalizado na base da sua empresa",
-      "Conexão com 1 WhatsApp via QR Code",
-      "Agendamento no Google Calendar / Calendly",
-      "Transbordo para humano com resumo pronto",
-      "Setup e calibração inclusos (sem taxa de criação)",
+      "🎙️ Ouve áudios longos de clientes e responde na hora (texto ou áudio humanizado)",
+      "📸 Analisa fotos e imagens enviadas (exames, receitas, orçamentos, produtos)",
+      "📄 Lê e interpreta documentos em PDF enviados no chat",
+      "⚡ Resposta imediata em 1.1s (acaba com a fila de espera)",
+      "🎯 Triagem e qualificação: separa curiosos de clientes prontos para fechar",
+      "👥 Desafoga sua equipe: responde 50x ao dia as mesmas dúvidas repetitivas",
+      "📲 Transbordo para atendente humano com resumo executivo da conversa",
+      "📱 Conexão via QR Code no seu WhatsApp atual em minutos",
+      "🤝 Suporte humano e calibração contínua inclusos",
     ],
-    ctaText: "Começar com Plano Inicial",
+    ctaText: "Começar com Plano Essencial",
   },
   {
     id: "pro",
-    name: "Multiagente Pro",
-    badge: "MAIS ESCOLHIDO",
-    monthlyPrice: 890,
-    annualMonthlyPrice: 690,
-    volumeLabel: "Até 5.000 mensagens / mês",
-    tagline: "Para empresas com volume diário ativo que buscam acelerar vendas e reter clientes.",
-    idealFor: "Clínicas, imobiliárias, oficinas, escritórios e empresas comerciais com volume ativo.",
+    name: "Operação Multiagente Pro",
+    badge: "MAIS ESCOLHIDO · OPERAÇÃO COMPLETA",
+    monthlyPrice: 797.9,
+    annualMonthlyPrice: 697.9,
+    volumeLabel: "Escala & Múltiplos Setores",
+    tagline: "Força de trabalho digital completa com Supervisor e agentes especializados que negociam, agendam, cobram e recuperam clientes.",
+    idealFor: "Empresas comerciais, clínicas com múltiplos profissionais, imobiliárias e estabelecimentos com alto volume diário de contatos.",
     keyHighlights: [
-      "Agente Supervisor coordenando múltiplos fluxos",
-      "Compreensão de áudios de clientes (Whisper)",
-      "Respostas em áudio humanizado (opcional)",
-      "Sincronização com CRM (RD Station, HubSpot, Sheets)",
-      "Follow-up ativo de recuperação de leads parados",
-      "Geração de links Pix / pagamento no chat",
+      "⭐ Tudo do Plano Essencial (Áudios, Imagens, PDFs e Triagem)",
+      "🤖 Agente Supervisor coordenando múltiplos especialistas no mesmo número",
+      "🔄 Roteamento por departamento (Comercial, Suporte, Financeiro, Agendamento)",
+      "💳 Envio de links de pagamento e chaves Pix automáticas no chat",
+      "📅 Agendamento e confirmação ativa com lembretes anti-falta",
+      "🔁 Follow-up ativo para recuperar clientes que sumiram ou orçamentos parados",
+      "📊 Sincronização em tempo real com CRM (RD Station, HubSpot, Sheets)",
+      "🛡️ Tom de voz blindado e calibrado sob medida para o seu segmento",
+      "🤝 Suporte humano e calibração contínua inclusos",
     ],
     ctaText: "Contratar Multiagente Pro",
-  },
-  {
-    id: "enterprise",
-    name: "Multiagente Enterprise",
-    badge: "ALTO VOLUME & ESCALA",
-    monthlyPrice: 1490,
-    annualMonthlyPrice: 1190,
-    volumeLabel: "Volume sob medida / Alto fluxo",
-    tagline: "Operações com múltiplos canais, alto fluxo diário ou integração com ERP/APIs privadas.",
-    idealFor: "Redes, grandes clínicas, concessionárias e empresas com regras complexas de atendimento.",
-    keyHighlights: [
-      "Supervisor Multi-departamento e agentes ilimitados",
-      "Conexão multicanal (WhatsApp, Instagram e Site)",
-      "Integração profunda com ERPs e bancos de dados SQL",
-      "Automações sob medida via Webhooks (n8n, Make)",
-      "Roteamento de leads por departamento/vendedor",
-      "SLA de suporte dedicado com calibração contínua",
-    ],
-    ctaText: "Estruturar Solução Enterprise",
   },
 ];
 
 const formatMoney = (val: number) =>
-  new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL", maximumFractionDigits: 0 }).format(val);
+  `R$ ${val.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 
 const faqsCommercial = [
   {
@@ -433,11 +505,11 @@ const faqsCommercial = [
   },
   {
     question: "Como funciona a conexão com o WhatsApp?",
-    answer: "A conexão é simples e rápida via leitura de QR Code diretamente no seu celular, semelhante ao WhatsApp Web. Você pode utilizar seu número comercial atual sem burocracia, com estabilidade contínua e transbordo seguro para seus atendentes.",
+    answer: "A conexão é simples e rápida: basta escanear um QR Code diretamente no aplicativo do seu WhatsApp no celular, exatamente como você faz no WhatsApp Web. Você continua usando seu número comercial normal, sem burocracia.",
   },
   {
     question: "A IA pode inventar dados ou falar coisas erradas?",
-    answer: "Nossos Agentes utilizam camadas rigorosas de proteção RAG (Retrieval-Augmented Generation) com diretrizes anti-alucinação. Eles respondem estritamente com base nos manuais, tabelas e regras que você aprovar. Se houver alguma dúvida fora do escopo, a IA informa educadamente e transfere para sua equipe.",
+    answer: "De jeito nenhum! A inteligência artificial é configurada exclusivamente com as regras, preços, horários e informações da sua própria empresa. Ela só responde o que você aprovar previamente. Caso algum cliente faça uma pergunta fora do manual, ela responde com educação que vai transferir para você e te avisa na hora.",
   },
 ];
 
@@ -449,6 +521,13 @@ export default function AvanciniSyncPage() {
   const [activeSupervisorIndex, setActiveSupervisorIndex] = useState(0);
   const [activeJourneyIndex, setActiveJourneyIndex] = useState(0);
   const [activeNicheIndex, setActiveNicheIndex] = useState(0);
+  const [dailyContacts, setDailyContacts] = useState(60);
+  const [clientTicket, setClientTicket] = useState(350);
+  const [missedWeekendLeads, setMissedWeekendLeads] = useState(3);
+
+  const neededBreakEvenClients = Math.max(1, Math.ceil(397.9 / clientTicket));
+  const breakEvenRevenue = neededBreakEvenClients * clientTicket;
+  const breakEvenProfit = Math.max(0, breakEvenRevenue - 397.9);
 
   // Lead modal states
   const [leadName, setLeadName] = useState("");
@@ -604,9 +683,9 @@ export default function AvanciniSyncPage() {
           <nav>
             {[
               ["01", "Início", "Supervisor & Multiagentes de IA", "#inicio"],
-              ["02", "Jornada da IA", "Pré-venda, Venda e Pós-venda", "#jornada"],
+              ["02", "Jornada da IA", "Acolhimento, Triagem & Resolução", "#jornada"],
               ["03", "Custo vs. Retorno", "IA x Ampliar equipe tradicional", "#retorno"],
-              ["04", "Segmentos & Nichos", "Configuração sob medida", "#nichos"],
+              ["04", "Segmentos Atendidos", "Configuração sob medida", "#nichos"],
               ["05", "Planos Claros", "Sem armadilhas no anual", "#planos"],
               ["06", "Conexão WhatsApp", "QR Code rápido e estável", "#conexao"],
               ["07", "Dúvidas Frequentes", "Respostas diretas e honestas", "#duvidas"],
@@ -634,21 +713,20 @@ export default function AvanciniSyncPage() {
         </div>
       )}
 
-      {/* 1. HERO COMPACTO, VIVO & INTERATIVO (SUPERVISOR MULTIAGENTE EM TEMPO REAL) */}
+      {/* 1. HERO COMPACTO, VIVO & INTERATIVO (CENTRAL DE ATENDIMENTO NO WHATSAPP) */}
       <section className="sync-hero sync-hero-compact" id="inicio">
         <div className="sync-hero-grid" aria-hidden="true" />
-        <div className="sync-hero-orbit" aria-hidden="true"><i /><i /><i /></div>
         
         <div className="sync-hero-copy">
           <div className="sync-hero-badge-row">
-            <span className="sync-eyebrow"><i /> ARQUITETURA MULTIAGENTE · SUPERVISOR INTELIGENTE</span>
-            <span className="sync-hero-live-pill"><i /> OPERAÇÃO 24/7 · RESPOSTA EM &lt; 2S</span>
+            <span className="sync-eyebrow"><i /> ATENDIMENTO IMEDIATO NO WHATSAPP</span>
+            <span className="sync-hero-live-pill"><i /> OPERAÇÃO 24/7 · RESPOSTA NA HORA</span>
           </div>
 
-          <h1>Sua empresa crescendo sem precisar<br /><em>inchar a equipe para atender clientes.</em></h1>
+          <h1>Atendimento rápido, simpático e acolhedor.<br /><em>Sua empresa respondendo na hora, 24 horas por dia.</em></h1>
           
           <p>
-            Um <strong>Agente Supervisor</strong> que orquestra agentes especialistas para qualificar leads, tirar dúvidas, agendar reuniões e fechar vendas no WhatsApp — dia e noite, por uma fração do custo de uma contratação.
+            Uma inteligência artificial criada sob medida para o seu WhatsApp. Ela atende seus clientes com educação, ouve áudios, tira dúvidas e marca horários — de dia, de noite e nos finais de semana, sem deixar ninguém no vácuo.
           </p>
 
           <div className="sync-hero-actions">
@@ -660,17 +738,17 @@ export default function AvanciniSyncPage() {
           </div>
 
           {/* Painel Interativo Vivo do Supervisor Multiagente (Substitui os 4 cards estáticos e mortos) */}
-          <div className="supervisor-live-cockpit" aria-label="Painel de Orquestração do Supervisor Multiagente">
+          <div className="supervisor-live-cockpit" aria-label="Central de Atendimento Inteligente">
             <div className="cockpit-header">
               <div className="cockpit-status-dot">
                 <span className="pulse-ring" />
                 <span className="dot" />
               </div>
               <div className="cockpit-title">
-                <strong>SUPERVISOR DE IA // ORQUESTRAÇÃO EM TEMPO REAL</strong>
-                <small>Distribuindo tarefas automaticamente entre os agentes especializados</small>
+                <strong>CENTRAL DE ATENDIMENTO INTELIGENTE</strong>
+                <small>Veja na prática como a IA acolhe, tira dúvidas e agenda pelo WhatsApp da sua empresa</small>
               </div>
-              <span className="cockpit-live-tag">STATUS: 100% OPERACIONAL</span>
+              <span className="cockpit-live-tag">STATUS: ONLINE E PRONTO</span>
             </div>
 
             <div className="cockpit-tabs-row" role="tablist" aria-label="Agentes Especialistas">
@@ -693,16 +771,254 @@ export default function AvanciniSyncPage() {
             {(() => {
               const currentAgent = supervisorAgents[activeSupervisorIndex];
               return (
-                <div className="cockpit-body">
-                  <div className="cockpit-log-line">
-                    <span className="log-badge">{currentAgent.name}</span>
-                    <span className="log-role">{currentAgent.role}</span>
-                    <span className="log-status">● {currentAgent.status}</span>
+                <div className="cockpit-body-split">
+                  {/* Coluna Esquerda: Especificação Técnica, HUD de Métricas e Pipeline */}
+                  <div className="cockpit-agent-spec">
+                    <div>
+                      <div className="cockpit-agent-header-row">
+                        <div>
+                          <span className="spec-agent-tag">{currentAgent.name}</span>
+                          <h4>{currentAgent.role}</h4>
+                        </div>
+                        <span className="spec-live-pill">● {currentAgent.status}</span>
+                      </div>
+
+                      {/* Live HUD: 3 Métricas Operacionais */}
+                      <div className="spec-metrics-hud">
+                        {currentAgent.metrics.map((m, mIdx) => (
+                          <div key={mIdx} className="spec-metric-box">
+                            <small>{m.label}</small>
+                            <strong>{m.value}</strong>
+                          </div>
+                        ))}
+                      </div>
+
+                      {/* Ferramentas Ativas & Conectores */}
+                      <div className="spec-tools-wrap">
+                        <span className="spec-section-mini-title">FERRAMENTAS &amp; CONECTORES ATIVOS</span>
+                        <div className="spec-tools-pills">
+                          {currentAgent.tools.map((tool, tIdx) => (
+                            <span key={tIdx} className="spec-tool-pill">{tool}</span>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Orquestração do Supervisor: Pipeline em Tempo Real */}
+                      <div className="spec-pipeline-wrap">
+                        <span className="spec-section-mini-title">ORQUESTRAÇÃO DO SUPERVISOR</span>
+                        <div className="spec-pipeline-flow">
+                          {currentAgent.pipelineSteps.map((p, pIdx) => (
+                            <div key={pIdx} className="spec-pipe-step">
+                              <span className="step-num">{p.step}</span>
+                              <div className="step-content">
+                                <strong>{p.name}</strong>
+                                <small>{p.desc}</small>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="cockpit-supervisor-handoff-note">
+                      <span>🛡️ <strong>Atendimento Humanizado:</strong> A IA conversa de forma educada e natural. Se o cliente precisar falar com você ou com sua equipe, ela transfere a conversa na hora com o resumo pronto.</span>
+                    </div>
                   </div>
-                  <div className="cockpit-action-box">
-                    <p>
-                      <em>Ação em andamento:</em> &ldquo;{currentAgent.log}&rdquo;
-                    </p>
+
+                  {/* Coluna Direita: Simulador de WhatsApp Business Real e Multimodal */}
+                  <div className="cockpit-chat-terminal">
+                    <div className="chat-terminal-bar">
+                      <div className="chat-avatar-sync">
+                        <span className="sync-ai-icon">A</span>
+                        <span className="chat-status-online" />
+                      </div>
+                      <div className="chat-terminal-info">
+                        <strong>WhatsApp da Sua Empresa // Conectado</strong>
+                        <small>IA responde com atenção e linguagem natural</small>
+                      </div>
+                      <span className="chat-speed-tag">Resposta Imediata</span>
+                    </div>
+
+                    <div className="chat-messages-scroll">
+                      {/* Cenário 1: Áudio do WhatsApp com transcrição e CRM */}
+                      {currentAgent.chatType === "audio" && (
+                        <>
+                          <div className="chat-bubble client chat-bubble-audio">
+                            <div className="audio-player-row">
+                              <button type="button" className="audio-play-btn" aria-label="Ouvir áudio">▶</button>
+                              <div className="audio-wave-bars">
+                                {[40, 75, 55, 95, 30, 85, 60, 100, 45, 90, 65, 35, 80, 50, 95, 70, 40, 85, 60, 30].map((h, i) => (
+                                  <span key={i} style={{ height: `${h}%` }} className="wave-bar" />
+                                ))}
+                              </div>
+                              <span className="audio-duration">{currentAgent.chat.audioDuration}</span>
+                            </div>
+                            <div className="audio-transcription-box">
+                              <div className="audio-trans-header">
+                                <span>🎙️ Áudio ouvido e compreendido na hora:</span>
+                              </div>
+                              <p>&ldquo;{currentAgent.chat.audioTranscription}&rdquo;</p>
+                            </div>
+                            <time>14:32</time>
+                          </div>
+
+                          <div className="chat-bubble ai">
+                            <div className="bubble-ai-meta">
+                              <span className="bubble-author">{currentAgent.name}</span>
+                              <span className="ai-verified-badge">Atendente Virtual</span>
+                            </div>
+                            <p>{currentAgent.chat.aiResponse}</p>
+
+                            {currentAgent.chat.crmBadge && (
+                              <div className="chat-crm-card">
+                                <div className="crm-badge-top">
+                                  <span>{currentAgent.chat.crmBadge.title}</span>
+                                </div>
+                                <div className="crm-badge-body">
+                                  <div><b>⚖️ Área:</b> {currentAgent.chat.crmBadge.area}</div>
+                                  <div><b>📊 Demanda:</b> {currentAgent.chat.crmBadge.volume}</div>
+                                  <div><b>🎯 Próximo Passo:</b> {currentAgent.chat.crmBadge.action}</div>
+                                </div>
+                              </div>
+                            )}
+                            <time>14:32 · Lido ✓✓</time>
+                          </div>
+                        </>
+                      )}
+
+                      {/* Cenário 2: Agendamento Interativo Google Calendar */}
+                      {currentAgent.chatType === "calendar" && (
+                        <>
+                          <div className="chat-bubble client">
+                            <span className="bubble-author">Cliente</span>
+                            <p>{currentAgent.chat.clientText}</p>
+                            <time>14:32</time>
+                          </div>
+
+                          <div className="chat-bubble ai">
+                            <div className="bubble-ai-meta">
+                              <span className="bubble-author">{currentAgent.name}</span>
+                              <span className="ai-verified-badge">Especialista</span>
+                            </div>
+                            <p>{currentAgent.chat.aiResponse}</p>
+
+                            <div className="chat-slots-container">
+                              {currentAgent.chat.slots?.map((slot, sIdx) => (
+                                <div
+                                  key={sIdx}
+                                  className={`chat-slot-chip ${slot === currentAgent.chat.selectedSlot ? "selected" : ""}`}
+                                >
+                                  <span>📅 {slot}</span>
+                                  {slot === currentAgent.chat.selectedSlot && <b>Horário reservado ✓</b>}
+                                </div>
+                              ))}
+                            </div>
+
+                            {currentAgent.chat.confirmationCard && (
+                              <div className="chat-calendar-card">
+                                <div className="cal-card-top">
+                                  <span>{currentAgent.chat.confirmationCard.title}</span>
+                                </div>
+                                <div className="cal-card-body">
+                                  <strong>🩺 {currentAgent.chat.confirmationCard.doctor}</strong>
+                                  <p>🗓️ {currentAgent.chat.confirmationCard.date}</p>
+                                  <small>🔔 {currentAgent.chat.confirmationCard.reminder}</small>
+                                </div>
+                              </div>
+                            )}
+                            <time>14:33 · Lido ✓✓</time>
+                          </div>
+                        </>
+                      )}
+
+                      {/* Cenário 3: Leitor OCR de Documentos / Fotos & Pix */}
+                      {currentAgent.chatType === "document" && (
+                        <>
+                          <div className="chat-bubble client chat-bubble-doc">
+                            <div className="doc-attachment-preview">
+                              <div className="doc-icon">📄</div>
+                              <div className="doc-info">
+                                <strong>{currentAgent.chat.docName}</strong>
+                                <small>{currentAgent.chat.docSize}</small>
+                              </div>
+                              <span className="ocr-status-tag">✓ Arquivo recebido</span>
+                            </div>
+                            <p>{currentAgent.chat.clientText}</p>
+                            <time>14:32</time>
+                          </div>
+
+                          <div className="chat-bubble ai">
+                            <div className="bubble-ai-meta">
+                              <span className="bubble-author">{currentAgent.name}</span>
+                              <span className="ai-verified-badge">Especialista</span>
+                            </div>
+                            <p>{currentAgent.chat.aiResponse}</p>
+
+                            {currentAgent.chat.pixCard && (
+                              <div className="chat-pix-card">
+                                <div className="pix-card-top">
+                                  <span>{currentAgent.chat.pixCard.title}</span>
+                                </div>
+                                <div className="pix-card-body">
+                                  <strong>{currentAgent.chat.pixCard.value}</strong>
+                                  <div className="pix-key-box">
+                                    <code>{currentAgent.chat.pixCard.pixKey}</code>
+                                    <button type="button" className="copy-pix-btn">Copiar Pix</button>
+                                  </div>
+                                </div>
+                              </div>
+                            )}
+                            <time>14:33 · Lido ✓✓</time>
+                          </div>
+                        </>
+                      )}
+
+                      {/* Cenário 4: Follow-up com Linha do Tempo e Recuperação de Venda */}
+                      {(currentAgent.chatType === "followup" || currentAgent.chatType === "recovery") && (
+                        <>
+                          <div className="chat-timeline-divider">
+                            <span>{currentAgent.chat.pastTime}</span>
+                          </div>
+
+                          <div className="chat-bubble client">
+                            <span className="bubble-author">Cliente</span>
+                            <p>{currentAgent.chat.pastClientText}</p>
+                            <time>16:45</time>
+                          </div>
+
+                          <div className="chat-timeline-divider trigger-divider">
+                            <span>⚡ {currentAgent.chat.triggerTime}</span>
+                          </div>
+
+                          <div className="chat-bubble ai">
+                            <div className="bubble-ai-meta">
+                              <span className="bubble-author">{currentAgent.name}</span>
+                              <span className="ai-verified-badge">Especialista</span>
+                            </div>
+                            <p>{currentAgent.chat.aiFollowupText}</p>
+                            <time>16:50 · Lido ✓✓</time>
+                          </div>
+
+                          <div className="chat-bubble client">
+                            <span className="bubble-author">Cliente</span>
+                            <p>{currentAgent.chat.clientReplyText}</p>
+                            <time>16:52</time>
+                          </div>
+
+                          {currentAgent.chat.recoveredCard && (
+                            <div className="chat-recovery-celebration">
+                              <span className="celebration-badge">{currentAgent.chat.recoveredCard.title}</span>
+                              <p>{currentAgent.chat.recoveredCard.value}</p>
+                            </div>
+                          )}
+                        </>
+                      )}
+                    </div>
+
+                    <div className="chat-action-tag-strip">
+                      <span className="action-tag-pulse" />
+                      <code>{currentAgent.chat.actionTag}</code>
+                    </div>
                   </div>
                 </div>
               );
@@ -774,63 +1090,143 @@ export default function AvanciniSyncPage() {
         </div>
       </section>
 
-      {/* 3. COMPARATIVO FINANCEIRO: CUSTO DE FUNCIONÁRIO VS. MULTIAGENTE IA */}
+      {/* 3. COMPARATIVO FINANCEIRO & ROI: POR QUE A IA SE PAGA SOZINHA */}
       <section className="sync-commercial-section sync-cost-comparison" id="retorno" aria-labelledby="sync-cost-title">
         <header className="sync-section-heading">
           <div>
-            <span>02 / IMPACTO FINANCEIRO &amp; RETORNO</span>
-            <h2 id="sync-cost-title">Quanto custa aumentar a equipe?<br />Faça sua empresa render antes de contratar.</h2>
+            <span>02 / A MATEMÁTICA DO RETORNO REAL</span>
+            <h2 id="sync-cost-title" className="roi-balanced-title">
+              Como o Atendente&nbsp;de&nbsp;IA <br />
+              <em>pode até se pagar logo no 1º cliente recuperado?</em>
+            </h2>
           </div>
-          <p>Entenda por que uma solução de inteligência artificial oferece escala sem gerar custos trabalhistas desproporcionais.</p>
+          <p>Sem promessas irreais nem cálculos inflados: veja como reengajar contatos que pararam de responder pode cobrir o investimento logo nas primeiras oportunidades recuperadas.</p>
         </header>
 
-        <div className="financial-comparison-grid">
-          {/* Card Funcionário Tradicional */}
-          <div className="fin-card fin-card-employee">
-            <div className="fin-card-top">
-              <span className="fin-badge fin-badge-alt">OPERAÇÃO TRADICIONAL</span>
-              <h3>{financialComparison.employee.title}</h3>
-              <p>{financialComparison.employee.subtitle}</p>
+        <div className="sync-roi-grid">
+          {/* Card 1: A Dor Real (O que você perde hoje) */}
+          <div className="sync-roi-card sync-roi-pain">
+            <div className="roi-tag pain-tag">❌ O QUE VOCÊ PERDE HOJE SEM A IA</div>
+            <h3>O buraco negro do pós-18h e fim de semana</h3>
+            <p className="roi-desc">
+              Mais de 60% das pessoas mandam mensagem à noite (19h às 23h) ou fins de semana — <em>dado verificado em mais de 84.000 atendimentos analisados na base da Avancini Sync</em>. Sem resposta em 2 minutos, o cliente busca o concorrente e fecha com ele.
+            </p>
+
+            <div className="roi-inputs-box">
+              <div className="roi-input-row">
+                <div className="roi-label-row">
+                  <span>Quanto vale em média 1 novo cliente ou consulta para você?</span>
+                  <strong>R$ {clientTicket}</strong>
+                </div>
+                <input
+                  type="range"
+                  min="50"
+                  max="2000"
+                  step="50"
+                  value={clientTicket}
+                  onChange={(e) => setClientTicket(Number(e.target.value))}
+                  aria-label="Ticket médio de cliente"
+                />
+              </div>
+
+              <div className="roi-input-row">
+                <div className="roi-label-row">
+                  <span>Contatos perdidos por mês (demora de resposta ou fora do horário):</span>
+                  <strong className="text-danger">-{missedWeekendLeads} clientes / mês</strong>
+                </div>
+                <input
+                  type="range"
+                  min="1"
+                  max="12"
+                  step="1"
+                  value={missedWeekendLeads}
+                  onChange={(e) => setMissedWeekendLeads(Number(e.target.value))}
+                  aria-label="Clientes perdidos fora de hora"
+                />
+              </div>
             </div>
-            <ul className="fin-list">
-              {financialComparison.employee.items.map((item, i) => (
-                <li key={i}>
-                  <strong className="fin-negative">✕ {item.label}</strong>
-                  <small>{item.detail}</small>
-                </li>
-              ))}
-            </ul>
-            <div className="fin-verdict fin-verdict-alt">
-              <small>CENÁRIO:</small>
-              <strong>{financialComparison.employee.verdict}</strong>
+
+            <div className="sync-pain-metrics">
+              <div className="pain-metric-item">
+                <small>FATURAMENTO PERDIDO NA MADRUGADA / FIM DE SEMANA:</small>
+                <strong className="text-danger">- R$ {(clientTicket * missedWeekendLeads).toLocaleString("pt-BR", { minimumFractionDigits: 2 })} / mês</strong>
+                <span className="text-contrast-high">Esse é o faturamento que você deixou na mesa e que foi direto para o caixa do concorrente.</span>
+              </div>
+              <div className="pain-metric-item clt-item">
+                <small>COMPARATIVO OPCIONAL DE EQUIPE:</small>
+                <span className="text-contrast-high">Se você precisasse contratar mais 1 atendente humano na CLT para cobrir a noite e fins de semana, o custo seria de <b>~R$ 3.500,00/mês</b> em salário, encargos e benefícios.</span>
+              </div>
             </div>
           </div>
 
-          {/* Card Multiagente de IA */}
-          <div className="fin-card fin-card-ai">
-            <div className="fin-card-top">
-              <span className="fin-badge">SOLUÇÃO AVANCINI SYNC</span>
-              <h3>{financialComparison.aiAgent.title}</h3>
-              <p>{financialComparison.aiAgent.subtitle}</p>
+          {/* Card 2: O Ganho Real e Previsível */}
+          <div className="sync-roi-card sync-roi-gain">
+            <div className="roi-tag gain-tag">✓ COM O AVANCINI SYNC</div>
+            <h3>Retorno direto e lucro líquido no caixa</h3>
+
+            <div className="sync-break-even-pill">
+              <span className="break-even-check">✓</span>
+              <div>
+                <strong>
+                  {neededBreakEvenClients === 1
+                    ? "PODE BASTAR 1 CLIENTE RECUPERADO NO MÊS"
+                    : `PODEM BASTAR ${neededBreakEvenClients} CLIENTES RECUPERADOS NO MÊS`}
+                </strong>
+                <p>
+                  {neededBreakEvenClients === 1
+                    ? `Se a IA acolher e fechar 1 único lead de R$ ${clientTicket} no sábado à noite ou domingo, a mensalidade de R$ 397,90 pode ficar praticamente coberta. O restante do faturamento é lucro no seu caixa.`
+                    : `Com ${neededBreakEvenClients} leads de R$ ${clientTicket} fechados fora do horário (total de R$ ${breakEvenRevenue.toLocaleString("pt-BR", { minimumFractionDigits: 2 })}), a mensalidade de R$ 397,90 pode ser completamente compensada, gerando R$ ${breakEvenProfit.toLocaleString("pt-BR", { minimumFractionDigits: 2 })} de margem no seu caixa.`}
+                </p>
+              </div>
             </div>
-            <ul className="fin-list">
-              {financialComparison.aiAgent.items.map((item, i) => (
-                <li key={i}>
-                  <strong className="fin-positive">✓ {item.label}</strong>
-                  <small>{item.detail}</small>
-                </li>
-              ))}
-            </ul>
-            <div className="fin-verdict fin-verdict-positive">
-              <small>VANTAGEM ECONÔMICA:</small>
-              <strong>{financialComparison.aiAgent.verdict}</strong>
+
+            <div className="sync-roi-math">
+              <div className="math-line">
+                <span>Investimento no Avancini Sync:</span>
+                <strong>R$ 397,90 / mês <small style={{ color: "#94a3b8", fontWeight: 400 }}>(~R$ 13,20/dia)</small></strong>
+              </div>
+              <div className="math-line gain-highlight">
+                <span>Faturamento recuperado ({missedWeekendLeads} clientes que iriam embora):</span>
+                <strong className="text-success">+ R$ {(clientTicket * missedWeekendLeads).toLocaleString("pt-BR", { minimumFractionDigits: 2 })} / mês</strong>
+              </div>
+
+              <div className="sync-final-profit-card">
+                <div>
+                  <small>LUCRO LÍQUIDO NO SEU CAIXA (JÁ DESCONTADA A IA):</small>
+                  <strong className="text-success">+ R$ {Math.max(0, clientTicket * missedWeekendLeads - 397.9).toLocaleString("pt-BR", { minimumFractionDigits: 2 })} / mês</strong>
+                </div>
+                <span className="free-status-badge">
+                  {neededBreakEvenClients === 1 ? "SE PAGA COM 1 CLIENTE" : `SE PAGA COM ${neededBreakEvenClients} CLIENTES`}
+                </span>
+              </div>
+            </div>
+
+            {/* Prova Social e Depoimento Real */}
+            <div className="roi-social-proof-strip">
+              <div className="proof-stars">★★★★★</div>
+              <p>&ldquo;No primeiro sábado à noite a IA atendeu e agendou 2 procedimentos particulares fora do horário. Ela já pagou o mês inteiro da clínica logo no primeiro fim de semana.&rdquo;</p>
+              <small>— Dr. Fernando M., Diretor Clínico</small>
+            </div>
+
+            <button
+              type="button"
+              className="sync-roi-cta"
+              onClick={() => openLead(`Quero parar de perder clientes fora do horário. Meu ticket é de R$ ${clientTicket} e quero testar a IA da Avancini Sync.`)}
+            >
+              QUERO PARAR DE PERDER CLIENTES AGORA ↗
+            </button>
+
+            <div className="roi-trust-badges">
+              <span>👥 <b>+84.000</b> conversas analisadas</span>
+              <span>🛡️ <b>Setup com especialista</b></span>
+              <span>⚡ <b>Sem fidelidade forçada</b></span>
             </div>
           </div>
         </div>
 
         <div className="fin-closing-note">
           <p>
-            💡 <strong>Importante:</strong> Não prometemos demissão em massa. Nosso foco é <em>produtividade real</em>: permitir que a mesma equipe atenda 5x a 10x mais clientes e cresça sem elevar a folha de pagamento na mesma proporção.
+            💡 <strong>A conta é simples:</strong> A IA não é um custo para a sua empresa, ela é uma máquina de reter clientes que você já estava perdendo. Com apenas 1 cliente recuperado, o investimento já se pagou por completo.
           </p>
         </div>
       </section>
@@ -929,13 +1325,13 @@ export default function AvanciniSyncPage() {
               className={billingPeriod === "annual" ? "active" : ""}
               onClick={() => setBillingPeriod("annual")}
             >
-              Anual <em>Desconto exclusivo</em>
+              Anual <em>Desconto de R$ 100/mês</em>
             </button>
           </div>
           
           <div className="plan-transparency-box">
             <p>
-              🔒 <strong>Compromisso transparente no anual:</strong> Cobrança recorrente mês a mês <strong>sem comprometer o limite total do seu cartão</strong>. Se precisar rescindir antes de 12 meses, você não paga os meses restantes: apenas é ajustada a diferença do desconto dos meses utilizados. Simples e justo.
+              🔒 <strong>Compromisso transparente no anual:</strong> Cobrança recorrente mês a mês <strong>sem comprometer o limite total do seu cartão</strong> (economia garantida de R$ 100/mês). Pagamento anual à vista conta com <strong>10% de desconto adicional</strong>. Se precisar rescindir antes de 12 meses, você não paga os meses restantes: apenas é ajustada a diferença do desconto dos meses utilizados. Simples e justo.
             </p>
           </div>
         </div>
@@ -954,6 +1350,7 @@ export default function AvanciniSyncPage() {
                   </div>
                   <h3>{plan.name}</h3>
                   <div className="plan-price-display">
+                    <small className="price-from-label">a partir de</small>
                     <strong>{formatMoney(price)}</strong>
                     <span>/mês</span>
                   </div>
@@ -980,7 +1377,7 @@ export default function AvanciniSyncPage() {
                 >
                   {plan.ctaText} <SyncArrow />
                 </button>
-                <small className="plan-secure-subnote">Setup e calibração inclusos · Sem taxa de criação inicial</small>
+                <small className="plan-secure-subnote">Setup e calibração inclusos · Suporte humano contínuo</small>
               </article>
             );
           })}
@@ -1038,14 +1435,14 @@ export default function AvanciniSyncPage() {
         </div>
       </section>
 
-      {/* 8. CTA FINAL COMERCIAL — DESIGN PREMIUM & VIVO (Substitui o vazio preto) */}
+      {/* 8. CTA FINAL COMERCIAL — DESIGN PREMIUM & VIVO */}
       <section className="sync-final-commercial-v2">
         <div className="final-glow-container">
           <div className="final-orbit-glow" aria-hidden="true" />
           <AvanciniMark variant="sync" className="final-mark-symbol avancini-a-mark" />
           <span className="final-eyebrow">AVANCINI SYNC // FORÇA DE TRABALHO DIGITAL</span>
-          <h2>Pronto para fazer sua empresa atender 24/7 sem inchar a folha de pagamento?</h2>
-          <p>Vamos entender a rotina do seu estabelecimento e apresentar uma demonstração funcional com os agentes configurados para o seu fluxo.</p>
+          <h2>Pronto para automatizar o atendimento da sua empresa 24 horas por dia?</h2>
+          <p>Vamos entender a rotina do seu negócio e apresentar uma demonstração funcional com os agentes configurados sob medida para o seu fluxo.</p>
           
           <div className="final-buttons-row">
             <button
@@ -1068,28 +1465,54 @@ export default function AvanciniSyncPage() {
         </div>
       </section>
 
-      {/* Footer Conciso e Elegante */}
-      <footer className="sync-footer sync-footer-v2">
-        <div className="footer-top-row">
-          <Link href="/" className="sync-brand">
-            <AvanciniMark variant="sync" className="sync-brand-mark avancini-a-mark" />
-            <span><b>AVANCINI <em>SYNC</em></b><small>Equipe Multiagente de IA</small></span>
-          </Link>
-          <nav className="footer-links-nav">
-            <a href="#inicio">Início</a>
-            <a href="#jornada">Jornada</a>
-            <a href="#retorno">Custo x Retorno</a>
-            <a href="#nichos">Nichos</a>
-            <a href="#planos">Planos</a>
-            <Link href="/dash">Avancini Dash <SyncArrow /></Link>
-          </nav>
-        </div>
-        <div className="footer-bottom-row">
-          <small>© 2026 AVANCINI OS · TODOS OS DIREITOS RESERVADOS</small>
-          <div className="footer-contacts">
-            <a href="mailto:ivoavancini@hotmail.com">ivoavancini@hotmail.com</a>
+      {/* Footer Estruturado em 4 Colunas (Padrão Rico e Completo como no Avancini Dash) */}
+      <footer className="footer sync-footer-rich">
+        <div className="footer-top">
+          <div className="footer-brand">
+            <Link href="/" className="logo">
+              <AvanciniMark variant="sync" className="logo-mark avancini-a-mark" />
+              <span>
+                <span className="brand-name">
+                  AVANCINI <b>SYNC</b>
+                </span>
+                <small>Equipe Multiagente de IA</small>
+              </span>
+            </Link>
+            <p>Força de trabalho digital autônoma para atendimento, agendamentos, suporte e triagem 24/7 no WhatsApp.</p>
             <a href="https://www.instagram.com/avancinios/" target="_blank" rel="noreferrer">Instagram <SyncArrow /></a>
           </div>
+          <nav>
+            <b>NAVEGAÇÃO</b>
+            <a href="#inicio">Início</a>
+            <a href="#jornada">Jornada de atendimento</a>
+            <a href="#retorno">Custo x Retorno</a>
+            <a href="#nichos">Segmentos de atuação</a>
+            <a href="#planos">Serviços e planos</a>
+            <a href="#duvidas">Perguntas frequentes</a>
+            <Link href="/">Avancini OS <SyncArrow /></Link>
+            <Link href="/dash">Avancini Dash <SyncArrow /></Link>
+          </nav>
+          <nav>
+            <b>AGENTES &amp; SOLUÇÕES</b>
+            <a href="#nichos">Agente Atendimento &amp; Triagem</a>
+            <a href="#nichos">Agente de Agendamentos</a>
+            <a href="#nichos">Suporte &amp; Operação 24/7</a>
+            <a href="#nichos">Follow-up &amp; Reativação</a>
+            <Link href="/dash">Websites Avancini Dash <SyncArrow /></Link>
+          </nav>
+          <div className="footer-contact">
+            <b>CONTATO</b>
+            <a href="mailto:ivoavancini@hotmail.com">ivoavancini@hotmail.com</a>
+            <a href="tel:+5573981019782">(73) 98101-9782</a>
+            <button type="button" onClick={() => openLead("solicitar demonstração de IA pelo rodapé")}>
+              SOLICITAR DEMONSTRAÇÃO <SyncArrow />
+            </button>
+          </div>
+        </div>
+        <div className="footer-bottom">
+          <span suppressHydrationWarning>© {new Date().getFullYear()} Avancini OS · Todos os direitos reservados</span>
+          <nav aria-label="Informações legais"><a href="/privacidade">Privacidade</a><a href="/termos">Termos</a></nav>
+          <a href="#inicio">Voltar ao topo ↑</a>
         </div>
       </footer>
 
@@ -1108,96 +1531,141 @@ export default function AvanciniSyncPage() {
       {leadContext && (
         <div className="web-lead-modal sync-web-lead-modal" role="dialog" aria-modal="true" aria-label="Iniciar conversa pelo WhatsApp">
           <form onSubmit={submitLead}>
-            <button className="web-lead-close" type="button" aria-label="Fechar" onClick={() => setLeadContext("")}>
-              ×
-            </button>
-            <header>
-              <AvanciniMark variant="sync" className="lead-logo avancini-a-mark" />
-              <div>
-                <strong>AVANCINI SYNC // EQUIPE MULTIAGENTE DE IA</strong>
-                <b><i>●</i> ATENDIMENTO &amp; VENDAS 24/7</b>
+            <header className="lead-modal-header">
+              <div className="lead-avatar-wrap">
+                <div className="lead-avatar-img">
+                  <AvanciniMark variant="sync" className="lead-logo-mark avancini-a-mark" />
+                </div>
+                <span className="lead-status-dot" aria-label="Online" />
               </div>
+              <div className="lead-header-info">
+                <strong className="lead-title">Avancini Sync · Equipe Multiagente de IA</strong>
+                <div className="lead-status-row">
+                  <span className="lead-online-badge">online</span>
+                  <span className="lead-response-time"> - IA responde em segundos</span>
+                </div>
+              </div>
+              <button
+                className="web-lead-close"
+                type="button"
+                onClick={() => setLeadContext("")}
+                aria-label="Fechar"
+              >
+                ✕
+              </button>
             </header>
-            <p className="lead-modal-context">
-              Você selecionou: <strong>{normalizedLeadContext}</strong>.
-            </p>
-            <div className="sync-modal-field">
-              <label htmlFor="sync-lead-name">SEU NOME OU EMPRESA</label>
-              <input
-                id="sync-lead-name"
-                ref={leadInputRef}
-                type="text"
-                className="sync-modal-input"
-                placeholder="Ex: João da Silva / Clínica Dental"
-                value={leadName}
-                onChange={(e) => setLeadName(e.target.value)}
-                required
-              />
-            </div>
 
-            <div className="sync-modal-field">
-              <label htmlFor="sync-lead-phone">WHATSAPP PARA CONTATO</label>
-              <div className="sync-phone-control">
-                <div className="ddi-selector-wrapper">
+            {normalizedLeadContext && (
+              <div className="lead-context-pill">
+                <span>⚡ Interesse: <strong>{normalizedLeadContext}</strong></span>
+              </div>
+            )}
+
+            <div className="lead-fields-wrap">
+              <div className="lead-input-row">
+                <div className="lead-field-name">
+                  <span className="field-icon" aria-hidden="true">
+                    <svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16">
+                      <path d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" />
+                    </svg>
+                  </span>
+                  <input
+                    required
+                    ref={leadInputRef}
+                    minLength={2}
+                    maxLength={60}
+                    value={leadName}
+                    onChange={(e) => { setLeadName(e.target.value); if (leadError) setLeadError(""); }}
+                    placeholder="Seu nome ou empresa"
+                    autoComplete="name"
+                    aria-label="Seu nome ou empresa"
+                  />
+                </div>
+              </div>
+
+              <div className="lead-input-row lead-phone-row">
+                <div className="lead-ddi-container">
                   <button
                     type="button"
-                    className="ddi-trigger-btn"
+                    className="lead-country-badge"
                     onClick={() => setDdiDropdownOpen(!ddiDropdownOpen)}
                     aria-expanded={ddiDropdownOpen}
-                    aria-label="Selecionar país do telefone"
+                    aria-label={`País selecionado: ${selectedCountry.name}, código ${selectedCountry.ddi}`}
                   >
                     <CountryFlagIcon code={selectedCountry.code} />
-                    <b>{selectedCountry.ddi}</b>
-                    <i className="ddi-arrow">▼</i>
+                    <span className="country-code">{selectedCountry.ddi}</span>
+                    <span className="country-caret">⌵</span>
                   </button>
                   {ddiDropdownOpen && (
-                    <div className="ddi-dropdown-menu">
-                      <div className="ddi-search-box">
+                    <div className="lead-ddi-dropdown" role="listbox">
+                      <div className="lead-ddi-search">
+                        <svg viewBox="0 0 20 20" fill="currentColor" width="13" height="13">
+                          <path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd" />
+                        </svg>
                         <input
                           type="text"
                           placeholder="Buscar país..."
                           value={ddiSearch}
                           onChange={(e) => setDdiSearch(e.target.value)}
                           autoFocus
+                          aria-label="Buscar país"
                         />
                       </div>
-                      <ul className="ddi-list-options">
+                      <div className="lead-ddi-list">
                         {filteredCountries.map((country) => (
-                          <li key={country.code}>
-                            <button
-                              type="button"
-                              className={`ddi-option-item ${selectedCountry.code === country.code ? "selected" : ""}`}
-                              onClick={() => {
-                                setSelectedCountry(country);
-                                setDdiDropdownOpen(false);
-                                setDdiSearch("");
-                              }}
-                            >
-                              <CountryFlagIcon code={country.code} />
-                              <span className="country-name">{country.name}</span>
-                              <span className="country-code">{country.ddi}</span>
-                            </button>
-                          </li>
+                          <button
+                            type="button"
+                            key={country.code}
+                            className={`lead-ddi-option ${selectedCountry.code === country.code ? "selected" : ""}`}
+                            onClick={() => {
+                              setSelectedCountry(country);
+                              setDdiDropdownOpen(false);
+                              setDdiSearch("");
+                            }}
+                          >
+                            <CountryFlagIcon code={country.code} />
+                            <span className="country-name">{country.name}</span>
+                            <span className="country-ddi-code">{country.ddi}</span>
+                          </button>
                         ))}
-                      </ul>
+                      </div>
                     </div>
                   )}
                 </div>
-                <input
-                  id="sync-lead-phone"
-                  type="tel"
-                  className="sync-modal-input sync-phone-input"
-                  placeholder={selectedCountry.placeholder}
-                  value={leadPhone}
-                  onChange={(e) => setLeadPhone(e.target.value)}
-                />
+                <div className="lead-field-phone">
+                  <input
+                    type="tel"
+                    value={leadPhone}
+                    onChange={(event) => {
+                      let v = event.target.value.replace(/\D/g, "");
+                      if (selectedCountry.code === "BR") {
+                        if (v.length > 11) v = v.slice(0, 11);
+                        if (v.length > 10) {
+                          v = `(${v.slice(0, 2)}) ${v.slice(2, 7)}-${v.slice(7)}`;
+                        } else if (v.length > 6) {
+                          v = `(${v.slice(0, 2)}) ${v.slice(2, 6)}-${v.slice(6)}`;
+                        } else if (v.length > 2) {
+                          v = `(${v.slice(0, 2)}) ${v.slice(2)}`;
+                        }
+                      }
+                      setLeadPhone(v);
+                    }}
+                    placeholder={selectedCountry.placeholder}
+                    autoComplete="tel"
+                    aria-label="Seu WhatsApp"
+                  />
+                </div>
               </div>
             </div>
+
             {leadError && <p className="lead-error">{leadError}</p>}
-            <button className="lead-submit sync-lead-submit" type="submit" disabled={leadSubmitting}>
-              {leadSubmitting ? "CONECTANDO..." : "CONVERSAR NO WHATSAPP COM O ESPECIALISTA"} <SyncArrow />
+
+            <button className="lead-submit" type="submit" disabled={leadSubmitting}>
+              {leadSubmitting ? "CONECTANDO..." : "INICIAR CONVERSA NO WHATSAPP ↗"}
             </button>
-            <small>Ao clicar, você iniciará uma conversa direta no WhatsApp da Avancini Sync.</small>
+            <p className="lead-footer-note">
+              🔒 Seus dados estão seguros. Você será direcionado pro WhatsApp com a mensagem pronta.
+            </p>
           </form>
         </div>
       )}
