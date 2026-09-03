@@ -474,11 +474,13 @@ export function OSHubClient() {
                   </div>
                 </div>
 
-                {/* Mensagem 2: IA acolhe com carinho e apresenta opções imediatas */}
+                {/* Mensagem 2: IA acolhe, responde valores com clareza e já oferece os horários livres */}
                 <div className="chat-bubble-row ai-row">
                   <div className="chat-bubble ai-bubble">
                     <p>
-                      Olá! Tudo bem? 😊 Temos sim! Nossos atendimentos são personalizados. Temos vaga nesta <b>quinta às 15h</b> ou <b>sexta às 10h</b>. Qual fica melhor para você?
+                      Olá! Tudo bem? 😊 O atendimento completo fica em <b>R$ 250</b> (com retorno incluso e parcelamento em até 3x).
+                      <br /><br />
+                      Para esta semana, temos vaga nesta <b>quinta às 15h</b> ou <b>sexta às 10h</b>. Qual fica melhor para você?
                     </p>
                     <div className="bubble-meta">
                       <span className="ai-tag">Atendente IA · Resposta em 3s</span>
@@ -490,7 +492,7 @@ export function OSHubClient() {
                 {/* Mensagem 3: Cliente escolhe o horário */}
                 <div className="chat-bubble-row client-row">
                   <div className="chat-bubble client-bubble">
-                    <p>Quinta às 15h fica perfeito pra mim!</p>
+                    <p>Quinta às 15h fica perfeito pra mim! Pode confirmar por favor?</p>
                     <time>21:15</time>
                   </div>
                 </div>
