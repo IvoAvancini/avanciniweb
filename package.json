@@ -12,6 +12,7 @@
     "start": "vinext start",
     "test": "npm run build",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next",
+    "clean": "node -e \"const fs = require('fs'); ['.next', '.vite'].forEach(p => fs.rmSync(p, {recursive: true, force: true})); console.log('✓ Cache limpo com sucesso!');\"",
     "db:generate": "drizzle-kit generate"
   },
   "dependencies": {

@@ -513,6 +513,58 @@ const faqsCommercial = [
   },
 ];
 
+const syncIntegrations = [
+  {
+    name: "Google Calendar",
+    category: "Agendas & Horários",
+    desc: "Sincronização em tempo real de dias livres, consultas e reuniões",
+    icon: "📅",
+    color: "#38bdf8",
+  },
+  {
+    name: "WhatsApp Cloud API",
+    category: "Comunicação Oficial",
+    desc: "Conexão oficial da Meta sem risco de queda ou banimento",
+    icon: "💬",
+    color: "#22c55e",
+  },
+  {
+    name: "Mercado Pago & Pix",
+    category: "Cobrança Instantânea",
+    desc: "Envio de chave Pix Copia e Cola e confirmação de pagamento",
+    icon: "💳",
+    color: "#009EE3",
+  },
+  {
+    name: "Hotmart & Kiwify",
+    category: "Vendas Digitais",
+    desc: "Recuperação automática de boletos e suporte pós-venda",
+    icon: "🚀",
+    color: "#f59e0b",
+  },
+  {
+    name: "Bling & Tiny ERP",
+    category: "Gestão & Pedidos",
+    desc: "Consulta de estoque, pedidos de clientes e emissão de notas",
+    icon: "📦",
+    color: "#10b981",
+  },
+  {
+    name: "Asana, Trello & Notion",
+    category: "Fluxo de Equipe",
+    desc: "Criação de tarefas e resumos automáticos dos atendimentos",
+    icon: "📋",
+    color: "#6366f1",
+  },
+  {
+    name: "Webhooks & Zapier",
+    category: "Automação Universal",
+    desc: "Integração aberta com mais de 2.000 sistemas de CRM e gestão",
+    icon: "⚡",
+    color: "#ec4899",
+  },
+];
+
 export default function AvanciniSyncPage() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -524,6 +576,38 @@ export default function AvanciniSyncPage() {
   const [dailyContacts, setDailyContacts] = useState(60);
   const [clientTicket, setClientTicket] = useState(350);
   const [missedWeekendLeads, setMissedWeekendLeads] = useState(3);
+
+  // Audio player demo states
+  const [audioPlaying, setAudioPlaying] = useState(false);
+  const [audioProgress, setAudioProgress] = useState(0);
+
+  useEffect(() => {
+    let timer: ReturnType<typeof setInterval>;
+    if (audioPlaying) {
+      timer = setInterval(() => {
+        setAudioProgress((prev) => {
+          if (prev >= 24) {
+            setAudioPlaying(false);
+            return 0;
+          }
+          return prev + 1;
+        });
+      }, 1000);
+    }
+    return () => clearInterval(timer);
+  }, [audioPlaying]);
+
+  const toggleAudio = () => {
+    if (!audioPlaying && audioProgress >= 24) {
+      setAudioProgress(0);
+    }
+    setAudioPlaying((prev) => !prev);
+  };
+
+  const formatAudioTime = (sec: number) => {
+    const s = sec % 60;
+    return `0:${s < 10 ? "0" : ""}${s}`;
+  };
 
   const neededBreakEvenClients = Math.max(1, Math.ceil(397.9 / clientTicket));
   const breakEvenRevenue = neededBreakEvenClients * clientTicket;
@@ -845,19 +929,35 @@ export default function AvanciniSyncPage() {
                         <>
                           <div className="chat-bubble client chat-bubble-audio">
                             <div className="audio-player-row">
-                              <button type="button" className="audio-play-btn" aria-label="Ouvir áudio">▶</button>
-                              <div className="audio-wave-bars">
+                              <button
+                                type="button"
+                                className={`audio-play-btn ${audioPlaying ? "is-playing" : ""}`}
+                                onClick={toggleAudio}
+                                aria-label={audioPlaying ? "Pausar demonstração de áudio" : "Ouvir demonstração de áudio"}
+                              >
+                                {audioPlaying ? "❚❚" : "▶"}
+                              </button>
+                              <div className={`audio-wave-bars ${audioPlaying ? "wave-animated" : ""}`}>
                                 {[40, 75, 55, 95, 30, 85, 60, 100, 45, 90, 65, 35, 80, 50, 95, 70, 40, 85, 60, 30].map((h, i) => (
-                                  <span key={i} style={{ height: `${h}%` }} className="wave-bar" />
+                                  <span
+                                    key={i}
+                                    style={{
+                                      height: audioPlaying ? `${Math.max(20, (h + (audioProgress * 9 + i * 13) % 75))}%` : `${h}%`,
+                                    }}
+                                    className="wave-bar"
+                                  />
                                 ))}
                               </div>
-                              <span className="audio-duration">{currentAgent.chat.audioDuration}</span>
+                              <span className="audio-duration">
+                                {audioPlaying ? formatAudioTime(audioProgress) : currentAgent.chat.audioDuration}
+                              </span>
                             </div>
                             <div className="audio-transcription-box">
                               <div className="audio-trans-header">
                                 <span>🎙️ Áudio ouvido e compreendido na hora:</span>
+                                {audioPlaying && <small className="audio-playing-indicator">● REPRODUZINDO DEMO</small>}
                               </div>
-                              <p>&ldquo;{currentAgent.chat.audioTranscription}&rdquo;</p>
+                              <p className={audioPlaying ? "transcription-active" : ""}>&ldquo;{currentAgent.chat.audioTranscription}&rdquo;</p>
                             </div>
                             <time>14:32</time>
                           </div>
@@ -1023,6 +1123,40 @@ export default function AvanciniSyncPage() {
                 </div>
               );
             })()}
+          </div>
+        </div>
+      </section>
+
+      {/* 1.5 FAIXA DE INTEGRAÇÕES E ECOSSISTEMA COMPATÍVEL */}
+      <section className="sync-integrations-section" id="integracoes" aria-labelledby="integrations-title">
+        <div className="sync-integrations-container">
+          <header className="integrations-header">
+            <span className="integrations-kicker">ECOSSISTEMA CONECTADO</span>
+            <h2 id="integrations-title">Integrado às ferramentas que você já usa no dia a dia</h2>
+            <p>
+              A IA da Avancini Sync não trabalha isolada: ela sincroniza com sua agenda, consulta sistemas de gestão e envia avisos em tempo real para sua equipe.
+            </p>
+          </header>
+
+          <div className="integrations-grid">
+            {syncIntegrations.map((tool, idx) => (
+              <div className="integration-card" key={idx}>
+                <div className="integration-icon-wrap" style={{ borderColor: `${tool.color}33`, background: `${tool.color}15` }}>
+                  <span className="integration-emoji">{tool.icon}</span>
+                </div>
+                <div className="integration-texts">
+                  <span className="integration-cat">{tool.category}</span>
+                  <strong>{tool.name}</strong>
+                  <p>{tool.desc}</p>
+                </div>
+                <span className="integration-status-dot" style={{ backgroundColor: tool.color }} />
+              </div>
+            ))}
+          </div>
+
+          <div className="integrations-footer-badge">
+            <span className="badge-shield">🛡️</span>
+            <span>API Oficial Segura com criptografia de ponta a ponta e total conformidade com a LGPD.</span>
           </div>
         </div>
       </section>

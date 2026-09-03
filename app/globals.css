@@ -10420,6 +10420,398 @@ body:has(.web-page) .page-progress{background:linear-gradient(90deg,#43c85d,#a9f
   }
 }
 
+/* ==========================================================================
+   MELHORIAS DE ESCALA: ANTES VS DEPOIS, DIAGNÓSTICO E INTEGRAÇÕES
+   ========================================================================== */
+
+/* 1. ABAS E TAGS DO COMPARATIVO ANTES VS DEPOIS */
+.ba-view-selector-tabs {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 18px;
+  flex-wrap: wrap;
+}
+
+.ba-tab-btn {
+  padding: 8px 18px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 750;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #94a3b8;
+  cursor: pointer;
+  transition: all 0.22s ease;
+}
+
+.ba-tab-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+
+.ba-tab-btn.active {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.3);
+  color: #ffffff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+}
+
+.ba-tab-btn.tab-before.active {
+  background: rgba(239, 68, 68, 0.15);
+  border-color: rgba(239, 68, 68, 0.4);
+  color: #fca5a5;
+}
+
+.ba-tab-btn.tab-after.active {
+  background: rgba(34, 197, 94, 0.15);
+  border-color: rgba(34, 197, 94, 0.4);
+  color: #86efac;
+}
+
+.browser-score-tag {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 9px;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 800;
+  margin-left: auto;
+}
+
+.browser-score-tag.tag-bad {
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  color: #ef4444;
+}
+
+.browser-score-tag.tag-bad small {
+  color: #fca5a5;
+  font-weight: 500;
+}
+
+.browser-score-tag.tag-good {
+  background: rgba(34, 197, 94, 0.15);
+  border: 1px solid rgba(34, 197, 94, 0.4);
+  color: #22c55e;
+}
+
+.browser-score-tag.tag-good small {
+  color: #86efac;
+  font-weight: 500;
+}
+
+.ba-cta-inline-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 14px;
+  padding: 12px 24px;
+  border-radius: 999px;
+  background: var(--os-dash);
+  border: none;
+  color: #020703;
+  font-size: 12px;
+  font-weight: 850;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 18px rgba(34, 197, 94, 0.35);
+}
+
+.ba-cta-inline-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 26px rgba(34, 197, 94, 0.5);
+  background: #2ee670;
+}
+
+/* 2. DIAGNÓSTICO GRATUITO DE SITE (LEAD MAGNET) */
+.dash-diagnostic-section {
+  padding: clamp(40px, 6vh, 80px) 5.5vw;
+  background: radial-gradient(circle at 50% 30%, rgba(34, 197, 94, 0.08) 0%, #03080e 75%);
+}
+
+.dash-diagnostic-card {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: clamp(28px, 4.5vw, 48px);
+  border-radius: 24px;
+  background: linear-gradient(135deg, rgba(8, 14, 22, 0.95) 0%, rgba(4, 20, 10, 0.9) 100%);
+  border: 1px solid rgba(34, 197, 94, 0.28);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.6), 0 0 32px rgba(34, 197, 94, 0.12);
+  text-align: center;
+}
+
+.diag-header-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 14px;
+  border-radius: 999px;
+  background: rgba(34, 197, 94, 0.12);
+  border: 1px solid rgba(34, 197, 94, 0.3);
+  margin-bottom: 14px;
+}
+
+.diag-live-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 8px #22c55e;
+  animation: pulseDot 2s infinite ease-in-out;
+}
+
+.diag-kicker {
+  font-size: 9.5px;
+  font-weight: 850;
+  letter-spacing: 0.1em;
+  color: var(--os-dash);
+}
+
+.dash-diagnostic-card h2 {
+  font-size: clamp(24px, 3vw, 36px);
+  font-weight: 850;
+  color: #ffffff;
+  margin: 0 0 10px 0;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.dash-diagnostic-card p {
+  font-size: 14px;
+  color: #94a3b8;
+  max-width: 680px;
+  margin: 0 auto 24px;
+  line-height: 1.6;
+}
+
+.diag-form-wrap {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.diag-inputs-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr auto;
+  gap: 10px;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 8px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+@media (max-width: 768px) {
+  .diag-inputs-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.diag-main-input,
+.diag-name-input {
+  background: transparent;
+  border: 1px solid transparent;
+  padding: 12px 16px;
+  color: #ffffff;
+  font-size: 13px;
+  outline: none;
+  border-radius: 10px;
+  transition: all 0.2s ease;
+}
+
+.diag-main-input:focus,
+.diag-name-input:focus {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(34, 197, 94, 0.5);
+}
+
+.diag-submit-btn {
+  padding: 12px 20px;
+  border-radius: 10px;
+  background: var(--os-dash);
+  border: none;
+  color: #020703;
+  font-size: 12px;
+  font-weight: 850;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.22s ease;
+  box-shadow: 0 4px 16px rgba(34, 197, 94, 0.35);
+}
+
+.diag-submit-btn:hover {
+  background: #2ee670;
+  transform: translateY(-1px);
+}
+
+.diag-privacy-sub {
+  display: block;
+  margin-top: 12px;
+  font-size: 11px;
+  color: #64748b;
+}
+
+/* 3. FAIXA DE INTEGRAÇÕES OFICIAIS DO AVANCINI SYNC */
+.sync-integrations-section {
+  padding: clamp(48px, 6vh, 84px) 5.5vw;
+  background: radial-gradient(circle at 50% 0%, rgba(56, 189, 248, 0.06) 0%, #030812 70%);
+}
+
+.sync-integrations-container {
+  max-width: 1240px;
+  margin: 0 auto;
+}
+
+.integrations-header {
+  text-align: center;
+  max-width: 780px;
+  margin: 0 auto clamp(32px, 4vh, 48px);
+}
+
+.integrations-kicker {
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 0.16em;
+  color: var(--os-sync);
+  display: block;
+  margin-bottom: 6px;
+}
+
+.integrations-header h2 {
+  font-size: clamp(24px, 3vw, 38px);
+  font-weight: 850;
+  color: #f8fafc;
+  line-height: 1.2;
+  margin: 0 0 10px 0;
+  letter-spacing: -0.02em;
+}
+
+.integrations-header p {
+  font-size: 14px;
+  color: #94a3b8;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.integrations-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 14px;
+}
+
+.integration-card {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px 18px;
+  border-radius: 16px;
+  background: rgba(8, 16, 28, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.integration-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(56, 189, 248, 0.35);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5), 0 0 20px rgba(56, 189, 248, 0.12);
+  background: rgba(10, 20, 36, 0.95);
+}
+
+.integration-icon-wrap {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  border: 1px solid;
+  flex-shrink: 0;
+  font-size: 18px;
+}
+
+.integration-texts {
+  flex: 1;
+}
+
+.integration-cat {
+  font-size: 8.5px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  color: #7dd3fc;
+  display: block;
+  margin-bottom: 2px;
+}
+
+.integration-texts strong {
+  font-size: 13.5px;
+  font-weight: 800;
+  color: #ffffff;
+  display: block;
+  margin-bottom: 3px;
+}
+
+.integration-texts p {
+  font-size: 11px;
+  line-height: 1.45;
+  color: #94a3b8;
+  margin: 0;
+}
+
+.integration-status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 4px;
+}
+
+.integrations-footer-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 24px;
+  padding: 10px 20px;
+  border-radius: 999px;
+  background: rgba(56, 189, 248, 0.06);
+  border: 1px solid rgba(56, 189, 248, 0.18);
+  font-size: 11.5px;
+  color: #94a3b8;
+  max-width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.badge-shield {
+  font-size: 13px;
+}
+
+/* 4. PLAYER DE ÁUDIO DINÂMICO NO SIMULADOR DE WHATSAPP */
+.audio-playing-indicator {
+  font-size: 8px;
+  font-weight: 800;
+  color: #22c55e;
+  letter-spacing: 0.08em;
+  margin-left: 8px;
+  animation: pulseDot 1.5s infinite;
+}
+
+.transcription-active {
+  color: #38bdf8 !important;
+  text-shadow: 0 0 10px rgba(56, 189, 248, 0.35);
+  transition: all 0.3s ease;
+}
+
+.audio-play-btn.is-playing {
+  background: #22c55e;
+  color: #020703;
+  box-shadow: 0 0 14px rgba(34, 197, 94, 0.6);
+}
+
 
 
 

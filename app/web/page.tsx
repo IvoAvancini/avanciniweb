@@ -490,38 +490,157 @@ function WebOpportunitySimulator({ onLead }: { onLead: (message: string) => void
 }
 
 
-function DashBeforeAfterSlider() {
+function DashBeforeAfterSlider({ onLead }: { onLead?: (intent: string) => void }) {
+  const [activeTab, setActiveTab] = useState<"both" | "before" | "after">("both");
+
   return (
     <section className="dash-comparison-section" id="antes-depois">
-      <div className="section-heading" style={{ margin: "0 auto 40px", maxWidth: "1240px" }}>
+      <div className="section-heading" style={{ margin: "0 auto 30px", maxWidth: "1240px" }}>
         <div>
           <span className="section-index">PROJETO REAL · CLÍNICA SAN DIEGO</span>
           <h2>O site anterior de um lado.<br />O projeto aprovado do outro.</h2>
         </div>
-        <p>Role dentro de cada janela para percorrer os dois projetos do início ao fim. A comparação usa somente o site antigo e a Clínica San Diego real criada no padrão Avancini Dash.</p>
+        <p>
+          Role dentro de cada janela para percorrer os dois projetos. Veja na prática a diferença entre um site comum lento e o padrão Avancini Dash com nota 100 no Google e WhatsApp em 1 clique.
+        </p>
+
+        <div className="ba-view-selector-tabs">
+          <button
+            type="button"
+            className={`ba-tab-btn ${activeTab === "both" ? "active" : ""}`}
+            onClick={() => setActiveTab("both")}
+          >
+            Comparar Lado a Lado
+          </button>
+          <button
+            type="button"
+            className={`ba-tab-btn tab-before ${activeTab === "before" ? "active" : ""}`}
+            onClick={() => setActiveTab("before")}
+          >
+            ❌ Antes (Site Anterior)
+          </button>
+          <button
+            type="button"
+            className={`ba-tab-btn tab-after ${activeTab === "after" ? "active" : ""}`}
+            onClick={() => setActiveTab("after")}
+          >
+            ✓ Depois (Padrão Avancini Dash)
+          </button>
+        </div>
       </div>
 
-      <div className="dash-comparison-browsers">
-        <article className="dash-comparison-browser dash-comparison-before-browser">
-          <header><span><i /><i /><i /></span><strong>ANTES · SITE PÚBLICO ATUAL</strong><a href="https://clinicasandiego.com.br/" target="_blank" rel="noreferrer">ABRIR ↗</a></header>
-          <div className="dash-comparison-live-site">
-            <iframe src="https://clinicasandiego.com.br/" title="Site público da Clínica San Diego" loading="lazy" />
-          </div>
-          <footer><span>ROLE DENTRO DA JANELA</span><b>Site real · navegação completa</b></footer>
-        </article>
+      <div className={`dash-comparison-browsers view-mode-${activeTab}`}>
+        {(activeTab === "both" || activeTab === "before") && (
+          <article className="dash-comparison-browser dash-comparison-before-browser">
+            <header>
+              <span><i /><i /><i /></span>
+              <strong>ANTES · SITE PÚBLICO ANTERIOR</strong>
+              <div className="browser-score-tag tag-bad">
+                <span>Nota 34</span>
+                <small>4.6s Lentidão</small>
+              </div>
+            </header>
+            <div className="dash-comparison-live-site">
+              <iframe src="https://clinicasandiego.com.br/" title="Site público da Clínica San Diego" loading="lazy" />
+            </div>
+            <footer>
+              <span>ROLE DENTRO DA JANELA</span>
+              <b>Identidade comum · carregamento pesado</b>
+            </footer>
+          </article>
+        )}
 
-        <article className="dash-comparison-browser dash-comparison-after-browser">
-          <header><span><i /><i /><i /></span><strong>DEPOIS · CLÍNICA SAN DIEGO REAL</strong><em>PROJETO APLICADO</em></header>
-          <div className="dash-comparison-project" role="region" tabIndex={0} aria-label="Projeto completo e real da Clínica San Diego, role para navegar">
-            <SiteImage src="/projects/san-diego-full.png" alt="Site completo e real da Clínica San Diego" sizes="72vw" quality={82} />
-          </div>
-          <footer><span>ROLE DENTRO DA JANELA</span><b>Experiência completa · do topo ao rodapé</b></footer>
-        </article>
+        {(activeTab === "both" || activeTab === "after") && (
+          <article className="dash-comparison-browser dash-comparison-after-browser">
+            <header>
+              <span><i /><i /><i /></span>
+              <strong>DEPOIS · CLÍNICA SAN DIEGO REAL</strong>
+              <div className="browser-score-tag tag-good">
+                <span>100/100</span>
+                <small>0.2s LCP</small>
+              </div>
+            </header>
+            <div className="dash-comparison-project" role="region" tabIndex={0} aria-label="Projeto completo e real da Clínica San Diego, role para navegar">
+              <SiteImage src="/projects/san-diego-full.png" alt="Site completo e real da Clínica San Diego" sizes="72vw" quality={82} />
+            </div>
+            <footer>
+              <span>ROLE DENTRO DA JANELA</span>
+              <b>Padrão Avancini Dash · alta conversão</b>
+            </footer>
+          </article>
+        )}
       </div>
+
       <div className="dash-comparison-verdict">
-        <span>O QUE MUDA</span>
-        <p><b>Antes:</b> informação dispersa e uma identidade que não acompanha o nível do atendimento.</p>
-        <p><b>Depois:</b> proposta clara, hierarquia, confiança e caminhos objetivos até o agendamento.</p>
+        <span>O QUE MUDA NO SEU NEGÓCIO</span>
+        <p><b>Antes:</b> Informação dispersa, lentidão no celular e uma presença que não acompanha o padrão do seu atendimento.</p>
+        <p><b>Depois:</b> Proposta clara, carregamento em 0.2s, credibilidade inquestionável e agendamento direto pelo WhatsApp.</p>
+        {onLead && (
+          <button
+            type="button"
+            className="ba-cta-inline-btn"
+            onClick={() => onLead("Olá! Vi o comparativo Antes e Depois da Clínica San Diego e quero um projeto desse nível para a minha empresa.")}
+          >
+            QUERO TRANSFORMAR MEU SITE NO PADRÃO AVANCINI DASH ↗
+          </button>
+        )}
+      </div>
+    </section>
+  );
+}
+
+function DashSiteDiagnosticSection({ onLead }: { onLead: (message: string) => void }) {
+  const [siteUrlInput, setSiteUrlInput] = useState("");
+  const [clientName, setClientName] = useState("");
+
+  const handleDiagnostic = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!siteUrlInput.trim()) return;
+    const msg = `Olá! Gostaria de uma análise gratuita de velocidade e conversão para o meu negócio.${clientName ? ` Meu nome é ${clientName}.` : ""} Link/perfil: ${siteUrlInput}`;
+    onLead(msg);
+  };
+
+  return (
+    <section className="dash-diagnostic-section" id="diagnostico" aria-labelledby="diag-title">
+      <div className="dash-diagnostic-card">
+        <div className="diag-header-row">
+          <span className="diag-live-dot" />
+          <span className="diag-kicker">DIAGNÓSTICO GRATUITO EM 5 MINUTOS</span>
+        </div>
+        <h2 id="diag-title">
+          Quer saber a nota real do seu site ou Instagram hoje?
+        </h2>
+        <p>
+          Nossa equipe analisa gratuitamente a velocidade no celular, a clareza da proposta e os pontos onde você pode estar perdendo clientes para concorrentes.
+        </p>
+
+        <form onSubmit={handleDiagnostic} className="diag-form-wrap">
+          <div className="diag-inputs-grid">
+            <input
+              type="text"
+              placeholder="Digite o link do seu site (ou seu @ do Instagram)"
+              value={siteUrlInput}
+              onChange={(e) => setSiteUrlInput(e.target.value)}
+              required
+              aria-label="Link do site ou perfil do Instagram"
+              className="diag-main-input"
+            />
+            <input
+              type="text"
+              placeholder="Seu nome (opcional)"
+              value={clientName}
+              onChange={(e) => setClientName(e.target.value)}
+              aria-label="Seu nome"
+              className="diag-name-input"
+            />
+            <button type="submit" className="diag-submit-btn">
+              RECEBER ANÁLISE GRÁTIS NO WHATSAPP ↗
+            </button>
+          </div>
+          <span className="diag-privacy-sub">
+            🔒 Análise 100% gratuita e confidencial. Resposta direta com relatório prático no seu WhatsApp.
+          </span>
+        </form>
       </div>
     </section>
   );
@@ -1013,7 +1132,7 @@ export default function Home() {
         </div>
       </section>
 
-      <DashBeforeAfterSlider />
+      <DashBeforeAfterSlider onLead={(intent) => startBudgetConversation("Antes e Depois - Clínica San Diego", intent)} />
 
       <WebOpportunitySimulator onLead={(message) => startBudgetConversation("Simulação de oportunidade digital", message)} />
 
@@ -1203,6 +1322,8 @@ export default function Home() {
           </div>
         </div>
       )}
+
+      <DashSiteDiagnosticSection onLead={(message) => startBudgetConversation("Diagnóstico Gratuito de Site", message)} />
 
       <footer id="contato">
         <div className="footer-top">
