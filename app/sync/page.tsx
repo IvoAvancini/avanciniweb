@@ -428,14 +428,13 @@ const simplifiedPlans: SyncPlanSimple[] = [
     monthlyPrice: 397.9,
     annualMonthlyPrice: 297.9,
     volumeLabel: "Fluxo Contínuo 24/7",
-    tagline: "Atendimento imediato no WhatsApp que ouve áudios, confere fotos, lê PDFs e qualifica leads 24h por dia.",
-    idealFor: "Clínicas, consultórios, escritórios e empresas que não querem perder clientes à noite ou no fim de semana.",
+    tagline: "Atende na hora, ouve áudios, lê fotos e qualifica leads 24h no seu WhatsApp.",
+    idealFor: "Clínicas, escritórios, consultórios e prestadores de serviços.",
     keyHighlights: [
-      "🎙️ Ouve e entende áudios longos, lê fotos e documentos em PDF",
-      "⚡ Resposta imediata em 1.1s (zero fila de espera 24h por dia)",
-      "🎯 Triagem inteligente: separa curiosos de clientes prontos para comprar",
-      "👥 Desafoga sua equipe das dúvidas repetitivas do dia a dia",
-      "📲 Transbordo para atendente humano com resumo pronto da conversa",
+      "🎙️ Ouve áudios longos, lê fotos e documentos em PDF",
+      "⚡ Resposta em 1.1s (zero fila de espera 24h por dia)",
+      "🎯 Triagem ágil: separa curiosos de quem vai comprar",
+      "📲 Transbordo para atendente com resumo pronto",
     ],
     ctaText: "Começar com Plano Essencial",
   },
@@ -446,14 +445,13 @@ const simplifiedPlans: SyncPlanSimple[] = [
     monthlyPrice: 797.9,
     annualMonthlyPrice: 697.9,
     volumeLabel: "Escala & Múltiplos Setores",
-    tagline: "Força de trabalho digital completa com Supervisor e agentes especializados que negociam, agendam e cobram.",
-    idealFor: "Empresas com equipe comercial, clínicas com múltiplos profissionais e operações de alto volume.",
+    tagline: "Força de trabalho digital que acolhe, agenda horários, envia Pix e retoma clientes.",
+    idealFor: "Empresas comerciais, equipes de vendas e alto volume.",
     keyHighlights: [
-      "⭐ Tudo do Essencial (Áudios, Fotos, PDFs, Triagem e Resposta 24/7)",
-      "🤖 Agente Supervisor roteando por setor (Comercial, Suporte, Financeiro)",
-      "📅 Agendamento integrado no Google Calendar com lembretes anti-falta",
-      "💳 Chave Pix instantânea cópia e cola e links de pagamento no chat",
-      "🔁 Follow-up ativo para recuperar clientes que sumiram ou orçamentos",
+      "⭐ Tudo do Essencial (Áudios, Fotos, PDFs e Triagem 24/7)",
+      "🤖 Roteamento por setor: comercial, suporte e financeiro",
+      "📅 Agendamento no Google Calendar e chave Pix no chat",
+      "🔁 Follow-up ativo para recuperar orçamentos parados",
     ],
     ctaText: "Contratar Multiagente Pro",
   },
@@ -1210,7 +1208,7 @@ export default function AvanciniSyncPage() {
               <em>pode até se pagar logo no 1º cliente recuperado?</em>
             </h2>
           </div>
-          <p>Sem promessas irreais nem cálculos inflados: veja como reengajar contatos que pararam de responder pode cobrir o investimento logo nas primeiras oportunidades recuperadas.</p>
+          <p>Veja como apenas 1 cliente recuperado fora do horário já pode cobrir o investimento da IA.</p>
         </header>
 
         <div className="sync-roi-grid">
@@ -1219,7 +1217,7 @@ export default function AvanciniSyncPage() {
             <div className="roi-tag pain-tag">❌ O QUE VOCÊ PERDE HOJE SEM A IA</div>
             <h3>O buraco negro do pós-18h e fim de semana</h3>
             <p className="roi-desc">
-              Mais de 60% das pessoas mandam mensagem à noite (19h às 23h) ou fins de semana — <em>dado verificado em mais de 84.000 atendimentos analisados na base da Avancini Sync</em>. Sem resposta em 2 minutos, o cliente busca o concorrente e fecha com ele.
+              Mais de 60% das mensagens chegam à noite ou no fim de semana. Sem resposta rápida, o cliente contrata o concorrente.
             </p>
 
             <div className="roi-inputs-box">
@@ -1260,11 +1258,11 @@ export default function AvanciniSyncPage() {
               <div className="pain-metric-item">
                 <small>FATURAMENTO PERDIDO NA MADRUGADA / FIM DE SEMANA:</small>
                 <strong className="text-danger">- R$ {(clientTicket * missedWeekendLeads).toLocaleString("pt-BR", { minimumFractionDigits: 2 })} / mês</strong>
-                <span className="text-contrast-high">Esse é o faturamento que você deixou na mesa e que foi direto para o caixa do concorrente.</span>
+                <span className="text-contrast-high">Faturamento que vai direto para o caixa do concorrente.</span>
               </div>
               <div className="pain-metric-item clt-item">
-                <small>COMPARATIVO OPCIONAL DE EQUIPE:</small>
-                <span className="text-contrast-high">Se você precisasse contratar mais 1 atendente humano na CLT para cobrir a noite e fins de semana, o custo seria de <b>~R$ 3.500,00/mês</b> em salário, encargos e benefícios.</span>
+                <small>COMPARATIVO COM CLT:</small>
+                <span className="text-contrast-high">1 atendente na CLT para cobrir noites e fins de semana custa mais de <b>R$ 3.500/mês</b> com encargos.</span>
               </div>
             </div>
           </div>
@@ -1284,8 +1282,8 @@ export default function AvanciniSyncPage() {
                 </strong>
                 <p>
                   {neededBreakEvenClients === 1
-                    ? `Se a IA acolher e fechar 1 único lead de R$ ${clientTicket} no sábado à noite ou domingo, a mensalidade de R$ 397,90 pode ficar praticamente coberta. O restante do faturamento é lucro no seu caixa.`
-                    : `Com ${neededBreakEvenClients} leads de R$ ${clientTicket} fechados fora do horário (total de R$ ${breakEvenRevenue.toLocaleString("pt-BR", { minimumFractionDigits: 2 })}), a mensalidade de R$ 397,90 pode ser completamente compensada, gerando R$ ${breakEvenProfit.toLocaleString("pt-BR", { minimumFractionDigits: 2 })} de margem no seu caixa.`}
+                    ? `Basta 1 cliente de R$ ${clientTicket} recuperado para cobrir a mensalidade de R$ 397,90. O resto é lucro no seu caixa.`
+                    : `Com ${neededBreakEvenClients} clientes de R$ ${clientTicket} recuperados, a mensalidade já fica coberta e você lucra R$ ${breakEvenProfit.toLocaleString("pt-BR", { minimumFractionDigits: 2 })}.`}
                 </p>
               </div>
             </div>
@@ -1336,7 +1334,7 @@ export default function AvanciniSyncPage() {
 
         <div className="fin-closing-note">
           <p>
-            💡 <strong>A conta é simples:</strong> A IA não é um custo para a sua empresa, ela é uma máquina de reter clientes que você já estava perdendo. Com apenas 1 cliente recuperado, o investimento já se pagou por completo.
+            💡 <strong>A conta é simples:</strong> A IA se paga logo no primeiro cliente retido fora do horário comercial.
           </p>
         </div>
       </section>

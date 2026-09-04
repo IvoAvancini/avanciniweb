@@ -11433,6 +11433,17 @@ body:has(.web-page) .page-progress{background:linear-gradient(90deg,#43c85d,#a9f
     gap: 12px !important;
   }
 
+  .cockpit-agent-spec .spec-pipeline-wrap,
+  .cockpit-agent-spec .spec-tools-wrap,
+  .cockpit-agent-spec .cockpit-supervisor-handoff-note {
+    display: none !important;
+  }
+
+  .cockpit-agent-spec {
+    padding: 10px 12px !important;
+    gap: 8px !important;
+  }
+
   .cockpit-chat-terminal {
     min-height: 380px !important;
   }

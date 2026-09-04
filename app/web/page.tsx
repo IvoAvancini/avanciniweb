@@ -114,10 +114,10 @@ const portfolioRows = [
 ] as const;
 
 const webPillars = [
-  { number: "01", title: "Direção estratégica", text: "Antes do visual, definimos o que sua empresa precisa comunicar e qual ação o visitante deve tomar." },
-  { number: "02", title: "Texto que conduz", text: "Cada título, argumento e chamada existe para transformar atenção em confiança e confiança em contato." },
-  { number: "03", title: "Design com presença", text: "Hierarquia, contraste e identidade para sua empresa parecer tão profissional quanto o trabalho que entrega." },
-  { number: "04", title: "Velocidade que converte", text: "Uma experiência leve, responsiva e pensada primeiro para o celular, a tela que o seu cliente realmente usa." },
+  { number: "01", title: "Direção Estratégica", text: "Definimos o foco da sua empresa e a ação exata que o cliente deve tomar." },
+  { number: "02", title: "Texto Persuasivo", text: "Argumentos claros que transformam curiosidade em confiança e contato." },
+  { number: "03", title: "Design com Autoridade", text: "Identidade visual para transmitir o peso real do seu negócio." },
+  { number: "04", title: "Velocidade no Celular", text: "Carregamento leve e instantâneo pensado para quem navega pelo celular." },
 ] as const;
 
 const webFaqs = [
@@ -241,15 +241,14 @@ const dashPlans: DashPlan[] = [
     badge: "CONVERSÃO & VENDAS RÁPIDAS",
     subscriptionPrice: 89.9,
     singlePrice: 599.9,
-    tagline: "Página de foco total para transformar cliques de anúncios e visitantes em conversas no WhatsApp.",
-    painPoint: "Elimina a perda de cliques de anúncios por páginas lentas, confusas ou difíceis de ler no celular.",
-    idealFor: "Profissionais liberais, clínicas, estética, consultórios, advogados e serviços de captação direta.",
+    tagline: "Foco total em converter cliques de anúncios em conversas no WhatsApp.",
+    painPoint: "Elimina a perda de cliques de anúncios por páginas lentas ou confusas.",
+    idealFor: "Clínicas, consultórios, advogados e serviços com tráfego pago.",
     keyHighlights: [
-      "⚡ Carregamento instantâneo (menos de 0.4s no celular)",
-      "🎯 Textos persuasivos focados em converter visitantes",
-      "📲 Botão WhatsApp posicionado para máxima conversão",
-      "🛡️ Hospedagem ultrarrápida e certificado SSL blindado",
-      "📊 Meta Pixel e Google Analytics já configurados",
+      "⚡ Carregamento em 0.4s (sem perda de cliques)",
+      "🎯 Copy persuasiva focada em gerar novos contatos",
+      "📲 Botão de WhatsApp em posição de máxima conversão",
+      "🛡️ Hospedagem ultrarrápida e certificado SSL incluso",
     ],
     ctaText: "Quero minha Landing Page",
     featured: false,
@@ -260,15 +259,14 @@ const dashPlans: DashPlan[] = [
     badge: "MAIS ESCOLHIDO · AUTORIDADE",
     subscriptionPrice: 109.9,
     singlePrice: 899.9,
-    tagline: "Estrutura completa com autoridade máxima para inspirar confiança e fechar contratos maiores.",
-    painPoint: "Substitui sites antigos ou amadores que espantam clientes que buscam sua empresa no Google.",
-    idealFor: "Empresas estabelecidas, consultorias, escritórios de advocacia, clínicas e serviços premium.",
+    tagline: "Estrutura completa com autoridade máxima para fechar contratos maiores.",
+    painPoint: "Substitui sites antigos ou amadores que espantam clientes no Google.",
+    idealFor: "Empresas estabelecidas, consultorias e serviços premium.",
     keyHighlights: [
-      "🏢 Até 5 páginas estruturadas com autoridade visual",
+      "🏢 Até 5 páginas estruturadas com design exclusivo",
       "💼 Apresentação de serviços, diferenciais e equipe",
       "📍 Mapa interativo, rotas e contato direto",
       "🔍 Otimização de SEO para buscas na sua região",
-      "📱 100% responsivo e fluido em qualquer tela",
     ],
     ctaText: "Planejar meu Site",
     featured: true,
@@ -279,15 +277,14 @@ const dashPlans: DashPlan[] = [
     badge: "CATÁLOGO & RECEBIMENTO",
     subscriptionPrice: 129.9,
     singlePrice: 1199.9,
-    tagline: "Catálogo visual moderno com carrinho, cálculo de frete e recebimento sem complicação.",
-    painPoint: "Automatiza seus pedidos sem você precisar passar preços um a um no direct do Instagram.",
-    idealFor: "Lojas de roupas, cosméticos, autopeças e marcas que precisam de catálogo e recebimento.",
+    tagline: "Catálogo visual moderno com checkout sem taxa sobre vendas.",
+    painPoint: "Automatiza pedidos sem precisar passar preços um a um no direct.",
+    idealFor: "Comércios locais, roupas, cosméticos e marcas próprias.",
     keyHighlights: [
-      "🛍️ Catálogo visual moderno com fotos e categorias",
+      "🛍️ Catálogo moderno organizado por categorias e fotos",
       "💳 Pagamentos via Pix instantâneo e parcelamento",
       "📦 Cálculo automático de frete dos Correios",
-      "📲 Notificação de pedidos novos direto no WhatsApp",
-      "🚫 ZERO comissões sobre vendas: o lucro é 100% seu",
+      "🚫 Zero comissões sobre vendas: o lucro é 100% seu",
     ],
     ctaText: "Planejar minha Loja Virtual",
     featured: false,
@@ -1118,11 +1115,6 @@ export default function Home() {
                     <span>{paymentModel === "subscription" ? "/mês" : "/único"}</span>
                   </div>
                   <p className="plan-tagline">{plan.tagline}</p>
-                </div>
-
-                <div className="plan-pain-box">
-                  <small>A DOR QUE RESOLVE:</small>
-                  <p>{plan.painPoint}</p>
                 </div>
 
                 <div className="plan-ideal-for">
