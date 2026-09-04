@@ -241,16 +241,15 @@ const dashPlans: DashPlan[] = [
     badge: "CONVERSÃO & VENDAS RÁPIDAS",
     subscriptionPrice: 89.9,
     singlePrice: 599.9,
-    tagline: "Página cirúrgica e ultrarrápida projetada para transformar cada visitante ou clique de anúncio em conversa real no seu WhatsApp.",
-    painPoint: "Para quem anuncia no Google ou Instagram e perde dinheiro porque o visitante clica, o site demora para abrir ou é confuso, e a pessoa desiste indo pro concorrente.",
-    idealFor: "Profissionais liberais, clínicas, estética, consultórios, advogados e ofertas focadas em captação direta.",
+    tagline: "Página de foco total para transformar cliques de anúncios e visitantes em conversas no WhatsApp.",
+    painPoint: "Elimina a perda de cliques de anúncios por páginas lentas, confusas ou difíceis de ler no celular.",
+    idealFor: "Profissionais liberais, clínicas, estética, consultórios, advogados e serviços de captação direta.",
     keyHighlights: [
-      "⚡ Carregamento em menos de 0.4s no celular (zero perda de leads por lentidão)",
-      "🎯 Textos persuasivos que atacam as dores, dúvidas e objeções do seu cliente",
-      "📲 Botão de WhatsApp estratégico em posição de máxima taxa de contato",
-      "💎 Design exclusivo sob medida para a autoridade visual da sua marca",
-      "🛡️ Hospedagem ultrarrápida com certificado SSL blindado incluso",
-      "📊 Configuração de Meta Pixel e Google Analytics para rastreamento de anúncios",
+      "⚡ Carregamento instantâneo (menos de 0.4s no celular)",
+      "🎯 Textos persuasivos focados em converter visitantes",
+      "📲 Botão WhatsApp posicionado para máxima conversão",
+      "🛡️ Hospedagem ultrarrápida e certificado SSL blindado",
+      "📊 Meta Pixel e Google Analytics já configurados",
     ],
     ctaText: "Quero minha Landing Page",
     featured: false,
@@ -261,16 +260,15 @@ const dashPlans: DashPlan[] = [
     badge: "MAIS ESCOLHIDO · AUTORIDADE",
     subscriptionPrice: 109.9,
     singlePrice: 899.9,
-    tagline: "Presença digital completa para apresentar sua empresa com peso de mercado, inspirar máxima credibilidade e fechar contratos maiores.",
-    painPoint: "Para empresas que perdem orçamentos valiosos porque o site atual é antigo, passa ar amador ou nem sequer abre com boa leitura na tela do celular.",
-    idealFor: "Empresas estabelecidas, escritórios de advocacia, consultorias, clínicas multidisciplinares e serviços premium.",
+    tagline: "Estrutura completa com autoridade máxima para inspirar confiança e fechar contratos maiores.",
+    painPoint: "Substitui sites antigos ou amadores que espantam clientes que buscam sua empresa no Google.",
+    idealFor: "Empresas estabelecidas, consultorias, escritórios de advocacia, clínicas e serviços premium.",
     keyHighlights: [
-      "🏢 Estrutura institucional completa de até 5 páginas estratégicas",
-      "💼 Apresentação impecável de diferenciais, equipe, serviços prestados e cases",
-      "📍 Página de contato com Google Maps interativo e rotas diretas",
-      "🔍 Otimização de SEO para seu negócio ser encontrado nas buscas da sua região",
-      "📱 100% responsivo e adaptado para celulares, tablets e computadores",
-      "🤝 Suporte técnico contínuo e atualizações para você não esquentar a cabeça",
+      "🏢 Até 5 páginas estruturadas com autoridade visual",
+      "💼 Apresentação de serviços, diferenciais e equipe",
+      "📍 Mapa interativo, rotas e contato direto",
+      "🔍 Otimização de SEO para buscas na sua região",
+      "📱 100% responsivo e fluido em qualquer tela",
     ],
     ctaText: "Planejar meu Site",
     featured: true,
@@ -281,16 +279,15 @@ const dashPlans: DashPlan[] = [
     badge: "CATÁLOGO & RECEBIMENTO",
     subscriptionPrice: 129.9,
     singlePrice: 1199.9,
-    tagline: "Venda seus produtos e serviços 24 horas por dia com catálogo visual organizado, cálculo de frete e recebimento sem complicação.",
-    painPoint: "Para negócios que perdem vendas no direct do Instagram por cansaço de passar preço um a um ou por não terem um checkout automático no próprio site.",
-    idealFor: "Lojas de roupas, cosméticos, estética, autopeças e marcas que precisam de catálogo e recebimento automático.",
+    tagline: "Catálogo visual moderno com carrinho, cálculo de frete e recebimento sem complicação.",
+    painPoint: "Automatiza seus pedidos sem você precisar passar preços um a um no direct do Instagram.",
+    idealFor: "Lojas de roupas, cosméticos, autopeças e marcas que precisam de catálogo e recebimento.",
     keyHighlights: [
-      "🛍️ Catálogo visual moderno organizado por categorias, tamanhos e fotos",
-      "💳 Pagamento transparente com Pix instantâneo e parcelamento no cartão",
-      "📦 Cálculo automático de frete dos Correios e transportadoras",
-      "📲 Notificação de pedidos novos direto no seu WhatsApp e e-mail",
-      "🚫 ZERO comissões ou taxas sobre suas vendas: o lucro é 100% seu",
-      "📊 Painel simples para você cadastrar produtos e alterar preços sem depender de ninguém",
+      "🛍️ Catálogo visual moderno com fotos e categorias",
+      "💳 Pagamentos via Pix instantâneo e parcelamento",
+      "📦 Cálculo automático de frete dos Correios",
+      "📲 Notificação de pedidos novos direto no WhatsApp",
+      "🚫 ZERO comissões sobre vendas: o lucro é 100% seu",
     ],
     ctaText: "Planejar minha Loja Virtual",
     featured: false,
@@ -369,7 +366,7 @@ function WebOpportunitySimulator({ onLead }: { onLead: (message: string) => void
           </h2>
         </div>
         <p>
-          Sem promessas irreais nem cálculos inflados: veja como uma presença digital rápida e com autoridade pode cobrir o valor da assinatura logo nas primeiras oportunidades geradas.
+          Veja como apenas 1 cliente conquistado no mês já pode cobrir o investimento integral do site.
         </p>
       </header>
 
@@ -379,10 +376,10 @@ function WebOpportunitySimulator({ onLead }: { onLead: (message: string) => void
           <div className="roi-card-tag pain-tag">❌ O QUE VOCÊ PERDE HOJE SEM O SITE</div>
           <h3>Dinheiro escorrendo pelo ralo</h3>
           <p className="roi-card-desc">
-            Seja porque seu site atual é amador/lento, ou porque você ainda não tem site e depende só do link do Instagram: quando o cliente busca sua empresa e não sente confiança profissional, ele fecha a aba e contrata o concorrente.
+            Quando o cliente clica no seu link e encontra uma página lenta ou amadora, ele fecha a aba e contrata o concorrente.
           </p>
           <div className="roi-evidence-callout">
-            📊 <strong>Dado oficial do Google:</strong> Mais de 53% dos usuários no celular abandonam páginas que demoram mais de 3 segundos para carregar (Think with Google).
+            📊 <strong>Google:</strong> 53% dos usuários no celular abandonam sites que demoram mais de 3s para carregar.
           </div>
 
           <div className="roi-interactive-controls">
@@ -422,7 +419,7 @@ function WebOpportunitySimulator({ onLead }: { onLead: (message: string) => void
           <div className="roi-impact-box pain-impact">
             <small>PREJUÍZO MENSAL ESTIMADO:</small>
             <strong className="roi-number-danger">- R$ {monthlyLost.toLocaleString("pt-BR", { minimumFractionDigits: 2 })} / mês</strong>
-            <p className="text-contrast-high">Esse é o faturamento que você deixa na mesa todo mês e entrega de presente para concorrentes que passam mais credibilidade.</p>
+            <p className="text-contrast-high">Faturamento que você deixa na mesa todo mês para concorrentes que passam mais confiança.</p>
           </div>
         </div>
 
@@ -435,7 +432,7 @@ function WebOpportunitySimulator({ onLead }: { onLead: (message: string) => void
             <span className="roi-check-circle">✓</span>
             <div>
               <strong>PODE BASTAR 1 ÚNICO CLIENTE NO MÊS</strong>
-              <p>Se o site trouxer apenas 1 cliente de R$ {ticketValue}, a assinatura de R$ 89,90 já pode ficar 100% coberta. Os outros contatos do mês representam resultado direto para o seu negócio.</p>
+              <p>Com apenas 1 cliente de R$ {ticketValue}, a assinatura de R$ 89,90 já fica 100% coberta. O restante é lucro limpo no seu bolso.</p>
             </div>
           </div>
 
@@ -514,7 +511,7 @@ function DashSiteDiagnosticSection({ onLead }: { onLead: (message: string) => vo
           Quer saber a nota real do seu site ou Instagram hoje?
         </h2>
         <p>
-          Nossa equipe analisa gratuitamente a velocidade no celular, a clareza da proposta e os pontos onde você pode estar perdendo clientes para concorrentes.
+          Analisamos gratuitamente a velocidade no celular e onde você pode estar perdendo clientes para concorrentes.
         </p>
 
         <form onSubmit={handleDiagnostic} className="diag-form-wrap">
@@ -541,7 +538,7 @@ function DashSiteDiagnosticSection({ onLead }: { onLead: (message: string) => vo
             </button>
           </div>
           <span className="diag-privacy-sub">
-            🔒 Análise 100% gratuita e confidencial. Resposta direta com relatório prático no seu WhatsApp.
+            🔒 100% gratuita e confidencial. Relatório prático direto no seu WhatsApp.
           </span>
         </form>
       </div>
@@ -909,9 +906,7 @@ export default function Home() {
             <br /><em>gere novos clientes.</em>
           </h1>
           <p>
-            Para quem ainda não tem site ou sente que o atual ficou para trás.
-            Uma presença profissional para ser encontrado, gerar confiança e
-            abrir novas conversas todos os dias.
+            Presença profissional rápida e elegante para ser encontrado no Google, transmitir autoridade e abrir conversas no seu WhatsApp.
           </p>
           <div className="hero-brand-promise" aria-label="Sites impossíveis de ignorar. Preparados para vender.">
             <span>Sites impossíveis de ignorar.</span>
@@ -1087,11 +1082,11 @@ export default function Home() {
           <div className="plan-transparency-box dash-transparency-box">
             {paymentModel === "subscription" ? (
               <p>
-                🔒 <strong>Site por Assinatura (Zero Taxa de Criação):</strong> Sem custo inicial de criação (R$ 0 de setup). Hospedagem ultrarrápida, certificado de segurança SSL, suporte contínuo e manutenção técnica inclusos na mensalidade acessível.
+                🔒 <strong>Assinatura (Setup R$ 0 Isento):</strong> Sem custo de criação. Hospedagem rápida, SSL blindado e suporte contínuo inclusos na mensalidade.
               </p>
             ) : (
               <p>
-                🔒 <strong>Pagamento Único (Propriedade Definitiva):</strong> O projeto é 100% da sua empresa, sem mensalidade obrigatória. Publicação completa, garantia e 30 dias de acompanhamento técnico dedicado inclusos.
+                🔒 <strong>Pagamento Único (Site Próprio):</strong> O projeto é 100% seu, sem mensalidades obrigatórias. Inclui publicação e 30 dias de suporte.
               </p>
             )}
           </div>
