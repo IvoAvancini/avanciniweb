@@ -490,104 +490,7 @@ function WebOpportunitySimulator({ onLead }: { onLead: (message: string) => void
 }
 
 
-function DashBeforeAfterSlider({ onLead }: { onLead?: (intent: string) => void }) {
-  const [activeTab, setActiveTab] = useState<"both" | "before" | "after">("both");
 
-  return (
-    <section className="dash-comparison-section" id="antes-depois">
-      <div className="section-heading" style={{ margin: "0 auto 30px", maxWidth: "1240px" }}>
-        <div>
-          <span className="section-index">PROJETO REAL · CLÍNICA SAN DIEGO</span>
-          <h2>O site anterior de um lado.<br />O projeto aprovado do outro.</h2>
-        </div>
-        <p>
-          Role dentro de cada janela para percorrer os dois projetos. Veja na prática a diferença entre um site comum lento e o padrão Avancini Dash com nota 100 no Google e WhatsApp em 1 clique.
-        </p>
-
-        <div className="ba-view-selector-tabs">
-          <button
-            type="button"
-            className={`ba-tab-btn ${activeTab === "both" ? "active" : ""}`}
-            onClick={() => setActiveTab("both")}
-          >
-            Comparar Lado a Lado
-          </button>
-          <button
-            type="button"
-            className={`ba-tab-btn tab-before ${activeTab === "before" ? "active" : ""}`}
-            onClick={() => setActiveTab("before")}
-          >
-            ❌ Antes (Site Anterior)
-          </button>
-          <button
-            type="button"
-            className={`ba-tab-btn tab-after ${activeTab === "after" ? "active" : ""}`}
-            onClick={() => setActiveTab("after")}
-          >
-            ✓ Depois (Padrão Avancini Dash)
-          </button>
-        </div>
-      </div>
-
-      <div className={`dash-comparison-browsers view-mode-${activeTab}`}>
-        {(activeTab === "both" || activeTab === "before") && (
-          <article className="dash-comparison-browser dash-comparison-before-browser">
-            <header>
-              <span><i /><i /><i /></span>
-              <strong>ANTES · SITE PÚBLICO ANTERIOR</strong>
-              <div className="browser-score-tag tag-bad">
-                <span>Nota 34</span>
-                <small>4.6s Lentidão</small>
-              </div>
-            </header>
-            <div className="dash-comparison-live-site">
-              <iframe src="https://clinicasandiego.com.br/" title="Site público da Clínica San Diego" loading="lazy" />
-            </div>
-            <footer>
-              <span>ROLE DENTRO DA JANELA</span>
-              <b>Identidade comum · carregamento pesado</b>
-            </footer>
-          </article>
-        )}
-
-        {(activeTab === "both" || activeTab === "after") && (
-          <article className="dash-comparison-browser dash-comparison-after-browser">
-            <header>
-              <span><i /><i /><i /></span>
-              <strong>DEPOIS · CLÍNICA SAN DIEGO REAL</strong>
-              <div className="browser-score-tag tag-good">
-                <span>100/100</span>
-                <small>0.2s LCP</small>
-              </div>
-            </header>
-            <div className="dash-comparison-project" role="region" tabIndex={0} aria-label="Projeto completo e real da Clínica San Diego, role para navegar">
-              <SiteImage src="/projects/san-diego-full.png" alt="Site completo e real da Clínica San Diego" sizes="72vw" quality={82} />
-            </div>
-            <footer>
-              <span>ROLE DENTRO DA JANELA</span>
-              <b>Padrão Avancini Dash · alta conversão</b>
-            </footer>
-          </article>
-        )}
-      </div>
-
-      <div className="dash-comparison-verdict">
-        <span>O QUE MUDA NO SEU NEGÓCIO</span>
-        <p><b>Antes:</b> Informação dispersa, lentidão no celular e uma presença que não acompanha o padrão do seu atendimento.</p>
-        <p><b>Depois:</b> Proposta clara, carregamento em 0.2s, credibilidade inquestionável e agendamento direto pelo WhatsApp.</p>
-        {onLead && (
-          <button
-            type="button"
-            className="ba-cta-inline-btn"
-            onClick={() => onLead("Olá! Vi o comparativo Antes e Depois da Clínica San Diego e quero um projeto desse nível para a minha empresa.")}
-          >
-            QUERO TRANSFORMAR MEU SITE NO PADRÃO AVANCINI DASH ↗
-          </button>
-        )}
-      </div>
-    </section>
-  );
-}
 
 function DashSiteDiagnosticSection({ onLead }: { onLead: (message: string) => void }) {
   const [siteUrlInput, setSiteUrlInput] = useState("");
@@ -928,10 +831,10 @@ export default function Home() {
             {[
               ["01", "Início", "Presença que trabalha", "#inicio"],
               ["02", "Portfólio", "Experiências por segmento", "#portfolio"],
-              ["03", "Antes e depois", "Compare o impacto", "#antes-depois"],
-              ["04", "Custo x Retorno", "A matemática do retorno real", "#retorno"],
-              ["05", "Metodologia", "Estratégia antes do visual", "#metodo"],
-              ["06", "Serviços e planos", "Encontre o formato certo", "#configurar-plano"],
+              ["03", "Custo x Retorno", "A matemática do retorno real", "#retorno"],
+              ["04", "Metodologia", "Estratégia antes do visual", "#metodo"],
+              ["05", "Serviços e planos", "Encontre o formato certo", "#configurar-plano"],
+              ["06", "Diagnóstico", "Análise gratuita do seu site", "#diagnostico"],
               ["07", "Dúvidas", "Decida com segurança", "#duvidas"],
               ["08", "Contato", "Comece uma conversa", "#contato"],
             ].map(([number, label, description, href]) => (
@@ -1131,8 +1034,6 @@ export default function Home() {
           ))}
         </div>
       </section>
-
-      <DashBeforeAfterSlider onLead={(intent) => startBudgetConversation("Antes e Depois - Clínica San Diego", intent)} />
 
       <WebOpportunitySimulator onLead={(message) => startBudgetConversation("Simulação de oportunidade digital", message)} />
 
@@ -1344,10 +1245,10 @@ export default function Home() {
             <b>NAVEGAÇÃO</b>
             <a href="#inicio">Início</a>
             <a href="#portfolio">Portfólio</a>
-            <a href="#antes-depois">Antes e depois</a>
             <a href="#retorno">Custo x Retorno</a>
             <a href="#metodo">Metodologia</a>
-            <a href="#investimento">Serviços e planos</a>
+            <a href="#configurar-plano">Serviços e planos</a>
+            <a href="#diagnostico">Diagnóstico gratuito</a>
             <a href="#duvidas">Perguntas frequentes</a>
             <Link href="/">Avancini OS <WebArrow /></Link>
             <Link href="/sync">Avancini Sync <WebArrow /></Link>

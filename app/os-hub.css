@@ -1539,28 +1539,69 @@ body {
   }
 }
 
-/* Tablets Portrait (768x1024) */
-@media (max-width: 860px) {
+/* Tablets Portrait & Telas Médias (<= 980px) */
+@media (max-width: 980px) {
+  .os-hub-root {
+    height: auto !important;
+    min-height: 100vh !important;
+    min-height: 100dvh !important;
+    max-height: none !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    -webkit-overflow-scrolling: touch;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+  }
+  .hub-navbar {
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 40 !important;
+    background: rgba(2, 4, 6, 0.88) !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+  }
   .hub-ecosystem-stage {
-    grid-template-columns: 1fr;
-    max-width: 580px;
-    gap: 18px;
-    padding: 0 20px 30px;
+    display: flex !important;
+    flex-direction: column !important;
+    max-width: 620px !important;
+    margin: 0 auto !important;
+    gap: 22px !important;
+    padding: 10px 18px 40px !important;
+  }
+  .ecosystem-card {
+    min-height: auto !important;
+    flex: none !important;
+    overflow: visible !important;
   }
   .ecosystem-connector-bridge {
     flex-direction: row;
-    padding: 4px 0;
+    padding: 6px 0;
+    margin: -4px 0;
   }
   .bridge-laser-line {
     height: 1px;
     width: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
   }
   .bridge-node-pill {
-    margin: 0 10px;
+    margin: 0 12px;
   }
   .viewport-content {
-    max-width: 60%;
+    max-width: 100% !important;
+  }
+  .card-action-footer {
+    position: static !important;
+    margin-top: 14px !important;
+  }
+  .card-explore-btn {
+    width: 100% !important;
+    min-height: 48px !important;
+    font-size: 14px !important;
+    font-weight: 800 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
   }
 }
 
@@ -1568,32 +1609,35 @@ body {
 @media (max-width: 640px) {
   .hub-navbar {
     padding: 0 16px;
+    height: 60px;
   }
   .hub-brand-text .brand-tagline {
     display: none;
   }
   .hub-specialist-btn {
-    padding: 6px 13px;
+    padding: 8px 14px;
     font-size: 11.5px;
+    min-height: 38px;
   }
   .hub-hero-section {
-    padding: 22px 16px 16px;
+    padding: 24px 16px 16px;
   }
   .hub-eyebrow {
-    font-size: 9.5px;
-    padding: 5px 12px;
+    font-size: 10px;
+    padding: 5px 14px;
   }
   .hub-headline {
-    font-size: 26px;
-    line-height: 1.2;
+    font-size: clamp(24px, 6.8vw, 30px);
+    line-height: 1.22;
     margin-bottom: 10px;
   }
   .hero-break {
     display: inline;
   }
   .hub-subheadline {
-    font-size: 13.5px;
-    line-height: 1.5;
+    font-size: 14px;
+    line-height: 1.55;
+    color: #cbd5e1;
   }
   .hub-cta-cluster {
     flex-direction: column;
@@ -1603,34 +1647,77 @@ body {
   .hub-cta-primary,
   .hub-cta-secondary {
     width: 100%;
+    min-height: 46px;
     justify-content: center;
     box-sizing: border-box;
   }
   .hub-ecosystem-stage {
-    grid-template-columns: 1fr;
-    padding: 0 14px 28px;
-    gap: 16px;
+    padding: 8px 14px 36px;
+    gap: 18px;
   }
   .ecosystem-card {
     padding: 18px 14px;
     border-radius: 18px;
   }
+  .card-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .card-specs-row {
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 6px;
+  }
+  .spec-item {
+    padding: 6px 8px;
+  }
+  .spec-item .spec-texts strong {
+    font-size: 10.5px;
+    color: #f8fafc;
+  }
+  .spec-item .spec-texts small {
+    font-size: 9px;
+    color: #94a3b8;
+  }
+  .browser-hero-layout {
+    flex-direction: column;
+    gap: 12px;
+  }
   .viewport-content {
     max-width: 100%;
   }
+  .viewport-metrics-col {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
   .viewport-badge {
     position: static;
-    margin-top: 8px;
+    margin: 0;
+    width: auto;
   }
   .browser-viewport {
     min-height: auto;
+    padding: 12px;
     gap: 10px;
   }
   .hub-footer {
     flex-direction: column;
     gap: 10px;
     text-align: center;
-    padding: 18px 16px;
+    padding: 20px 16px 28px;
+    height: auto;
+  }
+}
+
+@media (max-width: 420px) {
+  .card-specs-row {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+  .viewport-metrics-col {
+    grid-template-columns: 1fr;
   }
 }
 
