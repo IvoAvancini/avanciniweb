@@ -1021,7 +1021,7 @@ footer {
 .web-menu-network a:last-child{border-color:rgba(224,0,40,.22);color:#d00025}
 .web-menu-network a:hover{border-color:#160a0e;background:#160a0e;color:#fff;transform:translateY(-1px)}
 @media(max-width:760px){
-  .web-page .web-ecosystem-switch{display:none}
+  .web-page .web-ecosystem-switch{display:flex;align-items:center;gap:5px;margin-left:auto}
   .web-menu-top{grid-template-columns:1fr auto;gap:10px}
   .web-menu-top>span{display:none}
   .web-menu-network{justify-self:start}
@@ -2576,9 +2576,9 @@ body:has(.web-page) .page-progress{background:linear-gradient(90deg,#43c85d,#a9f
 
 @media(max-width:900px){
   .sync-page .sync-plan-grid,.solution-combo-bridge{grid-template-columns:1fr}
-  .sync-page .sync-shared-header .header-cta{display:none!important}
-  .sync-page .sync-shared-header .web-ecosystem-switch{display:none!important}
-  .sync-page .sync-shared-header .menu-toggle{margin-left:auto}
+  .sync-page .sync-shared-header .web-ecosystem-switch{display:flex!important;align-items:center;gap:5px;margin-left:auto;margin-right:4px}
+  .sync-page .sync-shared-header .web-ecosystem-switch .header-cta{display:inline-flex!important}
+  .sync-page .sync-shared-header .menu-toggle{margin-left:0}
   .sync-page .sync-ai-sim-grid{grid-template-columns:1fr}
   .sync-page .sync-wa-phone{min-height:580px}
 }
@@ -3472,7 +3472,11 @@ body:has(.web-page) .page-progress{background:linear-gradient(90deg,#43c85d,#a9f
     overflow:hidden !important;
   }
   .web-page .web-ecosystem-switch{
-    display:none !important;
+    display:flex !important;
+    align-items:center !important;
+    gap:4px !important;
+    margin-left:auto !important;
+    margin-right:4px !important;
   }
   .web-page .menu-toggle{
     display:inline-flex !important;
@@ -11477,12 +11481,119 @@ body:has(.web-page) .page-progress{background:linear-gradient(90deg,#43c85d,#a9f
   }
 }
 
+/* ==========================================================================
+   CABECALHO RESPONSIVO UNIFICADO: ATALHOS DO ECOSSISTEMA NO CELULAR
+   Garante que [Dash ↗] [OS ↗] e [Sync ↗] fiquem visiveis ao lado do MENU.
+   ========================================================================== */
+@media (max-width: 860px) {
+  .web-page .web-ecosystem-switch,
+  .sync-page .sync-shared-header .web-ecosystem-switch {
+    display: flex !important;
+    align-items: center !important;
+    gap: 5px !important;
+    margin-left: auto !important;
+    margin-right: 6px !important;
+  }
 
+  .web-page .web-ecosystem-switch .header-cta,
+  .sync-page .sync-shared-header .web-ecosystem-switch .header-cta {
+    display: inline-flex !important;
+    height: 34px !important;
+    min-height: 34px !important;
+    padding: 0 11px !important;
+    font-size: 11px !important;
+    font-weight: 750 !important;
+    border-radius: 9999px !important;
+    white-space: nowrap !important;
+    gap: 4px !important;
+    text-decoration: none !important;
+  }
 
+  .web-page .header .menu-toggle,
+  .sync-page .sync-shared-header .menu-toggle {
+    height: 34px !important;
+    min-height: 34px !important;
+    padding: 0 12px !important;
+    font-size: 11px !important;
+    min-width: auto !important;
+    border-radius: 9999px !important;
+    margin-left: 0 !important;
+  }
+}
 
+@media (max-width: 600px) {
+  .web-page .header,
+  .sync-page .sync-shared-header {
+    padding: 0 10px !important;
+    height: 60px !important;
+    gap: 4px !important;
+    justify-content: space-between !important;
+  }
 
+  .web-page .header .logo,
+  .sync-page .sync-shared-header .logo {
+    max-width: none !important;
+    flex: 0 0 auto !important;
+    margin-right: 2px !important;
+    gap: 6px !important;
+  }
 
+  .web-page .header .logo small,
+  .sync-page .sync-shared-header .logo small {
+    display: none !important;
+  }
 
+  .web-page .header .logo .brand-name,
+  .sync-page .sync-shared-header .brand-name {
+    font-size: 12px !important;
+    letter-spacing: -0.01em !important;
+  }
 
+  /* No mobile compacto, esconde o prefixo 'Avancini ' deixando apenas 'Sync ↗', 'Dash ↗', 'OS ↗' */
+  .web-page .web-ecosystem-switch .cta-full-name,
+  .sync-page .sync-shared-header .web-ecosystem-switch .cta-full-name {
+    display: none !important;
+  }
 
+  .web-page .web-ecosystem-switch,
+  .sync-page .sync-shared-header .web-ecosystem-switch {
+    display: flex !important;
+    gap: 4px !important;
+    margin-left: auto !important;
+    margin-right: 4px !important;
+  }
+
+  .web-page .web-ecosystem-switch .header-cta,
+  .sync-page .sync-shared-header .web-ecosystem-switch .header-cta {
+    height: 32px !important;
+    min-height: 32px !important;
+    padding: 0 8px !important;
+    font-size: 10.5px !important;
+    font-weight: 700 !important;
+    border-radius: 9999px !important;
+    gap: 3px !important;
+  }
+
+  .web-page .web-ecosystem-switch .header-cta svg,
+  .sync-page .sync-shared-header .web-ecosystem-switch .header-cta svg {
+    width: 9px !important;
+    height: 9px !important;
+  }
+
+  .web-page .header .menu-toggle,
+  .sync-page .sync-shared-header .menu-toggle {
+    height: 32px !important;
+    min-height: 32px !important;
+    padding: 0 8px !important;
+    font-size: 10px !important;
+    min-width: 0 !important;
+    border-radius: 9999px !important;
+    gap: 5px !important;
+  }
+
+  .web-page .header .menu-toggle b,
+  .sync-page .sync-shared-header .menu-toggle b {
+    font-size: 10px !important;
+  }
+}
 

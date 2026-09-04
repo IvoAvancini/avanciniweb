@@ -703,10 +703,10 @@ export default function AvanciniSyncPage() {
         </a>
         <div className="web-ecosystem-switch" aria-label="Ecossistema Avancini">
           <Link className="button button-small header-cta sync-dash-cta" href="/dash">
-            Avancini Dash <SyncArrow />
+            <span className="cta-full-name">Avancini </span>Dash <SyncArrow />
           </Link>
           <Link className="button button-small header-cta" href="/">
-            Avancini OS <SyncArrow />
+            <span className="cta-full-name">Avancini </span>OS <SyncArrow />
           </Link>
         </div>
         <button className="menu-toggle" type="button" aria-label={menuOpen ? "Fechar menu" : "Abrir menu"} aria-expanded={menuOpen} onClick={() => setMenuOpen((open) => !open)}>
@@ -1140,9 +1140,9 @@ export default function AvanciniSyncPage() {
         <header className="sync-section-heading">
           <div>
             <span>01 / A FORÇA DE TRABALHO DIGITAL</span>
-            <h2 id="sync-journey-title">Você não contrata só um chatbot.<br />Você contrata uma equipe digital.</h2>
+            <h2 id="sync-journey-title">Muito além de um robô.<br />Uma equipe que atende, agenda e vende.</h2>
           </div>
-          <p>O Supervisor delega para agentes especializados em cada fase da sua empresa, reduzindo tarefas repetitivas e aumentando a conversão.</p>
+          <p>Agentes especializados para acolher leads, marcar horários e tirar dúvidas 24 horas por dia.</p>
         </header>
 
         <div className="commercial-journey-container">

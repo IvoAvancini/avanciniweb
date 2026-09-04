@@ -143,14 +143,25 @@ export function OSHubClient() {
   }, []);
 
   useEffect(() => {
-    const origHtmlOverflow = document.documentElement.style.overflow;
-    const origBodyOverflow = document.body.style.overflow;
-    document.documentElement.style.overflow = "hidden";
-    document.body.style.overflow = "hidden";
+    const handleResize = () => {
+      if (typeof window !== "undefined") {
+        if (window.innerWidth > 980) {
+          document.documentElement.style.overflow = "hidden";
+          document.body.style.overflow = "hidden";
+        } else {
+          document.documentElement.style.overflow = "";
+          document.body.style.overflow = "";
+        }
+      }
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
 
     return () => {
-      document.documentElement.style.overflow = origHtmlOverflow;
-      document.body.style.overflow = origBodyOverflow;
+      window.removeEventListener("resize", handleResize);
+      document.documentElement.style.overflow = "";
+      document.body.style.overflow = "";
     };
   }, []);
 
@@ -182,6 +193,15 @@ export function OSHubClient() {
           </Link>
         </div>
 
+        <div className="hub-ecosystem-switch" aria-label="Soluções Avancini">
+          <Link className="hub-switch-pill pill-dash" href="/dash">
+            <span className="pill-prefix">Avancini </span>Dash <Arrow />
+          </Link>
+          <Link className="hub-switch-pill pill-sync" href="/sync">
+            <span className="pill-prefix">Avancini </span>Sync <Arrow />
+          </Link>
+        </div>
+
         <div className="hub-actions-col">
           <a
             href={whatsappUrl}
@@ -193,7 +213,8 @@ export function OSHubClient() {
               <span className="radar-ping" />
               <span className="radar-core" />
             </span>
-            <span>Falar com especialista</span>
+            <span className="btn-label-desktop">Falar com especialista</span>
+            <span className="btn-label-mobile">Contato</span>
             <Arrow />
           </a>
         </div>

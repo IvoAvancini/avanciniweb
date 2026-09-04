@@ -334,6 +334,59 @@ body {
   margin-top: 1px;
 }
 
+.hub-ecosystem-switch {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+  margin-right: 14px;
+}
+
+.hub-switch-pill {
+  height: 36px;
+  padding: 0 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border-radius: 9999px;
+  font-size: 11.5px;
+  font-weight: 750;
+  text-decoration: none;
+  transition: all 0.22s ease;
+  white-space: nowrap;
+}
+
+.hub-switch-pill.pill-dash {
+  background: rgba(34, 197, 94, 0.08);
+  border: 1px solid rgba(34, 197, 94, 0.3);
+  color: #4ade80;
+}
+
+.hub-switch-pill.pill-dash:hover {
+  background: rgba(34, 197, 94, 0.18);
+  border-color: rgba(34, 197, 94, 0.6);
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+.hub-switch-pill.pill-sync {
+  background: rgba(56, 189, 248, 0.08);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  color: #7dd3fc;
+}
+
+.hub-switch-pill.pill-sync:hover {
+  background: rgba(56, 189, 248, 0.18);
+  border-color: rgba(56, 189, 248, 0.6);
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+.btn-label-mobile {
+  display: none;
+}
+
 .hub-specialist-btn {
   position: relative;
   display: inline-flex;
@@ -1541,14 +1594,21 @@ body {
 
 /* Tablets Portrait & Telas Médias (<= 980px) */
 @media (max-width: 980px) {
+  html,
+  body {
+    height: auto !important;
+    min-height: 100% !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
   .os-hub-root {
     height: auto !important;
     min-height: 100vh !important;
     min-height: 100dvh !important;
     max-height: none !important;
-    overflow-y: auto !important;
+    overflow-y: visible !important;
     overflow-x: hidden !important;
-    -webkit-overflow-scrolling: touch;
     display: flex !important;
     flex-direction: column !important;
     justify-content: flex-start !important;
@@ -1557,9 +1617,10 @@ body {
     position: sticky !important;
     top: 0 !important;
     z-index: 40 !important;
-    background: rgba(2, 4, 6, 0.88) !important;
+    background: rgba(2, 4, 6, 0.92) !important;
     backdrop-filter: blur(20px) !important;
     -webkit-backdrop-filter: blur(20px) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
   }
   .hub-ecosystem-stage {
     display: flex !important;
@@ -1587,6 +1648,11 @@ body {
   .bridge-node-pill {
     margin: 0 12px;
   }
+  .browser-hero-layout {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 14px !important;
+  }
   .viewport-content {
     max-width: 100% !important;
   }
@@ -1608,35 +1674,60 @@ body {
 /* Mobile Moderno (390x844) & Clássico (375x812) */
 @media (max-width: 640px) {
   .hub-navbar {
-    padding: 0 16px;
+    padding: 0 12px;
     height: 60px;
+    gap: 6px;
   }
   .hub-brand-text .brand-tagline {
     display: none;
   }
+  .hub-brand-text .brand-name {
+    font-size: 12.5px;
+  }
+  .hub-ecosystem-switch {
+    gap: 4px;
+    margin-left: auto;
+    margin-right: 4px;
+  }
+  .hub-switch-pill {
+    height: 32px;
+    padding: 0 8px;
+    font-size: 10.5px;
+    gap: 3px;
+  }
+  .hub-switch-pill .pill-prefix {
+    display: none;
+  }
+  .btn-label-desktop {
+    display: none;
+  }
+  .btn-label-mobile {
+    display: inline;
+  }
   .hub-specialist-btn {
-    padding: 8px 14px;
-    font-size: 11.5px;
-    min-height: 38px;
+    padding: 6px 10px;
+    font-size: 11px;
+    min-height: 32px;
+    gap: 5px;
   }
   .hub-hero-section {
-    padding: 24px 16px 16px;
+    padding: 22px 14px 14px;
   }
   .hub-eyebrow {
     font-size: 10px;
     padding: 5px 14px;
   }
   .hub-headline {
-    font-size: clamp(24px, 6.8vw, 30px);
+    font-size: clamp(22px, 6.4vw, 28px);
     line-height: 1.22;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
   }
   .hero-break {
     display: inline;
   }
   .hub-subheadline {
-    font-size: 14px;
-    line-height: 1.55;
+    font-size: 13.5px;
+    line-height: 1.5;
     color: #cbd5e1;
   }
   .hub-cta-cluster {
@@ -1652,7 +1743,7 @@ body {
     box-sizing: border-box;
   }
   .hub-ecosystem-stage {
-    padding: 8px 14px 36px;
+    padding: 8px 12px 36px;
     gap: 18px;
   }
   .ecosystem-card {
@@ -1664,27 +1755,41 @@ body {
     align-items: flex-start;
     gap: 8px;
   }
-  .card-specs-row {
-    grid-template-columns: 1fr 1fr 1fr;
+  .product-category-row {
+    flex-wrap: wrap;
     gap: 6px;
   }
+  .product-spec-strip,
+  .card-specs-row {
+    grid-template-columns: 1fr 1fr 1fr !important;
+    gap: 6px !important;
+  }
   .spec-item {
-    padding: 6px 8px;
+    padding: 6px 6px;
   }
   .spec-item .spec-texts strong {
-    font-size: 10.5px;
+    font-size: 10px;
     color: #f8fafc;
   }
   .spec-item .spec-texts small {
-    font-size: 9px;
+    font-size: 8px;
     color: #94a3b8;
   }
   .browser-hero-layout {
-    flex-direction: column;
+    display: flex !important;
+    flex-direction: column !important;
     gap: 12px;
   }
   .viewport-content {
     max-width: 100%;
+  }
+  .viewport-title {
+    font-size: 15px;
+    line-height: 1.25;
+  }
+  .viewport-desc {
+    font-size: 11px;
+    line-height: 1.4;
   }
   .viewport-metrics-col {
     width: 100%;
@@ -1699,8 +1804,17 @@ body {
   }
   .browser-viewport {
     min-height: auto;
-    padding: 12px;
+    padding: 12px 10px;
     gap: 10px;
+  }
+  .whatsapp-chat-body {
+    padding: 10px;
+    gap: 8px;
+  }
+  .chat-bubble {
+    max-width: 90%;
+    font-size: 11.5px;
+    line-height: 1.4;
   }
   .hub-footer {
     flex-direction: column;
@@ -1712,9 +1826,23 @@ body {
 }
 
 @media (max-width: 420px) {
+  .product-spec-strip,
   .card-specs-row {
-    grid-template-columns: 1fr;
-    gap: 6px;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 4px;
+  }
+  .spec-item {
+    padding: 5px 4px;
+    gap: 4px;
+  }
+  .spec-item .spec-icon {
+    font-size: 12px;
+  }
+  .spec-item .spec-texts strong {
+    font-size: 9.5px;
+  }
+  .spec-item .spec-texts small {
+    font-size: 7.5px;
   }
   .viewport-metrics-col {
     grid-template-columns: 1fr;

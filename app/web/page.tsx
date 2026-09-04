@@ -794,10 +794,10 @@ export default function Home() {
         </a>
         <div className="web-ecosystem-switch" aria-label="Navegar entre as soluções Avancini">
           <Link className="button button-small header-cta header-sync-cta" href="/sync">
-            Avancini Sync <WebArrow />
+            <span className="cta-full-name">Avancini </span>Sync <WebArrow />
           </Link>
           <Link className="button button-small header-cta" href="/">
-            Avancini OS <WebArrow />
+            <span className="cta-full-name">Avancini </span>OS <WebArrow />
           </Link>
         </div>
         <button
