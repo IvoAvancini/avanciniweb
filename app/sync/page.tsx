@@ -407,57 +407,62 @@ const nicheSolutions = [
    PLANOS SIMPLIFICADOS — ARQUITETURA MULTIAGENTE INCLUSA EM TODOS
    Valores transparentes e foco nas dores reais das empresas.
    -------------------------------------------------------------------------- */
+type CapabilityItem = {
+  icon: string;
+  title: string;
+  desc: string;
+};
+
 type SyncPlanSimple = {
   id: string;
   name: string;
   badge: string;
-  formatTitle: string;
-  volumeLabel: string;
+  kicker: string;
+  headline: string;
+  capabilities: CapabilityItem[];
+  transformationBadge: string;
+  transformationText: string;
   deliverableBadge: string;
-  tagline: string;
-  idealFor: string;
-  keyHighlights: string[];
   ctaText: string;
+  featured?: boolean;
 };
 
 const simplifiedPlans: SyncPlanSimple[] = [
   {
     id: "essencial",
     name: "Operação Essencial",
-    badge: "1 WHATSAPP DEDICADO · FLUXO CONTÍNUO",
-    formatTitle: "Implantação Sob Medida",
-    volumeLabel: "1 WhatsApp · Atendimento Contínuo 24/7",
-    deliverableBadge: "⚡ Calibração Guiada, Google Agenda e QR Code Ativo",
-    tagline: "Sem estresse de limites ou cotas. O WhatsApp da sua clínica ou empresa acolhe, tira dúvidas, agenda consultas e transfere com resumo pronto.",
-    idealFor: "Médicos, dentistas, advogados, esteticistas, consultores e empresas que usam um WhatsApp principal para o atendimento.",
-    keyHighlights: [
-      "📅 Agendamento automático no Google Calendar em tempo real",
-      "⏰ Lembrete anti-falta na véspera com confirmação de presença no chat",
-      "📲 Transbordo inteligente para equipe humana com resumo pronto da conversa",
-      "💳 Envio de chave Pix cópia e cola e formas de pagamento no chat",
-      "🔁 Follow-up inteligente de orçamentos e retornos sem resposta (24h)",
-      "🎙️ Ouve áudios longos, transcreve e lê fotos, exames e PDFs",
-      "🛡️ Atendimento 24/7 contínuo com calibração profunda da sua rotina",
+    badge: "1 WHATSAPP DEDICADO",
+    kicker: "FLUXO CONTÍNUO 24/7",
+    headline: "Atendimento acolhedor, agendamento no Google Calendar e follow-up inteligente sem pausas ou retrabalho.",
+    capabilities: [
+      { icon: "📅", title: "Google Agenda em Tempo Real", desc: "Verifica horários livres e reserva consultas na grade instantaneamente." },
+      { icon: "🎙️", title: "Ouve Áudios & Lê Exames", desc: "Transcreve áudios longos e analisa documentos e fotos sem travar o cliente." },
+      { icon: "📲", title: "Transbordo com Resumo", desc: "Passa para sua equipe com ficha pronta e contexto completo do atendimento." },
+      { icon: "⏰", title: "Lembretes Anti-Falta", desc: "Envia confirmação ativa na véspera direto no WhatsApp para reduzir no-show." },
     ],
+    transformationBadge: "O IMPACTO NO SEU NEGÓCIO",
+    transformationText: "Você nunca mais perde pacientes ou clientes à noite e no fim de semana enquanto a concorrência demora horas para responder.",
+    deliverableBadge: "⚡ Calibração Guiada · Conexão QR Code · Suporte Direto",
     ctaText: "Solicitar Demonstração no WhatsApp",
+    featured: false,
   },
   {
     id: "pro",
     name: "Operação Scale Pro",
-    badge: "MAIS ESCOLHIDO · OPERAÇÕES MULTISSETOR",
-    formatTitle: "Arquitetura Corporativa",
-    volumeLabel: "Múltiplos Setores & Equipe Humana",
-    deliverableBadge: "⚡ Roteamento de Departamentos, Filas & Relatórios",
-    tagline: "Para clínicas com múltiplos profissionais, equipes comerciais ou tráfego pago intenso que exigem triagem e roteamento por setor.",
-    idealFor: "Clínicas com vários especialistas, imobiliárias, distribuidoras e empresas com divisão de departamentos.",
-    keyHighlights: [
-      "⭐ Tudo da Operação Essencial incluso (Agenda, Lembretes, Pix, Transbordo e Áudios)",
-      "🏢 Roteamento inteligente por setores (comercial, recepção, financeiro, suporte)",
-      "👥 Distribuição equilibrada de fila para múltiplos atendentes humanos em equipe",
-      "📊 Relatórios avançados de conversão, motivos de contato e performance de tráfego",
-      "⚡ Processamento prioritário com alta capacidade para picos de mensagens",
+    badge: "MAIS ESCOLHIDO",
+    kicker: "ARQUITETURA MULTISSETOR",
+    headline: "Triagem por setores, distribuição de fila para atendentes humanos e relatórios analíticos de conversão.",
+    capabilities: [
+      { icon: "🏢", title: "Roteamento por Setores", desc: "Separa fluxos de Comercial, Recepção, Financeiro e Suporte com inteligência." },
+      { icon: "👥", title: "Fila de Atendentes Humanos", desc: "Distribui clientes de forma equilibrada entre múltiplos operadores da equipe." },
+      { icon: "📊", title: "Relatórios de Conversão", desc: "Métricas detalhadas de motivos de contato, horários de pico e conversão." },
+      { icon: "⚡", title: "Capacidade Prioritária", desc: "Processamento de alta escala desenhado para absorver picos de tráfego pago." },
     ],
+    transformationBadge: "O IMPACTO NA SUA EMPRESA",
+    transformationText: "Estrutura corporativa que profissionaliza o atendimento de equipes grandes, reduz o tempo de resposta a 2 segundos e blinda contra perdas de vendas.",
+    deliverableBadge: "⚡ Multiagentes Integrados · Gestão de Fila · Relatórios",
     ctaText: "Agendar Diagnóstico com Especialista",
+    featured: true,
   },
 ];
 
@@ -551,6 +556,7 @@ export default function AvanciniSyncPage() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [leadContext, setLeadContext] = useState("");
+  const [selectedFormat, setSelectedFormat] = useState<"essencial" | "pro">("pro");
   const [activeSupervisorIndex, setActiveSupervisorIndex] = useState(0);
   const [activeJourneyIndex, setActiveJourneyIndex] = useState(0);
   const [activeNicheIndex, setActiveNicheIndex] = useState(0);
@@ -1411,66 +1417,122 @@ export default function AvanciniSyncPage() {
       </section>
 
       {/* 5. FORMATOS DE IMPLANTAÇÃO SOB MEDIDA */}
+      {/* 5. FORMATOS DE IMPLANTAÇÃO SOB MEDIDA — ALTO IMPACTO & VISUAL CLEAN */}
       <section className="sync-commercial-section" id="planos" aria-labelledby="sync-plans-title">
         <header className="sync-section-heading">
           <div>
             <span>04 / FORMATOS DE IMPLANTAÇÃO SOB MEDIDA</span>
             <h2 id="sync-plans-title">Não vendemos pacotes engessados.<br />A IA é calibrada para a realidade da sua empresa.</h2>
           </div>
-          <p>Sem tabelas genéricas ou limites que travam seu atendimento. Configuramos a inteligência sob medida para o seu volume, nicho e rotina comercial.</p>
+          <p>Sem tabelas genéricas ou limites que travam seu atendimento. Você testa a inteligência no seu segmento e vê o retorno antes de contratar.</p>
         </header>
 
-        <div className="plan-cycle-toggle-wrapper">
-          <div className="plan-transparency-box sync-transparency-premium">
-            <p>
-              🔒 <strong>Engenharia de Implantação Dedicada:</strong> Não entregamos robô cru. Mapeamos seus serviços, regras e horários, calibramos a IA com o tom de voz da sua marca e integramos diretamente ao seu WhatsApp e Google Agenda.
-            </p>
+        {/* 1. Dock de Garantia e Engenharia Dedicada */}
+        <div className="value-assurance-dock">
+          <div className="assurance-radar-pill">
+            <span className="dock-radar-dot" />
+            <span>IMPLANTAÇÃO CHAVE NA MÃO · SEM PACOTES ENGESSADOS</span>
+          </div>
+          <p className="assurance-headline">
+            Não entregamos robô cru. Mapeamos as regras da sua clínica ou negócio, calibramos as respostas com o seu tom de voz e conectamos no seu WhatsApp via QR Code em minutos.
+          </p>
+          <div className="assurance-perks-row">
+            <div className="perk-chip">
+              <span className="perk-icon">⚡</span>
+              <span>Conexão Imediata via QR Code</span>
+            </div>
+            <div className="perk-chip">
+              <span className="perk-icon">🛡️</span>
+              <span>Zero Risco: Teste no seu WhatsApp</span>
+            </div>
+            <div className="perk-chip">
+              <span className="perk-icon">📅</span>
+              <span>Google Agenda em Tempo Real</span>
+            </div>
+            <div className="perk-chip">
+              <span className="perk-icon">🤝</span>
+              <span>Calibração Guiada por Especialista</span>
+            </div>
           </div>
         </div>
 
-        <div className="simplified-plans-grid">
+        {/* 2. Alternador Interativo de Formatos */}
+        <div className="plan-interactive-switcher-row" role="tablist" aria-label="Formatos de Atendimento">
+          <button
+            type="button"
+            role="tab"
+            aria-selected={selectedFormat === "essencial"}
+            className={`plan-switcher-pill ${selectedFormat === "essencial" ? "is-active" : ""}`}
+            onClick={() => setSelectedFormat("essencial")}
+          >
+            <span>Operação Essencial (1 WhatsApp)</span>
+          </button>
+          <button
+            type="button"
+            role="tab"
+            aria-selected={selectedFormat === "pro"}
+            className={`plan-switcher-pill ${selectedFormat === "pro" ? "is-active" : ""}`}
+            onClick={() => setSelectedFormat("pro")}
+          >
+            <span>Operação Scale Pro (Equipe &amp; Setores)</span>
+            <em className="switcher-badge-mini">Recomendado</em>
+          </button>
+        </div>
+
+        {/* 3. Grid com Cards Luminous de Alto Impacto */}
+        <div className="plans-showcase-grid sync-plans-grid-new">
           {simplifiedPlans.map((plan) => {
-            const isPro = plan.id === "pro";
+            const isFeatured = plan.featured;
+            const isHighlighted = selectedFormat === plan.id;
             return (
-              <article className={`simple-plan-card ${isPro ? "featured" : ""}`} key={plan.id}>
-                {isPro && <span className="simple-plan-pill-tag">MAIS ESCOLHIDO</span>}
-                <div className="plan-card-top">
-                  <div className="plan-badge-row">
-                    <small className="plan-badge-label">{plan.badge}</small>
-                  </div>
-                  <h3>{plan.name}</h3>
-                  <div className="plan-format-deliverable">
-                    <small className="format-scope-label">ESCOPO DE IMPLANTAÇÃO</small>
-                    <strong className="format-title-main">{plan.formatTitle}</strong>
-                    <span className="format-scope-sub">{plan.volumeLabel}</span>
-                  </div>
-                  <div className="plan-setup-badge">
-                    <span>{plan.deliverableBadge}</span>
-                  </div>
-                  <p className="plan-tagline">{plan.tagline}</p>
+              <article
+                className={`plan-showcase-card ${isFeatured ? "featured" : ""} ${isHighlighted ? "is-active-format" : ""}`}
+                key={plan.id}
+                onMouseEnter={() => setSelectedFormat(plan.id as "essencial" | "pro")}
+              >
+                {isFeatured && <span className="plan-featured-badge">MAIS ESCOLHIDO</span>}
+
+                <div className="card-kicker-row">
+                  <span className="card-kicker-tag">{plan.kicker}</span>
                 </div>
 
-                <div className="plan-ideal-for">
-                  <small>IDEAL PARA:</small>
-                  <p>{plan.idealFor}</p>
-                </div>
+                <h3 className="plan-title-hero">{plan.name}</h3>
+                <p className="plan-headline-impact">{plan.headline}</p>
 
-                <ul className="plan-features-list">
-                  {plan.keyHighlights.map((feat, i) => (
-                    <li key={i}>
-                      <i>✓</i> {feat}
-                    </li>
+                {/* Grid 2x2 com Capacidades Técnicas Vivas */}
+                <div className="plan-capabilities-grid">
+                  {plan.capabilities.map((cap, cIdx) => (
+                    <div className="capability-item" key={cIdx}>
+                      <span className="capability-icon">{cap.icon}</span>
+                      <div className="capability-text">
+                        <strong>{cap.title}</strong>
+                        <small>{cap.desc}</small>
+                      </div>
+                    </div>
                   ))}
-                </ul>
+                </div>
 
+                {/* Card de Transformação / Impacto no Negócio */}
+                <div className="plan-transformation-card">
+                  <span className="transformation-icon">💎</span>
+                  <div>
+                    <span className="transformation-badge">{plan.transformationBadge}</span>
+                    <p className="transformation-desc">{plan.transformationText}</p>
+                  </div>
+                </div>
+
+                {/* Botão Magnético Luminous */}
                 <button
                   type="button"
-                  className="plan-direct-cta"
-                  onClick={() => openLead(`Gostaria de uma demonstração e proposta para a ${plan.name}.`)}
+                  className="plan-magnetic-btn btn-sync-glow"
+                  onClick={() => openLead(`Olá! Gostaria de testar uma demonstração gratuita da ${plan.name} no meu WhatsApp.`)}
                 >
-                  {plan.ctaText} <SyncArrow />
+                  <span>{plan.ctaText}</span>
+                  <SyncArrow size={14} />
                 </button>
-                <small className="plan-secure-subnote">Calibração sob medida · Conexão rápida via QR Code · Suporte contínuo</small>
+                <small className="plan-trust-subnote">
+                  {plan.deliverableBadge}
+                </small>
               </article>
             );
           })}
