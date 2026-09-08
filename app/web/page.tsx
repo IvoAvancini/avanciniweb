@@ -594,6 +594,7 @@ export default function Home() {
   const portfolioCloseRef = useRef<HTMLButtonElement | null>(null);
   const [scrolled, setScrolled] = useState(false);
   const [selectedDashFormat, setSelectedDashFormat] = useState<"landing" | "institucional" | "loja">("institucional");
+  const [showAllMobileDash, setShowAllMobileDash] = useState(false);
   const [portfolioSpotlight, setPortfolioSpotlight] = useState<PortfolioSpotlightType | null>(null);
 
   const navigateFromMenu = (event: MouseEvent<HTMLAnchorElement>, href: string) => {
@@ -1096,7 +1097,7 @@ export default function Home() {
           </div>
         </div>
 
-        {/* 2. Alternador Interativo de Projetos */}
+        {/* 2. Alternador Interativo de Formatos */}
         <div className="plan-interactive-switcher-row dash-switcher-row" role="tablist" aria-label="Formatos de Projeto">
           <button
             type="button"
@@ -1105,7 +1106,8 @@ export default function Home() {
             className={`plan-switcher-pill ${selectedDashFormat === "landing" ? "is-active" : ""}`}
             onClick={() => setSelectedDashFormat("landing")}
           >
-            <span>Landing Page (Conversão)</span>
+            <span className="pill-title-long">Landing Page (Conversão)</span>
+            <span className="pill-title-short">🎯 Landing</span>
           </button>
           <button
             type="button"
@@ -1114,7 +1116,8 @@ export default function Home() {
             className={`plan-switcher-pill ${selectedDashFormat === "institucional" ? "is-active" : ""}`}
             onClick={() => setSelectedDashFormat("institucional")}
           >
-            <span>Site Institucional (Autoridade)</span>
+            <span className="pill-title-long">Site Institucional (Autoridade)</span>
+            <span className="pill-title-short">🏛️ Institucional</span>
             <em className="switcher-badge-mini">Mais Escolhido</em>
           </button>
           <button
@@ -1124,12 +1127,13 @@ export default function Home() {
             className={`plan-switcher-pill ${selectedDashFormat === "loja" ? "is-active" : ""}`}
             onClick={() => setSelectedDashFormat("loja")}
           >
-            <span>Loja Virtual (Catálogo)</span>
+            <span className="pill-title-long">Loja Virtual (Catálogo)</span>
+            <span className="pill-title-short">⚡ Loja</span>
           </button>
         </div>
 
         {/* 3. Grid com Cards Luminous de Alto Impacto */}
-        <div className="plans-showcase-grid dash-plans-grid-new">
+        <div className={`plans-showcase-grid dash-plans-grid-new ${showAllMobileDash ? "show-all-mobile" : ""}`}>
           {dashPlans.map((plan) => {
             const isFeatured = plan.featured;
             const isHighlighted = selectedDashFormat === plan.id;
@@ -1191,6 +1195,57 @@ export default function Home() {
               </article>
             );
           })}
+        </div>
+
+        {/* 4. Barra Mobile de Navegação Fluida entre Formatos */}
+        <div className="mobile-plan-nav-bar">
+          <button
+            type="button"
+            className="mobile-plan-step-btn"
+            onClick={() => {
+              const keys: ("landing" | "institucional" | "loja")[] = ["landing", "institucional", "loja"];
+              const curIdx = keys.indexOf(selectedDashFormat);
+              const prevIdx = (curIdx - 1 + keys.length) % keys.length;
+              setSelectedDashFormat(keys[prevIdx]);
+            }}
+            aria-label="Formato anterior"
+          >
+            ← Anterior
+          </button>
+          <div className="mobile-plan-dots">
+            {dashPlans.map((p) => (
+              <button
+                type="button"
+                key={p.id}
+                aria-label={`Selecionar formato ${p.name}`}
+                className={`mobile-plan-dot ${selectedDashFormat === p.id ? "active" : ""}`}
+                onClick={() => setSelectedDashFormat(p.id as "landing" | "institucional" | "loja")}
+              />
+            ))}
+          </div>
+          <button
+            type="button"
+            className="mobile-plan-step-btn"
+            onClick={() => {
+              const keys: ("landing" | "institucional" | "loja")[] = ["landing", "institucional", "loja"];
+              const curIdx = keys.indexOf(selectedDashFormat);
+              const nextIdx = (curIdx + 1) % keys.length;
+              setSelectedDashFormat(keys[nextIdx]);
+            }}
+            aria-label="Próximo formato"
+          >
+            Próximo →
+          </button>
+        </div>
+
+        <div className="mobile-view-all-toggle-wrap">
+          <button
+            type="button"
+            className="mobile-view-all-toggle"
+            onClick={() => setShowAllMobileDash(!showAllMobileDash)}
+          >
+            {showAllMobileDash ? "Alternar em Modo Abas Rápidas ↑" : "Ver todos os 3 formatos em lista ↓"}
+          </button>
         </div>
 
         <div className="offer-standard" aria-label="O que está presente em toda entrega Avancini Dash">

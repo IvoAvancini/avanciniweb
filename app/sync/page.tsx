@@ -557,6 +557,7 @@ export default function AvanciniSyncPage() {
   const [scrolled, setScrolled] = useState(false);
   const [leadContext, setLeadContext] = useState("");
   const [selectedFormat, setSelectedFormat] = useState<"essencial" | "pro">("pro");
+  const [showAllMobileSync, setShowAllMobileSync] = useState(false);
   const [activeSupervisorIndex, setActiveSupervisorIndex] = useState(0);
   const [activeJourneyIndex, setActiveJourneyIndex] = useState(0);
   const [activeNicheIndex, setActiveNicheIndex] = useState(0);
@@ -1465,7 +1466,8 @@ export default function AvanciniSyncPage() {
             className={`plan-switcher-pill ${selectedFormat === "essencial" ? "is-active" : ""}`}
             onClick={() => setSelectedFormat("essencial")}
           >
-            <span>Operação Essencial (1 WhatsApp)</span>
+            <span className="pill-title-long">Operação Essencial (1 WhatsApp)</span>
+            <span className="pill-title-short">⚡ Essencial</span>
           </button>
           <button
             type="button"
@@ -1474,13 +1476,14 @@ export default function AvanciniSyncPage() {
             className={`plan-switcher-pill ${selectedFormat === "pro" ? "is-active" : ""}`}
             onClick={() => setSelectedFormat("pro")}
           >
-            <span>Operação Scale Pro (Equipe &amp; Setores)</span>
+            <span className="pill-title-long">Operação Scale Pro (Equipe &amp; Setores)</span>
+            <span className="pill-title-short">🚀 Scale Pro</span>
             <em className="switcher-badge-mini">Recomendado</em>
           </button>
         </div>
 
         {/* 3. Grid com Cards Luminous de Alto Impacto */}
-        <div className="plans-showcase-grid sync-plans-grid-new">
+        <div className={`plans-showcase-grid sync-plans-grid-new ${showAllMobileSync ? "show-all-mobile" : ""}`}>
           {simplifiedPlans.map((plan) => {
             const isFeatured = plan.featured;
             const isHighlighted = selectedFormat === plan.id;
@@ -1536,6 +1539,47 @@ export default function AvanciniSyncPage() {
               </article>
             );
           })}
+        </div>
+
+        {/* 4. Barra Mobile de Navegação Fluida entre Formatos */}
+        <div className="mobile-plan-nav-bar">
+          <button
+            type="button"
+            className="mobile-plan-step-btn"
+            onClick={() => setSelectedFormat(selectedFormat === "essencial" ? "pro" : "essencial")}
+            aria-label="Alternar formato"
+          >
+            ← {selectedFormat === "essencial" ? "Ver Scale Pro" : "Ver Essencial"}
+          </button>
+          <div className="mobile-plan-dots">
+            {simplifiedPlans.map((p) => (
+              <button
+                type="button"
+                key={p.id}
+                aria-label={`Selecionar plano ${p.name}`}
+                className={`mobile-plan-dot ${selectedFormat === p.id ? "active" : ""}`}
+                onClick={() => setSelectedFormat(p.id as "essencial" | "pro")}
+              />
+            ))}
+          </div>
+          <button
+            type="button"
+            className="mobile-plan-step-btn"
+            onClick={() => setSelectedFormat(selectedFormat === "essencial" ? "pro" : "essencial")}
+            aria-label="Alternar formato"
+          >
+            {selectedFormat === "essencial" ? "Scale Pro" : "Essencial"} →
+          </button>
+        </div>
+
+        <div className="mobile-view-all-toggle-wrap">
+          <button
+            type="button"
+            className="mobile-view-all-toggle"
+            onClick={() => setShowAllMobileSync(!showAllMobileSync)}
+          >
+            {showAllMobileSync ? "Alternar em Modo Abas Rápidas ↑" : "Ver todos os planos em lista contínua ↓"}
+          </button>
         </div>
 
         {/* Faixa Enterprise para múltiplos números ou CRM */}

@@ -9654,6 +9654,300 @@ body:has(.web-page) .page-progress{background:linear-gradient(90deg,#43c85d,#a9f
   margin-top: 12px;
 }
 
+/* 8. CONTROLES MOBILE FLUIDOS & RESPONSIVIDADE AVANÇADA */
+.pill-title-short {
+  display: none;
+}
+
+.mobile-plan-nav-bar {
+  display: none;
+}
+
+.mobile-view-all-toggle-wrap {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  /* 1. Value Assurance Dock no Mobile */
+  .value-assurance-dock {
+    padding: 16px 14px 14px;
+    border-radius: 16px;
+    margin-bottom: 18px;
+  }
+
+  .assurance-kicker-tag {
+    font-size: 8.5px;
+    padding: 3px 8px;
+  }
+
+  .assurance-headline {
+    font-size: 13px;
+    line-height: 1.48;
+    margin-bottom: 12px;
+  }
+
+  .assurance-perks-row {
+    gap: 6px;
+    justify-content: center;
+  }
+
+  .perk-chip {
+    padding: 5px 9px;
+    font-size: 10px;
+    gap: 5px;
+    border-radius: 8px;
+  }
+
+  .perk-icon {
+    font-size: 11px;
+  }
+
+  /* 2. Switcher de Formatos no Mobile */
+  .plan-interactive-switcher-row {
+    padding: 4px;
+    gap: 4px;
+    border-radius: 14px;
+    margin-bottom: 16px;
+    width: 100%;
+    max-width: 480px;
+    box-sizing: border-box;
+  }
+
+  .pill-title-long {
+    display: none;
+  }
+
+  .pill-title-short {
+    display: inline;
+  }
+
+  .plan-switcher-pill {
+    padding: 9px 8px;
+    font-size: 11.5px;
+    font-weight: 750;
+    border-radius: 10px;
+    gap: 4px;
+    flex: 1;
+    text-align: center;
+    justify-content: center;
+    white-space: nowrap;
+  }
+
+  .dash-switcher-row .plan-switcher-pill {
+    font-size: 10.5px;
+    padding: 8px 4px;
+  }
+
+  .plan-switcher-pill .switcher-badge-mini {
+    display: none;
+  }
+
+  /* 3. Comportamento Fluido de Cards no Celular (Modo Abas Interativas) */
+  .plans-showcase-grid:not(.show-all-mobile) .plan-showcase-card {
+    display: none;
+  }
+
+  .plans-showcase-grid:not(.show-all-mobile) .plan-showcase-card.is-active-format {
+    display: flex;
+    animation: mobileCardFadeIn 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .plans-showcase-grid.show-all-mobile {
+    display: grid;
+    gap: 18px;
+  }
+
+  .plans-showcase-grid.show-all-mobile .plan-showcase-card {
+    display: flex;
+  }
+
+  /* 4. Barra de Navegação Rápida (Dots + Prev/Next) */
+  .mobile-plan-nav-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin: 14px auto 0;
+    max-width: 310px;
+    padding: 6px 14px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-sizing: border-box;
+  }
+
+  .mobile-plan-step-btn {
+    background: none;
+    border: none;
+    color: #94a3b8;
+    font-size: 11px;
+    font-weight: 750;
+    cursor: pointer;
+    padding: 4px 6px;
+    transition: color 0.2s;
+  }
+
+  .mobile-plan-step-btn:hover,
+  .mobile-plan-step-btn:active {
+    color: #ffffff;
+  }
+
+  .mobile-plan-dots {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  }
+
+  .mobile-plan-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    cursor: pointer;
+    border: none;
+    padding: 0;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .mobile-plan-dot.active {
+    width: 22px;
+    border-radius: 999px;
+    background: #38bdf8;
+    box-shadow: 0 0 10px rgba(56, 189, 248, 0.6);
+  }
+
+  .dash-plans-grid-new + .mobile-plan-nav-bar .mobile-plan-dot.active {
+    background: #22c55e;
+    box-shadow: 0 0 10px rgba(34, 197, 94, 0.6);
+  }
+
+  .mobile-view-all-toggle-wrap {
+    display: block;
+    text-align: center;
+    margin-top: 10px;
+  }
+
+  .mobile-view-all-toggle {
+    background: none;
+    border: none;
+    font-size: 10.5px;
+    font-weight: 600;
+    color: #64748b;
+    cursor: pointer;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    padding: 4px 8px;
+    transition: color 0.2s;
+  }
+
+  .mobile-view-all-toggle:hover {
+    color: #94a3b8;
+  }
+
+  /* 5. Anatomia e Espaçamento Interno do Card no Celular */
+  .plan-showcase-card {
+    padding: 22px 16px 18px;
+    border-radius: 18px;
+  }
+
+  .card-kicker-row {
+    margin-bottom: 8px;
+  }
+
+  .card-kicker-tag {
+    font-size: 8.5px;
+    padding: 2.5px 7px;
+  }
+
+  .plan-title-hero {
+    font-size: 20px;
+    line-height: 1.2;
+    margin: 0 0 6px;
+  }
+
+  .plan-headline-impact {
+    font-size: 12.5px;
+    line-height: 1.45;
+    margin: 0 0 14px;
+  }
+
+  .plan-capabilities-grid {
+    grid-template-columns: 1fr;
+    gap: 7px;
+    margin-bottom: 16px;
+  }
+
+  .capability-item {
+    padding: 9px 11px;
+    gap: 9px;
+    border-radius: 10px;
+  }
+
+  .capability-icon {
+    font-size: 15px;
+  }
+
+  .capability-text strong {
+    font-size: 11.5px;
+    margin-bottom: 1px;
+  }
+
+  .capability-text small {
+    font-size: 10px;
+    line-height: 1.35;
+  }
+
+  .plan-transformation-card {
+    padding: 11px 12px;
+    gap: 9px;
+    margin-bottom: 18px;
+    border-radius: 12px;
+  }
+
+  .transformation-icon {
+    font-size: 16px;
+  }
+
+  .transformation-badge {
+    font-size: 8px;
+    margin-bottom: 2px;
+  }
+
+  .transformation-desc {
+    font-size: 11px;
+    line-height: 1.4;
+  }
+
+  .plan-magnetic-btn {
+    min-height: 46px;
+    font-size: 13px;
+    border-radius: 12px;
+  }
+
+  .plan-trust-subnote {
+    font-size: 10px;
+    margin-top: 8px;
+  }
+
+  .plan-featured-badge {
+    top: 12px;
+    right: 12px;
+    font-size: 8px;
+    padding: 2.5px 8px;
+  }
+}
+
+@keyframes mobileCardFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .simplified-plans-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
