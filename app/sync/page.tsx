@@ -588,7 +588,7 @@ export default function AvanciniSyncPage() {
   const [activeJourneyIndex, setActiveJourneyIndex] = useState(0);
   const [activeNicheIndex, setActiveNicheIndex] = useState(0);
   const [dailyContacts, setDailyContacts] = useState(60);
-  const [clientTicket, setClientTicket] = useState(350);
+  const [clientTicket, setClientTicket] = useState(800);
   const [missedWeekendLeads, setMissedWeekendLeads] = useState(3);
 
   // Audio player demo states
@@ -1239,24 +1239,24 @@ export default function AvanciniSyncPage() {
         </div>
       </section>
 
-      {/* 3. COMPARATIVO FINANCEIRO & ROI: POR QUE A IA SE PAGA SOZINHA */}
+      {/* 3. COMPARATIVO FINANCEIRO & EFICIÊNCIA OPERACIONAL */}
       <section className="sync-commercial-section sync-cost-comparison" id="retorno" aria-labelledby="sync-cost-title">
         <header className="sync-section-heading">
           <div>
-            <span>02 / A MATEMÁTICA DO RETORNO REAL</span>
+            <span>02 / EFICIÊNCIA OPERACIONAL &amp; RESULTADOS</span>
             <h2 id="sync-cost-title" className="roi-balanced-title">
-              Como o Atendente&nbsp;de&nbsp;IA <br />
-              <em>pode até se pagar logo no 1º cliente recuperado?</em>
+              Quanto a sua empresa ganha <br />
+              <em>quando nenhum cliente fica sem resposta no WhatsApp?</em>
             </h2>
           </div>
-          <p>Veja como apenas 1 cliente recuperado fora do horário já pode cobrir o investimento da IA.</p>
+          <p>Simule a receita recuperada fora do expediente e compare com o custo de uma operação humana tradicional.</p>
         </header>
 
         <div className="sync-roi-grid">
           {/* Card 1: A Dor Real (O que você perde hoje) */}
           <div className="sync-roi-card sync-roi-pain">
             <div className="roi-tag pain-tag">❌ O QUE VOCÊ PERDE HOJE SEM A IA</div>
-            <h3>O buraco negro do pós-18h e fim de semana</h3>
+            <h3>O vácuo do pós-18h e fim de semana</h3>
             <p className="roi-desc">
               Mais de 60% das mensagens chegam à noite ou no fim de semana. Sem resposta rápida, o cliente contrata o concorrente.
             </p>
@@ -1265,13 +1265,13 @@ export default function AvanciniSyncPage() {
               <div className="roi-input-row">
                 <div className="roi-label-row">
                   <span>Quanto vale em média 1 novo cliente ou consulta para você?</span>
-                  <strong>R$ {clientTicket}</strong>
+                  <strong>R$ {clientTicket.toLocaleString("pt-BR")}</strong>
                 </div>
                 <input
                   type="range"
-                  min="50"
-                  max="2000"
-                  step="50"
+                  min="100"
+                  max="5000"
+                  step="100"
                   value={clientTicket}
                   onChange={(e) => setClientTicket(Number(e.target.value))}
                   aria-label="Ticket médio de cliente"
@@ -1311,14 +1311,14 @@ export default function AvanciniSyncPage() {
           {/* Card 2: O Ganho Real e Previsível */}
           <div className="sync-roi-card sync-roi-gain">
             <div className="roi-tag gain-tag">✓ COM O AVANCINI SYNC</div>
-            <h3>Retorno direto e lucro líquido no caixa</h3>
+            <h3>Conversão contínua sem limite de horário</h3>
 
             <div className="sync-break-even-pill">
-              <span className="break-even-check">✓</span>
+              <span className="break-even-check">⚡</span>
               <div>
-                <strong>PODE BASTAR 1 ÚNICO CLIENTE RECUPERADO NO MÊS</strong>
+                <strong>RESGATE DE VENDAS EM TEMPO REAL</strong>
                 <p>
-                  Com apenas 1 cliente de R$ {clientTicket} retido que antes desistiria por demora no atendimento, a IA já se paga e o restante é faturamento puro no seu caixa.
+                  Cada cliente atendido em segundos fora do expediente é uma oportunidade quente resgatada antes de procurar o concorrente, gerando faturamento novo no seu caixa.
                 </p>
               </div>
             </div>
@@ -1329,17 +1329,17 @@ export default function AvanciniSyncPage() {
                 <strong>R$ 3.500+ / mês <small style={{ color: "#94a3b8", fontWeight: 400 }}>(encargos + plantões)</small></strong>
               </div>
               <div className="math-line gain-highlight">
-                <span>Faturamento recuperado ({missedWeekendLeads} clientes que iriam embora):</span>
+                <span>Faturamento recuperado estimado ({missedWeekendLeads} clientes acolhidos):</span>
                 <strong className="text-success">+ R$ {(clientTicket * missedWeekendLeads).toLocaleString("pt-BR", { minimumFractionDigits: 2 })} / mês</strong>
               </div>
 
               <div className="sync-final-profit-card">
                 <div>
-                  <small>RECEITA ADICIONAL RECUPERADA NO SEU CAIXA:</small>
+                  <small>RECEITA ADICIONAL RESGATADA NO SEU CAIXA:</small>
                   <strong className="text-success">+ R$ {(clientTicket * missedWeekendLeads).toLocaleString("pt-BR", { minimumFractionDigits: 2 })} / mês</strong>
                 </div>
                 <span className="free-status-badge">
-                  RETORNO DIRETO NO 1º FECHAMENTO
+                  RECEITA NOVA NO CAIXA
                 </span>
               </div>
             </div>
@@ -1347,16 +1347,16 @@ export default function AvanciniSyncPage() {
             {/* Prova Social e Depoimento Real */}
             <div className="roi-social-proof-strip">
               <div className="proof-stars">★★★★★</div>
-              <p>&ldquo;No primeiro sábado à noite a IA atendeu e agendou 2 procedimentos particulares fora do horário. Ela já pagou o mês inteiro da clínica logo no primeiro fim de semana.&rdquo;</p>
+              <p>&ldquo;No primeiro sábado à noite a IA atendeu e agendou 2 procedimentos particulares fora do horário. Recuperamos clientes que certamente teriam procurado outro profissional se tivessem que esperar até segunda-feira.&rdquo;</p>
               <small>— Dr. Fernando M., Diretor Clínico</small>
             </div>
 
             <button
               type="button"
               className="sync-roi-cta"
-              onClick={() => openLead(`Quero parar de perder clientes fora do horário. Meu ticket é de R$ ${clientTicket} e quero testar a IA da Avancini Sync.`)}
+              onClick={() => openLead(`Quero parar de perder clientes fora do horário. Meu ticket é de R$ ${clientTicket} e quero estruturar o atendimento da Avancini Sync.`)}
             >
-              QUERO PARAR DE PERDER CLIENTES AGORA ↗
+              ESTRUTURAR ATENDIMENTO 24/7 NA MINHA EMPRESA ↗
             </button>
 
             <div className="roi-trust-badges">
@@ -1369,7 +1369,7 @@ export default function AvanciniSyncPage() {
 
         <div className="fin-closing-note">
           <p>
-            💡 <strong>A conta é simples:</strong> A IA se paga logo no primeiro cliente retido fora do horário comercial.
+            💡 <strong>A lógica é simples:</strong> Enquanto o modelo tradicional exige altos custos fixos com pessoal para horários estendidos, a IA atende em segundos 24/7 e multiplica suas conversões sem encargos trabalhistas.
           </p>
         </div>
       </section>
@@ -1589,8 +1589,8 @@ export default function AvanciniSyncPage() {
               <span>Conecta no seu número atual via QR Code</span>
             </div>
             <div className="argument-proof-pill">
-              <strong>0 Risco</strong>
-              <span>Se paga na 1ª consulta ou venda salva</span>
+              <strong>Mais Vendas</strong>
+              <span>Zero perda de leads na noite e fins de semana</span>
             </div>
           </div>
         </div>

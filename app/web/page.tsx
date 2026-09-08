@@ -351,35 +351,33 @@ const dashOpportunityGoals = {
 } as const;
 
 function WebOpportunitySimulator({ onLead }: { onLead: (message: string) => void }) {
-  const [ticketValue, setTicketValue] = useState(300);
+  const [ticketValue, setTicketValue] = useState(800);
   const [lostClients, setLostClients] = useState(3);
 
   const monthlyLost = ticketValue * lostClients;
-  const siteCost = 89.9;
-  const netGainWithJustThree = ticketValue * 3 - siteCost;
 
   return (
     <section className="web-opportunity dash-roi-section" id="retorno" aria-labelledby="web-opportunity-title">
       <header className="dash-roi-header">
         <div>
-          <span className="section-index">03 / A MATEMÁTICA DO RETORNO REAL</span>
+          <span className="section-index">03 / MULTIPLICADOR DE RESULTADOS</span>
           <h2 id="web-opportunity-title" className="roi-balanced-title">
-            Como um site profissional <br />
-            <em>pode até se pagar logo no 1º cliente conquistado?</em>
+            O site certo não é um custo. <br />
+            <em>É um gerador contínuo de novos clientes.</em>
           </h2>
         </div>
         <p>
-          Veja como apenas 1 cliente conquistado no mês já pode cobrir o investimento integral do site.
+          Simule o impacto de um posicionamento rápido e de alta credibilidade no volume de vendas da sua empresa.
         </p>
       </header>
 
       <div className="dash-roi-grid">
         {/* Painel Esquerdo: A Dor e a Perda */}
         <div className="dash-roi-card dash-roi-pain">
-          <div className="roi-card-tag pain-tag">❌ O QUE VOCÊ PERDE HOJE SEM O SITE</div>
-          <h3>Dinheiro escorrendo pelo ralo</h3>
+          <div className="roi-card-tag pain-tag">❌ O CUSTO DA INVISIBILIDADE DIGITAL</div>
+          <h3>Dinheiro deixado na mesa todo mês</h3>
           <p className="roi-card-desc">
-            Quando o cliente clica no seu link e encontra uma página lenta ou amadora, ele fecha a aba e contrata o concorrente.
+            Quando um potencial cliente clica no seu link e encontra uma página amadora ou lenta, ele fecha a aba e contrata o concorrente.
           </p>
           <div className="roi-evidence-callout">
             📊 <strong>Google:</strong> 53% dos usuários no celular abandonam sites que demoram mais de 3s para carregar.
@@ -388,14 +386,14 @@ function WebOpportunitySimulator({ onLead }: { onLead: (message: string) => void
           <div className="roi-interactive-controls">
             <div className="roi-control-item">
               <div className="roi-control-label">
-                <span>Quanto vale 1 novo cliente ou consulta para você?</span>
-                <strong>R$ {ticketValue}</strong>
+                <span>Quanto vale em média 1 novo cliente ou contrato para você?</span>
+                <strong>R$ {ticketValue.toLocaleString("pt-BR")}</strong>
               </div>
               <input
                 type="range"
-                min="50"
-                max="1500"
-                step="50"
+                min="100"
+                max="5000"
+                step="100"
                 value={ticketValue}
                 onChange={(e) => setTicketValue(Number(e.target.value))}
                 aria-label="Ticket médio de um cliente"
@@ -404,7 +402,7 @@ function WebOpportunitySimulator({ onLead }: { onLead: (message: string) => void
 
             <div className="roi-control-item">
               <div className="roi-control-label">
-                <span>Clientes perdidos por mês (sem site ou site que não converte):</span>
+                <span>Oportunidades perdidas por mês (sem site ou página que não converte):</span>
                 <strong className="roi-number-danger">-{lostClients} clientes / mês</strong>
               </div>
               <input
@@ -420,22 +418,22 @@ function WebOpportunitySimulator({ onLead }: { onLead: (message: string) => void
           </div>
 
           <div className="roi-impact-box pain-impact">
-            <small>PREJUÍZO MENSAL ESTIMADO:</small>
+            <small>FATURAMENTO QUE ESCORRE TODO MÊS:</small>
             <strong className="roi-number-danger">- R$ {monthlyLost.toLocaleString("pt-BR", { minimumFractionDigits: 2 })} / mês</strong>
-            <p className="text-contrast-high">Faturamento que você deixa na mesa todo mês para concorrentes que passam mais confiança.</p>
+            <p className="text-contrast-high">Receita que você deixa de colocar no caixa para concorrentes que passam mais confiança.</p>
           </div>
         </div>
 
         {/* Painel Direito: O Ganho Real e Previsível */}
         <div className="dash-roi-card dash-roi-gain">
           <div className="roi-card-tag gain-tag">✓ COM O AVANCINI DASH</div>
-          <h3>O investimento que pode até se pagar sozinho</h3>
+          <h3>Ativo comercial gerando receita contínua</h3>
 
           <div className="roi-break-even-card">
-            <span className="roi-check-circle">✓</span>
+            <span className="roi-check-circle">📈</span>
             <div>
-              <strong>PODE BASTAR 1 ÚNICO CLIENTE NO MÊS</strong>
-              <p>Com apenas 1 cliente de R$ {ticketValue} conquistado através de um site rápido e com alta credibilidade, o investimento já se paga e o restante é faturamento novo no seu caixa.</p>
+              <strong>ALAVANCAGEM REAL DE FATURAMENTO</strong>
+              <p>Ao transmitir autoridade imediata e carregar em 0.2s, cada novo contrato fechado através do site multiplica o valor do seu investimento e consolida sua marca.</p>
             </div>
           </div>
 
@@ -449,32 +447,32 @@ function WebOpportunitySimulator({ onLead }: { onLead: (message: string) => void
               <strong>+3 a +8 clientes / mês</strong>
             </div>
             <div className="roi-line gain-highlight">
-              <span>Faturamento com 3 novos clientes fechados:</span>
+              <span>Estimativa de faturamento com 3 novos clientes:</span>
               <strong className="roi-number-success">+ R$ {(ticketValue * 3).toLocaleString("pt-BR", { minimumFractionDigits: 2 })}</strong>
             </div>
 
             <div className="roi-final-profit-box">
               <div>
-                <small>RECEITA ADICIONAL GERADA NO SEU NEGÓCIO:</small>
+                <small>RECEITA ADICIONAL ESTIMADA NO SEU NEGÓCIO:</small>
                 <strong className="roi-number-success">+ R$ {(ticketValue * 3).toLocaleString("pt-BR", { minimumFractionDigits: 2 })} / mês</strong>
               </div>
-              <span className="roi-status-pill">SE PAGA NO 1º CONTRATO</span>
+              <span className="roi-status-pill">ALTO RETORNO SOBRE O INVESTIMENTO</span>
             </div>
           </div>
 
           {/* Prova Social e Case Real */}
           <div className="roi-social-proof-strip">
             <div className="proof-stars">★★★★★</div>
-            <p>&ldquo;Colocamos a nova landing page no ar na quarta-feira e na mesma semana fechamos 2 contratos particulares que pagaram o ano inteiro de investimento do projeto.&rdquo;</p>
+            <p>&ldquo;Colocamos a nova landing page no ar na quarta-feira e na mesma semana fechamos 2 novos clientes particulares que vieram diretamente das buscas no Google.&rdquo;</p>
             <small>— Dr. Roberto M., Diretor na Clínica San Diego</small>
           </div>
 
           <button
             type="button"
             className="roi-action-button"
-            onClick={() => onLead(`Quero parar de perder clientes. Meu ticket médio é de R$ ${ticketValue} e quero colocar um site profissional no ar com a Avancini Dash.`)}
+            onClick={() => onLead(`Quero parar de perder clientes. Meu ticket médio é de R$ ${ticketValue} e quero estruturar um site de alta conversão com a Avancini Dash.`)}
           >
-            PARAR DE PERDER CLIENTES E COMEÇAR ↗
+            POTENCIALIZAR O MEU FATURAMENTO ↗
           </button>
 
           <div className="roi-trust-badges">
