@@ -121,14 +121,14 @@ const webPillars = [
 ] as const;
 
 const webFaqs = [
-  { question: "Como funciona o processo de criação?", answer: "Começamos entendendo sua empresa, o público e o objetivo do site. Depois alinhamos estrutura, mensagem e direção visual antes do desenvolvimento e da publicação." },
-  { question: "Landing page e site institucional são a mesma coisa?", answer: "Não. A landing concentra o visitante em uma oferta e uma ação. O site institucional apresenta a empresa inteira, organiza serviços e constrói autoridade." },
-  { question: "O site funciona bem no celular?", answer: "Sim. A experiência é planejada para celular, computador e outras telas, com atenção a legibilidade, velocidade e facilidade para entrar em contato." },
-  { question: "Posso usar meu próprio domínio?", answer: "Sim. Conectamos um domínio que já seja seu. Se precisar registrar um novo .com.br, verificamos disponibilidade e condições antes do início." },
-  { question: "Quanto tempo demora para ficar pronto?", answer: "O prazo depende da estrutura e do conteúdo disponível. Como referência, projetos diretos podem levar 7 dias e estruturas completas até 30 dias, sempre combinado antes do início." },
-  { question: "A opção sem entrada tem qualidade inferior?", answer: "Não. Estratégia, texto, design, versão mobile e acabamento seguem o mesmo padrão. O que muda é a forma de contratação e o endereço escolhido, nunca o cuidado com a entrega." },
-  { question: "O que acontece depois da publicação ou se eu cancelar?", answer: "Hospedagem, SSL, suporte e um pequeno ajuste mensal permanecem inclusos enquanto a assinatura estiver ativa. No mensal, você pode encerrar antes da próxima renovação. No semestral ou anual, o serviço permanece ativo até o fim do período já contratado." },
-  { question: "Preciso entender de tecnologia?", answer: "Não. Você explica seu negócio e envia as informações essenciais. A Avancini organiza estratégia, texto, visual, publicação e suporte para entregar tudo funcionando." },
+  { question: "Como funciona o processo de criação?", answer: "Iniciamos entendendo seu modelo de negócio, público-alvo e metas de conversão. Desenvolvemos o copywriting estratégico, o design autoral e a engenharia de alta performance, entregando o primeiro rascunho interativo em 48h para validação." },
+  { question: "Landing page e site institucional são a mesma coisa?", answer: "Não. A landing page concentra 100% da atenção em uma oferta direta ou campanha com foco em conversão rápida. O site institucional apresenta sua empresa completa, catálogo de serviços, equipe e consolida autoridade no Google." },
+  { question: "O site carrega rápido e funciona bem no celular?", answer: "Sim. Todos os nossos projetos são desenvolvidos com nota máxima no Google PageSpeed e carregamento de 0.2s LCP. A experiência mobile é fluida e prioritária, garantindo zero perda de clientes em conexões móveis." },
+  { question: "Posso usar meu próprio domínio e e-mail profissional?", answer: "Com certeza. Conectamos seu domínio corporativo (.com.br, .com etc.) e auxiliamos na configuração de e-mails profissionais com certificado de segurança SSL avançado." },
+  { question: "Quanto tempo demora para o projeto ficar pronto?", answer: "Projetos de alta conversão (Landing Pages) ficam prontos entre 48h e 7 dias. Estruturas institucionais e lojas virtuais completas são entregues entre 10 e 20 dias, com cronograma claro e acompanhamento diário." },
+  { question: "Como é calculada a proposta de investimento?", answer: "Cada solução é desenhada sob medida conforme a complexidade técnica e os objetivos do seu negócio. Analisamos o escopo ideal para garantir a máxima taxa de retorno sobre o seu investimento." },
+  { question: "Como funciona a hospedagem, SSL e suporte?", answer: "Cuidamos de toda a infraestrutura técnica: servidores em nuvem ultrarrápidos, certificado SSL de alta criptografia, backups automatizados e suporte dedicado para qualquer ajuste ou melhoria." },
+  { question: "Preciso entender de tecnologia para gerenciar?", answer: "De forma alguma. Cuidamos de 100% da engenharia, do rascunho à publicação. Você só precisa nos enviar as diretrizes essenciais do seu negócio e nós entregamos a máquina de conversão pronta." },
 ] as const;
 
 const heroAudiences = ["EMPRESAS", "AUTÔNOMOS", "CLÍNICAS", "ESCRITÓRIOS", "MARCAS"] as const;
@@ -490,62 +490,7 @@ function WebOpportunitySimulator({ onLead }: { onLead: (message: string) => void
 
 
 
-function DashSiteDiagnosticSection({ onLead }: { onLead: (message: string) => void }) {
-  const [siteUrlInput, setSiteUrlInput] = useState("");
-  const [clientName, setClientName] = useState("");
 
-  const handleDiagnostic = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!siteUrlInput.trim()) return;
-    const msg = `Olá! Gostaria de uma análise gratuita de velocidade e conversão para o meu negócio.${clientName ? ` Meu nome é ${clientName}.` : ""} Link/perfil: ${siteUrlInput}`;
-    onLead(msg);
-  };
-
-  return (
-    <section className="dash-diagnostic-section" id="diagnostico" aria-labelledby="diag-title">
-      <div className="dash-diagnostic-card">
-        <div className="diag-header-row">
-          <span className="diag-live-dot" />
-          <span className="diag-kicker">DIAGNÓSTICO GRATUITO EM 5 MINUTOS</span>
-        </div>
-        <h2 id="diag-title">
-          Quer saber a nota real do seu site ou Instagram hoje?
-        </h2>
-        <p>
-          Analisamos gratuitamente a velocidade no celular e onde você pode estar perdendo clientes para concorrentes.
-        </p>
-
-        <form onSubmit={handleDiagnostic} className="diag-form-wrap">
-          <div className="diag-inputs-grid">
-            <input
-              type="text"
-              placeholder="Digite o link do seu site (ou seu @ do Instagram)"
-              value={siteUrlInput}
-              onChange={(e) => setSiteUrlInput(e.target.value)}
-              required
-              aria-label="Link do site ou perfil do Instagram"
-              className="diag-main-input"
-            />
-            <input
-              type="text"
-              placeholder="Seu nome (opcional)"
-              value={clientName}
-              onChange={(e) => setClientName(e.target.value)}
-              aria-label="Seu nome"
-              className="diag-name-input"
-            />
-            <button type="submit" className="diag-submit-btn">
-              RECEBER ANÁLISE GRÁTIS NO WHATSAPP ↗
-            </button>
-          </div>
-          <span className="diag-privacy-sub">
-            🔒 100% gratuita e confidencial. Relatório prático direto no seu WhatsApp.
-          </span>
-        </form>
-      </div>
-    </section>
-  );
-}
 
 const countriesList = [
   { code: "BR", name: "Brasil", ddi: "+55", placeholder: "(11) 99999-9999" },
@@ -839,9 +784,8 @@ export default function Home() {
               ["03", "Custo x Retorno", "A matemática do retorno real", "#retorno"],
               ["04", "Metodologia", "Estratégia antes do visual", "#metodo"],
               ["05", "Serviços e planos", "Encontre o formato certo", "#configurar-plano"],
-              ["06", "Diagnóstico", "Análise gratuita do seu site", "#diagnostico"],
-              ["07", "Dúvidas", "Decida com segurança", "#duvidas"],
-              ["08", "Contato", "Comece uma conversa", "#contato"],
+              ["06", "Dúvidas", "Decida com segurança", "#duvidas"],
+              ["07", "Contato", "Comece uma conversa", "#contato"],
             ].map(([number, label, description, href]) => (
               <a href={href} key={number} onClick={(event) => navigateFromMenu(event, href)}>
                 <small>{number}</small>
@@ -993,53 +937,6 @@ export default function Home() {
         <div className="web-portfolio-all"><strong>Dez experiências diferentes, cada uma construída a partir do problema real do segmento, não apenas com outro nome e outra cor.</strong><span>AMPLIE E ROLE POR DENTRO <WebArrow /></span></div>
       </section>
 
-      <section className="dash-entry-paths" id="planos-rapidos" aria-labelledby="dash-entry-title">
-        <header>
-          <span>COMECE PELO SEU OBJETIVO</span>
-          <h2 id="dash-entry-title">Você não precisa entender de site.<br />Só precisa saber o que quer conquistar.</h2>
-          <p>Escolha o cenário mais próximo do seu negócio. A gente organiza o restante.</p>
-        </header>
-        <div>
-          {dashPlans.map((plan, index) => (
-            <a href="#investimento" key={plan.id} className="dash-entry-card">
-              <div className="dash-entry-card-top">
-                <small>0{index + 1} · FORMATO</small>
-                <span className="dash-entry-badge">{plan.badge}</span>
-              </div>
-              <h3 className="dash-entry-card-title">{plan.name}</h3>
-              <p className="dash-entry-desc">{plan.pitch}</p>
-              
-              <div className="dash-entry-price-wrap">
-                <div className="dash-entry-price-amount">
-                  PROJETO SOB MEDIDA
-                </div>
-                <div className="dash-entry-perk-row">
-                  <span className="dash-entry-perk-pill">
-                    <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
-                      <path fillRule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clipRule="evenodd" />
-                    </svg>
-                    {plan.deliverableBadge}
-                  </span>
-                </div>
-              </div>
-
-              <ul className="dash-entry-features">
-                {plan.features.slice(0, 3).map((feat, hIdx) => (
-                  <li key={hIdx}>
-                    <i aria-hidden="true" />
-                    <span><b>{feat.title}:</b> {feat.desc}</span>
-                  </li>
-                ))}
-              </ul>
-
-              <div className="dash-entry-action">
-                <span>Ver escopo e proposta</span>
-                <WebArrow />
-              </div>
-            </a>
-          ))}
-        </div>
-      </section>
 
       <WebOpportunitySimulator onLead={(message) => startBudgetConversation("Simulação de oportunidade digital", message)} />
 
@@ -1171,9 +1068,28 @@ export default function Home() {
         <p className="investment-note">Valores de lançamento para escopos iniciais. Todos os ciclos mantêm a mesma qualidade e incluem publicação, hospedagem de alta velocidade, SSL, suporte e acompanhamento.</p>
       </section>
 
-      <section className="section web-faq" id="duvidas">
-        <div className="web-faq-intro"><span>PERGUNTAS FREQUENTES</span><h2>Tire suas dúvidas<br /><em>antes de começar.</em></h2><p>As perguntas que mais aparecem antes de iniciar um projeto. Não encontrou a sua?</p><button type="button" onClick={() => openLead("Tenho uma dúvida sobre os serviços da Avancini Dash antes de começar meu projeto.")}>FALAR COM A AVANCINI <WebArrow /></button></div>
-        <div className="web-faq-list">{webFaqs.map((item)=><details key={item.question}><summary>{item.question}<span>+</span></summary><p>{item.answer}</p></details>)}</div>
+      <section className="section web-faq" id="duvidas" aria-labelledby="web-faq-heading">
+        <div className="web-faq-intro">
+          <span className="faq-kicker">PERGUNTAS FREQUENTES</span>
+          <h2 id="web-faq-heading">Tire suas dúvidas<br /><em>antes de começar.</em></h2>
+          <p>As principais respostas sobre metodologia, prazos, domínio e entrega. Não encontrou o que precisa?</p>
+          <button type="button" onClick={() => openLead("Tenho uma dúvida sobre os serviços da Avancini Dash antes de começar meu projeto.")}>
+            FALAR COM A AVANCINI <WebArrow />
+          </button>
+        </div>
+        <div className="web-faq-list">
+          {webFaqs.map((item) => (
+            <details key={item.question} className="faq-item-details">
+              <summary className="faq-item-summary">
+                <span className="faq-item-q">{item.question}</span>
+                <span className="faq-toggle-icon" aria-hidden="true">+</span>
+              </summary>
+              <div className="faq-item-answer">
+                <p>{item.answer}</p>
+              </div>
+            </details>
+          ))}
+        </div>
       </section>
 
       {activeSpotlight && portfolioSpotlight && (
@@ -1220,8 +1136,6 @@ export default function Home() {
         </div>
       )}
 
-      <DashSiteDiagnosticSection onLead={(message) => startBudgetConversation("Diagnóstico Gratuito de Site", message)} />
-
       <footer id="contato">
         <div className="footer-top">
           <div className="footer-brand">
@@ -1244,7 +1158,6 @@ export default function Home() {
             <a href="#retorno">Custo x Retorno</a>
             <a href="#metodo">Metodologia</a>
             <a href="#configurar-plano">Serviços e planos</a>
-            <a href="#diagnostico">Diagnóstico gratuito</a>
             <a href="#duvidas">Perguntas frequentes</a>
             <Link href="/">Avancini OS <WebArrow /></Link>
             <Link href="/sync">Avancini Sync <WebArrow /></Link>

@@ -1571,26 +1571,34 @@ export default function AvanciniSyncPage() {
       {/* 5.1 ARGUMENTO & RETORNO IMEDIATO — A CONSULTA PERDIDA */}
       <section className="sync-commercial-section sync-argument-section" aria-label="Retorno sobre o investimento">
         <div className="sync-argument-box">
-          <span className="sync-argument-badge">O CÁLCULO QUE REALMENTE IMPORTA</span>
+          <div className="sync-argument-top-glow" aria-hidden="true" />
+          <div className="sync-argument-header">
+            <span className="sync-argument-badge">
+              <i className="badge-pulse-dot" aria-hidden="true" /> O CÁLCULO QUE REALMENTE IMPORTA
+            </span>
+          </div>
           <div className="sync-argument-quote-deco" aria-hidden="true">“</div>
           <blockquote>
-            A mensalidade do robô custa menos do que uma consulta ou venda perdida porque o WhatsApp demorou duas horas para responder num sábado à noite.
+            Uma única venda ou consulta perdida na noite ou no fim de semana custa mais caro do que estruturar um atendimento inteligente.
           </blockquote>
           <p className="sync-argument-desc">
-            É esse o cálculo que importa — não quantas mensagens sobraram no fim do mês. Enquanto seu concorrente ainda está sem responder no domingo, o seu cliente já está com o horário agendado e confirmado na sua grade.
+            É esse o cálculo que define os líderes de mercado: enquanto o seu concorrente deixa o cliente esperando até segunda-feira de manhã, a sua IA acolhe com empatia humana, tira dúvidas, qualifica a intenção e confirma o agendamento na sua grade em segundos.
           </p>
           <div className="sync-argument-proof-row">
             <div className="argument-proof-pill">
-              <strong>24h</strong>
-              <span>Atendimento ativo fora do expediente</span>
+              <span className="proof-metric">24/7</span>
+              <strong className="proof-label">Atendimento Imediato</strong>
+              <p className="proof-desc">Acolhimento ativo mesmo fora do expediente comercial</p>
             </div>
             <div className="argument-proof-pill">
-              <strong>1 WhatsApp</strong>
-              <span>Conecta no seu número atual via QR Code</span>
+              <span className="proof-metric">&lt; 2s</span>
+              <strong className="proof-label">Resposta em Tempo Real</strong>
+              <p className="proof-desc">Leitura de áudios, textos e envio de respostas naturais</p>
             </div>
             <div className="argument-proof-pill">
-              <strong>Mais Vendas</strong>
-              <span>Zero perda de leads na noite e fins de semana</span>
+              <span className="proof-metric">100%</span>
+              <strong className="proof-label">Retenção de Oportunidades</strong>
+              <p className="proof-desc">Zero perda de pacientes e clientes na noite e fins de semana</p>
             </div>
           </div>
         </div>
