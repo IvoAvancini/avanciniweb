@@ -218,14 +218,12 @@ const portfolioSpotlights = {
 
 type PortfolioSpotlightType = keyof typeof portfolioSpotlights;
 
-type DashPaymentModel = "subscription" | "single";
-
 type DashPlan = {
   id: string;
   name: string;
   badge: string;
-  subscriptionPrice: number;
-  singlePrice: number;
+  formatTitle: string;
+  deliverableBadge: string;
   tagline: string;
   painPoint: string;
   idealFor: string;
@@ -238,55 +236,55 @@ const dashPlans: DashPlan[] = [
   {
     id: "landing",
     name: "Landing Page de Alta Conversão",
-    badge: "CONVERSÃO & VENDAS RÁPIDAS",
-    subscriptionPrice: 89.9,
-    singlePrice: 599.9,
-    tagline: "Foco total em converter cliques de anúncios em conversas no WhatsApp.",
-    painPoint: "Elimina a perda de cliques de anúncios por páginas lentas ou confusas.",
-    idealFor: "Clínicas, consultórios, advogados e serviços com tráfego pago.",
+    badge: "CONVERSÃO & ANÚNCIOS",
+    formatTitle: "Página Única de Alta Conversão",
+    deliverableBadge: "⚡ Rascunho em 48h · Performance 0.2s LCP",
+    tagline: "Foco total em converter cliques de anúncios e campanhas em conversas no WhatsApp.",
+    painPoint: "Elimina a perda de cliques de anúncios causada por páginas lentas ou confusas.",
+    idealFor: "Clínicas, consultórios, advogados, infoprodutos e serviços com tráfego pago.",
     keyHighlights: [
-      "⚡ Carregamento em 0.4s (sem perda de cliques)",
-      "🎯 Copy persuasiva focada em gerar novos contatos",
-      "📲 Botão de WhatsApp em posição de máxima conversão",
-      "🛡️ Hospedagem ultrarrápida e certificado SSL incluso",
+      "⚡ Carregamento em 0.2s a 0.4s (zero perda de cliques)",
+      "🎯 Copy persuasiva focada em gerar novos contatos qualificados",
+      "📲 Botão de WhatsApp em posição estratégica de máxima conversão",
+      "🛡️ Hospedagem ultrarrápida e certificado SSL blindado inclusos",
     ],
-    ctaText: "Quero minha Landing Page",
+    ctaText: "Solicitar Proposta para Landing Page",
     featured: false,
   },
   {
     id: "institucional",
     name: "Site Institucional de Autoridade",
     badge: "MAIS ESCOLHIDO · AUTORIDADE",
-    subscriptionPrice: 109.9,
-    singlePrice: 899.9,
+    formatTitle: "Arquitetura Corporativa Completa",
+    deliverableBadge: "⚡ Posicionamento Premium · SEO Google · Até 5 Páginas",
     tagline: "Estrutura completa com autoridade máxima para fechar contratos maiores.",
-    painPoint: "Substitui sites antigos ou amadores que espantam clientes no Google.",
-    idealFor: "Empresas estabelecidas, consultorias e serviços premium.",
+    painPoint: "Substitui sites antigos ou amadores que espantam clientes que buscam no Google.",
+    idealFor: "Empresas estabelecidas, consultorias, clínicas e prestadores de serviços premium.",
     keyHighlights: [
-      "🏢 Até 5 páginas estruturadas com design exclusivo",
-      "💼 Apresentação de serviços, diferenciais e equipe",
-      "📍 Mapa interativo, rotas e contato direto",
-      "🔍 Otimização de SEO para buscas na sua região",
+      "🏢 Até 5 páginas estruturadas com design exclusivo e autoral",
+      "💼 Apresentação de serviços, diferenciais e equipe com alta autoridade",
+      "📍 Mapa interativo, rotas e captação direta de oportunidades",
+      "🔍 Otimização de SEO técnico para buscas na sua região",
     ],
-    ctaText: "Planejar meu Site",
+    ctaText: "Planejar Site Institucional",
     featured: true,
   },
   {
     id: "loja",
     name: "Loja Virtual Integrada",
     badge: "CATÁLOGO & RECEBIMENTO",
-    subscriptionPrice: 129.9,
-    singlePrice: 1199.9,
-    tagline: "Catálogo visual moderno com checkout sem taxa sobre vendas.",
+    formatTitle: "E-Commerce / Catálogo Sob Medida",
+    deliverableBadge: "⚡ Checkout Rápido · Pix Automático · Zero Comissão",
+    tagline: "Catálogo visual moderno com checkout sem taxas percentuais sobre vendas.",
     painPoint: "Automatiza pedidos sem precisar passar preços um a um no direct.",
-    idealFor: "Comércios locais, roupas, cosméticos e marcas próprias.",
+    idealFor: "Comércios locais, marcas de vestuário, cosméticos e produtos físicos.",
     keyHighlights: [
-      "🛍️ Catálogo moderno organizado por categorias e fotos",
-      "💳 Pagamentos via Pix instantâneo e parcelamento",
-      "📦 Cálculo automático de frete dos Correios",
-      "🚫 Zero comissões sobre vendas: o lucro é 100% seu",
+      "🛍️ Catálogo moderno organizado por categorias e fotos em alta definição",
+      "💳 Pagamentos via Pix instantâneo e parcelamento no cartão",
+      "📦 Cálculo automático de frete e logística integrada",
+      "🚫 Zero comissões sobre vendas: o lucro é 100% da sua empresa",
     ],
-    ctaText: "Planejar minha Loja Virtual",
+    ctaText: "Planejar Loja Virtual",
     featured: false,
   },
 ];
@@ -429,37 +427,37 @@ function WebOpportunitySimulator({ onLead }: { onLead: (message: string) => void
             <span className="roi-check-circle">✓</span>
             <div>
               <strong>PODE BASTAR 1 ÚNICO CLIENTE NO MÊS</strong>
-              <p>Com apenas 1 cliente de R$ {ticketValue}, a assinatura de R$ 89,90 já fica 100% coberta. O restante é lucro limpo no seu bolso.</p>
+              <p>Com apenas 1 cliente de R$ {ticketValue} conquistado através de um site rápido e com alta credibilidade, o investimento já se paga e o restante é faturamento novo no seu caixa.</p>
             </div>
           </div>
 
           <div className="roi-numbers-breakdown">
             <div className="roi-line">
-              <span>Investimento no site por dia:</span>
-              <strong>Apenas R$ 2,99 / dia</strong>
+              <span>Impacto de autoridade &amp; velocidade:</span>
+              <strong>0.2s LCP · Nota 100 PageSpeed</strong>
             </div>
             <div className="roi-line">
-              <span>Assinatura mensal Avancini Dash:</span>
-              <strong>R$ 89,90 / mês</strong>
+              <span>Novos contatos qualificados estimados:</span>
+              <strong>+3 a +8 clientes / mês</strong>
             </div>
             <div className="roi-line gain-highlight">
-              <span>Faturamento com 3 novos clientes recuperados:</span>
+              <span>Faturamento com 3 novos clientes fechados:</span>
               <strong className="roi-number-success">+ R$ {(ticketValue * 3).toLocaleString("pt-BR", { minimumFractionDigits: 2 })}</strong>
             </div>
 
             <div className="roi-final-profit-box">
               <div>
-                <small>LUCRO LÍQUIDO NO SEU BOLSO (JÁ DESCONTADO O SITE):</small>
-                <strong className="roi-number-success">+ R$ {Math.max(0, netGainWithJustThree).toLocaleString("pt-BR", { minimumFractionDigits: 2 })} / mês</strong>
+                <small>RECEITA ADICIONAL GERADA NO SEU NEGÓCIO:</small>
+                <strong className="roi-number-success">+ R$ {(ticketValue * 3).toLocaleString("pt-BR", { minimumFractionDigits: 2 })} / mês</strong>
               </div>
-              <span className="roi-status-pill">SE PAGOU E SOBROU R$ {Math.max(0, netGainWithJustThree).toFixed(0)}</span>
+              <span className="roi-status-pill">SE PAGA NO 1º CONTRATO</span>
             </div>
           </div>
 
           {/* Prova Social e Case Real */}
           <div className="roi-social-proof-strip">
             <div className="proof-stars">★★★★★</div>
-            <p>&ldquo;Colocamos a nova landing page no ar na quarta-feira e na mesma semana fechamos 2 contratos particulares que pagaram o ano inteiro de mensalidade do site.&rdquo;</p>
+            <p>&ldquo;Colocamos a nova landing page no ar na quarta-feira e na mesma semana fechamos 2 contratos particulares que pagaram o ano inteiro de investimento do projeto.&rdquo;</p>
             <small>— Dr. Roberto M., Diretor na Clínica San Diego</small>
           </div>
 
@@ -476,7 +474,7 @@ function WebOpportunitySimulator({ onLead }: { onLead: (message: string) => void
             <span>⚡ <b>Primeiro rascunho em 48h</b></span>
             <span>🛡️ <b>Site pronto em 5 dias</b></span>
           </div>
-          <small className="roi-subnote">Sem taxa de criação · Hospedagem e suporte inclusos · Cancele quando quiser</small>
+          <small className="roi-subnote">Sem taxas ocultas · Hospedagem ultrarrápida e suporte técnico inclusos</small>
         </div>
       </div>
     </section>
@@ -589,7 +587,6 @@ export default function Home() {
   const menuCloseRef = useRef<HTMLButtonElement | null>(null);
   const portfolioCloseRef = useRef<HTMLButtonElement | null>(null);
   const [scrolled, setScrolled] = useState(false);
-  const [paymentModel, setPaymentModel] = useState<DashPaymentModel>("subscription");
   const [portfolioSpotlight, setPortfolioSpotlight] = useState<PortfolioSpotlightType | null>(null);
 
   const navigateFromMenu = (event: MouseEvent<HTMLAnchorElement>, href: string) => {
@@ -1003,14 +1000,14 @@ export default function Home() {
               
               <div className="dash-entry-price-wrap">
                 <div className="dash-entry-price-amount">
-                  A partir de R$ {plan.subscriptionPrice.toLocaleString("pt-BR", { minimumFractionDigits: 2 })}/mês
+                  PROJETO SOB MEDIDA
                 </div>
                 <div className="dash-entry-perk-row">
                   <span className="dash-entry-perk-pill">
                     <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
                       <path fillRule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clipRule="evenodd" />
                     </svg>
-                    Taxa de criação zero no anual
+                    {plan.deliverableBadge}
                   </span>
                 </div>
               </div>
@@ -1025,7 +1022,7 @@ export default function Home() {
               </ul>
 
               <div className="dash-entry-action">
-                <span>Ver planos e contratar</span>
+                <span>Ver escopo e proposta</span>
                 <WebArrow />
               </div>
             </a>
@@ -1055,43 +1052,19 @@ export default function Home() {
       <section className="section investment dash-investment-fluid" id="investimento">
         <div className="section-heading">
           <div>
-            <span className="section-index">04 / INVESTIMENTO TRANSPARENTE</span>
-            <h2 id="configurar-plano">Dois formatos diretos.<br />Sem taxa de criação ou surpresas.</h2>
+            <span className="section-index">04 / FORMATOS DE ENGENHARIA SOB MEDIDA</span>
+            <h2 id="configurar-plano">Engenharia digital de alta performance.<br />Planejada para o momento da sua empresa.</h2>
           </div>
           <p>
-            Escolha como prefere investir: por assinatura mensal com tudo incluso (hospedagem, SSL e manutenção) ou em pagamento único para ter o site 100% próprio.
+            Desenvolvemos páginas ultrarrápidas (0.2s LCP), responsivas e pensadas estrategicamente para transformar visitantes em contatos qualificados.
           </p>
         </div>
 
-        {/* Toggle Assinatura Mensal vs Pagamento Único */}
         <div className="plan-cycle-toggle-wrapper">
-          <div className="plan-cycle-toggle dash-cycle-toggle">
-            <button
-              type="button"
-              className={paymentModel === "subscription" ? "active" : ""}
-              onClick={() => setPaymentModel("subscription")}
-            >
-              Por Assinatura Mensal <em>Setup R$ 0 Isento</em>
-            </button>
-            <button
-              type="button"
-              className={paymentModel === "single" ? "active" : ""}
-              onClick={() => setPaymentModel("single")}
-            >
-              Pagamento Único <em>Site Próprio</em>
-            </button>
-          </div>
-
           <div className="plan-transparency-box dash-transparency-box">
-            {paymentModel === "subscription" ? (
-              <p>
-                🔒 <strong>Assinatura (Setup R$ 0 Isento):</strong> Sem custo de criação. Hospedagem rápida, SSL blindado e suporte contínuo inclusos na mensalidade.
-              </p>
-            ) : (
-              <p>
-                🔒 <strong>Pagamento Único (Site Próprio):</strong> O projeto é 100% seu, sem mensalidades obrigatórias. Inclui publicação e 30 dias de suporte.
-              </p>
-            )}
+            <p>
+              🔒 <strong>Garantia de Entrega &amp; Performance:</strong> Primeiro rascunho interativo em até 48h. Código otimizado com Nota 100 no Google PageSpeed, SEO local avançado e suporte direto com os engenheiros responsáveis pelo projeto.
+            </p>
           </div>
         </div>
 
@@ -1099,8 +1072,6 @@ export default function Home() {
         <div className="simplified-plans-grid dash-plans-grid">
           {dashPlans.map((plan) => {
             const isFeatured = plan.featured;
-            const formattedSubPrice = `R$ ${plan.subscriptionPrice.toLocaleString("pt-BR", { minimumFractionDigits: 2 })}`;
-            const formattedSinglePrice = `a partir de R$ ${plan.singlePrice.toLocaleString("pt-BR", { minimumFractionDigits: 2 })}`;
 
             return (
               <article className={`simple-plan-card dash-plan-card ${isFeatured ? "featured" : ""}`} key={plan.id}>
@@ -1108,17 +1079,12 @@ export default function Home() {
                 <div className="plan-card-top">
                   <div className="plan-badge-row">
                     <small className="plan-badge-label">{plan.badge}</small>
-                    <span className="plan-volume-badge dash-setup-badge">
-                      {paymentModel === "subscription" ? "Setup R$ 0 (Isento)" : "Site Próprio"}
-                    </span>
                   </div>
                   <h3>{plan.name}</h3>
-                  <div className="plan-price-display">
-                    <small className="price-from-label">
-                      {paymentModel === "subscription" ? "mensalidade fixa" : "a partir de"}
-                    </small>
-                    <strong>{paymentModel === "subscription" ? formattedSubPrice : `R$ ${plan.singlePrice.toLocaleString("pt-BR", { minimumFractionDigits: 2 })}`}</strong>
-                    <span>{paymentModel === "subscription" ? "/mês" : "/único"}</span>
+                  <div className="plan-format-deliverable">
+                    <small className="format-scope-label">ESCOPO DO PROJETO</small>
+                    <strong className="format-title-main">{plan.formatTitle}</strong>
+                    <span className="format-scope-sub">{plan.deliverableBadge}</span>
                   </div>
                   <p className="plan-tagline">{plan.tagline}</p>
                 </div>
@@ -1142,16 +1108,14 @@ export default function Home() {
                   onClick={() =>
                     startBudgetConversation(
                       plan.name,
-                      `Quero conversar sobre o plano ${plan.name} da Avancini Dash no formato ${paymentModel === "subscription" ? `Assinatura Mensal (${formattedSubPrice}/mês com setup zerado)` : `Pagamento Único (${formattedSinglePrice})`}.`
+                      `Olá! Gostaria de conversar sobre uma proposta para o projeto de ${plan.name} da Avancini Dash.`
                     )
                   }
                 >
                   {plan.ctaText} <WebArrow />
                 </button>
                 <small className="plan-secure-subnote">
-                  {paymentModel === "subscription"
-                    ? "Sem taxa de criação · Hospedagem e suporte inclusos"
-                    : "Código 100% seu · Publicação e garantia inclusas"}
+                  Primeiro rascunho em 48h · Performance 0.2s LCP · Suporte contínuo
                 </small>
               </article>
             );

@@ -23,21 +23,19 @@ const sections = [
     ],
   },
   {
-    title: "Criação, hospedagem e suporte",
+    title: "Criação, hospedagem e suporte (Avancini Dash)",
     paragraphs: [
-      "A Landing Page tem taxa de criação de R$ 299,90 no mensal, R$ 149,90 no semestral e R$ 0 no anual. A assinatura custa R$ 59,90 no mensal, R$ 289,90 no semestral ou R$ 499,90 no anual.",
-      "O Site Institucional tem taxa de criação a partir de R$ 399,90 no mensal, R$ 199,90 no semestral e R$ 0 no anual. A assinatura começa em R$ 79,90 no mensal, R$ 379,90 no semestral ou R$ 669,90 no anual.",
-      "A Loja Virtual tem taxa de criação a partir de R$ 599,90 no mensal, R$ 299,90 no semestral e R$ 0 no anual. A assinatura começa em R$ 119,90 no mensal, R$ 579,90 no semestral ou R$ 999,90 no anual. Catálogo, pagamento, entrega e rotina de pedidos são validados antes da proposta.",
-      "Os três planos recebem estratégia, texto, design, versão mobile e desenvolvimento compatíveis com o escopo contratado.",
-      "A contratação recorrente inclui hospedagem, SSL, suporte e um pequeno ajuste mensal. Novas seções, integrações, funcionalidades ou reformulações podem receber orçamento separado.",
+      "Os projetos (Landing Pages de Alta Conversão, Sites Institucionais e Lojas Virtuais) possuem investimento, cronograma e condições definidos em proposta comercial personalizada, de acordo com o escopo e complexidade de cada cliente.",
+      "Os projetos recebem estratégia, texto persuasivo, design autoral, versão responsiva para celular e desenvolvimento de alta performance compatíveis com o escopo contratado.",
+      "A contratação contínua inclui hospedagem ultrarrápida, SSL blindado, suporte e manutenção preventiva. Novas páginas, integrações personalizadas ou reformulações estruturais podem receber orçamento sob medida.",
     ],
   },
   {
-    title: "Avancini Sync",
+    title: "Implantação e Operação (Avancini Sync)",
     paragraphs: [
-      "O Chatbot Start custa R$ 149,90 no mensal, R$ 719,90 no semestral ou R$ 1.259,90 no anual. Não há taxa de criação.",
-      "O Atendente IA começa em R$ 297,90 no mensal, R$ 1.429,90 no semestral ou R$ 2.499,90 no anual. Não há taxa de criação.",
-      "Custos externos de WhatsApp, APIs, inteligência artificial ou volume de uso são validados antes da contratação e cobrados separadamente quando existirem.",
+      "A implantação do Atendente de IA (Operação Essencial ou Scale Pro) é calibrada sob medida para a rotina da empresa, com valores e condições estipulados na proposta comercial após diagnóstico técnico do fluxo de atendimento.",
+      "A operação inclui calibração das regras da empresa, conexão com WhatsApp e integração com Google Agenda, além de suporte contínuo para atualizações.",
+      "Custos de infraestrutura de conectividade ou APIs externas, quando necessários para volumes de tráfego específicos ou integrações complexas de CRM, são detalhados com total transparência na proposta técnica.",
     ],
   },
   {

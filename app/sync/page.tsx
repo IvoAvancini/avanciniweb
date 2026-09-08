@@ -411,10 +411,9 @@ type SyncPlanSimple = {
   id: string;
   name: string;
   badge: string;
-  monthlyPrice: number;
-  annualMonthlyPrice: number;
+  formatTitle: string;
   volumeLabel: string;
-  setupText: string;
+  deliverableBadge: string;
   tagline: string;
   idealFor: string;
   keyHighlights: string[];
@@ -424,43 +423,41 @@ type SyncPlanSimple = {
 const simplifiedPlans: SyncPlanSimple[] = [
   {
     id: "essencial",
-    name: "Plano Essencial",
-    badge: "USO JUSTO · SEM TRAVA DE CONVERSAS",
-    monthlyPrice: 397.9,
-    annualMonthlyPrice: 297.9,
-    volumeLabel: "1 WhatsApp · Atendimento Contínuo",
-    setupText: "Setup de R$ 500 — ou 100% ZERADO no compromisso de 6 meses",
-    tagline: "Sem estresse de cotas. O WhatsApp do seu negócio responde, agenda, envia Pix e transfere para você 24h por dia.",
-    idealFor: "Médicos, dentistas, advogados, esteticistas e pequenas empresas com um único WhatsApp para tocar o atendimento.",
+    name: "Operação Essencial",
+    badge: "1 WHATSAPP DEDICADO · FLUXO CONTÍNUO",
+    formatTitle: "Implantação Sob Medida",
+    volumeLabel: "1 WhatsApp · Atendimento Contínuo 24/7",
+    deliverableBadge: "⚡ Calibração Guiada, Google Agenda e QR Code Ativo",
+    tagline: "Sem estresse de limites ou cotas. O WhatsApp da sua clínica ou empresa acolhe, tira dúvidas, agenda consultas e transfere com resumo pronto.",
+    idealFor: "Médicos, dentistas, advogados, esteticistas, consultores e empresas que usam um WhatsApp principal para o atendimento.",
     keyHighlights: [
       "📅 Agendamento automático no Google Calendar em tempo real",
       "⏰ Lembrete anti-falta na véspera com confirmação de presença no chat",
-      "📲 Transbordo para atendente/responsável com resumo pronto da conversa",
+      "📲 Transbordo inteligente para equipe humana com resumo pronto da conversa",
       "💳 Envio de chave Pix cópia e cola e formas de pagamento no chat",
       "🔁 Follow-up inteligente de orçamentos e retornos sem resposta (24h)",
-      "🎙️ Ouve áudios longos, transcreve e lê fotos, exames e documentos",
-      "🛡️ Atendimento 24/7 contínuo com uso justo para toda a sua rotina",
+      "🎙️ Ouve áudios longos, transcreve e lê fotos, exames e PDFs",
+      "🛡️ Atendimento 24/7 contínuo com calibração profunda da sua rotina",
     ],
-    ctaText: "Começar com o Essencial",
+    ctaText: "Solicitar Demonstração no WhatsApp",
   },
   {
     id: "pro",
-    name: "Plano Scale Pro",
-    badge: "MAIS ESCOLHIDO · OPERAÇÕES ROBUSTAS",
-    monthlyPrice: 797.9,
-    annualMonthlyPrice: 697.9,
+    name: "Operação Scale Pro",
+    badge: "MAIS ESCOLHIDO · OPERAÇÕES MULTISSETOR",
+    formatTitle: "Arquitetura Corporativa",
     volumeLabel: "Múltiplos Setores & Equipe Humana",
-    setupText: "Setup de R$ 800 — parcelável nas primeiras mensalidades",
-    tagline: "Para clínicas com recepção física, equipes de vendas ou tráfego pago que exigem roteamento setorizado.",
-    idealFor: "Clínicas com vários profissionais, imobiliárias, e-commerces e empresas com divisão de departamentos.",
+    deliverableBadge: "⚡ Roteamento de Departamentos, Filas & Relatórios",
+    tagline: "Para clínicas com múltiplos profissionais, equipes comerciais ou tráfego pago intenso que exigem triagem e roteamento por setor.",
+    idealFor: "Clínicas com vários especialistas, imobiliárias, distribuidoras e empresas com divisão de departamentos.",
     keyHighlights: [
-      "⭐ Tudo do Plano Essencial incluso (Agenda, Lembretes, Pix, Transbordo e Áudios)",
-      "🏢 Roteamento por múltiplos setores (comercial, financeiro, agendamentos)",
-      "👥 Distribuição de fila para múltiplos atendentes humanos em equipe",
-      "📊 Relatórios avançados de conversão, motivos de contato e tráfego pago",
+      "⭐ Tudo da Operação Essencial incluso (Agenda, Lembretes, Pix, Transbordo e Áudios)",
+      "🏢 Roteamento inteligente por setores (comercial, recepção, financeiro, suporte)",
+      "👥 Distribuição equilibrada de fila para múltiplos atendentes humanos em equipe",
+      "📊 Relatórios avançados de conversão, motivos de contato e performance de tráfego",
       "⚡ Processamento prioritário com alta capacidade para picos de mensagens",
     ],
-    ctaText: "Contratar o Scale Pro",
+    ctaText: "Agendar Diagnóstico com Especialista",
   },
 ];
 
@@ -473,16 +470,16 @@ const faqsCommercial = [
     answer: "É atendimento contínuo e sem estresse para o volume normal do dia a dia de clínicas, consultórios e escritórios — áudios, textos, marcações no Google Calendar e follow-ups à vontade. Você não precisa se preocupar com um contador de mensagens travando seu atendimento no meio do mês. A política de uso justo apenas previne disparos ilegais de spam em massa não autorizados.",
   },
   {
-    question: "Como funciona a taxa de setup e a isenção de 6 meses?",
-    answer: "A taxa de setup cobre toda a engenharia de implantação: calibração personalizada da IA com o manual da sua empresa, conexão do WhatsApp via QR Code e integração direta com o Google Calendar. No Plano Essencial, o setup de R$ 500 é 100% ZERADO caso você escolha o compromisso de 6 meses (ou plano anual). No Plano Scale Pro, o setup é de R$ 800 e pode ser parcelado nas primeiras mensalidades para não onerar o fluxo de caixa inicial.",
+    question: "Como funciona a contratação e o processo de implantação?",
+    answer: "Apresentamos uma demonstração prática focada no segmento do seu negócio para você ver a IA em ação. Em seguida, desenhamos a arquitetura do seu fluxo, calibramos as respostas com o manual da sua empresa e realizamos a conexão direta no seu WhatsApp via QR Code em poucos minutos.",
   },
   {
     question: "Preciso trocar de número de WhatsApp ou contratar chip novo?",
     answer: "Não! A IA conecta diretamente no número comercial que sua clínica ou empresa já utiliza hoje. Basta escanear um QR Code rápido pelo seu próprio WhatsApp no celular, exatamente como você faz no WhatsApp Web. Você não perde nenhum contato, histórico nem conversas anteriores.",
   },
   {
-    question: "Quando faz sentido migrar do Plano Essencial para o Scale Pro?",
-    answer: "O Plano Essencial já é 100% completo para 1 número de WhatsApp: agenda no Google Calendar, manda lembretes anti-falta, envia Pix, ouve áudios, faz follow-up e transfere para o responsável com resumo pronto da conversa. O Scale Pro faz sentido quando sua empresa cresce e passa a ter múltiplos setores (como separar comercial, financeiro e agendamento) e uma equipe com vários atendentes humanos precisando de distribuição automática de fila.",
+    question: "Quando faz sentido escolher a Operação Scale Pro?",
+    answer: "A Operação Essencial já é 100% completa para 1 número de WhatsApp: agenda no Google Calendar, manda lembretes anti-falta, envia Pix, ouve áudios, faz follow-up e transfere para o responsável com resumo pronto da conversa. O Scale Pro faz sentido quando sua empresa cresce e passa a ter múltiplos setores (como separar comercial, financeiro e agendamento) e uma equipe com vários atendentes humanos precisando de distribuição automática de fila.",
   },
   {
     question: "A IA pode inventar dados, falar preços errados ou dar diagnósticos?",
@@ -490,11 +487,11 @@ const faqsCommercial = [
   },
   {
     question: "A IA substitui os meus funcionários?",
-    answer: "O objetivo é potencializar a sua equipe, não substituí-la. A IA assume as tarefas repetitivas, como tirar dúvidas de preços, conferir convênios, marcar horários na agenda e atender à noite e nos finais de semana. Quando surge uma negociação complexa ou uma situação que exige empatia humana, ela passa o contato com o histórico mastigado para seu atendente fechar.",
+    answer: "O objetivo é potencializar a sua equipe, não substituí-la. A IA assume as tarefas repetitivas, como tirar dúvidas de serviços, conferir disponibilidade, marcar horários na agenda e atender à noite e nos finais de semana. Quando surge uma negociação complexa ou uma situação que exige empatia humana, ela passa o contato com o histórico mastigado para seu atendente fechar.",
   },
   {
-    question: "Como funciona o Plano Anual? Bloqueia o limite do meu cartão?",
-    answer: "Não! No plano anual, o valor é cobrado de forma recorrente mês a mês, sem comprometer o limite total do seu cartão de crédito. Trata-se de um compromisso com desconto garantido de R$ 100/mês.",
+    question: "Existe período de teste ou demonstração personalizada?",
+    answer: "Sim! Antes de qualquer contratação, realizamos uma simulação guiada no WhatsApp para o seu nicho. Você testa o tempo de resposta, o envio de agenda e a audição de áudios em tempo real.",
   },
 ];
 
@@ -554,7 +551,6 @@ export default function AvanciniSyncPage() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [leadContext, setLeadContext] = useState("");
-  const [billingPeriod, setBillingPeriod] = useState<"monthly" | "annual">("monthly");
   const [activeSupervisorIndex, setActiveSupervisorIndex] = useState(0);
   const [activeJourneyIndex, setActiveJourneyIndex] = useState(0);
   const [activeNicheIndex, setActiveNicheIndex] = useState(0);
@@ -593,10 +589,6 @@ export default function AvanciniSyncPage() {
     const s = sec % 60;
     return `0:${s < 10 ? "0" : ""}${s}`;
   };
-
-  const neededBreakEvenClients = Math.max(1, Math.ceil(397.9 / clientTicket));
-  const breakEvenRevenue = neededBreakEvenClients * clientTicket;
-  const breakEvenProfit = Math.max(0, breakEvenRevenue - 397.9);
 
   // Lead modal states
   const [leadName, setLeadName] = useState("");
@@ -1291,23 +1283,17 @@ export default function AvanciniSyncPage() {
             <div className="sync-break-even-pill">
               <span className="break-even-check">✓</span>
               <div>
-                <strong>
-                  {neededBreakEvenClients === 1
-                    ? "PODE BASTAR 1 CLIENTE RECUPERADO NO MÊS"
-                    : `PODEM BASTAR ${neededBreakEvenClients} CLIENTES RECUPERADOS NO MÊS`}
-                </strong>
+                <strong>PODE BASTAR 1 ÚNICO CLIENTE RECUPERADO NO MÊS</strong>
                 <p>
-                  {neededBreakEvenClients === 1
-                    ? `Basta 1 cliente de R$ ${clientTicket} recuperado para cobrir a mensalidade de R$ 397,90. O resto é lucro no seu caixa.`
-                    : `Com ${neededBreakEvenClients} clientes de R$ ${clientTicket} recuperados, a mensalidade já fica coberta e você lucra R$ ${breakEvenProfit.toLocaleString("pt-BR", { minimumFractionDigits: 2 })}.`}
+                  Com apenas 1 cliente de R$ {clientTicket} retido que antes desistiria por demora no atendimento, a IA já se paga e o restante é faturamento puro no seu caixa.
                 </p>
               </div>
             </div>
 
             <div className="sync-roi-math">
               <div className="math-line">
-                <span>Investimento no Avancini Sync:</span>
-                <strong>R$ 397,90 / mês <small style={{ color: "#94a3b8", fontWeight: 400 }}>(~R$ 13,20/dia)</small></strong>
+                <span>Custo alternativo tradicional (CLT 24/7):</span>
+                <strong>R$ 3.500+ / mês <small style={{ color: "#94a3b8", fontWeight: 400 }}>(encargos + plantões)</small></strong>
               </div>
               <div className="math-line gain-highlight">
                 <span>Faturamento recuperado ({missedWeekendLeads} clientes que iriam embora):</span>
@@ -1316,11 +1302,11 @@ export default function AvanciniSyncPage() {
 
               <div className="sync-final-profit-card">
                 <div>
-                  <small>LUCRO LÍQUIDO NO SEU CAIXA (JÁ DESCONTADA A IA):</small>
-                  <strong className="text-success">+ R$ {Math.max(0, clientTicket * missedWeekendLeads - 397.9).toLocaleString("pt-BR", { minimumFractionDigits: 2 })} / mês</strong>
+                  <small>RECEITA ADICIONAL RECUPERADA NO SEU CAIXA:</small>
+                  <strong className="text-success">+ R$ {(clientTicket * missedWeekendLeads).toLocaleString("pt-BR", { minimumFractionDigits: 2 })} / mês</strong>
                 </div>
                 <span className="free-status-badge">
-                  {neededBreakEvenClients === 1 ? "SE PAGA COM 1 CLIENTE" : `SE PAGA COM ${neededBreakEvenClients} CLIENTES`}
+                  RETORNO DIRETO NO 1º FECHAMENTO
                 </span>
               </div>
             </div>
@@ -1424,45 +1410,26 @@ export default function AvanciniSyncPage() {
         })()}
       </section>
 
-      {/* 5. PLANOS CLAROS COM ARQUITETURA MULTIAGENTE EM TODOS */}
+      {/* 5. FORMATOS DE IMPLANTAÇÃO SOB MEDIDA */}
       <section className="sync-commercial-section" id="planos" aria-labelledby="sync-plans-title">
         <header className="sync-section-heading">
           <div>
-            <span>04 / INVESTIMENTO TRANSPARENTE &amp; JUSTO</span>
-            <h2 id="sync-plans-title">Sem contar mensagens.<br />O que muda é a maturidade do negócio.</h2>
+            <span>04 / FORMATOS DE IMPLANTAÇÃO SOB MEDIDA</span>
+            <h2 id="sync-plans-title">Não vendemos pacotes engessados.<br />A IA é calibrada para a realidade da sua empresa.</h2>
           </div>
-          <p>Sem o medo de "estourar cota" no meio do mês. O plano se adapta à complexidade da sua operação, com agendamento no Google Calendar e inteligência completa inclusos desde o primeiro dia.</p>
+          <p>Sem tabelas genéricas ou limites que travam seu atendimento. Configuramos a inteligência sob medida para o seu volume, nicho e rotina comercial.</p>
         </header>
 
-        {/* Toggle Mensal / Anual */}
         <div className="plan-cycle-toggle-wrapper">
-          <div className="plan-cycle-toggle">
-            <button
-              type="button"
-              className={billingPeriod === "monthly" ? "active" : ""}
-              onClick={() => setBillingPeriod("monthly")}
-            >
-              Mensal (Sem fidelidade)
-            </button>
-            <button
-              type="button"
-              className={billingPeriod === "annual" ? "active" : ""}
-              onClick={() => setBillingPeriod("annual")}
-            >
-              Anual <em>Desconto de R$ 100/mês</em>
-            </button>
-          </div>
-          
-          <div className="plan-transparency-box">
+          <div className="plan-transparency-box sync-transparency-premium">
             <p>
-              🔒 <strong>Previsibilidade e economia:</strong> Mensalidade recorrente sem travar o limite do cartão (economia de R$ 100/mês no plano anual). No Plano Essencial, o setup de R$ 500 é <strong>100% ZERADO</strong> ao optar pelo compromisso semestral (6 meses). Sem pegadinhas.
+              🔒 <strong>Engenharia de Implantação Dedicada:</strong> Não entregamos robô cru. Mapeamos seus serviços, regras e horários, calibramos a IA com o tom de voz da sua marca e integramos diretamente ao seu WhatsApp e Google Agenda.
             </p>
           </div>
         </div>
 
         <div className="simplified-plans-grid">
           {simplifiedPlans.map((plan) => {
-            const price = billingPeriod === "monthly" ? plan.monthlyPrice : plan.annualMonthlyPrice;
             const isPro = plan.id === "pro";
             return (
               <article className={`simple-plan-card ${isPro ? "featured" : ""}`} key={plan.id}>
@@ -1470,16 +1437,15 @@ export default function AvanciniSyncPage() {
                 <div className="plan-card-top">
                   <div className="plan-badge-row">
                     <small className="plan-badge-label">{plan.badge}</small>
-                    <span className="plan-volume-badge">{plan.volumeLabel}</span>
                   </div>
                   <h3>{plan.name}</h3>
-                  <div className="plan-price-display">
-                    <small className="price-from-label">a partir de</small>
-                    <strong>{formatMoney(price)}</strong>
-                    <span>/mês</span>
+                  <div className="plan-format-deliverable">
+                    <small className="format-scope-label">ESCOPO DE IMPLANTAÇÃO</small>
+                    <strong className="format-title-main">{plan.formatTitle}</strong>
+                    <span className="format-scope-sub">{plan.volumeLabel}</span>
                   </div>
                   <div className="plan-setup-badge">
-                    <span>⚡ {plan.setupText}</span>
+                    <span>{plan.deliverableBadge}</span>
                   </div>
                   <p className="plan-tagline">{plan.tagline}</p>
                 </div>
@@ -1500,7 +1466,7 @@ export default function AvanciniSyncPage() {
                 <button
                   type="button"
                   className="plan-direct-cta"
-                  onClick={() => openLead(`${plan.name} (${billingPeriod === "monthly" ? "Mensal" : "Anual"})`)}
+                  onClick={() => openLead(`Gostaria de uma demonstração e proposta para a ${plan.name}.`)}
                 >
                   {plan.ctaText} <SyncArrow />
                 </button>

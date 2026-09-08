@@ -9246,6 +9246,38 @@ body:has(.web-page) .page-progress{background:linear-gradient(90deg,#43c85d,#a9f
   margin: 0 0 6px;
 }
 
+.plan-format-deliverable {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin-bottom: 8px;
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+}
+
+.format-scope-label {
+  font-size: 8px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #38bdf8;
+}
+
+.format-title-main {
+  font-size: 17px;
+  font-weight: 800;
+  color: #f8fafc;
+  font-family: var(--font-space), sans-serif;
+  letter-spacing: -0.01em;
+}
+
+.format-scope-sub {
+  font-size: 9.5px;
+  color: #94a3b8;
+}
+
 .plan-price-display {
   display: flex;
   align-items: baseline;

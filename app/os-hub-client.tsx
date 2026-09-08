@@ -313,7 +313,42 @@ export function OSHubClient() {
   const [isAudioPlaying, setIsAudioPlaying] = useState(false);
   const [audioSeconds, setAudioSeconds] = useState(0);
 
+  const [userInteractedDash, setUserInteractedDash] = useState(false);
+  const [userInteractedSync, setUserInteractedSync] = useState(false);
+  const [bridgePulse, setBridgePulse] = useState(false);
+  const [showBridgeTooltip, setShowBridgeTooltip] = useState(false);
+
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
+
+  // Autoplay rotation for Dash sectors (demonstração viva suave)
+  useEffect(() => {
+    if (userInteractedDash || activeHover === "dash") return;
+    const sectors: DashSectorKey[] = ["clinica", "advocacia", "imoveis", "roupa", "solar"];
+    const timer = setInterval(() => {
+      setDashSector((prev) => {
+        const nextIdx = (sectors.indexOf(prev) + 1) % sectors.length;
+        return sectors[nextIdx];
+      });
+      setDashOptionIdx(0);
+      setDashFeedback(null);
+    }, 6500);
+    return () => clearInterval(timer);
+  }, [userInteractedDash, activeHover]);
+
+  // Autoplay rotation for Sync scenarios (demonstração viva do WhatsApp)
+  useEffect(() => {
+    if (userInteractedSync || activeHover === "sync" || isAudioPlaying) return;
+    const scenarios: SyncScenarioKey[] = ["agendamento", "audio", "qualificacao", "recuperacao"];
+    const timer = setInterval(() => {
+      setSyncScenario((prev) => {
+        const nextIdx = (scenarios.indexOf(prev) + 1) % scenarios.length;
+        return scenarios[nextIdx];
+      });
+      setIsAudioPlaying(false);
+      setAudioSeconds(0);
+    }, 7500);
+    return () => clearInterval(timer);
+  }, [userInteractedSync, activeHover, isAudioPlaying]);
 
   // Audio simulation timer
   useEffect(() => {
@@ -337,12 +372,14 @@ export function OSHubClient() {
   }, [isAudioPlaying]);
 
   const handleSelectSector = (sec: DashSectorKey) => {
+    setUserInteractedDash(true);
     setDashSector(sec);
     setDashOptionIdx(0);
     setDashFeedback(null);
   };
 
   const handleDashCtaClick = (feedbackMsg: string) => {
+    setUserInteractedDash(true);
     setDashFeedback(feedbackMsg);
     setTimeout(() => {
       setDashFeedback(null);
@@ -350,6 +387,7 @@ export function OSHubClient() {
   };
 
   const handleSelectScenario = (scen: SyncScenarioKey) => {
+    setUserInteractedSync(true);
     setSyncScenario(scen);
     setIsAudioPlaying(false);
     setAudioSeconds(0);
@@ -805,32 +843,37 @@ export function OSHubClient() {
           {/* Ação Direta para o Produto */}
           <div className="card-action-footer">
             <Link href="/dash" className="card-explore-btn btn-dash" onClick={handleExitHub}>
-              <span>Explorar Avancini Dash</span>
+              <span>Ver Portfólio &amp; Engenharia</span>
               <Arrow />
             </Link>
           </div>
         </div>
 
-        {/* Conector Central Interativo */}
+        {/* Conector Central Interativo com Efeito de Sinergia */}
         <div
-          className={`ecosystem-connector-bridge ${activeHover ? `active-${activeHover}` : ""}`}
-          aria-hidden="true"
+          className={`ecosystem-connector-bridge ${activeHover ? `active-${activeHover}` : ""} ${bridgePulse ? "is-pulsing" : ""}`}
+          onMouseEnter={() => setShowBridgeTooltip(true)}
+          onMouseLeave={() => setShowBridgeTooltip(false)}
+          onClick={() => {
+            setBridgePulse(true);
+            setTimeout(() => setBridgePulse(false), 1400);
+          }}
+          role="button"
+          tabIndex={0}
+          aria-label="Sinergia do Ecossistema Avancini: Dash atrai e qualifica ➔ Sync fecha no WhatsApp"
         >
           <div className="bridge-laser-line line-top" />
-          <div
-            className="bridge-node-pill"
-            title={
-              activeHover === "dash"
-                ? "Avancini Dash: Alta Autoridade Digital"
-                : activeHover === "sync"
-                ? "Avancini Sync: Conversão e IA 24/7"
-                : "Sinergia Contínua: Dash atrai ⇄ Sync converte 24/7"
-            }
-          >
+          <div className="bridge-node-pill">
             <span className="bridge-connector-symbol">
               {activeHover === "dash" ? "←" : activeHover === "sync" ? "→" : "⇄"}
             </span>
           </div>
+          {showBridgeTooltip && (
+            <div className="bridge-synergy-tooltip">
+              <strong>Sinergia Avancini OS</strong>
+              <span>O site <b>Dash</b> atrai e qualifica ➔ A IA <b>Sync</b> acolhe e agenda no WhatsApp 24/7.</span>
+            </div>
+          )}
           <div className="bridge-laser-line line-bottom" />
         </div>
 
@@ -989,7 +1032,7 @@ export function OSHubClient() {
           {/* Ação Direta para o Produto */}
           <div className="card-action-footer">
             <Link href="/sync" className="card-explore-btn btn-sync" onClick={handleExitHub}>
-              <span>Explorar Avancini Sync</span>
+              <span>Testar Demonstração da IA</span>
               <Arrow />
             </Link>
           </div>
