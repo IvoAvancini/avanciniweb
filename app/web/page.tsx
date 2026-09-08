@@ -927,6 +927,9 @@ export default function Home() {
             <button className="button button-primary" type="button" onClick={() => startBudgetConversation("Seu novo site", "Quero solicitar um orçamento para criar ou modernizar o site da minha empresa.")}>
               Solicitar orçamento <WebArrow />
             </button>
+            <a className="button button-ghost" href="#investimento">
+              Ver planos <WebDownArrow />
+            </a>
             <a className="button button-ghost" href="#portfolio">
               Ver projetos <WebDownArrow />
             </a>
@@ -1060,6 +1063,7 @@ export default function Home() {
       </section>
 
       <section className="section investment dash-investment-fluid" id="investimento">
+        <span id="planos" style={{ display: "block", position: "relative", top: "-80px", visibility: "hidden" }} aria-hidden="true" />
         <div className="section-heading">
           <div>
             <span className="section-index">04 / FORMATOS DE ENGENHARIA SOB MEDIDA</span>

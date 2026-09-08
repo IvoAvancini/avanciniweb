@@ -830,7 +830,7 @@ export default function AvanciniSyncPage() {
 
           <div className="sync-hero-actions">
             <a href="#retorno">Comparar com funcionário <SyncDownArrow /></a>
-            <a className="sync-plans-shortcut" href="#planos">Ver planos simples <SyncDownArrow /></a>
+            <a className="sync-plans-shortcut" href="#planos">Ver planos <SyncDownArrow /></a>
             <button type="button" onClick={() => openLead("implantar a equipe de IA na minha empresa")}>
               Quero uma demonstração prática <SyncArrow />
             </button>
