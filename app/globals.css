@@ -9287,325 +9287,235 @@ body:has(.web-page) .page-progress{background:linear-gradient(90deg,#43c85d,#a9f
   font-size: 13px;
 }
 
-/* 2. INTERACTIVE FORMAT SWITCHER ROW */
-.plan-interactive-switcher-row {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  margin: 0 auto 28px;
-  max-width: 680px;
-  padding: 5px;
-  background: rgba(4, 9, 16, 0.85);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 999px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-}
+/* ==========================================================================
+   SISTEMA DE PLANOS DE ALTA CONVERSÃO — COMPACTO, ELEGANTE E PERSUASIVO
+   - 3 Planos no Sync: 1. Chatbot de Fluxo | 2. IA Essencial | 3. Scale Pro
+   - 3 Formatos no Dash: 1. Landing Page | 2. Site Institucional | 3. Loja Virtual
+   - Card Enterprise VIP Executivo no rodapé
+   - Elimina caixas 2x2 pesadas, switchers redundantes e textos soltos
+   ========================================================================== */
 
-.plan-switcher-pill {
-  position: relative;
-  flex: 1;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 10px 18px;
-  border-radius: 999px;
-  border: none;
-  background: transparent;
-  color: #94a3b8;
-  font-size: 12.5px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.plan-switcher-pill:hover {
-  color: #f8fafc;
-  background: rgba(255, 255, 255, 0.05);
-}
-
-.plan-switcher-pill.is-active {
-  background: #38bdf8;
-  color: #020914;
-  font-weight: 850;
-  box-shadow: 0 4px 20px rgba(56, 189, 248, 0.45);
-}
-
-.dash-switcher-row .plan-switcher-pill.is-active {
-  background: #22c55e;
-  color: #020e06;
-  box-shadow: 0 4px 20px rgba(34, 197, 94, 0.45);
-}
-
-.switcher-badge-mini {
-  font-size: 9px;
-  font-weight: 850;
-  letter-spacing: 0.04em;
-  padding: 2px 7px;
-  border-radius: 999px;
-  background: rgba(0, 0, 0, 0.25);
-  color: inherit;
-  font-style: normal;
-}
-
-/* 3. GRID DOS CARDS DE PLANO */
-.plans-showcase-grid {
+/* 1. GRID PRINCIPAL DE 3 COLUNAS */
+.plans-showcase-grid-compact {
   display: grid;
-  gap: 22px;
-  margin: 0 auto;
-}
-
-.sync-plans-grid-new {
-  grid-template-columns: repeat(2, 1fr);
-  max-width: 1080px;
-}
-
-.dash-plans-grid-new {
   grid-template-columns: repeat(3, 1fr);
-  max-width: 1240px;
+  gap: 22px;
+  max-width: 1260px;
+  margin: 0 auto 36px;
+  align-items: stretch;
 }
 
-@media (max-width: 980px) {
-  .sync-plans-grid-new,
-  .dash-plans-grid-new {
+@media (max-width: 1060px) {
+  .plans-showcase-grid-compact {
     grid-template-columns: 1fr;
-    max-width: 580px;
+    max-width: 520px;
+    gap: 20px;
   }
 }
 
-/* 4. ANATOMIA DOS CARDS DE ALTA PERFORMANCE */
-.plan-showcase-card {
+/* 2. CARD DO PLANO COMPACTO */
+.plan-compact-card {
   position: relative;
   display: flex;
   flex-direction: column;
-  padding: 34px 30px 28px;
-  border-radius: 22px;
-  background: linear-gradient(180deg, rgba(8, 16, 28, 0.88) 0%, rgba(4, 8, 16, 0.96) 100%);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.75);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  padding: 30px 24px 26px;
+  border-radius: 20px;
+  background: linear-gradient(180deg, rgba(8, 18, 32, 0.9) 0%, rgba(4, 9, 18, 0.98) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  box-shadow: 0 16px 45px rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s, box-shadow 0.3s;
   overflow: hidden;
 }
 
-.plan-showcase-card::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: 22px;
-  padding: 1.5px;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.18) 0%, transparent 60%);
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  pointer-events: none;
+.plan-compact-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(56, 189, 248, 0.45);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.8), 0 0 35px rgba(56, 189, 248, 0.18);
 }
 
-.plan-showcase-card:hover {
-  transform: translateY(-8px);
-  border-color: rgba(56, 189, 248, 0.5);
-  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.9), 0 0 35px rgba(56, 189, 248, 0.22);
+.dash-compact-card {
+  background: linear-gradient(180deg, rgba(7, 20, 14, 0.9) 0%, rgba(3, 8, 6, 0.98) 100%);
 }
 
-.dash-plan-card-new {
-  background: linear-gradient(180deg, rgba(8, 18, 12, 0.88) 0%, rgba(3, 7, 5, 0.96) 100%);
+.dash-compact-card:hover {
+  border-color: rgba(34, 197, 94, 0.45);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.8), 0 0 35px rgba(34, 197, 94, 0.18);
 }
 
-.dash-plan-card-new:hover {
-  border-color: rgba(34, 197, 94, 0.5);
-  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.9), 0 0 35px rgba(34, 197, 94, 0.22);
+/* Card em Destaque (Mais Escolhido) */
+.plan-compact-card.featured {
+  border-color: rgba(56, 189, 248, 0.6);
+  box-shadow: 0 20px 55px rgba(0, 0, 0, 0.75), 0 0 40px rgba(56, 189, 248, 0.22);
+  background: linear-gradient(180deg, rgba(12, 28, 48, 0.95) 0%, rgba(5, 12, 24, 0.98) 100%);
 }
 
-.plan-showcase-card.featured {
-  border-color: rgba(56, 189, 248, 0.7);
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.85), 0 0 45px rgba(56, 189, 248, 0.28);
+.dash-compact-card.featured {
+  border-color: rgba(34, 197, 94, 0.6);
+  box-shadow: 0 20px 55px rgba(0, 0, 0, 0.75), 0 0 40px rgba(34, 197, 94, 0.22);
+  background: linear-gradient(180deg, rgba(10, 30, 18, 0.95) 0%, rgba(4, 12, 8, 0.98) 100%);
 }
 
-.dash-plan-card-new.featured {
-  border-color: rgba(34, 197, 94, 0.7);
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.85), 0 0 45px rgba(34, 197, 94, 0.28);
-}
-
-/* Badge Destaque Animado */
-.plan-featured-badge {
+.plan-compact-badge {
   position: absolute;
   top: 16px;
-  right: 20px;
+  right: 18px;
   font-size: 9px;
-  font-weight: 900;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  padding: 4px 12px;
-  border-radius: 999px;
-  background: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
-  color: #020712;
-  box-shadow: 0 2px 14px rgba(56, 189, 248, 0.45);
-}
-
-.dash-plan-card-new .plan-featured-badge {
-  background: linear-gradient(135deg, #22c55e 0%, #4ade80 100%);
-  color: #020e06;
-  box-shadow: 0 2px 14px rgba(34, 197, 94, 0.45);
-}
-
-/* Header do Card */
-.card-kicker-row {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 12px;
-}
-
-.card-kicker-tag {
-  font-size: 9.5px;
   font-weight: 850;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+  padding: 4px 11px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
+  color: #020712;
+  box-shadow: 0 2px 12px rgba(56, 189, 248, 0.4);
+}
+
+.dash-compact-card .plan-compact-badge {
+  background: linear-gradient(135deg, #22c55e 0%, #4ade80 100%);
+  color: #020e06;
+  box-shadow: 0 2px 12px rgba(34, 197, 94, 0.4);
+}
+
+/* Header do Card */
+.plan-compact-kicker {
+  display: inline-block;
+  font-size: 9px;
+  font-weight: 850;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
   color: #38bdf8;
-  padding: 3px 9px;
-  border-radius: 6px;
-  background: rgba(56, 189, 248, 0.12);
-  border: 1px solid rgba(56, 189, 248, 0.25);
+  margin-bottom: 8px;
 }
 
-.dash-plan-card-new .card-kicker-tag {
+.dash-compact-card .plan-compact-kicker {
   color: #4ade80;
-  background: rgba(34, 197, 94, 0.12);
-  border-color: rgba(34, 197, 94, 0.25);
 }
 
-.plan-title-hero {
-  font-size: 24px;
+.plan-compact-title {
+  font-size: 22px;
   font-weight: 850;
   color: #ffffff;
   font-family: var(--font-space), sans-serif;
   letter-spacing: -0.02em;
   line-height: 1.2;
-  margin: 0 0 10px;
+  margin: 0 0 8px;
 }
 
-.plan-headline-impact {
-  font-size: 13.5px;
-  line-height: 1.5;
-  color: #cbd5e1;
-  margin: 0 0 22px;
+.plan-compact-ideal {
+  font-size: 12px;
+  line-height: 1.45;
+  color: #94a3b8;
+  margin: 0 0 14px;
+  min-height: 35px;
 }
 
-/* 5. GRID DE CAPACIDADES / SUPERPODERES (Substitui as caixas cinzas pesadas) */
-.plan-capabilities-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  margin-bottom: 22px;
+.plan-compact-pitch {
+  font-size: 13px;
+  line-height: 1.48;
+  color: #e2e8f0;
+  font-weight: 600;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.035);
+  border-left: 3px solid #38bdf8;
+  margin-bottom: 20px;
 }
 
-@media (max-width: 600px) {
-  .plan-capabilities-grid {
-    grid-template-columns: 1fr;
-  }
+.dash-compact-card .plan-compact-pitch {
+  border-left-color: #22c55e;
 }
 
-.capability-item {
+/* Checklist Limpa e Escaneável (Sem caixas pesadas) */
+.plan-compact-features {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex-grow: 1;
+}
+
+.plan-compact-feature-item {
   display: flex;
   align-items: flex-start;
   gap: 10px;
-  padding: 12px 14px;
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.035);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  transition: all 0.25s ease;
 }
 
-.capability-item:hover {
-  background: rgba(255, 255, 255, 0.07);
-  border-color: rgba(255, 255, 255, 0.18);
-  transform: translateY(-2px);
-}
-
-.capability-icon {
-  font-size: 18px;
-  line-height: 1;
+.feature-check-icon {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 900;
+  background: rgba(56, 189, 248, 0.15);
+  color: #38bdf8;
+  border: 1px solid rgba(56, 189, 248, 0.3);
   flex-shrink: 0;
   margin-top: 1px;
 }
 
-.capability-text strong {
+.dash-compact-card .feature-check-icon {
+  background: rgba(34, 197, 94, 0.15);
+  color: #4ade80;
+  border-color: rgba(34, 197, 94, 0.3);
+}
+
+.feature-body strong {
   display: block;
-  font-size: 12.5px;
+  font-size: 12px;
   font-weight: 750;
-  color: #f8fafc;
+  color: #f1f5f9;
+  line-height: 1.3;
   margin-bottom: 2px;
 }
 
-.capability-text small {
-  display: block;
+.feature-body p {
+  margin: 0;
   font-size: 11px;
-  line-height: 1.35;
+  line-height: 1.38;
   color: #94a3b8;
 }
 
-/* 6. TRANSFORMAÇÃO NO NEGÓCIO */
-.plan-transformation-card {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  padding: 14px 16px;
-  border-radius: 14px;
+/* Faixa de Retorno / Payoff */
+.plan-compact-payoff {
+  font-size: 11.5px;
+  line-height: 1.42;
+  color: #cbd5e1;
+  padding: 10px 12px;
+  border-radius: 10px;
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.07);
-  margin-bottom: 24px;
+  margin-bottom: 20px;
 }
 
-.transformation-icon {
-  font-size: 20px;
-  line-height: 1;
-  flex-shrink: 0;
-}
-
-.transformation-badge {
-  display: block;
-  font-size: 8.5px;
-  font-weight: 850;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: #38bdf8;
-  margin-bottom: 4px;
-}
-
-.dash-plan-card-new .transformation-badge {
-  color: #4ade80;
-}
-
-.transformation-desc {
-  font-size: 12px;
-  line-height: 1.45;
-  color: #cbd5e1;
-  margin: 0;
-}
-
-/* 7. BOTÃO MAGNÉTICO COM REFLEXO ANIMADO */
-.plan-magnetic-btn {
+/* Botão Magnético */
+.plan-compact-btn {
   position: relative;
   width: 100%;
-  min-height: 52px;
+  min-height: 48px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-  font-size: 14px;
+  gap: 8px;
+  font-size: 13.5px;
   font-weight: 850;
-  letter-spacing: 0.015em;
-  border-radius: 14px;
+  letter-spacing: 0.01em;
+  border-radius: 12px;
   text-decoration: none;
   cursor: pointer;
   overflow: hidden;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
   margin-top: auto;
+  border: none;
 }
 
-.plan-magnetic-btn::after {
+.plan-compact-btn::after {
   content: "";
   position: absolute;
   top: -50%;
@@ -9625,326 +9535,200 @@ body:has(.web-page) .page-progress{background:linear-gradient(90deg,#43c85d,#a9f
 .btn-sync-glow {
   background: linear-gradient(135deg, #0284c7 0%, #38bdf8 100%);
   color: #020914;
-  box-shadow: 0 4px 22px rgba(56, 189, 248, 0.42), inset 0 1px 0 rgba(255, 255, 255, 0.35);
-  border: none;
+  box-shadow: 0 4px 18px rgba(56, 189, 248, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.35);
 }
 
 .btn-sync-glow:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 32px rgba(56, 189, 248, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  box-shadow: 0 8px 28px rgba(56, 189, 248, 0.65);
 }
 
 .btn-dash-glow {
   background: linear-gradient(135deg, #16a34a 0%, #22c55e 100%);
   color: #020e06;
-  box-shadow: 0 4px 22px rgba(34, 197, 94, 0.42), inset 0 1px 0 rgba(255, 255, 255, 0.35);
-  border: none;
+  box-shadow: 0 4px 18px rgba(34, 197, 94, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.35);
 }
 
 .btn-dash-glow:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 32px rgba(34, 197, 94, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  box-shadow: 0 8px 28px rgba(34, 197, 94, 0.65);
 }
 
-.plan-trust-subnote {
+.plan-compact-subnote {
   display: block;
   text-align: center;
+  font-size: 10px;
+  color: #64748b;
+  margin-top: 10px;
+}
+
+/* 3. CARD ENTERPRISE VIP EXECUTIVO (Substitui o texto solto feio) */
+.enterprise-vip-card {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 32px;
+  max-width: 1260px;
+  margin: 0 auto;
+  padding: 30px 36px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, rgba(8, 22, 42, 0.92) 0%, rgba(3, 8, 18, 0.98) 100%);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  box-shadow: 0 16px 50px rgba(0, 0, 0, 0.6), 0 0 35px rgba(56, 189, 248, 0.08);
+  backdrop-filter: blur(20px);
+}
+
+.enterprise-vip-left {
+  max-width: 820px;
+}
+
+.enterprise-vip-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: rgba(56, 189, 248, 0.12);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  font-size: 9.5px;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #38bdf8;
+  margin-bottom: 12px;
+}
+
+.enterprise-vip-left h3 {
+  font-size: 20px;
+  font-weight: 850;
+  color: #ffffff;
+  font-family: var(--font-space), sans-serif;
+  letter-spacing: -0.02em;
+  margin: 0 0 8px;
+}
+
+.enterprise-vip-left p {
+  font-size: 13px;
+  line-height: 1.55;
+  color: #cbd5e1;
+  margin: 0 0 14px;
+}
+
+.enterprise-vip-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.enterprise-tag-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
   font-size: 11px;
-  color: #94a3b8;
-  margin-top: 12px;
+  font-weight: 650;
+  color: #7dd3fc;
+  padding: 4px 10px;
+  border-radius: 6px;
+  background: rgba(56, 189, 248, 0.08);
+  border: 1px solid rgba(56, 189, 248, 0.18);
 }
 
-/* 8. CONTROLES MOBILE FLUIDOS & RESPONSIVIDADE AVANÇADA */
-.pill-title-short {
-  display: none;
+.enterprise-vip-right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
+  min-width: 260px;
 }
 
-.mobile-plan-nav-bar {
-  display: none;
+.enterprise-vip-btn {
+  width: 100%;
+  min-height: 48px;
+  padding: 0 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 13.5px;
+  font-weight: 850;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #0284c7 0%, #38bdf8 100%);
+  color: #020914;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(56, 189, 248, 0.45);
+  transition: all 0.25s ease;
 }
 
-.mobile-view-all-toggle-wrap {
-  display: none;
+.enterprise-vip-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(56, 189, 248, 0.65);
 }
 
-@media (max-width: 768px) {
-  /* 1. Value Assurance Dock no Mobile */
-  .value-assurance-dock {
-    padding: 16px 14px 14px;
+.enterprise-vip-right small {
+  font-size: 10.5px;
+  color: #64748b;
+}
+
+/* RESPONSIVIDADE MOBILE LIMPA */
+@media (max-width: 860px) {
+  .enterprise-vip-card {
+    grid-template-columns: 1fr;
+    padding: 24px 20px;
+    gap: 20px;
+    text-align: left;
+  }
+
+  .enterprise-vip-right {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .enterprise-vip-btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 640px) {
+  .plan-compact-card {
+    padding: 24px 18px 20px;
     border-radius: 16px;
-    margin-bottom: 18px;
   }
 
-  .assurance-kicker-tag {
-    font-size: 8.5px;
-    padding: 3px 8px;
+  .plan-compact-title {
+    font-size: 19px;
   }
 
-  .assurance-headline {
-    font-size: 13px;
-    line-height: 1.48;
+  .plan-compact-ideal {
+    font-size: 11.5px;
+    min-height: 0;
     margin-bottom: 12px;
   }
 
-  .assurance-perks-row {
-    gap: 6px;
-    justify-content: center;
-  }
-
-  .perk-chip {
-    padding: 5px 9px;
-    font-size: 10px;
-    gap: 5px;
-    border-radius: 8px;
-  }
-
-  .perk-icon {
-    font-size: 11px;
-  }
-
-  /* 2. Switcher de Formatos no Mobile */
-  .plan-interactive-switcher-row {
-    padding: 4px;
-    gap: 4px;
-    border-radius: 14px;
+  .plan-compact-pitch {
+    font-size: 12px;
+    padding: 8px 10px;
     margin-bottom: 16px;
-    width: 100%;
-    max-width: 480px;
-    box-sizing: border-box;
   }
 
-  .pill-title-long {
-    display: none;
-  }
-
-  .pill-title-short {
-    display: inline;
-  }
-
-  .plan-switcher-pill {
-    padding: 9px 8px;
+  .feature-body strong {
     font-size: 11.5px;
-    font-weight: 750;
-    border-radius: 10px;
-    gap: 4px;
-    flex: 1;
-    text-align: center;
-    justify-content: center;
-    white-space: nowrap;
   }
 
-  .dash-switcher-row .plan-switcher-pill {
+  .feature-body p {
     font-size: 10.5px;
-    padding: 8px 4px;
   }
 
-  .plan-switcher-pill .switcher-badge-mini {
-    display: none;
-  }
-
-  /* 3. Comportamento Fluido de Cards no Celular (Modo Abas Interativas) */
-  .plans-showcase-grid:not(.show-all-mobile) .plan-showcase-card {
-    display: none;
-  }
-
-  .plans-showcase-grid:not(.show-all-mobile) .plan-showcase-card.is-active-format {
-    display: flex;
-    animation: mobileCardFadeIn 0.28s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  .plans-showcase-grid.show-all-mobile {
-    display: grid;
-    gap: 18px;
-  }
-
-  .plans-showcase-grid.show-all-mobile .plan-showcase-card {
-    display: flex;
-  }
-
-  /* 4. Barra de Navegação Rápida (Dots + Prev/Next) */
-  .mobile-plan-nav-bar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 10px;
-    margin: 14px auto 0;
-    max-width: 310px;
-    padding: 6px 14px;
-    border-radius: 999px;
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    box-sizing: border-box;
-  }
-
-  .mobile-plan-step-btn {
-    background: none;
-    border: none;
-    color: #94a3b8;
+  .plan-compact-payoff {
     font-size: 11px;
-    font-weight: 750;
-    cursor: pointer;
-    padding: 4px 6px;
-    transition: color 0.2s;
+    padding: 8px 10px;
+    margin-bottom: 16px;
   }
 
-  .mobile-plan-step-btn:hover,
-  .mobile-plan-step-btn:active {
-    color: #ffffff;
-  }
-
-  .mobile-plan-dots {
-    display: flex;
-    align-items: center;
-    gap: 7px;
-  }
-
-  .mobile-plan-dot {
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.2);
-    cursor: pointer;
-    border: none;
-    padding: 0;
-    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  .mobile-plan-dot.active {
-    width: 22px;
-    border-radius: 999px;
-    background: #38bdf8;
-    box-shadow: 0 0 10px rgba(56, 189, 248, 0.6);
-  }
-
-  .dash-plans-grid-new + .mobile-plan-nav-bar .mobile-plan-dot.active {
-    background: #22c55e;
-    box-shadow: 0 0 10px rgba(34, 197, 94, 0.6);
-  }
-
-  .mobile-view-all-toggle-wrap {
-    display: block;
-    text-align: center;
-    margin-top: 10px;
-  }
-
-  .mobile-view-all-toggle {
-    background: none;
-    border: none;
-    font-size: 10.5px;
-    font-weight: 600;
-    color: #64748b;
-    cursor: pointer;
-    text-decoration: underline;
-    text-underline-offset: 3px;
-    padding: 4px 8px;
-    transition: color 0.2s;
-  }
-
-  .mobile-view-all-toggle:hover {
-    color: #94a3b8;
-  }
-
-  /* 5. Anatomia e Espaçamento Interno do Card no Celular */
-  .plan-showcase-card {
-    padding: 22px 16px 18px;
-    border-radius: 18px;
-  }
-
-  .card-kicker-row {
-    margin-bottom: 8px;
-  }
-
-  .card-kicker-tag {
-    font-size: 8.5px;
-    padding: 2.5px 7px;
-  }
-
-  .plan-title-hero {
-    font-size: 20px;
-    line-height: 1.2;
-    margin: 0 0 6px;
-  }
-
-  .plan-headline-impact {
+  .plan-compact-btn {
+    min-height: 44px;
     font-size: 12.5px;
-    line-height: 1.45;
-    margin: 0 0 14px;
-  }
-
-  .plan-capabilities-grid {
-    grid-template-columns: 1fr;
-    gap: 7px;
-    margin-bottom: 16px;
-  }
-
-  .capability-item {
-    padding: 9px 11px;
-    gap: 9px;
-    border-radius: 10px;
-  }
-
-  .capability-icon {
-    font-size: 15px;
-  }
-
-  .capability-text strong {
-    font-size: 11.5px;
-    margin-bottom: 1px;
-  }
-
-  .capability-text small {
-    font-size: 10px;
-    line-height: 1.35;
-  }
-
-  .plan-transformation-card {
-    padding: 11px 12px;
-    gap: 9px;
-    margin-bottom: 18px;
-    border-radius: 12px;
-  }
-
-  .transformation-icon {
-    font-size: 16px;
-  }
-
-  .transformation-badge {
-    font-size: 8px;
-    margin-bottom: 2px;
-  }
-
-  .transformation-desc {
-    font-size: 11px;
-    line-height: 1.4;
-  }
-
-  .plan-magnetic-btn {
-    min-height: 46px;
-    font-size: 13px;
-    border-radius: 12px;
-  }
-
-  .plan-trust-subnote {
-    font-size: 10px;
-    margin-top: 8px;
-  }
-
-  .plan-featured-badge {
-    top: 12px;
-    right: 12px;
-    font-size: 8px;
-    padding: 2.5px 8px;
-  }
-}
-
-@keyframes mobileCardFadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(6px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
   }
 }
 

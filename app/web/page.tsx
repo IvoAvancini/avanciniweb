@@ -218,8 +218,7 @@ const portfolioSpotlights = {
 
 type PortfolioSpotlightType = keyof typeof portfolioSpotlights;
 
-type CapabilityItem = {
-  icon: string;
+type PlanFeature = {
   title: string;
   desc: string;
 };
@@ -227,12 +226,12 @@ type CapabilityItem = {
 type DashPlan = {
   id: string;
   name: string;
-  badge: string;
+  badge?: string;
   kicker: string;
-  headline: string;
-  capabilities: CapabilityItem[];
-  transformationBadge: string;
-  transformationText: string;
+  idealFor: string;
+  pitch: string;
+  features: PlanFeature[];
+  payoff: string;
   deliverableBadge: string;
   ctaText: string;
   featured?: boolean;
@@ -243,17 +242,18 @@ const dashPlans: DashPlan[] = [
     id: "landing",
     name: "Landing Page de Alta Conversão",
     badge: "ANÚNCIOS & TRÁFEGO PAGO",
-    kicker: "CONVERSÃO ACIMA DA MÉDIA",
-    headline: "Página focada 100% em transformar visitantes de anúncios em conversas reais e agendamentos no seu WhatsApp.",
-    capabilities: [
-      { icon: "⚡", title: "Carregamento em 0.2s LCP", desc: "Zero perda de cliques de campanhas por lentidão ou abandono no 4G." },
-      { icon: "🎯", title: "Copywriting Persuasivo", desc: "Estrutura de persuasão que conduz o visitante até a ação sem dispersão." },
-      { icon: "📲", title: "WhatsApp em Posição de Ouro", desc: "Gatilhos e botões estrategicamente posicionados para captura imediata." },
-      { icon: "🛡️", title: "Hospedagem Rápida & SSL", desc: "Infraestrutura global com certificado de segurança blindado incluso." },
+    kicker: "CAMPANHAS NO GOOGLE & META ADS",
+    idealFor: "Para quem investe em anúncios e precisa que cada clique vire contato e venda no WhatsApp.",
+    pitch: "Página focada 100% em conversão rápida: carrega em 0.2s, quebra objeções e captura o lead sem dispersão.",
+    features: [
+      { title: "Carregamento Ultrarrápido em 0.2s LCP", desc: "Zero perda de cliques de campanhas por lentidão no 4G ou celular antigo." },
+      { title: "Copywriting Persuasivo Direto ao Ponto", desc: "Texto estratégico que conduz o visitante do problema até a contratação." },
+      { title: "WhatsApp em Posição de Ouro", desc: "Gatilhos e botões posicionados nos pontos de maior atenção visual." },
+      { title: "Hospedagem Blindada & Certificado SSL", desc: "Infraestrutura global ultra-estável sem limites de tráfego inclusa." },
+      { title: "Rastreamento Completo (Pixel & GA4)", desc: "Métricas exatas de conversão configuradas para otimizar seus anúncios." },
     ],
-    transformationBadge: "POR QUE ESSA PÁGINA CONVENCE",
-    transformationText: "Cada segundo de espera em um anúncio custa metade dos seus clientes. Entregamos uma página que carrega como um piscar de olhos e vende seu serviço com clareza.",
-    deliverableBadge: "⚡ Rascunho em 48h · Código Otimizado · Suporte Dedicado",
+    payoff: "💡 Pare de queimar dinheiro em anúncios com páginas lentas que espantam clientes.",
+    deliverableBadge: "⚡ Primeiro Rascunho em 48h · Código Otimizado · Suporte Dedicado",
     ctaText: "Solicitar Proposta de Landing Page",
     featured: false,
   },
@@ -261,17 +261,18 @@ const dashPlans: DashPlan[] = [
     id: "institucional",
     name: "Site Institucional de Autoridade",
     badge: "MAIS ESCOLHIDO",
-    kicker: "AUTORIDADE MÁXIMA & SEO",
-    headline: "Estrutura corporativa completa para consolidar sua marca como a escolha premium e líder no Google.",
-    capabilities: [
-      { icon: "🏢", title: "Até 5 Páginas Exclusivas", desc: "Arquitetura autoral com apresentação impecável de serviços e equipe." },
-      { icon: "🔍", title: "SEO Local no Google", desc: "Otimização técnica para ranquear nas pesquisas orgânicas da sua cidade." },
-      { icon: "💼", title: "Posicionamento Premium", desc: "Design sofisticado com estética moderna que justifica honorários mais altos." },
-      { icon: "📍", title: "Rotas & Contato Direto", desc: "Integração com mapas, telefones e formulários com entrega instantânea." },
+    kicker: "AUTORIDADE MÁXIMA & SEO NO GOOGLE",
+    idealFor: "Para clínicas, escritórios, consultorias e empresas que precisam transmitir liderança e fechar contratos maiores.",
+    pitch: "Estrutura corporativa completa que posiciona sua marca no topo do Google e justifica honorários mais altos.",
+    features: [
+      { title: "Até 5 Páginas Exclusivas e Autorais", desc: "Apresentação impecável: Início, Sobre, Serviços, Equipe e Contato." },
+      { title: "SEO Local Técnico Configurado", desc: "Otimização para sua empresa ranquear nas buscas orgânicas da sua cidade." },
+      { title: "Design de Nível Internacional", desc: "Estética refinada que transmite confiança instantânea ao primeiro olhar." },
+      { title: "Integração com Mapas, Rotas & WhatsApp", desc: "O cliente encontra sua localização e fala com você com apenas um clique." },
+      { title: "Nota 100 no Google PageSpeed", desc: "Desempenho técnico impecável que o Google prioriza nas primeiras posições." },
     ],
-    transformationBadge: "O IMPACTO NO SEU NEGÓCIO",
-    transformationText: "Quando um cliente em potencial pesquisa sua empresa no Google, ele encontra uma página de nível internacional que transmite autoridade inquestionável.",
-    deliverableBadge: "⚡ Design Autoral · Nota 100 PageSpeed · SEO Local",
+    payoff: "💎 Quem pesquisa sua empresa no Google encontra autoridade inquestionável.",
+    deliverableBadge: "⚡ Design Autoral · Nota 100 PageSpeed · SEO Local Configurado",
     ctaText: "Planejar Site Institucional",
     featured: true,
   },
@@ -279,16 +280,17 @@ const dashPlans: DashPlan[] = [
     id: "loja",
     name: "Loja Virtual Integrada",
     badge: "CATÁLOGO & CHECKOUT",
-    kicker: "VENDAS SEM FRICÇÃO",
-    headline: "Catálogo moderno, carrinho intuitivo e checkout automático sem pagar comissões sobre o seu faturamento.",
-    capabilities: [
-      { icon: "🛍️", title: "Catálogo em Alta Definição", desc: "Fotos nítidas, variações de tamanho/cor e filtros rápidos de busca." },
-      { icon: "💳", title: "Pix Automático & Cartão", desc: "Confirmação instantânea de pagamento sem travamentos no checkout." },
-      { icon: "📦", title: "Cálculo de Frete Correios", desc: "Cotação automática em tempo real para qualquer CEP do Brasil." },
-      { icon: "🚫", title: "Zero Comissões", desc: "Diferente de marketplaces, 100% da margem das suas vendas fica com você." },
+    kicker: "VENDAS ONLINE SEM COMISSÕES",
+    idealFor: "Para marcas, atacado e varejo que querem vender online 24/7 sem pagar comissões para plataformas terceiras.",
+    pitch: "Catálogo moderno, carrinho intuitivo e checkout automático com 100% da margem das vendas ficando com você.",
+    features: [
+      { title: "Catálogo com Fotos em Alta Definição", desc: "Variações de tamanho, cor, filtros rápidos e zoom nos detalhes do produto." },
+      { title: "Pix Automático & Cartão em até 12x", desc: "Confirmação instantânea de pagamento sem fricção nem abandono de carrinho." },
+      { title: "Cálculo de Frete Correios / Transportadora", desc: "Cotação em tempo real por CEP integrada com Melhor Envio e Correios." },
+      { title: "Zero Taxas ou Comissões sobre Vendas", desc: "Diferente de marketplaces, todo o faturamento vai direto para a sua conta." },
+      { title: "Painel Administrativo Ágil e Simples", desc: "Cadastre produtos, altere preços e controle estoque direto pelo celular." },
     ],
-    transformationBadge: "O IMPACTO NO SEU NEGÓCIO",
-    transformationText: "Automatize pedidos e pagamentos 24/7 sem precisar gastar horas do seu dia respondendo preço e mandando fotos manualmente no direct.",
+    payoff: "🚀 Automatize suas vendas e receba pedidos no WhatsApp mesmo dormindo.",
     deliverableBadge: "⚡ Checkout Rápido · Zero Comissão · Painel Ágil",
     ctaText: "Planejar Loja Virtual",
     featured: false,
@@ -1004,7 +1006,7 @@ export default function Home() {
                 <span className="dash-entry-badge">{plan.badge}</span>
               </div>
               <h3 className="dash-entry-card-title">{plan.name}</h3>
-              <p className="dash-entry-desc">{plan.headline}</p>
+              <p className="dash-entry-desc">{plan.pitch}</p>
               
               <div className="dash-entry-price-wrap">
                 <div className="dash-entry-price-amount">
@@ -1021,10 +1023,10 @@ export default function Home() {
               </div>
 
               <ul className="dash-entry-features">
-                {plan.capabilities.slice(0, 3).map((cap, hIdx) => (
+                {plan.features.slice(0, 3).map((feat, hIdx) => (
                   <li key={hIdx}>
                     <i aria-hidden="true" />
-                    <span><b>{cap.title}:</b> {cap.desc}</span>
+                    <span><b>{feat.title}:</b> {feat.desc}</span>
                   </li>
                 ))}
               </ul>
@@ -1097,88 +1099,48 @@ export default function Home() {
           </div>
         </div>
 
-        {/* 2. Alternador Interativo de Formatos */}
-        <div className="plan-interactive-switcher-row dash-switcher-row" role="tablist" aria-label="Formatos de Projeto">
-          <button
-            type="button"
-            role="tab"
-            aria-selected={selectedDashFormat === "landing"}
-            className={`plan-switcher-pill ${selectedDashFormat === "landing" ? "is-active" : ""}`}
-            onClick={() => setSelectedDashFormat("landing")}
-          >
-            <span className="pill-title-long">Landing Page (Conversão)</span>
-            <span className="pill-title-short">🎯 Landing</span>
-          </button>
-          <button
-            type="button"
-            role="tab"
-            aria-selected={selectedDashFormat === "institucional"}
-            className={`plan-switcher-pill ${selectedDashFormat === "institucional" ? "is-active" : ""}`}
-            onClick={() => setSelectedDashFormat("institucional")}
-          >
-            <span className="pill-title-long">Site Institucional (Autoridade)</span>
-            <span className="pill-title-short">🏛️ Institucional</span>
-            <em className="switcher-badge-mini">Mais Escolhido</em>
-          </button>
-          <button
-            type="button"
-            role="tab"
-            aria-selected={selectedDashFormat === "loja"}
-            className={`plan-switcher-pill ${selectedDashFormat === "loja" ? "is-active" : ""}`}
-            onClick={() => setSelectedDashFormat("loja")}
-          >
-            <span className="pill-title-long">Loja Virtual (Catálogo)</span>
-            <span className="pill-title-short">⚡ Loja</span>
-          </button>
-        </div>
-
-        {/* 3. Grid com Cards Luminous de Alto Impacto */}
-        <div className={`plans-showcase-grid dash-plans-grid-new ${showAllMobileDash ? "show-all-mobile" : ""}`}>
+        {/* 2. Grid com os 3 Formatos Principais (Landing, Institucional e Loja Virtual) */}
+        <div className="plans-showcase-grid-compact">
           {dashPlans.map((plan) => {
             const isFeatured = plan.featured;
-            const isHighlighted = selectedDashFormat === plan.id;
 
             return (
               <article
-                className={`plan-showcase-card dash-plan-card-new ${isFeatured ? "featured" : ""} ${isHighlighted ? "is-active-format" : ""}`}
+                className={`plan-compact-card dash-compact-card ${isFeatured ? "featured" : ""}`}
                 key={plan.id}
-                onMouseEnter={() => setSelectedDashFormat(plan.id as "landing" | "institucional" | "loja")}
               >
-                {isFeatured && <span className="plan-featured-badge">MAIS ESCOLHIDO</span>}
+                {isFeatured && <span className="plan-compact-badge">{plan.badge || "MAIS ESCOLHIDO"}</span>}
 
-                <div className="card-kicker-row">
-                  <span className="card-kicker-tag">{plan.kicker}</span>
+                <span className="plan-compact-kicker">{plan.kicker}</span>
+                <h3 className="plan-compact-title">{plan.name}</h3>
+                <p className="plan-compact-ideal"><strong>Para quem é:</strong> {plan.idealFor}</p>
+
+                <div className="plan-compact-pitch">
+                  {plan.pitch}
                 </div>
 
-                <h3 className="plan-title-hero">{plan.name}</h3>
-                <p className="plan-headline-impact">{plan.headline}</p>
-
-                {/* Grid 2x2 com Capacidades Técnicas Vivas */}
-                <div className="plan-capabilities-grid">
-                  {plan.capabilities.map((cap, cIdx) => (
-                    <div className="capability-item" key={cIdx}>
-                      <span className="capability-icon">{cap.icon}</span>
-                      <div className="capability-text">
-                        <strong>{cap.title}</strong>
-                        <small>{cap.desc}</small>
+                {/* Checklist Elegante e Direta */}
+                <ul className="plan-compact-features">
+                  {plan.features.map((feat, fIdx) => (
+                    <li className="plan-compact-feature-item" key={fIdx}>
+                      <span className="feature-check-icon">✓</span>
+                      <div className="feature-body">
+                        <strong>{feat.title}</strong>
+                        <p>{feat.desc}</p>
                       </div>
-                    </div>
+                    </li>
                   ))}
+                </ul>
+
+                {/* Faixa de Retorno / Payoff */}
+                <div className="plan-compact-payoff">
+                  {plan.payoff}
                 </div>
 
-                {/* Card de Transformação / Impacto no Negócio */}
-                <div className="plan-transformation-card">
-                  <span className="transformation-icon">💎</span>
-                  <div>
-                    <span className="transformation-badge">{plan.transformationBadge}</span>
-                    <p className="transformation-desc">{plan.transformationText}</p>
-                  </div>
-                </div>
-
-                {/* Botão Magnético Luminous */}
+                {/* Botão Magnético de Alta Conversão */}
                 <button
                   type="button"
-                  className="plan-magnetic-btn btn-dash-glow"
+                  className="plan-compact-btn btn-dash-glow"
                   onClick={() =>
                     startBudgetConversation(
                       plan.name,
@@ -1189,63 +1151,12 @@ export default function Home() {
                   <span>{plan.ctaText}</span>
                   <WebArrow />
                 </button>
-                <small className="plan-trust-subnote">
+                <small className="plan-compact-subnote">
                   {plan.deliverableBadge}
                 </small>
               </article>
             );
           })}
-        </div>
-
-        {/* 4. Barra Mobile de Navegação Fluida entre Formatos */}
-        <div className="mobile-plan-nav-bar">
-          <button
-            type="button"
-            className="mobile-plan-step-btn"
-            onClick={() => {
-              const keys: ("landing" | "institucional" | "loja")[] = ["landing", "institucional", "loja"];
-              const curIdx = keys.indexOf(selectedDashFormat);
-              const prevIdx = (curIdx - 1 + keys.length) % keys.length;
-              setSelectedDashFormat(keys[prevIdx]);
-            }}
-            aria-label="Formato anterior"
-          >
-            ← Anterior
-          </button>
-          <div className="mobile-plan-dots">
-            {dashPlans.map((p) => (
-              <button
-                type="button"
-                key={p.id}
-                aria-label={`Selecionar formato ${p.name}`}
-                className={`mobile-plan-dot ${selectedDashFormat === p.id ? "active" : ""}`}
-                onClick={() => setSelectedDashFormat(p.id as "landing" | "institucional" | "loja")}
-              />
-            ))}
-          </div>
-          <button
-            type="button"
-            className="mobile-plan-step-btn"
-            onClick={() => {
-              const keys: ("landing" | "institucional" | "loja")[] = ["landing", "institucional", "loja"];
-              const curIdx = keys.indexOf(selectedDashFormat);
-              const nextIdx = (curIdx + 1) % keys.length;
-              setSelectedDashFormat(keys[nextIdx]);
-            }}
-            aria-label="Próximo formato"
-          >
-            Próximo →
-          </button>
-        </div>
-
-        <div className="mobile-view-all-toggle-wrap">
-          <button
-            type="button"
-            className="mobile-view-all-toggle"
-            onClick={() => setShowAllMobileDash(!showAllMobileDash)}
-          >
-            {showAllMobileDash ? "Alternar em Modo Abas Rápidas ↑" : "Ver todos os 3 formatos em lista ↓"}
-          </button>
         </div>
 
         <div className="offer-standard" aria-label="O que está presente em toda entrega Avancini Dash">

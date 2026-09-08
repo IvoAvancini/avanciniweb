@@ -413,15 +413,20 @@ type CapabilityItem = {
   desc: string;
 };
 
+type PlanFeature = {
+  title: string;
+  desc: string;
+};
+
 type SyncPlanSimple = {
   id: string;
   name: string;
-  badge: string;
+  badge?: string;
   kicker: string;
-  headline: string;
-  capabilities: CapabilityItem[];
-  transformationBadge: string;
-  transformationText: string;
+  idealFor: string;
+  pitch: string;
+  features: PlanFeature[];
+  payoff: string;
   deliverableBadge: string;
   ctaText: string;
   featured?: boolean;
@@ -429,40 +434,61 @@ type SyncPlanSimple = {
 
 const simplifiedPlans: SyncPlanSimple[] = [
   {
-    id: "essencial",
-    name: "Operação Essencial",
-    badge: "1 WHATSAPP DEDICADO",
-    kicker: "FLUXO CONTÍNUO 24/7",
-    headline: "Atendimento acolhedor, agendamento no Google Calendar e follow-up inteligente sem pausas ou retrabalho.",
-    capabilities: [
-      { icon: "📅", title: "Google Agenda em Tempo Real", desc: "Verifica horários livres e reserva consultas na grade instantaneamente." },
-      { icon: "🎙️", title: "Ouve Áudios & Lê Exames", desc: "Transcreve áudios longos e analisa documentos e fotos sem travar o cliente." },
-      { icon: "📲", title: "Transbordo com Resumo", desc: "Passa para sua equipe com ficha pronta e contexto completo do atendimento." },
-      { icon: "⏰", title: "Lembretes Anti-Falta", desc: "Envia confirmação ativa na véspera direto no WhatsApp para reduzir no-show." },
+    id: "chatbot",
+    name: "Chatbot de Fluxo",
+    badge: "AUTOMAÇÃO EXPRESSA",
+    kicker: "MENU GUIADO & RESPOSTAS IMEDIATAS",
+    idealFor: "Para empresas que querem respostas automáticas instantâneas, cardápio/catálogo e triagem sem IA generativa.",
+    pitch: "Elimina as perguntas repetitivas do dia a dia com direcionamento objetivo em botões ou menu 1, 2, 3.",
+    features: [
+      { title: "Menu Inteligente de Opções (1 a 5)", desc: "Cliente escolhe o assunto e recebe a resposta oficial sem fila de espera." },
+      { title: "Envio Automático de Catálogo & PDF", desc: "Dispara tabela de serviços, cardápio, fotos e localização no mesmo segundo." },
+      { title: "Horários de Funcionamento & FAQ", desc: "Tira dúvidas recorrentes 24h e orienta o cliente sem intervenção humana." },
+      { title: "Transbordo Direto para Atendente", desc: "Transfere a conversa para o WhatsApp do setor certo quando solicitado." },
+      { title: "Zero Risco de Alucinação", desc: "Respostas 100% literais e exatas, rigorosamente dentro do fluxo que você aprovar." },
     ],
-    transformationBadge: "O IMPACTO NO SEU NEGÓCIO",
-    transformationText: "Você nunca mais perde pacientes ou clientes à noite e no fim de semana enquanto a concorrência demora horas para responder.",
-    deliverableBadge: "⚡ Calibração Guiada · Conexão QR Code · Suporte Direto",
-    ctaText: "Solicitar Demonstração no WhatsApp",
+    payoff: "💡 Libere a sua equipe das dúvidas repetitivas com ativação rápida em 24h.",
+    deliverableBadge: "⚡ Setup Ágil · Conexão QR Code · Sem Complexidade",
+    ctaText: "Testar Chatbot no WhatsApp",
     featured: false,
+  },
+  {
+    id: "essencial",
+    name: "Operação IA Essencial",
+    badge: "MAIS ESCOLHIDO",
+    kicker: "IA GENERATIVA HUMANIZADA 24/7",
+    idealFor: "Para clínicas, consultórios, advogados e serviços que perdem pacientes e vendas à noite e no fim de semana.",
+    pitch: "Uma secretária virtual de elite com o tom de voz da sua marca que acolhe, tira dúvidas e agenda consultas na hora.",
+    features: [
+      { title: "Atendente IA com Empatia e Tom Autoral", desc: "Conversa com fluidez natural no WhatsApp, entende gírias e acolhe com cordialidade." },
+      { title: "Ouve Áudios Longos & Analisa Exames", desc: "O paciente manda áudio de 2 minutos ou foto de documento e a IA processa perfeitamente." },
+      { title: "Google Agenda Integrada em Tempo Real", desc: "Consulta a sua grade em tempo real e reserva consultas/reuniões automaticamente." },
+      { title: "Lembretes Anti-Falta na Véspera", desc: "Envia confirmação ativa com botão de aceite para zerar furos de agenda e no-show." },
+      { title: "Transbordo com Resumo Pronto", desc: "Passa para seu WhatsApp com ficha mastigada do que o paciente precisa." },
+    ],
+    payoff: "💎 Nunca mais perca um cliente fora do horário comercial enquanto o concorrente dorme.",
+    deliverableBadge: "⚡ Calibração Guiada · Google Calendar · Teste sem Risco",
+    ctaText: "Solicitar Demonstração da IA",
+    featured: true,
   },
   {
     id: "pro",
     name: "Operação Scale Pro",
-    badge: "MAIS ESCOLHIDO",
-    kicker: "ARQUITETURA MULTISSETOR",
-    headline: "Triagem por setores, distribuição de fila para atendentes humanos e relatórios analíticos de conversão.",
-    capabilities: [
-      { icon: "🏢", title: "Roteamento por Setores", desc: "Separa fluxos de Comercial, Recepção, Financeiro e Suporte com inteligência." },
-      { icon: "👥", title: "Fila de Atendentes Humanos", desc: "Distribui clientes de forma equilibrada entre múltiplos operadores da equipe." },
-      { icon: "📊", title: "Relatórios de Conversão", desc: "Métricas detalhadas de motivos de contato, horários de pico e conversão." },
-      { icon: "⚡", title: "Capacidade Prioritária", desc: "Processamento de alta escala desenhado para absorver picos de tráfego pago." },
+    badge: "ALTA ESCALA",
+    kicker: "CENTRAL CORPORATIVA MULTISSETOR",
+    idealFor: "Para clínicas com múltiplos especialistas, imobiliárias, distribuidoras e empresas com equipe de vendas.",
+    pitch: "Multiagentes especializados por setor e distribuição inteligente de fila para vários atendentes no mesmo número.",
+    features: [
+      { title: "Multiagentes Especializados por Setor", desc: "IAs dedicadas: um agente para Vendas, um para Recepção e um para Financeiro/Cobrança." },
+      { title: "Fila Inteligente de Atendentes Humanos", desc: "Vários operadores atendendo no mesmo WhatsApp oficial sem conflito de mensagens." },
+      { title: "Painel de Métricas & Taxa de Conversão", desc: "Relatórios de motivos de contato, horários de pico e desempenho do time." },
+      { title: "Capacidade Prioritária para Anúncios", desc: "Infraestrutura reforçada para suportar picos pesados de campanhas e tráfego pago." },
+      { title: "Gerente de Conta Dedicado & SLA Prioritário", desc: "Acompanhamento VIP contínuo para calibração de processos e suporte direto." },
     ],
-    transformationBadge: "O IMPACTO NA SUA EMPRESA",
-    transformationText: "Estrutura corporativa que profissionaliza o atendimento de equipes grandes, reduz o tempo de resposta a 2 segundos e blinda contra perdas de vendas.",
-    deliverableBadge: "⚡ Multiagentes Integrados · Gestão de Fila · Relatórios",
-    ctaText: "Agendar Diagnóstico com Especialista",
-    featured: true,
+    payoff: "🚀 Transforme seu WhatsApp em uma máquina de vendas multissetor que atende 500 pessoas ao mesmo tempo.",
+    deliverableBadge: "⚡ Multiagentes · Gestão de Equipe · SLA Corporativo",
+    ctaText: "Agendar Diagnóstico Scale Pro",
+    featured: false,
   },
 ];
 
@@ -1457,83 +1483,53 @@ export default function AvanciniSyncPage() {
           </div>
         </div>
 
-        {/* 2. Alternador Interativo de Formatos */}
-        <div className="plan-interactive-switcher-row" role="tablist" aria-label="Formatos de Atendimento">
-          <button
-            type="button"
-            role="tab"
-            aria-selected={selectedFormat === "essencial"}
-            className={`plan-switcher-pill ${selectedFormat === "essencial" ? "is-active" : ""}`}
-            onClick={() => setSelectedFormat("essencial")}
-          >
-            <span className="pill-title-long">Operação Essencial (1 WhatsApp)</span>
-            <span className="pill-title-short">⚡ Essencial</span>
-          </button>
-          <button
-            type="button"
-            role="tab"
-            aria-selected={selectedFormat === "pro"}
-            className={`plan-switcher-pill ${selectedFormat === "pro" ? "is-active" : ""}`}
-            onClick={() => setSelectedFormat("pro")}
-          >
-            <span className="pill-title-long">Operação Scale Pro (Equipe &amp; Setores)</span>
-            <span className="pill-title-short">🚀 Scale Pro</span>
-            <em className="switcher-badge-mini">Recomendado</em>
-          </button>
-        </div>
-
-        {/* 3. Grid com Cards Luminous de Alto Impacto */}
-        <div className={`plans-showcase-grid sync-plans-grid-new ${showAllMobileSync ? "show-all-mobile" : ""}`}>
+        {/* 2. Grid com os 3 Modelos de Atendimento (Chatbot, IA Essencial e Scale Pro) */}
+        <div className="plans-showcase-grid-compact">
           {simplifiedPlans.map((plan) => {
             const isFeatured = plan.featured;
-            const isHighlighted = selectedFormat === plan.id;
             return (
               <article
-                className={`plan-showcase-card ${isFeatured ? "featured" : ""} ${isHighlighted ? "is-active-format" : ""}`}
+                className={`plan-compact-card ${isFeatured ? "featured" : ""}`}
                 key={plan.id}
-                onMouseEnter={() => setSelectedFormat(plan.id as "essencial" | "pro")}
               >
-                {isFeatured && <span className="plan-featured-badge">MAIS ESCOLHIDO</span>}
+                {isFeatured && <span className="plan-compact-badge">{plan.badge || "MAIS ESCOLHIDO"}</span>}
 
-                <div className="card-kicker-row">
-                  <span className="card-kicker-tag">{plan.kicker}</span>
+                <span className="plan-compact-kicker">{plan.kicker}</span>
+                <h3 className="plan-compact-title">{plan.name}</h3>
+                <p className="plan-compact-ideal"><strong>Para quem é:</strong> {plan.idealFor}</p>
+
+                <div className="plan-compact-pitch">
+                  {plan.pitch}
                 </div>
 
-                <h3 className="plan-title-hero">{plan.name}</h3>
-                <p className="plan-headline-impact">{plan.headline}</p>
-
-                {/* Grid 2x2 com Capacidades Técnicas Vivas */}
-                <div className="plan-capabilities-grid">
-                  {plan.capabilities.map((cap, cIdx) => (
-                    <div className="capability-item" key={cIdx}>
-                      <span className="capability-icon">{cap.icon}</span>
-                      <div className="capability-text">
-                        <strong>{cap.title}</strong>
-                        <small>{cap.desc}</small>
+                {/* Checklist Elegante e Direta */}
+                <ul className="plan-compact-features">
+                  {plan.features.map((feat, fIdx) => (
+                    <li className="plan-compact-feature-item" key={fIdx}>
+                      <span className="feature-check-icon">✓</span>
+                      <div className="feature-body">
+                        <strong>{feat.title}</strong>
+                        <p>{feat.desc}</p>
                       </div>
-                    </div>
+                    </li>
                   ))}
+                </ul>
+
+                {/* Faixa de Retorno / Payoff */}
+                <div className="plan-compact-payoff">
+                  {plan.payoff}
                 </div>
 
-                {/* Card de Transformação / Impacto no Negócio */}
-                <div className="plan-transformation-card">
-                  <span className="transformation-icon">💎</span>
-                  <div>
-                    <span className="transformation-badge">{plan.transformationBadge}</span>
-                    <p className="transformation-desc">{plan.transformationText}</p>
-                  </div>
-                </div>
-
-                {/* Botão Magnético Luminous */}
+                {/* Botão Magnético de Alta Conversão */}
                 <button
                   type="button"
-                  className="plan-magnetic-btn btn-sync-glow"
-                  onClick={() => openLead(`Olá! Gostaria de testar uma demonstração gratuita da ${plan.name} no meu WhatsApp.`)}
+                  className="plan-compact-btn btn-sync-glow"
+                  onClick={() => openLead(`Olá! Gostaria de testar uma demonstração gratuita do ${plan.name} no meu WhatsApp.`)}
                 >
                   <span>{plan.ctaText}</span>
                   <SyncArrow size={14} />
                 </button>
-                <small className="plan-trust-subnote">
+                <small className="plan-compact-subnote">
                   {plan.deliverableBadge}
                 </small>
               </article>
@@ -1541,61 +1537,34 @@ export default function AvanciniSyncPage() {
           })}
         </div>
 
-        {/* 4. Barra Mobile de Navegação Fluida entre Formatos */}
-        <div className="mobile-plan-nav-bar">
-          <button
-            type="button"
-            className="mobile-plan-step-btn"
-            onClick={() => setSelectedFormat(selectedFormat === "essencial" ? "pro" : "essencial")}
-            aria-label="Alternar formato"
-          >
-            ← {selectedFormat === "essencial" ? "Ver Scale Pro" : "Ver Essencial"}
-          </button>
-          <div className="mobile-plan-dots">
-            {simplifiedPlans.map((p) => (
-              <button
-                type="button"
-                key={p.id}
-                aria-label={`Selecionar plano ${p.name}`}
-                className={`mobile-plan-dot ${selectedFormat === p.id ? "active" : ""}`}
-                onClick={() => setSelectedFormat(p.id as "essencial" | "pro")}
-              />
-            ))}
+        {/* 3. Card Enterprise VIP Executivo (Arquitetura Sob Medida) */}
+        <div className="enterprise-vip-card">
+          <div className="enterprise-vip-left">
+            <div className="enterprise-vip-badge">
+              <span>🏢 ARQUITETURA ENTERPRISE SOB MEDIDA</span>
+            </div>
+            <h3>Múltiplos Números de WhatsApp &amp; Integração Profunda com CRM/ERP</h3>
+            <p>
+              Para redes de clínicas, hospitais, distribuidoras e operações com alta demanda. Desenvolvemos infraestrutura dedicada com múltiplos números simultâneos, banco de dados isolado e integração bidirecional em tempo real com HubSpot, RD Station, Piperun, Salesforce ou ERP proprietário.
+            </p>
+            <div className="enterprise-vip-tags">
+              <span className="enterprise-tag-pill">✓ SLA de 99.9% Garantido</span>
+              <span className="enterprise-tag-pill">✓ Servidores Dedicados Isolados</span>
+              <span className="enterprise-tag-pill">✓ Gerente de Engenharia Exclusivo</span>
+              <span className="enterprise-tag-pill">✓ Múltiplos Números no Mesmo Painel</span>
+            </div>
           </div>
-          <button
-            type="button"
-            className="mobile-plan-step-btn"
-            onClick={() => setSelectedFormat(selectedFormat === "essencial" ? "pro" : "essencial")}
-            aria-label="Alternar formato"
-          >
-            {selectedFormat === "essencial" ? "Scale Pro" : "Essencial"} →
-          </button>
-        </div>
-
-        <div className="mobile-view-all-toggle-wrap">
-          <button
-            type="button"
-            className="mobile-view-all-toggle"
-            onClick={() => setShowAllMobileSync(!showAllMobileSync)}
-          >
-            {showAllMobileSync ? "Alternar em Modo Abas Rápidas ↑" : "Ver todos os planos em lista contínua ↓"}
-          </button>
-        </div>
-
-        {/* Faixa Enterprise para múltiplos números ou CRM */}
-        <div className="plan-enterprise-strip">
-          <div className="enterprise-strip-text">
-            <span className="enterprise-kicker">VOLUME ENTERPRISE · MÚLTIPLOS NÚMEROS / INTEGRAÇÃO DE CRM</span>
-            <h4>Precisa de múltiplos números de WhatsApp ou integração profunda com ERP/CRM?</h4>
-            <p>Estruturamos arquiteturas corporativas sob medida com SLA prioritário, múltiplos números dedicados e integração direta nos seus sistemas.</p>
+          <div className="enterprise-vip-right">
+            <button
+              type="button"
+              className="enterprise-vip-btn"
+              onClick={() => openLead("Olá! Gostaria de conversar com um arquiteto sobre a solução Enterprise (Múltiplos Números / CRM Corporativo).")}
+            >
+              <span>Consultar Solução Enterprise</span>
+              <SyncArrow size={14} />
+            </button>
+            <small>Atendimento executivo com arquiteto de software</small>
           </div>
-          <button
-            type="button"
-            className="enterprise-strip-btn"
-            onClick={() => openLead("Plano Enterprise (Múltiplos Números / CRM Corporativo)")}
-          >
-            Falar sobre Plano Enterprise <SyncArrow />
-          </button>
         </div>
       </section>
 
