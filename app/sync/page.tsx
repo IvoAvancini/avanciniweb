@@ -414,6 +414,7 @@ type SyncPlanSimple = {
   monthlyPrice: number;
   annualMonthlyPrice: number;
   volumeLabel: string;
+  setupText: string;
   tagline: string;
   idealFor: string;
   keyHighlights: string[];
@@ -423,37 +424,43 @@ type SyncPlanSimple = {
 const simplifiedPlans: SyncPlanSimple[] = [
   {
     id: "essencial",
-    name: "IA Atendente & Qualificadora",
-    badge: "ATENDIMENTO 24/7 & TRIAGEM",
+    name: "Plano Essencial",
+    badge: "USO JUSTO · SEM TRAVA DE CONVERSAS",
     monthlyPrice: 397.9,
     annualMonthlyPrice: 297.9,
-    volumeLabel: "Fluxo Contínuo 24/7",
-    tagline: "Atende na hora, ouve áudios, lê fotos e qualifica leads 24h no seu WhatsApp.",
-    idealFor: "Clínicas, escritórios, consultórios e prestadores de serviços.",
+    volumeLabel: "1 WhatsApp · Atendimento Contínuo",
+    setupText: "Setup de R$ 500 — ou 100% ZERADO no compromisso de 6 meses",
+    tagline: "Sem estresse de cotas. O WhatsApp do seu negócio responde, agenda, envia Pix e transfere para você 24h por dia.",
+    idealFor: "Médicos, dentistas, advogados, esteticistas e pequenas empresas com um único WhatsApp para tocar o atendimento.",
     keyHighlights: [
-      "🎙️ Ouve áudios longos, lê fotos e documentos em PDF",
-      "⚡ Resposta em 1.1s (zero fila de espera 24h por dia)",
-      "🎯 Triagem ágil: separa curiosos de quem vai comprar",
-      "📲 Transbordo para atendente com resumo pronto",
+      "📅 Agendamento automático no Google Calendar em tempo real",
+      "⏰ Lembrete anti-falta na véspera com confirmação de presença no chat",
+      "📲 Transbordo para atendente/responsável com resumo pronto da conversa",
+      "💳 Envio de chave Pix cópia e cola e formas de pagamento no chat",
+      "🔁 Follow-up inteligente de orçamentos e retornos sem resposta (24h)",
+      "🎙️ Ouve áudios longos, transcreve e lê fotos, exames e documentos",
+      "🛡️ Atendimento 24/7 contínuo com uso justo para toda a sua rotina",
     ],
-    ctaText: "Começar com Plano Essencial",
+    ctaText: "Começar com o Essencial",
   },
   {
     id: "pro",
-    name: "Operação Multiagente Pro",
-    badge: "MAIS ESCOLHIDO · OPERAÇÃO COMPLETA",
+    name: "Plano Scale Pro",
+    badge: "MAIS ESCOLHIDO · OPERAÇÕES ROBUSTAS",
     monthlyPrice: 797.9,
     annualMonthlyPrice: 697.9,
-    volumeLabel: "Escala & Múltiplos Setores",
-    tagline: "Força de trabalho digital que acolhe, agenda horários, envia Pix e retoma clientes.",
-    idealFor: "Empresas comerciais, equipes de vendas e alto volume.",
+    volumeLabel: "Múltiplos Setores & Equipe Humana",
+    setupText: "Setup de R$ 800 — parcelável nas primeiras mensalidades",
+    tagline: "Para clínicas com recepção física, equipes de vendas ou tráfego pago que exigem roteamento setorizado.",
+    idealFor: "Clínicas com vários profissionais, imobiliárias, e-commerces e empresas com divisão de departamentos.",
     keyHighlights: [
-      "⭐ Tudo do Essencial (Áudios, Fotos, PDFs e Triagem 24/7)",
-      "🤖 Roteamento por setor: comercial, suporte e financeiro",
-      "📅 Agendamento no Google Calendar e chave Pix no chat",
-      "🔁 Follow-up ativo para recuperar orçamentos parados",
+      "⭐ Tudo do Plano Essencial incluso (Agenda, Lembretes, Pix, Transbordo e Áudios)",
+      "🏢 Roteamento por múltiplos setores (comercial, financeiro, agendamentos)",
+      "👥 Distribuição de fila para múltiplos atendentes humanos em equipe",
+      "📊 Relatórios avançados de conversão, motivos de contato e tráfego pago",
+      "⚡ Processamento prioritário com alta capacidade para picos de mensagens",
     ],
-    ctaText: "Contratar Multiagente Pro",
+    ctaText: "Contratar o Scale Pro",
   },
 ];
 
@@ -462,28 +469,32 @@ const formatMoney = (val: number) =>
 
 const faqsCommercial = [
   {
-    question: "O que é a arquitetura Multiagente com Agente Supervisor?",
-    answer: "Em vez de uma IA que tenta fazer tudo de forma confusa, o Agente Supervisor funciona como um gerente de equipe: ele acolhe a mensagem do cliente, identifica a intenção e delega para o agente especialista correspondente (SDR de Vendas, Suporte/Pós-Venda, Agendamento ou Cobrança). Isso garante precisão cirúrgica sem falhas.",
+    question: "O que é 'uso justo' (Fair Use) e como funciona na prática?",
+    answer: "É atendimento contínuo e sem estresse para o volume normal do dia a dia de clínicas, consultórios e escritórios — áudios, textos, marcações no Google Calendar e follow-ups à vontade. Você não precisa se preocupar com um contador de mensagens travando seu atendimento no meio do mês. A política de uso justo apenas previne disparos ilegais de spam em massa não autorizados.",
+  },
+  {
+    question: "Como funciona a taxa de setup e a isenção de 6 meses?",
+    answer: "A taxa de setup cobre toda a engenharia de implantação: calibração personalizada da IA com o manual da sua empresa, conexão do WhatsApp via QR Code e integração direta com o Google Calendar. No Plano Essencial, o setup de R$ 500 é 100% ZERADO caso você escolha o compromisso de 6 meses (ou plano anual). No Plano Scale Pro, o setup é de R$ 800 e pode ser parcelado nas primeiras mensalidades para não onerar o fluxo de caixa inicial.",
+  },
+  {
+    question: "Preciso trocar de número de WhatsApp ou contratar chip novo?",
+    answer: "Não! A IA conecta diretamente no número comercial que sua clínica ou empresa já utiliza hoje. Basta escanear um QR Code rápido pelo seu próprio WhatsApp no celular, exatamente como você faz no WhatsApp Web. Você não perde nenhum contato, histórico nem conversas anteriores.",
+  },
+  {
+    question: "Quando faz sentido migrar do Plano Essencial para o Scale Pro?",
+    answer: "O Plano Essencial já é 100% completo para 1 número de WhatsApp: agenda no Google Calendar, manda lembretes anti-falta, envia Pix, ouve áudios, faz follow-up e transfere para o responsável com resumo pronto da conversa. O Scale Pro faz sentido quando sua empresa cresce e passa a ter múltiplos setores (como separar comercial, financeiro e agendamento) e uma equipe com vários atendentes humanos precisando de distribuição automática de fila.",
+  },
+  {
+    question: "A IA pode inventar dados, falar preços errados ou dar diagnósticos?",
+    answer: "De jeito nenhum! A inteligência artificial é calibrada estritamente com o manual de regras, serviços, valores e horários da sua empresa. Ela é expressamente proibida de dar diagnósticos médicos, inventar informações ou prometer descontos fora da tabela. Caso receba uma pergunta imprevista, ela informa com simpatia que vai encaminhar para você e notifica seu número na hora.",
   },
   {
     question: "A IA substitui os meus funcionários?",
-    answer: "O objetivo não é demitir funcionários, mas fazer sua equipe atual render muito mais. A IA assume as tarefas repetitivas, o atendimento de noites e fins de semana e a triagem inicial. Quando surge uma negociação complexa ou uma situação que exige empatia humana, a IA transfere o cliente com um resumo pronto de toda a conversa.",
+    answer: "O objetivo é potencializar a sua equipe, não substituí-la. A IA assume as tarefas repetitivas, como tirar dúvidas de preços, conferir convênios, marcar horários na agenda e atender à noite e nos finais de semana. Quando surge uma negociação complexa ou uma situação que exige empatia humana, ela passa o contato com o histórico mastigado para seu atendente fechar.",
   },
   {
     question: "Como funciona o Plano Anual? Bloqueia o limite do meu cartão?",
-    answer: "Não! No plano anual, o valor é cobrado de forma recorrente mês a mês, sem comprometer o limite total do seu cartão de crédito. Trata-se de um compromisso de 12 meses com desconto garantido.",
-  },
-  {
-    question: "E se eu precisar cancelar o plano anual antes de 12 meses?",
-    answer: "Nossa política é justa e transparente: não cobramos multas abusivas com todos os meses restantes como fazem operadoras de telefonia. Se você precisar cancelar antes, apenas é recalculada a diferença do desconto usufruído (cobrança retroativa da diferença para o valor do plano mensal nos meses em que o serviço foi utilizado). Você nunca fica refém.",
-  },
-  {
-    question: "Como funciona a conexão com o WhatsApp?",
-    answer: "A conexão é simples e rápida: basta escanear um QR Code diretamente no aplicativo do seu WhatsApp no celular, exatamente como você faz no WhatsApp Web. Você continua usando seu número comercial normal, sem burocracia.",
-  },
-  {
-    question: "A IA pode inventar dados ou falar coisas erradas?",
-    answer: "De jeito nenhum! A inteligência artificial é configurada exclusivamente com as regras, preços, horários e informações da sua própria empresa. Ela só responde o que você aprovar previamente. Caso algum cliente faça uma pergunta fora do manual, ela responde com educação que vai transferir para você e te avisa na hora.",
+    answer: "Não! No plano anual, o valor é cobrado de forma recorrente mês a mês, sem comprometer o limite total do seu cartão de crédito. Trata-se de um compromisso com desconto garantido de R$ 100/mês.",
   },
 ];
 
@@ -611,6 +622,12 @@ export default function AvanciniSyncPage() {
   const normalizedLeadContext = leadContext.trim().replace(/[.!?]+$/, "");
 
   useEffect(() => {
+    if (typeof document !== "undefined") {
+      document.documentElement.classList.remove("is-os-hub");
+      document.body.classList.remove("is-os-hub");
+      document.documentElement.style.overflow = "";
+      document.body.style.overflow = "";
+    }
     window.scrollTo(0, 0);
     const updateHeader = () => setScrolled(window.scrollY > 20);
     updateHeader();
@@ -626,11 +643,10 @@ export default function AvanciniSyncPage() {
         setMenuOpen(false);
       }
     };
-    const prev = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     window.addEventListener("keydown", onKeyDown);
     return () => {
-      document.body.style.overflow = prev;
+      document.body.style.overflow = "";
       window.removeEventListener("keydown", onKeyDown);
     };
   }, [leadContext, menuOpen]);
@@ -701,17 +717,17 @@ export default function AvanciniSyncPage() {
             <small>Equipe Multiagente de IA</small>
           </span>
         </a>
-        <div className="web-ecosystem-switch" aria-label="Ecossistema Avancini">
-          <Link className="button button-small header-cta sync-dash-cta" href="/dash">
+        <div className="sync-header-actions" aria-label="Ações de navegação">
+          <Link className="sync-header-btn sync-dash-btn" href="/dash">
             <span className="cta-full-name">Avancini </span>Dash <SyncArrow />
           </Link>
-          <Link className="button button-small header-cta" href="/">
+          <Link className="sync-header-btn sync-os-btn" href="/">
             <span className="cta-full-name">Avancini </span>OS <SyncArrow />
           </Link>
+          <button className="sync-header-btn sync-menu-btn" type="button" aria-label={menuOpen ? "Fechar menu" : "Abrir menu"} aria-expanded={menuOpen} onClick={() => setMenuOpen((open) => !open)}>
+            <i className="menu-glyph" aria-hidden="true"><span /><span /><span /></i><b>{menuOpen ? "Fechar" : "Menu"}</b>
+          </button>
         </div>
-        <button className="menu-toggle" type="button" aria-label={menuOpen ? "Fechar menu" : "Abrir menu"} aria-expanded={menuOpen} onClick={() => setMenuOpen((open) => !open)}>
-          <i className="menu-glyph" aria-hidden="true"><span /><span /><span /></i><b>{menuOpen ? "Fechar" : "Menu"}</b>
-        </button>
       </header>
 
       {/* Menu Overlay */}
@@ -1412,10 +1428,10 @@ export default function AvanciniSyncPage() {
       <section className="sync-commercial-section" id="planos" aria-labelledby="sync-plans-title">
         <header className="sync-section-heading">
           <div>
-            <span>04 / INVESTIMENTO TRANSPARENTE</span>
-            <h2 id="sync-plans-title">Três formatos simples.<br />Multiagente com Supervisor em todos.</h2>
+            <span>04 / INVESTIMENTO TRANSPARENTE &amp; JUSTO</span>
+            <h2 id="sync-plans-title">Sem contar mensagens.<br />O que muda é a maturidade do negócio.</h2>
           </div>
-          <p>Supervisor e especialistas em todos os planos: escolha pelo volume e setores da sua empresa.</p>
+          <p>Sem o medo de "estourar cota" no meio do mês. O plano se adapta à complexidade da sua operação, com agendamento no Google Calendar e inteligência completa inclusos desde o primeiro dia.</p>
         </header>
 
         {/* Toggle Mensal / Anual */}
@@ -1439,7 +1455,7 @@ export default function AvanciniSyncPage() {
           
           <div className="plan-transparency-box">
             <p>
-              🔒 <strong>Anual sem travar limite:</strong> Cobrança mês a mês sem comprometer o limite do cartão (economia de R$ 100/mês). Se cancelar antes, paga apenas a diferença do desconto usado. Sem multas abusivas.
+              🔒 <strong>Previsibilidade e economia:</strong> Mensalidade recorrente sem travar o limite do cartão (economia de R$ 100/mês no plano anual). No Plano Essencial, o setup de R$ 500 é <strong>100% ZERADO</strong> ao optar pelo compromisso semestral (6 meses). Sem pegadinhas.
             </p>
           </div>
         </div>
@@ -1461,6 +1477,9 @@ export default function AvanciniSyncPage() {
                     <small className="price-from-label">a partir de</small>
                     <strong>{formatMoney(price)}</strong>
                     <span>/mês</span>
+                  </div>
+                  <div className="plan-setup-badge">
+                    <span>⚡ {plan.setupText}</span>
                   </div>
                   <p className="plan-tagline">{plan.tagline}</p>
                 </div>
@@ -1485,10 +1504,54 @@ export default function AvanciniSyncPage() {
                 >
                   {plan.ctaText} <SyncArrow />
                 </button>
-                <small className="plan-secure-subnote">Setup e calibração inclusos · Suporte humano contínuo</small>
+                <small className="plan-secure-subnote">Calibração sob medida · Conexão rápida via QR Code · Suporte contínuo</small>
               </article>
             );
           })}
+        </div>
+
+        {/* Faixa Enterprise para múltiplos números ou CRM */}
+        <div className="plan-enterprise-strip">
+          <div className="enterprise-strip-text">
+            <span className="enterprise-kicker">VOLUME ENTERPRISE · MÚLTIPLOS NÚMEROS / INTEGRAÇÃO DE CRM</span>
+            <h4>Precisa de múltiplos números de WhatsApp ou integração profunda com ERP/CRM?</h4>
+            <p>Estruturamos arquiteturas corporativas sob medida com SLA prioritário, múltiplos números dedicados e integração direta nos seus sistemas.</p>
+          </div>
+          <button
+            type="button"
+            className="enterprise-strip-btn"
+            onClick={() => openLead("Plano Enterprise (Múltiplos Números / CRM Corporativo)")}
+          >
+            Falar sobre Plano Enterprise <SyncArrow />
+          </button>
+        </div>
+      </section>
+
+      {/* 5.1 ARGUMENTO & RETORNO IMEDIATO — A CONSULTA PERDIDA */}
+      <section className="sync-commercial-section sync-argument-section" aria-label="Retorno sobre o investimento">
+        <div className="sync-argument-box">
+          <span className="sync-argument-badge">O CÁLCULO QUE REALMENTE IMPORTA</span>
+          <div className="sync-argument-quote-deco" aria-hidden="true">“</div>
+          <blockquote>
+            A mensalidade do robô custa menos do que uma consulta ou venda perdida porque o WhatsApp demorou duas horas para responder num sábado à noite.
+          </blockquote>
+          <p className="sync-argument-desc">
+            É esse o cálculo que importa — não quantas mensagens sobraram no fim do mês. Enquanto seu concorrente ainda está sem responder no domingo, o seu cliente já está com o horário agendado e confirmado na sua grade.
+          </p>
+          <div className="sync-argument-proof-row">
+            <div className="argument-proof-pill">
+              <strong>24h</strong>
+              <span>Atendimento ativo fora do expediente</span>
+            </div>
+            <div className="argument-proof-pill">
+              <strong>1 WhatsApp</strong>
+              <span>Conecta no seu número atual via QR Code</span>
+            </div>
+            <div className="argument-proof-pill">
+              <strong>0 Risco</strong>
+              <span>Se paga na 1ª consulta ou venda salva</span>
+            </div>
+          </div>
         </div>
       </section>
 

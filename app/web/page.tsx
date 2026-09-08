@@ -644,6 +644,12 @@ export default function Home() {
         }
       });
     };
+    if (typeof document !== "undefined") {
+      document.documentElement.classList.remove("is-os-hub");
+      document.body.classList.remove("is-os-hub");
+      document.documentElement.style.overflow = "";
+      document.body.style.overflow = "";
+    }
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => {

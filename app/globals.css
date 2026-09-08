@@ -11597,3 +11597,111 @@ body:has(.web-page) .page-progress{background:linear-gradient(90deg,#43c85d,#a9f
   }
 }
 
+/* ==========================================================================
+   SYNC SHARED HEADER - UNIFIED ACTIONS GROUP & BUTTONS
+   Elimina espaçamentos estranhos, alinha Dash (verde), OS (neutro) e Menu
+   ========================================================================== */
+.sync-page .sync-shared-header .sync-header-actions {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  margin-left: auto !important;
+}
+
+.sync-page .sync-shared-header .sync-header-btn {
+  height: 36px !important;
+  min-height: 36px !important;
+  padding: 0 14px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 6px !important;
+  border-radius: 9999px !important;
+  font-size: 11.5px !important;
+  font-weight: 750 !important;
+  text-decoration: none !important;
+  transition: all 0.22s ease !important;
+  white-space: nowrap !important;
+  cursor: pointer !important;
+  box-sizing: border-box !important;
+  line-height: 1 !important;
+}
+
+.sync-page .sync-shared-header .sync-dash-btn {
+  background: rgba(34, 197, 94, 0.08) !important;
+  border: 1px solid rgba(34, 197, 94, 0.32) !important;
+  color: #4ade80 !important;
+}
+
+.sync-page .sync-shared-header .sync-dash-btn:hover {
+  background: rgba(34, 197, 94, 0.18) !important;
+  border-color: rgba(34, 197, 94, 0.6) !important;
+  color: #ffffff !important;
+  transform: translateY(-1px) !important;
+}
+
+.sync-page .sync-shared-header .sync-os-btn {
+  background: rgba(255, 255, 255, 0.04) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  color: #f1f5f9 !important;
+}
+
+.sync-page .sync-shared-header .sync-os-btn:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border-color: rgba(255, 255, 255, 0.35) !important;
+  color: #ffffff !important;
+  transform: translateY(-1px) !important;
+}
+
+.sync-page .sync-shared-header .sync-menu-btn {
+  background: rgba(255, 255, 255, 0.06) !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
+  color: #ffffff !important;
+  gap: 7px !important;
+}
+
+.sync-page .sync-shared-header .sync-menu-btn:hover {
+  background: rgba(56, 189, 248, 0.12) !important;
+  border-color: rgba(56, 189, 248, 0.45) !important;
+  color: #ffffff !important;
+  transform: translateY(-1px) !important;
+}
+
+.sync-page .sync-shared-header .sync-menu-btn .menu-glyph {
+  display: grid !important;
+  width: 14px !important;
+  gap: 2.5px !important;
+}
+
+.sync-page .sync-shared-header .sync-menu-btn .menu-glyph span {
+  display: block !important;
+  width: 14px !important;
+  height: 1.5px !important;
+  margin: 0 !important;
+  border-radius: 2px !important;
+  background: #ffffff !important;
+}
+
+.sync-page .sync-shared-header .sync-menu-btn b {
+  font-size: 10.5px !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  font-weight: 750 !important;
+}
+
+@media (max-width: 600px) {
+  .sync-page .sync-shared-header .sync-header-actions {
+    gap: 4px !important;
+  }
+  .sync-page .sync-shared-header .sync-header-btn {
+    height: 32px !important;
+    min-height: 32px !important;
+    padding: 0 8px !important;
+    font-size: 10px !important;
+  }
+  .sync-page .sync-shared-header .sync-header-btn .cta-full-name {
+    display: none !important;
+  }
+}
+
+
