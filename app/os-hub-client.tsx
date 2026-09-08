@@ -185,10 +185,6 @@ export function OSHubClient() {
 
       {/* 2. HERO EDITORIAL: DIRETO, IMPACTANTE E LIMPO */}
       <section className="hub-hero-section">
-        <div className="hub-eyebrow-pill">
-          <span className="hub-eyebrow-dot" />
-          <span>PORTAL DE ENGENHARIA &amp; INTELIGÊNCIA ARTIFICIAL</span>
-        </div>
         <h1 className="hub-headline">
           Sua empresa <span className="highlight-dash">mais forte na internet.</span>{" "}
           <br className="hero-break" />
@@ -349,29 +345,6 @@ export function OSHubClient() {
           </div>
         </article>
       </main>
-
-      {/* 4. FAIXA DE SINERGIA & RODAPÉ */}
-      <footer className="hub-bottom-bar">
-        <div className="hub-synergy-pill">
-          <span className="synergy-tag">SINERGIA TOTAL</span>
-          <span className="synergy-desc">
-            O site <b>Dash</b> atrai e qualifica o visitante ➔ A IA <b>Sync</b> acolhe e fecha no WhatsApp 24/7.
-          </span>
-        </div>
-
-        <div className="hub-footer-links">
-          <span>© {new Date().getFullYear()} Avancini OS · Tecnologia com Identidade</span>
-          <div className="footer-links-group">
-            <Link href="/dash">Dash</Link>
-            <span>/</span>
-            <Link href="/sync">Sync</Link>
-            <span>/</span>
-            <a href={whatsappUrl} target="_blank" rel="noreferrer">
-              WhatsApp
-            </a>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 }
