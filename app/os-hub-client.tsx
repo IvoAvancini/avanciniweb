@@ -156,6 +156,90 @@ function CalendarCheckIcon({ className = "" }: { className?: string }) {
   );
 }
 
+function SearchIcon({ className = "" }: { className?: string }) {
+  return (
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden="true"
+    >
+      <circle cx="11" cy="11" r="8" />
+      <line x1="21" y1="21" x2="16.65" y2="16.65" />
+    </svg>
+  );
+}
+
+function ShieldCheckIcon({ className = "" }: { className?: string }) {
+  return (
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden="true"
+    >
+      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+      <path d="m9 12 2 2 4-4" />
+    </svg>
+  );
+}
+
+function RepeatIcon({ className = "" }: { className?: string }) {
+  return (
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden="true"
+    >
+      <polyline points="17 1 21 5 17 9" />
+      <path d="M3 11V9a4 4 0 0 1 4-4h14" />
+      <polyline points="7 23 3 19 7 15" />
+      <path d="M21 13v2a4 4 0 0 1-4 4H3" />
+    </svg>
+  );
+}
+
+function UsersIcon({ className = "" }: { className?: string }) {
+  return (
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden="true"
+    >
+      <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+      <circle cx="9" cy="7" r="4" />
+      <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+      <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+    </svg>
+  );
+}
+
 export function OSHubClient() {
   const [activeHover, setActiveHover] = useState<"dash" | "sync" | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -336,7 +420,7 @@ export function OSHubClient() {
             </p>
           </div>
 
-          {/* Luxury Bento Feature Tiles */}
+          {/* Luxury Bento Feature Tiles (5 High-Impact Cards) */}
           <div className="choice-tiles-stack">
             <div className="choice-tile-item tile-dash">
               <div className="tile-icon-box">
@@ -358,6 +442,7 @@ export function OSHubClient() {
               <div className="tile-content">
                 <div className="tile-title-row">
                   <strong>Copywriting de Alta Persuasão</strong>
+                  <span className="tile-metric-badge">CONVERSÃO</span>
                 </div>
                 <p>Arquitetura psicológica que conduz o visitante direto ao WhatsApp.</p>
               </div>
@@ -370,8 +455,35 @@ export function OSHubClient() {
               <div className="tile-content">
                 <div className="tile-title-row">
                   <strong>Posicionamento de Autoridade</strong>
+                  <span className="tile-metric-badge">AUTORAL</span>
                 </div>
                 <p>Estética autoral de luxo que eleva o valor percebido e honorários.</p>
+              </div>
+            </div>
+
+            <div className="choice-tile-item tile-dash">
+              <div className="tile-icon-box">
+                <SearchIcon />
+              </div>
+              <div className="tile-content">
+                <div className="tile-title-row">
+                  <strong>SEO Técnico &amp; Google Ranqueado</strong>
+                  <span className="tile-metric-badge">NOTA 100</span>
+                </div>
+                <p>Código semântico estruturado para ranquear no topo da sua cidade.</p>
+              </div>
+            </div>
+
+            <div className="choice-tile-item tile-dash">
+              <div className="tile-icon-box">
+                <ShieldCheckIcon />
+              </div>
+              <div className="tile-content">
+                <div className="tile-title-row">
+                  <strong>Hospedagem Cloud &amp; SSL Grátis</strong>
+                  <span className="tile-metric-badge">99.9% UPTIME</span>
+                </div>
+                <p>Servidores ultrarrápidos, backup contínuo e proteção contra invasões.</p>
               </div>
             </div>
           </div>
@@ -381,6 +493,7 @@ export function OSHubClient() {
               <span className="choice-meta-pill">⚡ Rascunho em 48h</span>
               <span className="choice-meta-pill">🛡️ Hospedagem &amp; SSL</span>
               <span className="choice-meta-pill">📱 100% Responsivo</span>
+              <span className="choice-meta-pill">💎 Sem Mensalidades</span>
             </div>
 
             <Link href="/dash" className="choice-action-btn btn-dash">
@@ -423,7 +536,7 @@ export function OSHubClient() {
             </p>
           </div>
 
-          {/* Luxury Bento Feature Tiles */}
+          {/* Luxury Bento Feature Tiles (5 High-Impact Cards) */}
           <div className="choice-tiles-stack">
             <div className="choice-tile-item tile-sync">
               <div className="tile-icon-box">
@@ -445,6 +558,7 @@ export function OSHubClient() {
               <div className="tile-content">
                 <div className="tile-title-row">
                   <strong>Compreensão Real de Áudios</strong>
+                  <span className="tile-metric-badge">VOZ E TEXTO</span>
                 </div>
                 <p>Ouve mensagens de voz e responde com clareza e empatia humana.</p>
               </div>
@@ -457,8 +571,35 @@ export function OSHubClient() {
               <div className="tile-content">
                 <div className="tile-title-row">
                   <strong>Google Calendar Sincronizado</strong>
+                  <span className="tile-metric-badge">TEMPO REAL</span>
                 </div>
                 <p>Marcação e qualificação de horários em tempo real na sua agenda.</p>
+              </div>
+            </div>
+
+            <div className="choice-tile-item tile-sync">
+              <div className="tile-icon-box">
+                <RepeatIcon />
+              </div>
+              <div className="tile-content">
+                <div className="tile-title-row">
+                  <strong>Follow-Up Automático de Leads</strong>
+                  <span className="tile-metric-badge">RECUPERAÇÃO</span>
+                </div>
+                <p>Reengaja orçamentos pendentes e resgata contatos que esfriaram.</p>
+              </div>
+            </div>
+
+            <div className="choice-tile-item tile-sync">
+              <div className="tile-icon-box">
+                <UsersIcon />
+              </div>
+              <div className="tile-content">
+                <div className="tile-title-row">
+                  <strong>Painel Multi-Atendentes &amp; Transbordo</strong>
+                  <span className="tile-metric-badge">HUMANO + IA</span>
+                </div>
+                <p>Setorização de equipe e transbordo para humanos com histórico.</p>
               </div>
             </div>
           </div>
@@ -468,6 +609,7 @@ export function OSHubClient() {
               <span className="choice-meta-pill">📲 Conexão QR Code</span>
               <span className="choice-meta-pill">🔒 Zero Alucinação</span>
               <span className="choice-meta-pill">👥 Multi-Atendentes</span>
+              <span className="choice-meta-pill">⚡ Respostas &lt; 2s</span>
             </div>
 
             <Link href="/sync" className="choice-action-btn btn-sync">
