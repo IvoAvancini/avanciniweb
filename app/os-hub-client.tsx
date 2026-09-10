@@ -4,6 +4,9 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { AvanciniMark } from "./avancini-mark";
 import "./os-hub.css";
+import "./os-hub-animations.css";
+import "./os-hub-card.css";
+import AnimatedCounter from "./components/AnimatedCounter";
 
 const WHATSAPP_NUMBER = "5573981019782";
 const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
@@ -13,8 +16,8 @@ const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
 function Arrow() {
   return (
     <svg
-      width="15"
-      height="15"
+      width="18"
+      height="18"
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
@@ -30,220 +33,47 @@ function Arrow() {
   );
 }
 
-function LightningIcon({ className = "" }: { className?: string }) {
-  return (
-    <svg
-      width="16"
-      height="16"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2.2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-      aria-hidden="true"
-    >
-      <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
-    </svg>
-  );
-}
+const DASH_FEATURES = [
+  { emoji: "⚡", label: "0.2s LCP", desc: "Carregamento ultrarrápido no celular" },
+  { emoji: "🎯", label: "Copywriting", desc: "Texto que converte visitante em cliente" },
+  { emoji: "💎", label: "Design Autoral", desc: "Identidade visual de alto padrão" },
+  { emoji: "🔍", label: "SEO Técnico", desc: "Nota 100 no Google PageSpeed" },
+  { emoji: "🛡️", label: "Hospedagem SSL", desc: "Cloud segura com 99.9% uptime" },
+  { emoji: "📱", label: "100% Responsivo", desc: "Perfeito em qualquer dispositivo" },
+];
 
-function TargetIcon({ className = "" }: { className?: string }) {
-  return (
-    <svg
-      width="16"
-      height="16"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2.2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-      aria-hidden="true"
-    >
-      <circle cx="12" cy="12" r="10" />
-      <circle cx="12" cy="12" r="6" />
-      <circle cx="12" cy="12" r="2" />
-    </svg>
-  );
-}
-
-function DiamondIcon({ className = "" }: { className?: string }) {
-  return (
-    <svg
-      width="16"
-      height="16"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2.2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-      aria-hidden="true"
-    >
-      <path d="M6 3h12l4 6-10 12L2 9z" />
-      <path d="M2 9h20" />
-      <path d="m10 3 2 6-4 12" />
-      <path d="m14 3-2 6 4 12" />
-    </svg>
-  );
-}
-
-function Clock24Icon({ className = "" }: { className?: string }) {
-  return (
-    <svg
-      width="16"
-      height="16"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2.2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-      aria-hidden="true"
-    >
-      <circle cx="12" cy="12" r="10" />
-      <polyline points="12 6 12 12 16 14" />
-    </svg>
-  );
-}
-
-function MicWaveIcon({ className = "" }: { className?: string }) {
-  return (
-    <svg
-      width="16"
-      height="16"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2.2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-      aria-hidden="true"
-    >
-      <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z" />
-      <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
-      <line x1="12" y1="19" x2="12" y2="22" />
-    </svg>
-  );
-}
-
-function CalendarCheckIcon({ className = "" }: { className?: string }) {
-  return (
-    <svg
-      width="16"
-      height="16"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2.2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-      aria-hidden="true"
-    >
-      <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
-      <line x1="16" y1="2" x2="16" y2="6" />
-      <line x1="8" y1="2" x2="8" y2="6" />
-      <line x1="3" y1="10" x2="21" y2="10" />
-      <path d="m9 16 2 2 4-4" />
-    </svg>
-  );
-}
-
-function SearchIcon({ className = "" }: { className?: string }) {
-  return (
-    <svg
-      width="16"
-      height="16"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2.2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-      aria-hidden="true"
-    >
-      <circle cx="11" cy="11" r="8" />
-      <line x1="21" y1="21" x2="16.65" y2="16.65" />
-    </svg>
-  );
-}
-
-function ShieldCheckIcon({ className = "" }: { className?: string }) {
-  return (
-    <svg
-      width="16"
-      height="16"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2.2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-      aria-hidden="true"
-    >
-      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-      <path d="m9 12 2 2 4-4" />
-    </svg>
-  );
-}
-
-function RepeatIcon({ className = "" }: { className?: string }) {
-  return (
-    <svg
-      width="16"
-      height="16"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2.2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-      aria-hidden="true"
-    >
-      <polyline points="17 1 21 5 17 9" />
-      <path d="M3 11V9a4 4 0 0 1 4-4h14" />
-      <polyline points="7 23 3 19 7 15" />
-      <path d="M21 13v2a4 4 0 0 1-4 4H3" />
-    </svg>
-  );
-}
-
-function UsersIcon({ className = "" }: { className?: string }) {
-  return (
-    <svg
-      width="16"
-      height="16"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2.2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-      aria-hidden="true"
-    >
-      <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-      <circle cx="9" cy="7" r="4" />
-      <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
-      <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-    </svg>
-  );
-}
+const SYNC_FEATURES = [
+  { emoji: "🤖", label: "IA 24h/dia", desc: "Atendimento ativo sem pausas ou feriados" },
+  { emoji: "🎙️", label: "Áudios & Textos", desc: "Ouve, entende e responde com empatia" },
+  { emoji: "📅", label: "Google Calendar", desc: "Marcação de horários em tempo real" },
+  { emoji: "🔁", label: "Follow-Up Auto", desc: "Recupera leads frios automaticamente" },
+  { emoji: "👥", label: "Multi-Atendentes", desc: "Equipe + IA com histórico completo" },
+  { emoji: "🔒", label: "Zero Alucinação", desc: "Responde só o que você configurou" },
+];
 
 export function OSHubClient() {
-  const [activeHover, setActiveHover] = useState<"dash" | "sync" | null>(null);
+  const [hoveredCard, setHoveredCard] = useState<"dash" | "sync" | null>(null);
+  const [mobileActiveTab, setMobileActiveTab] = useState<"dash" | "sync">("dash");
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
+  // Scroll spy para mobile
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.innerWidth > 768) return;
+      const syncEl = document.getElementById("portal-sync");
+      if (!syncEl) return;
+      const rect = syncEl.getBoundingClientRect();
+      if (rect.top <= window.innerHeight * 0.45) {
+        setMobileActiveTab("sync");
+      } else {
+        setMobileActiveTab("dash");
+      }
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Canvas background de partículas leve
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -261,59 +91,54 @@ export function OSHubClient() {
     };
     window.addEventListener("resize", handleResize);
 
-    const count = Math.min(45, Math.max(20, Math.floor(width / 35)));
-    const particles = Array.from({ length: count }, () => {
-      const isLeft = Math.random() < 0.5;
-      return {
-        x: Math.random() * width,
-        y: Math.random() * height,
-        vx: (Math.random() - 0.5) * 0.45,
-        vy: (Math.random() - 0.5) * 0.45,
-        radius: Math.random() * 1.6 + 1,
-        color: isLeft ? "34, 197, 94" : "56, 189, 248",
-        alpha: Math.random() * 0.4 + 0.2,
-      };
-    });
+    const isMobile = width <= 768;
+    const count = isMobile ? 18 : Math.min(48, Math.max(22, Math.floor(width / 35)));
+
+    const particles = Array.from({ length: count }, () => ({
+      x: Math.random() * width,
+      y: Math.random() * height,
+      vx: (Math.random() - 0.5) * (isMobile ? 0.2 : 0.35),
+      vy: (Math.random() - 0.5) * (isMobile ? 0.2 : 0.35),
+      radius: Math.random() * 1.6 + 0.6,
+      color: Math.random() < 0.5 ? "34, 197, 94" : "56, 189, 248",
+      alpha: Math.random() * 0.35 + 0.12,
+    }));
 
     const render = () => {
       ctx.clearRect(0, 0, width, height);
-
-      for (let i = 0; i < particles.length; i++) {
-        const p1 = particles[i];
-        p1.x += p1.vx;
-        p1.y += p1.vy;
-
-        if (p1.x < 0) p1.x = width;
-        if (p1.x > width) p1.x = 0;
-        if (p1.y < 0) p1.y = height;
-        if (p1.y > height) p1.y = 0;
-
+      particles.forEach((p) => {
+        p.x += p.vx;
+        p.y += p.vy;
+        if (p.x < 0) p.x = width;
+        if (p.x > width) p.x = 0;
+        if (p.y < 0) p.y = height;
+        if (p.y > height) p.y = 0;
         ctx.beginPath();
-        ctx.arc(p1.x, p1.y, p1.radius, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(${p1.color}, ${p1.alpha})`;
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${p.color}, ${p.alpha})`;
         ctx.fill();
+      });
 
-        for (let j = i + 1; j < particles.length; j++) {
-          const p2 = particles[j];
-          const dx = p1.x - p2.x;
-          const dy = p1.y - p2.y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-
-          if (dist < 130) {
-            const alpha = (1 - dist / 130) * 0.16;
-            ctx.beginPath();
-            ctx.moveTo(p1.x, p1.y);
-            ctx.lineTo(p2.x, p2.y);
-            ctx.strokeStyle = `rgba(${p1.color}, ${alpha})`;
-            ctx.lineWidth = 0.8;
-            ctx.stroke();
-          }
-        }
+      // Linhas de conexão só no desktop para economia de CPU
+      if (!isMobile) {
+        particles.forEach((a, i) => {
+          particles.slice(i + 1).forEach((b) => {
+            const dx = a.x - b.x;
+            const dy = a.y - b.y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist < 90) {
+              ctx.beginPath();
+              ctx.moveTo(a.x, a.y);
+              ctx.lineTo(b.x, b.y);
+              ctx.strokeStyle = `rgba(${a.color}, ${(1 - dist / 90) * 0.1})`;
+              ctx.lineWidth = 0.5;
+              ctx.stroke();
+            }
+          });
+        });
       }
-
       animId = requestAnimationFrame(render);
     };
-
     render();
 
     return () => {
@@ -322,303 +147,248 @@ export function OSHubClient() {
     };
   }, []);
 
+  const scrollToMobileSection = (id: "portal-dash" | "portal-sync") => {
+    if (window.innerWidth <= 768) {
+      const el = document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+        setMobileActiveTab(id === "portal-dash" ? "dash" : "sync");
+      }
+    }
+  };
+
   return (
-    <div className={`os-hub-root ${activeHover ? `hover-${activeHover}` : ""}`}>
-      {/* Background Atmosphere */}
+    <div className={`os-hub-root os-v2 ${hoveredCard ? `hover-${hoveredCard}` : ""}`}>
+      {/* ATMOSPHERIC BACKGROUND */}
       <div className="hub-atmosphere" aria-hidden="true">
         <canvas ref={canvasRef} className="hub-animated-canvas" />
         <div className="ambient-glow glow-dash-left" />
         <div className="ambient-glow glow-sync-right" />
         <div className="hub-tech-grid" />
+        <div className="hub-center-divider-glow" />
         <div className="hub-vignette" />
+        <div className="orb orb-green" />
+        <div className="orb orb-blue" />
+        <div className="orb orb-magenta" />
+        <div className="orb orb-cyan" />
       </div>
 
-      {/* 1. NAVBAR */}
-      <header className="hub-navbar">
-        <div className="hub-brand-col">
-          <Link href="/" className="hub-brand" aria-label="Avancini OS - Início">
-            <AvanciniMark variant="os" className="hub-brand-mark" />
-            <div className="hub-brand-text">
-              <span className="brand-name">
-                AVANCINI <em>OS</em>
-              </span>
-              <span className="brand-tagline">ECOSSISTEMA DE TECNOLOGIA</span>
-            </div>
-          </Link>
-        </div>
+      {/* NAVBAR LIMPA & ELEGANTE */}
+      <header className="hub-navbar hub-navbar-v2">
+        <Link href="/" className="hub-brand" aria-label="Avancini OS - Início">
+          <AvanciniMark variant="os" className="hub-brand-mark" />
+          <div className="hub-brand-text">
+            <span className="brand-name">AVANCINI <em>OS</em></span>
+            <span className="brand-tagline">ECOSSISTEMA DE TECNOLOGIA</span>
+          </div>
+        </Link>
 
-        <div className="hub-ecosystem-switch" aria-label="Soluções Avancini">
-          <Link className="hub-switch-pill pill-dash" href="/dash">
-            <span className="pill-prefix">Avancini </span>Dash <Arrow />
-          </Link>
-          <Link className="hub-switch-pill pill-sync" href="/sync">
-            <span className="pill-prefix">Avancini </span>Sync <Arrow />
-          </Link>
-        </div>
-
-        <div className="hub-actions-col">
-          <a
-            href={whatsappUrl}
-            target="_blank"
-            rel="noreferrer"
-            className="hub-specialist-btn"
-          >
-            <span className="hub-status-radar">
-              <span className="radar-ping" />
-              <span className="radar-core" />
-            </span>
-            <span className="btn-label-desktop">Falar com especialista</span>
-            <span className="btn-label-mobile">Contato</span>
-            <Arrow />
-          </a>
-        </div>
+        {/* BOTÃO ESPECIALISTA */}
+        <a
+          href={whatsappUrl}
+          target="_blank"
+          rel="noreferrer"
+          className="hub-specialist-btn"
+          aria-label="Falar com especialista via WhatsApp"
+        >
+          <span className="hub-status-radar">
+            <span className="radar-ping" />
+            <span className="radar-core" />
+          </span>
+          <span className="btn-label-desktop">Falar com especialista</span>
+          <span className="btn-label-mobile">Contato</span>
+          <Arrow />
+        </a>
       </header>
 
-      {/* 2. HERO EDITORIAL: DIRETO, IMPACTANTE E LIMPO */}
-      <section className="hub-hero-section">
-        <h1 className="hub-headline">
-          Sua empresa <span className="highlight-dash">mais forte na internet.</span>{" "}
-          <br className="hero-break" />
-          E <span className="highlight-sync">mais inteligente no WhatsApp.</span>
+      {/* HERO EDITORIAL COMPACTO & ELEGANTE */}
+      <section className="hub-hero-header">
+        <h1 className="hub-hero-title">
+          Sua empresa <span className="text-dash">mais forte na internet</span>{" "}
+          <span className="text-blend">e</span>{" "}
+          <span className="text-sync">mais inteligente no WhatsApp.</span>
         </h1>
-        <p className="hub-subheadline">
-          Dois caminhos complementares para acelerar o seu negócio. Escolha onde você quer começar:
+        <p className="hub-hero-sub">
+          Dois motores complementares de crescimento. Escolha por onde você quer começar:
         </p>
       </section>
 
-      {/* 3. DOIS GRANDES CARDS DE DECISÃO (PREMIUM, BENTO TILES, ZERO SCROLL) */}
-      <main className="hub-cards-container" id="ecossistema">
-        {/* ================= CARD 1: AVANCINI DASH ================= */}
-        <article
-          className={`hub-choice-card card-dash ${activeHover === "dash" ? "is-focused" : ""} ${
-            activeHover === "sync" ? "is-dimmed" : ""
+      {/* STAGE DOS DOIS PORTAIS */}
+      <main className="hub-twin-stage" id="ecossistema">
+
+        {/* CARD DASH */}
+        <Link
+          href="/dash"
+          id="portal-dash"
+          className={`hub-portal-card portal-dash ${hoveredCard === "dash" ? "is-active" : ""} ${
+            hoveredCard === "sync" ? "is-faded" : ""
           }`}
-          onMouseEnter={() => setActiveHover("dash")}
-          onMouseLeave={() => setActiveHover(null)}
+          onMouseEnter={() => setHoveredCard("dash")}
+          onMouseLeave={() => setHoveredCard(null)}
+          aria-label="Entrar no Avancini Dash"
         >
-          {/* Inner Ambient Glow & Top Sheen */}
-          <div className="card-ambient-aura aura-dash" aria-hidden="true" />
-          <div className="card-top-glow" />
-          
-          <div className="choice-card-head">
-            <div className="choice-badge-row">
-              <span className="choice-kicker-badge kicker-dash">
-                <span className="kicker-pulse-dot dot-dash">
+          {/* Efeitos decorativos */}
+          <div className="portal-aura aura-dash" aria-hidden="true" />
+          <div className="portal-top-laser laser-dash" aria-hidden="true" />
+
+          {/* Cabeçalho do Card */}
+          <div className="portal-header">
+            {/* Linha 1 de métrica principal */}
+            <div className="portal-badge-row">
+              <AnimatedCounter target={15000} />
+              <span className="portal-kicker kicker-dash">
+                <span className="kicker-dot dot-dash">
                   <span className="kicker-dot-ping" />
                   <span className="kicker-dot-core" />
                 </span>
                 01 · PRESENÇA DIGITAL
               </span>
-              <span className="choice-spec-pill spec-dash">0.2s LCP · NOTA 100</span>
+              <span className="portal-tech-pill">0.2s LCP · NOTA 100</span>
             </div>
 
-            <h2 className="choice-product-title">
-              Avancini <span className="text-dash">Dash</span>
+            {/* Linha 2 de métrica complementar (simétrica) */}
+            <div className="portal-badge-row extra-metric-row">
+              <AnimatedCounter target={5000} className="extra-metric" />
+              <span className="portal-kicker kicker-extra">Leads qualificados gerados</span>
+            </div>
+
+            <h2 className="portal-product-name">
+              Avancini <span className="name-dash">Dash</span>
             </h2>
-            <p className="choice-product-desc">
-              Websites autorais, landing pages de alta conversão e lojas virtuais desenvolvidas para transformar visitantes em contratos fechados.
+
+            <p className="portal-tagline">
+              Sites autorais, landing pages de alta conversão e lojas virtuais que
+              transformam visitantes em clientes — com velocidade máxima, SEO dominante e
+              design de padrão internacional.
             </p>
-          </div>
 
-          {/* Luxury Bento Feature Tiles (5 High-Impact Cards) */}
-          <div className="choice-tiles-stack">
-            <div className="choice-tile-item tile-dash">
-              <div className="tile-icon-box">
-                <LightningIcon />
-              </div>
-              <div className="tile-content">
-                <div className="tile-title-row">
-                  <strong>Carregamento Instantâneo</strong>
-                  <span className="tile-metric-badge">0.2s LCP</span>
-                </div>
-                <p>Zero perda de cliques por lentidão no 4G ou celular.</p>
-              </div>
+            {/* Divisor */}
+            <div className="portal-divider" aria-hidden="true">
+              <span className="divider-line" />
+              <span className="divider-label">O que você recebe</span>
+              <span className="divider-line" />
             </div>
 
-            <div className="choice-tile-item tile-dash">
-              <div className="tile-icon-box">
-                <TargetIcon />
-              </div>
-              <div className="tile-content">
-                <div className="tile-title-row">
-                  <strong>Copywriting de Alta Persuasão</strong>
-                  <span className="tile-metric-badge">CONVERSÃO</span>
+            {/* Lista de Recursos (Bento Grid) */}
+            <div className="portal-features-grid">
+              {DASH_FEATURES.map((f) => (
+                <div className="portal-feat feat-dash" key={f.label}>
+                  <span className="feat-emoji">{f.emoji}</span>
+                  <div className="feat-text">
+                    <strong>{f.label}</strong>
+                    <span>{f.desc}</span>
+                  </div>
                 </div>
-                <p>Arquitetura psicológica que conduz o visitante direto ao WhatsApp.</p>
-              </div>
-            </div>
-
-            <div className="choice-tile-item tile-dash">
-              <div className="tile-icon-box">
-                <DiamondIcon />
-              </div>
-              <div className="tile-content">
-                <div className="tile-title-row">
-                  <strong>Posicionamento de Autoridade</strong>
-                  <span className="tile-metric-badge">AUTORAL</span>
-                </div>
-                <p>Estética autoral de luxo que eleva o valor percebido e honorários.</p>
-              </div>
-            </div>
-
-            <div className="choice-tile-item tile-dash">
-              <div className="tile-icon-box">
-                <SearchIcon />
-              </div>
-              <div className="tile-content">
-                <div className="tile-title-row">
-                  <strong>SEO Técnico &amp; Google Ranqueado</strong>
-                  <span className="tile-metric-badge">NOTA 100</span>
-                </div>
-                <p>Código semântico estruturado para ranquear no topo da sua cidade.</p>
-              </div>
-            </div>
-
-            <div className="choice-tile-item tile-dash">
-              <div className="tile-icon-box">
-                <ShieldCheckIcon />
-              </div>
-              <div className="tile-content">
-                <div className="tile-title-row">
-                  <strong>Hospedagem Cloud &amp; SSL Grátis</strong>
-                  <span className="tile-metric-badge">99.9% UPTIME</span>
-                </div>
-                <p>Servidores ultrarrápidos, backup contínuo e proteção contra invasões.</p>
-              </div>
+              ))}
             </div>
           </div>
 
-          <div className="choice-card-footer">
-            <div className="choice-pills-row">
-              <span className="choice-meta-pill">⚡ Rascunho em 48h</span>
-              <span className="choice-meta-pill">🛡️ Hospedagem &amp; SSL</span>
-              <span className="choice-meta-pill">📱 100% Responsivo</span>
-              <span className="choice-meta-pill">💎 Sem Mensalidades</span>
-            </div>
-
-            <Link href="/dash" className="choice-action-btn btn-dash">
-              <span className="btn-shimmer" />
-              <span className="btn-text">Explorar Avancini Dash</span>
-              <Arrow />
-            </Link>
+          {/* CTA */}
+          <div className="portal-enter-cta cta-dash">
+            <span className="cta-shimmer" aria-hidden="true" />
+            <span className="cta-label">Explorar Avancini Dash</span>
+            <Arrow />
           </div>
-        </article>
 
-        {/* ================= CARD 2: AVANCINI SYNC ================= */}
-        <article
-          className={`hub-choice-card card-sync ${activeHover === "sync" ? "is-focused" : ""} ${
-            activeHover === "dash" ? "is-dimmed" : ""
+          <div className="portal-corner-accent accent-dash" aria-hidden="true" />
+        </Link>
+
+        {/* SEPARADOR CENTRAL INTELIGENTE "OS" */}
+        <div
+          className={`hub-vertical-sep ${
+            hoveredCard === "dash"
+              ? "focus-dash"
+              : hoveredCard === "sync"
+              ? "focus-sync"
+              : ""
           }`}
-          onMouseEnter={() => setActiveHover("sync")}
-          onMouseLeave={() => setActiveHover(null)}
+          aria-hidden="true"
         >
-          {/* Inner Ambient Glow & Top Sheen */}
-          <div className="card-ambient-aura aura-sync" aria-hidden="true" />
-          <div className="card-top-glow" />
+          <span className="sep-line" />
+          <div className="sep-node">
+            <span className="sep-glow" />
+            <span className="sep-symbol">OS</span>
+          </div>
+          <span className="sep-line" />
+        </div>
 
-          <div className="choice-card-head">
-            <div className="choice-badge-row">
-              <span className="choice-kicker-badge kicker-sync">
-                <span className="kicker-pulse-dot dot-sync">
+        {/* CARD SYNC */}
+        <Link
+          href="/sync"
+          id="portal-sync"
+          className={`hub-portal-card portal-sync ${hoveredCard === "sync" ? "is-active" : ""} ${
+            hoveredCard === "dash" ? "is-faded" : ""
+          }`}
+          onMouseEnter={() => setHoveredCard("sync")}
+          onMouseLeave={() => setHoveredCard(null)}
+          aria-label="Entrar no Avancini Sync"
+        >
+          {/* Efeitos decorativos */}
+          <div className="portal-aura aura-sync" aria-hidden="true" />
+          <div className="portal-top-laser laser-sync" aria-hidden="true" />
+
+          {/* Cabeçalho do Card */}
+          <div className="portal-header">
+            {/* Linha 1 de métrica principal */}
+            <div className="portal-badge-row">
+              <AnimatedCounter target={24000} />
+              <span className="portal-kicker kicker-sync">
+                <span className="kicker-dot dot-sync">
                   <span className="kicker-dot-ping" />
                   <span className="kicker-dot-core" />
                 </span>
                 02 · INTELIGÊNCIA ARTIFICIAL
               </span>
-              <span className="choice-spec-pill spec-sync">ATENDIMENTO 24/7 · &lt; 2s</span>
+              <span className="portal-tech-pill">24/7 · &lt;2s RESPOSTA</span>
             </div>
 
-            <h2 className="choice-product-title">
-              Avancini <span className="text-sync">Sync</span>
+            {/* Linha 2 de métrica complementar (simétrica com o Dash!) */}
+            <div className="portal-badge-row extra-metric-row">
+              <AnimatedCounter target={99} suffix="%" className="extra-metric" />
+              <span className="portal-kicker kicker-extra">Precisão com IA (Zero Alucinação)</span>
+            </div>
+
+            <h2 className="portal-product-name">
+              Avancini <span className="name-sync">Sync</span>
             </h2>
-            <p className="choice-product-desc">
-              Agentes inteligentes e chatbots operando 24h no seu WhatsApp comercial para acolher clientes, qualificar e agendar sem filas de espera.
+
+            <p className="portal-tagline">
+              Agentes inteligentes operando 24h no seu WhatsApp comercial — acolhem,
+              qualificam, agendam reuniões e realizam follow-up sem fila de espera, sem
+              erros e sem pausas.
             </p>
-          </div>
 
-          {/* Luxury Bento Feature Tiles (5 High-Impact Cards) */}
-          <div className="choice-tiles-stack">
-            <div className="choice-tile-item tile-sync">
-              <div className="tile-icon-box">
-                <Clock24Icon />
-              </div>
-              <div className="tile-content">
-                <div className="tile-title-row">
-                  <strong>Atendimento Ativo 24h por Dia</strong>
-                  <span className="tile-metric-badge">24/7</span>
-                </div>
-                <p>Respostas imediatas na madrugada e finais de semana sem faltas.</p>
-              </div>
+            {/* Divisor */}
+            <div className="portal-divider" aria-hidden="true">
+              <span className="divider-line" />
+              <span className="divider-label">O que você recebe</span>
+              <span className="divider-line" />
             </div>
 
-            <div className="choice-tile-item tile-sync">
-              <div className="tile-icon-box">
-                <MicWaveIcon />
-              </div>
-              <div className="tile-content">
-                <div className="tile-title-row">
-                  <strong>Compreensão Real de Áudios</strong>
-                  <span className="tile-metric-badge">VOZ E TEXTO</span>
+            {/* Lista de Recursos (Bento Grid) */}
+            <div className="portal-features-grid">
+              {SYNC_FEATURES.map((f) => (
+                <div className="portal-feat feat-sync" key={f.label}>
+                  <span className="feat-emoji">{f.emoji}</span>
+                  <div className="feat-text">
+                    <strong>{f.label}</strong>
+                    <span>{f.desc}</span>
+                  </div>
                 </div>
-                <p>Ouve mensagens de voz e responde com clareza e empatia humana.</p>
-              </div>
-            </div>
-
-            <div className="choice-tile-item tile-sync">
-              <div className="tile-icon-box">
-                <CalendarCheckIcon />
-              </div>
-              <div className="tile-content">
-                <div className="tile-title-row">
-                  <strong>Google Calendar Sincronizado</strong>
-                  <span className="tile-metric-badge">TEMPO REAL</span>
-                </div>
-                <p>Marcação e qualificação de horários em tempo real na sua agenda.</p>
-              </div>
-            </div>
-
-            <div className="choice-tile-item tile-sync">
-              <div className="tile-icon-box">
-                <RepeatIcon />
-              </div>
-              <div className="tile-content">
-                <div className="tile-title-row">
-                  <strong>Follow-Up Automático de Leads</strong>
-                  <span className="tile-metric-badge">RECUPERAÇÃO</span>
-                </div>
-                <p>Reengaja orçamentos pendentes e resgata contatos que esfriaram.</p>
-              </div>
-            </div>
-
-            <div className="choice-tile-item tile-sync">
-              <div className="tile-icon-box">
-                <UsersIcon />
-              </div>
-              <div className="tile-content">
-                <div className="tile-title-row">
-                  <strong>Painel Multi-Atendentes &amp; Transbordo</strong>
-                  <span className="tile-metric-badge">HUMANO + IA</span>
-                </div>
-                <p>Setorização de equipe e transbordo para humanos com histórico.</p>
-              </div>
+              ))}
             </div>
           </div>
 
-          <div className="choice-card-footer">
-            <div className="choice-pills-row">
-              <span className="choice-meta-pill">📲 Conexão QR Code</span>
-              <span className="choice-meta-pill">🔒 Zero Alucinação</span>
-              <span className="choice-meta-pill">👥 Multi-Atendentes</span>
-              <span className="choice-meta-pill">⚡ Respostas &lt; 2s</span>
-            </div>
-
-            <Link href="/sync" className="choice-action-btn btn-sync">
-              <span className="btn-shimmer" />
-              <span className="btn-text">Explorar Avancini Sync</span>
-              <Arrow />
-            </Link>
+          {/* CTA */}
+          <div className="portal-enter-cta cta-sync">
+            <span className="cta-shimmer" aria-hidden="true" />
+            <span className="cta-label">Explorar Avancini Sync</span>
+            <Arrow />
           </div>
-        </article>
+
+          <div className="portal-corner-accent accent-sync" aria-hidden="true" />
+        </Link>
+
       </main>
     </div>
   );

@@ -8,11 +8,14 @@ import Link from "next/link";
 import { AvanciniMark } from "../avancini-mark";
 import { trackLead, trackMarketingEvent } from "../marketing-events";
 import type { SectorShowcaseType } from "./sector-showcases";
+import AnimatedCounter from "../components/AnimatedCounter";
 
 const SectorShowcasePage = dynamic(
   () => import("./sector-showcases").then((module) => module.SectorShowcasePage),
   { ssr: false },
 );
+
+import "./dash-hero.css";
 
 const WebArrow = ({ size = 12 }: { size?: number }) => (
   <svg
@@ -114,10 +117,11 @@ const portfolioRows = [
 ] as const;
 
 const webPillars = [
-  { number: "01", title: "Direção Estratégica", text: "Definimos o foco da sua empresa e a ação exata que o cliente deve tomar." },
-  { number: "02", title: "Texto Persuasivo", text: "Argumentos claros que transformam curiosidade em confiança e contato." },
-  { number: "03", title: "Design com Autoridade", text: "Identidade visual para transmitir o peso real do seu negócio." },
-  { number: "04", title: "Velocidade no Celular", text: "Carregamento leve e instantâneo pensado para quem navega pelo celular." },
+  { number: "01", title: "Estudo de Mercado", text: "Análise profunda do seu nicho, dos concorrentes e das brechas para posicionar sua marca como líder." },
+  { number: "02", title: "Copywriting Persuasivo", text: "Arquitetura psicológica de texto para quebrar objeções e conduzir o visitante do clique ao fechamento." },
+  { number: "03", title: "Design Estratégico Autoral", text: "Identidade visual exclusiva de padrão internacional. Zero templates amadores: cada detalhe transmite autoridade." },
+  { number: "04", title: "Carregamento Rápido (0.2s)", text: "Engenharia de código limpo com nota 95-100 no Google PageSpeed. Sua página voa até em conexões móveis fracas." },
+  { number: "05", title: "Responsividade & Preparo para IA", text: "Experiência perfeita em qualquer celular e dados estruturados para o site ser recomendado por Google, ChatGPT e Perplexity." },
 ] as const;
 
 const webFaqs = [
@@ -131,21 +135,45 @@ const webFaqs = [
   { question: "Preciso entender de tecnologia para gerenciar?", answer: "De forma alguma. Cuidamos de 100% da engenharia, do rascunho à publicação. Você só precisa nos enviar as diretrizes essenciais do seu negócio e nós entregamos a máquina de conversão pronta." },
 ] as const;
 
-const heroAudiences = ["EMPRESAS", "AUTÔNOMOS", "CLÍNICAS", "ESCRITÓRIOS", "MARCAS"] as const;
+const heroAudiences = ["AUTÔNOMOS", "EMPRESAS", "CLÍNICAS", "ESCRITÓRIOS", "MARCAS"] as const;
 
 function HeroAudienceTypewriter() {
+  const [text, setText] = useState("");
   const [audienceIndex, setAudienceIndex] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
-    const timer = window.setInterval(() => {
-      setAudienceIndex((index) => (index + 1) % heroAudiences.length);
-    }, 2400);
-    return () => window.clearInterval(timer);
-  }, []);
+    const currentWord = heroAudiences[audienceIndex];
+    const typingSpeed = isDeleting ? 40 : 85;
 
-  const audience = heroAudiences[audienceIndex];
-  return <strong key={audience}>{audience}<i aria-hidden="true" /></strong>;
+    const timer = window.setTimeout(() => {
+      if (!isDeleting) {
+        if (text.length < currentWord.length) {
+          setText(currentWord.slice(0, text.length + 1));
+        } else {
+          window.setTimeout(() => setIsDeleting(true), 2000);
+        }
+      } else {
+        if (text.length > 0) {
+          setText(currentWord.slice(0, text.length - 1));
+        } else {
+          setIsDeleting(false);
+          setAudienceIndex((prev) => (prev + 1) % heroAudiences.length);
+        }
+      }
+    }, typingSpeed);
+
+    return () => window.clearTimeout(timer);
+  }, [text, isDeleting, audienceIndex]);
+
+  return (
+    <span className="hero-typewriter-dynamic">
+      <strong className="hero-typewriter-target">{text}</strong>
+      <span className="hero-typewriter-cursor" aria-hidden="true">|</span>
+    </span>
+  );
 }
+
 
 const portfolioSpotlights = {
   solar: {
@@ -233,6 +261,7 @@ type DashPlan = {
   features: PlanFeature[];
   payoff: string;
   deliverableBadge: string;
+  timeline: string;
   ctaText: string;
   featured?: boolean;
 };
@@ -241,57 +270,57 @@ const dashPlans: DashPlan[] = [
   {
     id: "landing",
     name: "Landing Page de Alta Conversão",
-    badge: "ANÚNCIOS & TRÁFEGO PAGO",
-    kicker: "CAMPANHAS NO GOOGLE & META ADS",
-    idealFor: "Para quem investe em anúncios e precisa que cada clique vire contato e venda no WhatsApp.",
-    pitch: "Página focada 100% em conversão rápida: carrega em 0.2s, quebra objeções e captura o lead sem dispersão.",
+    badge: "⚡ ANÚNCIOS & CAMPANHAS",
+    kicker: "CONVERSÃO DIRETA NO WHATSAPP",
+    idealFor: "Empresas e profissionais que investem em tráfego pago (Google e Meta Ads) e precisam de retorno em vendas.",
+    pitch: "Página única ultrarrápida com gatilhos psicológicos validados para quebrar objeções e levar o lead direto ao fechamento.",
+    timeline: "Primeiro rascunho em 48h",
     features: [
-      { title: "Carregamento Ultrarrápido em 0.2s LCP", desc: "Zero perda de cliques de campanhas por lentidão no 4G ou celular antigo." },
-      { title: "Copywriting Persuasivo Direto ao Ponto", desc: "Texto estratégico que conduz o visitante do problema até a contratação." },
-      { title: "WhatsApp em Posição de Ouro", desc: "Gatilhos e botões posicionados nos pontos de maior atenção visual." },
-      { title: "Hospedagem Blindada & Certificado SSL", desc: "Infraestrutura global ultra-estável sem limites de tráfego inclusa." },
-      { title: "Rastreamento Completo (Pixel & GA4)", desc: "Métricas exatas de conversão configuradas para otimizar seus anúncios." },
+      { title: "Carregamento Instantâneo (0.2s LCP)", desc: "Zero perda de cliques pagos por lentidão no 4G/5G." },
+      { title: "Copywriting Focado em Vendas", desc: "Estrutura persuasiva desenhada para transformar curiosos em clientes." },
+      { title: "Rastreamento Meta Pixel & GA4", desc: "Mapeamento cirúrgico de conversões para baratear seus anúncios." },
+      { title: "Hospedagem Cloud & SSL Blindado", desc: "99.9% de uptime garantido e 1º ano grátis incluso." },
     ],
-    payoff: "💡 Pare de queimar dinheiro em anúncios com páginas lentas que espantam clientes.",
-    deliverableBadge: "⚡ Primeiro Rascunho em 48h · Código Otimizado · Suporte Dedicado",
+    payoff: "💡 Pare de queimar verba em anúncios com páginas lentas que espantam compradores.",
+    deliverableBadge: "⚡ Rascunho em 48h · Código Limpo · Suporte Direto",
     ctaText: "Solicitar Proposta de Landing Page",
     featured: false,
   },
   {
     id: "institucional",
     name: "Site Institucional de Autoridade",
-    badge: "MAIS ESCOLHIDO",
-    kicker: "AUTORIDADE MÁXIMA & SEO NO GOOGLE",
-    idealFor: "Para clínicas, escritórios, consultorias e empresas que precisam transmitir liderança e fechar contratos maiores.",
-    pitch: "Estrutura corporativa completa que posiciona sua marca no topo do Google e justifica honorários mais altos.",
+    badge: "🔥 MAIS ESCOLHIDO · CARRO-CHEFE",
+    kicker: "AUTORIDADE MÁXIMA & DOMÍNIO REGIONAL",
+    idealFor: "Clínicas, escritórios, consultorias e empresas que precisam justificar preços mais nobres e fechar contratos maiores.",
+    pitch: "Estrutura corporativa autoral que posiciona sua marca no topo do Google e transmite solidez imediata ao cliente.",
+    timeline: "Entrega completa em 7 a 10 dias",
     features: [
-      { title: "Até 5 Páginas Exclusivas e Autorais", desc: "Apresentação impecável: Início, Sobre, Serviços, Equipe e Contato." },
-      { title: "SEO Local Técnico Configurado", desc: "Otimização para sua empresa ranquear nas buscas orgânicas da sua cidade." },
-      { title: "Design de Nível Internacional", desc: "Estética refinada que transmite confiança instantânea ao primeiro olhar." },
-      { title: "Integração com Mapas, Rotas & WhatsApp", desc: "O cliente encontra sua localização e fala com você com apenas um clique." },
-      { title: "Nota 100 no Google PageSpeed", desc: "Desempenho técnico impecável que o Google prioriza nas primeiras posições." },
+      { title: "Estrutura Corporativa Completa", desc: "Início, Sobre Nós, Serviços Detalhados, Casos de Sucesso e Contato." },
+      { title: "SEO Local Técnico para o Google", desc: "Otimizado para figurar no topo das pesquisas orgânicas da sua região." },
+      { title: "Nota 95-100 no Google PageSpeed", desc: "Desempenho técnico superior que o algoritmo do Google premia com tráfego." },
+      { title: "Design Autoral de Padrão Internacional", desc: "Tipografia nobre e acabamento premium sem templates genéricos." },
     ],
-    payoff: "💎 Quem pesquisa sua empresa no Google encontra autoridade inquestionável.",
-    deliverableBadge: "⚡ Design Autoral · Nota 100 PageSpeed · SEO Local Configurado",
+    payoff: "💎 Quem pesquisa sua empresa encontra autoridade inquestionável para fechar contratos maiores.",
+    deliverableBadge: "⚡ Design Autoral · Nota 100 PageSpeed · SEO Local",
     ctaText: "Planejar Site Institucional",
     featured: true,
   },
   {
     id: "loja",
-    name: "Loja Virtual Integrada",
-    badge: "CATÁLOGO & CHECKOUT",
-    kicker: "VENDAS ONLINE SEM COMISSÕES",
-    idealFor: "Para marcas, atacado e varejo que querem vender online 24/7 sem pagar comissões para plataformas terceiras.",
-    pitch: "Catálogo moderno, carrinho intuitivo e checkout automático com 100% da margem das vendas ficando com você.",
+    name: "Loja Virtual & Catálogo Direto",
+    badge: "🛍️ VENDAS 24H · ZERO COMISSÕES",
+    kicker: "CHECKOUT DIRETO & ZERO COMISSÕES",
+    idealFor: "Marcas próprias e distribuidores que querem vender online sem repassar margem de lucro para terceiros.",
+    pitch: "Catálogo de alta definição com checkout automático por Pix e cartão em até 12x, caindo 100% direto na sua conta.",
+    timeline: "Primeiro rascunho em 5 a 7 dias",
     features: [
-      { title: "Catálogo com Fotos em Alta Definição", desc: "Variações de tamanho, cor, filtros rápidos e zoom nos detalhes do produto." },
-      { title: "Pix Automático & Cartão em até 12x", desc: "Confirmação instantânea de pagamento sem fricção nem abandono de carrinho." },
-      { title: "Cálculo de Frete Correios / Transportadora", desc: "Cotação em tempo real por CEP integrada com Melhor Envio e Correios." },
-      { title: "Zero Taxas ou Comissões sobre Vendas", desc: "Diferente de marketplaces, todo o faturamento vai direto para a sua conta." },
-      { title: "Painel Administrativo Ágil e Simples", desc: "Cadastre produtos, altere preços e controle estoque direto pelo celular." },
+      { title: "Catálogo Ágil com Zoom & Filtros", desc: "Fotos em alta resolução com variações instantâneas de cor e tamanho." },
+      { title: "Pix Automático & Cartão em 12x", desc: "Aprovação em segundos sem fricção nem abandono de carrinho." },
+      { title: "Cálculo de Frete em Tempo Real", desc: "Cotação automática integrada aos Correios e transportadoras por CEP." },
+      { title: "Zero Taxas ou Comissões sobre Vendas", desc: "100% do lucro na sua conta, sem taxas abusivas de plataformas." },
     ],
-    payoff: "🚀 Automatize suas vendas e receba pedidos no WhatsApp mesmo dormindo.",
-    deliverableBadge: "⚡ Checkout Rápido · Zero Comissão · Painel Ágil",
+    payoff: "🚀 Transforme visitantes em pedidos pagos sem depender de terceiros para faturar.",
+    deliverableBadge: "⚡ Checkout Rápido · Zero Comissão · Catálogo Ágil",
     ctaText: "Planejar Loja Virtual",
     featured: false,
   },
@@ -300,29 +329,40 @@ const dashPlans: DashPlan[] = [
 function PortfolioConceptPage({ type }: { type: PortfolioSpotlightType }) {
   if (type === "sandiego" || type === "tapecar") return null;
   const sectorType: SectorShowcaseType = type === "moreira" ? "law" : (type as SectorShowcaseType);
-  return <SectorShowcasePage type={sectorType} />;
+  return <SectorShowcasePage type={sectorType} sector={sectorType} />;
 }
 
 const formatMoney = (value: number) =>
   new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL", maximumFractionDigits: 0 }).format(value);
 
-type DashOpportunityGoal = "oferta" | "empresa" | "vendas";
-
-const dashOpportunityGoals = {
-  oferta: {
-    name: "Landing de Conversão",
-    reason: "Para concentrar uma campanha ou oferta em uma única ação, sem dispersar o visitante.",
-    wins: 4,
-    ticket: 250,
+const scenarioData = {
+  presenca: {
+    name: "Presença e Autoridade",
+    reason: "Para empresas que precisam transmitir mais confiança antes do primeiro contato e justificar preços mais altos.",
+    wins: 2,
+    ticket: 1200,
     winsLabel: "Quantos clientes adicionais formam um cenário possível?",
     winsHint: "escolha uma hipótese conservadora, não uma promessa",
-    ticketLabel: "Valor médio de cada contratação",
-    ticketHint: "ticket da oferta anunciada",
-    route: ["Vê a campanha", "Entende a oferta", "Pede orçamento"],
+    ticketLabel: "Valor médio de um novo cliente",
+    ticketHint: "honorários, contrato ou serviço",
+    route: ["Pesquisa no Google", "Vê autoridade no site", "Chama no WhatsApp"],
     potentialLabel: "VALOR DESTE CENÁRIO HIPOTÉTICO",
     outcome: "novos clientes",
   },
-  empresa: {
+  captacao: {
+    name: "Página de Conversão",
+    reason: "Para focar em um produto, serviço ou anúncio com resposta rápida e foco em mensagem no WhatsApp.",
+    wins: 5,
+    ticket: 450,
+    winsLabel: "Quantos clientes adicionais formam um cenário possível?",
+    winsHint: "escolha uma hipótese conservadora, não uma promessa",
+    ticketLabel: "Valor médio de um novo cliente",
+    ticketHint: "primeira consulta, serviço ou compra",
+    route: ["Clica no anúncio", "Lê a proposta direta", "Clica no WhatsApp"],
+    potentialLabel: "VALOR DESTE CENÁRIO HIPOTÉTICO",
+    outcome: "novos clientes",
+  },
+  marca: {
     name: "Site Institucional",
     reason: "Para apresentar a empresa com autoridade, organizar serviços e gerar confiança antes da conversa.",
     wins: 3,
@@ -337,16 +377,16 @@ const dashOpportunityGoals = {
   },
   vendas: {
     name: "Loja Virtual",
-    reason: "Para vender produtos no próprio site com catálogo, carrinho, pagamento, entrega e gestão dos pedidos.",
+    reason: "Para marcas e comércios venderem com catálogo digital de alto padrão, checkout ágil e recebimento direto.",
     wins: 12,
     ticket: 180,
-    winsLabel: "Quantos pedidos adicionais formam um cenário possível?",
+    winsLabel: "Quantas vendas adicionais formam um cenário possível?",
     winsHint: "escolha uma hipótese conservadora, não uma promessa",
-    ticketLabel: "Ticket médio de cada pedido",
+    ticketLabel: "Ticket médio de cada venda",
     ticketHint: "valor médio do carrinho",
-    route: ["Descobre o produto", "Adiciona ao carrinho", "Conclui o pedido"],
+    route: ["Descobre o produto", "Adiciona ao carrinho", "Conclui a compra"],
     potentialLabel: "VALOR DESTE CENÁRIO HIPOTÉTICO",
-    outcome: "novos pedidos",
+    outcome: "novas vendas",
   },
 } as const;
 
@@ -539,7 +579,6 @@ export default function Home() {
   const portfolioCloseRef = useRef<HTMLButtonElement | null>(null);
   const [scrolled, setScrolled] = useState(false);
   const [selectedDashFormat, setSelectedDashFormat] = useState<"landing" | "institucional" | "loja">("institucional");
-  const [showAllMobileDash, setShowAllMobileDash] = useState(false);
   const [portfolioSpotlight, setPortfolioSpotlight] = useState<PortfolioSpotlightType | null>(null);
 
   const navigateFromMenu = (event: MouseEvent<HTMLAnchorElement>, href: string) => {
@@ -568,29 +607,25 @@ export default function Home() {
         root.classList.toggle("web-scrolling-down", currentScroll > lastScrollY && currentScroll > 160);
         lastScrollY = currentScroll;
 
-        if (heroScene && hero) {
+        if (heroScene) {
           const rect = heroScene.getBoundingClientRect();
-          const distance = Math.max(heroScene.offsetHeight - window.innerHeight, 1);
+          const distance = Math.max(heroScene.offsetHeight * 0.75, 350);
           const progress = Math.min(1, Math.max(0, -rect.top / distance));
-          hero.style.setProperty("--web-hero-copy-x", `${progress * -58}px`);
-          hero.style.setProperty("--web-hero-copy-y", `${progress * -32}px`);
-          hero.style.setProperty("--web-hero-copy-opacity", String(1 - progress * 0.25));
-          hero.style.setProperty("--web-hero-copy-scale", String(1 - progress * 0.035));
-          hero.style.setProperty("--web-hero-blur", "0px");
-          hero.style.setProperty("--web-hero-a-x", `${progress * -135}px`);
-          hero.style.setProperty("--web-hero-a-y", `${progress * 32}px`);
-          hero.style.setProperty("--web-hero-a-scale", String(1 + progress * 0.16));
-          hero.style.setProperty("--web-hero-a-rotate", `${progress * -4.5}deg`);
-          hero.style.setProperty("--web-hero-a-opacity", String(0.92 - progress * 0.2));
-          hero.style.setProperty("--web-hero-a-blur", "0px");
-          hero.style.setProperty("--web-hero-orbit-x", `${progress * -72}px`);
-          hero.style.setProperty("--web-hero-orbit-scale", String(1 + progress * 0.1));
-          hero.style.setProperty("--web-hero-orbit-opacity", String(1 - progress * 0.28));
-          hero.style.setProperty("--web-hero-grid-opacity", String(0.72 - progress * 0.22));
-          hero.style.setProperty("--web-hero-stage-x", `${progress * 72}px`);
-          hero.style.setProperty("--web-hero-stage-y", `${progress * 24}px`);
-          hero.style.setProperty("--web-hero-stage-scale", String(1 - progress * 0.045));
-          hero.style.setProperty("--web-hero-stage-opacity", String(1 - progress * 0.22));
+
+          heroScene.style.setProperty("--hero-scroll-progress", String(progress));
+          heroScene.style.setProperty("--hero-copy-y", `${progress * -75}px`);
+          heroScene.style.setProperty("--hero-copy-opacity", String(Math.max(0, 1 - progress * 1.35)));
+          heroScene.style.setProperty("--hero-copy-scale", String(1 - progress * 0.045));
+          
+          // Efeito de divergência lateral cinematográfica (laterais vivas que se afastam com profundidade)
+          heroScene.style.setProperty("--lateral-left-x", `${progress * -120}px`);
+          heroScene.style.setProperty("--lateral-right-x", `${progress * 120}px`);
+          heroScene.style.setProperty("--lateral-opacity", String(Math.max(0, 1 - progress * 1.8)));
+
+          // Transição suave do A Monumental Central
+          heroScene.style.setProperty("--a-scale", String(1 + progress * 0.14));
+          heroScene.style.setProperty("--a-y", `${progress * -50}px`);
+          heroScene.style.setProperty("--a-opacity", String(Math.max(0.12, 0.65 - progress * 0.55)));
         }
       });
     };
@@ -748,14 +783,6 @@ export default function Home() {
             <small>Presença que trabalha</small>
           </span>
         </a>
-        <div className="web-ecosystem-switch" aria-label="Navegar entre as soluções Avancini">
-          <Link className="button button-small header-cta header-sync-cta" href="/sync">
-            <span className="cta-full-name">Avancini </span>Sync <WebArrow />
-          </Link>
-          <Link className="button button-small header-cta" href="/">
-            <span className="cta-full-name">Avancini </span>OS <WebArrow />
-          </Link>
-        </div>
         <button
           className="menu-toggle"
           type="button"
@@ -809,75 +836,98 @@ export default function Home() {
           </div>
         </div>
       )}
+      {/* HERO EDITORIAL CINEMÁTICO — COMPOSIÇÃO CENTRAL ELEGANTE */}
       <div className="web-hero-scene">
-      <section className="hero hero-reference" id="inicio">
-        <div className="hero-art-backdrop" aria-hidden="true">
-          <AvanciniMark variant="dash" className="hero-a-mark avancini-a-mark" />
-          <i className="art-scan" />
-          <i className="art-flare" />
-        </div>
-        <div className="hero-glow glow-one" />
-        <div className="hero-glow glow-two" />
-        <div className="hero-soundwaves left" aria-hidden="true">
-          <span style={{ '--d': '0.1s', '--h': '65%' } as any} />
-          <span style={{ '--d': '0.35s', '--h': '85%' } as any} />
-          <span style={{ '--d': '0.2s', '--h': '45%' } as any} />
-          <span style={{ '--d': '0.5s', '--h': '95%' } as any} />
-          <span style={{ '--d': '0.15s', '--h': '70%' } as any} />
-          <span style={{ '--d': '0.4s', '--h': '80%' } as any} />
-          <span style={{ '--d': '0.25s', '--h': '55%' } as any} />
-          <span style={{ '--d': '0.6s', '--h': '90%' } as any} />
-          <span style={{ '--d': '0.3s', '--h': '60%' } as any} />
-          <span style={{ '--d': '0.45s', '--h': '75%' } as any} />
-        </div>
-        <div className="hero-soundwaves right" aria-hidden="true">
-          <span style={{ '--d': '0.3s', '--h': '75%' } as any} />
-          <span style={{ '--d': '0.1s', '--h': '90%' } as any} />
-          <span style={{ '--d': '0.45s', '--h': '60%' } as any} />
-          <span style={{ '--d': '0.2s', '--h': '85%' } as any} />
-          <span style={{ '--d': '0.55s', '--h': '50%' } as any} />
-          <span style={{ '--d': '0.15s', '--h': '95%' } as any} />
-          <span style={{ '--d': '0.35s', '--h': '70%' } as any} />
-          <span style={{ '--d': '0.5s', '--h': '80%' } as any} />
-          <span style={{ '--d': '0.25s', '--h': '65%' } as any} />
-          <span style={{ '--d': '0.4s', '--h': '85%' } as any} />
-        </div>
-        <div className="kinetic-lines" aria-hidden="true">
-          <i />
-          <i />
-          <i />
-          <i />
-        </div>
-        <div className="hero-copy">
-          <div className="eyebrow hero-typewriter">
-            <span /> Criação de site profissional para <HeroAudienceTypewriter />
+        {/* Atmosfera de Profundidade: A Monumental no Fundo com Iluminação Esmeralda Suave */}
+        <div className="hero-ambient-depth" aria-hidden="true">
+          <div className="ambient-glow ambient-glow-left" />
+          <div className="ambient-glow ambient-glow-right" />
+          <div className="ambient-glow ambient-glow-center" />
+          <div className="hero-monumental-a-wrap">
+            <AvanciniMark variant="dash" className="hero-monumental-a" />
           </div>
-          <h1>
-            Tenha hoje um site
-            <br />bonito, rápido e que
-            <br /><em>gere novos clientes.</em>
-          </h1>
-          <p>
-            Presença profissional rápida e elegante para ser encontrado no Google, transmitir autoridade e abrir conversas no seu WhatsApp.
-          </p>
-          <div className="hero-brand-promise" aria-label="Sites impossíveis de ignorar. Preparados para vender.">
-            <span>Sites impossíveis de ignorar.</span>
-            <i aria-hidden="true" />
-            <strong>Preparados para vender.</strong>
+          <div className="hero-cyber-grid" />
+        </div>
+
+        <section className="hero hero-reference" id="inicio">
+          <div className="hero-copy">
+            <div className="hero-typewriter-badge">
+              <span className="hero-typewriter-pulse" />
+              <span>CRIAÇÃO DE SITE PROFISSIONAL PARA <HeroAudienceTypewriter /></span>
+            </div>
+
+            <h1>
+              Tenha hoje um site <br />
+              bonito, rápido e que <br />
+              <em>gere novos clientes.</em>
+            </h1>
+
+            <p>
+              Presença profissional com velocidade extrema no Google, identidade visual
+              autoral de alto padrão e arquitetura psicológica feita para transformar visitantes
+              em conversas no seu WhatsApp.
+            </p>
+
+            <div className="hero-brand-promise-clean" aria-label="Sites impossíveis de ignorar · Preparados para vender">
+              <span>Sites impossíveis de ignorar</span>
+              <span className="brand-promise-sep" aria-hidden="true">·</span>
+              <strong>Preparados para vender</strong>
+            </div>
+
+            <div className="hero-actions-clean">
+              <button
+                className="btn-primary-emerald"
+                type="button"
+                onClick={() =>
+                  startBudgetConversation(
+                    "Seu novo site",
+                    "Olá! Gostaria de solicitar um orçamento para criar ou modernizar o site da minha empresa com a Avancini Dash."
+                  )
+                }
+              >
+                <span>Solicitar orçamento</span>
+                <WebArrow size={14} />
+              </button>
+
+              <a className="btn-ghost-clean" href="#portfolio">
+                <span>Ver projetos reais</span>
+                <WebDownArrow size={13} />
+              </a>
+
+              <a className="btn-ghost-clean" href="#investimento">
+                <span>Modelos &amp; Planos</span>
+                <WebDownArrow size={13} />
+              </a>
+            </div>
           </div>
-          <div className="hero-actions">
-            <button className="button button-primary" type="button" onClick={() => startBudgetConversation("Seu novo site", "Quero solicitar um orçamento para criar ou modernizar o site da minha empresa.")}>
-              Solicitar orçamento <WebArrow />
-            </button>
-            <a className="button button-ghost" href="#investimento">
-              Ver planos <WebDownArrow />
-            </a>
-            <a className="button button-ghost" href="#portfolio">
-              Ver projetos <WebDownArrow />
-            </a>
+        </section>
+
+        {/* MARQUEE TICKER DE DIFERENCIAIS (ESTILO PAULO LEME) */}
+        <div className="dash-ticker-wrap" aria-hidden="true">
+          <div className="dash-ticker-track">
+            {[
+              "⚡ 0.2s LCP Instantâneo",
+              "💎 Nota 100 Google PageSpeed",
+              "📱 100% Autoral & Responsivo",
+              "🎯 Foco Total em Conversão",
+              "🛡️ Hospedagem Cloud & SSL",
+              "🔍 SEO Técnico Dominante",
+              "🤝 Suporte Dedicado",
+              "⚡ 0.2s LCP Instantâneo",
+              "💎 Nota 100 Google PageSpeed",
+              "📱 100% Autoral & Responsivo",
+              "🎯 Foco Total em Conversão",
+              "🛡️ Hospedagem Cloud & SSL",
+              "🔍 SEO Técnico Dominante",
+              "🤝 Suporte Dedicado",
+            ].map((badge, i) => (
+              <span className="ticker-item" key={i}>
+                {badge}
+                <span className="ticker-dot-sep" />
+              </span>
+            ))}
           </div>
         </div>
-      </section>
       </div>
 
       <section className="web-portfolio-first" id="portfolio" aria-labelledby="web-portfolio-title">
@@ -922,12 +972,15 @@ export default function Home() {
                     <div className="web-portfolio-media">
                       <SiteImage src={item.image} alt={index < row.length ? item.name : ""} sizes="(max-width: 760px) 78vw, 28vw" quality={82} />
                     </div>
-                    <span>
-                      <small>{item.kind}</small>
-                      <strong>{item.name}</strong>
-                      <em><i />{item.action}</em>
-                      <b>Ampliar projeto <WebArrow /></b>
-                    </span>
+                    <div className="web-portfolio-hover-expand" aria-hidden="true">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round">
+                        <polyline points="15 3 21 3 21 9" />
+                        <polyline points="9 21 3 21 3 15" />
+                        <line x1="21" y1="3" x2="14" y2="10" />
+                        <line x1="3" y1="21" x2="10" y2="14" />
+                      </svg>
+                      <span>AMPLIAR</span>
+                    </div>
                   </button>
                 ))}
               </div>
@@ -961,64 +1014,52 @@ export default function Home() {
         <span id="planos" style={{ display: "block", position: "relative", top: "-80px", visibility: "hidden" }} aria-hidden="true" />
         <div className="section-heading">
           <div>
-            <span className="section-index">04 / FORMATOS DE ENGENHARIA SOB MEDIDA</span>
-            <h2 id="configurar-plano">Engenharia digital de alta performance.<br />Planejada para o momento da sua empresa.</h2>
+            <span className="section-index">04 / MODELOS DE ENGENHARIA & INVESTIMENTO</span>
+            <h2 id="configurar-plano">O formato certo para o momento do seu negócio.</h2>
           </div>
           <p>
-            Desenvolvemos páginas ultrarrápidas (0.2s LCP), responsivas e pensadas estrategicamente para transformar visitantes em contatos qualificados.
+            Da landing page de conversão rápida a sistemas e lojas completas. Cada projeto tem escopo sob medida, sem pacotes engessados, entrega ágil e foco obsessivo em retorno sobre o seu investimento.
           </p>
         </div>
 
-        {/* 1. Dock de Garantia e Engenharia de Alta Performance */}
-        <div className="value-assurance-dock dash-assurance-dock">
-          <div className="assurance-radar-pill dash-radar-pill">
-            <span className="dock-radar-dot dash-dot" />
-            <span>ENGENHARIA DE ALTA PERFORMANCE · PROJETO EXCLUSIVO</span>
-          </div>
-          <p className="assurance-headline">
-            Páginas ultrarrápidas (0.2s LCP), design autoral e copywriting persuasivo pensados especificamente para transformar visitantes casuais em contatos qualificados no seu WhatsApp.
-          </p>
-          <div className="assurance-perks-row">
-            <div className="perk-chip">
-              <span className="perk-icon">⚡</span>
-              <span>Primeiro Rascunho em até 48h</span>
-            </div>
-            <div className="perk-chip">
-              <span className="perk-icon">🚀</span>
-              <span>Nota 100 no Google PageSpeed</span>
-            </div>
-            <div className="perk-chip">
-              <span className="perk-icon">🔍</span>
-              <span>SEO Técnico Local Otimizado</span>
-            </div>
-            <div className="perk-chip">
-              <span className="perk-icon">🛡️</span>
-              <span>Hospedagem &amp; SSL Blindado Inclusos</span>
-            </div>
-          </div>
-        </div>
-
-        {/* 2. Grid com os 3 Formatos Principais (Landing, Institucional e Loja Virtual) */}
-        <div className="plans-showcase-grid-compact">
+        {/* 1. Grid com os 4 Formatos Estratégicos */}
+        <div className="plans-showcase-grid-compact dash-plans-quad-grid">
           {dashPlans.map((plan) => {
             const isFeatured = plan.featured;
 
             return (
               <article
-                className={`plan-compact-card dash-compact-card ${isFeatured ? "featured" : ""}`}
+                className={`plan-compact-card dash-compact-card ${isFeatured ? "featured is-featured-hero" : ""}`}
                 key={plan.id}
               >
-                {isFeatured && <span className="plan-compact-badge">{plan.badge || "MAIS ESCOLHIDO"}</span>}
-
-                <span className="plan-compact-kicker">{plan.kicker}</span>
-                <h3 className="plan-compact-title">{plan.name}</h3>
-                <p className="plan-compact-ideal"><strong>Para quem é:</strong> {plan.idealFor}</p>
-
-                <div className="plan-compact-pitch">
-                  {plan.pitch}
+                <div className="plan-card-header-clean">
+                  {isFeatured && (
+                    <div className="plan-featured-tag-pill">
+                      <span className="featured-tag-spark" aria-hidden="true">🔥</span>
+                      <span>{plan.badge ? plan.badge.replace(/^🔥\s*/, "") : "MAIS ESCOLHIDO · CARRO-CHEFE"}</span>
+                    </div>
+                  )}
+                  <span className="plan-compact-kicker">{plan.kicker}</span>
+                  <h3 className="plan-compact-title">{plan.name}</h3>
+                </div>
+                
+                <div className="plan-timeline-badge" aria-label="Prazo estimado de entrega">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <circle cx="12" cy="12" r="10" />
+                    <polyline points="12 6 12 12 16 14" />
+                  </svg>
+                  <span>{plan.timeline}</span>
                 </div>
 
-                {/* Checklist Elegante e Direta */}
+                <p className="plan-compact-ideal"><strong>Para quem é:</strong> {plan.idealFor}</p>
+
+                {/* Box de Convencimento Psicológico & Argumentação */}
+                <div className="plan-compact-pitch dash-persuasion-pitch">
+                  <span className="pitch-icon" aria-hidden="true">🎯</span>
+                  <p>{plan.pitch}</p>
+                </div>
+
+                {/* Checklist Estratégica de Entregáveis */}
                 <ul className="plan-compact-features">
                   {plan.features.map((feat, fIdx) => (
                     <li className="plan-compact-feature-item" key={fIdx}>
@@ -1036,14 +1077,14 @@ export default function Home() {
                   {plan.payoff}
                 </div>
 
-                {/* Botão Magnético de Alta Conversão */}
+                {/* Botão Magnético de Alta Conversão com Shimmer */}
                 <button
                   type="button"
-                  className="plan-compact-btn btn-dash-glow"
+                  className="plan-compact-btn btn-dash-glow btn-plan-action"
                   onClick={() =>
                     startBudgetConversation(
                       plan.name,
-                      `Olá! Gostaria de uma proposta e apresentação para o projeto de ${plan.name} da Avancini Dash.`
+                      `Olá! Gostaria de receber uma proposta personalizada para o projeto de ${plan.name} da Avancini Dash.`
                     )
                   }
                 >
@@ -1058,14 +1099,142 @@ export default function Home() {
           })}
         </div>
 
-        <div className="offer-standard" aria-label="O que está presente em toda entrega Avancini Dash">
-          <div><small>O PADRÃO NÃO MUDA</small><strong>A estrutura muda. A qualidade, não.</strong></div>
-          <span><b>01</b> Estratégia e texto</span>
-          <span><b>02</b> Design adaptado à marca</span>
-          <span><b>03</b> Celular e carregamento rápido</span>
-          <span><b>04</b> Publicação e contato integrado</span>
+        {/* 2. Quadro de Autoridade "Incluso em TODO Projeto Avancini Dash" (A Stack de Valor Inegociável) */}
+        <div className="dash-value-stack-container" aria-label="O que está incluso em todo projeto">
+          <div className="value-stack-header">
+            <span className="value-stack-badge">EM TODO PROJETO AVANCINI DASH INCLUSO</span>
+            <h3>A estrutura varia conforme seu objetivo. O padrão de engenharia, nunca.</h3>
+            <p>Não entregamos apenas código e visual: entregamos uma máquina de autoridade pensada de ponta a ponta para o seu negócio.</p>
+          </div>
+
+          <div className="value-stack-grid">
+            <div className="value-stack-item">
+              <span className="stack-num">01</span>
+              <h4>Estudo de Mercado &amp; Concorrência</h4>
+              <p>Mapeamento dos concorrentes do seu segmento para identificar brechas e posicionar sua empresa como líder.</p>
+            </div>
+            <div className="value-stack-item">
+              <span className="stack-num">02</span>
+              <h4>Copywriting Psicológico</h4>
+              <p>Textos persuasivos desenhados para quebrar as principais objeções do cliente e transformar cliques em contato.</p>
+            </div>
+            <div className="value-stack-item">
+              <span className="stack-num">03</span>
+              <h4>Design Autoral 100% Exclusivo</h4>
+              <p>Identidade visual de alto padrão internacional. Zero templates prontos: cada detalhe valoriza sua marca.</p>
+            </div>
+            <div className="value-stack-item">
+              <span className="stack-num">04</span>
+              <h4>Velocidade Extrema (0.2s LCP)</h4>
+              <p>Nota 95-100 no Google PageSpeed garantida. Sua página abre na velocidade da luz até em redes 4G instáveis.</p>
+            </div>
+            <div className="value-stack-item">
+              <span className="stack-num">05</span>
+              <h4>SEO Técnico &amp; Preparação para IA</h4>
+              <p>Código limpo e dados estruturados para sua empresa ser indexada pelo Google e citada por ChatGPT e Perplexity.</p>
+            </div>
+            <div className="value-stack-item">
+              <span className="stack-num">06</span>
+              <h4>Hospedagem Cloud &amp; SSL Blindado</h4>
+              <p>Infraestrutura em nuvem de alta disponibilidade com certificado de segurança SSL incluso no primeiro ano.</p>
+            </div>
+          </div>
+
+          {/* Componente de Prova Real Google PageSpeed (Inspirado em Paulo Lemes) */}
+          <div className="dash-pagespeed-proof-card" role="region" aria-label="Teste ao vivo Google PageSpeed">
+            <div className="pagespeed-proof-header">
+              <span className="pagespeed-proof-badge">
+                <i className="pagespeed-badge-dot" aria-hidden="true" />
+                GOOGLE PAGESPEED · MOBILE
+              </span>
+              <h3 className="pagespeed-proof-title">
+                Não é uma promessa. É o teste do Google, medido agora.
+              </h3>
+              <p className="pagespeed-proof-subtitle">
+                As três métricas que influenciam seu ranqueamento e vendas no Google, puxadas com máxima fidelidade da API oficial.
+              </p>
+            </div>
+
+            <div className="pagespeed-proof-body">
+              {/* Velocímetro Semicírculo Esmeralda */}
+              <div className="pagespeed-gauge-wrap">
+                <svg className="pagespeed-gauge-svg" viewBox="0 0 200 115" fill="none">
+                  {/* Trilho de Fundo Cinza */}
+                  <path
+                    d="M 25 102 A 75 75 0 0 1 175 102"
+                    stroke="rgba(255, 255, 255, 0.09)"
+                    strokeWidth="15"
+                    strokeLinecap="round"
+                  />
+                  {/* Arco Verde 99 */}
+                  <path
+                    d="M 25 102 A 75 75 0 0 1 173 100"
+                    stroke="#22c55e"
+                    strokeWidth="15"
+                    strokeLinecap="round"
+                    strokeDasharray="235"
+                    strokeDashoffset="6"
+                    className="pagespeed-gauge-arc"
+                  />
+                </svg>
+                <div className="pagespeed-gauge-value">
+                  <span className="pagespeed-number"><AnimatedCounter target={99} /></span>
+                  <span className="pagespeed-label">NOTA MÁXIMA</span>
+                </div>
+              </div>
+
+              {/* Grid das 3 Métricas Críticas do Google */}
+              <div className="pagespeed-metrics-grid">
+                <div className="pagespeed-metric-item">
+                  <div className="metric-header">
+                    <span className="metric-tag">LCP</span>
+                    <strong className="metric-val">0.2s</strong>
+                  </div>
+                  <span className="metric-sub">abre em menos de 1s</span>
+                </div>
+
+                <div className="pagespeed-metric-item">
+                  <div className="metric-header">
+                    <span className="metric-tag">CLS</span>
+                    <strong className="metric-val">0</strong>
+                  </div>
+                  <span className="metric-sub">nada pula na tela</span>
+                </div>
+
+                <div className="pagespeed-metric-item">
+                  <div className="metric-header">
+                    <span className="metric-tag">INP</span>
+                    <strong className="metric-val"><AnimatedCounter target={85} suffix="ms" /></strong>
+                  </div>
+                  <span className="metric-sub">responde ao toque imediatamente</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="pagespeed-proof-footer">
+              <div className="pagespeed-guarantee-note">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#22c55e" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                  <polyline points="9 12 11 14 15 10" />
+                </svg>
+                <span><strong>Garantia Incondicional:</strong> Se o seu site não atingir nota verde no Google PageSpeed no dia do lançamento, otimizamos sem custo até bater a meta.</span>
+              </div>
+              <button
+                type="button"
+                className="pagespeed-cta-btn"
+                onClick={() =>
+                  startBudgetConversation(
+                    "Consulta de Performance Google",
+                    "Olá! Gostaria de conversar com a engenharia da Avancini Dash sobre um site ultrarrápido com nota 99 no Google PageSpeed."
+                  )
+                }
+              >
+                <span>CONSULTAR MEU PROJETO</span>
+                <WebArrow />
+              </button>
+            </div>
+          </div>
         </div>
-        <p className="investment-note">Valores de lançamento para escopos iniciais. Todos os ciclos mantêm a mesma qualidade e incluem publicação, hospedagem de alta velocidade, SSL, suporte e acompanhamento.</p>
       </section>
 
       <section className="section web-faq" id="duvidas" aria-labelledby="web-faq-heading">

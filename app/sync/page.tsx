@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useRef, useState, type FormEvent, type MouseEvent } from "react";
 import { AvanciniMark } from "../avancini-mark";
+import "../web/dash-hero.css";
 
 const countriesList = [
   { code: "BR", name: "Brasil", ddi: "+55", placeholder: "(11) 99999-9999" },
@@ -26,6 +27,7 @@ const countriesList = [
 ];
 
 import { CountryFlag } from "../components/CountryFlag";
+import AnimatedCounter from "../components/AnimatedCounter";
 
 function CountryFlagIcon({ code }: { code: string }) {
   return <CountryFlag code={code} size={18} />;
@@ -435,39 +437,37 @@ type SyncPlanSimple = {
 const simplifiedPlans: SyncPlanSimple[] = [
   {
     id: "chatbot",
-    name: "Chatbot de Fluxo",
+    name: "Chatbot de Fluxo Guiado",
     badge: "AUTOMAÇÃO EXPRESSA",
-    kicker: "MENU GUIADO & RESPOSTAS IMEDIATAS",
-    idealFor: "Para empresas que querem respostas automáticas instantâneas, cardápio/catálogo e triagem sem IA generativa.",
-    pitch: "Elimina as perguntas repetitivas do dia a dia com direcionamento objetivo em botões ou menu 1, 2, 3.",
+    kicker: "RESPOSTAS IMEDIATAS & TRIAGEM OBJETIVA",
+    idealFor: "Empresas que recebem as mesmas dúvidas todo dia e precisam de triagem rápida sem IA generativa.",
+    pitch: "Elimina filas com envio instantâneo de cardápio, catálogo, tabela de preços e transferência automática de setor.",
     features: [
-      { title: "Menu Inteligente de Opções (1 a 5)", desc: "Cliente escolhe o assunto e recebe a resposta oficial sem fila de espera." },
-      { title: "Envio Automático de Catálogo & PDF", desc: "Dispara tabela de serviços, cardápio, fotos e localização no mesmo segundo." },
-      { title: "Horários de Funcionamento & FAQ", desc: "Tira dúvidas recorrentes 24h e orienta o cliente sem intervenção humana." },
-      { title: "Transbordo Direto para Atendente", desc: "Transfere a conversa para o WhatsApp do setor certo quando solicitado." },
-      { title: "Zero Risco de Alucinação", desc: "Respostas 100% literais e exatas, rigorosamente dentro do fluxo que você aprovar." },
+      { title: "Menu Ágil de Opções (1 a 5)", desc: "O cliente escolhe o assunto e recebe a resposta oficial sem espera." },
+      { title: "Envio de PDF, Fotos & Catálogo", desc: "Dispara tabelas, rotas e material comercial no mesmo segundo." },
+      { title: "FAQ & Horários Automatizados", desc: "Resolve 70% das dúvidas frequentes mesmo de madrugada." },
+      { title: "Transbordo Direto no WhatsApp", desc: "Transfere para o atendente com histórico preservado." },
     ],
-    payoff: "💡 Libere a sua equipe das dúvidas repetitivas com ativação rápida em 24h.",
-    deliverableBadge: "⚡ Setup Ágil · Conexão QR Code · Sem Complexidade",
+    payoff: "💡 Desafogue sua equipe das perguntas repetitivas com ativação rápida em 24h.",
+    deliverableBadge: "⚡ Setup em 24h · Conexão QR Code · Respostas Literais",
     ctaText: "Testar Chatbot no WhatsApp",
     featured: false,
   },
   {
     id: "essencial",
     name: "Operação IA Essencial",
-    badge: "MAIS ESCOLHIDO",
+    badge: "🔥 MAIS ESCOLHIDO",
     kicker: "IA GENERATIVA HUMANIZADA 24/7",
-    idealFor: "Para clínicas, consultórios, advogados e serviços que perdem pacientes e vendas à noite e no fim de semana.",
-    pitch: "Uma secretária virtual de elite com o tom de voz da sua marca que acolhe, tira dúvidas e agenda consultas na hora.",
+    idealFor: "Clínicas, consultórios e escritórios que perdem clientes à noite e no final de semana.",
+    pitch: "Atendente virtual com tom humanizado que acolhe, tira dúvidas e agenda consultas na sua grade em tempo real.",
     features: [
-      { title: "Atendente IA com Empatia e Tom Autoral", desc: "Conversa com fluidez natural no WhatsApp, entende gírias e acolhe com cordialidade." },
-      { title: "Ouve Áudios Longos & Analisa Exames", desc: "O paciente manda áudio de 2 minutos ou foto de documento e a IA processa perfeitamente." },
-      { title: "Google Agenda Integrada em Tempo Real", desc: "Consulta a sua grade em tempo real e reserva consultas/reuniões automaticamente." },
-      { title: "Lembretes Anti-Falta na Véspera", desc: "Envia confirmação ativa com botão de aceite para zerar furos de agenda e no-show." },
-      { title: "Transbordo com Resumo Pronto", desc: "Passa para seu WhatsApp com ficha mastigada do que o paciente precisa." },
+      { title: "Conversação Natural & Empática", desc: "Entende gírias, áudios longos e fotos de documentos com fluidez." },
+      { title: "Google Agenda em Tempo Real", desc: "Consulta horários vagos e marca compromissos sem choque de horário." },
+      { title: "Lembretes Ativos Anti-Falta", desc: "Confirma presença na véspera e reduz faltas a quase zero." },
+      { title: "Transbordo com Resumo Pronto", desc: "Encaminha para você com a ficha mastigada do que o lead precisa." },
     ],
-    payoff: "💎 Nunca mais perca um cliente fora do horário comercial enquanto o concorrente dorme.",
-    deliverableBadge: "⚡ Calibração Guiada · Google Calendar · Teste sem Risco",
+    payoff: "💎 Recupere clientes fora do horário comercial enquanto o concorrente está offline.",
+    deliverableBadge: "⚡ Calibração Guiada · Google Calendar · Sem Alucinações",
     ctaText: "Solicitar Demonstração da IA",
     featured: true,
   },
@@ -476,16 +476,15 @@ const simplifiedPlans: SyncPlanSimple[] = [
     name: "Operação Scale Pro",
     badge: "ALTA ESCALA",
     kicker: "CENTRAL CORPORATIVA MULTISSETOR",
-    idealFor: "Para clínicas com múltiplos especialistas, imobiliárias, distribuidoras e empresas com equipe de vendas.",
-    pitch: "Multiagentes especializados por setor e distribuição inteligente de fila para vários atendentes no mesmo número.",
+    idealFor: "Empresas com múltiplos profissionais, equipe comercial ou grande volume de anúncios pagos.",
+    pitch: "Multiagentes de IA especializados por setor (Vendas, Agendamento, Cobrança) e distribuição de fila humana.",
     features: [
-      { title: "Multiagentes Especializados por Setor", desc: "IAs dedicadas: um agente para Vendas, um para Recepção e um para Financeiro/Cobrança." },
-      { title: "Fila Inteligente de Atendentes Humanos", desc: "Vários operadores atendendo no mesmo WhatsApp oficial sem conflito de mensagens." },
-      { title: "Painel de Métricas & Taxa de Conversão", desc: "Relatórios de motivos de contato, horários de pico e desempenho do time." },
-      { title: "Capacidade Prioritária para Anúncios", desc: "Infraestrutura reforçada para suportar picos pesados de campanhas e tráfego pago." },
-      { title: "Gerente de Conta Dedicado & SLA Prioritário", desc: "Acompanhamento VIP contínuo para calibração de processos e suporte direto." },
+      { title: "Multiagentes Especializados por Setor", desc: "IAs dedicadas: um agente para Vendas, um para Recepção e um para Suporte." },
+      { title: "Fila Inteligente de Atendentes", desc: "Vários operadores no mesmo WhatsApp com divisão automática de leads." },
+      { title: "Painel de Métricas & Conversão", desc: "Relatórios de motivos de contato, horários de pico e conversão do time." },
+      { title: "Capacidade Prioritária para Ads", desc: "Infraestrutura reforçada para suportar picos de centenas de conversas." },
     ],
-    payoff: "🚀 Transforme seu WhatsApp em uma máquina de vendas multissetor que atende 500 pessoas ao mesmo tempo.",
+    payoff: "🚀 Uma máquina de vendas e atendimento multissetor sem limite de capacidade operacional.",
     deliverableBadge: "⚡ Multiagentes · Gestão de Equipe · SLA Corporativo",
     ctaText: "Agendar Diagnóstico Scale Pro",
     featured: false,
@@ -590,6 +589,21 @@ export default function AvanciniSyncPage() {
   const [dailyContacts, setDailyContacts] = useState(60);
   const [clientTicket, setClientTicket] = useState(800);
   const [missedWeekendLeads, setMissedWeekendLeads] = useState(3);
+  const [simulating, setSimulating] = useState(false);
+  const [simStage, setSimStage] = useState<0 | 1 | 2>(2);
+
+  const runSimulation = (agentIdx: number) => {
+    setActiveSupervisorIndex(agentIdx);
+    setSimulating(true);
+    setSimStage(0);
+    window.setTimeout(() => {
+      setSimStage(1);
+      window.setTimeout(() => {
+        setSimStage(2);
+        setSimulating(false);
+      }, 1000);
+    }, 600);
+  };
 
   // Audio player demo states
   const [audioPlaying, setAudioPlaying] = useState(false);
@@ -733,8 +747,8 @@ export default function AvanciniSyncPage() {
 
   return (
     <main className="sync-page sync-commercial-layout">
-      {/* Header Compacto de Navegação */}
-      <header className={`header sync-shared-header ${scrolled ? "scrolled" : ""}`}>
+      {/* Header Compacto de Navegação (Padronizado com Dash) */}
+      <header className={`header ${scrolled ? "scrolled" : ""}`}>
         <a href="#inicio" className="logo" aria-label="Avancini Sync, início">
           <AvanciniMark variant="sync" className="logo-mark avancini-a-mark" />
           <span>
@@ -742,32 +756,31 @@ export default function AvanciniSyncPage() {
             <small>Equipe Multiagente de IA</small>
           </span>
         </a>
-        <div className="sync-header-actions" aria-label="Ações de navegação">
-          <Link className="sync-header-btn sync-dash-btn" href="/dash">
-            <span className="cta-full-name">Avancini </span>Dash <SyncArrow />
-          </Link>
-          <Link className="sync-header-btn sync-os-btn" href="/">
-            <span className="cta-full-name">Avancini </span>OS <SyncArrow />
-          </Link>
-          <button className="sync-header-btn sync-menu-btn" type="button" aria-label={menuOpen ? "Fechar menu" : "Abrir menu"} aria-expanded={menuOpen} onClick={() => setMenuOpen((open) => !open)}>
-            <i className="menu-glyph" aria-hidden="true"><span /><span /><span /></i><b>{menuOpen ? "Fechar" : "Menu"}</b>
-          </button>
-        </div>
+        <button
+          className="menu-toggle"
+          type="button"
+          aria-label={menuOpen ? "Fechar menu" : "Abrir menu"}
+          aria-expanded={menuOpen}
+          onClick={() => setMenuOpen((open) => !open)}
+        >
+          <i className="menu-glyph" aria-hidden="true"><span /><span /><span /></i>
+          <b>{menuOpen ? "Fechar" : "Menu"}</b>
+        </button>
       </header>
 
-      {/* Menu Overlay */}
+      {/* Menu Overlay (Padronizado com Dash) */}
       {menuOpen && (
         <div
           ref={menuDialogRef}
           tabIndex={-1}
-          className="sync-menu-overlay"
+          className="web-menu-overlay sync-menu-overlay"
           role="dialog"
           aria-modal="true"
           aria-label="Menu principal do Avancini Sync"
         >
-          <div className="sync-menu-top">
-            <span>ARQUITETURA MULTIAGENTE <i /> AVANCINI SYNC</span>
-            <div className="sync-menu-network" aria-label="Ecossistema Avancini">
+          <div className="web-menu-top">
+            <span>NAVEGAÇÃO <i /> 07 SEÇÕES</span>
+            <div className="web-menu-network" aria-label="Ecossistema Avancini">
               <Link href="/" onClick={() => setMenuOpen(false)}>
                 AVANCINI OS <SyncArrow />
               </Link>
@@ -797,7 +810,7 @@ export default function AvanciniSyncPage() {
               </a>
             ))}
           </nav>
-          <div className="sync-menu-bottom">
+          <div className="web-menu-bottom">
             <span><i /> FAÇA SUA EQUIPE RENDER MAIS ANTES DE CONTRATAR MAIS GENTE</span>
             <button
               type="button"
@@ -836,6 +849,26 @@ export default function AvanciniSyncPage() {
             </button>
           </div>
 
+          {/* KPI Strip Comercial com Números Animados */}
+          <div className="sync-hero-kpis-strip" aria-label="Indicadores de performance da IA">
+            <div className="kpi-box">
+              <strong><AnimatedCounter target={24} suffix="/7" /></strong>
+              <span>Atendimento 24h</span>
+            </div>
+            <div className="kpi-box">
+              <strong>&lt; <AnimatedCounter target={3} suffix="s" /></strong>
+              <span>Tempo de Resposta</span>
+            </div>
+            <div className="kpi-box">
+              <strong>+<AnimatedCounter target={38} suffix="%" /></strong>
+              <span>Conversão Fora de Hora</span>
+            </div>
+            <div className="kpi-box">
+              <strong>R$ <AnimatedCounter target={0} /></strong>
+              <span>Horas Extras Gastas</span>
+            </div>
+          </div>
+
           {/* Painel Interativo Vivo do Supervisor Multiagente (Substitui os 4 cards estáticos e mortos) */}
           <div className="supervisor-live-cockpit" aria-label="Central de Atendimento Inteligente">
             <div className="cockpit-header">
@@ -847,7 +880,19 @@ export default function AvanciniSyncPage() {
                 <strong>CENTRAL DE ATENDIMENTO INTELIGENTE</strong>
                 <small>Veja na prática como a IA acolhe, tira dúvidas e agenda pelo WhatsApp da sua empresa</small>
               </div>
-              <span className="cockpit-live-tag">STATUS: ONLINE E PRONTO</span>
+              <div className="cockpit-header-actions">
+                <button
+                  type="button"
+                  className="cockpit-sim-btn"
+                  onClick={() => runSimulation(activeSupervisorIndex)}
+                  disabled={simulating}
+                  aria-label="Simular atendimento ao vivo"
+                >
+                  <span className="sim-btn-icon">{simulating ? "⚡" : "▶"}</span>
+                  <span>{simulating ? "Processando..." : "Simular Atendimento ao Vivo"}</span>
+                </button>
+                <span className="cockpit-live-tag">STATUS: ONLINE E PRONTO</span>
+              </div>
             </div>
 
             <div className="cockpit-tabs-row" role="tablist" aria-label="Agentes Especialistas">
@@ -858,7 +903,7 @@ export default function AvanciniSyncPage() {
                   role="tab"
                   aria-selected={activeSupervisorIndex === i}
                   className={`cockpit-agent-btn ${activeSupervisorIndex === i ? "active" : ""}`}
-                  onClick={() => setActiveSupervisorIndex(i)}
+                  onClick={() => runSimulation(i)}
                 >
                   <span className="btn-indicator" />
                   <strong>{agent.name}</strong>
@@ -902,6 +947,18 @@ export default function AvanciniSyncPage() {
                         </div>
                       </div>
 
+                      {/* Card de Classificação em Tempo Real do Lead */}
+                      <div className="spec-lead-qualification-card">
+                        <div className="lead-score-header">
+                          <span>Classificação de Lead</span>
+                          <strong>Score: <AnimatedCounter target={98} suffix="/100" /></strong>
+                        </div>
+                        <div className="lead-stage-pill-live">
+                          <i />
+                          <span>Status: Lead Qualificado &amp; Convertido</span>
+                        </div>
+                      </div>
+
                       {/* Orquestração do Supervisor: Pipeline em Tempo Real */}
                       <div className="spec-pipeline-wrap">
                         <span className="spec-section-mini-title">ORQUESTRAÇÃO DO SUPERVISOR</span>
@@ -938,7 +995,56 @@ export default function AvanciniSyncPage() {
                       <span className="chat-speed-tag">Resposta Imediata</span>
                     </div>
 
+                    {/* Stepper Visual em Tempo Real da IA */}
+                    <div className="cockpit-live-stepper" aria-label="Etapas da automação">
+                      <div className={`step-node ${simStage >= 0 ? "is-active" : ""}`}>
+                        <span className="step-dot">1</span>
+                        <div className="step-text">
+                          <strong>WhatsApp</strong>
+                          <small>Mensagem</small>
+                        </div>
+                      </div>
+                      <div className={`step-arrow ${simStage >= 1 ? "is-active" : ""}`}>➔</div>
+                      <div className={`step-node ${simStage >= 1 ? "is-active" : ""}`}>
+                        <span className="step-dot">2</span>
+                        <div className="step-text">
+                          <strong>Triagem IA</strong>
+                          <small>Análise</small>
+                        </div>
+                      </div>
+                      <div className={`step-arrow ${simStage >= 2 ? "is-active" : ""}`}>➔</div>
+                      <div className={`step-node ${simStage >= 2 ? "is-active" : ""}`}>
+                        <span className="step-dot">3</span>
+                        <div className="step-text">
+                          <strong>Ação &amp; Agenda</strong>
+                          <small>Reserva</small>
+                        </div>
+                      </div>
+                      <div className={`step-arrow ${simStage >= 2 ? "is-active" : ""}`}>➔</div>
+                      <div className={`step-node ${simStage >= 2 ? "is-active" : ""}`}>
+                        <span className="step-dot">4</span>
+                        <div className="step-text">
+                          <strong>Resumo</strong>
+                          <small>Pronto</small>
+                        </div>
+                      </div>
+                    </div>
+
                     <div className="chat-messages-scroll">
+                      {simStage === 1 && (
+                        <div className="chat-bubble ai typing-indicator-bubble">
+                          <div className="bubble-ai-meta">
+                            <span className="bubble-author">{currentAgent.name}</span>
+                            <span className="ai-verified-badge">Processando</span>
+                          </div>
+                          <div className="typing-dots-wrap">
+                            <span className="typing-dot" />
+                            <span className="typing-dot" />
+                            <span className="typing-dot" />
+                            <small>Analisando mensagem e consultando disponibilidade...</small>
+                          </div>
+                        </div>
+                      )}
                       {/* Cenário 1: Áudio do WhatsApp com transcrição e CRM */}
                       {currentAgent.chatType === "audio" && (
                         <>
@@ -977,27 +1083,29 @@ export default function AvanciniSyncPage() {
                             <time>14:32</time>
                           </div>
 
-                          <div className="chat-bubble ai">
-                            <div className="bubble-ai-meta">
-                              <span className="bubble-author">{currentAgent.name}</span>
-                              <span className="ai-verified-badge">Atendente Virtual</span>
-                            </div>
-                            <p>{currentAgent.chat.aiResponse}</p>
-
-                            {currentAgent.chat.crmBadge && (
-                              <div className="chat-crm-card">
-                                <div className="crm-badge-top">
-                                  <span>{currentAgent.chat.crmBadge.title}</span>
-                                </div>
-                                <div className="crm-badge-body">
-                                  <div><b>⚖️ Área:</b> {currentAgent.chat.crmBadge.area}</div>
-                                  <div><b>📊 Demanda:</b> {currentAgent.chat.crmBadge.volume}</div>
-                                  <div><b>🎯 Próximo Passo:</b> {currentAgent.chat.crmBadge.action}</div>
-                                </div>
+                          {simStage === 2 && (
+                            <div className="chat-bubble ai">
+                              <div className="bubble-ai-meta">
+                                <span className="bubble-author">{currentAgent.name}</span>
+                                <span className="ai-verified-badge">Atendente Virtual</span>
                               </div>
-                            )}
-                            <time>14:32 · Lido ✓✓</time>
-                          </div>
+                              <p>{currentAgent.chat.aiResponse}</p>
+
+                              {currentAgent.chat.crmBadge && (
+                                <div className="chat-crm-card">
+                                  <div className="crm-badge-top">
+                                    <span>{currentAgent.chat.crmBadge.title}</span>
+                                  </div>
+                                  <div className="crm-badge-body">
+                                    <div><b>⚖️ Área:</b> {currentAgent.chat.crmBadge.area}</div>
+                                    <div><b>📊 Demanda:</b> {currentAgent.chat.crmBadge.volume}</div>
+                                    <div><b>🎯 Próximo Passo:</b> {currentAgent.chat.crmBadge.action}</div>
+                                  </div>
+                                </div>
+                              )}
+                              <time>14:32 · Lido ✓✓</time>
+                            </div>
+                          )}
                         </>
                       )}
 
@@ -1010,39 +1118,41 @@ export default function AvanciniSyncPage() {
                             <time>14:32</time>
                           </div>
 
-                          <div className="chat-bubble ai">
-                            <div className="bubble-ai-meta">
-                              <span className="bubble-author">{currentAgent.name}</span>
-                              <span className="ai-verified-badge">Especialista</span>
-                            </div>
-                            <p>{currentAgent.chat.aiResponse}</p>
-
-                            <div className="chat-slots-container">
-                              {currentAgent.chat.slots?.map((slot, sIdx) => (
-                                <div
-                                  key={sIdx}
-                                  className={`chat-slot-chip ${slot === currentAgent.chat.selectedSlot ? "selected" : ""}`}
-                                >
-                                  <span>📅 {slot}</span>
-                                  {slot === currentAgent.chat.selectedSlot && <b>Horário reservado ✓</b>}
-                                </div>
-                              ))}
-                            </div>
-
-                            {currentAgent.chat.confirmationCard && (
-                              <div className="chat-calendar-card">
-                                <div className="cal-card-top">
-                                  <span>{currentAgent.chat.confirmationCard.title}</span>
-                                </div>
-                                <div className="cal-card-body">
-                                  <strong>🩺 {currentAgent.chat.confirmationCard.doctor}</strong>
-                                  <p>🗓️ {currentAgent.chat.confirmationCard.date}</p>
-                                  <small>🔔 {currentAgent.chat.confirmationCard.reminder}</small>
-                                </div>
+                          {simStage === 2 && (
+                            <div className="chat-bubble ai">
+                              <div className="bubble-ai-meta">
+                                <span className="bubble-author">{currentAgent.name}</span>
+                                <span className="ai-verified-badge">Especialista</span>
                               </div>
-                            )}
-                            <time>14:33 · Lido ✓✓</time>
-                          </div>
+                              <p>{currentAgent.chat.aiResponse}</p>
+
+                              <div className="chat-slots-container">
+                                {currentAgent.chat.slots?.map((slot, sIdx) => (
+                                  <div
+                                    key={sIdx}
+                                    className={`chat-slot-chip ${slot === currentAgent.chat.selectedSlot ? "selected" : ""}`}
+                                  >
+                                    <span>📅 {slot}</span>
+                                    {slot === currentAgent.chat.selectedSlot && <b>Horário reservado ✓</b>}
+                                  </div>
+                                ))}
+                              </div>
+
+                              {currentAgent.chat.confirmationCard && (
+                                <div className="chat-calendar-card">
+                                  <div className="cal-card-top">
+                                    <span>{currentAgent.chat.confirmationCard.title}</span>
+                                  </div>
+                                  <div className="cal-card-body">
+                                    <strong>🩺 {currentAgent.chat.confirmationCard.doctor}</strong>
+                                    <p>🗓️ {currentAgent.chat.confirmationCard.date}</p>
+                                    <small>🔔 {currentAgent.chat.confirmationCard.reminder}</small>
+                                  </div>
+                                </div>
+                              )}
+                              <time>14:33 · Lido ✓✓</time>
+                            </div>
+                          )}
                         </>
                       )}
 
@@ -1062,29 +1172,31 @@ export default function AvanciniSyncPage() {
                             <time>14:32</time>
                           </div>
 
-                          <div className="chat-bubble ai">
-                            <div className="bubble-ai-meta">
-                              <span className="bubble-author">{currentAgent.name}</span>
-                              <span className="ai-verified-badge">Especialista</span>
-                            </div>
-                            <p>{currentAgent.chat.aiResponse}</p>
+                          {simStage === 2 && (
+                            <div className="chat-bubble ai">
+                              <div className="bubble-ai-meta">
+                                <span className="bubble-author">{currentAgent.name}</span>
+                                <span className="ai-verified-badge">Especialista</span>
+                              </div>
+                              <p>{currentAgent.chat.aiResponse}</p>
 
-                            {currentAgent.chat.pixCard && (
-                              <div className="chat-pix-card">
-                                <div className="pix-card-top">
-                                  <span>{currentAgent.chat.pixCard.title}</span>
-                                </div>
-                                <div className="pix-card-body">
-                                  <strong>{currentAgent.chat.pixCard.value}</strong>
-                                  <div className="pix-key-box">
-                                    <code>{currentAgent.chat.pixCard.pixKey}</code>
-                                    <button type="button" className="copy-pix-btn">Copiar Pix</button>
+                              {currentAgent.chat.pixCard && (
+                                <div className="chat-pix-card">
+                                  <div className="pix-card-top">
+                                    <span>{currentAgent.chat.pixCard.title}</span>
+                                  </div>
+                                  <div className="pix-card-body">
+                                    <strong>{currentAgent.chat.pixCard.value}</strong>
+                                    <div className="pix-key-box">
+                                      <code>{currentAgent.chat.pixCard.pixKey}</code>
+                                      <button type="button" className="copy-pix-btn">Copiar Pix</button>
+                                    </div>
                                   </div>
                                 </div>
-                              </div>
-                            )}
-                            <time>14:33 · Lido ✓✓</time>
-                          </div>
+                              )}
+                              <time>14:33 · Lido ✓✓</time>
+                            </div>
+                          )}
                         </>
                       )}
 
@@ -1105,26 +1217,30 @@ export default function AvanciniSyncPage() {
                             <span>⚡ {currentAgent.chat.triggerTime}</span>
                           </div>
 
-                          <div className="chat-bubble ai">
-                            <div className="bubble-ai-meta">
-                              <span className="bubble-author">{currentAgent.name}</span>
-                              <span className="ai-verified-badge">Especialista</span>
-                            </div>
-                            <p>{currentAgent.chat.aiFollowupText}</p>
-                            <time>16:50 · Lido ✓✓</time>
-                          </div>
+                          {simStage === 2 && (
+                            <>
+                              <div className="chat-bubble ai">
+                                <div className="bubble-ai-meta">
+                                  <span className="bubble-author">{currentAgent.name}</span>
+                                  <span className="ai-verified-badge">Especialista</span>
+                                </div>
+                                <p>{currentAgent.chat.aiFollowupText}</p>
+                                <time>16:50 · Lido ✓✓</time>
+                              </div>
 
-                          <div className="chat-bubble client">
-                            <span className="bubble-author">Cliente</span>
-                            <p>{currentAgent.chat.clientReplyText}</p>
-                            <time>16:52</time>
-                          </div>
+                              <div className="chat-bubble client">
+                                <span className="bubble-author">Cliente</span>
+                                <p>{currentAgent.chat.clientReplyText}</p>
+                                <time>16:52</time>
+                              </div>
 
-                          {currentAgent.chat.recoveredCard && (
-                            <div className="chat-recovery-celebration">
-                              <span className="celebration-badge">{currentAgent.chat.recoveredCard.title}</span>
-                              <p>{currentAgent.chat.recoveredCard.value}</p>
-                            </div>
+                              {currentAgent.chat.recoveredCard && (
+                                <div className="chat-recovery-celebration">
+                                  <span className="celebration-badge">{currentAgent.chat.recoveredCard.title}</span>
+                                  <p>{currentAgent.chat.recoveredCard.value}</p>
+                                </div>
+                              )}
+                            </>
                           )}
                         </>
                       )}
@@ -1489,13 +1605,19 @@ export default function AvanciniSyncPage() {
             const isFeatured = plan.featured;
             return (
               <article
-                className={`plan-compact-card ${isFeatured ? "featured" : ""}`}
+                className={`plan-compact-card sync-compact-card ${isFeatured ? "featured is-featured-hero" : ""}`}
                 key={plan.id}
               >
-                {isFeatured && <span className="plan-compact-badge">{plan.badge || "MAIS ESCOLHIDO"}</span>}
-
-                <span className="plan-compact-kicker">{plan.kicker}</span>
-                <h3 className="plan-compact-title">{plan.name}</h3>
+                <div className="plan-card-header-clean">
+                  {isFeatured && (
+                    <div className="plan-featured-tag-pill">
+                      <span className="featured-tag-spark" aria-hidden="true">🔥</span>
+                      <span>{plan.badge ? plan.badge.replace(/^🔥\s*/, "") : "MAIS ESCOLHIDO"}</span>
+                    </div>
+                  )}
+                  <span className="plan-compact-kicker">{plan.kicker}</span>
+                  <h3 className="plan-compact-title">{plan.name}</h3>
+                </div>
                 <p className="plan-compact-ideal"><strong>Para quem é:</strong> {plan.idealFor}</p>
 
                 <div className="plan-compact-pitch">

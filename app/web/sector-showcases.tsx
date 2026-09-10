@@ -2093,14 +2093,15 @@ import VerticePage from "../vertice/page";
 import MotoraPage from "../motora/page";
 import CoraPage from "../cora/page";
 
-export function SectorShowcasePage({ type }: { type: SectorShowcaseType }) {
-  if (type === "cars") return <MotoraPage />;
-  if (type === "fashion") return <VerticePage />;
-  if (type === "realestate" || type === "realtor") return <CoraPage />;
-  if (type === "tapecar") return <TapeCarShowcase />;
-  if (type === "dentistry") return <DentistryShowcase />;
-  if (type === "law") return <LawShowcase />;
-  if (type === "salon") return <SalonShowcase />;
-  if (type === "solar") return <SolarShowcase />;
+export function SectorShowcasePage({ type, sector }: { type?: SectorShowcaseType; sector?: SectorShowcaseType }) {
+  const t = type || sector;
+  if (t === "cars") return <MotoraPage />;
+  if (t === "fashion") return <VerticePage />;
+  if (t === "realestate" || t === "realtor") return <CoraPage />;
+  if (t === "tapecar") return <TapeCarShowcase />;
+  if (t === "dentistry") return <DentistryShowcase />;
+  if (t === "law") return <LawShowcase />;
+  if (t === "salon") return <SalonShowcase />;
+  if (t === "solar") return <SolarShowcase />;
   return <AutonomousShowcase />;
 }

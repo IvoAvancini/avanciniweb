@@ -1,0 +1,563 @@
+/* ─── os-hub-card.css ─── portal cards premium — responsivo & simétrico ─── */
+
+/* ── HERO EDITORIAL COMPACTO & PRESTÍGIO ── */
+.hub-hero-header {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  padding: clamp(0.5rem, 1.2vh, 1rem) clamp(1rem, 3vw, 2rem) clamp(0.4rem, 1vh, 0.75rem);
+  flex-shrink: 0;
+}
+
+.hub-hero-title {
+  font-size: clamp(1.05rem, 2vw, 1.55rem);
+  font-weight: 800;
+  line-height: 1.25;
+  letter-spacing: -0.025em;
+  color: #ffffff;
+  margin: 0 0 0.3rem;
+}
+
+.hub-hero-title .text-dash {
+  background: linear-gradient(135deg, #22c55e, #86efac);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hub-hero-title .text-blend {
+  background: linear-gradient(90deg, #22c55e 0%, #06b6d4 50%, #38bdf8 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  font-weight: 850;
+  display: inline-block;
+  margin: 0 0.12em;
+}
+
+.hub-hero-title .text-sync {
+  background: linear-gradient(135deg, #38bdf8, #7dd3fc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hub-hero-sub {
+  font-size: clamp(0.72rem, 1vw, 0.84rem);
+  color: rgba(255, 255, 255, 0.5);
+  margin: 0;
+  letter-spacing: 0.01em;
+}
+
+/* ── TWIN STAGE: DOIS PORTÕES LADO A LADO ── */
+.hub-twin-stage {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  min-height: 0;
+  overflow: hidden;
+  position: relative;
+  z-index: 5;
+  padding: 0 clamp(0.75rem, 2vw, 2rem) clamp(0.75rem, 1.5vh, 1.25rem);
+  gap: 0;
+}
+
+/* ── PORTAL CARD BASE ── */
+.hub-portal-card {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  padding: clamp(1rem, 1.8vw, 1.8rem) clamp(1.2rem, 2vw, 2.2rem) clamp(0.9rem, 1.5vw, 1.4rem);
+  gap: 0;
+  border-radius: 1.2rem;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  background: rgba(15, 23, 42, 0.35);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition:
+    flex 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.4s ease,
+    filter 0.4s ease,
+    border-color 0.4s ease,
+    background 0.4s ease,
+    transform 0.4s ease;
+  will-change: flex, opacity, transform;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Hover no Desktop: expande levemente */
+@media (hover: hover) {
+  .hub-portal-card.portal-dash:hover,
+  .hub-portal-card.portal-dash.is-active {
+    flex: 1.12;
+    border-color: rgba(34, 197, 94, 0.35);
+    background: rgba(20, 35, 25, 0.45);
+    box-shadow: 0 12px 40px -10px rgba(34, 197, 94, 0.18);
+  }
+  .hub-portal-card.portal-sync:hover,
+  .hub-portal-card.portal-sync.is-active {
+    flex: 1.12;
+    border-color: rgba(56, 189, 248, 0.35);
+    background: rgba(15, 30, 45, 0.45);
+    box-shadow: 0 12px 40px -10px rgba(56, 189, 248, 0.18);
+  }
+  .hub-portal-card.is-faded {
+    flex: 0.88;
+    opacity: 0.55;
+    filter: saturate(0.45) brightness(0.88);
+  }
+}
+
+/* Auréola ambiente interna */
+.portal-aura {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+  z-index: 0;
+  will-change: opacity;
+}
+@media (hover: hover) {
+  .hub-portal-card.is-active .portal-aura { opacity: 1; }
+}
+.aura-dash { background: radial-gradient(ellipse at 50% 0%, rgba(34, 197, 94, 0.2) 0%, transparent 70%); }
+.aura-sync { background: radial-gradient(ellipse at 50% 0%, rgba(56, 189, 248, 0.2) 0%, transparent 70%); }
+
+/* ── CABEÇALHO DO CARD ── */
+.portal-header {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.portal-badge-row {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.55rem;
+}
+
+/* Counter animado */
+.counter {
+  font-size: clamp(1.5rem, 2.5vw, 2.3rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  font-feature-settings: "tnum";
+}
+.hub-portal-card.portal-dash .counter {
+  background: linear-gradient(135deg, #22c55e, #86efac);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 10px rgba(34, 197, 94, 0.4));
+}
+.hub-portal-card.portal-sync .counter {
+  background: linear-gradient(135deg, #38bdf8, #7dd3fc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 10px rgba(56, 189, 248, 0.4));
+}
+
+/* Kicker badge */
+.portal-kicker {
+  display: flex;
+  align-items: center;
+  gap: 0.42rem;
+  font-size: clamp(0.56rem, 0.85vw, 0.64rem);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.kicker-dash { color: #86efac; }
+.kicker-sync { color: #7dd3fc; }
+.kicker-extra { color: rgba(255, 255, 255, 0.45); font-weight: 600; }
+
+.kicker-dot {
+  position: relative;
+  display: inline-flex;
+  width: 9px; height: 9px;
+  flex-shrink: 0;
+}
+.kicker-dot-ping {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  animation: ping 1.8s ease-in-out infinite;
+  opacity: 0.6;
+}
+.kicker-dot-core {
+  position: absolute;
+  inset: 1.5px;
+  border-radius: 50%;
+}
+.dot-dash .kicker-dot-ping, .dot-dash .kicker-dot-core { background: #22c55e; }
+.dot-sync .kicker-dot-ping, .dot-sync .kicker-dot-core { background: #38bdf8; }
+
+@keyframes ping {
+  0%   { transform: scale(1);   opacity: 0.7; }
+  70%  { transform: scale(1.9); opacity: 0; }
+  100% { transform: scale(1.9); opacity: 0; }
+}
+
+/* Tech pill */
+.portal-tech-pill {
+  font-size: clamp(0.52rem, 0.7vw, 0.58rem);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.6);
+  white-space: nowrap;
+}
+
+/* Métrica complementar simétrica nos 2 cards */
+.extra-metric-row {
+  margin-bottom: 0.5rem;
+  min-height: 24px;
+  display: flex;
+  align-items: center;
+}
+.extra-metric {
+  font-size: clamp(0.9rem, 1.4vw, 1.25rem) !important;
+  font-weight: 750;
+  letter-spacing: -0.02em;
+}
+
+/* Nome do produto */
+.portal-product-name {
+  font-size: clamp(1.4rem, 2.2vw, 2.1rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  margin: 0 0 0.4rem;
+  color: #fff;
+}
+.name-dash { color: #22c55e; }
+.name-sync { color: #38bdf8; }
+
+/* Tagline */
+.portal-tagline {
+  font-size: clamp(0.7rem, 0.92vw, 0.84rem);
+  color: rgba(255, 255, 255, 0.56);
+  line-height: 1.5;
+  margin: 0 0 0.8rem;
+  max-width: 480px;
+}
+
+/* ── DIVISOR INTERNO ── */
+.portal-divider {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin-bottom: 0.65rem;
+  flex-shrink: 0;
+}
+.divider-line { flex: 1; height: 1px; background: rgba(255, 255, 255, 0.08); }
+.divider-label {
+  font-size: 0.55rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.35);
+  white-space: nowrap;
+}
+
+/* ── GRID DE RECURSOS (BENTO TILES) ── */
+.portal-features-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.35rem;
+  margin-bottom: 0.8rem;
+}
+.portal-feat {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.42rem;
+  padding: 0.4rem 0.55rem;
+  border-radius: 0.5rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: background 0.25s ease, border-color 0.25s ease, transform 0.2s ease;
+}
+@media (hover: hover) {
+  .hub-portal-card.is-active .portal-feat {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+  .portal-feat:hover { transform: translateY(-1px); }
+}
+.feat-emoji { font-size: 0.82rem; line-height: 1.35; flex-shrink: 0; }
+.feat-text { display: flex; flex-direction: column; gap: 0.02rem; min-width: 0; }
+.feat-text strong {
+  font-size: clamp(0.6rem, 0.8vw, 0.68rem);
+  font-weight: 700;
+  color: #ffffff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.feat-text span {
+  font-size: clamp(0.54rem, 0.72vw, 0.6rem);
+  color: rgba(255, 255, 255, 0.42);
+  line-height: 1.35;
+}
+
+/* ── CTA ENTER BUTTON ── */
+.portal-enter-cta {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: auto;
+  padding: 0.65rem 1.2rem;
+  border-radius: 0.7rem;
+  font-size: clamp(0.72rem, 0.95vw, 0.82rem);
+  font-weight: 750;
+  letter-spacing: 0.03em;
+  overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+  color: #fff;
+  flex-shrink: 0;
+  min-height: 44px;
+  -webkit-tap-highlight-color: transparent;
+}
+@media (hover: hover) {
+  .hub-portal-card:hover .portal-enter-cta { transform: translateY(-2px); }
+}
+.cta-dash {
+  background: linear-gradient(135deg, rgba(34, 197, 94, 0.32), rgba(34, 197, 94, 0.12));
+  border: 1px solid rgba(34, 197, 94, 0.4);
+  box-shadow: 0 0 16px rgba(34, 197, 94, 0.15);
+}
+.cta-sync {
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.32), rgba(56, 189, 248, 0.12));
+  border: 1px solid rgba(56, 189, 248, 0.4);
+  box-shadow: 0 0 16px rgba(56, 189, 248, 0.15);
+}
+.cta-label { position: relative; z-index: 1; }
+
+/* Canto decorativo */
+.portal-corner-accent {
+  position: absolute;
+  bottom: -20px; right: -20px;
+  width: 130px; height: 130px;
+  border-radius: 9999px;
+  opacity: 0.05;
+  filter: blur(45px);
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+@media (hover: hover) {
+  .hub-portal-card.is-active .portal-corner-accent { opacity: 0.12; }
+}
+.accent-dash { background: #22c55e; }
+.accent-sync { background: #38bdf8; }
+
+/* ── SEPARADOR VERTICAL INTERATIVO "OS" ── */
+.hub-vertical-sep {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 44px;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 5;
+  padding: 1rem 0;
+  transition: transform 0.4s ease;
+}
+.sep-line {
+  flex: 1;
+  width: 1px;
+  background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.12), transparent);
+  min-height: 50px;
+  transition: background 0.3s ease;
+}
+.sep-node {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  flex-shrink: 0;
+  transition: all 0.35s ease;
+}
+.sep-glow {
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  filter: blur(6px);
+  pointer-events: none;
+}
+.sep-symbol {
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.45);
+  transition: color 0.35s ease;
+}
+
+/* Reatividade do separador ao hover */
+.hub-vertical-sep.focus-dash .sep-node {
+  border-color: rgba(34, 197, 94, 0.5);
+  box-shadow: 0 0 16px rgba(34, 197, 94, 0.3);
+  transform: scale(1.08);
+}
+.hub-vertical-sep.focus-dash .sep-glow {
+  opacity: 0.7;
+  background: rgba(34, 197, 94, 0.35);
+}
+.hub-vertical-sep.focus-dash .sep-symbol {
+  color: #4ade80;
+}
+
+.hub-vertical-sep.focus-sync .sep-node {
+  border-color: rgba(56, 189, 248, 0.5);
+  box-shadow: 0 0 16px rgba(56, 189, 248, 0.3);
+  transform: scale(1.08);
+}
+.hub-vertical-sep.focus-sync .sep-glow {
+  opacity: 0.7;
+  background: rgba(56, 189, 248, 0.35);
+}
+.hub-vertical-sep.focus-sync .sep-symbol {
+  color: #7dd3fc;
+}
+
+/* ═══════════════════════════════════════════════════
+   RESPONSIVO — TABLET (≤ 1024px)
+   ═══════════════════════════════════════════════════ */
+@media (max-width: 1024px) {
+  .hub-hero-header { padding: 0.6rem 1rem 0.4rem; }
+  .hub-twin-stage { padding: 0 1rem 1rem; }
+  .portal-features-grid { gap: 0.28rem; }
+  .portal-feat { padding: 0.35rem 0.45rem; }
+  .portal-tagline { font-size: 0.74rem; }
+}
+
+/* ═══════════════════════════════════════════════════
+   RESPONSIVO — MOBILE (≤ 768px)
+   Empilha cards, sticky island switch e rolagem fluida
+   ═══════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+  .os-hub-root {
+    position: relative !important;
+    overflow-y: auto !important;
+    height: auto !important;
+    max-height: none !important;
+    min-height: 100dvh;
+  }
+
+  .hub-hero-header {
+    padding: 1.2rem 1.2rem 0.8rem;
+    text-align: left;
+  }
+  .hub-hero-title {
+    font-size: 1.35rem;
+    line-height: 1.3;
+  }
+  .hub-hero-sub {
+    font-size: 0.82rem;
+  }
+
+  .hub-twin-stage {
+    flex-direction: column;
+    overflow: visible;
+    min-height: auto;
+    padding: 0 1rem 2rem;
+    gap: 1.2rem;
+  }
+
+  .hub-portal-card {
+    flex: none !important;
+    opacity: 1 !important;
+    filter: none !important;
+    min-height: auto;
+    padding: 1.4rem 1.2rem 1.2rem;
+    border-radius: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    scroll-margin-top: 65px; /* Para scrollIntoView parar no lugar certo */
+  }
+
+  .hub-portal-card.portal-dash {
+    border-top: 2px solid rgba(34, 197, 94, 0.4);
+    background: rgba(20, 30, 24, 0.5);
+  }
+  .hub-portal-card.portal-sync {
+    border-top: 2px solid rgba(56, 189, 248, 0.4);
+    background: rgba(16, 26, 40, 0.5);
+  }
+
+  .portal-aura { opacity: 0.55; }
+
+  /* Separador horizontal no mobile */
+  .hub-vertical-sep {
+    flex-direction: row;
+    width: 100%;
+    height: 32px;
+    padding: 0 1rem;
+    gap: 0.8rem;
+  }
+  .sep-line {
+    flex: 1;
+    width: auto;
+    height: 1px;
+    min-height: unset;
+    background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.15), transparent);
+  }
+  .sep-node {
+    width: 30px; height: 30px;
+  }
+
+  .portal-features-grid {
+    grid-template-columns: 1fr;
+    gap: 0.35rem;
+  }
+
+  .portal-tagline { max-width: 100%; }
+  .portal-enter-cta { width: 100%; justify-content: center; }
+}
+
+/* ═══════════════════════════════════════════════════
+   RESPONSIVO — MOBILE PEQUENO (≤ 480px)
+   ═══════════════════════════════════════════════════ */
+@media (max-width: 480px) {
+  .hub-portal-card { padding: 1.1rem 0.95rem 1rem; }
+  .portal-badge-row { gap: 0.4rem; }
+  .portal-tech-pill { display: none; }
+}
+
+/* ═══════════════════════════════════════════════════
+   ACESSIBILIDADE — prefers-reduced-motion
+   ═══════════════════════════════════════════════════ */
+@media (prefers-reduced-motion: reduce) {
+  .hub-portal-card,
+  .portal-aura,
+  .portal-enter-cta,
+  .portal-feat,
+  .portal-corner-accent,
+  .sep-node {
+    transition: none !important;
+    animation: none !important;
+  }
+  .kicker-dot-ping { animation: none !important; }
+}
