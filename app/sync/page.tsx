@@ -60,8 +60,8 @@ const LivingArrow = ({ size = 12, className = "" }: { size?: number; className?:
 );
 
 const syncHeroAudiences = [
-  "CLÍNICAS & CONSULTÓRIOS",
-  "ESCRITÓRIOS DE ADVOCACIA",
+  "CLÍNICAS & SAÚDE",
+  "ADVOCACIA & JURÍDICO",
   "IMOBILIÁRIAS & CORRETORES",
   "LOJAS & E-COMMERCE",
   "EMPRESAS & PRESTADORES",
@@ -507,13 +507,12 @@ const simplifiedPlans: SyncPlanSimple[] = [
     name: "Chatbot de Fluxo Guiado",
     badge: "AUTOMAÇÃO EXPRESSA",
     kicker: "RESPOSTAS IMEDIATAS & TRIAGEM OBJETIVA",
-    idealFor: "Empresas que recebem as mesmas dúvidas todo dia e precisam de triagem rápida sem IA generativa.",
-    pitch: "Elimina filas com envio instantâneo de cardápio, catálogo, tabela de preços e transferência automática de setor.",
+    idealFor: "Empresas com dúvidas repetitivas que precisam de triagem rápida sem IA generativa.",
+    pitch: "Elimina filas com envio instantâneo de catálogo, tabela de preços e transferência automática de setor.",
     features: [
       { title: "Menu Ágil de Opções (1 a 5)", desc: "O cliente escolhe o assunto e recebe a resposta oficial sem espera." },
-      { title: "Envio de PDF, Fotos & Catálogo", desc: "Dispara tabelas, rotas e material comercial no mesmo segundo." },
-      { title: "FAQ & Horários Automatizados", desc: "Resolve 70% das dúvidas frequentes mesmo de madrugada." },
-      { title: "Transbordo Direto no WhatsApp", desc: "Transfere para o atendente com histórico preservado." },
+      { title: "Envio de Catálogo, PDFs & Fotos", desc: "Dispara tabelas, rotas e material comercial no mesmo segundo." },
+      { title: "Transbordo com Histórico Preservado", desc: "Transfere para o atendente humano mantendo toda a conversa." },
     ],
     payoff: "💡 Desafogue sua equipe das perguntas repetitivas com ativação rápida em 24h.",
     deliverableBadge: "⚡ Setup em 24h · Conexão QR Code · Respostas Literais",
@@ -525,12 +524,12 @@ const simplifiedPlans: SyncPlanSimple[] = [
     name: "Operação IA Essencial",
     badge: "🔥 MAIS ESCOLHIDO",
     kicker: "IA GENERATIVA HUMANIZADA 24/7",
-    idealFor: "Clínicas, consultórios e escritórios que perdem clientes à noite e no final de semana.",
-    pitch: "Atendente virtual com tom humanizado que acolhe, tira dúvidas e agenda consultas na sua grade em tempo real.",
+    idealFor: "Clínicas, consultórios e escritórios que precisam acolher e agendar horários 24h.",
+    pitch: "Atendente virtual humanizado que acolhe clientes, ouve áudios, tira dúvidas e marca consultas no Google Calendar.",
     features: [
       { title: "Conversação Natural & Empática", desc: "Entende gírias, áudios longos e fotos de documentos com fluidez." },
-      { title: "Google Agenda em Tempo Real", desc: "Consulta horários vagos e marca compromissos sem choque de horário." },
-      { title: "Lembretes Ativos de Presença", desc: "Dispara confirmação na véspera com opção de reagendamento para reduzir faltas e horários ociosos." },
+      { title: "Google Agenda em Tempo Real", desc: "Consulta horários vagos e marca compromissos sem choque de grade." },
+      { title: "Lembretes Ativos de Presença", desc: "Dispara confirmação na véspera com opção de reagendamento para reduzir faltas." },
       { title: "Transbordo com Resumo Pronto", desc: "Encaminha para você com a ficha mastigada do que o lead precisa." },
     ],
     payoff: "💎 Recupere clientes fora do horário comercial enquanto o concorrente está offline.",
@@ -543,15 +542,14 @@ const simplifiedPlans: SyncPlanSimple[] = [
     name: "Operação Scale Pro",
     badge: "ALTA ESCALA",
     kicker: "CENTRAL CORPORATIVA MULTISSETOR",
-    idealFor: "Empresas com múltiplos profissionais, equipe comercial ou grande volume de anúncios pagos.",
+    idealFor: "Empresas com múltiplos atendentes, vários departamentos ou anúncios em escala.",
     pitch: "Multiagentes de IA especializados por setor (Vendas, Agendamento, Cobrança) e distribuição de fila humana.",
     features: [
       { title: "Multiagentes Especializados por Setor", desc: "IAs dedicadas: um agente para Vendas, um para Recepção e um para Suporte." },
       { title: "Fila Inteligente de Atendentes", desc: "Vários operadores no mesmo WhatsApp com divisão automática de leads." },
-      { title: "Painel de Métricas & Conversão", desc: "Relatórios de motivos de contato, horários de pico e conversão do time." },
-      { title: "Capacidade Prioritária para Ads", desc: "Infraestrutura reforçada para suportar picos de centenas de conversas." },
+      { title: "Painel de Métricas & Prioridade Ads", desc: "Infraestrutura reforçada para suportar picos de campanhas e conversão do time." },
     ],
-    payoff: "🚀 Uma estrutura multissetor preparada para atender múltiplos clientes simultaneamente com respostas rápidas e padronizadas.",
+    payoff: "🚀 Uma estrutura multissetor preparada para atender múltiplos clientes simultaneamente com respostas rápidas.",
     deliverableBadge: "⚡ Multiagentes · Gestão de Equipe · SLA Corporativo",
     ctaText: "Agendar Diagnóstico Scale Pro",
     featured: false,
@@ -564,84 +562,67 @@ const formatMoney = (val: number) =>
 const faqsCommercial = [
   {
     question: "O que é 'uso justo' (Fair Use) e como funciona na prática?",
-    answer: "É atendimento contínuo e sem estresse para o volume normal do dia a dia de clínicas, consultórios e escritórios — áudios, textos, marcações no Google Calendar e follow-ups à vontade. Você não precisa se preocupar com um contador de mensagens travando seu atendimento no meio do mês. A política de uso justo apenas previne disparos ilegais de spam em massa não autorizados.",
+    answer: "É atendimento contínuo e sem estresse para o volume normal do dia a dia da sua empresa — áudios, textos, marcações no Google Calendar e follow-ups à vontade, sem contador travando seu atendimento no meio do mês. A política apenas previne spam em massa não autorizado.",
   },
   {
     question: "Como funciona a contratação e o processo de implantação?",
-    answer: "Apresentamos uma demonstração prática focada no segmento do seu negócio para você ver a IA em ação. Em seguida, desenhamos a arquitetura do seu fluxo, calibramos as respostas com o manual da sua empresa e realizamos a conexão direta no seu WhatsApp via QR Code em poucos minutos.",
+    answer: "Apresentamos uma demonstração ao vivo para o seu nicho. Em seguida, mapeamos as regras da sua empresa, calibramos as respostas e realizamos a conexão direta no seu WhatsApp via QR Code em poucos minutos.",
   },
   {
     question: "Preciso trocar de número de WhatsApp ou contratar chip novo?",
-    answer: "Não! A IA conecta diretamente no número comercial que sua clínica ou empresa já utiliza hoje. Basta escanear um QR Code rápido pelo seu próprio WhatsApp no celular, exatamente como você faz no WhatsApp Web. Você não perde nenhum contato, histórico nem conversas anteriores.",
+    answer: "Não! A IA conecta diretamente no número comercial que sua empresa já utiliza hoje. Basta escanear um QR Code rápido pelo celular, exatamente como no WhatsApp Web, mantendo todos os contatos e conversas.",
   },
   {
     question: "Quando faz sentido escolher a Operação Scale Pro?",
-    answer: "A Operação Essencial já é 100% completa para 1 número de WhatsApp: agenda no Google Calendar, manda lembretes anti-falta, envia Pix, ouve áudios, faz follow-up e transfere para o responsável com resumo pronto da conversa. O Scale Pro faz sentido quando sua empresa cresce e passa a ter múltiplos setores (como separar comercial, financeiro e agendamento) e uma equipe com vários atendentes humanos precisando de distribuição automática de fila.",
+    answer: "A Operação Essencial já é 100% completa para 1 número de WhatsApp (agenda, lembretes, áudio, Pix e resumo). O Scale Pro é indicado quando sua empresa tem múltiplos departamentos e vários atendentes humanos precisando de roteamento de fila.",
   },
   {
     question: "A IA pode inventar dados, falar preços errados ou dar diagnósticos?",
-    answer: "De jeito nenhum! A inteligência artificial é calibrada estritamente com o manual de regras, serviços, valores e horários da sua empresa. Ela é expressamente proibida de dar diagnósticos médicos, inventar informações ou prometer descontos fora da tabela. Caso receba uma pergunta imprevista, ela informa com simpatia que vai encaminhar para você e notifica seu número na hora.",
+    answer: "De jeito nenhum! A IA segue estritamente o manual de regras, serviços e horários da sua empresa. Não dá diagnósticos e não inventa dados. Se houver pergunta imprevista, avisa com simpatia e transfere para você.",
   },
   {
     question: "A IA substitui os meus funcionários?",
-    answer: "O objetivo é potencializar a sua equipe, não substituí-la. A IA assume as tarefas repetitivas, como tirar dúvidas de serviços, conferir disponibilidade, marcar horários na agenda e atender à noite e nos finais de semana. Quando surge uma negociação complexa ou uma situação que exige empatia humana, ela passa o contato com o histórico mastigado para seu atendente fechar.",
+    answer: "Não, ela potencializa sua equipe. A IA assume tarefas repetitivas (dúvidas básicas, grade de horários e atendimento noturno) e passa as conversas mastigadas para seu time focar em fechar.",
   },
   {
     question: "Existe período de teste ou demonstração personalizada?",
-    answer: "Sim! Antes de qualquer contratação, realizamos uma simulação guiada no WhatsApp para o seu nicho. Você testa o tempo de resposta, o envio de agenda e a audição de áudios em tempo real.",
+    answer: "Sim! Antes de contratar, você testa a IA no seu WhatsApp com demonstração ao vivo no seu segmento.",
   },
 ];
 
-const syncIntegrations = [
+const coreSyncIntegrations = [
   {
     name: "Google Calendar",
-    category: "Agendas & Horários",
-    desc: "Sincronização em tempo real de dias livres, consultas e reuniões",
+    category: "AGENDA & COMPROMISSOS EM TEMPO REAL",
+    desc: "Sincronização bidirecional em tempo real. A IA consulta horários livres, agenda consultas ou reuniões e bloqueia a grade automaticamente sem choque de horários.",
     icon: "📅",
     color: "#38bdf8",
+    highlights: [
+      "Bloqueio automático de grade sem choque de horários",
+      "Lembretes anti-falta programados no WhatsApp",
+      "Sincronização com agendas individuais ou de equipe",
+    ],
   },
   {
     name: "WhatsApp Cloud API",
-    category: "Comunicação Oficial",
-    desc: "Conexão oficial via WhatsApp Cloud API homologada pela Meta, garantindo alta estabilidade e conformidade",
+    category: "COMUNICAÇÃO OFICIAL META",
+    desc: "Conexão oficial homologada pela Meta com estabilidade corporativa e criptografia de ponta a ponta. Atendimento contínuo mantendo o mesmo número que você já tem.",
     icon: "💬",
     color: "#22c55e",
+    highlights: [
+      "Mantém o número comercial atual sem troca de chip",
+      "Conexão estável e segura via QR Code em 5 minutos",
+      "Transbordo fluido para atendentes humanos no WhatsApp",
+    ],
   },
-  {
-    name: "Mercado Pago & Pix",
-    category: "Cobrança Instantânea",
-    desc: "Envio de chave Pix Copia e Cola e confirmação de pagamento",
-    icon: "💳",
-    color: "#009EE3",
-  },
-  {
-    name: "Hotmart & Kiwify",
-    category: "Vendas Digitais",
-    desc: "Recuperação automática de boletos e suporte pós-venda",
-    icon: "🚀",
-    color: "#f59e0b",
-  },
-  {
-    name: "Bling & Tiny ERP",
-    category: "Gestão & Pedidos",
-    desc: "Consulta de estoque, pedidos de clientes e emissão de notas",
-    icon: "📦",
-    color: "#10b981",
-  },
-  {
-    name: "Asana, Trello & Notion",
-    category: "Fluxo de Equipe",
-    desc: "Criação de tarefas e resumos automáticos dos atendimentos",
-    icon: "📋",
-    color: "#6366f1",
-  },
-  {
-    name: "Webhooks & Zapier",
-    category: "Automação Universal",
-    desc: "Integração aberta com mais de 2.000 sistemas de CRM e gestão",
-    icon: "⚡",
-    color: "#ec4899",
-  },
+];
+
+const secondarySyncIntegrations = [
+  { name: "Mercado Pago & Pix", category: "Cobrança Instantânea", icon: "💳", desc: "Chave Pix Copia e Cola imediata no chat" },
+  { name: "Hotmart & Kiwify", category: "Vendas Digitais", icon: "🚀", desc: "Recuperação de boletos e pós-venda" },
+  { name: "Bling & Tiny ERP", category: "Gestão & Pedidos", icon: "📦", desc: "Consulta de estoque e confirmação de pedidos" },
+  { name: "Asana, Trello & Notion", category: "Organização", icon: "📋", desc: "Cards e resumos automáticos dos atendimentos" },
+  { name: "Webhooks & Zapier", category: "Automação Universal", icon: "⚡", desc: "Conexão aberta com mais de 2.000 sistemas de CRM" },
 ];
 
 export default function AvanciniSyncPage() {
@@ -657,20 +638,39 @@ export default function AvanciniSyncPage() {
   const [clientTicket, setClientTicket] = useState(800);
   const [missedWeekendLeads, setMissedWeekendLeads] = useState(3);
   const [simulating, setSimulating] = useState(false);
-  const [simStage, setSimStage] = useState<0 | 1 | 2>(2);
+  const [simStage, setSimStage] = useState<0 | 1 | 2 | 3>(3);
+  const simTimersRef = useRef<number[]>([]);
+
+  const clearSimTimers = () => {
+    simTimersRef.current.forEach((t) => window.clearTimeout(t));
+    simTimersRef.current = [];
+  };
 
   const runSimulation = (agentIdx: number) => {
+    clearSimTimers();
     setActiveSupervisorIndex(agentIdx);
     setSimulating(true);
     setSimStage(0);
-    window.setTimeout(() => {
+
+    const t1 = window.setTimeout(() => {
       setSimStage(1);
-      window.setTimeout(() => {
-        setSimStage(2);
-        setSimulating(false);
-      }, 1000);
-    }, 600);
+    }, 450);
+
+    const t2 = window.setTimeout(() => {
+      setSimStage(2);
+    }, 1500);
+
+    const t3 = window.setTimeout(() => {
+      setSimStage(3);
+      setSimulating(false);
+    }, 2350);
+
+    simTimersRef.current = [t1, t2, t3];
   };
+
+  useEffect(() => {
+    return () => clearSimTimers();
+  }, []);
 
   // Audio player demo states
   const [audioPlaying, setAudioPlaying] = useState(false);
@@ -945,8 +945,8 @@ export default function AvanciniSyncPage() {
               <span>Conversão Fora de Hora</span>
             </div>
             <div className="kpi-box">
-              <strong>R$ <AnimatedCounter target={0} /></strong>
-              <span>Horas Extras Gastas</span>
+              <strong><AnimatedCounter target={84000} prefix="+" /></strong>
+              <span>Conversas Analisadas</span>
             </div>
           </div>
 
@@ -1005,42 +1005,161 @@ export default function AvanciniSyncPage() {
                       </div>
                       <span className="spec-agent-tag">{currentAgent.name}</span>
                       <h4>Como o Chatbot com IA muda sua rotina:</h4>
-                      <p>Você foca no seu trabalho enquanto seu WhatsApp atende, tira dúvidas e agenda sem você precisar digitar nada.</p>
+                      <p>Você foca no seu trabalho enquanto seu WhatsApp acolhe, tira dúvidas e agenda sem você precisar digitar nada.</p>
                     </div>
 
-                    <div className="superpowers-grid">
-                      <div className="superpower-card">
-                        <span className="superpower-icon">⚡</span>
-                        <div className="superpower-body">
-                          <strong>Atendimento Contínuo 24/7 no WhatsApp</strong>
-                          <p>Responde prontamente inclusive de madrugada e nos finais de semana, acolhendo o cliente no momento exato em que ele busca sua empresa.</p>
+                    {/* Formato 1: Clínica & Saúde (Métricas + Passos de Grade) */}
+                    {currentAgent.id === "clinica" && (
+                      <div className="superpower-segment-panel segment-clinica">
+                        <div className="segment-metrics-highlight">
+                          <div className="seg-metric-chip">
+                            <span className="seg-chip-icon">📅</span>
+                            <div>
+                              <strong>Google Calendar</strong>
+                              <small>Grade em tempo real</small>
+                            </div>
+                          </div>
+                          <div className="seg-metric-chip">
+                            <span className="seg-chip-icon">⏰</span>
+                            <div>
+                              <strong>Anti-Falta Ativo</strong>
+                              <small>Lembretes 24h e 2h</small>
+                            </div>
+                          </div>
+                          <div className="seg-metric-chip">
+                            <span className="seg-chip-icon">🩺</span>
+                            <div>
+                              <strong>Sem Diagnóstico</strong>
+                              <small>Regras médicas estritas</small>
+                            </div>
+                          </div>
                         </div>
-                      </div>
 
-                      <div className="superpower-card">
-                        <span className="superpower-icon">🎙️</span>
-                        <div className="superpower-body">
-                          <strong>Ouve Áudios &amp; Responde Humanizado</strong>
-                          <p>Compreende áudios de qualquer tamanho com ruído de fundo e responde com naturalidade, sem robô chato.</p>
+                        <div className="segment-workflow-steps">
+                          <div className="seg-workflow-item">
+                            <span className="seg-step-num">01</span>
+                            <div className="seg-step-content">
+                              <strong>Checagem Autônoma de Grade</strong>
+                              <p>O paciente pede horário e a IA consulta dias e horários livres no Google Calendar sem choque de agenda.</p>
+                            </div>
+                          </div>
+                          <div className="seg-workflow-item">
+                            <span className="seg-step-num">02</span>
+                            <div className="seg-step-content">
+                              <strong>Escolha Direta no WhatsApp</strong>
+                              <p>Apresenta 3 opções práticas e reserva a consulta na hora com dados completos do paciente.</p>
+                            </div>
+                          </div>
+                          <div className="seg-workflow-item">
+                            <span className="seg-step-num">03</span>
+                            <div className="seg-step-content">
+                              <strong>Confirmação e Lembretes Automáticos</strong>
+                              <p>Dispara lembrete na véspera com confirmação em 1 clique para preencher horários ociosos.</p>
+                            </div>
+                          </div>
                         </div>
                       </div>
+                    )}
 
-                      <div className="superpower-card">
-                        <span className="superpower-icon">📅</span>
-                        <div className="superpower-body">
-                          <strong>Agenda Direto no Google Calendar</strong>
-                          <p>Checa seus horários vagos, agenda sem conflito de grade e envia lembrete no WhatsApp para reduzir faltas.</p>
+                    {/* Formato 2: Advocacia & Consultoria (Áudio Focus + Ficha Prévia) */}
+                    {currentAgent.id === "advocacia" && (
+                      <div className="superpower-segment-panel segment-advocacia">
+                        <div className="advocacia-focus-card">
+                          <div className="focus-card-header">
+                            <span className="focus-icon">🎙️</span>
+                            <div>
+                              <strong>Audição de Áudios Longos &amp; Triagem Preliminar</strong>
+                              <small>Ouve áudios de qualquer tamanho com ruído de fundo e transcreve na hora</small>
+                            </div>
+                          </div>
+                          <p>O cliente fala à vontade pelo WhatsApp. A IA acolhe com empatia e extrai os fatos relevantes do caso para o advogado.</p>
                         </div>
-                      </div>
 
-                      <div className="superpower-card">
-                        <span className="superpower-icon">💰</span>
-                        <div className="superpower-body">
-                          <strong>Cabe no Bolso de Qualquer Empresa</strong>
-                          <p>Custa menos que um café por dia. Sem encargos trabalhistas, e se paga já no 1º cliente resgatado.</p>
+                        <div className="advocacia-dossier-preview">
+                          <span className="dossier-label">📋 FICHA PRONTA ENTREGUE NO WHATSAPP DO ADVOGADO:</span>
+                          <div className="dossier-row">
+                            <span>Área Jurídica:</span>
+                            <strong>Direito Trabalhista / Rescisão</strong>
+                          </div>
+                          <div className="dossier-row">
+                            <span>Demanda Identificada:</span>
+                            <strong>Cálculo rescisório e verbas pendentes</strong>
+                          </div>
+                          <div className="dossier-row">
+                            <span>Status da Triagem:</span>
+                            <strong className="text-success">Cliente qualificado aguardando retorno</strong>
+                          </div>
+                        </div>
+
+                        <div className="advocacia-stat-line">
+                          <span>⚡ <b>Economia real:</b> o advogado entra na conversa já sabendo o contexto sem perder tempo com triagem repetitiva.</span>
                         </div>
                       </div>
-                    </div>
+                    )}
+
+                    {/* Formato 3: Comércio & Serviços (Feature Grid + Banner de Eficiência) */}
+                    {currentAgent.id === "comercio" && (
+                      <div className="superpower-segment-panel segment-comercio">
+                        <div className="comercio-feature-grid">
+                          <div className="comercio-feat-box">
+                            <span className="feat-ico">📄</span>
+                            <strong>OCR de Arquivos &amp; Fotos</strong>
+                            <p>Lê pedidos, tabelas de medidas e comprovantes enviados pelo cliente.</p>
+                          </div>
+                          <div className="comercio-feat-box">
+                            <span className="feat-ico">💳</span>
+                            <strong>Chave Pix Copia e Cola</strong>
+                            <p>Gera o código Pix imediato com o valor exato para acelerar o pagamento.</p>
+                          </div>
+                          <div className="comercio-feat-box">
+                            <span className="feat-ico">📦</span>
+                            <strong>Status de Frete &amp; Pedido</strong>
+                            <p>Informa prazos de entrega e rastreio sem ninguém precisar parar para consultar.</p>
+                          </div>
+                        </div>
+
+                        <div className="comercio-kpi-banner">
+                          <div className="kpi-banner-item">
+                            <strong>90%</strong>
+                            <span>das dúvidas resolvidas de forma autônoma</span>
+                          </div>
+                          <div className="kpi-banner-divider" />
+                          <div className="kpi-banner-item">
+                            <strong>Zero</strong>
+                            <span>pedidos perdidos por demora no envio do Pix</span>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Formato 4: Imobiliária & Negócios (Comparativo Antes/Depois + Resgate de Vendas) */}
+                    {currentAgent.id === "imobiliaria" && (
+                      <div className="superpower-segment-panel segment-imobiliaria">
+                        <div className="imob-comparison-box">
+                          <div className="imob-comp-item before">
+                            <span className="comp-tag">SEM O SYNC</span>
+                            <strong>O vácuo das 24h</strong>
+                            <p>O cliente orça o imóvel ou serviço, diz que vai pensar, ninguém faz follow-up e o negócio é esquecido.</p>
+                          </div>
+                          <div className="imob-comp-item after">
+                            <span className="comp-tag gain">COM O SYNC</span>
+                            <strong>Retomada Educada</strong>
+                            <p>Após 24h sem resposta, a IA retoma a conversa com gentileza, tira dúvidas pendentes e agenda visita presencial.</p>
+                          </div>
+                        </div>
+
+                        <div className="imob-recovery-kpis">
+                          <div className="imob-kpi-pill">
+                            <span className="pill-dot" />
+                            <span><b>+38%</b> de propostas recuperadas no pós-atendimento</span>
+                          </div>
+                          <div className="imob-kpi-pill">
+                            <span className="pill-dot" />
+                            <span><b>Visitas presenciais</b> marcadas sem você perder tempo</span>
+                          </div>
+                        </div>
+                      </div>
+                    )}
 
                     <div className="superpowers-footer">
                       <MagneticButton
@@ -1053,7 +1172,7 @@ export default function AvanciniSyncPage() {
                       </MagneticButton>
                       <div className="superpowers-guarantee">
                         <span>🛡️</span>
-                        <span><strong>Conexão via QR Code em 5 min</strong> · Sem trocar de chip nem de número</span>
+                        <span><strong>Sem fidelidade</strong> · Conexão QR Code em 5 min no seu número</span>
                       </div>
                     </div>
                   </div>
@@ -1111,8 +1230,8 @@ export default function AvanciniSyncPage() {
                           <small>Reserva</small>
                         </div>
                       </div>
-                      <div className={`step-arrow ${simStage >= 2 ? "is-active" : ""}`}>➔</div>
-                      <div className={`step-node ${simStage >= 2 ? "is-active" : ""}`}>
+                      <div className={`step-arrow ${simStage >= 3 ? "is-active" : ""}`}>➔</div>
+                      <div className={`step-node ${simStage >= 3 ? "is-active" : ""}`}>
                         <span className="step-dot">4</span>
                         <div className="step-text">
                           <strong>Resumo</strong>
@@ -1127,13 +1246,13 @@ export default function AvanciniSyncPage() {
                         <div className="chat-bubble ai typing-indicator-bubble">
                           <div className="bubble-ai-meta">
                             <span className="bubble-author">{currentAgent.name}</span>
-                            <span className="ai-verified-badge">Processando</span>
+                            <span className="ai-verified-badge">digitando</span>
                           </div>
                           <div className="typing-dots-wrap">
                             <span className="typing-dot" />
                             <span className="typing-dot" />
                             <span className="typing-dot" />
-                            <small>Analisando mensagem e consultando disponibilidade...</small>
+                            <small>digitando resposta...</small>
                           </div>
                         </div>
                       )}
@@ -1175,7 +1294,7 @@ export default function AvanciniSyncPage() {
                             <time>14:32</time>
                           </div>
 
-                          {simStage === 2 && (
+                          {simStage >= 2 && (
                             <div className="chat-bubble ai">
                               <div className="bubble-ai-meta">
                                 <span className="bubble-author">{currentAgent.name}</span>
@@ -1183,7 +1302,7 @@ export default function AvanciniSyncPage() {
                               </div>
                               <p>{currentAgent.chat.aiResponse}</p>
 
-                              {currentAgent.chat.crmBadge && (
+                              {simStage >= 3 && currentAgent.chat.crmBadge && (
                                 <div className="chat-crm-card">
                                   <div className="crm-badge-top">
                                     <span>{currentAgent.chat.crmBadge.title}</span>
@@ -1210,7 +1329,7 @@ export default function AvanciniSyncPage() {
                             <time>14:32</time>
                           </div>
 
-                          {simStage === 2 && (
+                          {simStage >= 2 && (
                             <div className="chat-bubble ai">
                               <div className="bubble-ai-meta">
                                 <span className="bubble-author">{currentAgent.name}</span>
@@ -1218,29 +1337,33 @@ export default function AvanciniSyncPage() {
                               </div>
                               <p>{currentAgent.chat.aiResponse}</p>
 
-                              <div className="chat-slots-container">
-                                {currentAgent.chat.slots?.map((slot, sIdx) => (
-                                  <div
-                                    key={sIdx}
-                                    className={`chat-slot-chip ${slot === currentAgent.chat.selectedSlot ? "selected" : ""}`}
-                                  >
-                                    <span>📅 {slot}</span>
-                                    {slot === currentAgent.chat.selectedSlot && <b>Horário reservado ✓</b>}
+                              {simStage >= 3 && (
+                                <>
+                                  <div className="chat-slots-container">
+                                    {currentAgent.chat.slots?.map((slot, sIdx) => (
+                                      <div
+                                        key={sIdx}
+                                        className={`chat-slot-chip ${slot === currentAgent.chat.selectedSlot ? "selected" : ""}`}
+                                      >
+                                        <span>📅 {slot}</span>
+                                        {slot === currentAgent.chat.selectedSlot && <b>Horário reservado ✓</b>}
+                                      </div>
+                                    ))}
                                   </div>
-                                ))}
-                              </div>
 
-                              {currentAgent.chat.confirmationCard && (
-                                <div className="chat-calendar-card">
-                                  <div className="cal-card-top">
-                                    <span>{currentAgent.chat.confirmationCard.title}</span>
-                                  </div>
-                                  <div className="cal-card-body">
-                                    <strong>🩺 {currentAgent.chat.confirmationCard.doctor}</strong>
-                                    <p>🗓️ {currentAgent.chat.confirmationCard.date}</p>
-                                    <small>🔔 {currentAgent.chat.confirmationCard.reminder}</small>
-                                  </div>
-                                </div>
+                                  {currentAgent.chat.confirmationCard && (
+                                    <div className="chat-calendar-card">
+                                      <div className="cal-card-top">
+                                        <span>{currentAgent.chat.confirmationCard.title}</span>
+                                      </div>
+                                      <div className="cal-card-body">
+                                        <strong>🩺 {currentAgent.chat.confirmationCard.doctor}</strong>
+                                        <p>🗓️ {currentAgent.chat.confirmationCard.date}</p>
+                                        <small>🔔 {currentAgent.chat.confirmationCard.reminder}</small>
+                                      </div>
+                                    </div>
+                                  )}
+                                </>
                               )}
                               <time>14:33 · <span className="wa-check-blue">✓✓</span></time>
                             </div>
@@ -1264,7 +1387,7 @@ export default function AvanciniSyncPage() {
                             <time>14:32</time>
                           </div>
 
-                          {simStage === 2 && (
+                          {simStage >= 2 && (
                             <div className="chat-bubble ai">
                               <div className="bubble-ai-meta">
                                 <span className="bubble-author">{currentAgent.name}</span>
@@ -1272,7 +1395,7 @@ export default function AvanciniSyncPage() {
                               </div>
                               <p>{currentAgent.chat.aiResponse}</p>
 
-                              {currentAgent.chat.pixCard && (
+                              {simStage >= 3 && currentAgent.chat.pixCard && (
                                 <div className="chat-pix-card">
                                   <div className="pix-card-top">
                                     <span>{currentAgent.chat.pixCard.title}</span>
@@ -1309,7 +1432,7 @@ export default function AvanciniSyncPage() {
                             <span>⚡ {currentAgent.chat.triggerTime}</span>
                           </div>
 
-                          {simStage === 2 && (
+                          {simStage >= 2 && (
                             <>
                               <div className="chat-bubble ai">
                                 <div className="bubble-ai-meta">
@@ -1320,17 +1443,21 @@ export default function AvanciniSyncPage() {
                                 <time>16:50 · <span className="wa-check-blue">✓✓</span></time>
                               </div>
 
-                              <div className="chat-bubble client">
-                                <span className="bubble-author">Cliente</span>
-                                <p>{currentAgent.chat.clientReplyText}</p>
-                                <time>16:52</time>
-                              </div>
+                              {simStage >= 3 && (
+                                <>
+                                  <div className="chat-bubble client">
+                                    <span className="bubble-author">Cliente</span>
+                                    <p>{currentAgent.chat.clientReplyText}</p>
+                                    <time>16:52</time>
+                                  </div>
 
-                              {currentAgent.chat.recoveredCard && (
-                                <div className="chat-recovery-celebration">
-                                  <span className="celebration-badge">{currentAgent.chat.recoveredCard.title}</span>
-                                  <p>{currentAgent.chat.recoveredCard.value}</p>
-                                </div>
+                                  {currentAgent.chat.recoveredCard && (
+                                    <div className="chat-recovery-celebration">
+                                      <span className="celebration-badge">{currentAgent.chat.recoveredCard.title}</span>
+                                      <p>{currentAgent.chat.recoveredCard.value}</p>
+                                    </div>
+                                  )}
+                                </>
                               )}
                             </>
                           )}
@@ -1365,31 +1492,68 @@ export default function AvanciniSyncPage() {
         </div>
       </section>
 
-      {/* 1.5 FAIXA DE INTEGRAÇÕES E ECOSSISTEMA COMPATÍVEL */}
+      {/* 1.5 FAIXA DE INTEGRAÇÕES E ECOSSISTEMA COMPATÍVEL (DUAS CAMADAS) */}
       <section className="sync-integrations-section" id="integracoes" aria-labelledby="integrations-title">
         <div className="sync-integrations-container">
           <header className="integrations-header">
             <span className="integrations-kicker">ECOSSISTEMA CONECTADO</span>
             <h2 id="integrations-title">Integrado às ferramentas que você já usa no dia a dia</h2>
             <p>
-              A IA da Avancini Sync não trabalha isolada: ela sincroniza com sua agenda, consulta sistemas de gestão e envia avisos em tempo real para sua equipe.
+              A IA da Avancini Sync não trabalha isolada: conecta diretamente à sua agenda oficial e comunica com as principais ferramentas do mercado.
             </p>
           </header>
 
-          <div className="integrations-grid">
-            {syncIntegrations.map((tool, idx) => (
-              <div className="integration-card" key={idx}>
-                <div className="integration-icon-wrap" style={{ borderColor: `${tool.color}33`, background: `${tool.color}15` }}>
-                  <span className="integration-emoji">{tool.icon}</span>
+          <div className="integrations-two-tier">
+            {/* Camada 1: Integrações Universais em Cards Grandes Destacados */}
+            <div className="integrations-core-grid">
+              {coreSyncIntegrations.map((tool, idx) => (
+                <div className="integration-core-card" key={idx}>
+                  <div className="core-card-header">
+                    <div
+                      className="core-card-icon"
+                      style={{ borderColor: `${tool.color}44`, background: `${tool.color}15`, color: tool.color }}
+                    >
+                      <span>{tool.icon}</span>
+                    </div>
+                    <div className="core-card-titles">
+                      <span className="core-card-badge">{tool.category}</span>
+                      <h3>{tool.name}</h3>
+                    </div>
+                  </div>
+                  <p className="core-card-desc">{tool.desc}</p>
+                  <ul className="core-card-highlights">
+                    {tool.highlights.map((item, hIdx) => (
+                      <li key={hIdx}>
+                        <span>✓</span> {item}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-                <div className="integration-texts">
-                  <span className="integration-cat">{tool.category}</span>
-                  <strong>{tool.name}</strong>
-                  <p>{tool.desc}</p>
-                </div>
-                <span className="integration-status-dot" style={{ backgroundColor: tool.color }} />
+              ))}
+            </div>
+
+            {/* Camada 2: Bloco Secundário Menor para Integrações Especializadas */}
+            <div className="integrations-secondary-block">
+              <div className="secondary-block-header">
+                <span>PLATAFORMAS &amp; INTEGRAÇÕES NICHADAS</span>
+                <small>Conectividade rápida com seu fluxo atual</small>
               </div>
-            ))}
+              <div className="secondary-integrations-grid">
+                {secondarySyncIntegrations.map((tool, idx) => (
+                  <div className="secondary-integration-pill" key={idx}>
+                    <span className="sec-icon">{tool.icon}</span>
+                    <div className="sec-info">
+                      <strong>{tool.name}</strong>
+                      <small>{tool.desc}</small>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <p className="integrations-on-demand-note">
+                <span className="note-pulse">●</span>
+                <span><strong>E mais integrações sob demanda:</strong> conectamos a qualquer CRM, ERP ou sistema proprietário com API aberta via Webhooks.</span>
+              </p>
+            </div>
           </div>
 
           <div className="integrations-footer-badge">
@@ -1572,13 +1736,13 @@ export default function AvanciniSyncPage() {
               className="sync-roi-cta"
               onClick={() => openLead(`Quero parar de perder clientes fora do horário. Meu ticket é de R$ ${clientTicket} e quero estruturar o atendimento da Avancini Sync.`)}
             >
-              ESTRUTURAR ATENDIMENTO 24/7 NA MINHA EMPRESA ↗
+              <span>ESTRUTURAR ATENDIMENTO 24/7 NA MINHA EMPRESA</span> <LivingArrow size={12} />
             </button>
 
             <div className="roi-trust-badges">
-              <span>👥 <b>+84.000</b> conversas analisadas</span>
-              <span>🛡️ <b>Setup com especialista</b></span>
-              <span>⚡ <b>Sem fidelidade forçada</b></span>
+              <span>🛡️ <b>Sem fidelidade</b> · Teste antes de contratar</span>
+              <span>📱 <b>QR Code em 5 min</b> · Mantém seu número</span>
+              <span>⚡ <b>Setup incluso</b> com especialista</span>
             </div>
           </div>
         </div>
@@ -1681,20 +1845,20 @@ export default function AvanciniSyncPage() {
           </p>
           <div className="assurance-perks-row">
             <div className="perk-chip">
-              <span className="perk-icon">⚡</span>
-              <span>Conexão Imediata via QR Code</span>
+              <span className="perk-icon">🛡️</span>
+              <span>Sem Fidelidade: Teste antes de contratar</span>
             </div>
             <div className="perk-chip">
-              <span className="perk-icon">🛡️</span>
-              <span>Demonstração Prática: Valide no seu WhatsApp</span>
+              <span className="perk-icon">📱</span>
+              <span>Conexão via QR Code em 5 min no seu número</span>
+            </div>
+            <div className="perk-chip">
+              <span className="perk-icon">⚡</span>
+              <span>Setup e calibração com especialista</span>
             </div>
             <div className="perk-chip">
               <span className="perk-icon">📅</span>
               <span>Google Agenda em Tempo Real</span>
-            </div>
-            <div className="perk-chip">
-              <span className="perk-icon">🤝</span>
-              <span>Calibração Guiada por Especialista</span>
             </div>
           </div>
         </div>
@@ -1847,8 +2011,8 @@ export default function AvanciniSyncPage() {
           <div className="final-orbit-glow" aria-hidden="true" />
           <AvanciniMark variant="sync" className="final-mark-symbol avancini-a-mark" />
           <span className="final-eyebrow">AVANCINI SYNC // FORÇA DE TRABALHO DIGITAL</span>
-          <h2>Pronto para automatizar o atendimento da sua empresa 24 horas por dia?</h2>
-          <p>Vamos entender a rotina do seu negócio e apresentar uma demonstração funcional com os agentes configurados sob medida para o seu fluxo.</p>
+          <h2>Sem fidelidade forçada. Teste a IA no seu WhatsApp antes de contratar.</h2>
+          <p>Demonstração ao vivo no seu WhatsApp em menos de 10 minutos. Veja na prática a velocidade de resposta e a sincronização com a sua agenda.</p>
           
           <div className="final-buttons-row">
             <button
@@ -1856,17 +2020,17 @@ export default function AvanciniSyncPage() {
               className="final-cta-main"
               onClick={() => openLead("solicitar demonstração da equipe multiagente de IA")}
             >
-              Solicitar Demonstração Gratuita <SyncArrow />
+              <span>Solicitar Demonstração Gratuita</span> <LivingArrow size={13} />
             </button>
             <a href="#planos" className="final-cta-secondary">
-              Rever planos e valores <SyncDownArrow />
+              <span>Rever planos e valores</span> <SyncDownArrow />
             </a>
           </div>
 
           <div className="final-proof-badges">
-            <span>✓ Setup e calibração inclusos</span>
-            <span>✓ Sem taxa de criação inicial</span>
-            <span>✓ Conexão via QR Code em minutos</span>
+            <span>✓ Sem fidelidade: teste antes de contratar</span>
+            <span>✓ Conexão via QR Code em 5 min no seu número</span>
+            <span>✓ Setup e calibração com especialista</span>
           </div>
         </div>
       </section>
