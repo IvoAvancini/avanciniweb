@@ -74,6 +74,45 @@ const SyncDownArrow = () => (
   </svg>
 );
 
+const syncAudiences = ["CLÍNICAS", "IMOBILIÁRIAS", "EMPRESAS", "ADVOGADOS", "OFICINAS", "COMÉRCIO"] as const;
+
+function SyncAudienceTypewriter() {
+  const [text, setText] = useState("");
+  const [audienceIndex, setAudienceIndex] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  useEffect(() => {
+    const currentWord = syncAudiences[audienceIndex];
+    const typingSpeed = isDeleting ? 40 : 85;
+
+    const timer = window.setTimeout(() => {
+      if (!isDeleting) {
+        if (text.length < currentWord.length) {
+          setText(currentWord.slice(0, text.length + 1));
+        } else {
+          window.setTimeout(() => setIsDeleting(true), 2000);
+        }
+      } else {
+        if (text.length > 0) {
+          setText(currentWord.slice(0, text.length - 1));
+        } else {
+          setIsDeleting(false);
+          setAudienceIndex((prev) => (prev + 1) % syncAudiences.length);
+        }
+      }
+    }, typingSpeed);
+
+    return () => window.clearTimeout(timer);
+  }, [text, isDeleting, audienceIndex]);
+
+  return (
+    <span className="hero-typewriter-dynamic">
+      <strong className="hero-typewriter-target">{text}</strong>
+      <span className="hero-typewriter-cursor" aria-hidden="true">|</span>
+    </span>
+  );
+}
+
 /* --------------------------------------------------------------------------
    CENTRAL DE ATENDIMENTO INTELIGENTE — SIMULAÇÃO INTERATIVA NO HERO
    -------------------------------------------------------------------------- */
@@ -830,9 +869,9 @@ export default function AvanciniSyncPage() {
         <div className="sync-hero-grid" aria-hidden="true" />
         
         <div className="sync-hero-copy">
-          <div className="sync-hero-badge-row">
-            <span className="sync-eyebrow"><i /> ATENDIMENTO IMEDIATO NO WHATSAPP</span>
-            <span className="sync-hero-live-pill"><i /> OPERAÇÃO 24/7 · RESPOSTA NA HORA</span>
+          <div className="hero-typewriter-badge">
+            <span className="hero-typewriter-pulse" />
+            <span>ATENDIMENTO INTELIGENTE NO WHATSAPP PARA <SyncAudienceTypewriter /></span>
           </div>
 
           <h1>Atendimento rápido, simpático e acolhedor.<br /><em>Sua empresa respondendo na hora, 24 horas por dia.</em></h1>
@@ -847,26 +886,6 @@ export default function AvanciniSyncPage() {
             <button type="button" onClick={() => openLead("implantar a equipe de IA na minha empresa")}>
               Quero uma demonstração prática <SyncArrow />
             </button>
-          </div>
-
-          {/* KPI Strip Comercial com Números Animados */}
-          <div className="sync-hero-kpis-strip" aria-label="Indicadores de performance da IA">
-            <div className="kpi-box">
-              <strong><AnimatedCounter target={24} suffix="/7" /></strong>
-              <span>Atendimento 24h</span>
-            </div>
-            <div className="kpi-box">
-              <strong>&lt; <AnimatedCounter target={3} suffix="s" /></strong>
-              <span>Tempo de Resposta</span>
-            </div>
-            <div className="kpi-box">
-              <strong>+<AnimatedCounter target={38} suffix="%" /></strong>
-              <span>Conversão Fora de Hora</span>
-            </div>
-            <div className="kpi-box">
-              <strong>R$ <AnimatedCounter target={0} /></strong>
-              <span>Horas Extras Gastas</span>
-            </div>
           </div>
 
           {/* Painel Interativo Vivo do Supervisor Multiagente (Substitui os 4 cards estáticos e mortos) */}
