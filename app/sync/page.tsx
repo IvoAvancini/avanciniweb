@@ -503,7 +503,7 @@ const simplifiedPlans: SyncPlanSimple[] = [
   {
     id: "chatbot",
     name: "Chatbot de Fluxo Guiado",
-    badge: "AUTOMAÇÃO EXPRESSA",
+    badge: "⚡ AUTOMAÇÃO EXPRESSA",
     kicker: "RESPOSTAS IMEDIATAS & TRIAGEM",
     valueProposition: "Triagem ágil de dúvidas repetitivas, envio instantâneo de catálogos e tabelas de preços com transbordo organizado para a equipe humana.",
     timeline: "Setup ativo em 24h",
@@ -523,7 +523,7 @@ const simplifiedPlans: SyncPlanSimple[] = [
     badge: "🔥 MAIS ESCOLHIDO",
     kicker: "IA GENERATIVA HUMANIZADA 24/7",
     valueProposition: "Atendente inteligente humanizado que acolhe leads, ouve áudios, tira dúvidas e agenda consultas ou reuniões no seu Google Calendar 24h por dia.",
-    timeline: "Ativação guiada em 48h",
+    timeline: "Ativação em 48h",
     highlights: [
       "Conversação natural e empática (compreende áudios, textos e gírias)",
       "Agendamento em tempo real sincronizado ao Google Calendar",
@@ -537,10 +537,10 @@ const simplifiedPlans: SyncPlanSimple[] = [
   {
     id: "pro",
     name: "Operação Scale Pro",
-    badge: "ALTA ESCALA CORPORATIVA",
+    badge: "🏢 ALTA ESCALA",
     kicker: "CENTRAL MULTISSETOR & FILAS",
     valueProposition: "Central inteligente com múltiplos agentes de IA por setor (Vendas, Agendamento e Suporte) e divisão automática de fila para múltiplos operadores.",
-    timeline: "Projeto corporativo sob medida",
+    timeline: "Setup sob medida",
     highlights: [
       "Multiagentes especializados por departamento (Vendas, Triagem e Suporte)",
       "Fila inteligente de operadores humanos no mesmo WhatsApp",
@@ -1823,12 +1823,15 @@ export default function AvanciniSyncPage() {
       {/* 5. FORMATOS DE IMPLANTAÇÃO SOB MEDIDA */}
       {/* 5. FORMATOS DE IMPLANTAÇÃO SOB MEDIDA — ALTO IMPACTO & VISUAL CLEAN */}
       <section className="sync-commercial-section" id="planos" aria-labelledby="sync-plans-title">
-        <header className="sync-section-heading">
-          <div>
-            <span className="paulo-ref-kicker">REF:// MODELOS ACESSÍVEIS · 03 <span className="kicker-bar" /></span>
-            <h2 id="sync-plans-title">Tecnologia de ponta que cabe no seu orçamento.<br /><em>A IA se adapta ao tamanho e à realidade da sua empresa.</em></h2>
+        <header className="sync-section-heading sync-plans-heading-compact">
+          <div className="sync-plans-heading-main">
+            <span className="paulo-ref-kicker">REF:// MODELOS &amp; FORMATOS · 03 <span className="kicker-bar" /></span>
+            <h2 id="sync-plans-title">
+              Tecnologia de ponta no seu orçamento.
+              <span className="heading-subline-cyan">Atendimento inteligente que se adapta à realidade da sua empresa.</span>
+            </h2>
           </div>
-          <p>Sem tabelas engessadas ou cobranças abusivas. Você testa a inteligência no seu segmento e vê o retorno antes de contratar.</p>
+          <p className="sync-plans-heading-desc">Sem tabelas engessadas ou cobranças abusivas. Teste a inteligência no seu segmento e comprove o retorno antes de contratar.</p>
         </header>
 
         {/* 1. Dock de Garantia e Engenharia Dedicada */}

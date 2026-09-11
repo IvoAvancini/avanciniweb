@@ -323,10 +323,10 @@ const dashPlans: DashPlan[] = [
   {
     id: "landing",
     name: "Landing Page de Alta Conversão",
-    badge: "⚡ CONVERSÃO RÁPIDA",
+    badge: "⚡ ALTA CONVERSÃO",
     kicker: "CONVERSÃO DIRETA NO WHATSAPP",
     valueProposition: "Página única ultrarrápida projetada para quebrar objeções e transformar o tráfego de anúncios (Google e Meta Ads) em clientes reais.",
-    timeline: "Primeiro rascunho em 48h",
+    timeline: "Rascunho em 48h",
     highlights: [
       "Página autoral única com copywriting persuasivo",
       "Abertura instantânea (0.2s LCP) com nota verde no Google",
@@ -340,10 +340,10 @@ const dashPlans: DashPlan[] = [
   {
     id: "institucional",
     name: "Site Institucional de Autoridade",
-    badge: "🔥 MAIS ESCOLHIDO · CARRO-CHEFE",
+    badge: "🔥 MAIS ESCOLHIDO",
     kicker: "AUTORIDADE MÁXIMA & DOMÍNIO REGIONAL",
     valueProposition: "Estrutura corporativa autoral que posiciona sua marca no topo das buscas do Google e transmite solidez imediata para fechar contratos maiores.",
-    timeline: "Primeiro rascunho em 4 dias",
+    timeline: "Rascunho em 4 dias",
     highlights: [
       "Estrutura completa: Início, Sobre, Serviços, Casos e Contato",
       "Design autoral exclusivo de padrão internacional (zero templates)",
@@ -357,10 +357,10 @@ const dashPlans: DashPlan[] = [
   {
     id: "loja",
     name: "Loja Virtual & Catálogo Direto",
-    badge: "🛍️ VENDAS 24H · ZERO COMISSÕES",
+    badge: "🛍️ E-COMMERCE & LOJA",
     kicker: "CHECKOUT DIRETO & ZERO COMISSÕES",
     valueProposition: "Catálogo ágil em alta definição com checkout automático por Pix e cartão em até 12x, caindo 100% do lucro direto na sua conta bancária.",
-    timeline: "Primeiro rascunho em 5 dias",
+    timeline: "Rascunho em 5 dias",
     highlights: [
       "Catálogo em alta definição com busca e filtros inteligentes",
       "Checkout automático por Pix imediato e Cartão em até 12x",
@@ -1056,13 +1056,16 @@ export default function Home() {
 
       <section className="section investment dash-investment-fluid" id="investimento">
         <span id="planos" style={{ display: "block", position: "relative", top: "-80px", visibility: "hidden" }} aria-hidden="true" />
-        <div className="section-heading">
-          <div>
-            <span className="paulo-ref-kicker">REF:// PROPOSTAS &amp; MODELOS · 03 <span className="kicker-bar" /></span>
-            <h2 id="configurar-plano">O formato certo para o momento do seu negócio.<br /><em>Sites de alto impacto preparados para vender.</em></h2>
+        <div className="section-heading dash-plans-heading-compact">
+          <div className="dash-plans-heading-main">
+            <span className="paulo-ref-kicker">REF:// PROPOSTAS &amp; FORMATOS · 03 <span className="kicker-bar" /></span>
+            <h2 id="configurar-plano">
+              O formato certo para o seu momento.
+              <span className="heading-subline-emerald">Sites e lojas autorais de alta conversão com entrega ágil.</span>
+            </h2>
           </div>
-          <p>
-            Da landing page de conversão rápida a sistemas e lojas completas. Cada projeto tem escopo sob medida, sem pacotes engessados, entrega ágil e foco obsessivo em retorno sobre o seu investimento.
+          <p className="dash-plans-heading-desc">
+            Da landing page direta a ecossistemas e lojas completas. Escopo transparente sob medida, sem pacotes engessados e foco obsessivo no seu retorno.
           </p>
         </div>
 
