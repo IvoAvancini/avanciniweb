@@ -2115,7 +2115,7 @@ export default function AvanciniSyncPage() {
 
           {/* Barra Inferior / Sub-footer */}
           <div className="paulo-footer-bottom">
-            <span suppressHydrationWarning>© {new Date().getFullYear()} Avancini OS · CNPJ 42.487.607/0001-98. Todos os direitos reservados.</span>
+            <span suppressHydrationWarning>© {new Date().getFullYear()} Avancini OS. Todos os direitos reservados.</span>
             <nav aria-label="Informações legais">
               <a href="/privacidade" className="btn-underline">Política de Privacidade</a>
               <a href="/termos" className="btn-underline">Termos de Uso</a>

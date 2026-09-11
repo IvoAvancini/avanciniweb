@@ -90,26 +90,28 @@
   -webkit-tap-highlight-color: transparent;
 }
 
-/* Hover no Desktop: expande levemente */
+/* Hover no Desktop: mantém proporção perfeitamente estável (sem salto de layout) */
 @media (hover: hover) {
   .hub-portal-card.portal-dash:hover,
   .hub-portal-card.portal-dash.is-active {
-    flex: 1.12;
-    border-color: rgba(34, 197, 94, 0.35);
-    background: rgba(20, 35, 25, 0.45);
-    box-shadow: 0 12px 40px -10px rgba(34, 197, 94, 0.18);
+    flex: 1;
+    border-color: rgba(34, 197, 94, 0.45);
+    background: rgba(20, 35, 25, 0.5);
+    box-shadow: 0 16px 44px -10px rgba(34, 197, 94, 0.22);
+    transform: translateY(-2px);
   }
   .hub-portal-card.portal-sync:hover,
   .hub-portal-card.portal-sync.is-active {
-    flex: 1.12;
-    border-color: rgba(56, 189, 248, 0.35);
-    background: rgba(15, 30, 45, 0.45);
-    box-shadow: 0 12px 40px -10px rgba(56, 189, 248, 0.18);
+    flex: 1;
+    border-color: rgba(56, 189, 248, 0.45);
+    background: rgba(15, 30, 45, 0.5);
+    box-shadow: 0 16px 44px -10px rgba(56, 189, 248, 0.22);
+    transform: translateY(-2px);
   }
   .hub-portal-card.is-faded {
-    flex: 0.88;
-    opacity: 0.55;
-    filter: saturate(0.45) brightness(0.88);
+    flex: 1;
+    opacity: 0.6;
+    filter: saturate(0.65) brightness(0.92);
   }
 }
 
@@ -138,18 +140,27 @@
   flex: 1;
 }
 
-.portal-badge-row {
+/* ── BARRA DE METADADOS SUPERIOR (KICKER + TECH PILL) ── */
+.portal-meta-bar {
   display: flex;
   align-items: center;
-  gap: 0.65rem;
-  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 0.55rem;
+}
+
+/* ── MÉTRICA ÂNCORA REALISTA ── */
+.portal-metric-hero {
+  display: flex;
+  align-items: baseline;
+  gap: 0.55rem;
   margin-bottom: 0.55rem;
 }
 
 /* Counter animado */
 .counter {
-  font-size: clamp(1.5rem, 2.5vw, 2.3rem);
-  font-weight: 800;
+  font-size: clamp(1.6rem, 2.6vw, 2.35rem);
+  font-weight: 850;
   line-height: 1;
   letter-spacing: -0.03em;
   font-feature-settings: "tnum";
@@ -167,18 +178,13 @@
   filter: drop-shadow(0 0 10px rgba(56, 189, 248, 0.4));
 }
 
-/* Âncora com unidade clara */
-.portal-metric-anchor {
-  display: inline-flex;
-  align-items: baseline;
-  gap: 0.32rem;
-}
-.portal-unit {
-  font-size: clamp(0.54rem, 0.76vw, 0.64rem);
-  font-weight: 700;
-  color: rgba(255, 255, 255, 0.7);
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
+.portal-metric-sub {
+  font-size: clamp(0.66rem, 0.9vw, 0.76rem);
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.65);
+  letter-spacing: 0.02em;
+  text-transform: none;
+  white-space: nowrap;
 }
 
 /* Kicker badge */
@@ -193,7 +199,6 @@
 }
 .kicker-dash { color: #86efac; }
 .kicker-sync { color: #7dd3fc; }
-.kicker-extra { color: rgba(255, 255, 255, 0.45); font-weight: 600; }
 
 .kicker-dot {
   position: relative;
@@ -234,19 +239,6 @@
   border: 1px solid rgba(255, 255, 255, 0.1);
   color: rgba(255, 255, 255, 0.6);
   white-space: nowrap;
-}
-
-/* Métrica complementar simétrica nos 2 cards */
-.extra-metric-row {
-  margin-bottom: 0.5rem;
-  min-height: 24px;
-  display: flex;
-  align-items: center;
-}
-.extra-metric {
-  font-size: clamp(0.9rem, 1.4vw, 1.25rem) !important;
-  font-weight: 750;
-  letter-spacing: -0.02em;
 }
 
 /* Nome do produto */

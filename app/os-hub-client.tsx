@@ -232,13 +232,10 @@ export function OSHubClient() {
           <div className="portal-top-laser laser-dash" aria-hidden="true" />
 
           {/* Cabeçalho do Card */}
+          {/* Cabeçalho do Card */}
           <div className="portal-header">
-            {/* Linha 1 de métrica principal */}
-            <div className="portal-badge-row">
-              <div className="portal-metric-anchor">
-                <AnimatedCounter target={15000} />
-                <span className="portal-unit">visitas geradas</span>
-              </div>
+            {/* Barra superior de metadados */}
+            <div className="portal-meta-bar">
               <span className="portal-kicker kicker-dash">
                 <span className="kicker-dot dot-dash">
                   <span className="kicker-dot-ping" />
@@ -249,10 +246,10 @@ export function OSHubClient() {
               <span className="portal-tech-pill">0.2s LCP · NOTA 100</span>
             </div>
 
-            {/* Linha 2 de métrica complementar (simétrica) */}
-            <div className="portal-badge-row extra-metric-row">
-              <AnimatedCounter target={5000} className="extra-metric" />
-              <span className="portal-kicker kicker-extra">Leads qualificados gerados</span>
+            {/* Métrica âncora realista com legenda clara */}
+            <div className="portal-metric-hero">
+              <AnimatedCounter target={14820} prefix="+" />
+              <span className="portal-metric-sub">visitas geradas</span>
             </div>
 
             <h2 className="portal-product-name">
@@ -286,9 +283,9 @@ export function OSHubClient() {
             </div>
           </div>
 
-          {/* Linha discreta de confiança jurídica no espaço existente */}
-          <div className="portal-trust-line" aria-label="Garantia e transparência jurídica">
-            <span>CNPJ 42.487.607/0001-98 · Emissão de NF · Sem fidelidade</span>
+          {/* Linha discreta de garantia e compromisso */}
+          <div className="portal-trust-line" aria-label="Garantia e transparência">
+            <span>Garantia de Satisfação · Contrato de Serviços · Sem fidelidade</span>
           </div>
 
           {/* CTA */}
@@ -337,12 +334,8 @@ export function OSHubClient() {
 
           {/* Cabeçalho do Card */}
           <div className="portal-header">
-            {/* Linha 1 de métrica principal */}
-            <div className="portal-badge-row">
-              <div className="portal-metric-anchor">
-                <AnimatedCounter target={24000} />
-                <span className="portal-unit">mensagens respondidas</span>
-              </div>
+            {/* Barra superior de metadados */}
+            <div className="portal-meta-bar">
               <span className="portal-kicker kicker-sync">
                 <span className="kicker-dot dot-sync">
                   <span className="kicker-dot-ping" />
@@ -353,10 +346,10 @@ export function OSHubClient() {
               <span className="portal-tech-pill">24/7 · &lt;2s RESPOSTA</span>
             </div>
 
-            {/* Linha 2 de métrica complementar (simétrica com o Dash!) */}
-            <div className="portal-badge-row extra-metric-row">
-              <AnimatedCounter target={99} suffix="%" className="extra-metric" />
-              <span className="portal-kicker kicker-extra">Precisão com IA (Zero Alucinação)</span>
+            {/* Métrica âncora realista com legenda clara */}
+            <div className="portal-metric-hero">
+              <AnimatedCounter target={23840} prefix="+" />
+              <span className="portal-metric-sub">mensagens respondidas</span>
             </div>
 
             <h2 className="portal-product-name">
@@ -390,9 +383,9 @@ export function OSHubClient() {
             </div>
           </div>
 
-          {/* Linha discreta de confiança jurídica no espaço existente */}
-          <div className="portal-trust-line" aria-label="Garantia e transparência jurídica">
-            <span>CNPJ 42.487.607/0001-98 · Emissão de NF · Sem fidelidade</span>
+          {/* Linha discreta de garantia e compromisso */}
+          <div className="portal-trust-line" aria-label="Garantia e transparência">
+            <span>Garantia de Satisfação · Contrato de Serviços · Sem fidelidade</span>
           </div>
 
           {/* CTA */}

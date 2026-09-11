@@ -190,9 +190,9 @@ const webFaqs = [
       "Todos os projetos incluem 30 dias de suporte e garantia técnica direta pelo WhatsApp para esclarecer dúvidas, realizar ajustes finos de lançamento e assegurar que tudo opere com estabilidade máxima.",
   },
   {
-    question: "Como funciona a segurança jurídica e emissão de nota fiscal?",
+    question: "Como funciona a segurança jurídica e contrato de serviços?",
     answer:
-      "Emitimos Nota Fiscal eletrônica para todo o Brasil sob o CNPJ 42.487.607/0001-98, com contrato de prestação de serviços formal que estipula prazos, entregáveis e garantias de ponta a ponta.",
+      "Trabalhamos com contrato formal de prestação de serviços com escopo, etapas de entrega e cronograma claros para total segurança e transparência entre as partes.",
   },
 ] as const;
 
@@ -1169,8 +1169,8 @@ export default function Home() {
           <div className="trust-strip-card">
             <span className="trust-strip-icon" aria-hidden="true">📄</span>
             <div className="trust-strip-info">
-              <strong>Segurança Jurídica &amp; NF</strong>
-              <p>Contrato formal com cronograma, CNPJ 42.487.607/0001-98 e Nota Fiscal para todo o Brasil.</p>
+              <strong>Segurança Jurídica &amp; Contrato</strong>
+              <p>Contrato formal de prestação de serviços com escopo, cronograma e garantias de ponta a ponta.</p>
             </div>
           </div>
           <div className="trust-strip-card">
@@ -1467,7 +1467,7 @@ export default function Home() {
 
           {/* Barra Inferior / Sub-footer */}
           <div className="paulo-footer-bottom">
-            <span suppressHydrationWarning>© {new Date().getFullYear()} Avancini OS · CNPJ 42.487.607/0001-98 · Emissão de Nota Fiscal para todo o Brasil. Todos os direitos reservados.</span>
+            <span suppressHydrationWarning>© {new Date().getFullYear()} Avancini OS. Todos os direitos reservados.</span>
             <nav aria-label="Informações legais">
               <a href="/privacidade" className="btn-underline">Política de Privacidade</a>
               <a href="/termos" className="btn-underline">Termos de Uso</a>
