@@ -3075,11 +3075,29 @@
 @media (max-width: 1060px) {
   .dash-plans-quad-grid,
   .plans-showcase-grid-compact {
-    grid-template-columns: 1fr !important;
+    display: flex !important;
+    flex-direction: column !important;
     max-width: 520px !important;
     margin-left: auto !important;
     margin-right: auto !important;
     gap: 1.75rem !important;
+  }
+
+  /* NO CELULAR: O plano Carro-Chefe (Mais Escolhido) VEM AUTOMATICAMENTE PRIMEIRO NO TOPO! */
+  .plan-card-luxury.is-featured-glow,
+  .plan-card-luxury.is-featured-glow-sync {
+    order: -1 !important;
+    transform: none !important;
+  }
+}
+
+/* Prevenção de Auto-Zoom no iOS e Otimizações de Toque */
+@media (max-width: 768px) {
+  input, select, textarea {
+    font-size: 16px !important;
+  }
+  * {
+    -webkit-tap-highlight-color: transparent;
   }
 }
 
