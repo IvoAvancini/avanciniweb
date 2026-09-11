@@ -100,8 +100,26 @@ const MotoraContext = createContext<MotoraContextType | null>(null);
 
 export function MotoraProvider({ children }: { children: ReactNode }) {
   const [vehicles] = useState<Vehicle[]>(MOTORA_VEHICLES);
-  const [favorites, setFavorites] = useState<string[]>([]);
-  const [compareList, setCompareList] = useState<string[]>([]);
+  const [favorites, setFavorites] = useState<string[]>(() => {
+    if (typeof window === "undefined") return [];
+    try {
+      const saved = localStorage.getItem("motora_favorites");
+      return saved ? (JSON.parse(saved) as string[]) : [];
+    } catch (e) {
+      console.warn("Could not load Motora favorites:", e);
+      return [];
+    }
+  });
+  const [compareList, setCompareList] = useState<string[]>(() => {
+    if (typeof window === "undefined") return [];
+    try {
+      const saved = localStorage.getItem("motora_compare");
+      return saved ? (JSON.parse(saved) as string[]) : [];
+    } catch (e) {
+      console.warn("Could not load Motora compare list:", e);
+      return [];
+    }
+  });
   const [filters, setFilters] = useState<VehicleFilterState>(initialFilters);
   const [sortOption, setSortOption] = useState<SortVehicleOption>("relevance");
 
@@ -116,28 +134,27 @@ export function MotoraProvider({ children }: { children: ReactNode }) {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
 
   const [toasts, setToasts] = useState<ToastNotification[]>([]);
-  const [leads, setLeads] = useState<LeadContact[]>([]);
-  const [testDrives, setTestDrives] = useState<TestDriveBooking[]>([]);
-  const [valuations, setValuations] = useState<TradeInValuation[]>([]);
-
-  // Load from localStorage
-  useEffect(() => {
+  const [leads, setLeads] = useState<LeadContact[]>(() => {
+    if (typeof window === "undefined") return [];
     try {
-      const savedFavs = localStorage.getItem("motora_favorites");
-      if (savedFavs) setFavorites(JSON.parse(savedFavs));
-
-      const savedComp = localStorage.getItem("motora_compare");
-      if (savedComp) setCompareList(JSON.parse(savedComp));
-
-      const savedLeads = localStorage.getItem("motora_leads");
-      if (savedLeads) setLeads(JSON.parse(savedLeads));
-
-      const savedTestDrives = localStorage.getItem("motora_testdrives");
-      if (savedTestDrives) setTestDrives(JSON.parse(savedTestDrives));
+      const saved = localStorage.getItem("motora_leads");
+      return saved ? (JSON.parse(saved) as LeadContact[]) : [];
     } catch (e) {
-      console.warn("Could not load Motora localStorage data:", e);
+      console.warn("Could not load Motora leads:", e);
+      return [];
     }
-  }, []);
+  });
+  const [testDrives, setTestDrives] = useState<TestDriveBooking[]>(() => {
+    if (typeof window === "undefined") return [];
+    try {
+      const saved = localStorage.getItem("motora_testdrives");
+      return saved ? (JSON.parse(saved) as TestDriveBooking[]) : [];
+    } catch (e) {
+      console.warn("Could not load Motora test drives:", e);
+      return [];
+    }
+  });
+  const [valuations, setValuations] = useState<TradeInValuation[]>([]);
 
   // Save to localStorage
   useEffect(() => {

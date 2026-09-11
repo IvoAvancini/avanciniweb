@@ -1,37 +1,70 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import Image from "next/image";
 import { useVertice } from "../store/useVerticeStore";
+import { Product } from "../types";
 
 export function QuickShopDrawer() {
   const { isQuickShopOpen, closeQuickShop, quickShopProduct, addToCart, openSizeGuide } = useVertice();
 
-  const [selectedColor, setSelectedColor] = useState<string>("");
-  const [selectedSize, setSelectedSize] = useState<string>("");
-  const [quantity, setQuantity] = useState(1);
-
-  useEffect(() => {
-    if (quickShopProduct) {
-      setSelectedColor(quickShopProduct.colors[0]?.name || "");
-      setSelectedSize(quickShopProduct.sizes[0] || "");
-      setQuantity(1);
-    }
-  }, [quickShopProduct]);
-
   if (!isQuickShopOpen || !quickShopProduct) return null;
+
+  return (
+    <QuickShopContent
+      key={quickShopProduct.id}
+      product={quickShopProduct}
+      closeQuickShop={closeQuickShop}
+      addToCart={addToCart}
+      openSizeGuide={openSizeGuide}
+    />
+  );
+}
+
+interface QuickShopContentProps {
+  product: Product;
+  closeQuickShop: () => void;
+  addToCart: (product: Product, size: string, color: string, quantity?: number) => void;
+  openSizeGuide: () => void;
+}
+
+function QuickShopContent({
+  product,
+  closeQuickShop,
+  addToCart,
+  openSizeGuide,
+}: QuickShopContentProps) {
+  const [selectedColor, setSelectedColor] = useState<string>(product.colors[0]?.name || "");
+  const [selectedSize, setSelectedSize] = useState<string>(product.sizes[0] || "");
+  const [quantity, setQuantity] = useState(1);
 
   const formatMoney = (val: number) =>
     new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(val);
 
   const handleAddToCart = () => {
     if (!selectedSize) return;
-    addToCart(quickShopProduct, selectedSize, selectedColor, quantity);
+    addToCart(product, selectedSize, selectedColor, quantity);
     closeQuickShop();
   };
 
   return (
-    <div className="v-drawer-overlay" onClick={closeQuickShop}>
-      <div className="v-drawer-body" onClick={(e) => e.stopPropagation()}>
+    <div
+      className="v-drawer-overlay"
+      onClick={closeQuickShop}
+      role="button"
+      tabIndex={0}
+      aria-label="Fechar compra rápida"
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") closeQuickShop();
+      }}
+    >
+      <div
+        className="v-drawer-body"
+        onClick={(e) => e.stopPropagation()}
+        role="button"
+        tabIndex={0}
+        onKeyDown={(e) => e.stopPropagation()}
+      >
         <div className="v-drawer-head">
           <h3>COMPRA RÁPIDA</h3>
           <button
@@ -47,23 +80,25 @@ export function QuickShopDrawer() {
         <div style={{ padding: "24px", overflowY: "auto", flex: 1, display: "grid", gap: 20 }}>
           {/* PRODUCT MAIN INFO */}
           <div style={{ display: "grid", gridTemplateColumns: "100px 1fr", gap: 16 }}>
-            <img
-              src={quickShopProduct.images[0]}
-              alt={quickShopProduct.name}
+            <Image
+              src={product.images[0]}
+              alt={product.name}
+              width={100}
+              height={120}
               style={{ width: 100, height: 120, objectFit: "cover", borderRadius: 4, background: "#111" }}
             />
             <div>
-              <span className="v-card-cat">{quickShopProduct.categoryLabel}</span>
+              <span className="v-card-cat">{product.categoryLabel}</span>
               <h4 style={{ fontSize: 16, fontWeight: 800, color: "#ffffff", margin: "4px 0 8px 0" }}>
-                {quickShopProduct.name}
+                {product.name}
               </h4>
               <div style={{ display: "flex", alignItems: "baseline", gap: 8 }}>
                 <strong style={{ fontSize: 18, color: "#ffffff" }}>
-                  {formatMoney(quickShopProduct.price)}
+                  {formatMoney(product.price)}
                 </strong>
-                {quickShopProduct.oldPrice && (
+                {product.oldPrice && (
                   <span style={{ fontSize: 13, color: "#64748b", textDecoration: "line-through" }}>
-                    {formatMoney(quickShopProduct.oldPrice)}
+                    {formatMoney(product.oldPrice)}
                   </span>
                 )}
               </div>
@@ -76,7 +111,7 @@ export function QuickShopDrawer() {
               <span>COR: <strong>{selectedColor}</strong></span>
             </div>
             <div style={{ display: "flex", gap: 8 }}>
-              {quickShopProduct.colors.map((color) => (
+              {product.colors.map((color) => (
                 <button
                   key={color.name}
                   type="button"
@@ -109,7 +144,7 @@ export function QuickShopDrawer() {
               <button type="button" onClick={openSizeGuide}>Guia de medidas</button>
             </div>
             <div className="v-pdp-sizes-grid">
-              {quickShopProduct.sizes.map((size) => (
+              {product.sizes.map((size) => (
                 <button
                   key={size}
                   type="button"
@@ -152,7 +187,7 @@ export function QuickShopDrawer() {
             className="v-btn v-btn-primary v-btn-full"
             onClick={handleAddToCart}
           >
-            ADICIONAR À SACOLA · {formatMoney(quickShopProduct.price * quantity)}
+            ADICIONAR À SACOLA · {formatMoney(product.price * quantity)}
           </button>
         </div>
       </div>

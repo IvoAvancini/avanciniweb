@@ -1,12 +1,12 @@
 "use client";
 
 import { useState, useMemo } from "react";
+import Image from "next/image";
 import { useVertice } from "../store/useVerticeStore";
 import { Product } from "../types";
 
 interface SearchOverlayProps {
   onSelectProduct: (product: Product) => void;
-  onSearchCategory: (category: string) => void;
 }
 
 const POPULAR_SEARCHES = [
@@ -18,7 +18,7 @@ const POPULAR_SEARCHES = [
   "Biker Shorts",
 ];
 
-export function SearchOverlay({ onSelectProduct, onSearchCategory }: SearchOverlayProps) {
+export function SearchOverlay({ onSelectProduct }: SearchOverlayProps) {
   const { isSearchOpen, closeSearch, products } = useVertice();
   const [query, setQuery] = useState("");
 
@@ -60,7 +60,9 @@ export function SearchOverlay({ onSelectProduct, onSearchCategory }: SearchOverl
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Busque por tênis, tech fleece, jaquetas ou corrida..."
           className="v-search-input"
-          autoFocus
+          ref={(el) => {
+            if (el) el.focus();
+          }}
         />
         {query && (
           <button
@@ -119,7 +121,7 @@ export function SearchOverlay({ onSelectProduct, onSearchCategory }: SearchOverl
               <p style={{ fontSize: 20, fontWeight: 800, color: "#ffffff", margin: "10px 0 8px", textTransform: "uppercase" }}>
                 NÃO ENCONTRAMOS RESULTADOS PARA ESTA BUSCA.
               </p>
-              <small>Tente buscar por termos mais genéricos como "tênis", "moletom", "jaqueta" ou "corrida".</small>
+              <small>Tente buscar por termos mais genéricos como &quot;tênis&quot;, &quot;moletom&quot;, &quot;jaqueta&quot; ou &quot;corrida&quot;.</small>
             </div>
           ) : (
             <div className="v-product-grid" style={{ gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))" }}>
@@ -131,10 +133,23 @@ export function SearchOverlay({ onSelectProduct, onSearchCategory }: SearchOverl
                     closeSearch();
                     onSelectProduct(product);
                   }}
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      closeSearch();
+                      onSelectProduct(product);
+                    }
+                  }}
                   style={{ cursor: "pointer" }}
                 >
                   <div className="v-card-media">
-                    <img src={product.images[0]} alt={product.name} />
+                    <Image
+                      src={product.images[0]}
+                      alt={product.name}
+                      fill
+                      sizes="(max-width: 768px) 50vw, 25vw"
+                    />
                   </div>
                   <div className="v-card-details">
                     <span className="v-card-cat">{product.categoryLabel}</span>

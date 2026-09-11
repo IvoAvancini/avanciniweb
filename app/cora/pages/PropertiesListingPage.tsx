@@ -1,6 +1,5 @@
-import React from "react";
 import { useCora } from "../store/useCoraStore";
-import { Property } from "../types";
+import { Property, FilterState } from "../types";
 import { PropertyGrid } from "../components/PropertyCard";
 import { PropertyFiltersSidebar, FilterDrawer } from "../components/PropertyFilters";
 import { Breadcrumbs } from "../components/CommonComponents";
@@ -22,7 +21,7 @@ export function PropertiesListingPage({
     setIsFilterDrawerOpen,
   } = useCora();
 
-  const handleChipClick = (type: string, value: any) => {
+  const handleChipClick = <K extends keyof FilterState>(type: K, value: FilterState[K]) => {
     setFilters((p) => ({ ...p, [type]: value }));
   };
 
@@ -244,7 +243,7 @@ export function PropertiesListingPage({
                 <select
                   id="plp-sort"
                   value={filters.sortBy}
-                  onChange={(e) => setFilters((p) => ({ ...p, sortBy: e.target.value as any }))}
+                  onChange={(e) => setFilters((p) => ({ ...p, sortBy: e.target.value as FilterState["sortBy"] }))}
                   style={{
                     height: "38px",
                     padding: "0 10px",

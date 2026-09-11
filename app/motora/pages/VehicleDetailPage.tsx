@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { useMotora } from "../store/useMotoraStore";
 import { Vehicle } from "../types";
 import { FinancingCalculator } from "../components/FinancingCalculator";
@@ -75,10 +76,12 @@ export function VehicleDetailPage({
             {/* GALLERY CONTAINER */}
             <div className="m-vdp-gallery">
               <div style={{ position: "relative" }}>
-                <img
+                <Image
                   src={vehicle.images[activeImageIndex] || vehicle.images[0]}
                   alt={`${vehicle.brand} ${vehicle.model}`}
                   className="m-vdp-main-img"
+                  width={1376}
+                  height={768}
                   style={{ borderRadius: 10, border: "1px solid var(--m-light-border)", background: "#ffffff" }}
                 />
                 <span style={{ position: "absolute", bottom: 12, right: 12, background: "rgba(15, 23, 42, 0.85)", color: "#fff", padding: "4px 10px", borderRadius: 4, fontSize: 11, fontWeight: 800 }}>
@@ -89,12 +92,20 @@ export function VehicleDetailPage({
               {/* THUMBNAILS */}
               <div className="m-vdp-thumbs-row">
                 {vehicle.images.map((img, idx) => (
-                  <img
+                  <Image
                     key={idx}
                     src={img}
                     alt={`Miniatura ${idx + 1}`}
                     className={`m-vdp-thumb ${activeImageIndex === idx ? "is-active" : ""}`}
+                    width={1376}
+                    height={768}
+                    role="button"
+                    tabIndex={0}
+                    aria-label={`Ver foto ${idx + 1} de ${vehicle.brand} ${vehicle.model}`}
                     onClick={() => setActiveImageIndex(idx)}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" || e.key === " ") setActiveImageIndex(idx);
+                    }}
                     style={{ borderRadius: 6, border: activeImageIndex === idx ? "2px solid #0f172a" : "1px solid var(--m-light-border)" }}
                   />
                 ))}

@@ -1,5 +1,7 @@
 "use client";
 
+import Image from "next/image";
+
 interface MegaMenuProps {
   category: string;
   onSelect: (filterCategory: string) => void;
@@ -138,9 +140,11 @@ export function MegaMenu({ category, onSelect }: MegaMenuProps) {
 
       {/* COL 5: BANNER EDITORIAL */}
       <div className="v-megamenu-banner">
-        <img
+        <Image
           src={isMen ? "/concepts/nike-tech-fleece.jpg" : "/concepts/nike-sneaker.jpg"}
           alt="Campanha Editorial Vértice"
+          fill
+          sizes="300px"
         />
         <div className="v-megamenu-banner-shade" />
         <div className="v-megamenu-banner-copy">

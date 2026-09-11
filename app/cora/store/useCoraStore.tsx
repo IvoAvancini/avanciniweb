@@ -173,27 +173,32 @@ export function CoraProvider({ children }: { children: ReactNode }) {
 
   // Load from localStorage on mount
   useEffect(() => {
-    try {
-      const favs = localStorage.getItem(STORAGE_KEYS.FAVORITES);
-      if (favs) setFavorites(JSON.parse(favs));
+    const loadFromStorage = () => {
+      try {
+        const favs = localStorage.getItem(STORAGE_KEYS.FAVORITES);
+        if (favs) setFavorites(JSON.parse(favs));
 
-      const comp = localStorage.getItem(STORAGE_KEYS.COMPARE);
-      if (comp) setCompareList(JSON.parse(comp));
+        const comp = localStorage.getItem(STORAGE_KEYS.COMPARE);
+        if (comp) setCompareList(JSON.parse(comp));
 
-      const viewed = localStorage.getItem(STORAGE_KEYS.RECENTLY_VIEWED);
-      if (viewed) setRecentlyViewedSlugs(JSON.parse(viewed));
+        const viewed = localStorage.getItem(STORAGE_KEYS.RECENTLY_VIEWED);
+        if (viewed) setRecentlyViewedSlugs(JSON.parse(viewed));
 
-      const visits = localStorage.getItem(STORAGE_KEYS.VISITS);
-      if (visits) setScheduledVisits(JSON.parse(visits));
+        const visits = localStorage.getItem(STORAGE_KEYS.VISITS);
+        if (visits) setScheduledVisits(JSON.parse(visits));
 
-      const sims = localStorage.getItem(STORAGE_KEYS.SIMULATIONS);
-      if (sims) setSimulations(JSON.parse(sims));
+        const sims = localStorage.getItem(STORAGE_KEYS.SIMULATIONS);
+        if (sims) setSimulations(JSON.parse(sims));
 
-      const subs = localStorage.getItem(STORAGE_KEYS.SUBMISSIONS);
-      if (subs) setPropertySubmissions(JSON.parse(subs));
-    } catch {
-      // ignore JSON parse error in SSR or private mode
-    }
+        const subs = localStorage.getItem(STORAGE_KEYS.SUBMISSIONS);
+        if (subs) setPropertySubmissions(JSON.parse(subs));
+      } catch {
+        // ignore JSON parse error in SSR or private mode
+      }
+    };
+
+    const timer = window.setTimeout(loadFromStorage, 0);
+    return () => window.clearTimeout(timer);
   }, []);
 
   // Global Keyboard Shortcuts (Cmd+K / Ctrl+K & ESC)
@@ -242,7 +247,9 @@ export function CoraProvider({ children }: { children: ReactNode }) {
         const next = exists ? prev.filter((item) => item !== id) : [...prev, id];
         try {
           localStorage.setItem(STORAGE_KEYS.FAVORITES, JSON.stringify(next));
-        } catch {}
+        } catch {
+          // localStorage indisponível (modo privado, SSR)
+        }
         if (!exists) {
           const prop = PROPERTIES.find((p) => p.id === id);
           addToast("Imóvel salvo nos favoritos", prop?.title || "Adicionado à Minha Cora");
@@ -264,7 +271,9 @@ export function CoraProvider({ children }: { children: ReactNode }) {
     setFavorites([]);
     try {
       localStorage.removeItem(STORAGE_KEYS.FAVORITES);
-    } catch {}
+    } catch {
+      // localStorage indisponível
+    }
     addToast("Lista de favoritos esvaziada", undefined, "info");
   }, [addToast]);
 
@@ -277,7 +286,9 @@ export function CoraProvider({ children }: { children: ReactNode }) {
           const next = prev.filter((item) => item !== id);
           try {
             localStorage.setItem(STORAGE_KEYS.COMPARE, JSON.stringify(next));
-          } catch {}
+          } catch {
+            // localStorage indisponível
+          }
           addToast("Removido do comparador", undefined, "info");
           return next;
         }
@@ -290,7 +301,9 @@ export function CoraProvider({ children }: { children: ReactNode }) {
         const next = [...prev, id];
         try {
           localStorage.setItem(STORAGE_KEYS.COMPARE, JSON.stringify(next));
-        } catch {}
+        } catch {
+          // localStorage indisponível
+        }
         addToast("Adicionado ao comparador", `Comparando ${next.length} de 3 imóveis.`);
         return next;
       });
@@ -309,7 +322,9 @@ export function CoraProvider({ children }: { children: ReactNode }) {
         const next = prev.filter((item) => item !== id);
         try {
           localStorage.setItem(STORAGE_KEYS.COMPARE, JSON.stringify(next));
-        } catch {}
+        } catch {
+          // localStorage indisponível
+        }
         return next;
       });
     },
@@ -320,7 +335,9 @@ export function CoraProvider({ children }: { children: ReactNode }) {
     setCompareList([]);
     try {
       localStorage.removeItem(STORAGE_KEYS.COMPARE);
-    } catch {}
+    } catch {
+      // localStorage indisponível
+    }
     addToast("Comparador limpo", undefined, "info");
   }, [addToast]);
 
@@ -331,7 +348,9 @@ export function CoraProvider({ children }: { children: ReactNode }) {
       const next = [slug, ...filtered].slice(0, 10);
       try {
         localStorage.setItem(STORAGE_KEYS.RECENTLY_VIEWED, JSON.stringify(next));
-      } catch {}
+      } catch {
+        // localStorage indisponível
+      }
       return next;
     });
   }, []);
@@ -352,7 +371,9 @@ export function CoraProvider({ children }: { children: ReactNode }) {
         const next = [newVisit, ...prev];
         try {
           localStorage.setItem(STORAGE_KEYS.VISITS, JSON.stringify(next));
-        } catch {}
+        } catch {
+          // localStorage indisponível
+        }
         return next;
       });
 
@@ -375,7 +396,9 @@ export function CoraProvider({ children }: { children: ReactNode }) {
         const next = [newSim, ...prev];
         try {
           localStorage.setItem(STORAGE_KEYS.SIMULATIONS, JSON.stringify(next));
-        } catch {}
+        } catch {
+          // localStorage indisponível
+        }
         return next;
       });
 
@@ -400,7 +423,9 @@ export function CoraProvider({ children }: { children: ReactNode }) {
         const next = [newSub, ...prev];
         try {
           localStorage.setItem(STORAGE_KEYS.SUBMISSIONS, JSON.stringify(next));
-        } catch {}
+        } catch {
+          // localStorage indisponível
+        }
         return next;
       });
 

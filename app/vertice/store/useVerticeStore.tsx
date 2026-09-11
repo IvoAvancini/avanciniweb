@@ -170,12 +170,26 @@ const defaultOrders: Order[] = [
   },
 ];
 
+function readStoredState<T>(key: string, fallback: T): T {
+  if (typeof window === "undefined") return fallback;
+  try {
+    const raw = localStorage.getItem(key);
+    return raw ? (JSON.parse(raw) as T) : fallback;
+  } catch {
+    return fallback;
+  }
+}
+
 const VerticeContext = createContext<VerticeContextType | null>(null);
 
 export function VerticeProvider({ children }: { children: ReactNode }) {
   const [products] = useState<Product[]>(VERTICE_PRODUCTS);
-  const [cart, setCart] = useState<CartItem[]>([]);
-  const [wishlist, setWishlist] = useState<string[]>([]);
+  const [cart, setCart] = useState<CartItem[]>(() =>
+    readStoredState<CartItem[]>("vertice_cart", [])
+  );
+  const [wishlist, setWishlist] = useState<string[]>(() =>
+    readStoredState<string[]>("vertice_wishlist", [])
+  );
   const [appliedCoupon, setAppliedCoupon] = useState<{ code: string; discountPercent: number } | null>(null);
   
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -205,26 +219,12 @@ export function VerticeProvider({ children }: { children: ReactNode }) {
     ],
   });
   const [isLoggedIn, setIsLoggedIn] = useState(true);
-  const [orders, setOrders] = useState<Order[]>(defaultOrders);
+  const [orders, setOrders] = useState<Order[]>(() =>
+    readStoredState<Order[]>("vertice_orders", defaultOrders)
+  );
 
   const [filters, setFilters] = useState<FilterState>(initialFilters);
   const [sortOption, setSortOption] = useState<SortOption>("relevance");
-
-  // Load from localStorage on mount
-  useEffect(() => {
-    try {
-      const savedCart = localStorage.getItem("vertice_cart");
-      if (savedCart) setCart(JSON.parse(savedCart));
-
-      const savedWishlist = localStorage.getItem("vertice_wishlist");
-      if (savedWishlist) setWishlist(JSON.parse(savedWishlist));
-
-      const savedOrders = localStorage.getItem("vertice_orders");
-      if (savedOrders) setOrders(JSON.parse(savedOrders));
-    } catch (e) {
-      console.warn("Could not read from localStorage:", e);
-    }
-  }, []);
 
   // Sync to localStorage
   useEffect(() => {

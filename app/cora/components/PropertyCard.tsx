@@ -1,4 +1,4 @@
-import React from "react";
+import Image from "next/image";
 import { Property } from "../types";
 import { useCora } from "../store/useCoraStore";
 
@@ -32,7 +32,7 @@ export function PropertyCard({
         }).format(property.price)}/mês`;
 
   return (
-    <article
+    <div
       className="cora-property-card"
       onClick={() => onSelect(property)}
       role="button"
@@ -47,10 +47,12 @@ export function PropertyCard({
     >
       {/* MEDIA CONTAINER */}
       <div className="cora-property-card-media">
-        <img
+        <Image
           src={property.images[0] || "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80"}
           alt={property.title}
           className="cora-property-card-img"
+          fill
+          sizes="(max-width: 768px) 100vw, 33vw"
           loading="lazy"
         />
 
@@ -122,7 +124,13 @@ export function PropertyCard({
           </div>
 
           {showCompareButton && (
-            <div className="cora-property-card-actions" onClick={(e) => e.stopPropagation()}>
+            <div
+              className="cora-property-card-actions"
+              onClick={(e) => e.stopPropagation()}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => e.stopPropagation()}
+            >
               <button
                 type="button"
                 onClick={() => toggleCompare(property.id)}
@@ -135,7 +143,7 @@ export function PropertyCard({
           )}
         </div>
       </div>
-    </article>
+    </div>
   );
 }
 

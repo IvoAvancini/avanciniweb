@@ -1,5 +1,8 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import Image from "next/image";
 import { useCora } from "../store/useCoraStore";
+
+type VisitStep = 1 | 2 | 3 | 4 | 5;
 
 export function VisitModal() {
   const {
@@ -10,8 +13,8 @@ export function VisitModal() {
     addScheduledVisit,
   } = useCora();
 
-  const [step, setStep] = useState<1 | 2 | 3 | 4 | 5>(1);
-  const [selectedPropertyId, setSelectedPropertyId] = useState<string>(
+  const [step, setStep] = useState<VisitStep>(1);
+  const [selectedPropertyId] = useState<string>(
     visitTargetProperty?.id || properties[0]?.id || ""
   );
   const [visitType, setVisitType] = useState<"presencial" | "video">("presencial");
@@ -68,11 +71,26 @@ export function VisitModal() {
   };
 
   return (
-    <div className="cora-modal-overlay" onClick={handleClose}>
+    <div
+      className="cora-modal-overlay"
+      onClick={handleClose}
+      role="button"
+      tabIndex={0}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          handleClose();
+        }
+      }}
+      aria-label="Fechar agendamento de visita"
+    >
       <div
         className="cora-modal-card"
         style={{ maxWidth: "620px", padding: "32px" }}
         onClick={(e) => e.stopPropagation()}
+        role="button"
+        tabIndex={0}
+        onKeyDown={(e) => e.stopPropagation()}
       >
         <button
           type="button"
@@ -112,10 +130,12 @@ export function VisitModal() {
               marginBottom: "24px",
             }}
           >
-            <img
+            <Image
               src={currentProperty.images[0]}
               alt={currentProperty.title}
-              style={{ width: "54px", height: "42px", borderRadius: "4px", objectFit: "cover" }}
+              width={54}
+              height={42}
+              style={{ borderRadius: "4px", objectFit: "cover" }}
             />
             <div style={{ flex: 1 }}>
               <strong style={{ fontSize: "13px", display: "block", color: "var(--cora-ink)" }}>
@@ -134,6 +154,14 @@ export function VisitModal() {
           <div style={{ display: "grid", gap: "14px" }}>
             <div
               onClick={() => setVisitType("presencial")}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  setVisitType("presencial");
+                }
+              }}
               style={{
                 padding: "18px",
                 borderRadius: "var(--radius-md)",
@@ -158,6 +186,14 @@ export function VisitModal() {
 
             <div
               onClick={() => setVisitType("video")}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  setVisitType("video");
+                }
+              }}
               style={{
                 padding: "18px",
                 borderRadius: "var(--radius-md)",
@@ -351,7 +387,7 @@ export function VisitModal() {
             {step > 1 ? (
               <button
                 type="button"
-                onClick={() => setStep((p) => ((p - 1) as any))}
+                onClick={() => setStep((p) => (p - 1) as VisitStep)}
                 className="cora-btn cora-btn-secondary"
                 style={{ minHeight: "44px", padding: "0 18px", fontSize: "13px" }}
               >

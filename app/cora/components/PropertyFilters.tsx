@@ -1,4 +1,3 @@
-import React from "react";
 import { useCora } from "../store/useCoraStore";
 import { PropertyType, PropertyPurpose } from "../types";
 
@@ -79,7 +78,7 @@ export function PropertyFiltersSidebar() {
             <button
               key={item.id}
               type="button"
-              onClick={() => handlePurposeChange(item.id as any)}
+              onClick={() => handlePurposeChange(item.id as PropertyPurpose | "todos")}
               style={{
                 padding: "8px 0",
                 fontSize: "12px",
@@ -104,7 +103,7 @@ export function PropertyFiltersSidebar() {
         </span>
         <select
           value={filters.type}
-          onChange={(e) => handleTypeChange(e.target.value as any)}
+          onChange={(e) => handleTypeChange(e.target.value as PropertyType | "todos")}
           style={{
             width: "100%",
             height: "42px",
@@ -289,11 +288,26 @@ export function FilterDrawer() {
   if (!isFilterDrawerOpen) return null;
 
   return (
-    <div className="cora-modal-overlay" onClick={() => setIsFilterDrawerOpen(false)}>
+    <div
+      className="cora-modal-overlay"
+      onClick={() => setIsFilterDrawerOpen(false)}
+      role="button"
+      tabIndex={0}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          setIsFilterDrawerOpen(false);
+        }
+      }}
+      aria-label="Fechar filtros"
+    >
       <div
         className="cora-modal-card"
         style={{ maxWidth: "480px", padding: "24px" }}
         onClick={(e) => e.stopPropagation()}
+        role="button"
+        tabIndex={0}
+        onKeyDown={(e) => e.stopPropagation()}
       >
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "20px" }}>
           <h3 style={{ fontSize: "18px", fontWeight: 800 }}>Filtros</h3>

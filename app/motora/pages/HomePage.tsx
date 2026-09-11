@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useMotora } from "../store/useMotoraStore";
 import { Vehicle, VehicleBodyType } from "../types";
 import { HeroSearch } from "../components/HeroSearch";
@@ -35,7 +36,12 @@ export function HomePage({ onSelectVehicle, onNavigate }: HomePageProps) {
       {/* 1. HERO CINEMATOGRÁFICO (DARK LUXURY) */}
       <section className="m-hero">
         <div className="m-hero-bg">
-          <img src="/concepts/apex-cars.jpg" alt="Veículo MOTORA em ambiente urbano" />
+          <Image
+            src="/concepts/apex-cars.jpg"
+            alt="Veículo MOTORA em ambiente urbano"
+            fill
+            sizes="100vw"
+          />
         </div>
         <div className="m-hero-shade" />
 
@@ -121,6 +127,12 @@ export function HomePage({ onSelectVehicle, onNavigate }: HomePageProps) {
                 key={cat.id}
                 className="m-category-card"
                 onClick={() => handleSelectCategory(cat.id)}
+                role="button"
+                tabIndex={0}
+                aria-label={`Ver ${cat.label}`}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") handleSelectCategory(cat.id);
+                }}
                 style={{
                   position: "relative",
                   height: 170,
@@ -131,10 +143,12 @@ export function HomePage({ onSelectVehicle, onNavigate }: HomePageProps) {
                   boxShadow: "var(--m-shadow-subtle)",
                 }}
               >
-                <img
+                <Image
                   src={cat.image}
                   alt={cat.label}
-                  style={{ width: "100%", height: "100%", objectFit: "cover", filter: "brightness(0.55) contrast(1.1)" }}
+                  fill
+                  sizes="(max-width: 1199px) 50vw, 320px"
+                  style={{ objectFit: "cover", filter: "brightness(0.55) contrast(1.1)" }}
                 />
                 <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, transparent 30%, rgba(15, 23, 42, 0.85) 100%)", display: "flex", flexDirection: "column", justifyContent: "flex-end", padding: 16 }}>
                   <strong style={{ fontSize: 14.5, fontWeight: 900, color: "#ffffff", textTransform: "uppercase" }}>

@@ -411,10 +411,11 @@ export function VehiclesListingPage({ onSelectVehicle, onNavigateHome }: Vehicle
 
             {/* SORT SELECTOR */}
             <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-              <label style={{ fontSize: 11, fontWeight: 800, color: "#64748b", textTransform: "uppercase" }}>
+              <label htmlFor="stock-sort" style={{ fontSize: 11, fontWeight: 800, color: "#64748b", textTransform: "uppercase" }}>
                 ORDENAR:
               </label>
               <select
+                id="stock-sort"
                 value={sortOption}
                 onChange={(e) => setSortOption(e.target.value as SortVehicleOption)}
                 style={{
@@ -473,8 +474,8 @@ export function VehiclesListingPage({ onSelectVehicle, onNavigateHome }: Vehicle
 
       {/* FILTER DRAWER / MODAL FOR LAPTOP & MOBILE */}
       {isFilterDrawerOpen && (
-        <div className="m-modal-overlay" onClick={() => setIsFilterDrawerOpen(false)}>
-          <div className="m-modal-card" style={{ background: "#ffffff", color: "#0f172a" }} onClick={(e) => e.stopPropagation()}>
+        <div className="m-modal-overlay" role="presentation" onClick={() => setIsFilterDrawerOpen(false)}>
+          <div className="m-modal-card" role="presentation" style={{ background: "#ffffff", color: "#0f172a" }} onClick={(e) => e.stopPropagation()}>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 18, borderBottom: "1px solid #e2e8f0", paddingBottom: 12 }}>
               <strong style={{ fontSize: 16, color: "#0f172a", textTransform: "uppercase" }}>
                 FILTRAR ESTOQUE

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useCora } from "../store/useCoraStore";
 
 interface HeaderProps {

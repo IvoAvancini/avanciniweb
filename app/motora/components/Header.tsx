@@ -191,8 +191,8 @@ export function Header({ onNavigate, activeView }: HeaderProps) {
 
       {/* MOBILE / TABLET DRAWER */}
       {isMobileDrawerOpen && (
-        <div className="m-mobile-drawer-overlay" onClick={() => setIsMobileDrawerOpen(false)}>
-          <div className="m-mobile-drawer" onClick={(e) => e.stopPropagation()}>
+        <div className="m-mobile-drawer-overlay" role="presentation" onClick={() => setIsMobileDrawerOpen(false)}>
+          <div className="m-mobile-drawer" role="presentation" onClick={(e) => e.stopPropagation()}>
             <div>
               <div className="m-mobile-drawer-head">
                 <span style={{ fontSize: 20, fontWeight: 900, letterSpacing: "0.16em", color: "#ffffff" }}>

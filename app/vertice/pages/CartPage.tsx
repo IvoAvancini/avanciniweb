@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { useVertice } from "../store/useVerticeStore";
 
 interface CartPageProps {
@@ -107,9 +108,11 @@ export function CartPage({ onGoToCheckout, onContinueShopping }: CartPageProps) 
                 alignItems: "center",
               }}
             >
-              <img
+              <Image
                 src={item.product.images[0]}
                 alt={item.product.name}
+                width={100}
+                height={110}
                 style={{ width: 100, height: 110, objectFit: "cover", borderRadius: 2, background: "#18181b" }}
               />
 
@@ -197,11 +200,12 @@ export function CartPage({ onGoToCheckout, onContinueShopping }: CartPageProps) 
 
           {/* SIMULADOR DE CEP */}
           <form onSubmit={handleCalculateZip} style={{ display: "grid", gap: 8 }}>
-            <label style={{ fontSize: 10.5, fontWeight: 800, color: "#8e8e93", textTransform: "uppercase" }}>
+            <label htmlFor="vertice-shipping-zip" style={{ fontSize: 10.5, fontWeight: 800, color: "#8e8e93", textTransform: "uppercase" }}>
               CALCULAR FRETE E PRAZO:
             </label>
             <div style={{ display: "flex", gap: 8 }}>
               <input
+                id="vertice-shipping-zip"
                 type="text"
                 placeholder="00000-000"
                 value={zipInput}

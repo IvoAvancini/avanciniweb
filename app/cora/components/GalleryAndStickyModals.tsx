@@ -1,4 +1,5 @@
-import React, { useEffect, useCallback } from "react";
+import { useEffect, useCallback } from "react";
+import Image from "next/image";
 import { useCora } from "../store/useCoraStore";
 
 export function GalleryModal() {
@@ -109,9 +110,11 @@ export function GalleryModal() {
           ‹
         </button>
 
-        <img
+        <Image
           src={galleryImages[activeGalleryIndex]}
           alt={`Foto ${activeGalleryIndex + 1}`}
+          width={1600}
+          height={1067}
           style={{
             maxHeight: "75vh",
             maxWidth: "90vw",
@@ -157,22 +160,31 @@ export function GalleryModal() {
         }}
       >
         {galleryImages.map((img, idx) => (
-          <img
-            key={idx}
-            src={img}
-            alt={`Miniatura ${idx + 1}`}
-            onClick={() => openGallery(galleryImages, idx)}
-            style={{
-              width: "70px",
-              height: "50px",
-              objectFit: "cover",
-              borderRadius: "4px",
-              cursor: "pointer",
-              opacity: activeGalleryIndex === idx ? 1 : 0.4,
-              border: activeGalleryIndex === idx ? "2px solid var(--cora-accent)" : "2px solid transparent",
-              transition: "all 0.2s",
-            }}
-          />
+          <Image
+          key={idx}
+          src={img}
+          alt={`Miniatura ${idx + 1}`}
+          width={70}
+          height={50}
+          onClick={() => openGallery(galleryImages, idx)}
+          role="button"
+          tabIndex={0}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              openGallery(galleryImages, idx);
+            }
+          }}
+          aria-label={`Abrir foto ${idx + 1}`}
+          style={{
+            objectFit: "cover",
+            borderRadius: "4px",
+            cursor: "pointer",
+            opacity: activeGalleryIndex === idx ? 1 : 0.4,
+            border: activeGalleryIndex === idx ? "2px solid var(--cora-accent)" : "2px solid transparent",
+            transition: "all 0.2s",
+          }}
+        />
         ))}
       </div>
     </div>
@@ -185,11 +197,26 @@ export function FloorPlanModal() {
   if (!isFloorPlanOpen || !activeFloorPlan) return null;
 
   return (
-    <div className="cora-modal-overlay" onClick={closeFloorPlan}>
+    <div
+      className="cora-modal-overlay"
+      onClick={closeFloorPlan}
+      role="button"
+      tabIndex={0}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          closeFloorPlan();
+        }
+      }}
+      aria-label="Fechar planta"
+    >
       <div
         className="cora-modal-card"
         style={{ maxWidth: "840px", padding: "32px" }}
         onClick={(e) => e.stopPropagation()}
+        role="button"
+        tabIndex={0}
+        onKeyDown={(e) => e.stopPropagation()}
       >
         <button
           type="button"
@@ -207,9 +234,11 @@ export function FloorPlanModal() {
         </p>
 
         <div style={{ background: "#fff", padding: "16px", borderRadius: "var(--radius-md)", border: "1px solid var(--cora-border)", textAlign: "center" }}>
-          <img
+          <Image
             src={activeFloorPlan.image}
             alt={activeFloorPlan.name}
+            width={1200}
+            height={800}
             style={{ width: "100%", maxHeight: "60vh", objectFit: "contain", borderRadius: "8px" }}
           />
         </div>

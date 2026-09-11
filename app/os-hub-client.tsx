@@ -53,25 +53,7 @@ const SYNC_FEATURES = [
 
 export function OSHubClient() {
   const [hoveredCard, setHoveredCard] = useState<"dash" | "sync" | null>(null);
-  const [mobileActiveTab, setMobileActiveTab] = useState<"dash" | "sync">("dash");
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
-
-  // Scroll spy para mobile
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.innerWidth > 768) return;
-      const syncEl = document.getElementById("portal-sync");
-      if (!syncEl) return;
-      const rect = syncEl.getBoundingClientRect();
-      if (rect.top <= window.innerHeight * 0.45) {
-        setMobileActiveTab("sync");
-      } else {
-        setMobileActiveTab("dash");
-      }
-    };
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   // Canvas background de partículas leve
   useEffect(() => {
@@ -146,16 +128,6 @@ export function OSHubClient() {
       cancelAnimationFrame(animId);
     };
   }, []);
-
-  const scrollToMobileSection = (id: "portal-dash" | "portal-sync") => {
-    if (window.innerWidth <= 768) {
-      const el = document.getElementById(id);
-      if (el) {
-        el.scrollIntoView({ behavior: "smooth", block: "start" });
-        setMobileActiveTab(id === "portal-dash" ? "dash" : "sync");
-      }
-    }
-  };
 
   return (
     <div className={`os-hub-root os-v2 ${hoveredCard ? `hover-${hoveredCard}` : ""}`}>

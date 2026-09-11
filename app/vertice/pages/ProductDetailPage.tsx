@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import { useVertice } from "../store/useVerticeStore";
 import { Product } from "../types";
 import { ProductCard } from "../components/ProductCard";
@@ -12,7 +13,11 @@ interface ProductDetailPageProps {
   onNavigateCatalog: (category?: string) => void;
 }
 
-export function ProductDetailPage({
+export function ProductDetailPage(props: ProductDetailPageProps) {
+  return <ProductDetailContent key={props.product.id} {...props} />;
+}
+
+function ProductDetailContent({
   product,
   onSelectProduct,
   onNavigateHome,
@@ -29,11 +34,7 @@ export function ProductDetailPage({
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
-    setActiveImageIndex(0);
-    setSelectedColor(product.colors[0]?.name || "");
-    setSelectedSize(product.sizes[0] || "");
-    setQuantity(1);
-  }, [product]);
+  }, []);
 
   // Handle sticky bar visibility
   useEffect(() => {
@@ -86,12 +87,20 @@ export function ProductDetailPage({
         {/* LEFT: GALLERY (60%) */}
         <div className="v-pdp-gallery-grid">
           {product.images.map((imgSrc, idx) => (
-            <img
+            <Image
               key={imgSrc + idx}
               src={imgSrc}
               alt={`${product.name} foto ${idx + 1}`}
               className="v-pdp-gallery-img"
+              width={600}
+              height={720}
+              sizes="(max-width: 768px) 100vw, 50vw"
+              role="button"
+              tabIndex={0}
               onClick={() => setActiveImageIndex(idx)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") setActiveImageIndex(idx);
+              }}
               style={{
                 gridColumn: idx === 0 ? "span 2" : "span 1",
                 border: activeImageIndex === idx ? "1px solid #ffffff" : "1px solid var(--v-border-subtle)",
@@ -247,10 +256,11 @@ export function ProductDetailPage({
             </div>
           </div>
           <div style={{ position: "relative", borderRadius: 2, overflow: "hidden", aspectRatio: "4/3.2", border: "1px solid var(--v-border-subtle)" }}>
-            <img
+            <Image
               src={product.images[1] || product.images[0]}
               alt={product.name}
-              style={{ width: "100%", height: "100%", objectFit: "cover" }}
+              fill
+              sizes="(max-width: 768px) 100vw, 50vw"
             />
           </div>
         </section>
@@ -279,9 +289,11 @@ export function ProductDetailPage({
       {showStickyBar && (
         <div className="v-sticky-cart-bar">
           <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
-            <img
+            <Image
               src={product.images[0]}
               alt={product.name}
+              width={44}
+              height={44}
               style={{ width: 44, height: 44, objectFit: "cover", borderRadius: 2 }}
             />
             <div>

@@ -45,8 +45,8 @@ export function MockWhatsAppModal({ onSelectOption }: MockWhatsAppModalProps) {
   };
 
   return (
-    <div className="m-whatsapp-modal-overlay" onClick={closeWhatsAppModal}>
-      <div className="m-whatsapp-card" onClick={(e) => e.stopPropagation()}>
+    <div className="m-whatsapp-modal-overlay" role="presentation" onClick={closeWhatsAppModal}>
+      <div className="m-whatsapp-card" role="presentation" onClick={(e) => e.stopPropagation()}>
         {/* HEADER */}
         <div className="m-whatsapp-header">
           <div style={{ display: "flex", alignItems: "center", gap: 10 }}>

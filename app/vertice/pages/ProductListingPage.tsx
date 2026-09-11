@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import { useVertice } from "../store/useVerticeStore";
 import { Product, ProductCategory, ProductGender, ProductSport, SortOption } from "../types";
 import { ProductGrid } from "../components/ProductGrid";
@@ -12,7 +12,6 @@ interface ProductListingPageProps {
 
 export function ProductListingPage({ onSelectProduct, onNavigateHome }: ProductListingPageProps) {
   const { products, filters, setFilters, sortOption, setSortOption, resetFilters } = useVertice();
-  const [isFilterDrawerOpen, setIsFilterDrawerOpen] = useState(false);
 
   const categories: { id: ProductCategory | "all"; label: string }[] = [
     { id: "all", label: "Todas as Categorias" },
@@ -115,10 +114,11 @@ export function ProductListingPage({ onSelectProduct, onNavigateHome }: ProductL
 
         <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
           {/* SORT SELECTOR */}
-          <label style={{ fontSize: 10.5, fontWeight: 800, color: "#8e8e93", textTransform: "uppercase", letterSpacing: "0.1em" }}>
+          <label htmlFor="vertice-sort" style={{ fontSize: 10.5, fontWeight: 800, color: "#8e8e93", textTransform: "uppercase", letterSpacing: "0.1em" }}>
             ORDENAR POR:
           </label>
           <select
+            id="vertice-sort"
             value={sortOption}
             onChange={(e) => setSortOption(e.target.value as SortOption)}
             style={{
@@ -150,32 +150,81 @@ export function ProductListingPage({ onSelectProduct, onNavigateHome }: ProductL
             FILTROS ATIVOS:
           </span>
           {filters.category !== "all" && (
-            <span className="v-search-tag-chip" onClick={() => setFilters((prev) => ({ ...prev, category: "all" }))}>
+            <span
+              className="v-search-tag-chip"
+              onClick={() => setFilters((prev) => ({ ...prev, category: "all" }))}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") setFilters((prev) => ({ ...prev, category: "all" }));
+              }}
+            >
               Categoria: {filters.category} ✕
             </span>
           )}
           {filters.gender !== "all" && (
-            <span className="v-search-tag-chip" onClick={() => setFilters((prev) => ({ ...prev, gender: "all" }))}>
+            <span
+              className="v-search-tag-chip"
+              onClick={() => setFilters((prev) => ({ ...prev, gender: "all" }))}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") setFilters((prev) => ({ ...prev, gender: "all" }));
+              }}
+            >
               Gênero: {filters.gender} ✕
             </span>
           )}
           {filters.sport !== "all" && (
-            <span className="v-search-tag-chip" onClick={() => setFilters((prev) => ({ ...prev, sport: "all" }))}>
+            <span
+              className="v-search-tag-chip"
+              onClick={() => setFilters((prev) => ({ ...prev, sport: "all" }))}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") setFilters((prev) => ({ ...prev, sport: "all" }));
+              }}
+            >
               Esporte: {filters.sport} ✕
             </span>
           )}
           {filters.sizes.map((size) => (
-            <span key={size} className="v-search-tag-chip" onClick={() => toggleSize(size)}>
+            <span
+              key={size}
+              className="v-search-tag-chip"
+              onClick={() => toggleSize(size)}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") toggleSize(size);
+              }}
+            >
               Tam: {size} ✕
             </span>
           ))}
           {filters.onlyOffers && (
-            <span className="v-search-tag-chip" onClick={() => setFilters((prev) => ({ ...prev, onlyOffers: false }))}>
+            <span
+              className="v-search-tag-chip"
+              onClick={() => setFilters((prev) => ({ ...prev, onlyOffers: false }))}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") setFilters((prev) => ({ ...prev, onlyOffers: false }));
+              }}
+            >
               Apenas Ofertas ✕
             </span>
           )}
           {filters.onlyNew && (
-            <span className="v-search-tag-chip" onClick={() => setFilters((prev) => ({ ...prev, onlyNew: false }))}>
+            <span
+              className="v-search-tag-chip"
+              onClick={() => setFilters((prev) => ({ ...prev, onlyNew: false }))}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") setFilters((prev) => ({ ...prev, onlyNew: false }));
+              }}
+            >
               Apenas Lançamentos ✕
             </span>
           )}

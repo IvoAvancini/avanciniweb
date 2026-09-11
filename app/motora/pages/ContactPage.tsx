@@ -68,8 +68,9 @@ export function ContactPage() {
 
           <form onSubmit={handleSubmit} style={{ display: "grid", gap: 14 }}>
             <div style={{ display: "grid", gap: 5 }}>
-              <label style={{ fontSize: 11, fontWeight: 800, color: "#475569", textTransform: "uppercase" }}>NOME COMPLETO</label>
+              <label htmlFor="ct-name" style={{ fontSize: 11, fontWeight: 800, color: "#475569", textTransform: "uppercase" }}>NOME COMPLETO</label>
               <input
+                id="ct-name"
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
@@ -80,8 +81,9 @@ export function ContactPage() {
 
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: 12 }}>
               <div style={{ display: "grid", gap: 5 }}>
-                <label style={{ fontSize: 11, fontWeight: 800, color: "#475569", textTransform: "uppercase" }}>TELEFONE / WHATSAPP</label>
+                <label htmlFor="ct-phone" style={{ fontSize: 11, fontWeight: 800, color: "#475569", textTransform: "uppercase" }}>TELEFONE / WHATSAPP</label>
                 <input
+                  id="ct-phone"
                   type="text"
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
@@ -90,8 +92,9 @@ export function ContactPage() {
                 />
               </div>
               <div style={{ display: "grid", gap: 5 }}>
-                <label style={{ fontSize: 11, fontWeight: 800, color: "#475569", textTransform: "uppercase" }}>E-MAIL</label>
+                <label htmlFor="ct-email" style={{ fontSize: 11, fontWeight: 800, color: "#475569", textTransform: "uppercase" }}>E-MAIL</label>
                 <input
+                  id="ct-email"
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
@@ -102,8 +105,9 @@ export function ContactPage() {
             </div>
 
             <div style={{ display: "grid", gap: 5 }}>
-              <label style={{ fontSize: 11, fontWeight: 800, color: "#475569", textTransform: "uppercase" }}>ASSUNTO</label>
+              <label htmlFor="ct-subject" style={{ fontSize: 11, fontWeight: 800, color: "#475569", textTransform: "uppercase" }}>ASSUNTO</label>
               <select
+                id="ct-subject"
                 value={subject}
                 onChange={(e) => setSubject(e.target.value)}
                 style={{ background: "#f8fafc", border: "1px solid var(--m-light-border)", borderRadius: 4, padding: "10px 14px", color: "#0f172a", fontSize: 13.5, outline: "none" }}
@@ -117,8 +121,9 @@ export function ContactPage() {
             </div>
 
             <div style={{ display: "grid", gap: 5 }}>
-              <label style={{ fontSize: 11, fontWeight: 800, color: "#475569", textTransform: "uppercase" }}>MENSAGEM</label>
+              <label htmlFor="ct-message" style={{ fontSize: 11, fontWeight: 800, color: "#475569", textTransform: "uppercase" }}>MENSAGEM</label>
               <textarea
+                id="ct-message"
                 rows={4}
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}

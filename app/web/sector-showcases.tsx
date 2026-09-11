@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo, type CSSProperties, type ReactNode } from "react";
+import { useState, useMemo } from "react";
 import Image from "next/image";
 import styles from "./sector-showcases.module.css";
 
@@ -35,13 +35,6 @@ const ArrowVector = () => (
     <line x1="5" y1="12" x2="19" y2="12" />
     <polyline points="12 5 19 12 12 19" />
   </svg>
-);
-
-const StaticAction = ({ children, light = false, onClick }: { children: ReactNode; light?: boolean; onClick?: () => void }) => (
-  <button type="button" className={`${styles.action} ${light ? styles.actionLight : ""}`} onClick={onClick}>
-    {children}
-    <ArrowVector />
-  </button>
 );
 
 const formatBRL = (val: number) =>

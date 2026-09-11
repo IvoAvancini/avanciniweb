@@ -2,10 +2,11 @@
 
 import { useState } from "react";
 import { useMotora } from "../store/useMotoraStore";
+import { FinancingSimulation } from "../types";
 
 interface FinancingCalculatorProps {
   vehiclePrice?: number;
-  onApplyForFinancing?: (simulation: any) => void;
+  onApplyForFinancing?: (simulation: FinancingSimulation) => void;
 }
 
 export function FinancingCalculator({
@@ -50,8 +51,9 @@ export function FinancingCalculator({
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(140px, 1fr))", gap: 16 }}>
         {/* VALOR DO VEÍCULO */}
         <div style={{ display: "grid", gap: 6 }}>
-          <label style={{ fontSize: 11, fontWeight: 800, color: "#475569", textTransform: "uppercase" }}>VALOR DO VEÍCULO</label>
+          <label htmlFor="fc-price" style={{ fontSize: 11, fontWeight: 800, color: "#475569", textTransform: "uppercase" }}>VALOR DO VEÍCULO</label>
           <input
+            id="fc-price"
             type="number"
             value={price}
             onChange={(e) => {
@@ -79,10 +81,10 @@ export function FinancingCalculator({
 
       {/* PRAZO EM PARCELAS */}
       <div>
-        <label style={{ fontSize: 11, fontWeight: 800, color: "#475569", textTransform: "uppercase", display: "block", marginBottom: 8 }}>
+        <span style={{ fontSize: 11, fontWeight: 800, color: "#475569", textTransform: "uppercase", display: "block", marginBottom: 8 }}>
           NÚMERO DE PARCELAS:
-        </label>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: 6 }}>
+        </span>
+        <div role="radiogroup" aria-label="Número de parcelas" style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: 6 }}>
           {[12, 24, 36, 48, 60].map((num) => (
             <button
               key={num}

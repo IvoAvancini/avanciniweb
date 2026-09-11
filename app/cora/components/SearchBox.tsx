@@ -1,6 +1,7 @@
 import React, { useState } from "react";
+import Image from "next/image";
 import { useCora } from "../store/useCoraStore";
-import { PropertyType } from "../types";
+import { PropertyType, Property } from "../types";
 
 interface SearchBoxProps {
   onSearchSubmit?: () => void;
@@ -158,7 +159,7 @@ export function SearchOverlay({
   onSelectProperty,
   onNavigate,
 }: {
-  onSelectProperty: (property: any) => void;
+  onSelectProperty: (property: Property) => void;
   onNavigate: (view: string, param?: string) => void;
 }) {
   const { isSearchOpen, setIsSearchOpen, properties, neighborhoods } = useCora();
@@ -183,11 +184,26 @@ export function SearchOverlay({
     : neighborhoods.slice(0, 3);
 
   return (
-    <div className="cora-modal-overlay" onClick={() => setIsSearchOpen(false)}>
+    <div
+      className="cora-modal-overlay"
+      onClick={() => setIsSearchOpen(false)}
+      role="button"
+      tabIndex={0}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          setIsSearchOpen(false);
+        }
+      }}
+      aria-label="Fechar busca"
+    >
       <div
         className="cora-modal-card"
         style={{ maxWidth: "680px", padding: "24px" }}
         onClick={(e) => e.stopPropagation()}
+        role="button"
+        tabIndex={0}
+        onKeyDown={(e) => e.stopPropagation()}
       >
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "16px" }}>
           <span className="cora-eyebrow" style={{ margin: 0 }}>
@@ -209,7 +225,9 @@ export function SearchOverlay({
             placeholder="Buscar por bairro, condomínio, rua ou código #CORA..."
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            autoFocus
+            ref={(el) => {
+              if (el) el.focus();
+            }}
             style={{
               width: "100%",
               height: "54px",
@@ -277,6 +295,15 @@ export function SearchOverlay({
                   setIsSearchOpen(false);
                   onSelectProperty(p);
                 }}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    setIsSearchOpen(false);
+                    onSelectProperty(p);
+                  }
+                }}
                 style={{
                   display: "grid",
                   gridTemplateColumns: "70px 1fr auto",
@@ -291,10 +318,12 @@ export function SearchOverlay({
                 onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "var(--cora-surface)")}
                 onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "transparent")}
               >
-                <img
+                <Image
                   src={p.images[0]}
                   alt={p.title}
-                  style={{ width: "70px", height: "54px", objectFit: "cover", borderRadius: "6px" }}
+                  width={70}
+                  height={54}
+                  style={{ objectFit: "cover", borderRadius: "6px" }}
                 />
                 <div style={{ textAlign: "left" }}>
                   <h4 style={{ fontSize: "13.5px", fontWeight: 700, margin: 0, color: "var(--cora-ink)" }}>

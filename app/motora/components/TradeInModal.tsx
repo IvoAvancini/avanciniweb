@@ -9,13 +9,13 @@ export function TradeInModal() {
   const [brand, setBrand] = useState("Toyota");
   const [model, setModel] = useState("Corolla");
   const [year, setYear] = useState("2021");
-  const [version, setVersion] = useState("2.0 XEi Flex");
+  const [version] = useState("2.0 XEi Flex");
   const [mileage, setMileage] = useState(48000);
   const [color, setColor] = useState("Prata");
-  const [city, setCity] = useState("São Paulo - SP");
+  const [city] = useState("São Paulo - SP");
   const [userName, setUserName] = useState("João Silva");
   const [userPhone, setUserPhone] = useState("(11) 98765-4321");
-  const [userEmail, setUserEmail] = useState("joao.silva@exemplo.com");
+  const [userEmail] = useState("joao.silva@exemplo.com");
 
   if (!isTradeInModalOpen) return null;
 
@@ -36,8 +36,8 @@ export function TradeInModal() {
   };
 
   return (
-    <div className="m-modal-overlay" onClick={closeTradeInModal}>
-      <div className="m-modal-card" onClick={(e) => e.stopPropagation()}>
+    <div className="m-modal-overlay" role="presentation" onClick={closeTradeInModal}>
+      <div className="m-modal-card" role="presentation" onClick={(e) => e.stopPropagation()}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 20 }}>
           <div>
             <span style={{ fontSize: 10.5, fontWeight: 900, letterSpacing: "0.18em", color: "#f59e0b", textTransform: "uppercase" }}>
@@ -64,8 +64,9 @@ export function TradeInModal() {
         <form onSubmit={handleSubmit} style={{ display: "grid", gap: 16 }}>
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
             <div style={{ display: "grid", gap: 6 }}>
-              <label style={{ fontSize: 10.5, fontWeight: 800, color: "#8e8e98", textTransform: "uppercase" }}>MARCA</label>
+              <label htmlFor="tim-brand" style={{ fontSize: 10.5, fontWeight: 800, color: "#8e8e98", textTransform: "uppercase" }}>MARCA</label>
               <input
+                id="tim-brand"
                 type="text"
                 value={brand}
                 onChange={(e) => setBrand(e.target.value)}
@@ -74,8 +75,9 @@ export function TradeInModal() {
               />
             </div>
             <div style={{ display: "grid", gap: 6 }}>
-              <label style={{ fontSize: 10.5, fontWeight: 800, color: "#8e8e98", textTransform: "uppercase" }}>MODELO</label>
+              <label htmlFor="tim-model" style={{ fontSize: 10.5, fontWeight: 800, color: "#8e8e98", textTransform: "uppercase" }}>MODELO</label>
               <input
+                id="tim-model"
                 type="text"
                 value={model}
                 onChange={(e) => setModel(e.target.value)}
@@ -87,8 +89,9 @@ export function TradeInModal() {
 
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 16 }}>
             <div style={{ display: "grid", gap: 6 }}>
-              <label style={{ fontSize: 10.5, fontWeight: 800, color: "#8e8e98", textTransform: "uppercase" }}>ANO</label>
+              <label htmlFor="tim-year" style={{ fontSize: 10.5, fontWeight: 800, color: "#8e8e98", textTransform: "uppercase" }}>ANO</label>
               <input
+                id="tim-year"
                 type="text"
                 value={year}
                 onChange={(e) => setYear(e.target.value)}
@@ -97,8 +100,9 @@ export function TradeInModal() {
               />
             </div>
             <div style={{ display: "grid", gap: 6 }}>
-              <label style={{ fontSize: 10.5, fontWeight: 800, color: "#8e8e98", textTransform: "uppercase" }}>KM ATUAL</label>
+              <label htmlFor="tim-mileage" style={{ fontSize: 10.5, fontWeight: 800, color: "#8e8e98", textTransform: "uppercase" }}>KM ATUAL</label>
               <input
+                id="tim-mileage"
                 type="number"
                 value={mileage}
                 onChange={(e) => setMileage(Number(e.target.value))}
@@ -107,8 +111,9 @@ export function TradeInModal() {
               />
             </div>
             <div style={{ display: "grid", gap: 6 }}>
-              <label style={{ fontSize: 10.5, fontWeight: 800, color: "#8e8e98", textTransform: "uppercase" }}>COR</label>
+              <label htmlFor="tim-color" style={{ fontSize: 10.5, fontWeight: 800, color: "#8e8e98", textTransform: "uppercase" }}>COR</label>
               <input
+                id="tim-color"
                 type="text"
                 value={color}
                 onChange={(e) => setColor(e.target.value)}
@@ -120,8 +125,9 @@ export function TradeInModal() {
 
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
             <div style={{ display: "grid", gap: 6 }}>
-              <label style={{ fontSize: 10.5, fontWeight: 800, color: "#8e8e98", textTransform: "uppercase" }}>SEU NOME</label>
+              <label htmlFor="tim-name" style={{ fontSize: 10.5, fontWeight: 800, color: "#8e8e98", textTransform: "uppercase" }}>SEU NOME</label>
               <input
+                id="tim-name"
                 type="text"
                 value={userName}
                 onChange={(e) => setUserName(e.target.value)}
@@ -130,8 +136,9 @@ export function TradeInModal() {
               />
             </div>
             <div style={{ display: "grid", gap: 6 }}>
-              <label style={{ fontSize: 10.5, fontWeight: 800, color: "#8e8e98", textTransform: "uppercase" }}>WHATSAPP</label>
+              <label htmlFor="tim-phone" style={{ fontSize: 10.5, fontWeight: 800, color: "#8e8e98", textTransform: "uppercase" }}>WHATSAPP</label>
               <input
+                id="tim-phone"
                 type="text"
                 value={userPhone}
                 onChange={(e) => setUserPhone(e.target.value)}

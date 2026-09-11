@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useVertice } from "../store/useVerticeStore";
 
 interface CartDrawerProps {
@@ -29,8 +30,23 @@ export function CartDrawer({ onGoToCart, onGoToCheckout }: CartDrawerProps) {
     new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(val);
 
   return (
-    <div className="v-drawer-overlay" onClick={closeCart}>
-      <div className="v-drawer-body" onClick={(e) => e.stopPropagation()}>
+    <div
+      className="v-drawer-overlay"
+      onClick={closeCart}
+      role="button"
+      tabIndex={0}
+      aria-label="Fechar sacola"
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") closeCart();
+      }}
+    >
+      <div
+        className="v-drawer-body"
+        onClick={(e) => e.stopPropagation()}
+        role="button"
+        tabIndex={0}
+        onKeyDown={(e) => e.stopPropagation()}
+      >
         {/* HEADER */}
         <div className="v-drawer-head">
           <h3>SUA SACOLA ({cartCount})</h3>
@@ -68,7 +84,13 @@ export function CartDrawer({ onGoToCart, onGoToCheckout }: CartDrawerProps) {
           ) : (
             cart.map((item) => (
               <div key={item.id} className="v-cart-item-card">
-                <img src={item.product.images[0]} alt={item.product.name} className="v-cart-item-img" />
+                <Image
+                  src={item.product.images[0]}
+                  alt={item.product.name}
+                  width={84}
+                  height={100}
+                  className="v-cart-item-img"
+                />
                 <div className="v-cart-item-info">
                   <div>
                     <h4 className="v-cart-item-title">{item.product.name}</h4>

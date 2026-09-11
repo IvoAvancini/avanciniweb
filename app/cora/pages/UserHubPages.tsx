@@ -1,6 +1,6 @@
-import React from "react";
 import { useCora } from "../store/useCoraStore";
 import { Property } from "../types";
+import Image from "next/image";
 import { Breadcrumbs, EmptyState } from "../components/CommonComponents";
 import { PropertyCard } from "../components/PropertyCard";
 
@@ -78,10 +78,24 @@ export function ComparePage({
               {comparedProperties.map((p) => (
                 <th key={p.id} style={{ padding: "16px", width: `${80 / comparedProperties.length}%`, borderBottom: "2px solid var(--cora-border)" }}>
                   <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: "10px" }}>
-                    <div onClick={() => onSelectProperty(p)} style={{ cursor: "pointer" }}>
-                      <img
+                    <div
+                      onClick={() => onSelectProperty(p)}
+                      role="button"
+                      tabIndex={0}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter" || e.key === " ") {
+                          e.preventDefault();
+                          onSelectProperty(p);
+                        }
+                      }}
+                      aria-label={`Ver detalhes de ${p.title}`}
+                      style={{ cursor: "pointer" }}
+                    >
+                      <Image
                         src={p.images[0]}
                         alt={p.title}
+                        width={640}
+                        height={140}
                         style={{ width: "100%", height: "140px", objectFit: "cover", borderRadius: "8px", marginBottom: "10px" }}
                       />
                       <strong style={{ fontSize: "15px", display: "block", color: "var(--cora-ink)" }}>{p.title}</strong>
@@ -237,15 +251,13 @@ export function FavoritesPage({
 export function MyCoraPage({
   onSelectProperty,
   onNavigateHome,
-  onNavigateProperties,
   onNavigateSchedule,
-  onNavigateSubmit,
 }: {
   onSelectProperty: (property: Property) => void;
   onNavigateHome: () => void;
-  onNavigateProperties: () => void;
   onNavigateSchedule: () => void;
-  onNavigateSubmit: () => void;
+  onNavigateProperties?: () => void;
+  onNavigateSubmit?: () => void;
 }) {
   const {
     favorites,
@@ -353,10 +365,12 @@ export function MyCoraPage({
                 }}
               >
                 <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
-                  <img
+                  <Image
                     src={v.propertyImage}
                     alt={v.propertyTitle}
-                    style={{ width: "64px", height: "50px", borderRadius: "6px", objectFit: "cover" }}
+                    width={64}
+                    height={50}
+                    style={{ borderRadius: "6px", objectFit: "cover" }}
                   />
                   <div>
                     <span style={{ fontSize: "11px", fontWeight: 800, color: "var(--cora-accent)", letterSpacing: "0.08em" }}>

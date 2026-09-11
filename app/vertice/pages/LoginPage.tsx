@@ -42,8 +42,9 @@ export function LoginPage({ onSuccess }: LoginPageProps) {
         <form onSubmit={handleSubmit} style={{ display: "grid", gap: 18 }}>
           {isRegister && (
             <div style={{ display: "grid", gap: 6 }}>
-              <label style={{ fontSize: 10.5, fontWeight: 800, color: "#8e8e93", textTransform: "uppercase", letterSpacing: "0.08em" }}>SEU NOME COMPLETO</label>
+              <label htmlFor="vertice-login-name" style={{ fontSize: 10.5, fontWeight: 800, color: "#8e8e93", textTransform: "uppercase", letterSpacing: "0.08em" }}>SEU NOME COMPLETO</label>
               <input
+                id="vertice-login-name"
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
@@ -54,8 +55,9 @@ export function LoginPage({ onSuccess }: LoginPageProps) {
           )}
 
           <div style={{ display: "grid", gap: 6 }}>
-            <label style={{ fontSize: 10.5, fontWeight: 800, color: "#8e8e93", textTransform: "uppercase", letterSpacing: "0.08em" }}>E-MAIL</label>
+            <label htmlFor="vertice-login-email" style={{ fontSize: 10.5, fontWeight: 800, color: "#8e8e93", textTransform: "uppercase", letterSpacing: "0.08em" }}>E-MAIL</label>
             <input
+              id="vertice-login-email"
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -66,7 +68,7 @@ export function LoginPage({ onSuccess }: LoginPageProps) {
 
           <div style={{ display: "grid", gap: 6 }}>
             <div style={{ display: "flex", justifyContent: "space-between", fontSize: 11 }}>
-              <label style={{ fontWeight: 800, color: "#8e8e93", textTransform: "uppercase", letterSpacing: "0.08em" }}>SENHA</label>
+              <label htmlFor="vertice-login-password" style={{ fontWeight: 800, color: "#8e8e93", textTransform: "uppercase", letterSpacing: "0.08em" }}>SENHA</label>
               {!isRegister && (
                 <button
                   type="button"
@@ -78,6 +80,7 @@ export function LoginPage({ onSuccess }: LoginPageProps) {
               )}
             </div>
             <input
+              id="vertice-login-password"
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Image from "next/image";
 import { useCora } from "../store/useCoraStore";
 
 export function MockWhatsAppModal({ onNavigate }: { onNavigate?: (view: string, param?: string) => void }) {
@@ -77,7 +78,19 @@ export function MockWhatsAppModal({ onNavigate }: { onNavigate?: (view: string, 
   };
 
   return (
-    <div className="cora-modal-overlay" onClick={closeWhatsAppModal}>
+    <div
+      className="cora-modal-overlay"
+      onClick={closeWhatsAppModal}
+      role="button"
+      tabIndex={0}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          closeWhatsAppModal();
+        }
+      }}
+      aria-label="Fechar WhatsApp"
+    >
       <div
         className="cora-modal-card"
         style={{
@@ -88,6 +101,9 @@ export function MockWhatsAppModal({ onNavigate }: { onNavigate?: (view: string, 
           boxShadow: "0 25px 80px rgba(0,0,0,0.3)",
         }}
         onClick={(e) => e.stopPropagation()}
+        role="button"
+        tabIndex={0}
+        onKeyDown={(e) => e.stopPropagation()}
       >
         {/* HEADER WHATSAPP */}
         <div
@@ -280,11 +296,26 @@ export function LeadConsultantModal() {
   };
 
   return (
-    <div className="cora-modal-overlay" onClick={handleClose}>
+    <div
+      className="cora-modal-overlay"
+      onClick={handleClose}
+      role="button"
+      tabIndex={0}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          handleClose();
+        }
+      }}
+      aria-label="Fechar formulário de contato com consultor"
+    >
       <div
         className="cora-modal-card"
         style={{ maxWidth: "520px", padding: "32px" }}
         onClick={(e) => e.stopPropagation()}
+        role="button"
+        tabIndex={0}
+        onKeyDown={(e) => e.stopPropagation()}
       >
         <button
           type="button"
@@ -297,10 +328,12 @@ export function LeadConsultantModal() {
         {!sent ? (
           <div>
             <div style={{ display: "flex", alignItems: "center", gap: "16px", marginBottom: "20px" }}>
-              <img
+              <Image
                 src={selectedConsultant.photo}
                 alt={selectedConsultant.name}
-                style={{ width: "64px", height: "64px", borderRadius: "50%", objectFit: "cover" }}
+                width={64}
+                height={64}
+                style={{ borderRadius: "50%", objectFit: "cover" }}
               />
               <div>
                 <span className="cora-eyebrow" style={{ margin: 0 }}>Consultor Cora</span>

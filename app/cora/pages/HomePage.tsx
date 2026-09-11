@@ -1,6 +1,6 @@
-import React from "react";
 import { useCora } from "../store/useCoraStore";
-import { Property } from "../types";
+import { Property, LifestyleCategory } from "../types";
+import Image from "next/image";
 import { SearchBox } from "../components/SearchBox";
 import { PropertyCard } from "../components/PropertyCard";
 import { SectionHeader } from "../components/SectionHeader";
@@ -49,7 +49,7 @@ export function HomePage({ onSelectProperty, onNavigate }: HomePageProps) {
   ];
 
   const handleSelectLifestyle = (lifestyleId: string) => {
-    setFilters((p) => ({ ...p, lifestyle: lifestyleId as any }));
+    setFilters((p) => ({ ...p, lifestyle: lifestyleId as LifestyleCategory }));
     onNavigate("properties");
   };
 
@@ -58,10 +58,13 @@ export function HomePage({ onSelectProperty, onNavigate }: HomePageProps) {
       {/* 1. HERO CINEMATOGRÁFICO */}
       <section className="cora-hero" id="inicio">
         <div className="cora-hero-bg-wrapper">
-          <img
+          <Image
             src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1920&q=85"
             alt="Arquitetura de alto padrão Cora Imóveis"
             className="cora-hero-bg-image"
+            fill
+            sizes="100vw"
+            priority
           />
           <div className="cora-hero-overlay" />
         </div>
@@ -148,11 +151,20 @@ export function HomePage({ onSelectProperty, onNavigate }: HomePageProps) {
                 className="cora-lifestyle-card"
                 role="button"
                 tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    handleSelectLifestyle(l.id);
+                  }
+                }}
+                aria-label={`Explorar estilo de vida ${l.title}`}
               >
-                <img
+                <Image
                   src={l.image}
                   alt={l.title}
                   className="cora-lifestyle-card-img"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
                   loading="lazy"
                 />
                 <div className="cora-lifestyle-card-overlay" />
@@ -185,11 +197,20 @@ export function HomePage({ onSelectProperty, onNavigate }: HomePageProps) {
                 className="cora-neighborhood-card"
                 role="button"
                 tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    onNavigate("neighborhood-detail", n.slug);
+                  }
+                }}
+                aria-label={`Ver bairro ${n.name}`}
               >
-                <img
+                <Image
                   src={n.image}
                   alt={n.name}
                   className="cora-neighborhood-card-img"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 33vw"
                   loading="lazy"
                 />
                 <div className="cora-neighborhood-card-overlay" />
@@ -224,6 +245,15 @@ export function HomePage({ onSelectProperty, onNavigate }: HomePageProps) {
               <div
                 key={l.id}
                 onClick={() => onNavigate("launch-detail", l.slug)}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    onNavigate("launch-detail", l.slug);
+                  }
+                }}
+                aria-label={`Ver lançamento ${l.title}`}
                 style={{
                   background: "var(--cora-surface)",
                   borderRadius: "var(--radius-md)",
@@ -236,10 +266,13 @@ export function HomePage({ onSelectProperty, onNavigate }: HomePageProps) {
                 }}
               >
                 <div style={{ position: "relative", width: "100%", aspectRatio: "16 / 10" }}>
-                  <img
+                  <Image
                     src={l.image}
                     alt={l.title}
-                    style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                    loading="lazy"
+                    style={{ objectFit: "cover" }}
                   />
                   <div style={{ position: "absolute", top: "14px", left: "14px" }}>
                     <span className="cora-badge cora-badge-accent">

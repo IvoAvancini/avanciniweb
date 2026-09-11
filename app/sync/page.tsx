@@ -68,7 +68,7 @@ const syncHeroAudiences = [
 ] as const;
 
 function SyncAudienceTypewriter() {
-  const [text, setText] = useState("");
+  const [text, setText] = useState<string>(syncHeroAudiences[0]);
   const [audienceIndex, setAudienceIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
 
@@ -81,7 +81,7 @@ function SyncAudienceTypewriter() {
         if (text.length < currentWord.length) {
           setText(currentWord.slice(0, text.length + 1));
         } else {
-          window.setTimeout(() => setIsDeleting(true), 2200);
+          window.setTimeout(() => setIsDeleting(true), 2400);
         }
       } else {
         if (text.length > 0) {
@@ -97,7 +97,7 @@ function SyncAudienceTypewriter() {
   }, [text, isDeleting, audienceIndex]);
 
   return (
-    <span className="hero-typewriter-dynamic sync-typewriter-dynamic">
+    <span className="hero-typewriter-dynamic sync-typewriter-dynamic" aria-live="polite">
       <strong className="hero-typewriter-target">{text}</strong>
       <span className="hero-typewriter-cursor" aria-hidden="true">|</span>
     </span>
@@ -359,36 +359,6 @@ const commercialJourney = [
 ];
 
 /* --------------------------------------------------------------------------
-   COMPARATIVO FINANCEIRO: CUSTO DE FUNCIONÁRIO VS. MULTIAGENTE IA
-   -------------------------------------------------------------------------- */
-const financialComparison = {
-  employee: {
-    title: "Ampliar Equipe Tradicional",
-    subtitle: "Custo total de contratação para tarefas operacionais",
-    items: [
-      { label: "Salário base + encargos CLT", detail: "Encargos e impostos somam até 70% a mais na folha mensal" },
-      { label: "Benefícios obrigatórios e provisões", detail: "VT, VR, férias proporcionais, 13º salário e rescisões contratuais" },
-      { label: "Treinamento e tempo de adaptação", detail: "Semanas de treino com risco contínuo de rotatividade (turnover)" },
-      { label: "Horário restrito (8h/dia)", detail: "Sem cobertura em noites, madrugadas, finais de semana e feriados" },
-      { label: "Gargalo no atendimento simultâneo", detail: "Atendente humano não consegue atender dezenas de chats no pico" },
-    ],
-    verdict: "Custo alto e difícil de escalar sem inflar a folha",
-  },
-  aiAgent: {
-    title: "Equipe Multiagente de IA",
-    subtitle: "Supervisor e especialistas calibrados no seu negócio",
-    items: [
-      { label: "Investimento fixo e previsível", detail: "Mensalidade acessível, sem encargos trabalhistas nem rescisões" },
-      { label: "Disponibilidade 24 horas por dia", detail: "Atende noites, domingos e feriados com o mesmo padrão" },
-      { label: "Treinamento sob medida incluso", detail: "Calibrado com dados e regras da sua empresa antes de operar" },
-      { label: "Escala simultânea elástica", detail: "Atende centenas de clientes juntos sem criar fila de espera" },
-      { label: "Alívio imediato para sua equipe", detail: "Seus colaboradores focam em negociações e fechamentos" },
-    ],
-    verdict: "Pode custar menos de 20% do custo de uma contratação",
-  },
-};
-
-/* --------------------------------------------------------------------------
    NICHOS ESPECÍFICOS: O QUE A IA EXECUTA EM CADA SEGMENTO
    -------------------------------------------------------------------------- */
 const nicheSolutions = [
@@ -476,17 +446,6 @@ const nicheSolutions = [
    PLANOS SIMPLIFICADOS — ARQUITETURA MULTIAGENTE INCLUSA EM TODOS
    Valores transparentes e foco nas dores reais das empresas.
    -------------------------------------------------------------------------- */
-type CapabilityItem = {
-  icon: string;
-  title: string;
-  desc: string;
-};
-
-type PlanFeature = {
-  title: string;
-  desc: string;
-};
-
 type SyncPlanSimple = {
   id: string;
   name: string;
@@ -552,9 +511,6 @@ const simplifiedPlans: SyncPlanSimple[] = [
     featured: false,
   },
 ];
-
-const formatMoney = (val: number) =>
-  `R$ ${val.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 
 const faqsCommercial = [
   {
@@ -626,12 +582,9 @@ export default function AvanciniSyncPage() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [leadContext, setLeadContext] = useState("");
-  const [selectedFormat, setSelectedFormat] = useState<"essencial" | "pro">("pro");
-  const [showAllMobileSync, setShowAllMobileSync] = useState(false);
   const [activeSupervisorIndex, setActiveSupervisorIndex] = useState(0);
   const [activeJourneyIndex, setActiveJourneyIndex] = useState(0);
   const [activeNicheIndex, setActiveNicheIndex] = useState(0);
-  const [dailyContacts, setDailyContacts] = useState(60);
   const [clientTicket, setClientTicket] = useState(800);
   const [missedWeekendLeads, setMissedWeekendLeads] = useState(3);
   const [simulating, setSimulating] = useState(false);
@@ -779,19 +732,17 @@ export default function AvanciniSyncPage() {
     setLeadError("");
     setLeadSubmitting(true);
 
-    try {
-      fetch("/api/lead", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name,
-          phone: fullPhone,
-          intent: `Quero conversar sobre ${normalizedLeadContext}`,
-          source: "sync_multiagent",
-          page: "/sync",
-        }),
-      }).catch(() => {});
-    } catch {}
+    fetch("/api/lead", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        name,
+        phone: fullPhone,
+        intent: `Quero conversar sobre ${normalizedLeadContext}`,
+        source: "sync_multiagent",
+        page: "/sync",
+      }),
+    }).catch((err) => console.error("[Lead API Error]", err));
 
     const phoneText = fullPhone ? ` Meu WhatsApp é ${fullPhone}.` : "";
     const message = `Olá! Meu nome é ${name}.${phoneText} Conheci o Avancini Sync e quero saber mais sobre ${normalizedLeadContext}.`;
@@ -2223,7 +2174,7 @@ export default function AvanciniSyncPage() {
                           placeholder="Buscar país..."
                           value={ddiSearch}
                           onChange={(e) => setDdiSearch(e.target.value)}
-                          autoFocus
+                          ref={(el) => el?.focus()}
                           aria-label="Buscar país"
                         />
                       </div>

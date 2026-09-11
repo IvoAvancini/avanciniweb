@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { useVertice } from "../store/useVerticeStore";
 import { Order } from "../types";
 
@@ -150,8 +151,9 @@ export function CheckoutPage({ onOrderCompleted, onBackToCart }: CheckoutPagePro
               <h2 style={{ fontSize: 16, fontWeight: 900, color: "#ffffff", margin: 0, textTransform: "uppercase", letterSpacing: "0.08em" }}>1. DADOS DE IDENTIFICAÇÃO</h2>
 
               <div style={{ display: "grid", gap: 6 }}>
-                <label style={{ fontSize: 10.5, fontWeight: 800, color: "#8e8e93", textTransform: "uppercase", letterSpacing: "0.08em" }}>NOME COMPLETO</label>
+                <label htmlFor="vertice-name" style={{ fontSize: 10.5, fontWeight: 800, color: "#8e8e93", textTransform: "uppercase", letterSpacing: "0.08em" }}>NOME COMPLETO</label>
                 <input
+                  id="vertice-name"
                   type="text"
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
@@ -161,8 +163,9 @@ export function CheckoutPage({ onOrderCompleted, onBackToCart }: CheckoutPagePro
 
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
                 <div style={{ display: "grid", gap: 6 }}>
-                  <label style={{ fontSize: 10.5, fontWeight: 800, color: "#8e8e93", textTransform: "uppercase", letterSpacing: "0.08em" }}>E-MAIL</label>
+                  <label htmlFor="vertice-email" style={{ fontSize: 10.5, fontWeight: 800, color: "#8e8e93", textTransform: "uppercase", letterSpacing: "0.08em" }}>E-MAIL</label>
                   <input
+                    id="vertice-email"
                     type="email"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
@@ -170,8 +173,9 @@ export function CheckoutPage({ onOrderCompleted, onBackToCart }: CheckoutPagePro
                   />
                 </div>
                 <div style={{ display: "grid", gap: 6 }}>
-                  <label style={{ fontSize: 10.5, fontWeight: 800, color: "#8e8e93", textTransform: "uppercase", letterSpacing: "0.08em" }}>CPF</label>
+                  <label htmlFor="vertice-cpf" style={{ fontSize: 10.5, fontWeight: 800, color: "#8e8e93", textTransform: "uppercase", letterSpacing: "0.08em" }}>CPF</label>
                   <input
+                    id="vertice-cpf"
                     type="text"
                     value={formData.cpf}
                     onChange={(e) => setFormData({ ...formData, cpf: e.target.value })}
@@ -181,8 +185,9 @@ export function CheckoutPage({ onOrderCompleted, onBackToCart }: CheckoutPagePro
               </div>
 
               <div style={{ display: "grid", gap: 6 }}>
-                <label style={{ fontSize: 10.5, fontWeight: 800, color: "#8e8e93", textTransform: "uppercase", letterSpacing: "0.08em" }}>CELULAR / WHATSAPP</label>
+                <label htmlFor="vertice-phone" style={{ fontSize: 10.5, fontWeight: 800, color: "#8e8e93", textTransform: "uppercase", letterSpacing: "0.08em" }}>CELULAR / WHATSAPP</label>
                 <input
+                  id="vertice-phone"
                   type="text"
                   value={formData.phone}
                   onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
@@ -208,8 +213,9 @@ export function CheckoutPage({ onOrderCompleted, onBackToCart }: CheckoutPagePro
 
               <div style={{ display: "grid", gridTemplateColumns: "1fr 2fr", gap: 16 }}>
                 <div style={{ display: "grid", gap: 6 }}>
-                  <label style={{ fontSize: 10.5, fontWeight: 800, color: "#8e8e93", textTransform: "uppercase", letterSpacing: "0.08em" }}>CEP</label>
+                  <label htmlFor="vertice-cep" style={{ fontSize: 10.5, fontWeight: 800, color: "#8e8e93", textTransform: "uppercase", letterSpacing: "0.08em" }}>CEP</label>
                   <input
+                    id="vertice-cep"
                     type="text"
                     value={formData.zipCode}
                     onChange={(e) => setFormData({ ...formData, zipCode: e.target.value })}
@@ -217,8 +223,9 @@ export function CheckoutPage({ onOrderCompleted, onBackToCart }: CheckoutPagePro
                   />
                 </div>
                 <div style={{ display: "grid", gap: 6 }}>
-                  <label style={{ fontSize: 10.5, fontWeight: 800, color: "#8e8e93", textTransform: "uppercase", letterSpacing: "0.08em" }}>RUA / AVENIDA</label>
+                  <label htmlFor="vertice-street" style={{ fontSize: 10.5, fontWeight: 800, color: "#8e8e93", textTransform: "uppercase", letterSpacing: "0.08em" }}>RUA / AVENIDA</label>
                   <input
+                    id="vertice-street"
                     type="text"
                     value={formData.street}
                     onChange={(e) => setFormData({ ...formData, street: e.target.value })}
@@ -229,8 +236,9 @@ export function CheckoutPage({ onOrderCompleted, onBackToCart }: CheckoutPagePro
 
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
                 <div style={{ display: "grid", gap: 6 }}>
-                  <label style={{ fontSize: 10.5, fontWeight: 800, color: "#8e8e93", textTransform: "uppercase", letterSpacing: "0.08em" }}>NÚMERO</label>
+                  <label htmlFor="vertice-number" style={{ fontSize: 10.5, fontWeight: 800, color: "#8e8e93", textTransform: "uppercase", letterSpacing: "0.08em" }}>NÚMERO</label>
                   <input
+                    id="vertice-number"
                     type="text"
                     value={formData.number}
                     onChange={(e) => setFormData({ ...formData, number: e.target.value })}
@@ -238,8 +246,9 @@ export function CheckoutPage({ onOrderCompleted, onBackToCart }: CheckoutPagePro
                   />
                 </div>
                 <div style={{ display: "grid", gap: 6 }}>
-                  <label style={{ fontSize: 10.5, fontWeight: 800, color: "#8e8e93", textTransform: "uppercase", letterSpacing: "0.08em" }}>BAIRRO</label>
+                  <label htmlFor="vertice-neighborhood" style={{ fontSize: 10.5, fontWeight: 800, color: "#8e8e93", textTransform: "uppercase", letterSpacing: "0.08em" }}>BAIRRO</label>
                   <input
+                    id="vertice-neighborhood"
                     type="text"
                     value={formData.neighborhood}
                     onChange={(e) => setFormData({ ...formData, neighborhood: e.target.value })}
@@ -250,8 +259,9 @@ export function CheckoutPage({ onOrderCompleted, onBackToCart }: CheckoutPagePro
 
               <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr", gap: 16 }}>
                 <div style={{ display: "grid", gap: 6 }}>
-                  <label style={{ fontSize: 10.5, fontWeight: 800, color: "#8e8e93", textTransform: "uppercase", letterSpacing: "0.08em" }}>CIDADE</label>
+                  <label htmlFor="vertice-city" style={{ fontSize: 10.5, fontWeight: 800, color: "#8e8e93", textTransform: "uppercase", letterSpacing: "0.08em" }}>CIDADE</label>
                   <input
+                    id="vertice-city"
                     type="text"
                     value={formData.city}
                     onChange={(e) => setFormData({ ...formData, city: e.target.value })}
@@ -259,8 +269,9 @@ export function CheckoutPage({ onOrderCompleted, onBackToCart }: CheckoutPagePro
                   />
                 </div>
                 <div style={{ display: "grid", gap: 6 }}>
-                  <label style={{ fontSize: 10.5, fontWeight: 800, color: "#8e8e93", textTransform: "uppercase", letterSpacing: "0.08em" }}>ESTADO (UF)</label>
+                  <label htmlFor="vertice-state" style={{ fontSize: 10.5, fontWeight: 800, color: "#8e8e93", textTransform: "uppercase", letterSpacing: "0.08em" }}>ESTADO (UF)</label>
                   <input
+                    id="vertice-state"
                     type="text"
                     value={formData.state}
                     onChange={(e) => setFormData({ ...formData, state: e.target.value })}
@@ -287,15 +298,15 @@ export function CheckoutPage({ onOrderCompleted, onBackToCart }: CheckoutPagePro
 
               {/* PAYMENT TABS */}
               <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 10 }}>
-                {[
-                  { id: "pix", label: "PIX (5% OFF)" },
-                  { id: "credit_card", label: "Cartão de Crédito" },
-                  { id: "boleto", label: "Boleto Bancário" },
-                ].map((p) => (
+{[
+                    { id: "pix" as const, label: "PIX (5% OFF)" },
+                    { id: "credit_card" as const, label: "Cartão de Crédito" },
+                    { id: "boleto" as const, label: "Boleto Bancário" },
+                  ].map((p) => (
                   <button
                     key={p.id}
                     type="button"
-                    onClick={() => setFormData({ ...formData, paymentMethod: p.id as any })}
+                    onClick={() => setFormData({ ...formData, paymentMethod: p.id })}
                     style={{
                       padding: 12,
                       borderRadius: 2,
@@ -330,8 +341,9 @@ export function CheckoutPage({ onOrderCompleted, onBackToCart }: CheckoutPagePro
               {formData.paymentMethod === "credit_card" && (
                 <div style={{ display: "grid", gap: 14 }}>
                   <div style={{ display: "grid", gap: 6 }}>
-                    <label style={{ fontSize: 10.5, fontWeight: 800, color: "#8e8e93", textTransform: "uppercase", letterSpacing: "0.08em" }}>NÚMERO DO CARTÃO</label>
+                    <label htmlFor="vertice-card-number" style={{ fontSize: 10.5, fontWeight: 800, color: "#8e8e93", textTransform: "uppercase", letterSpacing: "0.08em" }}>NÚMERO DO CARTÃO</label>
                     <input
+                      id="vertice-card-number"
                       type="text"
                       value={formData.cardNumber}
                       onChange={(e) => setFormData({ ...formData, cardNumber: e.target.value })}
@@ -340,8 +352,9 @@ export function CheckoutPage({ onOrderCompleted, onBackToCart }: CheckoutPagePro
                   </div>
                   <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
                     <div style={{ display: "grid", gap: 6 }}>
-                      <label style={{ fontSize: 10.5, fontWeight: 800, color: "#8e8e93", textTransform: "uppercase", letterSpacing: "0.08em" }}>VALIDADE</label>
+                      <label htmlFor="vertice-card-expiry" style={{ fontSize: 10.5, fontWeight: 800, color: "#8e8e93", textTransform: "uppercase", letterSpacing: "0.08em" }}>VALIDADE</label>
                       <input
+                        id="vertice-card-expiry"
                         type="text"
                         value={formData.cardExpiry}
                         onChange={(e) => setFormData({ ...formData, cardExpiry: e.target.value })}
@@ -349,8 +362,9 @@ export function CheckoutPage({ onOrderCompleted, onBackToCart }: CheckoutPagePro
                       />
                     </div>
                     <div style={{ display: "grid", gap: 6 }}>
-                      <label style={{ fontSize: 10.5, fontWeight: 800, color: "#8e8e93", textTransform: "uppercase", letterSpacing: "0.08em" }}>CVV</label>
+                      <label htmlFor="vertice-card-cvv" style={{ fontSize: 10.5, fontWeight: 800, color: "#8e8e93", textTransform: "uppercase", letterSpacing: "0.08em" }}>CVV</label>
                       <input
+                        id="vertice-card-cvv"
                         type="text"
                         value={formData.cardCvv}
                         onChange={(e) => setFormData({ ...formData, cardCvv: e.target.value })}
@@ -387,7 +401,7 @@ export function CheckoutPage({ onOrderCompleted, onBackToCart }: CheckoutPagePro
           <div style={{ display: "grid", gap: 12, maxHeight: 260, overflowY: "auto", paddingRight: 6 }}>
             {cart.map((item) => (
               <div key={item.id} style={{ display: "flex", gap: 12, alignItems: "center" }}>
-                <img src={item.product.images[0]} alt={item.product.name} style={{ width: 44, height: 48, objectFit: "cover", borderRadius: 2, background: "#18181b" }} />
+                <Image src={item.product.images[0]} alt={item.product.name} width={44} height={48} style={{ width: 44, height: 48, objectFit: "cover", borderRadius: 2, background: "#18181b" }} />
                 <div style={{ flex: 1, fontSize: 11.5 }}>
                   <strong style={{ color: "#ffffff", display: "block" }}>{item.product.name}</strong>
                   <span style={{ color: "#8e8e93" }}>Tam: {item.selectedSize} · Qtd: {item.quantity}</span>

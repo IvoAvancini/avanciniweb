@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useVertice } from "../store/useVerticeStore";
 import { Product } from "../types";
 import { ProductGrid } from "../components/ProductGrid";
@@ -59,9 +60,12 @@ export function HomePage({ onSelectProduct, onNavigateCatalog }: HomePageProps) 
       {/* 1. CINEMATIC HERO (IMPACTO) */}
       <section className="v-hero">
         <div className="v-hero-bg">
-          <img
+          <Image
             src="/concepts/nike-hero.jpg"
             alt="Campanha Global Vértice 2026"
+            fill
+            sizes="100vw"
+            priority
           />
         </div>
         <div className="v-hero-shade" />
@@ -118,7 +122,7 @@ export function HomePage({ onSelectProduct, onNavigateCatalog }: HomePageProps) 
                 onNavigateCatalog(cat.id);
               }}
             >
-              <img src={cat.image} alt={cat.name} loading="lazy" />
+              <Image src={cat.image} alt={cat.name} fill sizes="(max-width: 768px) 50vw, 20vw" loading="lazy" />
               <div className="v-category-card-shade" />
               <div className="v-category-card-info">
                 <span>{cat.tag}</span>
@@ -152,10 +156,11 @@ export function HomePage({ onSelectProduct, onNavigateCatalog }: HomePageProps) 
       {/* 4. STORYTELLING EDITORIAL (ENGENHARIA E MATERIAIS) */}
       <section className="v-story-section">
         <div style={{ position: "relative", borderRadius: 4, overflow: "hidden", aspectRatio: "4/3.2", border: "1px solid var(--v-border-subtle)" }}>
-          <img
+          <Image
             src="/concepts/nike-sneaker.jpg"
             alt="Engenharia V-Plate Carbon"
-            style={{ width: "100%", height: "100%", objectFit: "cover" }}
+            fill
+            sizes="(max-width: 768px) 100vw, 50vw"
           />
         </div>
         <div className="v-story-copy">

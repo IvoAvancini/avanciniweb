@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
+import Image from "next/image";
 import { useCora } from "../store/useCoraStore";
 import { Property } from "../types";
 import { Breadcrumbs } from "../components/CommonComponents";
@@ -78,24 +79,66 @@ export function PropertyDetailPage({
 
         {/* 1. GALERIA DE FOTOS (3 FOTOS DESKTOP + LIGHTBOX TRIGGER) */}
         <div className="cora-pdp-gallery-grid">
-          <div className="cora-gallery-main" onClick={() => openGallery(property.images, 0)}>
-            <img
+          <div
+            className="cora-gallery-main"
+            onClick={() => openGallery(property.images, 0)}
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                openGallery(property.images, 0);
+              }
+            }}
+            aria-label="Abrir galeria de fotos"
+          >
+            <Image
               src={property.images[0] || "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1400&q=80"}
               alt={property.title}
+              fill
+              sizes="(max-width: 768px) 100vw, 60vw"
             />
           </div>
 
           <div className="cora-gallery-side">
-            <div className="cora-gallery-side-item" onClick={() => openGallery(property.images, 1)}>
-              <img
+            <div
+              className="cora-gallery-side-item"
+              onClick={() => openGallery(property.images, 1)}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  openGallery(property.images, 1);
+                }
+              }}
+              aria-label="Abrir galeria de fotos"
+            >
+              <Image
                 src={property.images[1] || property.images[0]}
                 alt={`${property.title} foto 2`}
+                fill
+                sizes="(max-width: 768px) 100vw, 25vw"
               />
             </div>
-            <div className="cora-gallery-side-item" onClick={() => openGallery(property.images, 2)}>
-              <img
+            <div
+              className="cora-gallery-side-item"
+              onClick={() => openGallery(property.images, 2)}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  openGallery(property.images, 2);
+                }
+              }}
+              aria-label="Abrir galeria de fotos"
+            >
+              <Image
                 src={property.images[2] || property.images[0]}
                 alt={`${property.title} foto 3`}
+                fill
+                sizes="(max-width: 768px) 100vw, 25vw"
               />
             </div>
           </div>
@@ -274,6 +317,15 @@ export function PropertyDetailPage({
 
                 <div
                   onClick={() => openFloorPlan(property.floorPlans![0])}
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      openFloorPlan(property.floorPlans![0]);
+                    }
+                  }}
+                  aria-label="Ampliar planta do imóvel"
                   style={{
                     background: "var(--cora-white)",
                     borderRadius: "var(--radius-md)",
@@ -283,9 +335,11 @@ export function PropertyDetailPage({
                     cursor: "pointer",
                   }}
                 >
-                  <img
+                  <Image
                     src={property.floorPlans[0].image}
                     alt={property.floorPlans[0].name}
+                    width={1200}
+                    height={800}
                     style={{ width: "100%", maxHeight: "320px", objectFit: "contain", borderRadius: "8px" }}
                   />
                   <span style={{ display: "block", marginTop: "12px", color: "var(--cora-muted)", fontSize: "13px" }}>
@@ -346,9 +400,11 @@ export function PropertyDetailPage({
                 alignItems: "center",
               }}
             >
-              <img
+              <Image
                 src={property.consultant.photo}
                 alt={property.consultant.name}
+                width={100}
+                height={100}
                 style={{ width: "100px", height: "100px", borderRadius: "50%", objectFit: "cover" }}
               />
               <div>

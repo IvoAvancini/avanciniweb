@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Image from "next/image";
 import { useCora } from "../store/useCoraStore";
 import { Breadcrumbs } from "../components/CommonComponents";
 import { PropertyCard } from "../components/PropertyCard";
@@ -34,9 +35,18 @@ export function LaunchesPage({
 
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 360px), 1fr))", gap: "32px" }}>
         {launches.map((l) => (
-          <article
+          <div
             key={l.id}
             onClick={() => onSelectLaunch(l.slug)}
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                onSelectLaunch(l.slug);
+              }
+            }}
+            aria-label={`Ver lançamento ${l.title}`}
             style={{
               background: "var(--cora-white)",
               borderRadius: "var(--radius-md)",
@@ -50,10 +60,12 @@ export function LaunchesPage({
             }}
           >
             <div style={{ position: "relative", width: "100%", aspectRatio: "16 / 10" }}>
-              <img
+              <Image
                 src={l.image}
                 alt={l.title}
-                style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                fill
+                sizes="(max-width: 768px) 100vw, 33vw"
+                style={{ objectFit: "cover" }}
               />
               <div style={{ position: "absolute", top: "14px", left: "14px" }}>
                 <span className="cora-badge cora-badge-accent">
@@ -86,7 +98,7 @@ export function LaunchesPage({
                 </div>
               </div>
             </div>
-          </article>
+          </div>
         ))}
       </div>
     </div>
@@ -129,11 +141,20 @@ export function NeighborhoodsPage({
             className="cora-neighborhood-card"
             role="button"
             tabIndex={0}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                onSelectNeighborhood(n.slug);
+              }
+            }}
+            aria-label={`Ver bairro ${n.name}`}
           >
-            <img
+            <Image
               src={n.image}
               alt={n.name}
               className="cora-neighborhood-card-img"
+              fill
+              sizes="(max-width: 768px) 100vw, 50vw"
             />
             <div className="cora-neighborhood-card-overlay" />
             <div className="cora-neighborhood-card-content">
@@ -181,10 +202,12 @@ export function NeighborhoodDetailPage({
       />
 
       <div style={{ position: "relative", height: "380px", borderRadius: "var(--radius-lg)", overflow: "hidden", margin: "24px 0 48px" }}>
-        <img
+        <Image
           src={neighborhood.image}
           alt={neighborhood.name}
-          style={{ width: "100%", height: "100%", objectFit: "cover", filter: "brightness(0.65)" }}
+          fill
+          sizes="(min-width: 768px) 80vw, 100vw"
+          style={{ objectFit: "cover", filter: "brightness(0.65)" }}
         />
         <div style={{ position: "absolute", bottom: "36px", left: "36px", right: "36px", color: "#fff" }}>
           <span className="cora-eyebrow" style={{ color: "var(--cora-accent-light)" }}>Guia de Bairro</span>
@@ -252,10 +275,8 @@ export function NeighborhoodDetailPage({
 
 export function ConsultantsPage({
   onNavigateHome,
-  onSelectConsultant,
 }: {
   onNavigateHome: () => void;
-  onSelectConsultant: (consultant: any) => void;
 }) {
   const { consultants, openLeadConsultantModal } = useCora();
 
@@ -294,10 +315,12 @@ export function ConsultantsPage({
             }}
           >
             <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
-              <img
+              <Image
                 src={c.photo}
                 alt={c.name}
-                style={{ width: "72px", height: "72px", borderRadius: "50%", objectFit: "cover" }}
+                width={72}
+                height={72}
+                style={{ borderRadius: "50%", objectFit: "cover" }}
               />
               <div>
                 <h3 style={{ fontSize: "18px", fontWeight: 700, margin: "0 0 2px" }}>{c.name}</h3>

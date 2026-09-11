@@ -22,6 +22,12 @@ export function SizeGuideModal() {
         padding: "20px",
       }}
       onClick={closeSizeGuide}
+      role="button"
+      tabIndex={0}
+      aria-label="Fechar guia de medidas"
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") closeSizeGuide();
+      }}
     >
       <div
         style={{
@@ -34,6 +40,9 @@ export function SizeGuideModal() {
           boxShadow: "0 25px 60px rgba(0,0,0,0.8)",
         }}
         onClick={(e) => e.stopPropagation()}
+        role="button"
+        tabIndex={0}
+        onKeyDown={(e) => e.stopPropagation()}
       >
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 24 }}>
           <div>

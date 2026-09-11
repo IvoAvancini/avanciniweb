@@ -14,6 +14,11 @@ export function ToastContainer() {
           key={toast.id}
           className="v-toast-item"
           onClick={() => removeToast(toast.id)}
+          role="button"
+          tabIndex={0}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === " ") removeToast(toast.id);
+          }}
           style={{ cursor: "pointer", borderLeft: toast.type === "success" ? "3px solid #10b981" : "3px solid #f59e0b" }}
         >
           <div className="v-toast-title">{toast.title}</div>

@@ -17,7 +17,7 @@ import { CheckoutPage } from "./pages/CheckoutPage";
 import { WishlistPage } from "./pages/WishlistPage";
 import { AccountPage } from "./pages/AccountPage";
 import { LoginPage } from "./pages/LoginPage";
-import { Product, ProductCategory, ProductGender, ProductSport } from "./types";
+import { Product, ProductCategory, ProductCollection, ProductGender, ProductSport } from "./types";
 import "./vertice.css";
 
 function VerticeAppContent() {
@@ -50,7 +50,7 @@ function VerticeAppContent() {
         } else if (param === "corrida" || param === "academia" || param === "streetwear" || param === "lifestyle") {
           setFilters((prev) => ({ ...prev, sport: param as ProductSport }));
         } else if (param === "performance" || param === "essentials" || param === "street" || param === "new-season") {
-          setFilters((prev) => ({ ...prev, collection: param as any }));
+          setFilters((prev) => ({ ...prev, collection: param as ProductCollection }));
         } else {
           setFilters((prev) => ({ ...prev, category: param as ProductCategory }));
         }
@@ -170,7 +170,6 @@ function VerticeAppContent() {
 
       <SearchOverlay
         onSelectProduct={handleSelectProduct}
-        onSearchCategory={(cat) => handleNavigate("catalog", cat)}
       />
 
       <SizeGuideModal />

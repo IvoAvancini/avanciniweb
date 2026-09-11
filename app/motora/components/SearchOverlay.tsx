@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useMemo } from "react";
+import Image from "next/image";
 import { useMotora } from "../store/useMotoraStore";
 import { Vehicle } from "../types";
 
@@ -60,7 +61,9 @@ export function SearchOverlay({ onSelectVehicle }: SearchOverlayProps) {
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Busque por marca, modelo, motor (ex: SUV, Corolla, Turbo, Híbrido)..."
           className="v-search-input"
-          autoFocus
+          ref={(el) => {
+            if (el) el.focus();
+          }}
         />
         {query && (
           <button
@@ -131,10 +134,19 @@ export function SearchOverlay({ onSelectVehicle }: SearchOverlayProps) {
                     closeSearch();
                     onSelectVehicle(vehicle);
                   }}
+                  role="button"
+                  tabIndex={0}
+                  aria-label={`Ver detalhes de ${vehicle.brand} ${vehicle.model}`}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      closeSearch();
+                      onSelectVehicle(vehicle);
+                    }
+                  }}
                   style={{ cursor: "pointer" }}
                 >
                   <div className="m-card-media">
-                    <img src={vehicle.images[0]} alt={vehicle.model} />
+                    <Image src={vehicle.images[0]} alt={vehicle.model} width={1376} height={768} />
                   </div>
                   <div className="m-card-body">
                     <div className="m-card-header">

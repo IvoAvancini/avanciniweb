@@ -2,14 +2,10 @@
 
 import { useState } from "react";
 import { useMotora } from "../store/useMotoraStore";
-import { Vehicle } from "../types";
+import { TestDriveBooking } from "../types";
 
-interface TestDrivePageProps {
-  onSelectVehicle: (vehicle: Vehicle) => void;
-}
-
-export function TestDrivePage({ onSelectVehicle }: TestDrivePageProps) {
-  const { vehicles, submitTestDrive, testDrives } = useMotora();
+export function TestDrivePage() {
+  const { vehicles, submitTestDrive } = useMotora();
 
   const [selectedVehicleId, setSelectedVehicleId] = useState(vehicles[0]?.id || "");
   const [storeName, setStoreName] = useState("Unidade Jardins · Av. Europa, 850");
@@ -17,9 +13,9 @@ export function TestDrivePage({ onSelectVehicle }: TestDrivePageProps) {
   const [time, setTime] = useState("14:30");
   const [name, setName] = useState("João Silva");
   const [phone, setPhone] = useState("(11) 98765-4321");
-  const [email, setEmail] = useState("joao.silva@exemplo.com");
+  const [email] = useState("joao.silva@exemplo.com");
 
-  const [lastBooking, setLastBooking] = useState<any>(null);
+  const [lastBooking, setLastBooking] = useState<TestDriveBooking | null>(null);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -87,8 +83,9 @@ export function TestDrivePage({ onSelectVehicle }: TestDrivePageProps) {
 
             <form onSubmit={handleSubmit} style={{ display: "grid", gap: 18 }}>
               <div style={{ display: "grid", gap: 6 }}>
-                <label style={{ fontSize: 11, fontWeight: 800, color: "#475569", textTransform: "uppercase" }}>VEÍCULO DE INTERESSE</label>
+                <label htmlFor="tdp-vehicle" style={{ fontSize: 11, fontWeight: 800, color: "#475569", textTransform: "uppercase" }}>VEÍCULO DE INTERESSE</label>
                 <select
+                  id="tdp-vehicle"
                   value={selectedVehicleId}
                   onChange={(e) => setSelectedVehicleId(e.target.value)}
                   style={{ background: "#f8fafc", border: "1px solid var(--m-light-border)", borderRadius: 4, padding: "11px 14px", color: "#0f172a", fontSize: 13.5, outline: "none" }}
@@ -102,8 +99,9 @@ export function TestDrivePage({ onSelectVehicle }: TestDrivePageProps) {
               </div>
 
               <div style={{ display: "grid", gap: 6 }}>
-                <label style={{ fontSize: 11, fontWeight: 800, color: "#475569", textTransform: "uppercase" }}>CONCESSIONÁRIA MOTORA</label>
+                <label htmlFor="tdp-store" style={{ fontSize: 11, fontWeight: 800, color: "#475569", textTransform: "uppercase" }}>CONCESSIONÁRIA MOTORA</label>
                 <select
+                  id="tdp-store"
                   value={storeName}
                   onChange={(e) => setStoreName(e.target.value)}
                   style={{ background: "#f8fafc", border: "1px solid var(--m-light-border)", borderRadius: 4, padding: "11px 14px", color: "#0f172a", fontSize: 13.5, outline: "none" }}
@@ -117,8 +115,9 @@ export function TestDrivePage({ onSelectVehicle }: TestDrivePageProps) {
 
               <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: 16 }}>
                 <div style={{ display: "grid", gap: 6 }}>
-                  <label style={{ fontSize: 11, fontWeight: 800, color: "#475569", textTransform: "uppercase" }}>DATA</label>
+                  <label htmlFor="tdp-date" style={{ fontSize: 11, fontWeight: 800, color: "#475569", textTransform: "uppercase" }}>DATA</label>
                   <input
+                    id="tdp-date"
                     type="date"
                     value={date}
                     onChange={(e) => setDate(e.target.value)}
@@ -127,8 +126,9 @@ export function TestDrivePage({ onSelectVehicle }: TestDrivePageProps) {
                   />
                 </div>
                 <div style={{ display: "grid", gap: 6 }}>
-                  <label style={{ fontSize: 11, fontWeight: 800, color: "#475569", textTransform: "uppercase" }}>HORÁRIO</label>
+                  <label htmlFor="tdp-time" style={{ fontSize: 11, fontWeight: 800, color: "#475569", textTransform: "uppercase" }}>HORÁRIO</label>
                   <select
+                    id="tdp-time"
                     value={time}
                     onChange={(e) => setTime(e.target.value)}
                     style={{ background: "#f8fafc", border: "1px solid var(--m-light-border)", borderRadius: 4, padding: "11px 14px", color: "#0f172a", fontSize: 13.5, outline: "none" }}
@@ -144,8 +144,9 @@ export function TestDrivePage({ onSelectVehicle }: TestDrivePageProps) {
 
               <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: 16, borderTop: "1px solid #f1f5f9", paddingTop: 16 }}>
                 <div style={{ display: "grid", gap: 6 }}>
-                  <label style={{ fontSize: 11, fontWeight: 800, color: "#475569", textTransform: "uppercase" }}>SEU NOME</label>
+                  <label htmlFor="tdp-name" style={{ fontSize: 11, fontWeight: 800, color: "#475569", textTransform: "uppercase" }}>SEU NOME</label>
                   <input
+                    id="tdp-name"
                     type="text"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
@@ -154,8 +155,9 @@ export function TestDrivePage({ onSelectVehicle }: TestDrivePageProps) {
                   />
                 </div>
                 <div style={{ display: "grid", gap: 6 }}>
-                  <label style={{ fontSize: 11, fontWeight: 800, color: "#475569", textTransform: "uppercase" }}>WHATSAPP</label>
+                  <label htmlFor="tdp-phone" style={{ fontSize: 11, fontWeight: 800, color: "#475569", textTransform: "uppercase" }}>WHATSAPP</label>
                   <input
+                    id="tdp-phone"
                     type="text"
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}

@@ -1,7 +1,7 @@
 "use client";
 /* eslint-disable jsx-a11y/no-noninteractive-tabindex -- As prévias roláveis precisam receber foco para funcionar também pelo teclado. */
 
-import { useEffect, useRef, useState, type FormEvent, type MouseEvent } from "react";
+import { useEffect, useRef, useState, type CSSProperties, type FormEvent, type MouseEvent } from "react";
 import Image, { type ImageProps } from "next/image";
 import dynamic from "next/dynamic";
 import Link from "next/link";
@@ -199,7 +199,7 @@ const webFaqs = [
 const heroAudiences = ["AUTÔNOMOS", "EMPRESAS", "CLÍNICAS", "ESCRITÓRIOS", "MARCAS"] as const;
 
 function HeroAudienceTypewriter() {
-  const [text, setText] = useState("");
+  const [text, setText] = useState<string>(heroAudiences[0]);
   const [audienceIndex, setAudienceIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
 
@@ -212,7 +212,7 @@ function HeroAudienceTypewriter() {
         if (text.length < currentWord.length) {
           setText(currentWord.slice(0, text.length + 1));
         } else {
-          window.setTimeout(() => setIsDeleting(true), 2000);
+          window.setTimeout(() => setIsDeleting(true), 2400);
         }
       } else {
         if (text.length > 0) {
@@ -228,7 +228,7 @@ function HeroAudienceTypewriter() {
   }, [text, isDeleting, audienceIndex]);
 
   return (
-    <span className="hero-typewriter-dynamic">
+    <span className="hero-typewriter-dynamic" aria-live="polite">
       <strong className="hero-typewriter-target">{text}</strong>
       <span className="hero-typewriter-cursor" aria-hidden="true">|</span>
     </span>
@@ -378,64 +378,6 @@ function PortfolioConceptPage({ type }: { type: PortfolioSpotlightType }) {
   const sectorType: SectorShowcaseType = type === "moreira" ? "law" : (type as SectorShowcaseType);
   return <SectorShowcasePage type={sectorType} sector={sectorType} />;
 }
-
-const formatMoney = (value: number) =>
-  new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL", maximumFractionDigits: 0 }).format(value);
-
-const scenarioData = {
-  presenca: {
-    name: "Presença e Autoridade",
-    reason: "Para empresas que precisam transmitir mais confiança antes do primeiro contato e justificar preços mais altos.",
-    wins: 2,
-    ticket: 1200,
-    winsLabel: "Quantos clientes adicionais formam um cenário possível?",
-    winsHint: "escolha uma hipótese conservadora, não uma promessa",
-    ticketLabel: "Valor médio de um novo cliente",
-    ticketHint: "honorários, contrato ou serviço",
-    route: ["Pesquisa no Google", "Vê autoridade no site", "Chama no WhatsApp"],
-    potentialLabel: "VALOR DESTE CENÁRIO HIPOTÉTICO",
-    outcome: "novos clientes",
-  },
-  captacao: {
-    name: "Página de Conversão",
-    reason: "Para focar em um produto, serviço ou anúncio com resposta rápida e foco em mensagem no WhatsApp.",
-    wins: 5,
-    ticket: 450,
-    winsLabel: "Quantos clientes adicionais formam um cenário possível?",
-    winsHint: "escolha uma hipótese conservadora, não uma promessa",
-    ticketLabel: "Valor médio de um novo cliente",
-    ticketHint: "primeira consulta, serviço ou compra",
-    route: ["Clica no anúncio", "Lê a proposta direta", "Clica no WhatsApp"],
-    potentialLabel: "VALOR DESTE CENÁRIO HIPOTÉTICO",
-    outcome: "novos clientes",
-  },
-  marca: {
-    name: "Site Institucional",
-    reason: "Para apresentar a empresa com autoridade, organizar serviços e gerar confiança antes da conversa.",
-    wins: 3,
-    ticket: 300,
-    winsLabel: "Quantos clientes adicionais formam um cenário possível?",
-    winsHint: "escolha uma hipótese conservadora, não uma promessa",
-    ticketLabel: "Valor médio de um novo cliente",
-    ticketHint: "primeira compra ou contratação",
-    route: ["Procura a empresa", "Compara confiança", "Entra em contato"],
-    potentialLabel: "VALOR DESTE CENÁRIO HIPOTÉTICO",
-    outcome: "novos clientes",
-  },
-  vendas: {
-    name: "Loja Virtual",
-    reason: "Para marcas e comércios venderem com catálogo digital de alto padrão, checkout ágil e recebimento direto.",
-    wins: 12,
-    ticket: 180,
-    winsLabel: "Quantas vendas adicionais formam um cenário possível?",
-    winsHint: "escolha uma hipótese conservadora, não uma promessa",
-    ticketLabel: "Ticket médio de cada venda",
-    ticketHint: "valor médio do carrinho",
-    route: ["Descobre o produto", "Adiciona ao carrinho", "Conclui a compra"],
-    potentialLabel: "VALOR DESTE CENÁRIO HIPOTÉTICO",
-    outcome: "novas vendas",
-  },
-} as const;
 
 function WebOpportunitySimulator({ onLead }: { onLead: (message: string) => void }) {
   const [ticketValue, setTicketValue] = useState(800);
@@ -618,7 +560,6 @@ export default function Home() {
   const menuCloseRef = useRef<HTMLButtonElement | null>(null);
   const portfolioCloseRef = useRef<HTMLButtonElement | null>(null);
   const [scrolled, setScrolled] = useState(false);
-  const [selectedDashFormat, setSelectedDashFormat] = useState<"landing" | "institucional" | "loja">("institucional");
   const [portfolioSpotlight, setPortfolioSpotlight] = useState<PortfolioSpotlightType | null>(null);
 
   const navigateFromMenu = (event: MouseEvent<HTMLAnchorElement>, href: string) => {
@@ -634,7 +575,6 @@ export default function Home() {
     window.scrollTo(0, 0);
     const root = document.documentElement;
     const heroScene = document.querySelector<HTMLElement>(".web-hero-scene");
-    const hero = heroScene?.querySelector<HTMLElement>(".hero");
     root.classList.add("web-motion");
 
     let frame = 0;
@@ -780,19 +720,17 @@ export default function Home() {
     trackLead("whatsapp_modal", { name: cleanName, phone: fullPhone });
 
     // Envio seguro para a API interna em background (salva localmente e dispara webhook)
-    try {
-      fetch("/api/lead", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: cleanName,
-          phone: fullPhone,
-          intent: leadIntent,
-          source: "dash_modal",
-          page: "/dash",
-        }),
-      }).catch(() => {});
-    } catch {}
+    fetch("/api/lead", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        name: cleanName,
+        phone: fullPhone,
+        intent: leadIntent,
+        source: "dash_modal",
+        page: "/dash",
+      }),
+    }).catch((err) => console.error("[Lead API Error]", err));
 
     const phoneText = fullPhone ? ` Meu WhatsApp é ${fullPhone}.` : "";
     const message = `Olá! Meu nome é ${cleanName}.${phoneText} ${leadIntent}`;
@@ -895,28 +833,40 @@ export default function Home() {
           <div className="hero-glow glow-one" />
           <div className="hero-glow glow-two" />
           <div className="hero-soundwaves left" aria-hidden="true">
-            <span style={{ "--d": "0.1s", "--h": "65%" } as any} />
-            <span style={{ "--d": "0.35s", "--h": "85%" } as any} />
-            <span style={{ "--d": "0.2s", "--h": "45%" } as any} />
-            <span style={{ "--d": "0.5s", "--h": "95%" } as any} />
-            <span style={{ "--d": "0.15s", "--h": "70%" } as any} />
-            <span style={{ "--d": "0.4s", "--h": "80%" } as any} />
-            <span style={{ "--d": "0.25s", "--h": "55%" } as any} />
-            <span style={{ "--d": "0.6s", "--h": "90%" } as any} />
-            <span style={{ "--d": "0.3s", "--h": "60%" } as any} />
-            <span style={{ "--d": "0.45s", "--h": "75%" } as any} />
+            {(
+              [
+                ["0.1s", "65%"],
+                ["0.35s", "85%"],
+                ["0.2s", "45%"],
+                ["0.5s", "95%"],
+                ["0.15s", "70%"],
+                ["0.4s", "80%"],
+                ["0.25s", "55%"],
+                ["0.6s", "90%"],
+                ["0.3s", "60%"],
+                ["0.45s", "75%"],
+              ] as const
+            ).map(([delay, height]) => (
+              <span key={delay} style={{ "--d": delay, "--h": height } as CSSProperties} />
+            ))}
           </div>
           <div className="hero-soundwaves right" aria-hidden="true">
-            <span style={{ "--d": "0.3s", "--h": "75%" } as any} />
-            <span style={{ "--d": "0.1s", "--h": "90%" } as any} />
-            <span style={{ "--d": "0.45s", "--h": "60%" } as any} />
-            <span style={{ "--d": "0.2s", "--h": "85%" } as any} />
-            <span style={{ "--d": "0.55s", "--h": "50%" } as any} />
-            <span style={{ "--d": "0.15s", "--h": "95%" } as any} />
-            <span style={{ "--d": "0.35s", "--h": "70%" } as any} />
-            <span style={{ "--d": "0.5s", "--h": "80%" } as any} />
-            <span style={{ "--d": "0.25s", "--h": "65%" } as any} />
-            <span style={{ "--d": "0.4s", "--h": "85%" } as any} />
+            {(
+              [
+                ["0.3s", "75%"],
+                ["0.1s", "90%"],
+                ["0.45s", "60%"],
+                ["0.2s", "85%"],
+                ["0.55s", "50%"],
+                ["0.15s", "95%"],
+                ["0.35s", "70%"],
+                ["0.5s", "80%"],
+                ["0.25s", "65%"],
+                ["0.4s", "85%"],
+              ] as const
+            ).map(([delay, height]) => (
+              <span key={delay} style={{ "--d": delay, "--h": height } as CSSProperties} />
+            ))}
           </div>
           <div className="kinetic-lines" aria-hidden="true">
             <i />
@@ -983,7 +933,7 @@ export default function Home() {
           {portfolioRows.map((row, rowIndex) => (
             <div className="web-portfolio-row" key={rowIndex}>
               <div className="web-portfolio-track">
-                {[...row, ...row, ...row, ...row].map((item, index) => (
+                {[...row, ...row].map((item, index) => (
                   <button
                     type="button"
                     onClick={() => openPortfolioItem(item.view)}
@@ -1565,7 +1515,7 @@ export default function Home() {
                           placeholder="Buscar país..."
                           value={ddiSearch}
                           onChange={(e) => setDdiSearch(e.target.value)}
-                          autoFocus
+                          ref={(el) => el?.focus()}
                           aria-label="Buscar país"
                         />
                       </div>

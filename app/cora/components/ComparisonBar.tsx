@@ -1,4 +1,4 @@
-import React from "react";
+import Image from "next/image";
 import { useCora } from "../store/useCoraStore";
 
 interface ComparisonBarProps {
@@ -33,10 +33,12 @@ export function ComparisonBar({ onGoToCompare }: ComparisonBarProps) {
                 fontSize: "12px",
               }}
             >
-              <img
+              <Image
                 src={p.images[0]}
                 alt={p.title}
-                style={{ width: "24px", height: "24px", borderRadius: "4px", objectFit: "cover" }}
+                width={24}
+                height={24}
+                style={{ borderRadius: "4px", objectFit: "cover" }}
               />
               <span style={{ maxWidth: "110px", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
                 {p.title}

@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useMotora } from "../store/useMotoraStore";
 import { Vehicle } from "../types";
 
@@ -78,10 +79,11 @@ export function VehicleCard({ vehicle, onSelect }: VehicleCardProps) {
           </button>
         </div>
 
-        <img
+        <Image
           src={vehicle.images[0]}
           alt={`${vehicle.brand} ${vehicle.model}`}
-          loading="lazy"
+          fill
+          sizes="(max-width: 768px) 100vw, 33vw"
         />
       </div>
 

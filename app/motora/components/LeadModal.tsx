@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 import { useMotora } from "../store/useMotoraStore";
 
@@ -10,7 +11,7 @@ export function LeadModal() {
   const [phone, setPhone] = useState("(11) 98765-4321");
   const [email, setEmail] = useState("joao.silva@exemplo.com");
   const [contactPreference, setContactPreference] = useState<"whatsapp" | "phone" | "email">("whatsapp");
-  const [message, setMessage] = useState("Olá! Gostaria de mais informações sobre este veículo e condições de compra.");
+  const [message] = useState("Olá! Gostaria de mais informações sobre este veículo e condições de compra.");
 
   if (!isLeadModalOpen || !leadVehicle) return null;
 
@@ -32,8 +33,8 @@ export function LeadModal() {
   };
 
   return (
-    <div className="m-modal-overlay" onClick={closeLeadModal}>
-      <div className="m-modal-card" onClick={(e) => e.stopPropagation()}>
+    <div className="m-modal-overlay" role="presentation" onClick={closeLeadModal}>
+      <div className="m-modal-card" role="presentation" onClick={(e) => e.stopPropagation()}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 20 }}>
           <div>
             <span style={{ fontSize: 10.5, fontWeight: 900, letterSpacing: "0.18em", color: "#f59e0b", textTransform: "uppercase" }}>
@@ -56,10 +57,12 @@ export function LeadModal() {
 
         {/* VEHICLE SUMMARY */}
         <div style={{ display: "grid", gridTemplateColumns: "110px 1fr", gap: 16, background: "rgba(255,255,255,0.03)", padding: 14, borderRadius: 2, border: "1px solid var(--m-border-subtle)", marginBottom: 24 }}>
-          <img
+          <Image
             src={leadVehicle.images[0]}
             alt={leadVehicle.model}
-            style={{ width: 110, height: 75, objectFit: "cover", borderRadius: 2 }}
+            width={110}
+            height={75}
+            style={{ objectFit: "cover", borderRadius: 2 }}
           />
           <div>
             <strong style={{ fontSize: 14, color: "#ffffff", display: "block" }}>
@@ -75,8 +78,9 @@ export function LeadModal() {
         {/* FORM */}
         <form onSubmit={handleSubmit} style={{ display: "grid", gap: 16 }}>
           <div style={{ display: "grid", gap: 6 }}>
-            <label style={{ fontSize: 10.5, fontWeight: 800, color: "#8e8e98", textTransform: "uppercase" }}>SEU NOME COMPLETO</label>
+            <label htmlFor="lead-name" style={{ fontSize: 10.5, fontWeight: 800, color: "#8e8e98", textTransform: "uppercase" }}>SEU NOME COMPLETO</label>
             <input
+              id="lead-name"
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
@@ -87,8 +91,9 @@ export function LeadModal() {
 
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
             <div style={{ display: "grid", gap: 6 }}>
-              <label style={{ fontSize: 10.5, fontWeight: 800, color: "#8e8e98", textTransform: "uppercase" }}>WHATSAPP / CELULAR</label>
+              <label htmlFor="lead-phone" style={{ fontSize: 10.5, fontWeight: 800, color: "#8e8e98", textTransform: "uppercase" }}>WHATSAPP / CELULAR</label>
               <input
+                id="lead-phone"
                 type="text"
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
@@ -97,8 +102,9 @@ export function LeadModal() {
               />
             </div>
             <div style={{ display: "grid", gap: 6 }}>
-              <label style={{ fontSize: 10.5, fontWeight: 800, color: "#8e8e98", textTransform: "uppercase" }}>E-MAIL</label>
+              <label htmlFor="lead-email" style={{ fontSize: 10.5, fontWeight: 800, color: "#8e8e98", textTransform: "uppercase" }}>E-MAIL</label>
               <input
+                id="lead-email"
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -110,10 +116,10 @@ export function LeadModal() {
 
           {/* PREFERÊNCIA DE CONTATO */}
           <div>
-            <label style={{ fontSize: 10.5, fontWeight: 800, color: "#8e8e98", textTransform: "uppercase", display: "block", marginBottom: 6 }}>
+            <span style={{ fontSize: 10.5, fontWeight: 800, color: "#8e8e98", textTransform: "uppercase", display: "block", marginBottom: 6 }}>
               PREFERÊNCIA DE CONTATO:
-            </label>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 8 }}>
+            </span>
+            <div role="radiogroup" aria-label="Preferência de contato" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 8 }}>
               {[
                 { id: "whatsapp", label: "WhatsApp" },
                 { id: "phone", label: "Ligação" },
@@ -122,7 +128,7 @@ export function LeadModal() {
                 <button
                   key={p.id}
                   type="button"
-                  onClick={() => setContactPreference(p.id as any)}
+                  onClick={() => setContactPreference(p.id as "whatsapp" | "phone" | "email")}
                   style={{
                     padding: 8,
                     borderRadius: 2,

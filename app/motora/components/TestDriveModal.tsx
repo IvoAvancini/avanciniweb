@@ -11,7 +11,7 @@ export function TestDriveModal() {
   const [time, setTime] = useState("14:30");
   const [name, setName] = useState("João Silva");
   const [phone, setPhone] = useState("(11) 98765-4321");
-  const [email, setEmail] = useState("joao.silva@exemplo.com");
+  const [email] = useState("joao.silva@exemplo.com");
 
   if (!isTestDriveModalOpen || !testDriveVehicle) return null;
 
@@ -30,8 +30,8 @@ export function TestDriveModal() {
   };
 
   return (
-    <div className="m-modal-overlay" onClick={closeTestDriveModal}>
-      <div className="m-modal-card" onClick={(e) => e.stopPropagation()}>
+    <div className="m-modal-overlay" role="presentation" onClick={closeTestDriveModal}>
+      <div className="m-modal-card" role="presentation" onClick={(e) => e.stopPropagation()}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 20 }}>
           <div>
             <span style={{ fontSize: 10.5, fontWeight: 900, letterSpacing: "0.18em", color: "#f59e0b", textTransform: "uppercase" }}>
@@ -65,8 +65,9 @@ export function TestDriveModal() {
         {/* FORM */}
         <form onSubmit={handleSubmit} style={{ display: "grid", gap: 16 }}>
           <div style={{ display: "grid", gap: 6 }}>
-            <label style={{ fontSize: 10.5, fontWeight: 800, color: "#8e8e98", textTransform: "uppercase" }}>ESCOLHA A CONCESSIONÁRIA</label>
+            <label htmlFor="tdm-store" style={{ fontSize: 10.5, fontWeight: 800, color: "#8e8e98", textTransform: "uppercase" }}>ESCOLHA A CONCESSIONÁRIA</label>
             <select
+              id="tdm-store"
               value={storeName}
               onChange={(e) => setStoreName(e.target.value)}
               style={{ background: "#111116", border: "1px solid var(--m-border-medium)", borderRadius: 2, padding: "10px 14px", color: "#fff", fontSize: 13 }}
@@ -80,8 +81,9 @@ export function TestDriveModal() {
 
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
             <div style={{ display: "grid", gap: 6 }}>
-              <label style={{ fontSize: 10.5, fontWeight: 800, color: "#8e8e98", textTransform: "uppercase" }}>DATA PREFERENCIAL</label>
+              <label htmlFor="tdm-date" style={{ fontSize: 10.5, fontWeight: 800, color: "#8e8e98", textTransform: "uppercase" }}>DATA PREFERENCIAL</label>
               <input
+                id="tdm-date"
                 type="date"
                 value={date}
                 onChange={(e) => setDate(e.target.value)}
@@ -90,8 +92,9 @@ export function TestDriveModal() {
               />
             </div>
             <div style={{ display: "grid", gap: 6 }}>
-              <label style={{ fontSize: 10.5, fontWeight: 800, color: "#8e8e98", textTransform: "uppercase" }}>HORÁRIO</label>
+              <label htmlFor="tdm-time" style={{ fontSize: 10.5, fontWeight: 800, color: "#8e8e98", textTransform: "uppercase" }}>HORÁRIO</label>
               <select
+                id="tdm-time"
                 value={time}
                 onChange={(e) => setTime(e.target.value)}
                 style={{ background: "#111116", border: "1px solid var(--m-border-medium)", borderRadius: 2, padding: "10px 14px", color: "#fff", fontSize: 13 }}
@@ -107,8 +110,9 @@ export function TestDriveModal() {
 
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
             <div style={{ display: "grid", gap: 6 }}>
-              <label style={{ fontSize: 10.5, fontWeight: 800, color: "#8e8e98", textTransform: "uppercase" }}>NOME COMPLETO</label>
+              <label htmlFor="tdm-name" style={{ fontSize: 10.5, fontWeight: 800, color: "#8e8e98", textTransform: "uppercase" }}>NOME COMPLETO</label>
               <input
+                id="tdm-name"
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
@@ -117,8 +121,9 @@ export function TestDriveModal() {
               />
             </div>
             <div style={{ display: "grid", gap: 6 }}>
-              <label style={{ fontSize: 10.5, fontWeight: 800, color: "#8e8e98", textTransform: "uppercase" }}>WHATSAPP</label>
+              <label htmlFor="tdm-phone" style={{ fontSize: 10.5, fontWeight: 800, color: "#8e8e98", textTransform: "uppercase" }}>WHATSAPP</label>
               <input
+                id="tdm-phone"
                 type="text"
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}

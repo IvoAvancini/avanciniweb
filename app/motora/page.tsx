@@ -86,7 +86,6 @@ function MotoraContent() {
 
         {activeView === "compare" && (
           <ComparePage
-            onSelectVehicle={handleSelectVehicle}
             onExploreStock={() => navigateTo("vehicles")}
           />
         )}
@@ -104,9 +103,7 @@ function MotoraContent() {
         )}
 
         {activeView === "testdrive" && (
-          <TestDrivePage
-            onSelectVehicle={handleSelectVehicle}
-          />
+          <TestDrivePage />
         )}
 
         {activeView === "offers" && (

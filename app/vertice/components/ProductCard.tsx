@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useVertice } from "../store/useVerticeStore";
 import { Product } from "../types";
 
@@ -50,16 +51,20 @@ export function ProductCard({ product, onSelect }: ProductCardProps) {
         </button>
 
         {/* IMAGES (FLIP ON HOVER) */}
-        <img
+        <Image
           src={product.images[0]}
           alt={product.name}
+          fill
+          sizes="(max-width: 768px) 50vw, 25vw"
           className="v-img-primary"
           loading="lazy"
         />
         {product.images[1] && (
-          <img
+          <Image
             src={product.images[1]}
             alt={`${product.name} visualização secundária`}
+            fill
+            sizes="(max-width: 768px) 50vw, 25vw"
             className="v-img-secondary"
             loading="lazy"
           />

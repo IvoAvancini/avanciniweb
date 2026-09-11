@@ -2,13 +2,14 @@
 
 import { useState } from "react";
 import { useMotora } from "../store/useMotoraStore";
+import { TradeInValuation } from "../types";
 
 interface TradeInPageProps {
   onExploreStock: () => void;
 }
 
 export function TradeInPage({ onExploreStock }: TradeInPageProps) {
-  const { submitTradeIn, valuations } = useMotora();
+  const { submitTradeIn } = useMotora();
 
   const [brand, setBrand] = useState("Honda");
   const [model, setModel] = useState("Civic");
@@ -19,9 +20,9 @@ export function TradeInPage({ onExploreStock }: TradeInPageProps) {
   const [city, setCity] = useState("São Paulo - SP");
   const [userName, setUserName] = useState("João Silva");
   const [userPhone, setUserPhone] = useState("(11) 98765-4321");
-  const [userEmail, setUserEmail] = useState("joao.silva@exemplo.com");
+  const [userEmail] = useState("joao.silva@exemplo.com");
 
-  const [lastValuation, setLastValuation] = useState<any>(null);
+  const [lastValuation, setLastValuation] = useState<TradeInValuation | null>(null);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -95,8 +96,9 @@ export function TradeInPage({ onExploreStock }: TradeInPageProps) {
             <form onSubmit={handleSubmit} style={{ display: "grid", gap: 18 }}>
               <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 16 }}>
                 <div style={{ display: "grid", gap: 6 }}>
-                  <label style={{ fontSize: 11, fontWeight: 800, color: "#475569", textTransform: "uppercase" }}>MARCA</label>
+                  <label htmlFor="tip-brand" style={{ fontSize: 11, fontWeight: 800, color: "#475569", textTransform: "uppercase" }}>MARCA</label>
                   <input
+                    id="tip-brand"
                     type="text"
                     value={brand}
                     onChange={(e) => setBrand(e.target.value)}
@@ -105,8 +107,9 @@ export function TradeInPage({ onExploreStock }: TradeInPageProps) {
                   />
                 </div>
                 <div style={{ display: "grid", gap: 6 }}>
-                  <label style={{ fontSize: 11, fontWeight: 800, color: "#475569", textTransform: "uppercase" }}>MODELO</label>
+                  <label htmlFor="tip-model" style={{ fontSize: 11, fontWeight: 800, color: "#475569", textTransform: "uppercase" }}>MODELO</label>
                   <input
+                    id="tip-model"
                     type="text"
                     value={model}
                     onChange={(e) => setModel(e.target.value)}
@@ -118,8 +121,9 @@ export function TradeInPage({ onExploreStock }: TradeInPageProps) {
 
               <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))", gap: 16 }}>
                 <div style={{ display: "grid", gap: 6 }}>
-                  <label style={{ fontSize: 11, fontWeight: 800, color: "#475569", textTransform: "uppercase" }}>ANO</label>
+                  <label htmlFor="tip-year" style={{ fontSize: 11, fontWeight: 800, color: "#475569", textTransform: "uppercase" }}>ANO</label>
                   <input
+                    id="tip-year"
                     type="text"
                     value={year}
                     onChange={(e) => setYear(e.target.value)}
@@ -128,8 +132,9 @@ export function TradeInPage({ onExploreStock }: TradeInPageProps) {
                   />
                 </div>
                 <div style={{ display: "grid", gap: 6 }}>
-                  <label style={{ fontSize: 11, fontWeight: 800, color: "#475569", textTransform: "uppercase" }}>KM ATUAL</label>
+                  <label htmlFor="tip-mileage" style={{ fontSize: 11, fontWeight: 800, color: "#475569", textTransform: "uppercase" }}>KM ATUAL</label>
                   <input
+                    id="tip-mileage"
                     type="number"
                     value={mileage}
                     onChange={(e) => setMileage(Number(e.target.value))}
@@ -138,8 +143,9 @@ export function TradeInPage({ onExploreStock }: TradeInPageProps) {
                   />
                 </div>
                 <div style={{ display: "grid", gap: 6 }}>
-                  <label style={{ fontSize: 11, fontWeight: 800, color: "#475569", textTransform: "uppercase" }}>COR</label>
+                  <label htmlFor="tip-color" style={{ fontSize: 11, fontWeight: 800, color: "#475569", textTransform: "uppercase" }}>COR</label>
                   <input
+                    id="tip-color"
                     type="text"
                     value={color}
                     onChange={(e) => setColor(e.target.value)}
@@ -151,8 +157,9 @@ export function TradeInPage({ onExploreStock }: TradeInPageProps) {
 
               <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 16 }}>
                 <div style={{ display: "grid", gap: 6 }}>
-                  <label style={{ fontSize: 11, fontWeight: 800, color: "#475569", textTransform: "uppercase" }}>VERSÃO DETALHADA</label>
+                  <label htmlFor="tip-version" style={{ fontSize: 11, fontWeight: 800, color: "#475569", textTransform: "uppercase" }}>VERSÃO DETALHADA</label>
                   <input
+                    id="tip-version"
                     type="text"
                     value={version}
                     onChange={(e) => setVersion(e.target.value)}
@@ -161,8 +168,9 @@ export function TradeInPage({ onExploreStock }: TradeInPageProps) {
                   />
                 </div>
                 <div style={{ display: "grid", gap: 6 }}>
-                  <label style={{ fontSize: 11, fontWeight: 800, color: "#475569", textTransform: "uppercase" }}>CIDADE / ESTADO</label>
+                  <label htmlFor="tip-city" style={{ fontSize: 11, fontWeight: 800, color: "#475569", textTransform: "uppercase" }}>CIDADE / ESTADO</label>
                   <input
+                    id="tip-city"
                     type="text"
                     value={city}
                     onChange={(e) => setCity(e.target.value)}
@@ -178,8 +186,9 @@ export function TradeInPage({ onExploreStock }: TradeInPageProps) {
                 </h3>
                 <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 16 }}>
                   <div style={{ display: "grid", gap: 6 }}>
-                    <label style={{ fontSize: 11, fontWeight: 800, color: "#475569", textTransform: "uppercase" }}>NOME COMPLETO</label>
+                    <label htmlFor="tip-name" style={{ fontSize: 11, fontWeight: 800, color: "#475569", textTransform: "uppercase" }}>NOME COMPLETO</label>
                     <input
+                      id="tip-name"
                       type="text"
                       value={userName}
                       onChange={(e) => setUserName(e.target.value)}
@@ -188,8 +197,9 @@ export function TradeInPage({ onExploreStock }: TradeInPageProps) {
                     />
                   </div>
                   <div style={{ display: "grid", gap: 6 }}>
-                    <label style={{ fontSize: 11, fontWeight: 800, color: "#475569", textTransform: "uppercase" }}>WHATSAPP</label>
+                    <label htmlFor="tip-phone" style={{ fontSize: 11, fontWeight: 800, color: "#475569", textTransform: "uppercase" }}>WHATSAPP</label>
                     <input
+                      id="tip-phone"
                       type="text"
                       value={userPhone}
                       onChange={(e) => setUserPhone(e.target.value)}

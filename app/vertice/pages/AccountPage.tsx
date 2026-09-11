@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useVertice } from "../store/useVerticeStore";
 
 interface AccountPageProps {
@@ -105,7 +106,7 @@ export function AccountPage({ onGoToLogin }: AccountPageProps) {
                 <div style={{ display: "grid", gap: 10 }}>
                   {order.items.map((item) => (
                     <div key={item.id} style={{ display: "flex", gap: 12, alignItems: "center" }}>
-                      <img src={item.image} alt={item.productName} style={{ width: 44, height: 48, objectFit: "cover", borderRadius: 2, background: "#18181b" }} />
+                      <Image src={item.image} alt={item.productName} width={44} height={48} style={{ width: 44, height: 48, objectFit: "cover", borderRadius: 2, background: "#18181b" }} />
                       <div style={{ flex: 1, fontSize: 12 }}>
                         <strong style={{ color: "#ffffff" }}>{item.productName}</strong>
                         <span style={{ color: "#8e8e93", display: "block", fontSize: 11 }}>

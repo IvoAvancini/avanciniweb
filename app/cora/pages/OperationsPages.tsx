@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useCora } from "../store/useCoraStore";
 import { Breadcrumbs } from "../components/CommonComponents";
 import { PropertyType } from "../types";
@@ -15,7 +15,7 @@ export function SubmitPropertyPage({
   const [step, setStep] = useState<number>(1);
   const [purpose, setPurpose] = useState<"venda" | "locacao">("venda");
   const [propertyType, setPropertyType] = useState<PropertyType>("apartamento");
-  const [city, setCity] = useState("São Paulo");
+  const [city] = useState("São Paulo");
   const [neighborhood, setNeighborhood] = useState("Jardins");
   const [address, setAddress] = useState("");
   const [area, setArea] = useState<number | "">(180);
@@ -112,7 +112,16 @@ export function SubmitPropertyPage({
                 ].map((item) => (
                   <div
                     key={item.id}
-                    onClick={() => setPurpose(item.id as any)}
+                    onClick={() => setPurpose(item.id as "venda" | "locacao")}
+                    role="button"
+                    tabIndex={0}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" || e.key === " ") {
+                        e.preventDefault();
+                        setPurpose(item.id as "venda" | "locacao");
+                      }
+                    }}
+                    aria-label={`Anunciar para ${item.title}`}
                     style={{
                       padding: "20px",
                       borderRadius: "var(--radius-md)",
@@ -142,7 +151,16 @@ export function SubmitPropertyPage({
                 ].map((item) => (
                   <div
                     key={item.id}
-                    onClick={() => setPropertyType(item.id as any)}
+                    onClick={() => setPropertyType(item.id as PropertyType)}
+                    role="button"
+                    tabIndex={0}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" || e.key === " ") {
+                        e.preventDefault();
+                        setPropertyType(item.id as PropertyType);
+                      }
+                    }}
+                    aria-label={`Selecionar tipo ${item.label}`}
                     style={{
                       padding: "16px",
                       borderRadius: "var(--radius-sm)",
@@ -435,12 +453,13 @@ export function FinancingSimulatorPage({
           {/* 1. VALOR DO IMÓVEL */}
           <div>
             <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "8px" }}>
-              <label style={{ fontSize: "13px", fontWeight: 700 }}>1. Valor do Imóvel</label>
+              <label htmlFor="sim-property-price" style={{ fontSize: "13px", fontWeight: 700 }}>1. Valor do Imóvel</label>
               <strong style={{ fontSize: "16px", color: "var(--cora-accent)" }}>
                 R$ {propertyPrice.toLocaleString("pt-BR")}
               </strong>
             </div>
             <input
+              id="sim-property-price"
               type="range"
               min="500000"
               max="20000000"
@@ -454,12 +473,13 @@ export function FinancingSimulatorPage({
           {/* 2. ENTRADA */}
           <div>
             <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "8px" }}>
-              <label style={{ fontSize: "13px", fontWeight: 700 }}>2. Entrada ({downPaymentPercent}%)</label>
+              <label htmlFor="sim-down-payment" style={{ fontSize: "13px", fontWeight: 700 }}>2. Entrada ({downPaymentPercent}%)</label>
               <strong style={{ fontSize: "16px", color: "var(--cora-ink)" }}>
                 R$ {downPayment.toLocaleString("pt-BR")}
               </strong>
             </div>
             <input
+              id="sim-down-payment"
               type="range"
               min="20"
               max="80"
@@ -473,12 +493,13 @@ export function FinancingSimulatorPage({
           {/* 3. PRAZO */}
           <div>
             <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "8px" }}>
-              <label style={{ fontSize: "13px", fontWeight: 700 }}>3. Prazo de Amortização</label>
+              <label htmlFor="sim-term" style={{ fontSize: "13px", fontWeight: 700 }}>3. Prazo de Amortização</label>
               <strong style={{ fontSize: "16px", color: "var(--cora-ink)" }}>
                 {termYears} anos ({termMonths} parcelas)
               </strong>
             </div>
             <input
+              id="sim-term"
               type="range"
               min="5"
               max="35"

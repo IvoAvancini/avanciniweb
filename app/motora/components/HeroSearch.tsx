@@ -30,8 +30,9 @@ export function HeroSearch({ onSearch }: HeroSearchProps) {
     <form onSubmit={handleSubmit} className="m-hero-search-box">
       {/* 1. TERMO / MODELO */}
       <div className="m-search-field">
-        <label>QUAL CARRO VOCÊ PROCURA?</label>
+        <label htmlFor="hs-term">QUAL CARRO VOCÊ PROCURA?</label>
         <input
+          id="hs-term"
           type="text"
           placeholder="Ex: SUV, Corolla, Turbo, Híbrido..."
           value={term}
@@ -41,10 +42,11 @@ export function HeroSearch({ onSearch }: HeroSearchProps) {
 
       {/* 2. CARROCERIA */}
       <div className="m-search-field">
-        <label>CARROCERIA</label>
+        <label htmlFor="hs-body">CARROCERIA</label>
         <select
+          id="hs-body"
           value={bodyType}
-          onChange={(e) => setBodyType(e.target.value as any)}
+          onChange={(e) => setBodyType(e.target.value as VehicleBodyType | "all")}
         >
           <option value="all">Todas as Carrocerias</option>
           <option value="suv">SUVs & Crossovers</option>
@@ -58,10 +60,11 @@ export function HeroSearch({ onSearch }: HeroSearchProps) {
 
       {/* 3. CONDIÇÃO */}
       <div className="m-search-field">
-        <label>ESTADO DO VEÍCULO</label>
+        <label htmlFor="hs-condition">ESTADO DO VEÍCULO</label>
         <select
+          id="hs-condition"
           value={condition}
-          onChange={(e) => setCondition(e.target.value as any)}
+          onChange={(e) => setCondition(e.target.value as VehicleCondition | "all")}
         >
           <option value="all">Novos e Seminovos</option>
           <option value="novo">Apenas 0km Novos</option>

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, Suspense } from "react";
+import { useState, useEffect, useCallback, Suspense } from "react";
 import { CoraProvider, useCora } from "./store/useCoraStore";
 import { Header, Footer } from "./components/HeaderAndFooter";
 import { HomePage } from "./pages/HomePage";
@@ -40,7 +40,7 @@ function CoraAppInner() {
   const [selectedNeighborhoodSlug, setSelectedNeighborhoodSlug] = useState<string>("");
 
   // Helper para sincronizar URL do navegador com pathnames reais (/cora/imovel/slug)
-  const syncFromLocation = () => {
+  const syncFromLocation = useCallback(() => {
     const pathname = window.location.pathname;
     const hash = window.location.hash.replace("#", "");
 
@@ -143,17 +143,18 @@ function CoraAppInner() {
     } else if (hash === "contato") {
       setActiveView("contact");
     }
-  };
+  }, [properties, setFilters]);
 
   useEffect(() => {
-    syncFromLocation();
     window.addEventListener("popstate", syncFromLocation);
     window.addEventListener("hashchange", syncFromLocation);
+    const initialSync = window.requestAnimationFrame(syncFromLocation);
     return () => {
+      window.cancelAnimationFrame(initialSync);
       window.removeEventListener("popstate", syncFromLocation);
       window.removeEventListener("hashchange", syncFromLocation);
     };
-  }, [properties, setFilters]);
+  }, [syncFromLocation]);
 
   // Navigate handler com URLs reais e pushState
   const handleNavigate = (view: string, param?: string) => {
@@ -324,7 +325,6 @@ function CoraAppInner() {
         {activeView === "consultants" && (
           <ConsultantsPage
             onNavigateHome={() => handleNavigate("home")}
-            onSelectConsultant={() => {}}
           />
         )}
 

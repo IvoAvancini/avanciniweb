@@ -1,14 +1,14 @@
 "use client";
 
+import Image from "next/image";
 import { useMotora } from "../store/useMotoraStore";
 import { Vehicle } from "../types";
 
 interface ComparePageProps {
-  onSelectVehicle: (vehicle: Vehicle) => void;
   onExploreStock: () => void;
 }
 
-export function ComparePage({ onSelectVehicle, onExploreStock }: ComparePageProps) {
+export function ComparePage({ onExploreStock }: ComparePageProps) {
   const { compareList, removeFromCompare, clearCompare, vehicles, openLeadModal } = useMotora();
 
   const comparedVehicles = vehicles.filter((v) => compareList.includes(v.id));
@@ -90,7 +90,7 @@ export function ComparePage({ onSelectVehicle, onExploreStock }: ComparePageProp
                   <th key={v.id} style={{ padding: "20px", minWidth: "240px", verticalAlign: "top", borderLeft: "1px solid var(--m-light-border)" }}>
                     <div style={{ display: "grid", gap: 10 }}>
                       <div style={{ position: "relative", borderRadius: 6, overflow: "hidden" }}>
-                        <img src={v.images[0]} alt={v.model} style={{ width: "100%", height: 140, objectFit: "cover" }} />
+                        <Image src={v.images[0]} alt={v.model} width={400} height={140} style={{ width: "100%", height: 140, objectFit: "cover" }} />
                         <button
                           type="button"
                           onClick={() => removeFromCompare(v.id)}
