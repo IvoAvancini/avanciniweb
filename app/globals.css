@@ -2646,11 +2646,11 @@ body:has(.web-page) .page-progress{background:linear-gradient(90deg,#43c85d,#a9f
 
 /* Marca reconstruída em CSS: fita facetada, topo reto e corte diagonal afilado. */
 .avancini-mark{
-  --mark-bright:#ff5870;
-  --mark-main:#ed1238;
-  --mark-deep:#780014;
-  --mark-shadow:#240006;
-  --mark-glow:rgba(255,24,56,.38);
+  --mark-bright:#86efac;
+  --mark-main:#22c55e;
+  --mark-deep:#0284c7;
+  --mark-shadow:#021f2d;
+  --mark-glow:rgba(34,197,94,.38);
   position:relative;
   display:block;
   aspect-ratio:1/1!important;
@@ -2660,6 +2660,35 @@ body:has(.web-page) .page-progress{background:linear-gradient(90deg,#43c85d,#a9f
   filter:drop-shadow(0 0 18px var(--mark-glow))!important;
   isolation:isolate;
 }
+.avancini-mark-os{
+  --mark-bright:#86efac;
+  --mark-main:#22c55e;
+  --mark-deep:#0284c7;
+  --mark-shadow:#021f2d;
+  --mark-glow:rgba(56,189,248,.38);
+  filter:drop-shadow(0 0 12px rgba(34,197,94,.42)) drop-shadow(0 0 20px rgba(56,189,248,.38))!important;
+}
+.avancini-mark-os .avancini-mark-cap{
+  background:linear-gradient(90deg,#22c55e 0%,#10b981 35%,#06b6d4 70%,#38bdf8 100%)!important;
+}
+.avancini-mark-os .avancini-mark-leg-left{
+  background:linear-gradient(132deg,#86efac 0%,#22c55e 38%,#15803d 73%,#022c14 100%)!important;
+}
+.avancini-mark-os .avancini-mark-leg-right{
+  background:linear-gradient(128deg,#a5f3fc 0%,#38bdf8 41%,#0284c7 76%,#032338 100%)!important;
+}
+.avancini-mark-os .avancini-mark-notch{
+  background:linear-gradient(132deg,#10b981 0%,#0284c7 65%,#022030 100%)!important;
+}
+.avancini-mark-os .avancini-mark-slash{
+  background:linear-gradient(142deg,#ffffff 10%,#f0fdf4 45%,#e0f2fe 75%,#bae6fd 100%)!important;
+  filter:drop-shadow(0 0 5px rgba(255,255,255,.9)) drop-shadow(0 0 10px rgba(56,189,248,.45))!important;
+}
+.avancini-mark-os .avancini-mark-orbit-outer{border-color:rgba(34,197,94,.3)!important}
+.avancini-mark-os .avancini-mark-orbit-mid{border-color:rgba(56,189,248,.32)!important}
+.avancini-mark-os .avancini-mark-orbit-inner{border-color:rgba(16,185,129,.38)!important}
+.avancini-mark-os .avancini-mark-orbit-outer::after{background:#22c55e!important;box-shadow:0 0 10px #22c55e!important}
+.avancini-mark-os .avancini-mark-orbit-mid::after{background:#38bdf8!important;box-shadow:0 0 10px #38bdf8!important}
 .avancini-mark-dash{
   --mark-bright:#c5ffbb;
   --mark-main:#65ed68;
