@@ -235,7 +235,10 @@ export function OSHubClient() {
           <div className="portal-header">
             {/* Linha 1 de métrica principal */}
             <div className="portal-badge-row">
-              <AnimatedCounter target={15000} />
+              <div className="portal-metric-anchor">
+                <AnimatedCounter target={15000} />
+                <span className="portal-unit">visitas geradas</span>
+              </div>
               <span className="portal-kicker kicker-dash">
                 <span className="kicker-dot dot-dash">
                   <span className="kicker-dot-ping" />
@@ -281,6 +284,11 @@ export function OSHubClient() {
                 </div>
               ))}
             </div>
+          </div>
+
+          {/* Linha discreta de confiança jurídica no espaço existente */}
+          <div className="portal-trust-line" aria-label="Garantia e transparência jurídica">
+            <span>CNPJ 42.487.607/0001-98 · Emissão de NF · Sem fidelidade</span>
           </div>
 
           {/* CTA */}
@@ -331,7 +339,10 @@ export function OSHubClient() {
           <div className="portal-header">
             {/* Linha 1 de métrica principal */}
             <div className="portal-badge-row">
-              <AnimatedCounter target={24000} />
+              <div className="portal-metric-anchor">
+                <AnimatedCounter target={24000} />
+                <span className="portal-unit">mensagens respondidas</span>
+              </div>
               <span className="portal-kicker kicker-sync">
                 <span className="kicker-dot dot-sync">
                   <span className="kicker-dot-ping" />
@@ -377,6 +388,11 @@ export function OSHubClient() {
                 </div>
               ))}
             </div>
+          </div>
+
+          {/* Linha discreta de confiança jurídica no espaço existente */}
+          <div className="portal-trust-line" aria-label="Garantia e transparência jurídica">
+            <span>CNPJ 42.487.607/0001-98 · Emissão de NF · Sem fidelidade</span>
           </div>
 
           {/* CTA */}

@@ -2764,4 +2764,172 @@
   }
 }
 
+/* ==========================================================================
+   MINI-FLUXO DE PROCESSO: DO BRIEFING À ENTREGA (SUBSTITUI OS 05 PILARES)
+   ========================================================================== */
+.web-process-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+  position: relative;
+  z-index: 2;
+  margin-top: 2rem;
+}
+
+.process-step-card {
+  position: relative;
+  background: radial-gradient(circle at 90% 10%, rgba(34, 197, 94, 0.07), transparent 45%), rgba(15, 23, 18, 0.7);
+  border: 1px solid rgba(34, 197, 94, 0.16);
+  border-radius: 1.25rem;
+  padding: 1.6rem 1.35rem;
+  display: flex;
+  flex-direction: column;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+}
+
+.process-step-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(34, 197, 94, 0.45);
+  box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.5), 0 0 24px rgba(34, 197, 94, 0.12);
+}
+
+.process-step-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.process-step-num {
+  font-size: 0.85rem;
+  font-weight: 850;
+  color: #22c55e;
+  letter-spacing: 0.05em;
+  background: rgba(34, 197, 94, 0.1);
+  border: 1px solid rgba(34, 197, 94, 0.25);
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.process-step-pill {
+  font-size: 0.68rem;
+  font-weight: 750;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #86efac;
+  background: rgba(34, 197, 94, 0.12);
+  border: 1px solid rgba(34, 197, 94, 0.28);
+  padding: 0.25rem 0.65rem;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.process-step-kicker {
+  font-size: 0.62rem;
+  font-weight: 750;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgba(255, 255, 255, 0.45);
+  margin-bottom: 0.4rem;
+}
+
+.process-step-title {
+  font-size: 1.05rem;
+  font-weight: 750;
+  color: #ffffff;
+  margin: 0 0 0.55rem;
+  line-height: 1.3;
+}
+
+.process-step-desc {
+  font-size: 0.84rem;
+  color: rgba(255, 255, 255, 0.65);
+  line-height: 1.5;
+  margin: 0;
+}
+
+@media (max-width: 1024px) {
+  .web-process-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .web-process-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  .process-step-card {
+    padding: 1.35rem 1.15rem;
+  }
+}
+
+/* ==========================================================================
+   FAIXA DE SEGURANÇA JURÍDICA & GARANTIAS (ABAIXO DOS PLANOS)
+   ========================================================================== */
+.dash-plans-trust-strip {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  margin-top: 2rem;
+  margin-bottom: 3.5rem;
+  position: relative;
+  z-index: 2;
+}
+
+.trust-strip-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1.25rem 1.4rem;
+  background: rgba(15, 23, 42, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 1rem;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: border-color 0.25s ease, background 0.25s ease;
+}
+
+.trust-strip-card:hover {
+  background: rgba(20, 35, 25, 0.45);
+  border-color: rgba(34, 197, 94, 0.3);
+}
+
+.trust-strip-icon {
+  font-size: 1.5rem;
+  line-height: 1;
+  flex-shrink: 0;
+  padding-top: 2px;
+}
+
+.trust-strip-info strong {
+  display: block;
+  font-size: 0.92rem;
+  font-weight: 750;
+  color: #ffffff;
+  margin-bottom: 0.25rem;
+  line-height: 1.35;
+}
+
+.trust-strip-info p {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.45;
+  margin: 0;
+}
+
+@media (max-width: 900px) {
+  .dash-plans-trust-strip {
+    grid-template-columns: 1fr;
+    gap: 0.85rem;
+  }
+}
+
 

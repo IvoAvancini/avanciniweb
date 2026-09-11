@@ -137,23 +137,63 @@ const portfolioRows = [
   ],
 ] as const;
 
-const webPillars = [
-  { number: "01", title: "Estudo de Mercado", text: "Análise profunda do seu nicho, dos concorrentes e das brechas para posicionar sua marca como líder." },
-  { number: "02", title: "Copywriting Persuasivo", text: "Arquitetura psicológica de texto para quebrar objeções e conduzir o visitante do clique ao fechamento." },
-  { number: "03", title: "Design Estratégico Autoral", text: "Identidade visual exclusiva de padrão internacional. Zero templates amadores: cada detalhe transmite autoridade." },
-  { number: "04", title: "Engenharia de Performance", text: "Código enxuto com foco nos critérios Core Web Vitals do Google, priorizando estabilidade visual e abertura quase instantânea no celular." },
-  { number: "05", title: "Responsividade & Preparo para IA", text: "Experiência perfeita em qualquer celular e dados estruturados para o site ser recomendado por Google, ChatGPT e Perplexity." },
+const webProcessSteps = [
+  {
+    step: "01",
+    tag: "ALINHAMENTO & BRIEFING",
+    title: "Diagnóstico Estratégico",
+    time: "Dia 1",
+    desc: "Mapeamento do seu negócio, público comprador e objetivos comerciais para definir a arquitetura e tom ideais.",
+  },
+  {
+    step: "02",
+    tag: "PROTÓTIPO FUNCIONAL",
+    title: "Primeiro Rascunho em 48h",
+    time: "48 horas",
+    desc: "Você recebe um link online navegável para experimentar o design autoral, o copy persuasivo e a fluidez no celular.",
+  },
+  {
+    step: "03",
+    tag: "REFINAMENTO CONTÍNUO",
+    title: "Ajustes até 100% de Aprovação",
+    time: "Revisões ilimitadas",
+    desc: "Ajustamos seções, cores, tipografia e mensagens com você até o projeto atingir o nível exato de autoridade que procura.",
+  },
+  {
+    step: "04",
+    tag: "PUBLICAÇÃO & ESCALA",
+    title: "Lançamento & Suporte",
+    time: "7 a 10 dias",
+    desc: "Domínio próprio, certificado SSL, testes Core Web Vitals do Google e entrega com 30 dias de garantia e suporte.",
+  },
 ] as const;
 
 const webFaqs = [
-  { question: "Como funciona o processo de criação?", answer: "Iniciamos entendendo seu modelo de negócio, público-alvo e metas de conversão. Desenvolvemos o copywriting estratégico, o design autoral e a engenharia de alta performance, entregando o primeiro rascunho interativo em 48h para validação." },
-  { question: "Landing page e site institucional são a mesma coisa?", answer: "Não. A landing page concentra 100% da atenção em uma oferta direta ou campanha com foco em conversão rápida. O site institucional apresenta sua empresa completa, catálogo de serviços, equipe e consolida autoridade no Google." },
-  { question: "O site carrega rápido e funciona bem no celular?", answer: "Sim. Nossos projetos são desenvolvidos com arquitetura técnica focada nos Core Web Vitals do Google, com renderização leve e prioridade mobile para reduzir a taxa de rejeição e reter visitantes logo no primeiro segundo." },
-  { question: "Posso usar meu próprio domínio e e-mail profissional?", answer: "Com certeza. Conectamos seu domínio corporativo (.com.br, .com etc.) e auxiliamos na configuração de e-mails profissionais com certificado de segurança SSL avançado." },
-  { question: "Quanto tempo demora para o projeto ficar pronto?", answer: "Projetos de alta conversão (Landing Pages) ficam prontos entre 48h e 7 dias. Estruturas institucionais e lojas virtuais completas são entregues entre 10 e 20 dias, com cronograma claro e acompanhamento diário." },
-  { question: "Como é calculada a proposta de investimento?", answer: "Cada solução é desenhada sob medida conforme a complexidade técnica e os objetivos do seu negócio. Analisamos o escopo ideal para garantir a máxima taxa de retorno sobre o seu investimento." },
-  { question: "Como funciona a hospedagem, SSL e suporte?", answer: "Cuidamos de toda a infraestrutura técnica: servidores em nuvem ultrarrápidos, certificado SSL de alta criptografia, backups automatizados e suporte dedicado para qualquer ajuste ou melhoria." },
-  { question: "Preciso entender de tecnologia para gerenciar?", answer: "De forma alguma. Cuidamos de 100% da engenharia, do rascunho à publicação. Você só precisa nos enviar as diretrizes essenciais do seu negócio e nós entregamos a máquina de conversão pronta." },
+  {
+    question: "E se eu não gostar do design ou do resultado inicial?",
+    answer:
+      "Você não corre risco. Apresentamos o primeiro rascunho funcional em 48 horas e refinamos a estrutura em rodadas de ajustes até atingir 100% da sua aprovação antes de qualquer publicação definitiva.",
+  },
+  {
+    question: "Vocês entregam o código-fonte? O site é 100% meu?",
+    answer:
+      "Sim, total transparência e propriedade sua. O domínio, as contas, os arquivos e o código-fonte pertencem integralmente a você e à sua empresa. Sem aprisionamento e sem amarras proprietárias.",
+  },
+  {
+    question: "Preciso pagar mensalidade depois que o site estiver pronto?",
+    answer:
+      "Não. Não cobramos mensalidade obrigatória de desenvolvimento ou manutenção forçada. O site é seu e funciona de forma independente. Você assume apenas os custos naturais da internet (seu registro de domínio anual e hospedagem em nuvem após o 1º ano grátis).",
+  },
+  {
+    question: "Quanto tempo de suporte pós-entrega está incluso?",
+    answer:
+      "Todos os projetos incluem 30 dias de suporte e garantia técnica direta pelo WhatsApp para esclarecer dúvidas, realizar ajustes finos de lançamento e assegurar que tudo opere com estabilidade máxima.",
+  },
+  {
+    question: "Como funciona a segurança jurídica e emissão de nota fiscal?",
+    answer:
+      "Emitimos Nota Fiscal eletrônica para todo o Brasil sob o CNPJ 42.487.607/0001-98, com contrato de prestação de serviços formal que estipula prazos, entregáveis e garantias de ponta a ponta.",
+  },
 ] as const;
 
 const heroAudiences = ["AUTÔNOMOS", "EMPRESAS", "CLÍNICAS", "ESCRITÓRIOS", "MARCAS"] as const;
@@ -293,7 +333,7 @@ const dashPlans: DashPlan[] = [
     name: "Landing Page de Alta Conversão",
     badge: "⚡ ANÚNCIOS & CAMPANHAS",
     kicker: "CONVERSÃO DIRETA NO WHATSAPP",
-    idealFor: "Empresas e profissionais que investem em tráfego pago (Google e Meta Ads) e precisam de retorno em vendas.",
+    idealFor: "Especialistas e empresas com tráfego ativo de Google e Meta Ads focados em conversão imediata.",
     pitch: "Página única ultrarrápida com gatilhos psicológicos validados para quebrar objeções e levar o lead direto ao fechamento.",
     timeline: "Primeiro rascunho em 48h",
     features: [
@@ -303,7 +343,7 @@ const dashPlans: DashPlan[] = [
       { title: "Hospedagem Cloud & SSL Blindado", desc: "99.9% de uptime garantido e 1º ano grátis incluso." },
     ],
     payoff: "💡 Pare de queimar verba em anúncios com páginas lentas que espantam compradores.",
-    deliverableBadge: "⚡ Rascunho em 48h · Código Limpo · Suporte Direto",
+    deliverableBadge: "⚡ Rascunho em 48h · NF & Contrato · 30d Suporte",
     ctaText: "Solicitar Proposta de Landing Page",
     featured: false,
   },
@@ -312,9 +352,9 @@ const dashPlans: DashPlan[] = [
     name: "Site Institucional de Autoridade",
     badge: "🔥 MAIS ESCOLHIDO · CARRO-CHEFE",
     kicker: "AUTORIDADE MÁXIMA & DOMÍNIO REGIONAL",
-    idealFor: "Clínicas, escritórios, consultorias e empresas que precisam justificar preços mais nobres e fechar contratos maiores.",
+    idealFor: "Clínicas, escritórios e consultorias que precisam de autoridade regional no Google e contratos de maior valor.",
     pitch: "Estrutura corporativa autoral que posiciona sua marca no topo do Google e transmite solidez imediata ao cliente.",
-    timeline: "Entrega completa em 7 a 10 dias",
+    timeline: "Primeiro rascunho em 4 dias",
     features: [
       { title: "Estrutura Corporativa Completa", desc: "Início, Sobre Nós, Serviços Detalhados, Casos de Sucesso e Contato." },
       { title: "SEO Local Técnico para o Google", desc: "Otimizado para figurar no topo das pesquisas orgânicas da sua região." },
@@ -322,7 +362,7 @@ const dashPlans: DashPlan[] = [
       { title: "Design Autoral de Padrão Internacional", desc: "Tipografia nobre e acabamento premium sem templates genéricos." },
     ],
     payoff: "💎 Quem pesquisa sua empresa encontra autoridade inquestionável para fechar contratos maiores.",
-    deliverableBadge: "⚡ Design Autoral · Alta Performance · SEO Local",
+    deliverableBadge: "⚡ Design Autoral · NF & Contrato · 30d Suporte",
     ctaText: "Planejar Site Institucional",
     featured: true,
   },
@@ -331,9 +371,9 @@ const dashPlans: DashPlan[] = [
     name: "Loja Virtual & Catálogo Direto",
     badge: "🛍️ VENDAS 24H · ZERO COMISSÕES",
     kicker: "CHECKOUT DIRETO & ZERO COMISSÕES",
-    idealFor: "Marcas próprias e distribuidores que querem vender online sem repassar margem de lucro para terceiros.",
+    idealFor: "Marcas próprias e distribuidores que vendem produtos online diretamente, sem repassar margem a terceiros.",
     pitch: "Catálogo de alta definição com checkout automático por Pix e cartão em até 12x, caindo 100% direto na sua conta.",
-    timeline: "Primeiro rascunho em 5 a 7 dias",
+    timeline: "Primeiro rascunho em 5 dias",
     features: [
       { title: "Catálogo Ágil com Zoom & Filtros", desc: "Fotos em alta resolução com variações instantâneas de cor e tamanho." },
       { title: "Pix Automático & Cartão em 12x", desc: "Aprovação em segundos sem fricção nem abandono de carrinho." },
@@ -341,7 +381,7 @@ const dashPlans: DashPlan[] = [
       { title: "Zero Taxas ou Comissões sobre Vendas", desc: "100% do lucro na sua conta, sem taxas abusivas de plataformas." },
     ],
     payoff: "🚀 Transforme visitantes em pedidos pagos sem depender de terceiros para faturar.",
-    deliverableBadge: "⚡ Checkout Rápido · Zero Comissão · Catálogo Ágil",
+    deliverableBadge: "⚡ Checkout Ágil · NF & Contrato · 30d Suporte",
     ctaText: "Planejar Loja Virtual",
     featured: false,
   },
@@ -1008,18 +1048,21 @@ export default function Home() {
       <section className="section web-method" id="metodo">
         <div className="section-heading web-method-heading">
           <div>
-            <span className="paulo-ref-kicker">REF:// METODOLOGIA · 05 PILARES <span className="kicker-bar" /></span>
-            <h2>Site bonito chama atenção.<br /><em>Estratégia transforma em cliente.</em></h2>
+            <span className="paulo-ref-kicker">REF:// PROCESSO &amp; PRAZOS · 04 ETAPAS <span className="kicker-bar" /></span>
+            <h2>Como funciona na prática:<br /><em>do orçamento à entrega do site.</em></h2>
           </div>
-          <p>Sem estes pilares trabalhando juntos, até um visual impressionante vira apenas decoração.</p>
+          <p>Processo transparente com cronograma claro, validação funcional em 48h e zero enrolação técnica.</p>
         </div>
-        <div className="web-method-stack">
-          {webPillars.map((pillar) => (
-            <article data-step={pillar.number} key={pillar.number}>
-              <span>{pillar.number}</span>
-              <h3>{pillar.title}</h3>
-              <p>{pillar.text}</p>
-              <WebArrow />
+        <div className="web-process-grid">
+          {webProcessSteps.map((step) => (
+            <article className="process-step-card" key={step.step} data-step={step.step}>
+              <div className="process-step-top">
+                <span className="process-step-num">{step.step}</span>
+                <span className="process-step-pill">{step.time}</span>
+              </div>
+              <span className="process-step-kicker">{step.tag}</span>
+              <h3 className="process-step-title">{step.title}</h3>
+              <p className="process-step-desc">{step.desc}</p>
             </article>
           ))}
         </div>
@@ -1112,6 +1155,31 @@ export default function Home() {
               </article>
             );
           })}
+        </div>
+
+        {/* Faixa de Segurança Jurídica & Garantia nos Planos */}
+        <div className="dash-plans-trust-strip" aria-label="Garantia e segurança na contratação">
+          <div className="trust-strip-card">
+            <span className="trust-strip-icon" aria-hidden="true">🛡️</span>
+            <div className="trust-strip-info">
+              <strong>Garantia Incondicional de Satisfação</strong>
+              <p>Primeiro rascunho funcional em 48h e ajustes contínuos até 100% de aprovação do design.</p>
+            </div>
+          </div>
+          <div className="trust-strip-card">
+            <span className="trust-strip-icon" aria-hidden="true">📄</span>
+            <div className="trust-strip-info">
+              <strong>Segurança Jurídica &amp; NF</strong>
+              <p>Contrato formal com cronograma, CNPJ 42.487.607/0001-98 e Nota Fiscal para todo o Brasil.</p>
+            </div>
+          </div>
+          <div className="trust-strip-card">
+            <span className="trust-strip-icon" aria-hidden="true">⚡</span>
+            <div className="trust-strip-info">
+              <strong>Garantia de Performance Google</strong>
+              <p>Nota verde no Google PageSpeed ou otimização sem custo adicional até atingir a meta.</p>
+            </div>
+          </div>
         </div>
 
         {/* 2. Quadro de Autoridade "Incluso em TODO Projeto Avancini Dash" (A Stack de Valor Inegociável) */}
@@ -1245,7 +1313,7 @@ export default function Home() {
                 }
               >
                 <span>CONSULTAR MEU PROJETO</span>
-                <WebArrow />
+                <LivingArrow size={13} />
               </button>
             </div>
           </div>
@@ -1256,9 +1324,9 @@ export default function Home() {
         <div className="web-faq-intro">
           <span className="faq-kicker">PERGUNTAS FREQUENTES</span>
           <h2 id="web-faq-heading">Tire suas dúvidas<br /><em>antes de começar.</em></h2>
-          <p>As principais respostas sobre metodologia, prazos, domínio e entrega. Não encontrou o que precisa?</p>
+          <p>As principais respostas sobre metodologia, prazos, código-fonte e garantia. Não encontrou o que precisa?</p>
           <button type="button" onClick={() => openLead("Tenho uma dúvida sobre os serviços da Avancini Dash antes de começar meu projeto.")}>
-            FALAR COM A AVANCINI <WebArrow />
+            FALAR COM A AVANCINI <LivingArrow size={13} />
           </button>
         </div>
         <div className="web-faq-list">
@@ -1399,7 +1467,7 @@ export default function Home() {
 
           {/* Barra Inferior / Sub-footer */}
           <div className="paulo-footer-bottom">
-            <span suppressHydrationWarning>© {new Date().getFullYear()} Avancini OS · CNPJ 42.487.607/0001-98. Todos os direitos reservados.</span>
+            <span suppressHydrationWarning>© {new Date().getFullYear()} Avancini OS · CNPJ 42.487.607/0001-98 · Emissão de Nota Fiscal para todo o Brasil. Todos os direitos reservados.</span>
             <nav aria-label="Informações legais">
               <a href="/privacidade" className="btn-underline">Política de Privacidade</a>
               <a href="/termos" className="btn-underline">Termos de Uso</a>
