@@ -901,32 +901,32 @@ export default function Home() {
             </div>
           </div>
         </section>
+      </div>
 
-        {/* MARQUEE TICKER DE DIFERENCIAIS (ESTILO PAULO LEME) */}
-        <div className="dash-ticker-wrap" aria-hidden="true">
-          <div className="dash-ticker-track">
-            {[
-              "⚡ 0.2s LCP Instantâneo",
-              "💎 Nota 100 Google PageSpeed",
-              "📱 100% Autoral & Responsivo",
-              "🎯 Foco Total em Conversão",
-              "🛡️ Hospedagem Cloud & SSL",
-              "🔍 SEO Técnico Dominante",
-              "🤝 Suporte Dedicado",
-              "⚡ 0.2s LCP Instantâneo",
-              "💎 Nota 100 Google PageSpeed",
-              "📱 100% Autoral & Responsivo",
-              "🎯 Foco Total em Conversão",
-              "🛡️ Hospedagem Cloud & SSL",
-              "🔍 SEO Técnico Dominante",
-              "🤝 Suporte Dedicado",
-            ].map((badge, i) => (
-              <span className="ticker-item" key={i}>
-                {badge}
-                <span className="ticker-dot-sep" />
-              </span>
-            ))}
-          </div>
+      {/* MARQUEE TICKER DE DIFERENCIAIS (ESTILO PAULO LEME) */}
+      <div className="dash-ticker-wrap" aria-hidden="true">
+        <div className="dash-ticker-track">
+          {[
+            "⚡ 0.2s LCP Instantâneo",
+            "💎 Nota 100 Google PageSpeed",
+            "📱 100% Autoral & Responsivo",
+            "🎯 Foco Total em Conversão",
+            "🛡️ Hospedagem Cloud & SSL",
+            "🔍 SEO Técnico Dominante",
+            "🤝 Suporte Dedicado",
+            "⚡ 0.2s LCP Instantâneo",
+            "💎 Nota 100 Google PageSpeed",
+            "📱 100% Autoral & Responsivo",
+            "🎯 Foco Total em Conversão",
+            "🛡️ Hospedagem Cloud & SSL",
+            "🔍 SEO Técnico Dominante",
+            "🤝 Suporte Dedicado",
+          ].map((badge, i) => (
+            <span className="ticker-item" key={i}>
+              {badge}
+              <span className="ticker-dot-sep" />
+            </span>
+          ))}
         </div>
       </div>
 
