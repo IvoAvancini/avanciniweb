@@ -777,28 +777,66 @@
 }
 
 @media (max-width: 768px) {
-  html, body, .web-page {
+  html, body, .web-page, .sync-page {
     overflow-x: clip !important;
     max-width: 100vw;
   }
-  .web-page .header {
-    height: 56px;
-    padding: 0 1rem;
+  :is(.web-page, .sync-page) .header {
+    height: 56px !important;
+    padding: 0 1rem !important;
+    gap: 0.5rem !important;
+  }
+  :is(.web-page, .sync-page) .header .logo {
+    gap: 8px !important;
+    min-width: 0 !important;
+  }
+  :is(.web-page, .sync-page) .header .logo small {
+    display: none !important;
+  }
+  :is(.web-page, .sync-page) .header .logo .brand-name {
+    font-size: 0.86rem !important;
+    white-space: nowrap !important;
+  }
+  :is(.web-page, .sync-page) .header .web-ecosystem-switch {
+    display: none !important;
+  }
+  :is(.web-page, .sync-page) .header .menu-toggle {
+    min-width: 82px !important;
+    height: 38px !important;
+    min-height: 38px !important;
+    padding: 0 12px !important;
+    gap: 6px !important;
+    flex-shrink: 0 !important;
+  }
+  :is(.web-page, .sync-page) .header .menu-toggle b {
+    font-size: 11px !important;
   }
   .web-hero-scene {
     min-height: auto;
     padding-top: 20px;
+    overflow: hidden !important;
+    max-width: 100vw !important;
   }
   .web-hero-scene .hero {
     min-height: auto;
     padding: 95px 1rem 45px;
     width: 100%;
+    overflow: hidden !important;
+    max-width: 100vw !important;
+  }
+  .web-hero-scene .hero-art-backdrop {
+    right: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    overflow: hidden !important;
   }
   .hero-monumental-a-wrap {
     top: 40%;
     width: 88vw;
     height: 88vw;
+    max-width: 85vw !important;
     opacity: 0.3;
+    overflow: hidden !important;
   }
   .hero-typewriter-badge {
     max-width: 95vw;
@@ -836,9 +874,6 @@
     justify-content: center;
     min-height: 48px;
     font-size: 0.9rem;
-  }
-  .web-ecosystem-switch .cta-full-name {
-    display: none;
   }
   .dash-plans-quad-grid {
     grid-template-columns: 1fr;
@@ -1127,6 +1162,26 @@
     grid-template-columns: repeat(2, 1fr);
     gap: 10px;
     padding: 10px 14px;
+  }
+  .cockpit-header {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 8px !important;
+    padding: 10px 14px !important;
+  }
+  .cockpit-header-actions {
+    width: 100% !important;
+    justify-content: space-between !important;
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+  }
+  .cockpit-sim-btn {
+    flex: 1 !important;
+    min-height: 38px !important;
+    justify-content: center !important;
+  }
+  .cockpit-live-tag {
+    font-size: 0.62rem !important;
   }
   .cockpit-live-stepper {
     padding: 6px 10px;
