@@ -2932,4 +2932,318 @@
   }
 }
 
+/* ==========================================================================
+   NOVA ARQUITETURA DE PLANOS LUXURY (DASH & SYNC) — COMPACTO, ELEGANTE E CLARO
+   ========================================================================== */
+.plan-card-luxury {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: rgba(15, 23, 20, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 1.35rem;
+  padding: clamp(1.4rem, 2vw, 1.85rem) clamp(1.2rem, 1.8vw, 1.65rem);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+  height: 100%;
+}
+
+.plan-card-luxury:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255, 255, 255, 0.18);
+  box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.6);
+}
+
+/* Card Destacado (Carro-Chefe) */
+.plan-card-luxury.is-featured-glow {
+  background: radial-gradient(circle at 50% 0%, rgba(34, 197, 94, 0.14) 0%, transparent 65%), rgba(18, 30, 22, 0.8);
+  border-color: rgba(34, 197, 94, 0.45);
+  box-shadow: 0 16px 45px -10px rgba(34, 197, 94, 0.22), inset 0 1px 0 rgba(34, 197, 94, 0.35);
+}
+
+.plan-card-luxury.is-featured-glow:hover {
+  transform: translateY(-6px);
+  border-color: rgba(34, 197, 94, 0.65);
+  box-shadow: 0 24px 50px -10px rgba(34, 197, 94, 0.3), 0 0 30px rgba(34, 197, 94, 0.15);
+}
+
+.plan-card-luxury.is-featured-glow-sync {
+  background: radial-gradient(circle at 50% 0%, rgba(56, 189, 248, 0.14) 0%, transparent 65%), rgba(15, 26, 38, 0.8);
+  border-color: rgba(56, 189, 248, 0.45);
+  box-shadow: 0 16px 45px -10px rgba(56, 189, 248, 0.22), inset 0 1px 0 rgba(56, 189, 248, 0.35);
+}
+
+.plan-card-luxury.is-featured-glow-sync:hover {
+  transform: translateY(-6px);
+  border-color: rgba(56, 189, 248, 0.65);
+  box-shadow: 0 24px 50px -10px rgba(56, 189, 248, 0.3), 0 0 30px rgba(56, 189, 248, 0.15);
+}
+
+/* Topbar: Badge + Prazo */
+.plan-card-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 1.1rem;
+}
+
+.plan-badge-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.62rem;
+  font-weight: 750;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.28rem 0.65rem;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.badge-featured {
+  background: rgba(34, 197, 94, 0.18);
+  border: 1px solid rgba(34, 197, 94, 0.45);
+  color: #86efac;
+}
+
+.badge-featured-sync {
+  background: rgba(56, 189, 248, 0.18);
+  border: 1px solid rgba(56, 189, 248, 0.45);
+  color: #7dd3fc;
+}
+
+.badge-neutral {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.pill-ping-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 8px #22c55e;
+}
+
+.pill-ping-dot.dot-sync {
+  background: #38bdf8;
+  box-shadow: 0 0 8px #38bdf8;
+}
+
+.plan-timeline-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.66rem;
+  font-weight: 650;
+  color: rgba(255, 255, 255, 0.65);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 0.25rem 0.55rem;
+  border-radius: 0.45rem;
+  white-space: nowrap;
+}
+
+/* Título e Proposta */
+.plan-header-block {
+  margin-bottom: 1.1rem;
+}
+
+.plan-kicker-text {
+  display: block;
+  font-size: 0.62rem;
+  font-weight: 750;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #86efac;
+  margin-bottom: 0.4rem;
+}
+
+.kicker-sync-color {
+  color: #7dd3fc;
+}
+
+.plan-title-text {
+  font-size: clamp(1.2rem, 1.8vw, 1.45rem);
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  margin: 0 0 0.55rem;
+}
+
+.plan-prop-text {
+  font-size: 0.83rem;
+  color: rgba(255, 255, 255, 0.68);
+  line-height: 1.48;
+  margin: 0;
+}
+
+.plan-divider-line {
+  height: 1px;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
+  margin-bottom: 1.1rem;
+}
+
+/* Checklist */
+.plan-features-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.4rem;
+}
+
+.plan-features-header {
+  font-size: 0.6rem;
+  font-weight: 750;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.4);
+  margin-bottom: 0.8rem;
+}
+
+.plan-checklist-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.plan-checklist-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+}
+
+.checklist-bullet-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  background: rgba(34, 197, 94, 0.14);
+  color: #22c55e;
+  font-size: 0.65rem;
+  font-weight: 850;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.checklist-bullet-icon.icon-sync {
+  background: rgba(56, 189, 248, 0.14);
+  color: #38bdf8;
+}
+
+.checklist-row-text {
+  font-size: 0.81rem;
+  color: rgba(255, 255, 255, 0.82);
+  line-height: 1.42;
+  font-weight: 500;
+}
+
+/* Rodapé: Botão de Ação + Micro-garantia */
+.plan-card-footer-block {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.plan-signature-action-btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  width: 100%;
+  min-height: 48px;
+  padding: 0.75rem 1.2rem;
+  border-radius: 0.75rem;
+  font-size: 0.82rem;
+  font-weight: 750;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  overflow: hidden;
+  text-decoration: none;
+  border: none;
+}
+
+.btn-action-featured {
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  color: #041408;
+  font-weight: 800;
+  box-shadow: 0 4px 20px rgba(34, 197, 94, 0.35);
+}
+
+.btn-action-featured:hover {
+  background: linear-gradient(135deg, #4ade80, #22c55e);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(34, 197, 94, 0.45);
+}
+
+.btn-action-featured-sync {
+  background: linear-gradient(135deg, #38bdf8, #0284c7);
+  color: #031422;
+  font-weight: 800;
+  box-shadow: 0 4px 20px rgba(56, 189, 248, 0.35);
+}
+
+.btn-action-featured-sync:hover {
+  background: linear-gradient(135deg, #7dd3fc, #38bdf8);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(56, 189, 248, 0.45);
+}
+
+.btn-action-standard {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+}
+
+.btn-action-standard:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.25);
+  transform: translateY(-2px);
+}
+
+.action-arrow-dot {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.15);
+  transition: transform 0.25s ease;
+}
+
+.plan-signature-action-btn:hover .action-arrow-dot {
+  transform: translateX(3px) translateY(-1px);
+}
+
+.btn-action-standard .action-arrow-dot {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.plan-micro-security {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  font-size: 0.68rem;
+  color: rgba(255, 255, 255, 0.45);
+  text-align: center;
+}
+
+.security-icon {
+  font-size: 0.75rem;
+}
+
 

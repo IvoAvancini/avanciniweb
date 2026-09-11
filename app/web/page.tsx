@@ -307,22 +307,14 @@ const portfolioSpotlights = {
 
 type PortfolioSpotlightType = keyof typeof portfolioSpotlights;
 
-type PlanFeature = {
-  title: string;
-  desc: string;
-};
-
 type DashPlan = {
   id: string;
   name: string;
   badge?: string;
   kicker: string;
-  idealFor: string;
-  pitch: string;
-  features: PlanFeature[];
-  payoff: string;
-  deliverableBadge: string;
+  valueProposition: string;
   timeline: string;
+  highlights: string[];
   ctaText: string;
   featured?: boolean;
 };
@@ -331,20 +323,18 @@ const dashPlans: DashPlan[] = [
   {
     id: "landing",
     name: "Landing Page de Alta Conversão",
-    badge: "⚡ ANÚNCIOS & CAMPANHAS",
+    badge: "⚡ CONVERSÃO RÁPIDA",
     kicker: "CONVERSÃO DIRETA NO WHATSAPP",
-    idealFor: "Especialistas e empresas com tráfego ativo de Google e Meta Ads focados em conversão imediata.",
-    pitch: "Página única ultrarrápida com gatilhos psicológicos validados para quebrar objeções e levar o lead direto ao fechamento.",
+    valueProposition: "Página única ultrarrápida projetada para quebrar objeções e transformar o tráfego de anúncios (Google e Meta Ads) em clientes reais.",
     timeline: "Primeiro rascunho em 48h",
-    features: [
-      { title: "Abertura Ultrarrápida no Celular", desc: "Estrutura leve para reter o tráfego de anúncios e diminuir desistências por tempo de espera." },
-      { title: "Copywriting Focado em Vendas", desc: "Estrutura persuasiva desenhada para transformar curiosos em clientes." },
-      { title: "Rastreamento Meta Pixel & GA4", desc: "Mapeamento cirúrgico de conversões para baratear seus anúncios." },
-      { title: "Hospedagem Cloud & SSL Blindado", desc: "99.9% de uptime garantido e 1º ano grátis incluso." },
+    highlights: [
+      "Página autoral única com copywriting persuasivo",
+      "Abertura instantânea (0.2s LCP) com nota verde no Google",
+      "Rastreamento avançado (Meta Pixel, Google Ads & GA4)",
+      "Hospedagem Cloud ultrarrápida com SSL incluso",
+      "30 dias de suporte e garantia técnica pós-lançamento",
     ],
-    payoff: "💡 Pare de queimar verba em anúncios com páginas lentas que espantam compradores.",
-    deliverableBadge: "⚡ Rascunho em 48h · NF & Contrato · 30d Suporte",
-    ctaText: "Solicitar Proposta de Landing Page",
+    ctaText: "Solicitar Proposta da Landing Page",
     featured: false,
   },
   {
@@ -352,17 +342,15 @@ const dashPlans: DashPlan[] = [
     name: "Site Institucional de Autoridade",
     badge: "🔥 MAIS ESCOLHIDO · CARRO-CHEFE",
     kicker: "AUTORIDADE MÁXIMA & DOMÍNIO REGIONAL",
-    idealFor: "Clínicas, escritórios e consultorias que precisam de autoridade regional no Google e contratos de maior valor.",
-    pitch: "Estrutura corporativa autoral que posiciona sua marca no topo do Google e transmite solidez imediata ao cliente.",
+    valueProposition: "Estrutura corporativa autoral que posiciona sua marca no topo das buscas do Google e transmite solidez imediata para fechar contratos maiores.",
     timeline: "Primeiro rascunho em 4 dias",
-    features: [
-      { title: "Estrutura Corporativa Completa", desc: "Início, Sobre Nós, Serviços Detalhados, Casos de Sucesso e Contato." },
-      { title: "SEO Local Técnico para o Google", desc: "Otimizado para figurar no topo das pesquisas orgânicas da sua região." },
-      { title: "Otimização Técnica para o Google", desc: "Arquitetura enxuta com foco nas métricas de experiência que o algoritmo do Google prioriza." },
-      { title: "Design Autoral de Padrão Internacional", desc: "Tipografia nobre e acabamento premium sem templates genéricos." },
+    highlights: [
+      "Estrutura completa: Início, Sobre, Serviços, Casos e Contato",
+      "Design autoral exclusivo de padrão internacional (zero templates)",
+      "SEO Técnico local otimizado para liderar as buscas da sua região",
+      "Engenharia Core Web Vitals com velocidade máxima no celular",
+      "30 dias de suporte, contrato formal e garantia técnica",
     ],
-    payoff: "💎 Quem pesquisa sua empresa encontra autoridade inquestionável para fechar contratos maiores.",
-    deliverableBadge: "⚡ Design Autoral · NF & Contrato · 30d Suporte",
     ctaText: "Planejar Site Institucional",
     featured: true,
   },
@@ -371,17 +359,15 @@ const dashPlans: DashPlan[] = [
     name: "Loja Virtual & Catálogo Direto",
     badge: "🛍️ VENDAS 24H · ZERO COMISSÕES",
     kicker: "CHECKOUT DIRETO & ZERO COMISSÕES",
-    idealFor: "Marcas próprias e distribuidores que vendem produtos online diretamente, sem repassar margem a terceiros.",
-    pitch: "Catálogo de alta definição com checkout automático por Pix e cartão em até 12x, caindo 100% direto na sua conta.",
+    valueProposition: "Catálogo ágil em alta definição com checkout automático por Pix e cartão em até 12x, caindo 100% do lucro direto na sua conta bancária.",
     timeline: "Primeiro rascunho em 5 dias",
-    features: [
-      { title: "Catálogo Ágil com Zoom & Filtros", desc: "Fotos em alta resolução com variações instantâneas de cor e tamanho." },
-      { title: "Pix Automático & Cartão em 12x", desc: "Aprovação em segundos sem fricção nem abandono de carrinho." },
-      { title: "Cálculo de Frete em Tempo Real", desc: "Cotação automática integrada aos Correios e transportadoras por CEP." },
-      { title: "Zero Taxas ou Comissões sobre Vendas", desc: "100% do lucro na sua conta, sem taxas abusivas de plataformas." },
+    highlights: [
+      "Catálogo em alta definição com busca e filtros inteligentes",
+      "Checkout automático por Pix imediato e Cartão em até 12x",
+      "Cálculo de frete em tempo real integrado a Correios e transportadoras",
+      "Zero taxas ou comissões por venda (100% da margem é sua)",
+      "30 dias de suporte e acompanhamento operacional",
     ],
-    payoff: "🚀 Transforme visitantes em pedidos pagos sem depender de terceiros para faturar.",
-    deliverableBadge: "⚡ Checkout Ágil · NF & Contrato · 30d Suporte",
     ctaText: "Planejar Loja Virtual",
     featured: false,
   },
@@ -1080,78 +1066,73 @@ export default function Home() {
           </p>
         </div>
 
-        {/* 1. Grid com os 4 Formatos Estratégicos */}
+        {/* 1. Grid com os 3 Formatos Estratégicos */}
         <div className="plans-showcase-grid-compact dash-plans-quad-grid">
           {dashPlans.map((plan) => {
             const isFeatured = plan.featured;
 
             return (
               <article
-                className={`plan-compact-card dash-compact-card ${isFeatured ? "featured is-featured-hero" : ""}`}
+                className={`plan-card-luxury dash-plan-card ${isFeatured ? "is-featured-glow" : ""}`}
                 key={plan.id}
               >
-                <div className="plan-card-header-clean">
-                  {isFeatured && (
-                    <div className="plan-featured-tag-pill">
-                      <span className="featured-tag-spark" aria-hidden="true">🔥</span>
-                      <span>{plan.badge ? plan.badge.replace(/^🔥\s*/, "") : "MAIS ESCOLHIDO · CARRO-CHEFE"}</span>
-                    </div>
-                  )}
-                  <span className="plan-compact-kicker">{plan.kicker}</span>
-                  <h3 className="plan-compact-title">{plan.name}</h3>
-                </div>
-                
-                <div className="plan-timeline-badge" aria-label="Prazo estimado de entrega">
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                    <circle cx="12" cy="12" r="10" />
-                    <polyline points="12 6 12 12 16 14" />
-                  </svg>
-                  <span>{plan.timeline}</span>
+                {/* Topo do Card: Selo de Categoria/Destaque + Pílula de Prazo */}
+                <div className="plan-card-topbar">
+                  <span className={`plan-badge-pill ${isFeatured ? "badge-featured" : "badge-neutral"}`}>
+                    {isFeatured && <span className="pill-ping-dot" aria-hidden="true" />}
+                    {plan.badge}
+                  </span>
+                  <span className="plan-timeline-chip" aria-label="Prazo estimado">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                      <circle cx="12" cy="12" r="10" />
+                      <polyline points="12 6 12 12 16 14" />
+                    </svg>
+                    <span>{plan.timeline}</span>
+                  </span>
                 </div>
 
-                <p className="plan-compact-ideal"><strong>Para quem é:</strong> {plan.idealFor}</p>
-
-                {/* Box de Convencimento Psicológico & Argumentação */}
-                <div className="plan-compact-pitch dash-persuasion-pitch">
-                  <span className="pitch-icon" aria-hidden="true">🎯</span>
-                  <p>{plan.pitch}</p>
+                {/* Título e Proposta Única de Valor (sem redundância) */}
+                <div className="plan-header-block">
+                  <span className="plan-kicker-text">{plan.kicker}</span>
+                  <h3 className="plan-title-text">{plan.name}</h3>
+                  <p className="plan-prop-text">{plan.valueProposition}</p>
                 </div>
 
-                {/* Checklist Estratégica de Entregáveis */}
-                <ul className="plan-compact-features">
-                  {plan.features.map((feat, fIdx) => (
-                    <li className="plan-compact-feature-item" key={fIdx}>
-                      <span className="feature-check-icon">✓</span>
-                      <div className="feature-body">
-                        <strong>{feat.title}</strong>
-                        <p>{feat.desc}</p>
-                      </div>
-                    </li>
-                  ))}
-                </ul>
+                <div className="plan-divider-line" aria-hidden="true" />
 
-                {/* Faixa de Retorno / Payoff */}
-                <div className="plan-compact-payoff">
-                  {plan.payoff}
+                {/* Checklist Escaneável */}
+                <div className="plan-features-section">
+                  <span className="plan-features-header">O QUE ESTÁ INCLUSO:</span>
+                  <ul className="plan-checklist-list">
+                    {plan.highlights.map((item, idx) => (
+                      <li className="plan-checklist-row" key={idx}>
+                        <span className="checklist-bullet-icon" aria-hidden="true">✓</span>
+                        <span className="checklist-row-text">{item}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
 
-                {/* Botão Signature Paulo Leme */}
-                <button
-                  type="button"
-                  className="paulo-signature-btn btn-full paulo-btn-dash btn-icon-rotate"
-                  onClick={() =>
-                    startBudgetConversation(
-                      plan.name,
-                      `Olá! Gostaria de receber uma proposta personalizada para o projeto de ${plan.name} da Avancini Dash.`
-                    )
-                  }
-                >
-                  <span>{plan.ctaText}</span>
-                  <span className="paulo-arrow-circle"><LivingArrow size={13} /></span>
-                </button>
-                <small className="plan-compact-subnote">
-                  {plan.deliverableBadge}
-                </small>
+                {/* Rodapé: Botão de Ação + Micro-garantia */}
+                <div className="plan-card-footer-block">
+                  <button
+                    type="button"
+                    className={`plan-signature-action-btn ${isFeatured ? "btn-action-featured" : "btn-action-standard"}`}
+                    onClick={() =>
+                      startBudgetConversation(
+                        plan.name,
+                        `Olá! Gostaria de receber uma proposta personalizada para o projeto de ${plan.name} da Avancini Dash.`
+                      )
+                    }
+                  >
+                    <span>{plan.ctaText}</span>
+                    <span className="action-arrow-dot"><LivingArrow size={12} /></span>
+                  </button>
+                  <div className="plan-micro-security">
+                    <span className="security-icon" aria-hidden="true">🛡️</span>
+                    <span>Sem compromisso · Resposta imediata</span>
+                  </div>
+                </div>
               </article>
             );
           })}

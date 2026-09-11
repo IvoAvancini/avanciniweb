@@ -492,11 +492,9 @@ type SyncPlanSimple = {
   name: string;
   badge?: string;
   kicker: string;
-  idealFor: string;
-  pitch: string;
-  features: PlanFeature[];
-  payoff: string;
-  deliverableBadge: string;
+  valueProposition: string;
+  timeline: string;
+  highlights: string[];
   ctaText: string;
   featured?: boolean;
 };
@@ -506,16 +504,16 @@ const simplifiedPlans: SyncPlanSimple[] = [
     id: "chatbot",
     name: "Chatbot de Fluxo Guiado",
     badge: "AUTOMAÇÃO EXPRESSA",
-    kicker: "RESPOSTAS IMEDIATAS & TRIAGEM OBJETIVA",
-    idealFor: "Empresas com dúvidas repetitivas que precisam de triagem rápida sem IA generativa.",
-    pitch: "Elimina filas com envio instantâneo de catálogo, tabela de preços e transferência automática de setor.",
-    features: [
-      { title: "Menu Ágil de Opções (1 a 5)", desc: "O cliente escolhe o assunto e recebe a resposta oficial sem espera." },
-      { title: "Envio de Catálogo, PDFs & Fotos", desc: "Dispara tabelas, rotas e material comercial no mesmo segundo." },
-      { title: "Transbordo com Histórico Preservado", desc: "Transfere para o atendente humano mantendo toda a conversa." },
+    kicker: "RESPOSTAS IMEDIATAS & TRIAGEM",
+    valueProposition: "Triagem ágil de dúvidas repetitivas, envio instantâneo de catálogos e tabelas de preços com transbordo organizado para a equipe humana.",
+    timeline: "Setup ativo em 24h",
+    highlights: [
+      "Menu interativo de opções (1 a 5) com resposta instantânea",
+      "Disparo automático de catálogos, PDFs, fotos e tabelas de preço",
+      "Transbordo para atendente humano com histórico preservado",
+      "Conexão direta no seu número de WhatsApp via QR Code em 5 min",
+      "Zero mensalidade de inteligência artificial ou taxas ocultas",
     ],
-    payoff: "💡 Desafogue sua equipe das perguntas repetitivas com ativação rápida em 24h.",
-    deliverableBadge: "⚡ Setup em 24h · Conexão QR Code · Respostas Literais",
     ctaText: "Testar Chatbot no WhatsApp",
     featured: false,
   },
@@ -524,33 +522,32 @@ const simplifiedPlans: SyncPlanSimple[] = [
     name: "Operação IA Essencial",
     badge: "🔥 MAIS ESCOLHIDO",
     kicker: "IA GENERATIVA HUMANIZADA 24/7",
-    idealFor: "Clínicas, consultórios e escritórios que precisam acolher e agendar horários 24h.",
-    pitch: "Atendente virtual humanizado que acolhe clientes, ouve áudios, tira dúvidas e marca consultas no Google Calendar.",
-    features: [
-      { title: "Conversação Natural & Empática", desc: "Entende gírias, áudios longos e fotos de documentos com fluidez." },
-      { title: "Google Agenda em Tempo Real", desc: "Consulta horários vagos e marca compromissos sem choque de grade." },
-      { title: "Lembretes Ativos de Presença", desc: "Dispara confirmação na véspera com opção de reagendamento para reduzir faltas." },
-      { title: "Transbordo com Resumo Pronto", desc: "Encaminha para você com a ficha mastigada do que o lead precisa." },
+    valueProposition: "Atendente inteligente humanizado que acolhe leads, ouve áudios, tira dúvidas e agenda consultas ou reuniões no seu Google Calendar 24h por dia.",
+    timeline: "Ativação guiada em 48h",
+    highlights: [
+      "Conversação natural e empática (compreende áudios, textos e gírias)",
+      "Agendamento em tempo real sincronizado ao Google Calendar",
+      "Lembretes automáticos anti-falta na véspera do compromisso",
+      "Transbordo inteligente com resumo pronto do que o cliente precisa",
+      "Conexão no seu WhatsApp comercial mantendo seu número atual",
     ],
-    payoff: "💎 Recupere clientes fora do horário comercial enquanto o concorrente está offline.",
-    deliverableBadge: "⚡ Calibração Guiada · Google Calendar · Regras Estritas de Negócio",
     ctaText: "Solicitar Demonstração da IA",
     featured: true,
   },
   {
     id: "pro",
     name: "Operação Scale Pro",
-    badge: "ALTA ESCALA",
-    kicker: "CENTRAL CORPORATIVA MULTISSETOR",
-    idealFor: "Empresas com múltiplos atendentes, vários departamentos ou anúncios em escala.",
-    pitch: "Multiagentes de IA especializados por setor (Vendas, Agendamento, Cobrança) e distribuição de fila humana.",
-    features: [
-      { title: "Multiagentes Especializados por Setor", desc: "IAs dedicadas: um agente para Vendas, um para Recepção e um para Suporte." },
-      { title: "Fila Inteligente de Atendentes", desc: "Vários operadores no mesmo WhatsApp com divisão automática de leads." },
-      { title: "Painel de Métricas & Prioridade Ads", desc: "Infraestrutura reforçada para suportar picos de campanhas e conversão do time." },
+    badge: "ALTA ESCALA CORPORATIVA",
+    kicker: "CENTRAL MULTISSETOR & FILAS",
+    valueProposition: "Central inteligente com múltiplos agentes de IA por setor (Vendas, Agendamento e Suporte) e divisão automática de fila para múltiplos operadores.",
+    timeline: "Projeto corporativo sob medida",
+    highlights: [
+      "Multiagentes especializados por departamento (Vendas, Triagem e Suporte)",
+      "Fila inteligente de operadores humanos no mesmo WhatsApp",
+      "Painel executivo de métricas de conversão e tempos de resposta",
+      "Infraestrutura de alta disponibilidade para suportar picos de tráfego",
+      "SLA corporativo com suporte prioritário e acompanhamento técnico",
     ],
-    payoff: "🚀 Uma estrutura multissetor preparada para atender múltiplos clientes simultaneamente com respostas rápidas.",
-    deliverableBadge: "⚡ Multiagentes · Gestão de Equipe · SLA Corporativo",
     ctaText: "Agendar Diagnóstico Scale Pro",
     featured: false,
   },
@@ -1867,57 +1864,64 @@ export default function AvanciniSyncPage() {
         <div className="plans-showcase-grid-compact">
           {simplifiedPlans.map((plan) => {
             const isFeatured = plan.featured;
+
             return (
               <article
-                className={`plan-compact-card sync-compact-card ${isFeatured ? "featured is-featured-hero" : ""}`}
+                className={`plan-card-luxury sync-plan-card ${isFeatured ? "is-featured-glow-sync" : ""}`}
                 key={plan.id}
               >
-                <div className="plan-card-header-clean">
-                  {isFeatured && (
-                    <div className="plan-featured-tag-pill">
-                      <span className="featured-tag-spark" aria-hidden="true">🔥</span>
-                      <span>{plan.badge ? plan.badge.replace(/^🔥\s*/, "") : "MAIS ESCOLHIDO"}</span>
-                    </div>
-                  )}
-                  <span className="plan-compact-kicker">{plan.kicker}</span>
-                  <h3 className="plan-compact-title">{plan.name}</h3>
-                </div>
-                <p className="plan-compact-ideal"><strong>Para quem é:</strong> {plan.idealFor}</p>
-
-                <div className="plan-compact-pitch">
-                  {plan.pitch}
-                </div>
-
-                {/* Checklist Elegante e Direta */}
-                <ul className="plan-compact-features">
-                  {plan.features.map((feat, fIdx) => (
-                    <li className="plan-compact-feature-item" key={fIdx}>
-                      <span className="feature-check-icon">✓</span>
-                      <div className="feature-body">
-                        <strong>{feat.title}</strong>
-                        <p>{feat.desc}</p>
-                      </div>
-                    </li>
-                  ))}
-                </ul>
-
-                {/* Faixa de Retorno / Payoff */}
-                <div className="plan-compact-payoff">
-                  {plan.payoff}
+                {/* Topo do Card: Selo de Categoria/Destaque + Pílula de Prazo */}
+                <div className="plan-card-topbar">
+                  <span className={`plan-badge-pill ${isFeatured ? "badge-featured-sync" : "badge-neutral"}`}>
+                    {isFeatured && <span className="pill-ping-dot dot-sync" aria-hidden="true" />}
+                    {plan.badge}
+                  </span>
+                  <span className="plan-timeline-chip" aria-label="Prazo estimado de ativação">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                      <circle cx="12" cy="12" r="10" />
+                      <polyline points="12 6 12 12 16 14" />
+                    </svg>
+                    <span>{plan.timeline}</span>
+                  </span>
                 </div>
 
-                {/* Botão Signature Paulo Leme */}
-                <button
-                  type="button"
-                  className="paulo-signature-btn btn-full paulo-btn-sync btn-icon-rotate"
-                  onClick={() => openLead(`Olá! Gostaria de testar uma demonstração gratuita do ${plan.name} no meu WhatsApp.`)}
-                >
-                  <span>{plan.ctaText}</span>
-                  <span className="paulo-arrow-circle"><LivingArrow size={13} /></span>
-                </button>
-                <small className="plan-compact-subnote">
-                  {plan.deliverableBadge}
-                </small>
+                {/* Título e Proposta Única de Valor (sem redundância) */}
+                <div className="plan-header-block">
+                  <span className="plan-kicker-text kicker-sync-color">{plan.kicker}</span>
+                  <h3 className="plan-title-text">{plan.name}</h3>
+                  <p className="plan-prop-text">{plan.valueProposition}</p>
+                </div>
+
+                <div className="plan-divider-line" aria-hidden="true" />
+
+                {/* Checklist Escaneável */}
+                <div className="plan-features-section">
+                  <span className="plan-features-header">O QUE ESTÁ INCLUSO:</span>
+                  <ul className="plan-checklist-list">
+                    {plan.highlights.map((item, idx) => (
+                      <li className="plan-checklist-row" key={idx}>
+                        <span className="checklist-bullet-icon icon-sync" aria-hidden="true">✓</span>
+                        <span className="checklist-row-text">{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                {/* Rodapé: Botão de Ação + Micro-garantia */}
+                <div className="plan-card-footer-block">
+                  <button
+                    type="button"
+                    className={`plan-signature-action-btn ${isFeatured ? "btn-action-featured-sync" : "btn-action-standard"}`}
+                    onClick={() => openLead(`Olá! Gostaria de testar uma demonstração gratuita do ${plan.name} no meu WhatsApp.`)}
+                  >
+                    <span>{plan.ctaText}</span>
+                    <span className="action-arrow-dot"><LivingArrow size={12} /></span>
+                  </button>
+                  <div className="plan-micro-security">
+                    <span className="security-icon" aria-hidden="true">🛡️</span>
+                    <span>Sem compromisso · Demonstração imediata</span>
+                  </div>
+                </div>
               </article>
             );
           })}
