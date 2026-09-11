@@ -1003,15 +1003,29 @@ export default function AvanciniSyncPage() {
                   {/* Coluna Direita: Simulador de WhatsApp Business Real e Multimodal */}
                   <div className="cockpit-chat-terminal">
                     <div className="chat-terminal-bar">
-                      <div className="chat-avatar-sync">
-                        <span className="sync-ai-icon">A</span>
-                        <span className="chat-status-online" />
+                      <div className="chat-header-contact">
+                        <div className="chat-avatar-sync">
+                          <span className="sync-ai-icon">WA</span>
+                          <span className="chat-status-online" />
+                        </div>
+                        <div className="chat-terminal-info">
+                          <strong>WhatsApp da Sua Empresa · IA Conectada</strong>
+                          <small>
+                            {simStage === 1 ? "digitando..." : "● online"}
+                          </small>
+                        </div>
                       </div>
-                      <div className="chat-terminal-info">
-                        <strong>WhatsApp da Sua Empresa // Conectado</strong>
-                        <small>IA responde com atenção e linguagem natural</small>
+                      <div className="chat-header-icons" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                          <path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z" />
+                        </svg>
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                          <path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56-.35-.12-.74-.03-1.01.24l-1.57 1.97c-2.83-1.44-5.15-3.75-6.59-6.59l1.97-1.57c.27-.27.35-.66.24-1.01-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z" />
+                        </svg>
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                          <path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" />
+                        </svg>
                       </div>
-                      <span className="chat-speed-tag">Resposta Imediata</span>
                     </div>
 
                     {/* Stepper Visual em Tempo Real da IA */}
@@ -1050,6 +1064,7 @@ export default function AvanciniSyncPage() {
                     </div>
 
                     <div className="chat-messages-scroll">
+                      <div className="wa-date-pill">Hoje</div>
                       {simStage === 1 && (
                         <div className="chat-bubble ai typing-indicator-bubble">
                           <div className="bubble-ai-meta">
@@ -1122,7 +1137,7 @@ export default function AvanciniSyncPage() {
                                   </div>
                                 </div>
                               )}
-                              <time>14:32 · Lido ✓✓</time>
+                              <time>14:32 · <span className="wa-check-blue">✓✓</span></time>
                             </div>
                           )}
                         </>
@@ -1169,7 +1184,7 @@ export default function AvanciniSyncPage() {
                                   </div>
                                 </div>
                               )}
-                              <time>14:33 · Lido ✓✓</time>
+                              <time>14:33 · <span className="wa-check-blue">✓✓</span></time>
                             </div>
                           )}
                         </>
@@ -1213,7 +1228,7 @@ export default function AvanciniSyncPage() {
                                   </div>
                                 </div>
                               )}
-                              <time>14:33 · Lido ✓✓</time>
+                              <time>14:33 · <span className="wa-check-blue">✓✓</span></time>
                             </div>
                           )}
                         </>
@@ -1244,7 +1259,7 @@ export default function AvanciniSyncPage() {
                                   <span className="ai-verified-badge">Especialista</span>
                                 </div>
                                 <p>{currentAgent.chat.aiFollowupText}</p>
-                                <time>16:50 · Lido ✓✓</time>
+                                <time>16:50 · <span className="wa-check-blue">✓✓</span></time>
                               </div>
 
                               <div className="chat-bubble client">
@@ -1263,6 +1278,21 @@ export default function AvanciniSyncPage() {
                           )}
                         </>
                       )}
+                    </div>
+
+                    {/* Barra de Digitação Fake do WhatsApp */}
+                    <div className="wa-chat-input-bar" aria-hidden="true">
+                      <span style={{ fontSize: 18, cursor: "default" }}>😊</span>
+                      <span style={{ fontSize: 16, cursor: "default" }}>📎</span>
+                      <div className="wa-chat-input-pill">
+                        <span>Mensagem</span>
+                      </div>
+                      <div className="wa-chat-mic-btn">
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                          <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z" />
+                          <path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z" />
+                        </svg>
+                      </div>
                     </div>
 
                     <div className="chat-action-tag-strip">

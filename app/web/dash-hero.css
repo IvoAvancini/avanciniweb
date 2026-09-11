@@ -1607,3 +1607,262 @@
   }
 }
 
+/* ─── SIMULADOR HIPER-REALISTA DE WHATSAPP BUSINESS NO SYNC ─── */
+:is(.sync-page, html) .cockpit-chat-terminal {
+  display: flex !important;
+  flex-direction: column !important;
+  border-radius: 16px !important;
+  background: #0b141a !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  box-shadow: 0 16px 48px -12px rgba(0, 0, 0, 0.75), 0 0 0 1px rgba(34, 211, 238, 0.12) !important;
+  overflow: hidden !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
+}
+
+/* Barra Superior WhatsApp (Header Verde/Dark) */
+:is(.sync-page, html) .chat-terminal-bar {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: 10px 14px !important;
+  background: #202c33 !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+  color: #e9edef !important;
+}
+
+:is(.sync-page, html) .chat-header-contact {
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  flex: 1 !important;
+}
+
+:is(.sync-page, html) .chat-avatar-sync {
+  width: 36px !important;
+  height: 36px !important;
+  border-radius: 50% !important;
+  background: #25d366 !important;
+  color: #ffffff !important;
+  font-weight: 800 !important;
+  font-size: 14px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  position: relative !important;
+  flex-shrink: 0 !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3) !important;
+}
+
+:is(.sync-page, html) .chat-status-online {
+  position: absolute !important;
+  bottom: 0 !important;
+  right: 0 !important;
+  width: 10px !important;
+  height: 10px !important;
+  border-radius: 50% !important;
+  background: #00a884 !important;
+  border: 2px solid #202c33 !important;
+}
+
+:is(.sync-page, html) .chat-terminal-info strong {
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  color: #e9edef !important;
+  letter-spacing: -0.01em !important;
+  display: block !important;
+}
+
+:is(.sync-page, html) .chat-terminal-info small {
+  display: flex !important;
+  align-items: center !important;
+  gap: 4px !important;
+  font-size: 11px !important;
+  color: #00a884 !important;
+  font-weight: 600 !important;
+}
+
+:is(.sync-page, html) .chat-header-icons {
+  display: flex !important;
+  align-items: center !important;
+  gap: 16px !important;
+  color: #aebac1 !important;
+}
+
+:is(.sync-page, html) .chat-header-icons svg {
+  cursor: pointer !important;
+  transition: color 0.15s ease !important;
+}
+
+:is(.sync-page, html) .chat-header-icons svg:hover {
+  color: #e9edef !important;
+}
+
+/* Área de Mensagens com Wallpaper Estilo WhatsApp */
+:is(.sync-page, html) .chat-messages-scroll {
+  background-color: #0b141a !important;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px) !important;
+  background-size: 22px 22px !important;
+  padding: 14px 14px !important;
+  gap: 10px !important;
+  min-height: 290px !important;
+  max-height: 380px !important;
+  overflow-y: auto !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+/* Pílula de Data estilo WhatsApp */
+:is(.sync-page, html) .wa-date-pill {
+  align-self: center !important;
+  padding: 4px 12px !important;
+  border-radius: 8px !important;
+  background: #182229 !important;
+  color: #8696a0 !important;
+  font-size: 10.5px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.04em !important;
+  box-shadow: 0 1px 0.5px rgba(11, 20, 26, 0.15) !important;
+  margin: 2px 0 6px !important;
+  text-transform: uppercase !important;
+}
+
+/* Balão do Cliente (Mensagem Recebida no WhatsApp: #202c33) */
+:is(.sync-page, html) .chat-bubble.client {
+  align-self: flex-start !important;
+  background: #202c33 !important;
+  border: none !important;
+  border-radius: 8px 8px 8px 2px !important;
+  color: #e9edef !important;
+  padding: 8px 12px !important;
+  max-width: 84% !important;
+  font-size: 13.5px !important;
+  line-height: 1.45 !important;
+  box-shadow: 0 1px 0.5px rgba(11, 20, 26, 0.25) !important;
+  position: relative !important;
+}
+
+:is(.sync-page, html) .chat-bubble.client time {
+  display: block !important;
+  text-align: right !important;
+  font-size: 10.5px !important;
+  color: #8696a0 !important;
+  margin-top: 3px !important;
+}
+
+/* Balão da IA (Mensagem Enviada no WhatsApp: Verde #005c4b) */
+:is(.sync-page, html) .chat-bubble.ai {
+  align-self: flex-end !important;
+  background: #005c4b !important;
+  border: none !important;
+  border-radius: 8px 8px 2px 8px !important;
+  color: #e9edef !important;
+  padding: 8px 12px !important;
+  max-width: 86% !important;
+  font-size: 13.5px !important;
+  line-height: 1.45 !important;
+  box-shadow: 0 1px 0.5px rgba(11, 20, 26, 0.25) !important;
+  position: relative !important;
+}
+
+:is(.sync-page, html) .chat-bubble.ai time {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+  gap: 4px !important;
+  font-size: 10.5px !important;
+  color: rgba(255, 255, 255, 0.65) !important;
+  margin-top: 4px !important;
+}
+
+/* Double Check Azul de Mensagem Lida no WhatsApp */
+:is(.sync-page, html) .wa-check-blue {
+  color: #53bdeb !important;
+  font-size: 12px !important;
+  font-weight: 800 !important;
+  letter-spacing: -2px !important;
+  display: inline-block !important;
+}
+
+/* Player de Áudio Idêntico ao WhatsApp */
+:is(.sync-page, html) .audio-player-row {
+  background: #111b21 !important;
+  border: none !important;
+  padding: 8px 12px !important;
+  border-radius: 8px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+}
+
+:is(.sync-page, html) .audio-play-btn {
+  width: 32px !important;
+  height: 32px !important;
+  background: #00a884 !important;
+  color: #111b21 !important;
+  border-radius: 50% !important;
+  font-size: 12px !important;
+  box-shadow: 0 2px 8px rgba(0, 168, 132, 0.4) !important;
+}
+
+:is(.sync-page, html) .audio-wave-bars .wave-bar {
+  background: #00a884 !important;
+  width: 3px !important;
+  border-radius: 3px !important;
+}
+
+:is(.sync-page, html) .audio-transcription-box {
+  background: rgba(0, 0, 0, 0.25) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-radius: 6px !important;
+  padding: 8px 10px !important;
+  margin-top: 6px !important;
+}
+
+:is(.sync-page, html) .audio-transcription-box span {
+  font-size: 10.5px !important;
+  color: #00a884 !important;
+  font-weight: 700 !important;
+}
+
+:is(.sync-page, html) .audio-transcription-box p {
+  font-size: 12.5px !important;
+  color: #e9edef !important;
+  margin-top: 3px !important;
+  font-style: italic !important;
+}
+
+/* Barra Inferior com Input Fake do WhatsApp */
+:is(.sync-page, html) .wa-chat-input-bar {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  padding: 8px 12px !important;
+  background: #202c33 !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.06) !important;
+}
+
+:is(.sync-page, html) .wa-chat-input-pill {
+  flex: 1 !important;
+  display: flex !important;
+  align-items: center !important;
+  background: #2a3942 !important;
+  padding: 8px 14px !important;
+  border-radius: 8px !important;
+  color: #8696a0 !important;
+  font-size: 13px !important;
+  user-select: none !important;
+}
+
+:is(.sync-page, html) .wa-chat-mic-btn {
+  width: 36px !important;
+  height: 36px !important;
+  border-radius: 50% !important;
+  background: #00a884 !important;
+  color: #ffffff !important;
+  border: none !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: default !important;
+}
+
