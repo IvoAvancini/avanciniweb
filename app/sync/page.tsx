@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useEffect, useRef, useState, type FormEvent, type MouseEvent } from "react";
 import { AvanciniMark } from "../avancini-mark";
-import "../web/dash-hero.css";
+import { MagneticButton } from "../components/MagneticButton";
 
 const countriesList = [
   { code: "BR", name: "Brasil", ddi: "+55", placeholder: "(11) 99999-9999" },
@@ -28,6 +28,7 @@ const countriesList = [
 
 import { CountryFlag } from "../components/CountryFlag";
 import AnimatedCounter from "../components/AnimatedCounter";
+import "../web/dash-hero.css";
 
 function CountryFlagIcon({ code }: { code: string }) {
   return <CountryFlag code={code} size={18} />;
@@ -37,6 +38,71 @@ const WHATSAPP_NUMBER = "5573981019782";
 
 const whatsappFor = (message: string) =>
   `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+
+const LivingArrow = ({ size = 12, className = "" }: { size?: number; className?: string }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 14 14"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className={`living-svg-arrow ${className}`}
+    aria-hidden="true"
+  >
+    <path
+      d="M3.5 10.5L10.5 3.5M10.5 3.5H4.5M10.5 3.5V9.5"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
+
+const syncHeroAudiences = [
+  "CLÍNICAS & CONSULTÓRIOS",
+  "ESCRITÓRIOS DE ADVOCACIA",
+  "IMOBILIÁRIAS & CORRETORES",
+  "LOJAS & E-COMMERCE",
+  "EMPRESAS & PRESTADORES",
+] as const;
+
+function SyncAudienceTypewriter() {
+  const [text, setText] = useState("");
+  const [audienceIndex, setAudienceIndex] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  useEffect(() => {
+    const currentWord = syncHeroAudiences[audienceIndex];
+    const typingSpeed = isDeleting ? 35 : 75;
+
+    const timer = window.setTimeout(() => {
+      if (!isDeleting) {
+        if (text.length < currentWord.length) {
+          setText(currentWord.slice(0, text.length + 1));
+        } else {
+          window.setTimeout(() => setIsDeleting(true), 2200);
+        }
+      } else {
+        if (text.length > 0) {
+          setText(currentWord.slice(0, text.length - 1));
+        } else {
+          setIsDeleting(false);
+          setAudienceIndex((prev) => (prev + 1) % syncHeroAudiences.length);
+        }
+      }
+    }, typingSpeed);
+
+    return () => window.clearTimeout(timer);
+  }, [text, isDeleting, audienceIndex]);
+
+  return (
+    <span className="hero-typewriter-dynamic sync-typewriter-dynamic">
+      <strong className="hero-typewriter-target">{text}</strong>
+      <span className="hero-typewriter-cursor" aria-hidden="true">|</span>
+    </span>
+  );
+}
 
 const SyncArrow = ({ size = 12 }: { size?: number }) => (
   <svg
@@ -74,107 +140,32 @@ const SyncDownArrow = () => (
   </svg>
 );
 
-const syncAudiences = ["CLÍNICAS", "IMOBILIÁRIAS", "EMPRESAS", "ADVOGADOS", "OFICINAS", "COMÉRCIO"] as const;
-
-function SyncAudienceTypewriter() {
-  const [text, setText] = useState("");
-  const [audienceIndex, setAudienceIndex] = useState(0);
-  const [isDeleting, setIsDeleting] = useState(false);
-
-  useEffect(() => {
-    const currentWord = syncAudiences[audienceIndex];
-    const typingSpeed = isDeleting ? 40 : 85;
-
-    const timer = window.setTimeout(() => {
-      if (!isDeleting) {
-        if (text.length < currentWord.length) {
-          setText(currentWord.slice(0, text.length + 1));
-        } else {
-          window.setTimeout(() => setIsDeleting(true), 2000);
-        }
-      } else {
-        if (text.length > 0) {
-          setText(currentWord.slice(0, text.length - 1));
-        } else {
-          setIsDeleting(false);
-          setAudienceIndex((prev) => (prev + 1) % syncAudiences.length);
-        }
-      }
-    }, typingSpeed);
-
-    return () => window.clearTimeout(timer);
-  }, [text, isDeleting, audienceIndex]);
-
-  return (
-    <span className="hero-typewriter-dynamic">
-      <strong className="hero-typewriter-target">{text}</strong>
-      <span className="hero-typewriter-cursor" aria-hidden="true">|</span>
-    </span>
-  );
-}
 
 /* --------------------------------------------------------------------------
    CENTRAL DE ATENDIMENTO INTELIGENTE — SIMULAÇÃO INTERATIVA NO HERO
    -------------------------------------------------------------------------- */
 const supervisorAgents = [
   {
-    id: "sdr",
-    name: "Atendimento & Acolhimento",
-    role: "Recebe novos clientes com simpatia e agilidade",
-    status: "Responde em poucos segundos",
-    activeBadge: "⚡ Sempre Ativo",
-    metrics: [
-      { label: "Tempo de Resposta", value: "Na mesma hora" },
-      { label: "Fila de Espera", value: "Zero (atende todos juntos)" },
-      { label: "Disponibilidade", value: "24 horas por dia" },
-    ],
-    tools: ["🎙️ Ouve e entende áudios", "📄 Lê fotos e arquivos", "💬 Tira dúvidas frequentes", "🤝 Envia para sua equipe"],
-    pipelineSteps: [
-      { step: "01", name: "Ouve com Atenção", desc: "Entende áudios e textos longos" },
-      { step: "02", name: "Tira as Dúvidas", desc: "Explica os serviços com clareza" },
-      { step: "03", name: "Passa para Você", desc: "Entrega a conversa organizada" },
-    ],
-    capabilities: [
-      "Ouve e transcreve áudios de qualquer tamanho",
-      "Identifica a urgência e o perfil do cliente",
-      "Responde dúvidas frequentes com simpatia",
-      "Transfere para sua equipe com resumo pronto",
-    ],
-    chatType: "audio",
-    chat: {
-      audioDuration: "0:18",
-      audioTranscription: 'Olá! Temos alto fluxo no WhatsApp. Vocês conseguem acolher na hora, tirar dúvidas e filtrar quem tem urgência?',
-      aiResponse: "Olá, Ricardo! Com certeza. Atendemos na mesma hora, tiramos dúvidas sobre seus serviços e já passamos o resumo pronto para sua equipe.",
-      crmBadge: {
-        title: "⚡ CONTATO ACOLHIDO E QUALIFICADO",
-        area: "Atendimento Corporativo",
-        volume: "Novo contato acolhido na hora",
-        action: "Resumo organizado enviado para a sua equipe",
-      },
-      actionTag: "⚡ Áudio Ouvido · Cliente Acolhido · Resumo Pronto",
-    },
-  },
-  {
-    id: "agenda",
-    name: "Agendamento de Horários",
-    role: "Consulta sua agenda e marca consultas ou reuniões",
+    id: "clinica",
+    name: "Clínica & Saúde",
+    role: "Agendamento Direto no Google Calendar",
     status: "Sincronizado com sua agenda",
-    activeBadge: "📅 Agenda Conectada",
+    activeBadge: "🩺 Agenda no WhatsApp",
     metrics: [
       { label: "Sua Agenda", value: "Google Calendar" },
-      { label: "Faltas de Clientes", value: "Lembretes automáticos" },
+      { label: "Faltas de Pacientes", value: "Lembretes automáticos" },
       { label: "Marcação", value: "Direto no WhatsApp" },
     ],
     tools: ["📅 Google Calendar", "⏰ Lembrete Anti-Falta", "✅ Horários no Chat", "🔔 Aviso para Equipe"],
     pipelineSteps: [
       { step: "01", name: "Checa a Grade", desc: "Vê dias e horários livres" },
-      { step: "02", name: "Escolha Simples", desc: "O cliente escolhe no WhatsApp" },
+      { step: "02", name: "Escolha Simples", desc: "O paciente escolhe no WhatsApp" },
       { step: "03", name: "Salva e Lembra", desc: "Agenda e envia lembrete antes" },
     ],
     capabilities: [
       "Sincroniza em tempo real com Google Calendar",
       "Oferece opções claras de horários livres",
-      "Envia link ou endereço do local no chat",
+      "Envia link ou endereço da clínica no chat",
       "Dispara lembretes gentis anti-falta",
     ],
     chatType: "calendar",
@@ -184,7 +175,7 @@ const supervisorAgents = [
       slots: ["14h30", "16h00", "17h30"],
       selectedSlot: "14h30",
       confirmationCard: {
-        title: "✓ Agendamento Confirmado",
+        title: "✓ Consulta Agendada no Google Calendar",
         doctor: "Dr. Marcelo · Avaliação Presencial",
         date: "Quinta-feira às 14:30 (~45 min)",
         reminder: "Lembretes programados: 24h e 2h antes no WhatsApp",
@@ -193,11 +184,48 @@ const supervisorAgents = [
     },
   },
   {
-    id: "suporte",
-    name: "Dúvidas, Fotos & Pix",
-    role: "Tira dúvidas, lê arquivos e envia chave Pix",
-    status: "Zero fila de espera",
-    activeBadge: "🔍 Resolução Imediata",
+    id: "advocacia",
+    name: "Advocacia & Consultoria",
+    role: "Triagem de Casos & Audição de Áudios",
+    status: "Responde em < 3 segundos",
+    activeBadge: "⚖️ Ouve e Entende Áudios",
+    metrics: [
+      { label: "Tempo de Resposta", value: "Na mesma hora" },
+      { label: "Capacidade", value: "Múltiplos contatos simultâneos" },
+      { label: "Disponibilidade", value: "24 horas por dia" },
+    ],
+    tools: ["🎙️ Ouve e entende áudios", "📄 Lê fotos e arquivos", "💬 Tira dúvidas frequentes", "🤝 Envia para sua equipe"],
+    pipelineSteps: [
+      { step: "01", name: "Ouve com Atenção", desc: "Entende áudios e textos longos" },
+      { step: "02", name: "Tira as Dúvidas", desc: "Explica a atuação com clareza" },
+      { step: "03", name: "Passa para Você", desc: "Entrega a conversa organizada" },
+    ],
+    capabilities: [
+      "Ouve e transcreve áudios de qualquer tamanho",
+      "Identifica a urgência e o perfil do cliente",
+      "Responde dúvidas preliminares com empatia",
+      "Transfere para o advogado com resumo pronto",
+    ],
+    chatType: "audio",
+    chat: {
+      audioDuration: "0:18",
+      audioTranscription: 'Olá, doutor! Preciso de orientação urgente sobre uma rescisão de contrato de trabalho. Vocês atendem esse tipo de caso?',
+      aiResponse: "Olá! Atendemos sim. Nosso escritório é especializado em Direito Trabalhista e Contratual. Já organizei suas informações para o advogado responsável dar o retorno detalhado.",
+      crmBadge: {
+        title: "⚖️ CASO TRIADO & RESUMO PRONTO",
+        area: "Direito Trabalhista / Contratos",
+        volume: "Áudio de 18s ouvido e transcrito",
+        action: "Resumo organizado enviado para o WhatsApp do advogado",
+      },
+      actionTag: "⚡ Áudio Ouvido · Cliente Acolhido · Resumo Pronto",
+    },
+  },
+  {
+    id: "comercio",
+    name: "Comércio & Serviços",
+    role: "Dúvidas, Fotos, Catálogo & Pix",
+    status: "Atendimento simultâneo ágil",
+    activeBadge: "🛍️ Fotos & Chave Pix",
     metrics: [
       { label: "Dúvidas Repetitivas", value: "Resolvidas na hora" },
       { label: "Fotos e PDFs", value: "Confere arquivos enviados" },
@@ -205,36 +233,36 @@ const supervisorAgents = [
     ],
     tools: ["📄 Leitor de Fotos e PDFs", "💳 Chave Pix no Chat", "🔍 Consulta de Pedidos", "📦 Informações Claras"],
     pipelineSteps: [
-      { step: "01", name: "Recebe o Arquivo", desc: "Lê o PDF, exame ou comprovante" },
+      { step: "01", name: "Recebe o Arquivo", desc: "Lê o PDF, pedido ou comprovante" },
       { step: "02", name: "Conferência", desc: "Checa se está legível e correto" },
       { step: "03", name: "Orientação", desc: "Passa a chave Pix ou próximo passo" },
     ],
     capabilities: [
-      "Lê fotos de exames, pedidos e comprovantes",
-      "Consulta status de pedidos e solicitações",
+      "Lê fotos de pedidos, tabelas e comprovantes",
+      "Consulta status de entregas e serviços",
       "Gera chave Pix cópia e cola instantânea",
       "Resolve até 90% das dúvidas do dia a dia",
     ],
     chatType: "document",
     chat: {
-      docName: "Exame_Sangue_Ricardo.pdf",
-      docSize: "1.4 MB · Documento Médico",
-      clientText: "Boa tarde! Segue o exame que o Dr. Roberto pediu. Conseguem conferir e me passar o Pix da taxa?",
-      aiResponse: "Olá, Ricardo! Recebi o PDF, está legível e já anexei na sua ficha médica.\n\nSegue o Pix da taxa de retorno (R$ 65,00):",
+      docName: "Pedido_Orçamento_Serviço.pdf",
+      docSize: "1.4 MB · Documento de Pedido",
+      clientText: "Boa tarde! Segue o pedido do material que orcei. Conseguem confirmar se receberam e me mandar a chave Pix?",
+      aiResponse: "Olá! Recebi seu pedido perfeitamente e já encaminhei para a expedição.\n\nSegue o Pix para confirmação do pedido (R$ 65,00):",
       pixCard: {
         title: "Chave Pix Copia e Cola",
-        value: "R$ 65,00 · Taxa de Retorno Clínico",
+        value: "R$ 65,00 · Confirmação Imediata",
         pixKey: "00020126580014br.gov.bcb.pix0136...",
       },
-      actionTag: "📄 Exame Anexado à Ficha · Chave Pix Enviada",
+      actionTag: "📄 Pedido Confirmado · Chave Pix Enviada",
     },
   },
   {
-    id: "recuperacao",
-    name: "Retomada de Orçamentos",
-    role: "Reengaja orçamentos e clientes que pararam de responder",
+    id: "imobiliaria",
+    name: "Imobiliária & Negócios",
+    role: "Qualificação & Resgate de Orçamentos",
     status: "Acompanhamento simpático",
-    activeBadge: "💬 Lembrança Gentil",
+    activeBadge: "🏢 Resgate de Propostas",
     metrics: [
       { label: "Clientes Sumidos", value: "Reativados com educação" },
       { label: "Tempo de Retomada", value: "No momento ideal" },
@@ -247,23 +275,23 @@ const supervisorAgents = [
       { step: "03", name: "Conclusão", desc: "Facilita o fechamento da compra" },
     ],
     capabilities: [
-      "Identifica orçamentos sem resposta após 24h",
+      "Identifica clientes sem resposta após 24h",
       "Envia lembrete amigável e sem insistência",
-      "Tira dúvidas para destravar a contratação",
+      "Tira dúvidas para destravar a negociação",
       "Recupera vendas que seriam perdidas no silêncio",
     ],
     chatType: "recovery",
     chat: {
       pastTime: "Ontem às 16:45",
-      pastClientText: "Gostei da proposta! Vou alinhar com minha sócia hoje e te retorno amanhã cedo.",
+      pastClientText: "Gostei muito do apartamento! Vou conversar com minha esposa hoje e te retorno amanhã cedo.",
       triggerTime: "Hoje · 24h sem resposta — IA retoma com gentileza",
-      aiFollowupText: "Oi, Mariana! Tudo bem? Conseguiram conversar sobre a proposta? Se ficou alguma dúvida de prazos ou pagamento, estou por aqui!",
-      clientReplyText: "Oi! Conversamos sim e vamos fechar! Pode me mandar o link para pagamento?",
+      aiFollowupText: "Oi, Mariana! Tudo bem? Conseguiram conversar sobre o apartamento? Se ficou alguma dúvida de valores ou quiser agendar uma visita presencial, estou por aqui!",
+      clientReplyText: "Oi! Conversamos sim e adoramos! Podemos agendar a visita para sábado de manhã?",
       recoveredCard: {
-        title: "🎉 ORÇAMENTO RECUPERADO COM SUCESSO",
-        value: "R$ 1.800,00 · Venda salva que seria perdida no silêncio",
+        title: "🎉 PROPOSTA RESGATADA COM SUCESSO",
+        value: "Visita agendada · Negociação salva que seria perdida no silêncio",
       },
-      actionTag: "💬 Contato Reengajado · Proposta Aceita · Venda Fechada",
+      actionTag: "💬 Cliente Reativado com Educação · Visita Agendada",
     },
   },
 ];
@@ -279,12 +307,12 @@ const commercialJourney = [
     badge: "PRIMEIRO CONTATO",
     summary: "Seu cliente não fica esperando. A IA acolhe na hora, ouve áudios e entende a urgência de cada mensagem.",
     points: [
-      "⚡ Resposta imediata: zero perda de clientes por demora",
+      "⚡ Resposta ágil 24h: retenha clientes antes que procurem a concorrência",
       "🎙️ Compreensão total: ouve áudios, lê fotos e textos longos",
       "📋 Resumo organizado: passa o lead qualificado para sua equipe",
     ],
     metricLabel: "Impacto prático",
-    metricValue: "Acaba com o abandono de clientes por demora na resposta",
+    metricValue: "Reduz drasticamente o tempo de espera e o abandono de clientes",
   },
   {
     id: "venda",
@@ -502,11 +530,11 @@ const simplifiedPlans: SyncPlanSimple[] = [
     features: [
       { title: "Conversação Natural & Empática", desc: "Entende gírias, áudios longos e fotos de documentos com fluidez." },
       { title: "Google Agenda em Tempo Real", desc: "Consulta horários vagos e marca compromissos sem choque de horário." },
-      { title: "Lembretes Ativos Anti-Falta", desc: "Confirma presença na véspera e reduz faltas a quase zero." },
+      { title: "Lembretes Ativos de Presença", desc: "Dispara confirmação na véspera com opção de reagendamento para reduzir faltas e horários ociosos." },
       { title: "Transbordo com Resumo Pronto", desc: "Encaminha para você com a ficha mastigada do que o lead precisa." },
     ],
     payoff: "💎 Recupere clientes fora do horário comercial enquanto o concorrente está offline.",
-    deliverableBadge: "⚡ Calibração Guiada · Google Calendar · Sem Alucinações",
+    deliverableBadge: "⚡ Calibração Guiada · Google Calendar · Regras Estritas de Negócio",
     ctaText: "Solicitar Demonstração da IA",
     featured: true,
   },
@@ -523,7 +551,7 @@ const simplifiedPlans: SyncPlanSimple[] = [
       { title: "Painel de Métricas & Conversão", desc: "Relatórios de motivos de contato, horários de pico e conversão do time." },
       { title: "Capacidade Prioritária para Ads", desc: "Infraestrutura reforçada para suportar picos de centenas de conversas." },
     ],
-    payoff: "🚀 Uma máquina de vendas e atendimento multissetor sem limite de capacidade operacional.",
+    payoff: "🚀 Uma estrutura multissetor preparada para atender múltiplos clientes simultaneamente com respostas rápidas e padronizadas.",
     deliverableBadge: "⚡ Multiagentes · Gestão de Equipe · SLA Corporativo",
     ctaText: "Agendar Diagnóstico Scale Pro",
     featured: false,
@@ -575,7 +603,7 @@ const syncIntegrations = [
   {
     name: "WhatsApp Cloud API",
     category: "Comunicação Oficial",
-    desc: "Conexão oficial da Meta sem risco de queda ou banimento",
+    desc: "Conexão oficial via WhatsApp Cloud API homologada pela Meta, garantindo alta estabilidade e conformidade",
     icon: "💬",
     color: "#22c55e",
   },
@@ -787,14 +815,27 @@ export default function AvanciniSyncPage() {
   return (
     <main className="sync-page sync-commercial-layout">
       {/* Header Compacto de Navegação (Padronizado com Dash) */}
-      <header className={`header ${scrolled ? "scrolled" : ""}`}>
-        <a href="#inicio" className="logo" aria-label="Avancini Sync, início">
+      <header className={scrolled ? "header scrolled" : "header"}>
+        <a className="logo" href="#inicio" aria-label="Avancini Sync, início">
           <AvanciniMark variant="sync" className="logo-mark avancini-a-mark" />
           <span>
-            <span className="brand-name">AVANCINI <b>SYNC</b></span>
+            <span className="brand-name">
+              AVANCINI <b>SYNC</b>
+            </span>
             <small>Equipe Multiagente de IA</small>
           </span>
         </a>
+
+        {/* Dock Central de Ecossistema (Idêntico ao Dash em Modelo, Tamanho e Informações) */}
+        <div className="web-ecosystem-switch" aria-label="Navegar entre as soluções Avancini">
+          <Link className="header-cta header-dash-cta" href="/dash">
+            <span className="cta-full-name">Avancini </span>Dash <LivingArrow size={11} />
+          </Link>
+          <Link className="header-cta header-os-cta" href="/">
+            <span className="cta-full-name">Avancini </span>OS <LivingArrow size={11} />
+          </Link>
+        </div>
+
         <button
           className="menu-toggle"
           type="button"
@@ -869,9 +910,10 @@ export default function AvanciniSyncPage() {
         <div className="sync-hero-grid" aria-hidden="true" />
         
         <div className="sync-hero-copy">
-          <div className="hero-typewriter-badge">
-            <span className="hero-typewriter-pulse" />
-            <span>ATENDIMENTO INTELIGENTE NO WHATSAPP PARA <SyncAudienceTypewriter /></span>
+          <div className="eyebrow hero-typewriter sync-hero-typewriter">
+            <span className="hero-badge-dot sync-badge-dot" />
+            <span className="hero-typewriter-prefix">Atendimento inteligente com IA para</span>
+            <SyncAudienceTypewriter />
           </div>
 
           <h1>Atendimento rápido, simpático e acolhedor.<br /><em>Sua empresa respondendo na hora, 24 horas por dia.</em></h1>
@@ -881,11 +923,31 @@ export default function AvanciniSyncPage() {
           </p>
 
           <div className="sync-hero-actions">
-            <a href="#retorno">Comparar com funcionário <SyncDownArrow /></a>
-            <a className="sync-plans-shortcut" href="#planos">Ver planos <SyncDownArrow /></a>
-            <button type="button" onClick={() => openLead("implantar a equipe de IA na minha empresa")}>
-              Quero uma demonstração prática <SyncArrow />
-            </button>
+            <a className="btn-underline" href="#retorno"><span>Comparar com funcionário</span> <SyncDownArrow /></a>
+            <a className="btn-underline sync-plans-shortcut" href="#planos"><span>Ver planos</span> <SyncDownArrow /></a>
+            <MagneticButton type="button" className="sync-primary-cta" onClick={() => openLead("implantar a equipe de IA na minha empresa")}>
+              <span>Quero uma demonstração prática</span> <SyncArrow />
+            </MagneticButton>
+          </div>
+
+          {/* KPI Strip Comercial com Números Animados */}
+          <div className="sync-hero-kpis-strip" aria-label="Indicadores de performance da IA">
+            <div className="kpi-box">
+              <strong><AnimatedCounter target={24} suffix="/7" /></strong>
+              <span>Atendimento 24h</span>
+            </div>
+            <div className="kpi-box">
+              <strong>&lt; <AnimatedCounter target={3} suffix="s" /></strong>
+              <span>Tempo de Resposta</span>
+            </div>
+            <div className="kpi-box">
+              <strong>+<AnimatedCounter target={38} suffix="%" /></strong>
+              <span>Conversão Fora de Hora</span>
+            </div>
+            <div className="kpi-box">
+              <strong>R$ <AnimatedCounter target={0} /></strong>
+              <span>Horas Extras Gastas</span>
+            </div>
           </div>
 
           {/* Painel Interativo Vivo do Supervisor Multiagente (Substitui os 4 cards estáticos e mortos) */}
@@ -935,68 +997,64 @@ export default function AvanciniSyncPage() {
               const currentAgent = supervisorAgents[activeSupervisorIndex];
               return (
                 <div className="cockpit-body-split">
-                  {/* Coluna Esquerda: Especificação Técnica, HUD de Métricas e Pipeline */}
-                  <div className="cockpit-agent-spec">
-                    <div>
-                      <div className="cockpit-agent-header-row">
-                        <div>
-                          <span className="spec-agent-tag">{currentAgent.name}</span>
-                          <h4>{currentAgent.role}</h4>
-                        </div>
-                        <span className="spec-live-pill">● {currentAgent.status}</span>
+                  {/* Coluna Esquerda: O Que o Agente de IA Faz na Vida Real (Prático, sem jargões) */}
+                  <div className="cockpit-superpowers-panel">
+                    <div className="superpowers-header">
+                      <div className="paulo-ref-kicker" style={{ marginBottom: 4 }}>
+                        REF:// SEU DIA A DIA TRANSFORMADO · 24/7 <span className="kicker-bar" />
                       </div>
+                      <span className="spec-agent-tag">{currentAgent.name}</span>
+                      <h4>Como o Chatbot com IA muda sua rotina:</h4>
+                      <p>Você foca no seu trabalho enquanto seu WhatsApp atende, tira dúvidas e agenda sem você precisar digitar nada.</p>
+                    </div>
 
-                      {/* Live HUD: 3 Métricas Operacionais */}
-                      <div className="spec-metrics-hud">
-                        {currentAgent.metrics.map((m, mIdx) => (
-                          <div key={mIdx} className="spec-metric-box">
-                            <small>{m.label}</small>
-                            <strong>{m.value}</strong>
-                          </div>
-                        ))}
-                      </div>
-
-                      {/* Ferramentas Ativas & Conectores */}
-                      <div className="spec-tools-wrap">
-                        <span className="spec-section-mini-title">FERRAMENTAS &amp; CONECTORES ATIVOS</span>
-                        <div className="spec-tools-pills">
-                          {currentAgent.tools.map((tool, tIdx) => (
-                            <span key={tIdx} className="spec-tool-pill">{tool}</span>
-                          ))}
+                    <div className="superpowers-grid">
+                      <div className="superpower-card">
+                        <span className="superpower-icon">⚡</span>
+                        <div className="superpower-body">
+                          <strong>Atendimento Contínuo 24/7 no WhatsApp</strong>
+                          <p>Responde prontamente inclusive de madrugada e nos finais de semana, acolhendo o cliente no momento exato em que ele busca sua empresa.</p>
                         </div>
                       </div>
 
-                      {/* Card de Classificação em Tempo Real do Lead */}
-                      <div className="spec-lead-qualification-card">
-                        <div className="lead-score-header">
-                          <span>Classificação de Lead</span>
-                          <strong>Score: <AnimatedCounter target={98} suffix="/100" /></strong>
-                        </div>
-                        <div className="lead-stage-pill-live">
-                          <i />
-                          <span>Status: Lead Qualificado &amp; Convertido</span>
+                      <div className="superpower-card">
+                        <span className="superpower-icon">🎙️</span>
+                        <div className="superpower-body">
+                          <strong>Ouve Áudios &amp; Responde Humanizado</strong>
+                          <p>Compreende áudios de qualquer tamanho com ruído de fundo e responde com naturalidade, sem robô chato.</p>
                         </div>
                       </div>
 
-                      {/* Orquestração do Supervisor: Pipeline em Tempo Real */}
-                      <div className="spec-pipeline-wrap">
-                        <span className="spec-section-mini-title">ORQUESTRAÇÃO DO SUPERVISOR</span>
-                        <div className="spec-pipeline-flow">
-                          {currentAgent.pipelineSteps.map((p, pIdx) => (
-                            <div key={pIdx} className="spec-pipe-step">
-                              <span className="step-num">{p.step}</span>
-                              <div className="step-content">
-                                <strong>{p.name}</strong>
-                                <small>{p.desc}</small>
-                              </div>
-                            </div>
-                          ))}
+                      <div className="superpower-card">
+                        <span className="superpower-icon">📅</span>
+                        <div className="superpower-body">
+                          <strong>Agenda Direto no Google Calendar</strong>
+                          <p>Checa seus horários vagos, agenda sem conflito de grade e envia lembrete no WhatsApp para reduzir faltas.</p>
+                        </div>
+                      </div>
+
+                      <div className="superpower-card">
+                        <span className="superpower-icon">💰</span>
+                        <div className="superpower-body">
+                          <strong>Cabe no Bolso de Qualquer Empresa</strong>
+                          <p>Custa menos que um café por dia. Sem encargos trabalhistas, e se paga já no 1º cliente resgatado.</p>
                         </div>
                       </div>
                     </div>
 
-                    <div className="cockpit-supervisor-handoff-note">
-                      <span>🛡️ <strong>Atendimento Humanizado:</strong> A IA conversa de forma educada e natural. Se o cliente precisar falar com você ou com sua equipe, ela transfere a conversa na hora com o resumo pronto.</span>
+                    <div className="superpowers-footer">
+                      <MagneticButton
+                        type="button"
+                        className="paulo-signature-btn btn-full paulo-btn-sync btn-icon-rotate"
+                        onClick={() => openLead("testar o Chatbot de IA no meu WhatsApp")}
+                      >
+                        <span>TESTAR NO MEU WHATSAPP</span>
+                        <span className="paulo-arrow-circle"><LivingArrow size={13} /></span>
+                      </MagneticButton>
+                      <div className="superpowers-guarantee">
+                        <span>🛡️</span>
+                        <span><strong>Conexão via QR Code em 5 min</strong> · Sem trocar de chip nem de número</span>
+                      </div>
                     </div>
                   </div>
 
@@ -1345,10 +1403,10 @@ export default function AvanciniSyncPage() {
       <section className="sync-commercial-section" id="jornada" aria-labelledby="sync-journey-title">
         <header className="sync-section-heading">
           <div>
-            <span>01 / A FORÇA DE TRABALHO DIGITAL</span>
-            <h2 id="sync-journey-title">Muito além de um robô.<br />Uma equipe que atende, agenda e vende.</h2>
+            <span className="paulo-ref-kicker">REF:// ROTINA REVOLUCIONADA · 01 <span className="kicker-bar" /></span>
+            <h2 id="sync-journey-title">Você foca no seu trabalho.<br /><em>O Chatbot com IA cuida do seu WhatsApp.</em></h2>
           </div>
-          <p>Agentes especializados para acolher leads, marcar horários e tirar dúvidas 24 horas por dia.</p>
+          <p>Menos estresse com mensagens repetitivas, atendimento acolhedor para cada contato e sua agenda sempre organizada.</p>
         </header>
 
         <div className="commercial-journey-container">
@@ -1395,7 +1453,7 @@ export default function AvanciniSyncPage() {
                     className="journey-cta-btn"
                     onClick={() => openLead(`a atuação da IA em ${current.title}`)}
                   >
-                    Ver demonstração para {current.title.split("&")[0]} <SyncArrow />
+                    Ver demonstração para {current.title.split("&")[0].trim()} <SyncArrow />
                   </button>
                 </div>
               );
@@ -1408,13 +1466,13 @@ export default function AvanciniSyncPage() {
       <section className="sync-commercial-section sync-cost-comparison" id="retorno" aria-labelledby="sync-cost-title">
         <header className="sync-section-heading">
           <div>
-            <span>02 / EFICIÊNCIA OPERACIONAL &amp; RESULTADOS</span>
+            <span className="paulo-ref-kicker">REF:// ECONOMIA &amp; RETORNO · 02 <span className="kicker-bar" /></span>
             <h2 id="sync-cost-title" className="roi-balanced-title">
-              Quanto a sua empresa ganha <br />
-              <em>quando nenhum cliente fica sem resposta no WhatsApp?</em>
+              Uma tecnologia que cabe no bolso de qualquer empresa.<br />
+              <em>Custa menos que um café por dia e se paga no 1º cliente resgatado.</em>
             </h2>
           </div>
-          <p>Simule a receita recuperada fora do expediente e compare com o custo de uma operação humana tradicional.</p>
+          <p>Compare o custo de um funcionário tradicional (salário, encargos, férias e limite de 8h/dia) com um Agente de IA que nunca descansa.</p>
         </header>
 
         <div className="sync-roi-grid">
@@ -1446,7 +1504,7 @@ export default function AvanciniSyncPage() {
               <div className="roi-input-row">
                 <div className="roi-label-row">
                   <span>Contatos perdidos por mês (demora de resposta ou fora do horário):</span>
-                  <strong className="text-danger">-{missedWeekendLeads} clientes / mês</strong>
+                  <strong className="text-danger">Perda estimada: {missedWeekendLeads} contatos / mês</strong>
                 </div>
                 <input
                   type="range"
@@ -1507,13 +1565,6 @@ export default function AvanciniSyncPage() {
                   RECEITA NOVA NO CAIXA
                 </span>
               </div>
-            </div>
-
-            {/* Prova Social e Depoimento Real */}
-            <div className="roi-social-proof-strip">
-              <div className="proof-stars">★★★★★</div>
-              <p>&ldquo;No primeiro sábado à noite a IA atendeu e agendou 2 procedimentos particulares fora do horário. Recuperamos clientes que certamente teriam procurado outro profissional se tivessem que esperar até segunda-feira.&rdquo;</p>
-              <small>— Dr. Fernando M., Diretor Clínico</small>
             </div>
 
             <button
@@ -1591,7 +1642,7 @@ export default function AvanciniSyncPage() {
                 <div className="cta-bar-info">
                   <span className="cta-bar-icon">{niche.icon}</span>
                   <div>
-                    <strong>Pronto para automatizar a rotina de {niche.title.split("&")[0]}?</strong>
+                    <strong>Pronto para automatizar a rotina de {niche.title.split("&")[0].trim()}?</strong>
                     <small>Apresentamos uma demonstração ao vivo adaptada às regras do seu estabelecimento.</small>
                   </div>
                 </div>
@@ -1600,7 +1651,7 @@ export default function AvanciniSyncPage() {
                   className="niche-cta-highlight"
                   onClick={() => openLead(`a implantação da IA para ${niche.title}`)}
                 >
-                  Configurar IA para {niche.title.split("&")[0]} <SyncArrow />
+                  Configurar IA para {niche.title.split("&")[0].trim()} <SyncArrow />
                 </button>
               </div>
             </div>
@@ -1613,20 +1664,20 @@ export default function AvanciniSyncPage() {
       <section className="sync-commercial-section" id="planos" aria-labelledby="sync-plans-title">
         <header className="sync-section-heading">
           <div>
-            <span>04 / FORMATOS DE IMPLANTAÇÃO SOB MEDIDA</span>
-            <h2 id="sync-plans-title">Não vendemos pacotes engessados.<br />A IA é calibrada para a realidade da sua empresa.</h2>
+            <span className="paulo-ref-kicker">REF:// MODELOS ACESSÍVEIS · 03 <span className="kicker-bar" /></span>
+            <h2 id="sync-plans-title">Tecnologia de ponta que cabe no seu orçamento.<br /><em>A IA se adapta ao tamanho e à realidade da sua empresa.</em></h2>
           </div>
-          <p>Sem tabelas genéricas ou limites que travam seu atendimento. Você testa a inteligência no seu segmento e vê o retorno antes de contratar.</p>
+          <p>Sem tabelas engessadas ou cobranças abusivas. Você testa a inteligência no seu segmento e vê o retorno antes de contratar.</p>
         </header>
 
         {/* 1. Dock de Garantia e Engenharia Dedicada */}
         <div className="value-assurance-dock">
           <div className="assurance-radar-pill">
             <span className="dock-radar-dot" />
-            <span>IMPLANTAÇÃO CHAVE NA MÃO · SEM PACOTES ENGESSADOS</span>
+            <span>IMPLANTAÇÃO CHAVE NA MÃO · CABE NO BOLSO DE TODO MUNDO</span>
           </div>
           <p className="assurance-headline">
-            Não entregamos robô cru. Mapeamos as regras da sua clínica ou negócio, calibramos as respostas com o seu tom de voz e conectamos no seu WhatsApp via QR Code em minutos.
+            Não entregamos robô cru. Mapeamos as regras da sua empresa, calibramos as respostas com o seu tom de voz e conectamos no seu WhatsApp via QR Code em poucos minutos.
           </p>
           <div className="assurance-perks-row">
             <div className="perk-chip">
@@ -1635,7 +1686,7 @@ export default function AvanciniSyncPage() {
             </div>
             <div className="perk-chip">
               <span className="perk-icon">🛡️</span>
-              <span>Zero Risco: Teste no seu WhatsApp</span>
+              <span>Demonstração Prática: Valide no seu WhatsApp</span>
             </div>
             <div className="perk-chip">
               <span className="perk-icon">📅</span>
@@ -1691,14 +1742,14 @@ export default function AvanciniSyncPage() {
                   {plan.payoff}
                 </div>
 
-                {/* Botão Magnético de Alta Conversão */}
+                {/* Botão Signature Paulo Leme */}
                 <button
                   type="button"
-                  className="plan-compact-btn btn-sync-glow"
+                  className="paulo-signature-btn btn-full paulo-btn-sync btn-icon-rotate"
                   onClick={() => openLead(`Olá! Gostaria de testar uma demonstração gratuita do ${plan.name} no meu WhatsApp.`)}
                 >
                   <span>{plan.ctaText}</span>
-                  <SyncArrow size={14} />
+                  <span className="paulo-arrow-circle"><LivingArrow size={13} /></span>
                 </button>
                 <small className="plan-compact-subnote">
                   {plan.deliverableBadge}
@@ -1735,42 +1786,6 @@ export default function AvanciniSyncPage() {
               <SyncArrow size={14} />
             </button>
             <small>Atendimento executivo com arquiteto de software</small>
-          </div>
-        </div>
-      </section>
-
-      {/* 5.1 ARGUMENTO & RETORNO IMEDIATO — A CONSULTA PERDIDA */}
-      <section className="sync-commercial-section sync-argument-section" aria-label="Retorno sobre o investimento">
-        <div className="sync-argument-box">
-          <div className="sync-argument-top-glow" aria-hidden="true" />
-          <div className="sync-argument-header">
-            <span className="sync-argument-badge">
-              <i className="badge-pulse-dot" aria-hidden="true" /> O CÁLCULO QUE REALMENTE IMPORTA
-            </span>
-          </div>
-          <div className="sync-argument-quote-deco" aria-hidden="true">“</div>
-          <blockquote>
-            Uma única venda ou consulta perdida na noite ou no fim de semana custa mais caro do que estruturar um atendimento inteligente.
-          </blockquote>
-          <p className="sync-argument-desc">
-            É esse o cálculo que define os líderes de mercado: enquanto o seu concorrente deixa o cliente esperando até segunda-feira de manhã, a sua IA acolhe com empatia humana, tira dúvidas, qualifica a intenção e confirma o agendamento na sua grade em segundos.
-          </p>
-          <div className="sync-argument-proof-row">
-            <div className="argument-proof-pill">
-              <span className="proof-metric">24/7</span>
-              <strong className="proof-label">Atendimento Imediato</strong>
-              <p className="proof-desc">Acolhimento ativo mesmo fora do expediente comercial</p>
-            </div>
-            <div className="argument-proof-pill">
-              <span className="proof-metric">&lt; 2s</span>
-              <strong className="proof-label">Resposta em Tempo Real</strong>
-              <p className="proof-desc">Leitura de áudios, textos e envio de respostas naturais</p>
-            </div>
-            <div className="argument-proof-pill">
-              <span className="proof-metric">100%</span>
-              <strong className="proof-label">Retenção de Oportunidades</strong>
-              <p className="proof-desc">Zero perda de pacientes e clientes na noite e fins de semana</p>
-            </div>
           </div>
         </div>
       </section>
@@ -1856,54 +1871,93 @@ export default function AvanciniSyncPage() {
         </div>
       </section>
 
-      {/* Footer Estruturado em 4 Colunas (Padrão Rico e Completo como no Avancini Dash) */}
-      <footer className="footer sync-footer-rich">
-        <div className="footer-top">
-          <div className="footer-brand">
-            <Link href="/" className="logo">
-              <AvanciniMark variant="sync" className="logo-mark avancini-a-mark" />
-              <span>
-                <span className="brand-name">
-                  AVANCINI <b>SYNC</b>
+      <footer id="contato" className="paulo-footer-section">
+        <div className="paulo-footer-card">
+          <div className="paulo-footer-grid">
+            {/* Coluna 1: Marca, Bio & Redes Sociais */}
+            <div className="paulo-footer-brand">
+              <Link href="/" className="logo">
+                <AvanciniMark variant="sync" className="logo-mark avancini-a-mark" />
+                <span>
+                  <span className="brand-name">AVANCINI <b>SYNC</b></span>
+                  <small>Equipe Multiagente de IA</small>
                 </span>
-                <small>Equipe Multiagente de IA</small>
-              </span>
-            </Link>
-            <p>Força de trabalho digital autônoma para atendimento, agendamentos, suporte e triagem 24/7 no WhatsApp.</p>
-            <a href="https://www.instagram.com/avancinios/" target="_blank" rel="noreferrer">Instagram <SyncArrow /></a>
+              </Link>
+              <p className="paulo-footer-bio">
+                Inteligência artificial e agentes 24h para WhatsApp. Atendimento humanizado, agendamentos automáticos e suporte contínuo sem perda de vendas.
+              </p>
+              <div className="paulo-social-row" aria-label="Redes sociais">
+                <a href="https://www.instagram.com/avancinios/" target="_blank" rel="noreferrer" className="paulo-social-btn" aria-label="Instagram da Avancini OS">
+                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                </a>
+                <a href="https://wa.me/5573981019782" target="_blank" rel="noreferrer" className="paulo-social-btn" aria-label="WhatsApp direto">
+                  <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.698c.969.541 1.932.818 2.796.818 3.179 0 5.765-2.586 5.767-5.766.001-3.18-2.585-5.767-5.767-5.767zm3.376 8.204c-.14.394-.712.723-1.009.76-.282.035-.642.148-2.072-.444-1.745-.723-2.87-2.484-2.956-2.6-.088-.116-.708-.941-.708-1.795s.447-1.275.607-1.447c.159-.172.348-.215.464-.215.116 0 .232.002.333.007.107.005.25-.041.391.298.144.348.492 1.203.535 1.29.043.087.072.189.014.305-.058.115-.088.188-.174.289-.088.101-.185.226-.264.304-.088.087-.18.182-.078.358.101.174.452.744.969 1.205.666.594 1.228.778 1.402.865.174.088.276.073.377-.044.102-.116.435-.508.551-.682.116-.174.233-.145.392-.087s1.016.479 1.19.566c.174.087.29.13.333.203.044.072.044.42-.096.814z"/></svg>
+                </a>
+                <a href="https://github.com/IvoAvancini" target="_blank" rel="noreferrer" className="paulo-social-btn" aria-label="GitHub">
+                  <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+                </a>
+                <a href="mailto:ivoavancini@hotmail.com" className="paulo-social-btn" aria-label="E-mail">
+                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                </a>
+              </div>
+            </div>
+
+            {/* Coluna 2: Navegação */}
+            <div className="paulo-footer-col">
+              <h4>NAVEGAÇÃO</h4>
+              <a href="#inicio">Início</a>
+              <a href="#jornada">Jornada da IA</a>
+              <a href="#retorno">Custo x Retorno</a>
+              <a href="#nichos">Segmentos Atendidos</a>
+              <a href="#planos">Serviços e Planos</a>
+              <a href="#conexao">Conexão WhatsApp</a>
+              <a href="#duvidas">Perguntas frequentes</a>
+              <Link href="/">Avancini OS <SyncArrow /></Link>
+              <Link href="/dash">Avancini Dash <SyncArrow /></Link>
+            </div>
+
+            {/* Coluna 3: Soluções & IA */}
+            <div className="paulo-footer-col">
+              <h4>SOLUÇÕES &amp; IA</h4>
+              <a href="#nichos">Agente de Atendimento 24/7</a>
+              <a href="#nichos">Agendamento Google Calendar</a>
+              <a href="#nichos">Triagem e Qualificação de Leads</a>
+              <a href="#nichos">Follow-up &amp; Recuperação</a>
+              <a href="#planos">Solução Enterprise Sob Medida</a>
+              <Link href="/dash">Websites Avancini Dash <SyncArrow /></Link>
+            </div>
+
+            {/* Coluna 4: Contato & Botão Signature */}
+            <div className="paulo-footer-contact">
+              <h4>CONTATO</h4>
+              <a href="mailto:ivoavancini@hotmail.com" className="paulo-contact-link">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                <span>ivoavancini@hotmail.com</span>
+              </a>
+              <a href="tel:+5573981019782" className="paulo-contact-link">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                <span>(73) 98101-9782</span>
+              </a>
+              <MagneticButton
+                type="button"
+                className="paulo-signature-btn btn-icon-rotate"
+                onClick={() => openLead("solicitar demonstração de IA pelo rodapé")}
+              >
+                <span>SOLICITAR DEMONSTRAÇÃO</span>
+                <span className="paulo-arrow-circle"><LivingArrow size={13} /></span>
+              </MagneticButton>
+            </div>
           </div>
-          <nav>
-            <b>NAVEGAÇÃO</b>
-            <a href="#inicio">Início</a>
-            <a href="#jornada">Jornada de atendimento</a>
-            <a href="#retorno">Custo x Retorno</a>
-            <a href="#nichos">Segmentos de atuação</a>
-            <a href="#planos">Serviços e planos</a>
-            <a href="#duvidas">Perguntas frequentes</a>
-            <Link href="/">Avancini OS <SyncArrow /></Link>
-            <Link href="/dash">Avancini Dash <SyncArrow /></Link>
-          </nav>
-          <nav>
-            <b>AGENTES &amp; SOLUÇÕES</b>
-            <a href="#nichos">Agente Atendimento &amp; Triagem</a>
-            <a href="#nichos">Agente de Agendamentos</a>
-            <a href="#nichos">Suporte &amp; Operação 24/7</a>
-            <a href="#nichos">Follow-up &amp; Reativação</a>
-            <Link href="/dash">Websites Avancini Dash <SyncArrow /></Link>
-          </nav>
-          <div className="footer-contact">
-            <b>CONTATO</b>
-            <a href="mailto:ivoavancini@hotmail.com">ivoavancini@hotmail.com</a>
-            <a href="tel:+5573981019782">(73) 98101-9782</a>
-            <button type="button" onClick={() => openLead("solicitar demonstração de IA pelo rodapé")}>
-              SOLICITAR DEMONSTRAÇÃO <SyncArrow />
-            </button>
+
+          {/* Barra Inferior / Sub-footer */}
+          <div className="paulo-footer-bottom">
+            <span suppressHydrationWarning>© {new Date().getFullYear()} Avancini OS · CNPJ 42.487.607/0001-98. Todos os direitos reservados.</span>
+            <nav aria-label="Informações legais">
+              <a href="/privacidade" className="btn-underline">Política de Privacidade</a>
+              <a href="/termos" className="btn-underline">Termos de Uso</a>
+              <a href="#inicio" className="btn-underline">Voltar ao topo ↑</a>
+            </nav>
           </div>
-        </div>
-        <div className="footer-bottom">
-          <span suppressHydrationWarning>© {new Date().getFullYear()} Avancini OS · Todos os direitos reservados</span>
-          <nav aria-label="Informações legais"><a href="/privacidade">Privacidade</a><a href="/termos">Termos</a></nav>
-          <a href="#inicio">Voltar ao topo ↑</a>
         </div>
       </footer>
 

@@ -44,549 +44,79 @@
   padding-top: clamp(82px, 11vh, 105px) !important;
 }
 
-/* ── DOCK DE ECOSSISTEMA LUXURY GLASS (ADEUS BORDAS PESADAS) ── */
-.web-ecosystem-switch {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  padding: 4px 6px;
-  border-radius: 9999px;
-  background: rgba(255, 255, 255, 0.035);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 4px 20px rgba(0, 0, 0, 0.4);
-}
-
-.web-ecosystem-switch .header-cta {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 14px;
-  border-radius: 9999px;
-  font-size: 0.74rem;
-  font-weight: 600;
-  letter-spacing: 0.015em;
-  text-decoration: none;
-  background: transparent;
-  border: 1px solid transparent;
-  color: rgba(255, 255, 255, 0.65);
-  transition: all 0.24s cubic-bezier(0.16, 1, 0.3, 1);
-  position: relative;
-}
-
-.web-ecosystem-switch .header-cta:hover {
-  color: #ffffff;
-  background: rgba(255, 255, 255, 0.07);
-  border-color: rgba(255, 255, 255, 0.12);
-  transform: translateY(-0.5px);
-}
-
-.web-ecosystem-switch .header-sync-cta:hover {
-  background: rgba(56, 189, 248, 0.09);
-  border-color: rgba(56, 189, 248, 0.28);
-  color: #e0f2fe;
-  box-shadow: 0 0 16px rgba(56, 189, 248, 0.22);
-}
-
-.web-ecosystem-switch .header-os-cta:hover {
-  background: rgba(239, 68, 68, 0.09);
-  border-color: rgba(239, 68, 68, 0.28);
-  color: #fee2e2;
-  box-shadow: 0 0 16px rgba(239, 68, 68, 0.22);
-}
-
-/* ── HERO EDITORIAL CINEMÁTICO & ATMOSFERA VIVA (INSPIRADO EM PAULO LEME) ── */
-.web-hero-scene {
-  position: relative;
-  background: #04070a;
-  overflow: hidden;
-  min-height: calc(100vh - 64px);
-  width: 100%;
-  display: flex !important;
-  flex-direction: column !important;
+/* ── DOCK DE ECOSSISTEMA LUXURY GLASS UNIFICADO (DASH & SYNC) ── */
+:is(.web-page, .sync-page) .web-ecosystem-switch {
+  display: inline-flex !important;
   align-items: center !important;
-  justify-content: center !important;
-}
-
-/* Camada Atmosférica de Profundidade */
-.hero-ambient-depth {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
-  overflow: hidden;
-}
-
-.hero-cyber-grid {
-  position: absolute;
-  inset: 0;
-  background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
-  background-size: 80px 80px;
-  background-position: center top;
-  mask-image: radial-gradient(ellipse at 50% 45%, #000 35%, transparent 75%);
-  -webkit-mask-image: radial-gradient(ellipse at 50% 45%, #000 35%, transparent 75%);
-  opacity: 0.85;
-}
-
-/* Halos de Iluminação Atmosférica nas Laterais e Centro (Eliminando Laterais Mortas) */
-.ambient-glow {
-  position: absolute;
-  border-radius: 50%;
-  pointer-events: none;
-  filter: blur(90px);
-}
-
-.ambient-glow-left {
-  left: -12%;
-  top: 25%;
-  width: 580px;
-  height: 580px;
-  background: radial-gradient(circle, rgba(34, 197, 94, 0.2) 0%, rgba(5, 150, 105, 0.05) 60%, transparent 80%);
-  animation: mktGlowPulse 7s ease-in-out infinite alternate;
-}
-
-.ambient-glow-right {
-  right: -12%;
-  top: 30%;
-  width: 600px;
-  height: 600px;
-  background: radial-gradient(circle, rgba(16, 185, 129, 0.18) 0%, rgba(6, 78, 59, 0.04) 65%, transparent 80%);
-  animation: mktGlowPulse 8s ease-in-out 1.2s infinite alternate-reverse;
-}
-
-.ambient-glow-center {
-  left: 50%;
-  top: 45%;
-  transform: translate(-50%, -50%);
-  width: min(85vw, 900px);
-  height: min(85vw, 900px);
-  background: radial-gradient(circle, rgba(34, 197, 94, 0.15) 0%, rgba(4, 120, 87, 0.04) 55%, transparent 75%);
-}
-
-/* Marca A Monumental Centralizada com Profundidade Atmosférica Suave */
-.hero-monumental-a-wrap {
-  position: absolute;
-  top: 48%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: min(65vw, 680px);
-  height: min(65vw, 680px);
-  pointer-events: none;
-  z-index: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: var(--a-opacity, 0.24);
-  transition: opacity 0.15s ease-out;
-}
-
-.hero-monumental-a {
-  width: 100%;
-  height: 100%;
-  transform: translateY(var(--a-y, 0)) scale(var(--a-scale, 1));
-  filter: drop-shadow(0 0 80px rgba(34, 197, 94, 0.35))
-         drop-shadow(0 0 25px rgba(34, 197, 94, 0.18));
-  animation: mktHeroFloat 8s ease-in-out infinite;
-}
-
-/* Anéis de Energia Concêntricos ao redor do A */
-.monumental-a-ring {
-  position: absolute;
-  border-radius: 50%;
-  border: 1px dashed rgba(34, 197, 94, 0.12);
-  pointer-events: none;
-}
-
-.ring-1 {
-  width: 90%;
-  height: 90%;
-  animation: mktSpinSlow 35s linear infinite;
-}
-
-.ring-2 {
-  width: 120%;
-  height: 120%;
-  border: 1px solid rgba(255, 255, 255, 0.025);
-}
-
-@keyframes mktSpinSlow {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-@keyframes mktGlowPulse {
-  0% { transform: scale(0.92); opacity: 0.75; }
-  100% { transform: scale(1.08); opacity: 1; }
-}
-
-/* Animações de Entrada de Alta Precisão (Paulo Lemes) */
-@keyframes mktHeroFadeUp {
-  0% {
-    opacity: 0;
-    transform: translateY(32px);
-    filter: blur(6px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-    filter: blur(0);
-  }
-}
-
-@keyframes mktHeroFloat {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-}
-
-@keyframes mktShimmerSweep {
-  0% {
-    transform: translateX(-100%) skewX(-20deg);
-  }
-  100% {
-    transform: translateX(250%) skewX(-20deg);
-  }
-}
-
-@keyframes mktRadarPulse {
-  0% {
-    transform: scale(0.95);
-    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.6);
-  }
-  70% {
-    transform: scale(1);
-    box-shadow: 0 0 0 8px rgba(34, 197, 94, 0);
-  }
-  100% {
-    transform: scale(0.95);
-    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0);
-  }
-}
-
-:is(.web-page, html) .web-hero-scene .hero,
-:is(.web-page, html) .web-hero-scene .hero.hero-reference {
-  position: relative !important;
-  min-height: calc(100vh - 64px) !important;
-  height: auto !important;
-  width: 100% !important;
-  display: flex !important;
-  flex-direction: column !important;
-  justify-content: center !important;
-  align-items: center !important;
-  text-align: center !important;
-  padding: clamp(80px, 10vh, 100px) clamp(1.2rem, 5vw, 4rem) clamp(25px, 4vh, 45px) !important;
-  max-width: 1350px !important;
+  gap: 4px !important;
+  padding: 4px 6px !important;
+  border-radius: 9999px !important;
+  background: rgba(255, 255, 255, 0.035) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 4px 20px rgba(0, 0, 0, 0.4) !important;
   margin: 0 auto !important;
-  z-index: 2 !important;
-  grid-template-columns: none !important;
 }
 
-/* Conteúdo do Hero com Transição Dinâmica no Scroll */
-:is(.web-page, html) .web-hero-scene .hero-copy {
-  position: relative !important;
-  z-index: 2 !important;
-  width: 100% !important;
-  max-width: 860px !important;
-  text-align: center !important;
-  margin: 0 auto !important;
-  display: flex !important;
-  flex-direction: column !important;
+:is(.web-page, .sync-page) .web-ecosystem-switch .header-cta {
+  display: inline-flex !important;
   align-items: center !important;
-  justify-content: center !important;
-  transform: translateY(var(--hero-copy-y, 0)) scale(var(--hero-copy-scale, 1)) !important;
-  opacity: var(--hero-copy-opacity, 1) !important;
-  transition: transform 0.08s ease-out, opacity 0.08s ease-out !important;
+  gap: 6px !important;
+  padding: 6px 14px !important;
+  border-radius: 9999px !important;
+  font-size: 0.74rem !important;
+  font-weight: 650 !important;
+  letter-spacing: 0.015em !important;
+  text-decoration: none !important;
+  background: transparent !important;
+  border: 1px solid transparent !important;
+  color: rgba(255, 255, 255, 0.7) !important;
+  transition: all 0.24s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  position: relative !important;
+  line-height: 1 !important;
 }
 
-.hero-typewriter-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.55rem;
-  padding: 0.4rem 0.95rem;
-  border-radius: 9999px;
-  background: rgba(34, 197, 94, 0.1);
-  border: 1px solid rgba(34, 197, 94, 0.3);
-  font-size: clamp(0.68rem, 0.9vw, 0.78rem);
-  font-weight: 750;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: #86efac;
-  margin-bottom: 1.4rem;
-  animation: mktHeroFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
-  animation-delay: 100ms;
+:is(.web-page, .sync-page) .web-ecosystem-switch .header-cta:hover {
+  color: #ffffff !important;
+  background: rgba(255, 255, 255, 0.08) !important;
+  border-color: rgba(255, 255, 255, 0.14) !important;
+  transform: translateY(-0.5px) !important;
 }
 
-.hero-typewriter-pulse {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #22c55e;
-  box-shadow: 0 0 10px #22c55e;
-  animation: mktRadarPulse 2s infinite;
-  flex-shrink: 0;
+:is(.web-page, .sync-page) .web-ecosystem-switch .header-dash-cta:hover {
+  background: rgba(34, 197, 94, 0.1) !important;
+  border-color: rgba(34, 197, 94, 0.35) !important;
+  color: #dcfce7 !important;
+  box-shadow: 0 0 16px rgba(34, 197, 94, 0.25) !important;
 }
 
-.hero-typewriter-dynamic {
-  display: inline-flex;
-  align-items: center;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
-  letter-spacing: 0.05em;
-  margin-left: 2px;
+:is(.web-page, .sync-page) .web-ecosystem-switch .header-sync-cta:hover {
+  background: rgba(56, 189, 248, 0.1) !important;
+  border-color: rgba(56, 189, 248, 0.35) !important;
+  color: #e0f2fe !important;
+  box-shadow: 0 0 16px rgba(56, 189, 248, 0.25) !important;
 }
 
-.hero-typewriter-target {
-  color: #22c55e;
-  font-weight: 850;
-  text-shadow: 0 0 10px rgba(34, 197, 94, 0.45);
+:is(.web-page, .sync-page) .web-ecosystem-switch .header-os-cta:hover {
+  background: rgba(239, 68, 68, 0.1) !important;
+  border-color: rgba(239, 68, 68, 0.35) !important;
+  color: #fee2e2 !important;
+  box-shadow: 0 0 16px rgba(239, 68, 68, 0.25) !important;
 }
 
-.hero-typewriter-cursor {
-  color: #22c55e;
-  font-weight: 900;
-  margin-left: 1px;
-  animation: cursorBlink 0.75s steps(2, start) infinite;
-}
-
-/* Sync Typewriter Badge (Paleta Ciano / Azul Elétrico Unificada) */
-.sync-page .hero-typewriter-badge {
-  background: rgba(56, 189, 248, 0.08);
-  border: 1px solid rgba(56, 189, 248, 0.28);
-  color: #bae6fd;
-}
-
-.sync-page .hero-typewriter-pulse {
-  background: #38bdf8;
-  box-shadow: 0 0 10px #38bdf8;
-  animation: syncRadarPulse 2s infinite;
-}
-
-.sync-page .hero-typewriter-target {
-  color: #38bdf8;
-  text-shadow: 0 0 12px rgba(56, 189, 248, 0.45);
-}
-
-.sync-page .hero-typewriter-cursor {
-  color: #38bdf8;
-}
-
-@keyframes syncRadarPulse {
-  0% {
-    transform: scale(0.95);
-    box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.6);
+@media (max-width: 768px) {
+  :is(.web-page, .sync-page) .web-ecosystem-switch .cta-full-name {
+    display: none !important;
   }
-  70% {
-    transform: scale(1);
-    box-shadow: 0 0 0 8px rgba(56, 189, 248, 0);
-  }
-  100% {
-    transform: scale(0.95);
-    box-shadow: 0 0 0 0 rgba(56, 189, 248, 0);
+  :is(.web-page, .sync-page) .web-ecosystem-switch .header-cta {
+    padding: 5px 10px !important;
+    font-size: 0.72rem !important;
+    gap: 4px !important;
   }
 }
 
-@keyframes cursorBlink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
-}
-
-/* Título H1 Poderoso com Entrada Cinematográfica */
-.web-hero-scene .hero-copy h1 {
-  font-size: clamp(2.4rem, 4.5vw, 4.2rem);
-  font-weight: 850;
-  line-height: 1.1;
-  letter-spacing: -0.035em;
-  color: #ffffff;
-  margin: 0 0 1.2rem;
-  animation: mktHeroFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
-  animation-delay: 220ms;
-}
-
-.web-hero-scene .hero-copy h1 em {
-  font-style: normal;
-  background: linear-gradient(135deg, #22c55e 15%, #86efac 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 0 25px rgba(34, 197, 94, 0.25));
-}
-
-/* Parágrafo de Alto Contraste com Entrada Suave */
-.web-hero-scene .hero-copy p {
-  font-size: clamp(0.95rem, 1.25vw, 1.15rem);
-  line-height: 1.65;
-  color: rgba(255, 255, 255, 0.82);
-  margin: 0 0 1.6rem;
-  max-width: 620px;
-  animation: mktHeroFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
-  animation-delay: 340ms;
-}
-
-/* Promessa de Marca com Entrada Suave */
-.hero-brand-promise-clean {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.65rem;
-  padding: 0.45rem 1.15rem;
-  border-radius: 9999px;
-  background: rgba(255, 255, 255, 0.035);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  font-size: 0.82rem;
-  color: rgba(255, 255, 255, 0.8);
-  margin-bottom: 2.2rem;
-  animation: mktHeroFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
-  animation-delay: 460ms;
-}
-
-.hero-brand-promise-clean .brand-promise-sep {
-  color: #22c55e;
-  font-weight: 850;
-  font-size: 0.95rem;
-}
-
-.hero-brand-promise-clean strong {
-  color: #4ade80;
-  font-weight: 800;
-}
-
-/* Ações / Botões com Shimmer e Transição Escalonada */
-.hero-actions-clean {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.9rem;
-  flex-wrap: wrap;
-  width: 100%;
-  margin: 0 auto;
-  animation: mktHeroFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
-  animation-delay: 580ms;
-}
-
-.btn-primary-emerald {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.6rem;
-  padding: 0.9rem 1.8rem;
-  border-radius: 0.75rem;
-  background: linear-gradient(135deg, #16a34a, #22c55e);
-  color: #031508;
-  font-weight: 850;
-  font-size: 0.9rem;
-  letter-spacing: 0.01em;
-  border: none;
-  cursor: pointer;
-  text-decoration: none;
-  box-shadow: 0 6px 28px rgba(34, 197, 94, 0.4);
-  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
-  overflow: hidden;
-}
-
-/* Feixe de Luz Shimmer Contínuo no Botão Principal */
-.btn-primary-emerald::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 40%;
-  height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.38),
-    transparent
-  );
-  transform: translateX(-100%) skewX(-20deg);
-  animation: mktShimmerSweep 3.5s ease-in-out infinite;
-  pointer-events: none;
-}
-
-.btn-primary-emerald:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 38px rgba(34, 197, 94, 0.6);
-  color: #000000;
-}
-
-.btn-ghost-clean {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.9rem 1.4rem;
-  border-radius: 0.75rem;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  color: #ffffff;
-  font-weight: 750;
-  font-size: 0.88rem;
-  text-decoration: none;
-  transition: all 0.25s ease;
-}
-
-.btn-ghost-clean:hover {
-  background: rgba(255, 255, 255, 0.09);
-  border-color: rgba(34, 197, 94, 0.4);
-  color: #4ade80;
-  transform: translateY(-1px);
-}
-
-/* ── MARQUEE TICKER DE DIFERENCIAIS (ESTILO PAULO LEME) ── */
-.dash-ticker-wrap {
-  width: 100%;
-  overflow: hidden;
-  background: rgba(8, 14, 22, 0.6);
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-  padding: 0.85rem 0;
-  position: relative;
-  z-index: 5;
-}
-
-.dash-ticker-track {
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-  width: max-content;
-  animation: ticker-slide 32s linear infinite;
-}
-
-.dash-ticker-track:hover {
-  animation-play-state: paused;
-}
-
-@keyframes ticker-slide {
-  0%   { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-
-.ticker-item {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 0.78rem;
-  font-weight: 750;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.8);
-  white-space: nowrap;
-}
-
-.ticker-item strong {
-  color: #4ade80;
-}
-
-.ticker-dot-sep {
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
-  background: rgba(34, 197, 94, 0.5);
-  margin-left: 0.75rem;
-}
-
+/* ── HERO LAYOUTS MANTIDOS NATIVOS NAS SUAS RESPECTIVAS PÁGINAS (SEM CONFLITOS) ── */
 /* ─── GRID DE PLANOS 3 COLUNAS & PERSUASÃO ELEVADA (SEM SISTEMA DE PLATAFORMA) ─── */
 .dash-plans-quad-grid {
   display: grid;
@@ -1697,15 +1227,16 @@
   color: #e9edef !important;
 }
 
-/* Área de Mensagens com Wallpaper Estilo WhatsApp */
+/* Área de Mensagens com Wallpaper Estilo WhatsApp (Expandida para preencher o terminal sem vácuo) */
 :is(.sync-page, html) .chat-messages-scroll {
   background-color: #0b141a !important;
   background-image: radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px) !important;
   background-size: 22px 22px !important;
   padding: 14px 14px !important;
   gap: 10px !important;
-  min-height: 290px !important;
-  max-height: 380px !important;
+  flex: 1 1 auto !important;
+  min-height: 480px !important;
+  max-height: none !important;
   overflow-y: auto !important;
   display: flex !important;
   flex-direction: column !important;
@@ -1864,5 +1395,786 @@
   align-items: center !important;
   justify-content: center !important;
   cursor: default !important;
+}
+
+/* ==========================================================================
+   RODAPÉ / HEADER FINAL INSPIRADO EM PAULO LEME (DASH & SYNC)
+   ========================================================================== */
+
+.paulo-footer-section {
+  position: relative;
+  z-index: 10;
+  padding: 40px 24px 36px;
+  background: transparent;
+}
+
+.paulo-footer-card {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 52px 48px 28px;
+  border-radius: 32px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7);
+}
+
+/* Backgrounds temáticos sutis */
+.web-page .paulo-footer-card {
+  background: radial-gradient(circle at 10% 20%, rgba(34, 197, 94, 0.05) 0%, transparent 45%), #040c07;
+  border-color: rgba(34, 197, 94, 0.16);
+}
+
+.sync-page .paulo-footer-card {
+  background: radial-gradient(circle at 10% 20%, rgba(56, 189, 248, 0.05) 0%, transparent 45%), #030a14;
+  border-color: rgba(56, 189, 248, 0.16);
+}
+
+.paulo-footer-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 0.9fr 1.1fr 1.3fr;
+  gap: 40px;
+  align-items: start;
+  padding-bottom: 40px;
+}
+
+/* Coluna 1: Marca & Redes */
+.paulo-footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.paulo-footer-brand .logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: #ffffff;
+}
+
+.paulo-footer-brand .logo-mark {
+  width: 38px !important;
+  height: 38px !important;
+  flex-shrink: 0;
+}
+
+.paulo-footer-brand .brand-name {
+  font-family: var(--font-space), sans-serif;
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  color: #ffffff;
+  display: block;
+}
+
+.web-page .paulo-footer-brand .brand-name b {
+  color: #4ade80;
+}
+
+.sync-page .paulo-footer-brand .brand-name b {
+  color: #38bdf8;
+}
+
+.paulo-footer-brand small {
+  font-size: 8.5px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: #64748b;
+  text-transform: uppercase;
+  display: block;
+}
+
+.paulo-footer-bio {
+  font-size: 13px;
+  color: #94a3b8;
+  line-height: 1.6;
+  margin: 0;
+  max-width: 320px;
+}
+
+/* Redes Sociais em pílulas circulares */
+.paulo-social-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.paulo-social-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #cbd5e1;
+  text-decoration: none;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.paulo-social-btn:hover {
+  transform: translateY(-2px);
+  color: #030712;
+}
+
+.web-page .paulo-social-btn:hover {
+  background: #4ade80;
+  border-color: #4ade80;
+  box-shadow: 0 4px 14px rgba(74, 222, 128, 0.35);
+}
+
+.sync-page .paulo-social-btn:hover {
+  background: #38bdf8;
+  border-color: #38bdf8;
+  box-shadow: 0 4px 14px rgba(56, 189, 248, 0.35);
+}
+
+/* Colunas de Navegação & Serviços */
+.paulo-footer-col {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.paulo-footer-col h4 {
+  margin: 0 0 8px;
+  font-family: var(--font-space), sans-serif;
+  font-size: 11px;
+  font-weight: 850;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.web-page .paulo-footer-col h4 {
+  color: #4ade80;
+}
+
+.sync-page .paulo-footer-col h4 {
+  color: #38bdf8;
+}
+
+.paulo-footer-col a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: #94a3b8;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  line-height: 1.4;
+}
+
+.paulo-footer-col a:hover {
+  color: #f8fafc;
+  transform: translateX(3px);
+}
+
+/* Coluna 4: Contato & Botão Signature */
+.paulo-footer-contact {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.paulo-footer-contact h4 {
+  margin: 0 0 2px;
+  font-family: var(--font-space), sans-serif;
+  font-size: 11px;
+  font-weight: 850;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.web-page .paulo-footer-contact h4 {
+  color: #4ade80;
+}
+
+.sync-page .paulo-footer-contact h4 {
+  color: #38bdf8;
+}
+
+.paulo-contact-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: #94a3b8;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.paulo-contact-link:hover {
+  color: #ffffff;
+}
+
+.paulo-contact-link svg {
+  flex-shrink: 0;
+  color: #64748b;
+}
+
+/* Botão Signature Pílula com Círculo de Seta (Efeito Paulo Leme) */
+.paulo-signature-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 6px 6px 6px 22px;
+  border-radius: 999px;
+  text-decoration: none;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: #08140e;
+  color: #ffffff;
+  cursor: pointer;
+  margin-top: 6px;
+  width: max-content;
+  max-width: 100%;
+  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.5);
+  user-select: none;
+}
+
+.paulo-signature-btn span:first-child {
+  font-family: var(--font-space), "Inter", sans-serif;
+  font-size: 12.5px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #ffffff;
+}
+
+/* ── LIVING ANIMATED SVG ARROW & PAULO CIRCLE ── */
+.living-svg-arrow {
+  display: inline-block;
+  vertical-align: middle;
+  transition: transform 0.32s cubic-bezier(0.34, 1.56, 0.64, 1);
+  will-change: transform;
+}
+
+:is(.header-cta, .switch-pill):hover .living-svg-arrow {
+  transform: translate(2.5px, -2.5px) scale(1.12);
+}
+
+.paulo-signature-btn .paulo-arrow-circle {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: 900;
+  transition: transform 0.32s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.paulo-signature-btn .paulo-arrow-circle .living-svg-arrow {
+  transition: transform 0.32s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Modificadores */
+.paulo-signature-btn.btn-lg {
+  padding: 8px 8px 8px 26px;
+}
+
+.paulo-signature-btn.btn-lg span:first-child {
+  font-size: 13.5px;
+  letter-spacing: 0.09em;
+}
+
+.paulo-signature-btn.btn-lg .paulo-arrow-circle {
+  width: 38px;
+  height: 38px;
+  font-size: 18px;
+}
+
+.paulo-signature-btn.btn-full {
+  width: 100%;
+  justify-content: space-between;
+}
+
+/* Estilos de Tema no Botão — Dash (Verde Emerald) */
+.web-page .paulo-signature-btn,
+.paulo-btn-dash {
+  background: #05140b;
+  border-color: rgba(74, 222, 128, 0.45);
+}
+
+.web-page .paulo-signature-btn .paulo-arrow-circle,
+.paulo-btn-dash .paulo-arrow-circle {
+  background: #6ee7b7;
+  color: #022010;
+  border: 1px solid rgba(74, 222, 128, 0.5);
+}
+
+.web-page .paulo-signature-btn:hover,
+.paulo-btn-dash:hover {
+  transform: translateY(-2px);
+  border-color: #4ade80;
+  box-shadow: 0 10px 28px rgba(34, 197, 94, 0.45), 0 0 16px rgba(74, 222, 128, 0.2);
+}
+
+.web-page .paulo-signature-btn:hover .paulo-arrow-circle,
+.paulo-btn-dash:hover .paulo-arrow-circle {
+  background: #4ade80;
+  border-color: #86efac;
+  transform: scale(1.1);
+  box-shadow: 0 0 18px rgba(74, 222, 128, 0.6);
+}
+
+.web-page .paulo-signature-btn:hover .paulo-arrow-circle .living-svg-arrow,
+.paulo-btn-dash:hover .paulo-arrow-circle .living-svg-arrow {
+  transform: translate(2.5px, -2.5px) scale(1.15);
+}
+
+/* Estilos de Tema no Botão — Sync (Azul Cyan) */
+.sync-page .paulo-signature-btn,
+.paulo-btn-sync {
+  background: #041424;
+  border-color: rgba(56, 189, 248, 0.45);
+}
+
+.sync-page .paulo-signature-btn .paulo-arrow-circle,
+.paulo-btn-sync .paulo-arrow-circle {
+  background: #38bdf8;
+  color: #021a2c;
+  border: 1px solid rgba(56, 189, 248, 0.5);
+}
+
+.sync-page .paulo-signature-btn:hover,
+.paulo-btn-sync:hover {
+  transform: translateY(-2px);
+  border-color: #38bdf8;
+  box-shadow: 0 10px 28px rgba(56, 189, 248, 0.45), 0 0 16px rgba(56, 189, 248, 0.25);
+}
+
+.sync-page .paulo-signature-btn:hover .paulo-arrow-circle,
+.paulo-btn-sync:hover .paulo-arrow-circle {
+  background: #22d3ee;
+  border-color: #67e8f9;
+  transform: scale(1.1);
+  box-shadow: 0 0 18px rgba(34, 211, 238, 0.6);
+}
+
+.sync-page .paulo-signature-btn:hover .paulo-arrow-circle .living-svg-arrow,
+.paulo-btn-sync:hover .paulo-arrow-circle .living-svg-arrow {
+  transform: translate(2.5px, -2.5px) scale(1.15);
+}
+
+/* Kickers Técnicos Estilo Paulo Leme */
+.paulo-ref-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-space), monospace;
+  font-size: 11px;
+  font-weight: 850;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.web-page .paulo-ref-kicker {
+  color: #4ade80;
+}
+
+.sync-page .paulo-ref-kicker {
+  color: #38bdf8;
+}
+
+.paulo-ref-kicker .kicker-bar {
+  display: inline-block;
+  width: 5px;
+  height: 12px;
+  background: currentColor;
+  border-radius: 1px;
+  box-shadow: 0 0 8px currentColor;
+  animation: kickerBlink 2.2s infinite ease-in-out;
+}
+
+@keyframes kickerBlink {
+  0%, 100% { opacity: 1; transform: scaleY(1); }
+  50% { opacity: 0.5; transform: scaleY(0.75); }
+}
+
+/* 1.2 Layout Limpo e Prático dos Superpoderes do Cockpit (Sync) */
+.cockpit-superpowers-panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: rgba(6, 16, 32, 0.7);
+  border: 1px solid rgba(56, 189, 248, 0.2);
+  height: 100%;
+}
+
+.superpowers-header {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding-bottom: 10px;
+}
+
+.superpowers-header .spec-agent-tag {
+  margin-bottom: 4px;
+}
+
+.superpowers-header h4 {
+  font-size: 13.5px;
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0 0 3px;
+  line-height: 1.25;
+}
+
+.superpowers-header p {
+  font-size: 10.5px;
+  color: #94a3b8;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.superpowers-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 7px;
+  margin: 4px 0;
+}
+
+.superpower-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 9px 12px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.superpower-card:hover {
+  background: rgba(56, 189, 248, 0.06);
+  border-color: rgba(56, 189, 248, 0.3);
+  transform: translateY(-1px);
+}
+
+.superpower-icon {
+  font-size: 16px;
+  flex-shrink: 0;
+  line-height: 1.2;
+}
+
+.superpower-body strong {
+  display: block;
+  font-size: 11px;
+  font-weight: 800;
+  color: #f1f5f9;
+  margin-bottom: 2px;
+  letter-spacing: -0.01em;
+}
+
+.superpower-body p {
+  font-size: 9.5px;
+  color: #94a3b8;
+  margin: 0;
+  line-height: 1.35;
+}
+
+.superpowers-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 8px;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.superpowers-footer .paulo-signature-btn {
+  width: 100%;
+  justify-content: space-between;
+  margin-top: 0;
+}
+
+.superpowers-guarantee {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 9.5px;
+  color: #64748b;
+}
+
+.superpowers-guarantee strong {
+  color: #86efac;
+}
+
+
+/* Barra Inferior / Sub-footer */
+.paulo-footer-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 11.5px;
+  color: #64748b;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.paulo-footer-bottom nav {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.paulo-footer-bottom a {
+  color: #64748b;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.paulo-footer-bottom a:hover {
+  color: #cbd5e1;
+}
+
+/* Responsividade do Footer */
+@media (max-width: 960px) {
+  .paulo-footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 36px;
+  }
+  .paulo-footer-card {
+    padding: 40px 28px 24px;
+  }
+}
+
+@media (max-width: 640px) {
+  .paulo-footer-section {
+    padding: 24px 12px 20px;
+  }
+  .paulo-footer-card {
+    border-radius: 24px;
+    padding: 32px 18px 20px;
+  }
+  .paulo-footer-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .paulo-footer-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+}
+
+/* WhatsApp Flutuante com Badge Notificação estilo Paulo Leme */
+.whatsapp-float-paulo {
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  z-index: 999;
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background: #25d366;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 24px rgba(37, 211, 102, 0.45);
+  cursor: pointer;
+  border: none;
+  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  text-decoration: none;
+}
+
+.whatsapp-float-paulo:hover {
+  transform: scale(1.08) translateY(-2px);
+  box-shadow: 0 10px 30px rgba(37, 211, 102, 0.65);
+}
+
+.wa-notification-badge {
+  position: absolute;
+  top: -3px;
+  right: -3px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #ef4444;
+  border: 2px solid #030712;
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+  animation: pulseWaBadge 2s infinite ease-in-out;
+}
+
+@keyframes pulseWaBadge {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+}
+
+/* ==========================================================================
+   SISTEMA DE ANIMAÇÕES DE BOTÕES (PRIMÁRIO, SECUNDÁRIO E TERCIÁRIO)
+   ========================================================================== */
+
+/* ── 1. BOTÃO PRIMÁRIO: MAGNÉTICO + SWEEP FILL ── */
+.btn-magnetic {
+  position: relative !important;
+  overflow: hidden !important;
+  isolation: isolate !important;
+  transition: transform 0.32s cubic-bezier(0.65, 0, 0.35, 1),
+              box-shadow 0.32s cubic-bezier(0.65, 0, 0.35, 1),
+              border-color 0.32s ease !important;
+  will-change: transform;
+}
+
+.btn-magnetic::before {
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 !important;
+  border-radius: inherit !important;
+  z-index: 0 !important;
+  transform: scaleX(0) !important;
+  transform-origin: left !important;
+  transition: transform 0.38s cubic-bezier(0.65, 0, 0.35, 1) !important;
+  pointer-events: none !important;
+}
+
+/* Sweep Fill Colors */
+.web-page .btn-magnetic::before,
+.btn-magnetic.dash-primary::before {
+  background: linear-gradient(135deg, #22c55e, #16a34a) !important;
+}
+
+.sync-page .btn-magnetic::before,
+.btn-magnetic.sync-primary::before {
+  background: linear-gradient(135deg, #38bdf8, #0284c7) !important;
+}
+
+.btn-magnetic:hover::before {
+  transform: scaleX(1) !important;
+  transform-origin: left !important;
+}
+
+/* Garante que o texto e ícones fiquem na camada superior */
+.btn-magnetic > * {
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+.btn-magnetic:hover {
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45) !important;
+}
+
+/* ── 2. BOTÃO SECUNDÁRIO: EXPANSÃO DO CÍRCULO + ROTAÇÃO DA SETA ("ABRIR CAMINHO") ── */
+@keyframes arrowPathOpen {
+  0% {
+    transform: rotate(0deg);
+  }
+  40% {
+    transform: rotate(45deg) translate(1px, -1px);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+.btn-icon-rotate {
+  position: relative !important;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+              border-color 0.3s ease,
+              background 0.3s ease,
+              box-shadow 0.3s ease !important;
+  will-change: transform;
+}
+
+.btn-icon-rotate .paulo-arrow-circle,
+.btn-icon-rotate .btn-icon-circle {
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
+              background 0.25s ease,
+              box-shadow 0.25s ease !important;
+  will-change: transform;
+}
+
+.btn-icon-rotate:hover .paulo-arrow-circle,
+.btn-icon-rotate:hover .btn-icon-circle {
+  transform: scale(1.15) !important;
+}
+
+.btn-icon-rotate:hover .living-svg-arrow,
+.btn-icon-rotate:hover .paulo-arrow-circle svg,
+.btn-icon-rotate:hover .btn-icon-circle svg,
+.btn-icon-rotate:hover .dash-svg-arrow,
+.btn-icon-rotate:hover .sync-svg-arrow {
+  animation: arrowPathOpen 0.42s cubic-bezier(0.34, 1.56, 0.64, 1) forwards !important;
+}
+
+/* ── 3. BOTÕES TERCIÁRIOS / LINKS DE TEXTO: UNDERLINE REVEAL + DESLOCAMENTO DE ÍCONE ── */
+.btn-underline {
+  position: relative !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  text-decoration: none !important;
+  background: transparent !important;
+  padding-bottom: 3px !important;
+  transition: color 0.28s cubic-bezier(0.65, 0, 0.35, 1) !important;
+}
+
+.btn-underline::after {
+  content: "" !important;
+  position: absolute !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 1.5px !important;
+  background: currentColor !important;
+  transform: scaleX(0) !important;
+  transform-origin: left !important;
+  transition: transform 0.32s cubic-bezier(0.65, 0, 0.35, 1) !important;
+  pointer-events: none !important;
+}
+
+.btn-underline:hover::after {
+  transform: scaleX(1) !important;
+  transform-origin: left !important;
+}
+
+.btn-underline svg,
+.btn-underline .living-svg-arrow,
+.btn-underline .dash-svg-arrow,
+.btn-underline .sync-svg-arrow {
+  transition: transform 0.3s cubic-bezier(0.65, 0, 0.35, 1) !important;
+}
+
+.btn-underline:hover svg,
+.btn-underline:hover .living-svg-arrow,
+.btn-underline:hover .dash-svg-arrow,
+.btn-underline:hover .sync-svg-arrow {
+  transform: translateX(4px) !important;
+}
+
+/* ── REGRAS GERAIS: FEEDBACK DE CLIQUE (:ACTIVE) SCALE DOWN EM TODOS ── */
+:is(
+  .button,
+  .btn-magnetic,
+  .btn-icon-rotate,
+  .btn-underline,
+  .paulo-signature-btn,
+  .sync-hero-actions button,
+  .sync-hero-actions a,
+  .hero-actions .button,
+  .switch-pill,
+  .header-cta
+):active {
+  transform: scale(0.97) !important;
+  transition: transform 0.08s cubic-bezier(0.2, 0.8, 0.2, 1) !important;
 }
 

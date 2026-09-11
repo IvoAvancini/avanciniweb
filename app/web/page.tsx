@@ -9,13 +9,34 @@ import { AvanciniMark } from "../avancini-mark";
 import { trackLead, trackMarketingEvent } from "../marketing-events";
 import type { SectorShowcaseType } from "./sector-showcases";
 import AnimatedCounter from "../components/AnimatedCounter";
+import { MagneticButton } from "../components/MagneticButton";
+import "./dash-hero.css";
 
 const SectorShowcasePage = dynamic(
   () => import("./sector-showcases").then((module) => module.SectorShowcasePage),
   { ssr: false },
 );
 
-import "./dash-hero.css";
+
+const LivingArrow = ({ size = 12, className = "" }: { size?: number; className?: string }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 14 14"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className={`living-svg-arrow ${className}`}
+    aria-hidden="true"
+  >
+    <path
+      d="M3.5 10.5L10.5 3.5M10.5 3.5H4.5M10.5 3.5V9.5"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
 
 const WebArrow = ({ size = 12 }: { size?: number }) => (
   <svg
@@ -120,14 +141,14 @@ const webPillars = [
   { number: "01", title: "Estudo de Mercado", text: "Análise profunda do seu nicho, dos concorrentes e das brechas para posicionar sua marca como líder." },
   { number: "02", title: "Copywriting Persuasivo", text: "Arquitetura psicológica de texto para quebrar objeções e conduzir o visitante do clique ao fechamento." },
   { number: "03", title: "Design Estratégico Autoral", text: "Identidade visual exclusiva de padrão internacional. Zero templates amadores: cada detalhe transmite autoridade." },
-  { number: "04", title: "Carregamento Rápido (0.2s)", text: "Engenharia de código limpo com nota 95-100 no Google PageSpeed. Sua página voa até em conexões móveis fracas." },
+  { number: "04", title: "Engenharia de Performance", text: "Código enxuto com foco nos critérios Core Web Vitals do Google, priorizando estabilidade visual e abertura quase instantânea no celular." },
   { number: "05", title: "Responsividade & Preparo para IA", text: "Experiência perfeita em qualquer celular e dados estruturados para o site ser recomendado por Google, ChatGPT e Perplexity." },
 ] as const;
 
 const webFaqs = [
   { question: "Como funciona o processo de criação?", answer: "Iniciamos entendendo seu modelo de negócio, público-alvo e metas de conversão. Desenvolvemos o copywriting estratégico, o design autoral e a engenharia de alta performance, entregando o primeiro rascunho interativo em 48h para validação." },
   { question: "Landing page e site institucional são a mesma coisa?", answer: "Não. A landing page concentra 100% da atenção em uma oferta direta ou campanha com foco em conversão rápida. O site institucional apresenta sua empresa completa, catálogo de serviços, equipe e consolida autoridade no Google." },
-  { question: "O site carrega rápido e funciona bem no celular?", answer: "Sim. Todos os nossos projetos são desenvolvidos com nota máxima no Google PageSpeed e carregamento de 0.2s LCP. A experiência mobile é fluida e prioritária, garantindo zero perda de clientes em conexões móveis." },
+  { question: "O site carrega rápido e funciona bem no celular?", answer: "Sim. Nossos projetos são desenvolvidos com arquitetura técnica focada nos Core Web Vitals do Google, com renderização leve e prioridade mobile para reduzir a taxa de rejeição e reter visitantes logo no primeiro segundo." },
   { question: "Posso usar meu próprio domínio e e-mail profissional?", answer: "Com certeza. Conectamos seu domínio corporativo (.com.br, .com etc.) e auxiliamos na configuração de e-mails profissionais com certificado de segurança SSL avançado." },
   { question: "Quanto tempo demora para o projeto ficar pronto?", answer: "Projetos de alta conversão (Landing Pages) ficam prontos entre 48h e 7 dias. Estruturas institucionais e lojas virtuais completas são entregues entre 10 e 20 dias, com cronograma claro e acompanhamento diário." },
   { question: "Como é calculada a proposta de investimento?", answer: "Cada solução é desenhada sob medida conforme a complexidade técnica e os objetivos do seu negócio. Analisamos o escopo ideal para garantir a máxima taxa de retorno sobre o seu investimento." },
@@ -276,7 +297,7 @@ const dashPlans: DashPlan[] = [
     pitch: "Página única ultrarrápida com gatilhos psicológicos validados para quebrar objeções e levar o lead direto ao fechamento.",
     timeline: "Primeiro rascunho em 48h",
     features: [
-      { title: "Carregamento Instantâneo (0.2s LCP)", desc: "Zero perda de cliques pagos por lentidão no 4G/5G." },
+      { title: "Abertura Ultrarrápida no Celular", desc: "Estrutura leve para reter o tráfego de anúncios e diminuir desistências por tempo de espera." },
       { title: "Copywriting Focado em Vendas", desc: "Estrutura persuasiva desenhada para transformar curiosos em clientes." },
       { title: "Rastreamento Meta Pixel & GA4", desc: "Mapeamento cirúrgico de conversões para baratear seus anúncios." },
       { title: "Hospedagem Cloud & SSL Blindado", desc: "99.9% de uptime garantido e 1º ano grátis incluso." },
@@ -297,11 +318,11 @@ const dashPlans: DashPlan[] = [
     features: [
       { title: "Estrutura Corporativa Completa", desc: "Início, Sobre Nós, Serviços Detalhados, Casos de Sucesso e Contato." },
       { title: "SEO Local Técnico para o Google", desc: "Otimizado para figurar no topo das pesquisas orgânicas da sua região." },
-      { title: "Nota 95-100 no Google PageSpeed", desc: "Desempenho técnico superior que o algoritmo do Google premia com tráfego." },
+      { title: "Otimização Técnica para o Google", desc: "Arquitetura enxuta com foco nas métricas de experiência que o algoritmo do Google prioriza." },
       { title: "Design Autoral de Padrão Internacional", desc: "Tipografia nobre e acabamento premium sem templates genéricos." },
     ],
     payoff: "💎 Quem pesquisa sua empresa encontra autoridade inquestionável para fechar contratos maiores.",
-    deliverableBadge: "⚡ Design Autoral · Nota 100 PageSpeed · SEO Local",
+    deliverableBadge: "⚡ Design Autoral · Alta Performance · SEO Local",
     ctaText: "Planejar Site Institucional",
     featured: true,
   },
@@ -443,7 +464,7 @@ function WebOpportunitySimulator({ onLead }: { onLead: (message: string) => void
             <div className="roi-control-item">
               <div className="roi-control-label">
                 <span>Oportunidades perdidas por mês (sem site ou página que não converte):</span>
-                <strong className="roi-number-danger">-{lostClients} clientes / mês</strong>
+                <strong className="roi-number-danger">Perda estimada: {lostClients} clientes / mês</strong>
               </div>
               <input
                 type="range"
@@ -473,14 +494,14 @@ function WebOpportunitySimulator({ onLead }: { onLead: (message: string) => void
             <span className="roi-check-circle">📈</span>
             <div>
               <strong>ALAVANCAGEM REAL DE FATURAMENTO</strong>
-              <p>Ao transmitir autoridade imediata e carregar em 0.2s, cada novo contrato fechado através do site multiplica o valor do seu investimento e consolida sua marca.</p>
+              <p>Ao transmitir autoridade imediata e carregar com agilidade no celular, cada novo cliente conquistado pelo site acelera o retorno do investimento e fortalece sua marca.</p>
             </div>
           </div>
 
           <div className="roi-numbers-breakdown">
             <div className="roi-line">
               <span>Impacto de autoridade &amp; velocidade:</span>
-              <strong>0.2s LCP · Nota 100 PageSpeed</strong>
+              <strong>Alta Velocidade · Estrutura Otimizada</strong>
             </div>
             <div className="roi-line">
               <span>Novos contatos qualificados estimados:</span>
@@ -500,13 +521,6 @@ function WebOpportunitySimulator({ onLead }: { onLead: (message: string) => void
             </div>
           </div>
 
-          {/* Prova Social e Case Real */}
-          <div className="roi-social-proof-strip">
-            <div className="proof-stars">★★★★★</div>
-            <p>&ldquo;Colocamos a nova landing page no ar na quarta-feira e na mesma semana fechamos 2 novos clientes particulares que vieram diretamente das buscas no Google.&rdquo;</p>
-            <small>— Dr. Roberto M., Diretor na Clínica San Diego</small>
-          </div>
-
           <button
             type="button"
             className="roi-action-button"
@@ -516,9 +530,9 @@ function WebOpportunitySimulator({ onLead }: { onLead: (message: string) => void
           </button>
 
           <div className="roi-trust-badges">
-            <span>🏆 <b>+40</b> sites no ar</span>
-            <span>⚡ <b>Primeiro rascunho em 48h</b></span>
-            <span>🛡️ <b>Site pronto em 5 dias</b></span>
+            <span>🏆 <b>+40</b> projetos estruturados</span>
+            <span>⚡ <b>Primeiro rascunho a partir de 48h</b></span>
+            <span>🛡️ <b>Cronograma ágil alinhado ao escopo</b></span>
           </div>
           <small className="roi-subnote">Sem taxas ocultas · Hospedagem ultrarrápida e suporte técnico inclusos</small>
         </div>
@@ -783,6 +797,14 @@ export default function Home() {
             <small>Presença que trabalha</small>
           </span>
         </a>
+        <div className="web-ecosystem-switch" aria-label="Navegar entre as soluções Avancini">
+          <Link className="header-cta header-sync-cta" href="/sync">
+            <span className="cta-full-name">Avancini </span>Sync <LivingArrow size={11} />
+          </Link>
+          <Link className="header-cta header-os-cta" href="/">
+            <span className="cta-full-name">Avancini </span>OS <LivingArrow size={11} />
+          </Link>
+        </div>
         <button
           className="menu-toggle"
           type="button"
@@ -836,98 +858,88 @@ export default function Home() {
           </div>
         </div>
       )}
-      {/* HERO EDITORIAL CINEMÁTICO — COMPOSIÇÃO CENTRAL ELEGANTE */}
+      {/* HERO DASH RESTAURADO: COMPOSIÇÃO ANTERIOR COM ARTE ATMOSFÉRICA E ELEMENTOS GRÁFICOS */}
       <div className="web-hero-scene">
-        {/* Atmosfera de Profundidade: A Monumental no Fundo com Iluminação Esmeralda Suave */}
-        <div className="hero-ambient-depth" aria-hidden="true">
-          <div className="ambient-glow ambient-glow-left" />
-          <div className="ambient-glow ambient-glow-right" />
-          <div className="ambient-glow ambient-glow-center" />
-          <div className="hero-monumental-a-wrap">
-            <AvanciniMark variant="dash" className="hero-monumental-a" />
-          </div>
-          <div className="hero-cyber-grid" />
-        </div>
-
         <section className="hero hero-reference" id="inicio">
+          <div className="hero-art-backdrop" aria-hidden="true">
+            <AvanciniMark variant="dash" className="hero-a-mark avancini-a-mark" />
+            <i className="art-scan" />
+            <i className="art-flare" />
+          </div>
+          <div className="hero-glow glow-one" />
+          <div className="hero-glow glow-two" />
+          <div className="hero-soundwaves left" aria-hidden="true">
+            <span style={{ "--d": "0.1s", "--h": "65%" } as any} />
+            <span style={{ "--d": "0.35s", "--h": "85%" } as any} />
+            <span style={{ "--d": "0.2s", "--h": "45%" } as any} />
+            <span style={{ "--d": "0.5s", "--h": "95%" } as any} />
+            <span style={{ "--d": "0.15s", "--h": "70%" } as any} />
+            <span style={{ "--d": "0.4s", "--h": "80%" } as any} />
+            <span style={{ "--d": "0.25s", "--h": "55%" } as any} />
+            <span style={{ "--d": "0.6s", "--h": "90%" } as any} />
+            <span style={{ "--d": "0.3s", "--h": "60%" } as any} />
+            <span style={{ "--d": "0.45s", "--h": "75%" } as any} />
+          </div>
+          <div className="hero-soundwaves right" aria-hidden="true">
+            <span style={{ "--d": "0.3s", "--h": "75%" } as any} />
+            <span style={{ "--d": "0.1s", "--h": "90%" } as any} />
+            <span style={{ "--d": "0.45s", "--h": "60%" } as any} />
+            <span style={{ "--d": "0.2s", "--h": "85%" } as any} />
+            <span style={{ "--d": "0.55s", "--h": "50%" } as any} />
+            <span style={{ "--d": "0.15s", "--h": "95%" } as any} />
+            <span style={{ "--d": "0.35s", "--h": "70%" } as any} />
+            <span style={{ "--d": "0.5s", "--h": "80%" } as any} />
+            <span style={{ "--d": "0.25s", "--h": "65%" } as any} />
+            <span style={{ "--d": "0.4s", "--h": "85%" } as any} />
+          </div>
+          <div className="kinetic-lines" aria-hidden="true">
+            <i />
+            <i />
+            <i />
+            <i />
+          </div>
+
           <div className="hero-copy">
-            <div className="hero-typewriter-badge">
-              <span className="hero-typewriter-pulse" />
-              <span>CRIAÇÃO DE SITE PROFISSIONAL PARA <HeroAudienceTypewriter /></span>
+            <div className="eyebrow hero-typewriter">
+              <span className="hero-badge-dot" />
+              <span className="hero-typewriter-prefix">Criação de site profissional para</span>
+              <HeroAudienceTypewriter />
             </div>
-
             <h1>
-              Tenha hoje um site <br />
-              bonito, rápido e que <br />
-              <em>gere novos clientes.</em>
+              Tenha hoje um site
+              <br />bonito, rápido e que
+              <br /><em>gere novos clientes.</em>
             </h1>
-
             <p>
-              Presença profissional com velocidade extrema no Google, identidade visual
-              autoral de alto padrão e arquitetura psicológica feita para transformar visitantes
-              em conversas no seu WhatsApp.
+              Presença profissional rápida e elegante para ser encontrado no Google, transmitir autoridade e abrir conversas no seu WhatsApp.
             </p>
-
-            <div className="hero-brand-promise-clean" aria-label="Sites impossíveis de ignorar · Preparados para vender">
-              <span>Sites impossíveis de ignorar</span>
-              <span className="brand-promise-sep" aria-hidden="true">·</span>
-              <strong>Preparados para vender</strong>
+            <div className="hero-brand-promise" aria-label="Sites autorais de alto impacto. Preparados para converter.">
+              <span>Sites autorais de alto impacto.</span>
+              <i aria-hidden="true" />
+              <strong>Preparados para converter.</strong>
             </div>
-
-            <div className="hero-actions-clean">
-              <button
-                className="btn-primary-emerald"
+            <div className="hero-actions">
+              <MagneticButton
+                className="button button-primary"
                 type="button"
                 onClick={() =>
                   startBudgetConversation(
                     "Seu novo site",
-                    "Olá! Gostaria de solicitar um orçamento para criar ou modernizar o site da minha empresa com a Avancini Dash."
+                    "Quero solicitar um orçamento para criar ou modernizar o site da minha empresa com a Avancini Dash."
                   )
                 }
               >
-                <span>Solicitar orçamento</span>
-                <WebArrow size={14} />
-              </button>
-
-              <a className="btn-ghost-clean" href="#portfolio">
-                <span>Ver projetos reais</span>
-                <WebDownArrow size={13} />
+                <span>Solicitar orçamento</span> <LivingArrow size={12} />
+              </MagneticButton>
+              <a className="button button-ghost btn-underline" href="#investimento">
+                <span>Ver planos</span> <WebDownArrow />
               </a>
-
-              <a className="btn-ghost-clean" href="#investimento">
-                <span>Modelos &amp; Planos</span>
-                <WebDownArrow size={13} />
+              <a className="button button-ghost btn-underline" href="#portfolio">
+                <span>Ver projetos</span> <WebDownArrow />
               </a>
             </div>
           </div>
         </section>
-      </div>
-
-      {/* MARQUEE TICKER DE DIFERENCIAIS (ESTILO PAULO LEME) */}
-      <div className="dash-ticker-wrap" aria-hidden="true">
-        <div className="dash-ticker-track">
-          {[
-            "⚡ 0.2s LCP Instantâneo",
-            "💎 Nota 100 Google PageSpeed",
-            "📱 100% Autoral & Responsivo",
-            "🎯 Foco Total em Conversão",
-            "🛡️ Hospedagem Cloud & SSL",
-            "🔍 SEO Técnico Dominante",
-            "🤝 Suporte Dedicado",
-            "⚡ 0.2s LCP Instantâneo",
-            "💎 Nota 100 Google PageSpeed",
-            "📱 100% Autoral & Responsivo",
-            "🎯 Foco Total em Conversão",
-            "🛡️ Hospedagem Cloud & SSL",
-            "🔍 SEO Técnico Dominante",
-            "🤝 Suporte Dedicado",
-          ].map((badge, i) => (
-            <span className="ticker-item" key={i}>
-              {badge}
-              <span className="ticker-dot-sep" />
-            </span>
-          ))}
-        </div>
       </div>
 
       <section className="web-portfolio-first" id="portfolio" aria-labelledby="web-portfolio-title">
@@ -995,7 +1007,10 @@ export default function Home() {
 
       <section className="section web-method" id="metodo">
         <div className="section-heading web-method-heading">
-          <div><span className="section-index">METODOLOGIA / 04 PILARES</span><h2>Site bonito chama atenção.<br />Estratégia transforma em cliente.</h2></div>
+          <div>
+            <span className="paulo-ref-kicker">REF:// METODOLOGIA · 05 PILARES <span className="kicker-bar" /></span>
+            <h2>Site bonito chama atenção.<br /><em>Estratégia transforma em cliente.</em></h2>
+          </div>
           <p>Sem estes pilares trabalhando juntos, até um visual impressionante vira apenas decoração.</p>
         </div>
         <div className="web-method-stack">
@@ -1014,8 +1029,8 @@ export default function Home() {
         <span id="planos" style={{ display: "block", position: "relative", top: "-80px", visibility: "hidden" }} aria-hidden="true" />
         <div className="section-heading">
           <div>
-            <span className="section-index">04 / MODELOS DE ENGENHARIA & INVESTIMENTO</span>
-            <h2 id="configurar-plano">O formato certo para o momento do seu negócio.</h2>
+            <span className="paulo-ref-kicker">REF:// PROPOSTAS &amp; MODELOS · 03 <span className="kicker-bar" /></span>
+            <h2 id="configurar-plano">O formato certo para o momento do seu negócio.<br /><em>Sites de alto impacto preparados para vender.</em></h2>
           </div>
           <p>
             Da landing page de conversão rápida a sistemas e lojas completas. Cada projeto tem escopo sob medida, sem pacotes engessados, entrega ágil e foco obsessivo em retorno sobre o seu investimento.
@@ -1077,10 +1092,10 @@ export default function Home() {
                   {plan.payoff}
                 </div>
 
-                {/* Botão Magnético de Alta Conversão com Shimmer */}
+                {/* Botão Signature Paulo Leme */}
                 <button
                   type="button"
-                  className="plan-compact-btn btn-dash-glow btn-plan-action"
+                  className="paulo-signature-btn btn-full paulo-btn-dash btn-icon-rotate"
                   onClick={() =>
                     startBudgetConversation(
                       plan.name,
@@ -1089,7 +1104,7 @@ export default function Home() {
                   }
                 >
                   <span>{plan.ctaText}</span>
-                  <WebArrow />
+                  <span className="paulo-arrow-circle"><LivingArrow size={13} /></span>
                 </button>
                 <small className="plan-compact-subnote">
                   {plan.deliverableBadge}
@@ -1125,8 +1140,8 @@ export default function Home() {
             </div>
             <div className="value-stack-item">
               <span className="stack-num">04</span>
-              <h4>Velocidade Extrema (0.2s LCP)</h4>
-              <p>Nota 95-100 no Google PageSpeed garantida. Sua página abre na velocidade da luz até em redes 4G instáveis.</p>
+              <h4>Alta Velocidade &amp; Core Web Vitals</h4>
+              <p>Otimização avançada focada na faixa verde do Google PageSpeed. Carregamento ágil que prioriza estabilidade visual e retenção no celular.</p>
             </div>
             <div className="value-stack-item">
               <span className="stack-num">05</span>
@@ -1305,52 +1320,92 @@ export default function Home() {
         </div>
       )}
 
-      <footer id="contato">
-        <div className="footer-top">
-          <div className="footer-brand">
-            <a className="logo footer-logo" href="#inicio">
-              <AvanciniMark variant="dash" className="logo-mark avancini-a-mark" />
-              <span>
-                <span className="brand-name">
-                  AVANCINI <b>DASH</b>
+      <footer id="contato" className="paulo-footer-section">
+        <div className="paulo-footer-card">
+          <div className="paulo-footer-grid">
+            {/* Coluna 1: Marca, Bio & Redes Sociais */}
+            <div className="paulo-footer-brand">
+              <a className="logo" href="#inicio">
+                <AvanciniMark variant="dash" className="logo-mark avancini-a-mark" />
+                <span>
+                  <span className="brand-name">AVANCINI <b>DASH</b></span>
+                  <small>Uma solução Avancini OS</small>
                 </span>
-                <small>Uma solução Avancini OS</small>
-              </span>
-            </a>
-            <p>Sites com identidade, velocidade e estratégia para transformar presença em oportunidade.</p>
-            <a href="https://www.instagram.com/avancinios/" target="_blank" rel="noreferrer">Instagram <WebArrow /></a>
+              </a>
+              <p className="paulo-footer-bio">
+                Sites bonitos, ultrarrápidos e feitos pra gerar vendas. Tecnologia moderna e estratégia para colocar seu negócio na frente de quem procura.
+              </p>
+              <div className="paulo-social-row" aria-label="Redes sociais">
+                <a href="https://www.instagram.com/avancinios/" target="_blank" rel="noreferrer" className="paulo-social-btn" aria-label="Instagram da Avancini OS">
+                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                </a>
+                <a href="https://wa.me/5573981019782" target="_blank" rel="noreferrer" className="paulo-social-btn" aria-label="WhatsApp direto">
+                  <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.698c.969.541 1.932.818 2.796.818 3.179 0 5.765-2.586 5.767-5.766.001-3.18-2.585-5.767-5.767-5.767zm3.376 8.204c-.14.394-.712.723-1.009.76-.282.035-.642.148-2.072-.444-1.745-.723-2.87-2.484-2.956-2.6-.088-.116-.708-.941-.708-1.795s.447-1.275.607-1.447c.159-.172.348-.215.464-.215.116 0 .232.002.333.007.107.005.25-.041.391.298.144.348.492 1.203.535 1.29.043.087.072.189.014.305-.058.115-.088.188-.174.289-.088.101-.185.226-.264.304-.088.087-.18.182-.078.358.101.174.452.744.969 1.205.666.594 1.228.778 1.402.865.174.088.276.073.377-.044.102-.116.435-.508.551-.682.116-.174.233-.145.392-.087s1.016.479 1.19.566c.174.087.29.13.333.203.044.072.044.42-.096.814z"/></svg>
+                </a>
+                <a href="https://github.com/IvoAvancini" target="_blank" rel="noreferrer" className="paulo-social-btn" aria-label="GitHub">
+                  <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+                </a>
+                <a href="mailto:ivoavancini@hotmail.com" className="paulo-social-btn" aria-label="E-mail">
+                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                </a>
+              </div>
+            </div>
+
+            {/* Coluna 2: Navegação */}
+            <div className="paulo-footer-col">
+              <h4>NAVEGAÇÃO</h4>
+              <a href="#inicio">Início</a>
+              <a href="#portfolio">Portfólio</a>
+              <a href="#retorno">Custo x Retorno</a>
+              <a href="#metodo">Metodologia</a>
+              <a href="#configurar-plano">Serviços e planos</a>
+              <a href="#duvidas">Perguntas frequentes</a>
+              <Link href="/">Avancini OS <WebArrow /></Link>
+              <Link href="/sync">Avancini Sync <WebArrow /></Link>
+            </div>
+
+            {/* Coluna 3: Serviços */}
+            <div className="paulo-footer-col">
+              <h4>SERVIÇOS</h4>
+              <a href="#investimento">Desenvolvimento de Sites</a>
+              <a href="#investimento">Landing Pages de Alta Conversão</a>
+              <a href="#investimento">Lojas Virtuais &amp; Catálogos</a>
+              <a href="#investimento">Sistemas Web Sob Medida</a>
+              <a href="#metodo">Otimização Google 100/100</a>
+              <Link href="/sync">Chatbot &amp; Atendente IA <WebArrow /></Link>
+            </div>
+
+            {/* Coluna 4: Contato & Botão Signature */}
+            <div className="paulo-footer-contact">
+              <h4>CONTATO</h4>
+              <a href="mailto:ivoavancini@hotmail.com" className="paulo-contact-link">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                <span>ivoavancini@hotmail.com</span>
+              </a>
+              <a href="tel:+5573981019782" className="paulo-contact-link">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                <span>(73) 98101-9782</span>
+              </a>
+              <MagneticButton
+                type="button"
+                className="paulo-signature-btn btn-icon-rotate"
+                onClick={() => startBudgetConversation("Orçamento Avancini Dash", "Quero solicitar um orçamento para um projeto de site com a Avancini Dash.")}
+              >
+                <span>SOLICITAR ORÇAMENTO</span>
+                <span className="paulo-arrow-circle"><LivingArrow size={13} /></span>
+              </MagneticButton>
+            </div>
           </div>
-          <nav>
-            <b>NAVEGAÇÃO</b>
-            <a href="#inicio">Início</a>
-            <a href="#portfolio">Portfólio</a>
-            <a href="#retorno">Custo x Retorno</a>
-            <a href="#metodo">Metodologia</a>
-            <a href="#configurar-plano">Serviços e planos</a>
-            <a href="#duvidas">Perguntas frequentes</a>
-            <Link href="/">Avancini OS <WebArrow /></Link>
-            <Link href="/sync">Avancini Sync <WebArrow /></Link>
-          </nav>
-          <nav>
-            <b>SERVIÇOS</b>
-            <a href="#investimento">Landing Page</a>
-            <a href="#investimento">Site Institucional</a>
-            <a href="#investimento">Loja Virtual</a>
-            <Link href="/sync">Chatbot e Atendente IA <WebArrow /></Link>
-          </nav>
-          <div className="footer-contact">
-            <b>CONTATO</b>
-            <a href="mailto:ivoavancini@hotmail.com">ivoavancini@hotmail.com</a>
-            <a href="tel:+5573981019782">(73) 98101-9782</a>
-            <button type="button" onClick={() => startBudgetConversation("Orçamento Avancini Dash", "Quero solicitar um orçamento para um projeto de site com a Avancini Dash.")}>
-              SOLICITAR ORÇAMENTO <WebArrow />
-            </button>
+
+          {/* Barra Inferior / Sub-footer */}
+          <div className="paulo-footer-bottom">
+            <span suppressHydrationWarning>© {new Date().getFullYear()} Avancini OS · CNPJ 42.487.607/0001-98. Todos os direitos reservados.</span>
+            <nav aria-label="Informações legais">
+              <a href="/privacidade" className="btn-underline">Política de Privacidade</a>
+              <a href="/termos" className="btn-underline">Termos de Uso</a>
+              <a href="#inicio" className="btn-underline">Voltar ao topo ↑</a>
+            </nav>
           </div>
-        </div>
-        <div className="footer-bottom">
-          <span suppressHydrationWarning>© {new Date().getFullYear()} Avancini OS</span>
-          <nav aria-label="Informações legais"><a href="/privacidade">Privacidade</a><a href="/termos">Termos</a></nav>
-          <a href="#inicio">Voltar ao topo ↑</a>
         </div>
       </footer>
       <button
