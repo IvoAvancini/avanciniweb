@@ -3,6 +3,29 @@
 
   const init = () => {
     // -------------------------------------------------------------
+    // 0. SCROLL LOCK CONTROLLER
+    // -------------------------------------------------------------
+    const activeModals = new Set();
+    const setModalScrollLock = (modalId, locked) => {
+      if (locked) {
+        activeModals.add(modalId);
+      } else {
+        activeModals.delete(modalId);
+      }
+      if (activeModals.size > 0) {
+        document.documentElement.style.overflow = 'hidden';
+        document.body.style.overflow = 'hidden';
+        document.documentElement.classList.add('dash-scroll-locked');
+        document.body.classList.add('dash-scroll-locked');
+      } else {
+        document.documentElement.style.overflow = '';
+        document.body.style.overflow = '';
+        document.documentElement.classList.remove('dash-scroll-locked');
+        document.body.classList.remove('dash-scroll-locked');
+      }
+    };
+
+    // -------------------------------------------------------------
     // 1. TYPEWRITER ANIMATION (NICHES)
     // -------------------------------------------------------------
     const nicheWordSpan = document.querySelector('.dash-niche-word span');
@@ -386,14 +409,14 @@
     window.openContactModal = (msg) => {
       if (msg) currentIntentMessage = msg;
       modalBackdrop.classList.add('is-open');
-      document.body.style.overflow = 'hidden';
+      setModalScrollLock('contact', true);
       updateFloatingButton(true);
       setTimeout(() => nameInput?.focus(), 80);
     };
 
     window.closeContactModal = () => {
       modalBackdrop.classList.remove('is-open');
-      document.body.style.overflow = '';
+      setModalScrollLock('contact', false);
       if (countryPopover) { countryPopover.hidden = true; }
       if (countryBtn) countryBtn.setAttribute('aria-expanded', 'false');
       if (errorSpan) errorSpan.style.display = 'none';
@@ -465,43 +488,55 @@
     // -------------------------------------------------------------
     // 4. NAVIGATION OVERLAY MENU (#dash-navigation)
     // -------------------------------------------------------------
-    const menuBtn = document.querySelector('.dash-header-menu-button');
-    const navOverlay = document.getElementById('dash-navigation');
-    const menuCloseBtn = navOverlay?.querySelector('.dash-navigation-close');
+    const toggleMenu = (open) => {
+      const menuBtn = document.querySelector('.dash-header-menu-button');
+      const navOverlay = document.getElementById('dash-navigation');
+      if (!navOverlay) return;
+      const shouldOpen = open !== undefined ? open : !navOverlay.classList.contains('is-open');
+      menuBtn?.setAttribute('aria-expanded', String(shouldOpen));
+      navOverlay.setAttribute('aria-hidden', String(!shouldOpen));
+      if (shouldOpen) {
+        navOverlay.classList.add('is-open');
+      } else {
+        navOverlay.classList.remove('is-open');
+      }
+      setModalScrollLock('menu', shouldOpen);
+    };
 
-    if (menuBtn && navOverlay) {
-      const toggleMenu = (open) => {
-        menuBtn.setAttribute('aria-expanded', String(open));
-        navOverlay.setAttribute('aria-hidden', String(!open));
-        if (open) {
-          navOverlay.classList.add('is-open');
-          document.body.style.overflow = 'hidden';
-        } else {
-          navOverlay.classList.remove('is-open');
-          document.body.style.overflow = '';
+    window.toggleDashMenu = toggleMenu;
+
+    document.addEventListener('click', (e) => {
+      if (e.target.closest('.dash-header-menu-button')) {
+        e.preventDefault();
+        toggleMenu();
+        return;
+      }
+      if (e.target.closest('.dash-navigation-close')) {
+        e.preventDefault();
+        toggleMenu(false);
+        return;
+      }
+      if (e.target.closest('#dash-navigation a')) {
+        toggleMenu(false);
+        return;
+      }
+      const navOverlay = document.getElementById('dash-navigation');
+      if (navOverlay && navOverlay.classList.contains('is-open') && e.target === navOverlay) {
+        toggleMenu(false);
+        return;
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        const navOverlay = document.getElementById('dash-navigation');
+        if (modalBackdrop && modalBackdrop.classList.contains('is-open')) {
+          closeContactModal();
+        } else if (navOverlay && navOverlay.classList.contains('is-open')) {
+          toggleMenu(false);
         }
-      };
-
-      menuBtn.addEventListener('click', () => {
-        const isOpen = navOverlay.classList.contains('is-open');
-        toggleMenu(!isOpen);
-      });
-      menuCloseBtn?.addEventListener('click', () => toggleMenu(false));
-
-      navOverlay.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', () => toggleMenu(false));
-      });
-
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-          if (modalBackdrop && modalBackdrop.classList.contains('is-open')) {
-            closeContactModal();
-          } else if (navOverlay.classList.contains('is-open')) {
-            toggleMenu(false);
-          }
-        }
-      });
-    }
+      }
+    });
 
     // -------------------------------------------------------------
     // 5. FAQ ACCORDION
@@ -645,13 +680,13 @@
         };
       }
       projectDialog.classList.add('is-open');
-      document.body.style.overflow = 'hidden';
+      setModalScrollLock('project', true);
       if (dialogPanel) dialogPanel.scrollTop = 0;
     };
 
     const closeProjectModal = () => {
       projectDialog.classList.remove('is-open');
-      document.body.style.overflow = '';
+      setModalScrollLock('project', false);
       if (dialogIframe) dialogIframe.src = '';
     };
 
@@ -666,9 +701,10 @@
       }
     });
 
-    const projectCards = document.querySelectorAll('.dash-project-card');
-    projectCards.forEach(card => {
-      // Find theme or small text
+    window.openProjectModal = openProjectModal;
+    window.closeProjectModal = closeProjectModal;
+
+    const handleProjectCardClick = (card) => {
       const small = card.querySelector('.dash-project-browser small');
       let slug = '';
       if (small) {
@@ -698,10 +734,15 @@
         previewHeight: 6200
       };
 
-      card.addEventListener('click', (e) => {
+      openProjectModal(proj);
+    };
+
+    document.addEventListener('click', (e) => {
+      const card = e.target.closest('.dash-project-card');
+      if (card) {
         e.preventDefault();
-        openProjectModal(proj);
-      });
+        handleProjectCardClick(card);
+      }
     });
 
     // -------------------------------------------------------------

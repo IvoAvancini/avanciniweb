@@ -556,44 +556,6 @@ html:has(.dash-page){scroll-behavior:smooth;background:#f8fbf9;scroll-padding-to
   100% { transform: translateX(calc(-50% - 4px)); }
 }
 
-/* Navigation overlay */
-.dash-navigation-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.6);
-  backdrop-filter: blur(8px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.3s ease;
-  z-index: 1000;
-}
-.dash-navigation-overlay.is-open {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-/* Navigation close button */
-.dash-navigation-close {
-  appearance: none;
-  background: var(--dash-lime);
-  color: #fff;
-  border: none;
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
-  cursor: pointer;
-  transition: background-color 0.18s, transform 0.18s;
-}
-.dash-navigation-close:hover {
-  background: #149565;
-  transform: rotate(90deg);
-}
-
 /* Project track */
 .dash-project-track {
   overflow: hidden;
@@ -818,4 +780,13 @@ html:has(.dash-page){scroll-behavior:smooth;background:#f8fbf9;scroll-padding-to
     min-height: 34px;
   }
 }
+
+/* ============================================================
+   GLOBAL SCROLL LOCK (When any modal or navigation is open)
+   ============================================================ */
+html.dash-scroll-locked,
+body.dash-scroll-locked {
+  overflow: hidden !important;
+}
+
 
