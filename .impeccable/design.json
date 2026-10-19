@@ -1,0 +1,149 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-28T15:30:00-03:00",
+  "title": "Design System: Avancini OS",
+  "extensions": {
+    "colorMeta": {
+      "ink": {
+        "role": "neutral",
+        "displayName": "Obsidiana operacional",
+        "canonical": "#07101d",
+        "tonalRamp": ["oklch(15% 0.025 253)", "oklch(25% 0.025 253)", "oklch(36% 0.025 253)", "oklch(48% 0.025 253)", "oklch(60% 0.025 253)", "oklch(72% 0.02 253)", "oklch(84% 0.015 253)", "oklch(95% 0.008 253)"]
+      },
+      "paper": {
+        "role": "neutral",
+        "displayName": "Branco mineral",
+        "canonical": "#edf2f7",
+        "tonalRamp": ["oklch(15% 0.01 248)", "oklch(26% 0.01 248)", "oklch(38% 0.01 248)", "oklch(50% 0.01 248)", "oklch(62% 0.01 248)", "oklch(74% 0.01 248)", "oklch(86% 0.01 248)", "oklch(95% 0.01 248)"]
+      },
+      "cobalt": {
+        "role": "primary",
+        "displayName": "Azul cobalto",
+        "canonical": "#478dff",
+        "tonalRamp": ["oklch(15% 0.11 259)", "oklch(26% 0.14 259)", "oklch(38% 0.17 259)", "oklch(50% 0.19 259)", "oklch(62% 0.18 259)", "oklch(74% 0.14 259)", "oklch(86% 0.08 259)", "oklch(95% 0.025 259)"]
+      },
+      "ice": {
+        "role": "secondary",
+        "displayName": "Azul glacial",
+        "canonical": "#73e6ff",
+        "tonalRamp": ["oklch(15% 0.07 211)", "oklch(26% 0.09 211)", "oklch(38% 0.11 211)", "oklch(50% 0.13 211)", "oklch(62% 0.13 211)", "oklch(74% 0.11 211)", "oklch(86% 0.07 211)", "oklch(95% 0.025 211)"]
+      },
+      "metal": {
+        "role": "neutral",
+        "displayName": "Metal fosco",
+        "canonical": "#b4b3aa",
+        "tonalRamp": ["oklch(15% 0.01 95)", "oklch(26% 0.01 95)", "oklch(38% 0.01 95)", "oklch(50% 0.01 95)", "oklch(62% 0.01 95)", "oklch(74% 0.01 95)", "oklch(86% 0.01 95)", "oklch(95% 0.01 95)"]
+      },
+      "whatsapp": {
+        "role": "tertiary",
+        "displayName": "Verde de contato",
+        "canonical": "#20b858",
+        "tonalRamp": ["oklch(15% 0.09 148)", "oklch(26% 0.12 148)", "oklch(38% 0.15 148)", "oklch(50% 0.17 148)", "oklch(62% 0.16 148)", "oklch(74% 0.12 148)", "oklch(86% 0.07 148)", "oklch(95% 0.025 148)"]
+      }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display operacional", "purpose": "Nomes, capítulos e chamadas com teto de 6rem." },
+      "editorial": { "displayName": "Voz editorial", "purpose": "Trechos que humanizam e mudam o ritmo." },
+      "body": { "displayName": "Leitura comercial", "purpose": "Explicações diretas e curtas." },
+      "label": { "displayName": "Coordenada", "purpose": "Índices, estados e controles reais." }
+    },
+    "shadows": [
+      { "name": "console-ambient", "value": "0 34px 90px rgba(0, 0, 0, .38)", "purpose": "Eleva o instrumento do hero." },
+      { "name": "system-ambient", "value": "0 42px 90px rgba(7, 16, 29, .24)", "purpose": "Separa o mapa integrado da superfície mineral." },
+      { "name": "action-lift", "value": "0 22px 44px rgba(71, 141, 255, .18)", "purpose": "Resposta curta de ações principais." }
+    ],
+    "motion": [
+      { "name": "ease-expressive", "value": "cubic-bezier(.16, 1, .3, 1)", "purpose": "Entradas, deslocamentos e respostas táteis." },
+      { "name": "state-fast", "value": "300ms ease", "purpose": "Trocas de cor e estado." },
+      { "name": "reveal", "value": "850ms cubic-bezier(.16, 1, .3, 1)", "purpose": "Revelação progressiva dos capítulos." }
+    ],
+    "breakpoints": [
+      { "name": "mobile", "value": "650px" },
+      { "name": "stack", "value": "900px" },
+      { "name": "wide-stack", "value": "1050px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Action",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Ação cobalto retangular com ícone vetorial e elevação curta.",
+      "html": "<a class=\"ds-action\" href=\"#\"><span>Começar um projeto</span><svg width=\"20\" height=\"20\" viewBox=\"0 0 20 20\" fill=\"none\" aria-hidden=\"true\"><path d=\"M5 15 15 5M8 5h7v7\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg></a>",
+      "css": ".ds-action{min-height:62px;display:flex;align-items:center;justify-content:space-between;padding:0 20px 0 24px;color:#07101d;background:#478dff;font:760 12px/1 'Space Grotesk',sans-serif;text-decoration:none;transition:transform .4s cubic-bezier(.16,1,.3,1),box-shadow .4s}.ds-action:hover{transform:translateY(-5px);box-shadow:0 22px 44px rgba(71,141,255,.18)}.ds-action:hover svg{transform:translate(3px,-3px)}.ds-action:focus-visible{outline:3px solid #73e6ff;outline-offset:4px}.ds-action svg{transition:transform .3s}"
+    },
+    {
+      "name": "Signal Module",
+      "kind": "custom",
+      "refersTo": "module",
+      "description": "Controle tátil que representa uma das seis frentes equivalentes.",
+      "html": "<button class=\"ds-module\"><small>01</small><strong>Sites</strong><span>Presença, narrativa e conversão</span><i aria-hidden=\"true\"></i></button>",
+      "css": ".ds-module{position:relative;width:150px;height:230px;padding:20px 12px;border:1px solid rgba(7,16,29,.52);border-radius:3px;color:#07101d;background:#b4b3aa;text-align:left;transition:transform .45s cubic-bezier(.16,1,.3,1),background .3s}.ds-module small{font:700 8px/1 'Space Grotesk',sans-serif;letter-spacing:.14em}.ds-module strong{display:block;margin-top:16px;font:700 17px/1.05 'Space Grotesk',sans-serif}.ds-module span{display:block;margin-top:8px;font:650 9px/1.45 Manrope,sans-serif}.ds-module i{position:absolute;right:16px;bottom:22px;width:8px;height:8px;border-radius:50%;background:#73e6ff;box-shadow:0 0 12px #73e6ff}.ds-module:hover{transform:translateY(-8px);background:#c9c7bd}.ds-module:focus-visible{outline:3px solid #73e6ff;outline-offset:3px}"
+    },
+    {
+      "name": "Capability Tab",
+      "kind": "button",
+      "description": "Linha de seleção com ação separada para aprofundar a solução.",
+      "html": "<button class=\"ds-tab\" aria-selected=\"true\"><span>03</span><strong>Identidade e posicionamento</strong><svg width=\"20\" height=\"20\" viewBox=\"0 0 20 20\" fill=\"none\" aria-hidden=\"true\"><path d=\"M5 15 15 5M8 5h7v7\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg></button>",
+      "css": ".ds-tab{width:100%;min-height:110px;display:grid;grid-template-columns:42px 1fr 24px;gap:14px;align-items:center;padding:18px 22px;border:0;color:#07101d;background:#edf2f7;text-align:left}.ds-tab span{font:720 8px/1 'Space Grotesk',sans-serif;letter-spacing:.12em}.ds-tab strong{font:620 22px/1.08 'Space Grotesk',sans-serif;letter-spacing:-.03em;transition:transform .35s}.ds-tab svg{color:#478dff}.ds-tab:hover strong{transform:translateX(8px)}.ds-tab:focus-visible{outline:3px solid #73e6ff;outline-offset:-3px}"
+    },
+    {
+      "name": "Integration Node",
+      "kind": "custom",
+      "description": "Nó circular do mapa que confirma a frente ativa.",
+      "html": "<button class=\"ds-node\" aria-pressed=\"true\">06</button>",
+      "css": ".ds-node{width:44px;height:44px;display:grid;place-items:center;border:1px solid #73e6ff;border-radius:50%;color:#07101d;background:#73e6ff;font:700 8px/1 'Space Grotesk',sans-serif;box-shadow:0 0 0 8px rgba(115,230,255,.08),0 0 26px rgba(115,230,255,.25);transition:transform .35s}.ds-node:hover{transform:scale(1.08)}.ds-node:focus-visible{outline:3px solid #478dff;outline-offset:4px}"
+    },
+    {
+      "name": "FAQ Toggle",
+      "kind": "button",
+      "refersTo": "button-dark",
+      "description": "Pergunta escura com índice e estado aberto evidente.",
+      "html": "<button class=\"ds-faq\" aria-expanded=\"true\"><span>01</span><strong>Preciso chegar com textos e imagens prontos?</strong><i aria-hidden=\"true\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 20 20\" fill=\"none\"><path d=\"M10 4v12M4 10h12\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\"/></svg></i></button>",
+      "css": ".ds-faq{width:100%;min-height:112px;display:grid;grid-template-columns:42px 1fr 42px;gap:18px;align-items:center;padding:0;border:0;border-bottom:1px solid rgba(237,242,247,.18);color:#edf2f7;background:#07101d;text-align:left}.ds-faq span{color:#478dff;font:730 8px/1 'Space Grotesk',sans-serif}.ds-faq strong{font:600 20px/1.25 'Space Grotesk',sans-serif}.ds-faq i{width:38px;height:38px;display:grid;place-items:center;border:1px solid rgba(237,242,247,.25);border-radius:50%;color:#07101d;background:#73e6ff;transform:rotate(45deg)}.ds-faq:focus-visible{outline:2px solid #73e6ff;outline-offset:5px}"
+    },
+    {
+      "name": "Scope Tag",
+      "kind": "chip",
+      "description": "Rótulo não interativo para disciplinas de um trabalho.",
+      "html": "<span class=\"ds-tag\">Experiência digital</span>",
+      "css": ".ds-tag{display:inline-block;padding:8px 10px;border:1px solid rgba(7,16,29,.25);color:rgba(7,16,29,.64);background:transparent;font:700 8px/1 'Space Grotesk',sans-serif;letter-spacing:.08em;text-transform:uppercase}"
+    },
+    {
+      "name": "Editorial Navigation Link",
+      "kind": "nav",
+      "description": "Link de grande escala do menu editorial de tela cheia.",
+      "html": "<a class=\"ds-nav\" href=\"#\"><strong>Projetos</strong><span>Trabalho que já ganhou forma</span><svg width=\"20\" height=\"20\" viewBox=\"0 0 20 20\" fill=\"none\" aria-hidden=\"true\"><path d=\"M4 10h12M12 6l4 4-4 4\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg></a>",
+      "css": ".ds-nav{display:grid;grid-template-columns:minmax(240px,1fr) 1fr auto;align-items:center;min-height:72px;padding:0 2%;border-top:1px solid rgba(7,16,29,.16);border-bottom:1px solid rgba(7,16,29,.16);color:#07101d;background:#edf2f7;text-decoration:none;transition:color .2s,transform .35s cubic-bezier(.16,1,.3,1)}.ds-nav strong{font:400 46px/1 'Playfair Display',Georgia,serif;letter-spacing:-.035em}.ds-nav span{color:rgba(7,16,29,.58);font:400 12px/1.4 Manrope,sans-serif}.ds-nav:hover{color:#478dff;transform:translateX(8px)}.ds-nav:focus-visible{outline:2px solid #478dff;outline-offset:4px}"
+    }
+  ],
+  "narrative": {
+    "northStar": "Sistema Operacional Vivo",
+    "overview": "A Avancini OS se apresenta como uma empresa única capaz de ligar identidade, sites, e-commerce, agentes de IA, CRM e sistemas sob a mesma direção. A experiência se comporta como um instrumento editorial vivo, com controles táteis, fluxos visíveis e páginas comerciais próprias. A base mineral e os azuis derivados do A original mantêm tecnologia, clareza e autoria no mesmo mundo.",
+    "keyCharacteristics": [
+      "Contraste editorial alto, títulos fortes com teto de 6rem e respiros generosos.",
+      "Seis frentes com o mesmo peso, conectadas pela mesma marca.",
+      "Movimento explica estado, resposta, continuidade ou relação.",
+      "Superfícies minerais, linhas finas e cor usada como sinal funcional.",
+      "Trabalhos apresentados em escala, com origem e autoria explícitas."
+    ],
+    "rules": [
+      { "name": "Regra do sinal", "body": "Cobalto conduz, glacial confirma. Nenhum dos dois existe como brilho gratuito.", "section": "colors" },
+      { "name": "Regra de superfície", "body": "Cada seção tem base clara ou escura dominante. Evitar gradientes genéricos de SaaS e vidro decorativo.", "section": "colors" },
+      { "name": "Regra das frentes iguais", "body": "As seis soluções têm a mesma importância. Foco temporário nunca vira prioridade estrutural permanente.", "section": "layout" },
+      { "name": "The Flat-at-Rest Rule", "body": "Texto e seções não flutuam, profundidade pertence a objetos manipuláveis e estados de interação.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do preservar o A original da Avancini como assinatura central.",
+      "Do dar o mesmo peso às seis soluções e manter páginas aprofundadas para todas.",
+      "Do usar animação para explicar estado, fluxo, resposta ou continuidade.",
+      "Do declarar autoria e manter projetos, contatos e afirmações verificáveis."
+    ],
+    "donts": [
+      "Don't reintroduzir Dash ou Sync como marcas públicas separadas.",
+      "Don't transformar o mapa num dashboard corporativo.",
+      "Don't inventar métricas, clientes, resultados ou depoimentos.",
+      "Don't usar microtexto técnico sem significado, slogans genéricos ou efeitos de biblioteca como decoração."
+    ]
+  }
+}

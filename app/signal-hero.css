@@ -1,0 +1,735 @@
+/* ==========================================================================
+   SIGNAL HERO: COCKPIT DIGITAL DE ALTA CONVERSÃO
+   ========================================================================== */
+
+.signal-hero {
+  position: relative;
+  min-height: 100vh;
+  padding: 0 5% 80px;
+  overflow: hidden;
+  color: #f8fafc;
+  background: #050811;
+  background-image:
+    radial-gradient(circle at 18% 22%, rgba(56, 189, 248, 0.12), transparent 40%),
+    radial-gradient(circle at 82% 65%, rgba(37, 99, 235, 0.14), transparent 45%);
+}
+
+.interactive-hero-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.signal-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 5vw 5vw;
+  mask-image: radial-gradient(ellipse at 50% 50%, #000 30%, transparent 80%);
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* ==========================================================================
+   HEADER PRINCIPAL
+   ========================================================================== */
+
+/* ==========================================================================
+   HEADER PRINCIPAL (STICKY GLASS BAR)
+   ========================================================================== */
+
+.signal-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 72px;
+  padding: 0 4px;
+  background: rgba(5, 8, 17, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.signal-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #ffffff;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.signal-brand:hover {
+  opacity: 0.9;
+}
+
+.signal-brand-mark {
+  width: 32px;
+  height: 36px;
+}
+
+.signal-brand-text {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+
+.signal-brand-text strong {
+  font: 800 16px/1 var(--font-space), sans-serif;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+}
+
+.signal-brand-text span {
+  font: 700 12px/1 var(--font-space), sans-serif;
+  color: #22c55e;
+  letter-spacing: 0.05em;
+}
+
+.signal-nav {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.signal-nav a {
+  color: #94a3b8;
+  font: 600 12px/1 var(--font-space), sans-serif;
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  transition: color 0.2s;
+  position: relative;
+  padding: 6px 0;
+}
+
+.signal-nav a:hover {
+  color: #ffffff;
+}
+
+.signal-nav a::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #22c55e;
+  transition: width 0.25s ease;
+}
+
+.signal-nav a:hover::after {
+  width: 100%;
+}
+
+.signal-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Botão Estilo Paulo Leme no Header: Dark Pill + Green Circular Arrow Badge */
+.header-orcamento-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 6px 6px 16px;
+  border-radius: 9999px;
+  background: #0f172a;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: #f8fafc;
+  font: 750 11px/1 var(--font-space), sans-serif;
+  letter-spacing: 0.06em;
+  text-decoration: none;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.header-orcamento-btn:hover {
+  background: #1e293b;
+  border-color: rgba(34, 197, 94, 0.4);
+  transform: translateY(-1px);
+}
+
+.orcamento-arrow-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #22c55e;
+  color: #030712;
+  font-size: 13px;
+  font-weight: 900;
+  transition: transform 0.25s ease, background-color 0.2s;
+}
+
+.header-orcamento-btn:hover .orcamento-arrow-badge {
+  transform: translate(2px, -2px);
+  background: #4ade80;
+}
+
+/* Botão de Menu para abrir o Atlas Drawer */
+.signal-menu-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 16px;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.05);
+  color: #ffffff;
+  font: 700 11px/1 var(--font-space), sans-serif;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.signal-menu-trigger:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+.menu-bars-icon {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.menu-bars-icon span {
+  display: block;
+  width: 16px;
+  height: 2px;
+  background: #ffffff;
+  border-radius: 2px;
+  transition: transform 0.2s;
+}
+
+/* ==========================================================================
+   GRID DO HERO (NARRATIVA + COCKPIT)
+   ========================================================================== */
+
+.signal-hero-grid {
+  position: relative;
+  z-index: 10;
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1.15fr);
+  gap: 5vw;
+  align-items: center;
+  padding-top: 48px;
+  min-height: calc(100vh - 100px);
+}
+
+/* ==========================================================================
+   COLUNA ESQUERDA: NARRATIVA & AUTORIDADE
+   ========================================================================== */
+
+.signal-copy {
+  display: flex;
+  flex-direction: column;
+}
+
+.hero-main-headline {
+  margin: 0 0 20px;
+  font: 800 clamp(36px, 4.4vw, 68px) / 1.04 var(--font-space), sans-serif;
+  letter-spacing: -0.04em;
+  color: #ffffff;
+}
+
+.hero-main-headline em {
+  font-style: italic;
+  font-family: var(--font-playfair), Georgia, serif;
+  font-weight: 400;
+  color: #38bdf8;
+  padding-left: 6px;
+}
+
+.hero-main-subtext {
+  margin: 0 0 36px;
+  font-size: clamp(15px, 1.15vw, 17px);
+  line-height: 1.68;
+  color: #94a3b8;
+  max-width: 560px;
+}
+
+/* Linha de Botões do Hero: Paulo Leme Style */
+.hero-buttons-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+}
+
+.hero-primary-pill-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  padding: 8px 8px 8px 24px;
+  border-radius: 9999px;
+  background: #0f172a;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  color: #ffffff;
+  font: 800 12px/1 var(--font-space), sans-serif;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero-primary-pill-btn:hover {
+  background: #1e293b;
+  border-color: rgba(34, 197, 94, 0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.8);
+}
+
+.hero-arrow-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #22c55e;
+  color: #030712;
+  font-size: 16px;
+  font-weight: 900;
+  transition: transform 0.25s ease, background-color 0.2s;
+}
+
+.hero-primary-pill-btn:hover .hero-arrow-badge {
+  transform: translate(2px, -2px);
+  background: #4ade80;
+}
+
+.hero-secondary-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 14px 24px;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+  color: #cbd5e1;
+  font: 650 12px/1 var(--font-space), sans-serif;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.hero-secondary-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.24);
+  color: #ffffff;
+}
+
+/* Faixa de Confiança e Credenciais (Pills Elegantes) */
+.hero-trust-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.trust-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #94a3b8;
+  font: 600 11px/1 var(--font-space), sans-serif;
+}
+
+.trust-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 8px rgba(34, 197, 94, 0.6);
+}
+
+.trust-pill strong {
+  color: #f1f5f9;
+  font-weight: 600;
+}
+
+.authority-item {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.authority-item strong {
+  font: 700 13px/1 var(--font-space), sans-serif;
+  color: #f1f5f9;
+}
+
+.authority-item span {
+  font-size: 11px;
+  color: #64748b;
+}
+
+.authority-divider {
+  width: 1px;
+  height: 24px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* ==========================================================================
+   COLUNA DIREITA: COCKPIT DIGITAL INTERATIVO
+   ========================================================================== */
+
+.signal-cockpit {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border-radius: 24px;
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 35px 80px -20px rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(20px);
+  padding: 24px;
+}
+
+.cockpit-header {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.cockpit-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cockpit-label {
+  color: #64748b;
+  font: 750 9px/1 var(--font-space), sans-serif;
+  letter-spacing: 0.16em;
+}
+
+.cockpit-status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #38bdf8;
+  font: 750 9px/1 var(--font-space), sans-serif;
+  letter-spacing: 0.12em;
+}
+
+.cockpit-status i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #38bdf8;
+  box-shadow: 0 0 8px #38bdf8;
+}
+
+/* Abas do Cockpit */
+.cockpit-tabs {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 6px;
+  background: rgba(2, 6, 23, 0.5);
+  padding: 4px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.cockpit-tab-pill {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 8px 4px;
+  border-radius: 8px;
+  border: 0;
+  background: transparent;
+  color: #64748b;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: var(--font-space), sans-serif;
+}
+
+.cockpit-tab-pill span {
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+.cockpit-tab-pill b {
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.cockpit-tab-pill:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.cockpit-tab-pill.is-selected {
+  background: #ffffff;
+  color: #030712;
+  font-weight: 700;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+}
+
+.cockpit-tab-pill.is-selected span {
+  color: #0284c7;
+}
+
+/* Card do Palco Central */
+.cockpit-stage-card {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #020617;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+  animation: stage-card-in 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes stage-card-in {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.stage-browser-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  background: #090e17;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.stage-dots {
+  display: flex;
+  gap: 5px;
+}
+
+.stage-dots span {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.stage-dots span:nth-child(1) { background: #ef4444; }
+.stage-dots span:nth-child(2) { background: #eab308; }
+.stage-dots span:nth-child(3) { background: #22c55e; }
+
+.stage-url {
+  font: 600 10px/1 var(--font-space), monospace;
+  color: #64748b;
+  letter-spacing: 0.05em;
+}
+
+.stage-tag {
+  font: 750 8px/1 var(--font-space), sans-serif;
+  color: #38bdf8;
+  letter-spacing: 0.1em;
+}
+
+.stage-preview-media {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #000000;
+  overflow: hidden;
+}
+
+.stage-img {
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.cockpit-stage-card:hover .stage-img {
+  transform: scale(1.03);
+}
+
+.stage-glass-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.08) 0%,
+    transparent 50%
+  );
+}
+
+.stage-info-pill {
+  position: absolute;
+  bottom: 14px;
+  left: 14px;
+  right: 14px;
+  padding: 12px 16px;
+  border-radius: 12px;
+  background: rgba(3, 7, 18, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(12px);
+}
+
+.stage-info-pill strong {
+  display: block;
+  font: 650 14px/1.2 var(--font-space), sans-serif;
+  color: #ffffff;
+  margin-bottom: 4px;
+}
+
+.stage-info-pill p {
+  margin: 0;
+  font-size: 11.5px;
+  color: #38bdf8;
+  line-height: 1.35;
+}
+
+/* Footer do Stage */
+.stage-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  background: #090e17;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.stage-metrics-row {
+  display: flex;
+  gap: 20px;
+}
+
+.stage-metric-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.stage-metric-cell strong {
+  font: 700 13px/1 var(--font-space), sans-serif;
+  color: #ffffff;
+}
+
+.stage-metric-cell span {
+  font-size: 9px;
+  color: #64748b;
+}
+
+.stage-explore-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #38bdf8;
+  font: 750 10px/1 var(--font-space), sans-serif;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: gap 0.2s;
+}
+
+.stage-explore-link:hover {
+  gap: 12px;
+  color: #7dd3fc;
+}
+
+.cockpit-ambient-glow {
+  position: absolute;
+  z-index: -1;
+  inset: -15%;
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.2) 0%, transparent 68%);
+  filter: blur(45px);
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   RESPONSIVIDADE DO HERO
+   ========================================================================== */
+
+@media (max-width: 1024px) {
+  .signal-nav {
+    display: none;
+  }
+
+  .signal-menu-trigger {
+    display: flex;
+  }
+
+  .signal-hero-grid {
+    grid-template-columns: 1fr;
+    padding-top: 40px;
+  }
+
+  .cockpit-tabs {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .signal-hero {
+    padding: 0 4% 60px;
+  }
+
+  .header-orcamento-btn {
+    display: none;
+  }
+
+  .hero-trust-row {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .cockpit-tabs {
+    display: flex;
+    overflow-x: auto;
+    padding: 4px;
+    scroll-snap-type: x mandatory;
+  }
+
+  .cockpit-tab-pill {
+    flex: 0 0 auto;
+    min-width: 74px;
+    scroll-snap-align: start;
+  }
+
+  .stage-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  .hero-buttons-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .hero-primary-pill-btn,
+  .hero-secondary-btn {
+    justify-content: center;
+    width: 100%;
+    text-align: center;
+  }
+}

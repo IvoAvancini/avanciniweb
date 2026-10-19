@@ -1,376 +1,326 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { AvanciniMark } from "./avancini-mark";
-import "./os-hub.css";
-import "./os-hub-animations.css";
-import "./os-hub-card.css";
-import AnimatedCounter from "./components/AnimatedCounter";
+import "./os-hub-premium.css";
 
 const WHATSAPP_NUMBER = "5573981019782";
-const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
-  "Olá! Estive no Avancini OS e gostaria de conversar sobre a solução ideal para minha empresa."
-)}`;
-
-function Arrow() {
-  return (
-    <svg
-      width="18"
-      height="18"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-      className="hub-arrow-icon"
-    >
-      <line x1="7" y1="17" x2="17" y2="7" />
-      <polyline points="7 7 17 7 17 17" />
-    </svg>
+const whatsappUrl =
+  "https://wa.me/" +
+  WHATSAPP_NUMBER +
+  "?text=" +
+  encodeURIComponent(
+    "Olá! Quero entender se o melhor caminho para minha empresa é o Dash, o Sync ou os dois. Hoje, meu principal gargalo é:"
   );
-}
 
-const DASH_FEATURES = [
-  { emoji: "⚡", label: "0.2s LCP", desc: "Carregamento ultrarrápido no celular" },
-  { emoji: "🎯", label: "Copywriting", desc: "Texto que converte visitante em cliente" },
-  { emoji: "💎", label: "Design Autoral", desc: "Identidade visual de alto padrão" },
-  { emoji: "🔍", label: "SEO Técnico", desc: "Nota 100 no Google PageSpeed" },
-  { emoji: "🛡️", label: "Hospedagem SSL", desc: "Cloud segura com 99.9% uptime" },
-  { emoji: "📱", label: "100% Responsivo", desc: "Perfeito em qualquer dispositivo" },
+const solutions = [
+  {
+    id: "dash",
+    name: "Avancini Dash",
+    category: "Sites e landing pages sob medida",
+    title: "O site precisa explicar o negócio com clareza",
+    description:
+      "O Dash organiza mensagem, oferta e navegação para o visitante entender o que você faz, confiar no que vê e saber como avançar.",
+    route: ["Mensagem", "Experiência", "Contato"],
+    routeLabel: "O Dash organiza a mensagem, a experiência e o caminho de contato.",
+    frictionLabel: "O que o site não resolve hoje",
+    frictions: [
+      "Quem entra no site ainda precisa perguntar o que a empresa faz",
+      "A experiência no celular passa menos confiança que o serviço",
+      "Orçamento, agendamento ou contato ficam difíceis de encontrar",
+    ],
+    deliveryLabel: "O que entra no projeto",
+    capabilities: [
+      "Estratégia, arquitetura e texto",
+      "Design responsivo e desenvolvimento",
+      "Estrutura técnica para busca e desempenho",
+      "Publicação e caminhos de contato",
+    ],
+    result:
+      "Você recebe um site claro, responsivo e preparado para levar o visitante até o contato.",
+    href: "/dash",
+    cta: "Ver detalhes do Avancini Dash",
+  },
+  {
+    id: "sync",
+    name: "Avancini Sync",
+    category: "Atendimento com IA no WhatsApp",
+    title: "O atendimento precisa acompanhar as mensagens",
+    description:
+      "O Sync usa informações e regras do negócio para responder, entender o interesse e preparar o próximo passo no WhatsApp.",
+    route: ["Resposta", "Contexto", "Encaminhamento"],
+    routeLabel: "O Sync organiza a resposta, preserva o contexto e prepara o encaminhamento.",
+    frictionLabel: "O que pesa no atendimento",
+    frictions: [
+      "A equipe responde as mesmas perguntas todos os dias",
+      "Mensagens ficam esperando ou se perdem entre outras conversas",
+      "O atendimento muda de pessoa e o contexto se perde",
+    ],
+    deliveryLabel: "O que entra na operação",
+    capabilities: [
+      "Base de conhecimento e tom de voz",
+      "Regras de triagem e qualificação",
+      "Agendamento e acompanhamento, quando aplicável",
+      "Resumo e transferência para a equipe",
+    ],
+    result:
+      "Você recebe um atendimento configurado para responder com o contexto do negócio e preparar a conversa para a equipe.",
+    href: "/sync",
+    cta: "Ver detalhes do Avancini Sync",
+  },
 ];
 
-const SYNC_FEATURES = [
-  { emoji: "🤖", label: "IA 24h/dia", desc: "Atendimento ativo sem pausas ou feriados" },
-  { emoji: "🎙️", label: "Áudios & Textos", desc: "Ouve, entende e responde com empatia" },
-  { emoji: "📅", label: "Google Calendar", desc: "Marcação de horários em tempo real" },
-  { emoji: "🔁", label: "Follow-Up Auto", desc: "Recupera leads frios automaticamente" },
-  { emoji: "👥", label: "Multi-Atendentes", desc: "Equipe + IA com histórico completo" },
-  { emoji: "🔒", label: "Zero Alucinação", desc: "Responde só o que você configurou" },
+const diagnosis = [
+  {
+    id: "dash",
+    category: "Presença digital",
+    name: "Avancini Dash",
+    pains: [
+      "As pessoas chegam, mas ainda perguntam o que a empresa faz",
+      "O site atual não organiza os serviços nem conduz ao contato",
+    ],
+    href: "/dash",
+    cta: "Ver detalhes do Avancini Dash",
+  },
+  {
+    id: "sync",
+    category: "Atendimento no WhatsApp",
+    name: "Avancini Sync",
+    pains: [
+      "As mensagens se acumulam antes de alguém responder",
+      "A equipe repete respostas e retoma conversas sem contexto",
+    ],
+    href: "/sync",
+    cta: "Ver detalhes do Avancini Sync",
+  },
 ];
 
 export function OSHubClient() {
-  const [hoveredCard, setHoveredCard] = useState<"dash" | "sync" | null>(null);
-  const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const [mounted, setMounted] = useState(false);
 
-  // Canvas background de partículas leve
   useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-
-    let animId: number;
-    let width = (canvas.width = window.innerWidth);
-    let height = (canvas.height = window.innerHeight);
-
-    const handleResize = () => {
-      if (!canvas) return;
-      width = canvas.width = window.innerWidth;
-      height = canvas.height = window.innerHeight;
-    };
-    window.addEventListener("resize", handleResize);
-
-    const isMobile = width <= 768;
-    const count = isMobile ? 18 : Math.min(48, Math.max(22, Math.floor(width / 35)));
-
-    const particles = Array.from({ length: count }, () => ({
-      x: Math.random() * width,
-      y: Math.random() * height,
-      vx: (Math.random() - 0.5) * (isMobile ? 0.2 : 0.35),
-      vy: (Math.random() - 0.5) * (isMobile ? 0.2 : 0.35),
-      radius: Math.random() * 1.6 + 0.6,
-      color: Math.random() < 0.5 ? "34, 197, 94" : "56, 189, 248",
-      alpha: Math.random() * 0.35 + 0.12,
-    }));
-
-    const render = () => {
-      ctx.clearRect(0, 0, width, height);
-      particles.forEach((p) => {
-        p.x += p.vx;
-        p.y += p.vy;
-        if (p.x < 0) p.x = width;
-        if (p.x > width) p.x = 0;
-        if (p.y < 0) p.y = height;
-        if (p.y > height) p.y = 0;
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(${p.color}, ${p.alpha})`;
-        ctx.fill();
-      });
-
-      // Linhas de conexão só no desktop para economia de CPU
-      if (!isMobile) {
-        particles.forEach((a, i) => {
-          particles.slice(i + 1).forEach((b) => {
-            const dx = a.x - b.x;
-            const dy = a.y - b.y;
-            const dist = Math.sqrt(dx * dx + dy * dy);
-            if (dist < 90) {
-              ctx.beginPath();
-              ctx.moveTo(a.x, a.y);
-              ctx.lineTo(b.x, b.y);
-              ctx.strokeStyle = `rgba(${a.color}, ${(1 - dist / 90) * 0.1})`;
-              ctx.lineWidth = 0.5;
-              ctx.stroke();
-            }
-          });
-        });
-      }
-      animId = requestAnimationFrame(render);
-    };
-    render();
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-      cancelAnimationFrame(animId);
-    };
+    setMounted(true);
   }, []);
 
   return (
-    <div className={`os-hub-root os-v2 ${hoveredCard ? `hover-${hoveredCard}` : ""}`}>
-      {/* ATMOSPHERIC BACKGROUND */}
-      <div className="hub-atmosphere" aria-hidden="true">
-        <canvas ref={canvasRef} className="hub-animated-canvas" />
-        <div className="ambient-glow glow-dash-left" />
-        <div className="ambient-glow glow-sync-right" />
-        <div className="hub-tech-grid" />
-        <div className="hub-center-divider-glow" />
-        <div className="hub-vignette" />
-        <div className="orb orb-green" />
-        <div className="orb orb-blue" />
-        <div className="orb orb-magenta" />
-        <div className="orb orb-cyan" />
-      </div>
+    <div className="os-premium-shell">
+      <a href="#conteudo" className="os-skip-link">
+        Ir para o conteúdo
+      </a>
 
-      {/* NAVBAR LIMPA & ELEGANTE */}
-      <header className="hub-navbar hub-navbar-v2">
-        <Link href="/" className="hub-brand" aria-label="Avancini OS - Início">
-          <AvanciniMark variant="os" className="hub-brand-mark" />
-          <div className="hub-brand-text">
-            <span className="brand-name">AVANCINI <em>OS</em></span>
-            <span className="brand-tagline">ECOSSISTEMA DE TECNOLOGIA</span>
-          </div>
+      <header className="ecosystem-header ecosystem-header--os os-header">
+        <Link href="/" className="os-brand" aria-label="Avancini OS, início">
+          <AvanciniMark className="os-brand-mark" />
+          <span className="os-wordmark">
+            <strong>AVANCINI</strong>
+            <span>OS</span>
+          </span>
         </Link>
 
-        {/* BOTÃO ESPECIALISTA */}
+        <nav className="os-nav" aria-label="Soluções Avancini">
+          <Link href="/dash" className="os-nav-link-dash">
+            Dash
+          </Link>
+          <Link href="/sync" className="os-nav-link-sync">
+            Sync
+          </Link>
+          <a href="#diagnostico" className="os-nav-link-neutral">
+            Escolher
+          </a>
+        </nav>
+
         <a
           href={whatsappUrl}
           target="_blank"
           rel="noreferrer"
-          className="hub-specialist-btn"
-          aria-label="Falar com especialista via WhatsApp"
+          className="os-button os-button-header"
+          aria-label="Conversar no WhatsApp sobre uma solução para sua empresa"
         >
-          <span className="hub-status-radar">
-            <span className="radar-ping" />
-            <span className="radar-core" />
-          </span>
-          <span className="btn-label-desktop">Falar com especialista</span>
-          <span className="btn-label-mobile">Contato</span>
-          <Arrow />
+          <span className="os-button-long">Conversar no WhatsApp</span>
+          <span className="os-button-short">WhatsApp</span>
         </a>
       </header>
 
-      {/* HERO EDITORIAL COMPACTO & ELEGANTE */}
-      <section className="hub-hero-header">
-        <h1 className="hub-hero-title">
-          Sua empresa <span className="text-dash">mais forte na internet</span>{" "}
-          <span className="text-blend">e</span>{" "}
-          <span className="text-sync">mais inteligente no WhatsApp.</span>
-        </h1>
-        <p className="hub-hero-sub">
-          Dois motores complementares de crescimento. Escolha por onde você quer começar:
-        </p>
-      </section>
-
-      {/* STAGE DOS DOIS PORTAIS */}
-      <main className="hub-twin-stage" id="ecossistema">
-
-        {/* CARD DASH */}
-        <Link
-          href="/dash"
-          id="portal-dash"
-          className={`hub-portal-card portal-dash ${hoveredCard === "dash" ? "is-active" : ""} ${
-            hoveredCard === "sync" ? "is-faded" : ""
-          }`}
-          onMouseEnter={() => setHoveredCard("dash")}
-          onMouseLeave={() => setHoveredCard(null)}
-          aria-label="Entrar no Avancini Dash"
-        >
-          {/* Efeitos decorativos */}
-          <div className="portal-aura aura-dash" aria-hidden="true" />
-          <div className="portal-top-laser laser-dash" aria-hidden="true" />
-
-          {/* Cabeçalho do Card */}
-          {/* Cabeçalho do Card */}
-          <div className="portal-header">
-            {/* Barra superior de metadados */}
-            <div className="portal-meta-bar">
-              <span className="portal-kicker kicker-dash">
-                <span className="kicker-dot dot-dash">
-                  <span className="kicker-dot-ping" />
-                  <span className="kicker-dot-core" />
-                </span>
-                01 · PRESENÇA DIGITAL
-              </span>
-              <span className="portal-tech-pill">0.2s LCP · NOTA 100</span>
-            </div>
-
-            {/* Métrica âncora realista com legenda clara */}
-            <div className="portal-metric-hero">
-              <AnimatedCounter target={14820} prefix="+" />
-              <span className="portal-metric-sub">visitas geradas</span>
-            </div>
-
-            <h2 className="portal-product-name">
-              Avancini <span className="name-dash">Dash</span>
-            </h2>
-
-            <p className="portal-tagline">
-              Sites autorais, landing pages de alta conversão e lojas virtuais que
-              transformam visitantes em clientes — com velocidade máxima, SEO dominante e
-              design de padrão internacional.
+      <main id="conteudo">
+        <section className="os-hero" aria-labelledby="os-hero-title">
+          <div className="os-hero-copy">
+            <h1 id="os-hero-title">
+              <span>Sites que apresentam</span>
+              <span>IA que atende clientes</span>
+            </h1>
+            <p className="os-hero-body">
+              Sites sob medida para explicar sua empresa e atendimento com IA no
+              WhatsApp para organizar as conversas que chegam.
             </p>
-
-            {/* Divisor */}
-            <div className="portal-divider" aria-hidden="true">
-              <span className="divider-line" />
-              <span className="divider-label">O que você recebe</span>
-              <span className="divider-line" />
-            </div>
-
-            {/* Lista de Recursos (Bento Grid) */}
-            <div className="portal-features-grid">
-              {DASH_FEATURES.map((f) => (
-                <div className="portal-feat feat-dash" key={f.label}>
-                  <span className="feat-emoji">{f.emoji}</span>
-                  <div className="feat-text">
-                    <strong>{f.label}</strong>
-                    <span>{f.desc}</span>
-                  </div>
-                </div>
-              ))}
+            <div className="os-hero-actions">
+              <a
+                href={whatsappUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="os-button os-button-primary"
+              >
+                Conversar no WhatsApp
+              </a>
+              <a href="#solucoes" className="os-text-link">
+                Ver Dash e Sync
+              </a>
             </div>
           </div>
+        </section>
 
-          {/* Linha discreta de garantia e compromisso */}
-          <div className="portal-trust-line" aria-label="Garantia e transparência">
-            <span>Garantia de Satisfação · Contrato de Serviços · Sem fidelidade</span>
-          </div>
-
-          {/* CTA */}
-          <div className="portal-enter-cta cta-dash">
-            <span className="cta-shimmer" aria-hidden="true" />
-            <span className="cta-label">Explorar Avancini Dash</span>
-            <Arrow />
-          </div>
-
-          <div className="portal-corner-accent accent-dash" aria-hidden="true" />
-        </Link>
-
-        {/* SEPARADOR CENTRAL INTELIGENTE "OS" */}
-        <div
-          className={`hub-vertical-sep ${
-            hoveredCard === "dash"
-              ? "focus-dash"
-              : hoveredCard === "sync"
-              ? "focus-sync"
-              : ""
-          }`}
-          aria-hidden="true"
-        >
-          <span className="sep-line" />
-          <div className="sep-node">
-            <span className="sep-glow" />
-            <span className="sep-symbol">OS</span>
-          </div>
-          <span className="sep-line" />
-        </div>
-
-        {/* CARD SYNC */}
-        <Link
-          href="/sync"
-          id="portal-sync"
-          className={`hub-portal-card portal-sync ${hoveredCard === "sync" ? "is-active" : ""} ${
-            hoveredCard === "dash" ? "is-faded" : ""
-          }`}
-          onMouseEnter={() => setHoveredCard("sync")}
-          onMouseLeave={() => setHoveredCard(null)}
-          aria-label="Entrar no Avancini Sync"
-        >
-          {/* Efeitos decorativos */}
-          <div className="portal-aura aura-sync" aria-hidden="true" />
-          <div className="portal-top-laser laser-sync" aria-hidden="true" />
-
-          {/* Cabeçalho do Card */}
-          <div className="portal-header">
-            {/* Barra superior de metadados */}
-            <div className="portal-meta-bar">
-              <span className="portal-kicker kicker-sync">
-                <span className="kicker-dot dot-sync">
-                  <span className="kicker-dot-ping" />
-                  <span className="kicker-dot-core" />
-                </span>
-                02 · INTELIGÊNCIA ARTIFICIAL
-              </span>
-              <span className="portal-tech-pill">24/7 · &lt;2s RESPOSTA</span>
-            </div>
-
-            {/* Métrica âncora realista com legenda clara */}
-            <div className="portal-metric-hero">
-              <AnimatedCounter target={23840} prefix="+" />
-              <span className="portal-metric-sub">mensagens respondidas</span>
-            </div>
-
-            <h2 className="portal-product-name">
-              Avancini <span className="name-sync">Sync</span>
-            </h2>
-
-            <p className="portal-tagline">
-              Agentes inteligentes operando 24h no seu WhatsApp comercial — acolhem,
-              qualificam, agendam reuniões e realizam follow-up sem fila de espera, sem
-              erros e sem pausas.
+        <section className="os-solutions" id="solucoes" aria-labelledby="os-solutions-title">
+          <div className="os-section-intro">
+            <h2 id="os-solutions-title">Escolha pelo que precisa funcionar melhor</h2>
+            <p>
+              Use o Dash quando o problema está no site e o Sync quando está no
+              atendimento. Eles funcionam separados e podem trabalhar juntos.
             </p>
+          </div>
 
-            {/* Divisor */}
-            <div className="portal-divider" aria-hidden="true">
-              <span className="divider-line" />
-              <span className="divider-label">O que você recebe</span>
-              <span className="divider-line" />
-            </div>
+          <div className="os-solution-grid">
+            {solutions.map((item) => (
+              <article
+                key={item.id}
+                id={item.id}
+                className={`os-solution-card os-solution-${item.id}`}
+              >
+                <header className="os-solution-heading">
+                  <h3>{item.name}</h3>
+                  <p>{item.category}</p>
+                </header>
 
-            {/* Lista de Recursos (Bento Grid) */}
-            <div className="portal-features-grid">
-              {SYNC_FEATURES.map((f) => (
-                <div className="portal-feat feat-sync" key={f.label}>
-                  <span className="feat-emoji">{f.emoji}</span>
-                  <div className="feat-text">
-                    <strong>{f.label}</strong>
-                    <span>{f.desc}</span>
-                  </div>
+                <p className="os-solution-title">{item.title}</p>
+                <p className="os-solution-description">{item.description}</p>
+
+                <div className="os-solution-route" aria-label={item.routeLabel}>
+                  {item.route.map((step) => (
+                    <span key={step} className="os-solution-route-step">
+                      {step}
+                    </span>
+                  ))}
                 </div>
-              ))}
-            </div>
+
+                <div className="os-solution-details">
+                  <section aria-labelledby={`${item.id}-friction`}>
+                    <h4 id={`${item.id}-friction`}>{item.frictionLabel}</h4>
+                    <ul>
+                      {item.frictions.map((friction) => (
+                        <li key={friction}>{friction}</li>
+                      ))}
+                    </ul>
+                  </section>
+
+                  <section aria-labelledby={`${item.id}-delivery`}>
+                    <h4 id={`${item.id}-delivery`}>{item.deliveryLabel}</h4>
+                    <ul>
+                      {item.capabilities.map((capability) => (
+                        <li key={capability}>{capability}</li>
+                      ))}
+                    </ul>
+                  </section>
+                </div>
+
+                <p className="os-solution-result">{item.result}</p>
+
+                <Link href={item.href} className="os-solution-link">
+                  {item.cta}
+                </Link>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section className="os-diagnosis" id="diagnostico" aria-labelledby="os-diagnosis-title">
+          <div className="os-diagnosis-heading">
+            <h2 id="os-diagnosis-title">Qual destes problemas acontece hoje?</h2>
+            <p>Abra o Dash ou o Sync pelo problema que você reconhece na sua rotina.</p>
           </div>
 
-          {/* Linha discreta de garantia e compromisso */}
-          <div className="portal-trust-line" aria-label="Garantia e transparência">
-            <span>Garantia de Satisfação · Contrato de Serviços · Sem fidelidade</span>
+          <div className="os-diagnosis-grid">
+            {diagnosis.map((item) => (
+              <section
+                key={item.id}
+                className={`os-diagnosis-group os-diagnosis-${item.id}`}
+                aria-labelledby={`diagnosis-${item.id}`}
+              >
+                <div className="os-diagnosis-group-heading">
+                  <h3 id={`diagnosis-${item.id}`}>{item.category}</h3>
+                  <span>{item.name}</span>
+                </div>
+                <ul>
+                  {item.pains.map((pain) => (
+                    <li key={pain}>{pain}</li>
+                  ))}
+                </ul>
+                <Link href={item.href} className="os-diagnosis-link">
+                  {item.cta}
+                </Link>
+              </section>
+            ))}
           </div>
 
-          {/* CTA */}
-          <div className="portal-enter-cta cta-sync">
-            <span className="cta-shimmer" aria-hidden="true" />
-            <span className="cta-label">Explorar Avancini Sync</span>
-            <Arrow />
+          <div className="os-diagnosis-combined">
+            <strong>Os dois problemas aparecem juntos?</strong>
+            <p>
+              Comece pelo ponto que mais atrasa o cliente. Dash e Sync podem ser
+              conectados depois.
+            </p>
+          </div>
+        </section>
+
+        <section className="os-final" aria-labelledby="os-final-title">
+          <div className="os-final-copy">
+            <h2 id="os-final-title">Quer entender por onde começar?</h2>
+            <p>
+              Conte como os clientes encontram sua empresa e o que acontece quando eles
+              chamam no WhatsApp.
+            </p>
           </div>
 
-          <div className="portal-corner-accent accent-sync" aria-hidden="true" />
-        </Link>
-
+          <a
+            href={whatsappUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="os-button os-button-primary os-final-action"
+          >
+            Conversar sobre meu cenário
+          </a>
+        </section>
       </main>
+
+      <footer className="os-footer">
+        <div className="os-footer-brand">
+          <AvanciniMark className="os-footer-mark" />
+          <span>Avancini OS</span>
+        </div>
+        <p>Sites sob medida e atendimento com IA para empresas</p>
+        <nav aria-label="Links institucionais">
+          <Link href="/dash" className="os-nav-link-dash">
+            Dash
+          </Link>
+          <Link href="/sync" className="os-nav-link-sync">
+            Sync
+          </Link>
+          <a href="#diagnostico" className="os-nav-link-neutral">
+            Escolher
+          </a>
+          <a
+            href={whatsappUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="os-nav-link-neutral"
+          >
+            Contato
+          </a>
+          <Link href="/termos" className="os-nav-link-neutral">
+            Termos
+          </Link>
+          <Link href="/privacidade" className="os-nav-link-neutral">
+            Privacidade
+          </Link>
+        </nav>
+      </footer>
     </div>
   );
 }

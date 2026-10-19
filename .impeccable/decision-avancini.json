@@ -1,0 +1,104 @@
+{
+  "title": "Escolha o novo mundo visual da Avancini OS",
+  "question": "As referências Elo e Umbler definem a régua. Estas direções definem como a Avancini será reconhecida.",
+  "options": [
+    {
+      "id": "assigned",
+      "label": "Oficina de Sistemas",
+      "kicker": "A DIREÇÃO",
+      "lineage": "sinalização industrial brasileira + estúdio de tecnologia",
+      "thesis": "A Avancini aparece como a oficina onde presença, automação e sistemas são montados em uma operação única.",
+      "palette": ["#f3f0e8", "#121313", "#2f5bff", "#ff5a36"],
+      "materials": ["placas técnicas", "tinta de sinalização", "papel de especificação"],
+      "viewport": "Tipografia monumental divide a tela com uma rota visual viva que conecta as vertentes e desemboca em projetos reais.",
+      "risk": "Pode parecer industrial demais se a linguagem humana e os projetos não liderarem a composição.",
+      "raised": [
+        {
+          "from": "Portfólio Monumental",
+          "raise": "Os projetos ganham escala cinematográfica e deixam de parecer miniaturas de portfólio."
+        },
+        {
+          "from": "Camadas em Movimento",
+          "raise": "A navegação passa a usar profundidade e ritmo sem esconder conteúdo em efeitos."
+        }
+      ],
+      "comp": ".impeccable/mocks/decision/assigned.png"
+    },
+    {
+      "id": "model-pick",
+      "label": "Atlas Vivo",
+      "kicker": "IMPECCABLE’S PICK",
+      "lineage": "atlas editorial + catálogo de estúdio contemporâneo",
+      "thesis": "Cada vertente ocupa um território e os projetos comprovam como a Avancini atravessa todos eles.",
+      "palette": ["#eeeae0", "#151515", "#3157ff", "#e8ff3d"],
+      "materials": ["papel editorial", "mapas de conexão", "janelas fotográficas"],
+      "viewport": "Uma abertura clara e editorial organiza a promessa da marca ao redor de um mapa assimétrico das vertentes.",
+      "risk": "É a direção mais naturalmente elegante e, por isso, a que mais exige composição autoral para não parecer uma revista genérica.",
+      "comp": ".impeccable/mocks/decision/model-pick.png"
+    },
+    {
+      "id": "challenger-luxury",
+      "label": "Portfólio Monumental",
+      "verdict": "competitive",
+      "lineage": "flagship editorial de moda",
+      "thesis": "Projetos em escala total, com texto mínimo e a confiança de uma marca que deixa o trabalho ocupar a tela.",
+      "palette": ["#f5f2ea", "#111111", "#3157ff"],
+      "materials": ["fotografia em tela cheia", "papel fosco", "tipografia de contraste"],
+      "viewport": "Um projeto real domina a abertura enquanto a proposta da Avancini aparece em poucas linhas e navegação silenciosa.",
+      "case": "Ganha em impacto e qualidade percebida; perde um pouco de clareza sobre a amplitude das vertentes.",
+      "risk": "Pode comunicar luxo e portfólio antes de comunicar tecnologia útil para negócios.",
+      "comp": ".impeccable/mocks/decision/challenger-luxury.png",
+      "hero": "https://impeccable.style/worlds/cards/luxury-fashion-flagship-hero.webp",
+      "board": "https://impeccable.style/worlds/cards/luxury-fashion-flagship.webp"
+    },
+    {
+      "id": "challenger-depth",
+      "label": "Camadas em Movimento",
+      "verdict": "competitive",
+      "lineage": "telas digitais em profundidade",
+      "thesis": "As vertentes avançam e recuam em planos tipográficos, como um sistema vivo escolhendo o próximo problema a resolver.",
+      "palette": ["#08090b", "#f2f0e8", "#ffb000", "#777b84"],
+      "materials": ["luz emissiva", "grão digital", "camadas tipográficas"],
+      "viewport": "Uma frase imóvel lidera enquanto nomes, projetos e capacidades atravessam a profundidade ao redor dela.",
+      "case": "Ganha em memorabilidade digital; exige disciplina para não afastar visitantes pouco técnicos.",
+      "risk": "Pode parecer experimental ou retrô demais se a legibilidade perder prioridade.",
+      "comp": ".impeccable/mocks/decision/challenger-depth.png",
+      "hero": "https://impeccable.style/worlds/cards/operate-c-cracktro-scroller-queue-hero.webp",
+      "board": "https://impeccable.style/worlds/cards/operate-c-cracktro-scroller-queue.webp"
+    },
+    {
+      "id": "challenger-console",
+      "label": "Console Avancini",
+      "verdict": "declined",
+      "lineage": "interfaces multimídia dos anos 1990",
+      "thesis": "A empresa vira uma máquina navegável em que cada vertente aciona uma nova operação.",
+      "palette": ["#b8bec4", "#15171a", "#00b7b0", "#7f55ff"],
+      "materials": ["metal escovado", "botões em relevo", "visor luminoso"],
+      "viewport": "Um console ocupa a tela e os projetos aparecem dentro de um visor central.",
+      "case": "A metáfora de sistema é forte, mas a nostalgia reduz a confiança comercial.",
+      "kept": "A direção principal herda controles com resposta física e estados inequívocos.",
+      "risk": "Pode fazer a marca parecer datada ou lúdica demais.",
+      "hero": "https://impeccable.style/worlds/cards/digital-design-canon-cdrom-chrome-navigation-hero.webp",
+      "board": "https://impeccable.style/worlds/cards/digital-design-canon-cdrom-chrome-navigation.webp"
+    }
+  ],
+  "reroll": {
+    "registers": ["safer", "bolder"]
+  },
+  "buildPath": {
+    "value": "comp",
+    "toggle": true
+  },
+  "canon": true,
+  "canonCard": {
+    "label": "Agência digital premium",
+    "thesis": "Uma landing page clara, elegante e convencional, executada com excelente acabamento.",
+    "palette": ["#ffffff", "#111111", "#2563eb"],
+    "materials": ["grade limpa", "mockups de projetos", "cartões de serviço"],
+    "viewport": "Headline central, explicação curta, dois botões e uma composição de telas de projetos.",
+    "risk": "É fácil de entender, mas também fácil de confundir com dezenas de outras agências.",
+    "comp": ".impeccable/mocks/decision/canon.png"
+  },
+  "steer": true
+}
+

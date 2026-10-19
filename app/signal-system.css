@@ -1,0 +1,449 @@
+/* ==========================================================================
+   SIGNAL SYSTEM: FLUXO DE INTEGRAÇÃO OPERACIONAL
+   ========================================================================== */
+
+.signal-system {
+  position: relative;
+  padding: 120px 5% 130px;
+  color: #f8fafc;
+  background: #040711;
+  background-image:
+    radial-gradient(circle at 15% 15%, rgba(56, 189, 248, 0.1), transparent 40%),
+    radial-gradient(circle at 85% 85%, rgba(37, 99, 235, 0.12), transparent 45%);
+}
+
+.signal-system-head {
+  display: grid;
+  grid-template-columns: auto 1fr 1fr;
+  gap: 4vw;
+  align-items: end;
+  margin-bottom: 56px;
+}
+
+.signal-system-label {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  color: #38bdf8;
+  font: 750 9px/1 var(--font-space), sans-serif;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.signal-system-label span { color: currentColor; }
+.signal-system-label i { width: 32px; height: 1px; background: currentColor; }
+
+.signal-system-head h2 {
+  margin: 0;
+  font: 650 clamp(38px, 4.8vw, 76px) / 0.94 var(--font-space), sans-serif;
+  letter-spacing: -0.04em;
+  color: #ffffff;
+}
+
+.signal-system-head h2 em {
+  color: #38bdf8;
+  font-family: var(--font-playfair), Georgia, serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.signal-system-head > p {
+  margin: 0;
+  color: #94a3b8;
+  font-size: 15px;
+  line-height: 1.65;
+  max-width: 480px;
+}
+
+/* ==========================================================================
+   PIPELINE SHELL & STEPPER
+   ========================================================================== */
+
+.pipeline-shell {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.pipeline-stepper {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.pipeline-step-btn {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 20px 22px;
+  border-radius: 14px;
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #94a3b8;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  font-family: var(--font-space), sans-serif;
+}
+
+.pipeline-step-btn:hover {
+  background: rgba(15, 23, 42, 0.9);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.18);
+}
+
+.pipeline-step-btn.is-selected {
+  background: #ffffff;
+  border-color: #ffffff;
+  color: #030712;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.step-indicator {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.step-num {
+  font: 750 11px/1 var(--font-space), sans-serif;
+  color: #38bdf8;
+}
+
+.pipeline-step-btn.is-selected .step-num {
+  color: #0284c7;
+}
+
+.step-phase {
+  font: 700 8.5px/1 var(--font-space), sans-serif;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  opacity: 0.65;
+}
+
+.step-title {
+  font: 650 15px/1.2 var(--font-space), sans-serif;
+  letter-spacing: -0.02em;
+}
+
+/* ==========================================================================
+   PALCO CENTRAL DO PIPELINE
+   ========================================================================== */
+
+.pipeline-stage-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  gap: 5vw;
+  align-items: center;
+  padding: clamp(34px, 4vw, 56px);
+  border-radius: 24px;
+  background: linear-gradient(145deg, rgba(15, 23, 42, 0.85), rgba(7, 11, 20, 0.95));
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 30px 80px -20px rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(20px);
+  animation: pipeline-fade 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes pipeline-fade {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.pipeline-stage-left {
+  display: flex;
+  flex-direction: column;
+}
+
+.stage-step-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 20px;
+  background: rgba(56, 189, 248, 0.12);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  color: #38bdf8;
+  font: 750 9px/1 var(--font-space), sans-serif;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  align-self: flex-start;
+}
+
+.pulse-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #38bdf8;
+  box-shadow: 0 0 10px #38bdf8;
+}
+
+.stage-headline {
+  margin: 0 0 8px;
+  font: 650 clamp(28px, 2.8vw, 42px) / 1.1 var(--font-space), sans-serif;
+  letter-spacing: -0.035em;
+  color: #ffffff;
+}
+
+.stage-subhead {
+  margin: 0 0 16px;
+  font: 600 15px/1.4 var(--font-manrope), sans-serif;
+  color: #38bdf8;
+}
+
+.stage-description {
+  margin: 0 0 28px;
+  font-size: 14.5px;
+  line-height: 1.68;
+  color: #94a3b8;
+}
+
+.stage-kpi-box {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 16px 20px;
+  border-radius: 12px;
+  background: rgba(2, 6, 23, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  margin-bottom: 20px;
+}
+
+.kpi-label {
+  color: #64748b;
+  font: 750 8.5px/1 var(--font-space), sans-serif;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.stage-kpi-box strong {
+  font: 700 15px/1.3 var(--font-space), sans-serif;
+  color: #20b858;
+}
+
+.stage-data-flow {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 32px;
+  padding: 14px 18px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.03);
+  border-left: 3px solid #38bdf8;
+}
+
+.flow-label {
+  color: #94a3b8;
+  font: 750 8.5px/1 var(--font-space), sans-serif;
+  letter-spacing: 0.1em;
+}
+
+.stage-data-flow p {
+  margin: 0;
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: #cbd5e1;
+}
+
+.stage-solution-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 50px;
+  padding: 0 22px;
+  border-radius: 10px;
+  background: #38bdf8;
+  color: #030712;
+  font: 750 11px/1 var(--font-space), sans-serif;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  align-self: flex-start;
+  box-shadow: 0 10px 24px -6px rgba(56, 189, 248, 0.4);
+}
+
+.stage-solution-link:hover {
+  background: #7dd3fc;
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px -6px rgba(56, 189, 248, 0.55);
+}
+
+/* ==========================================================================
+   DIAGRAMA VISUAL À DIREITA
+   ========================================================================== */
+
+.pipeline-stage-right {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pipeline-flow-diagram {
+  width: 100%;
+}
+
+.flow-visual-box {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 28px;
+  border-radius: 18px;
+  background: #020617;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+}
+
+.flow-badge-top {
+  align-self: flex-start;
+  color: #38bdf8;
+  font: 750 8.5px/1 var(--font-space), sans-serif;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.flow-nodes-tree {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 16px 12px;
+  border-radius: 12px;
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.flow-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 10px 8px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #64748b;
+  font-family: var(--font-space), sans-serif;
+  text-align: center;
+  flex: 1;
+  transition: all 0.3s;
+}
+
+.flow-node span {
+  font-size: 8px;
+  font-weight: 700;
+}
+
+.flow-node b {
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.flow-node.active {
+  background: #38bdf8;
+  color: #030712;
+  border-color: #38bdf8;
+  box-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
+}
+
+.flow-node.active b {
+  font-weight: 700;
+}
+
+.flow-arrow {
+  color: #475569;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.flow-state-display {
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  background: #090e17;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+}
+
+.display-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  background: #0d1524;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  font: 750 8.5px/1 var(--font-space), monospace;
+  color: #94a3b8;
+  letter-spacing: 0.1em;
+}
+
+.display-led {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #20b858;
+  box-shadow: 0 0 6px #20b858;
+}
+
+.display-terminal {
+  padding: 16px;
+  font-family: var(--font-space), monospace;
+  font-size: 11px;
+  line-height: 1.6;
+  color: #38bdf8;
+}
+
+/* ==========================================================================
+   RESPONSIVIDADE
+   ========================================================================== */
+
+@media (max-width: 1024px) {
+  .signal-system-head {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .pipeline-stepper {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .pipeline-stage-card {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .signal-system {
+    padding: 80px 4% 90px;
+  }
+
+  .pipeline-stepper {
+    grid-template-columns: 1fr;
+  }
+
+  .flow-nodes-tree {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .flow-node {
+    width: 100%;
+  }
+
+  .flow-arrow {
+    transform: rotate(90deg);
+  }
+
+  .stage-solution-link {
+    width: 100%;
+    justify-content: center;
+  }
+}

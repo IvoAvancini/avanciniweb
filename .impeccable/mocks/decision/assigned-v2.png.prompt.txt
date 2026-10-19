@@ -1,0 +1,10 @@
+Use case: ui-mockup
+Asset type: high-fidelity desktop homepage first viewport, 16:10 landscape
+Primary request: Create a world-class homepage concept for Avancini OS, a Brazilian creative technology studio connecting brand strategy, websites, e-commerce, automation with WhatsApp and AI, and custom systems. Visual direction: an elegant modular synthesizer and creative signal studio translated into a web interface, where services are connected signals that turn an idea into a working system.
+Scene/backdrop: near-black editorial field with one large mineral-paper plane and a few tactile studio modules, no photorealistic room.
+Composition/framing: huge brand typography anchored left, sophisticated connected module field on the right, signal cables and responsive nodes cross the grid, clear navigation and one primary call to action. Strong scale changes and generous intentional negative space.
+Style/medium: premium experimental web design mockup, sharp editorial typography, brushed aluminum, paper labels, luminous but restrained signal indicators, award-site level polish.
+Color palette: #10110f near black, #f1efdf mineral paper, #ff5c35 coral, #b9ff36 acid lime, #8a8f86 muted metal.
+Text (verbatim): "AVANCINI OS", "Ideias que encontram direção", "Estratégia", "Experiências", "Automação", "Sistemas", "Começar um projeto".
+Constraints: commercially clear within seconds; the modular-synth metaphor must feel like a creative operating system, never an audio gear store; show that only the needed capabilities are connected; motion may be implied through pulsing paths and changing states; no real client claims.
+Avoid: car or transportation imagery, generic SaaS dashboards, generic cards, neon cyberpunk, gradients, laptop mockups, fake metrics, stock photography, tiny illegible labels, excessive pills, template look, watermarks.

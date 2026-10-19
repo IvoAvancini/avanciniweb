@@ -1,0 +1,1456 @@
+{
+  "tool": "comp-spec",
+  "version": 1,
+  "createdAt": "2026-09-25T21:22:51.395Z",
+  "comp": ".impeccable\\mocks\\atlas-02.png",
+  "warnings": [
+    "region project-photo: \"bleed\": true set in the regions file (the clipped-artwork refusal is overridden: the page crops it there)",
+    "region project-label: \"codeDrawn\": true set in the regions file (the painted-material refusal is overridden: code draws this region)",
+    "region route-left: \"codeDrawn\": true set in the regions file (the painted-material refusal is overridden: code draws this region)",
+    "region route-right: \"codeDrawn\": true set in the regions file (the painted-material refusal is overridden: code draws this region)"
+  ],
+  "uncoveredInkCells": [],
+  "compSize": {
+    "width": 1586,
+    "height": 992
+  },
+  "aspect": 1.5988,
+  "orientation": "landscape",
+  "palette": [
+    {
+      "hex": "#e8e7d9",
+      "coverage": 0.5946
+    },
+    {
+      "hex": "#141416",
+      "coverage": 0.1776
+    },
+    {
+      "hex": "#b5ada8",
+      "coverage": 0.1083
+    },
+    {
+      "hex": "#494645",
+      "coverage": 0.0854
+    },
+    {
+      "hex": "#c7b196",
+      "coverage": 0.0341
+    }
+  ],
+  "bands": [
+    {
+      "y": 0.1,
+      "strength": 0.7171
+    },
+    {
+      "y": 0.3,
+      "strength": 0.2069
+    },
+    {
+      "y": 0.3375,
+      "strength": 0.4519
+    },
+    {
+      "y": 0.4125,
+      "strength": 0.3286
+    },
+    {
+      "y": 0.4625,
+      "strength": 0.4604
+    },
+    {
+      "y": 0.6875,
+      "strength": 0.2294
+    },
+    {
+      "y": 0.825,
+      "strength": 0.8687
+    },
+    {
+      "y": 0.9625,
+      "strength": 0.359
+    }
+  ],
+  "regions": [
+    {
+      "id": "paper-texture",
+      "kind": "texture",
+      "note": "warm mineral paper fiber with faint print texture",
+      "grid": "C0:C0",
+      "box": {
+        "x": 0.2,
+        "y": 0,
+        "w": 0.1,
+        "h": 0.1
+      },
+      "px": {
+        "x": 317,
+        "y": 0,
+        "w": 159,
+        "h": 99
+      },
+      "aspect": 1.6061,
+      "palette": [
+        {
+          "hex": "#e8e8dd",
+          "coverage": 1
+        }
+      ],
+      "detail": {
+        "energy": 2.1373
+      },
+      "medium": "raster",
+      "plate": "assets/plates/paper-texture.png",
+      "text": null
+    },
+    {
+      "id": "header-rule",
+      "kind": "chrome",
+      "note": "compact header with a thin black bottom rule",
+      "grid": "A0:J0",
+      "box": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 0.1
+      },
+      "px": {
+        "x": 0,
+        "y": 0,
+        "w": 1586,
+        "h": 99
+      },
+      "aspect": 16.0202,
+      "palette": [
+        {
+          "hex": "#e8e8da",
+          "coverage": 0.9867
+        },
+        {
+          "hex": "#111111",
+          "coverage": 0.0059
+        },
+        {
+          "hex": "#d1d1e5",
+          "coverage": 0.003
+        },
+        {
+          "hex": "#b4b4ac",
+          "coverage": 0.0022
+        },
+        {
+          "hex": "#696969",
+          "coverage": 0.0022
+        }
+      ],
+      "detail": {
+        "energy": 7.5971
+      },
+      "medium": "semantic",
+      "plate": null,
+      "text": null
+    },
+    {
+      "id": "brand",
+      "kind": "text",
+      "note": "AVANCINI OS wordmark",
+      "grid": "A0:B0",
+      "coverBox": {
+        "x": 0,
+        "y": 0,
+        "w": 0.2,
+        "h": 0.1
+      },
+      "box": {
+        "x": 0.0378,
+        "y": 0.0181,
+        "w": 0.1059,
+        "h": 0.0363
+      },
+      "px": {
+        "x": 60,
+        "y": 18,
+        "w": 168,
+        "h": 36
+      },
+      "aspect": 4.6667,
+      "palette": [
+        {
+          "hex": "#e9e8de",
+          "coverage": 0.7795
+        },
+        {
+          "hex": "#0e0e0e",
+          "coverage": 0.1314
+        },
+        {
+          "hex": "#605f5f",
+          "coverage": 0.0408
+        },
+        {
+          "hex": "#bdbbb3",
+          "coverage": 0.0393
+        },
+        {
+          "hex": "#908d8d",
+          "coverage": 0.0091
+        }
+      ],
+      "detail": {
+        "energy": 45.1901
+      },
+      "medium": "semantic",
+      "plate": null,
+      "text": null,
+      "type": {
+        "comp": {
+          "lines": 1,
+          "glyphs": 12,
+          "capHeightPx": 17.6,
+          "inkIsDark": true,
+          "allCaps": true,
+          "advance": 0.5528,
+          "advTall": 0.5528,
+          "advX": null,
+          "gap": 0.1417,
+          "xRatio": null,
+          "stemW": 0.1783,
+          "contrast": 1.0129,
+          "serif": 0.2666,
+          "densTall": 0.4911,
+          "densX": null,
+          "weight": 0.4911
+        },
+        "widthClass": "condensed",
+        "weightClass": "medium"
+      }
+    },
+    {
+      "id": "header-nav",
+      "kind": "text",
+      "note": "ESTÚDIO PROJETOS SERVIÇOS CONTATO navigation",
+      "grid": "D0:G0",
+      "coverBox": {
+        "x": 0.3,
+        "y": 0,
+        "w": 0.4,
+        "h": 0.1
+      },
+      "box": {
+        "x": 0.4325,
+        "y": 0.0242,
+        "w": 0.0492,
+        "h": 0.0242
+      },
+      "px": {
+        "x": 686,
+        "y": 24,
+        "w": 78,
+        "h": 24
+      },
+      "aspect": 3.25,
+      "palette": [
+        {
+          "hex": "#e9e9db",
+          "coverage": 0.8529
+        },
+        {
+          "hex": "#4b484a",
+          "coverage": 0.049
+        },
+        {
+          "hex": "#8f9188",
+          "coverage": 0.0343
+        },
+        {
+          "hex": "#bdbab8",
+          "coverage": 0.0343
+        },
+        {
+          "hex": "#6b6860",
+          "coverage": 0.0294
+        }
+      ],
+      "detail": {
+        "energy": 17.5802
+      },
+      "medium": "semantic",
+      "plate": null,
+      "text": null,
+      "type": {
+        "comp": {
+          "lines": 1,
+          "glyphs": 8,
+          "capHeightPx": 8.3,
+          "inkIsDark": true,
+          "allCaps": false,
+          "advance": 0.6941,
+          "advTall": 0.6941,
+          "advX": null,
+          "gap": 0.3018,
+          "xRatio": 0.8422,
+          "stemW": 0.2301,
+          "contrast": 1.2253,
+          "serif": null,
+          "densTall": 0.5831,
+          "densX": null,
+          "weight": 0.5831
+        },
+        "widthClass": "normal",
+        "weightClass": "bold"
+      }
+    },
+    {
+      "id": "menu-control",
+      "kind": "control",
+      "note": "MENU label and two-line menu icon",
+      "grid": "I0:J0",
+      "coverBox": {
+        "x": 0.8,
+        "y": 0,
+        "w": 0.2,
+        "h": 0.1
+      },
+      "box": {
+        "x": 0.8947,
+        "y": 0.0242,
+        "w": 0.034,
+        "h": 0.0242
+      },
+      "px": {
+        "x": 1419,
+        "y": 24,
+        "w": 54,
+        "h": 24
+      },
+      "aspect": 2.25,
+      "palette": [
+        {
+          "hex": "#e9e8db",
+          "coverage": 0.8333
+        },
+        {
+          "hex": "#857f7b",
+          "coverage": 0.0764
+        },
+        {
+          "hex": "#222222",
+          "coverage": 0.0556
+        },
+        {
+          "hex": "#bbbbab",
+          "coverage": 0.0347
+        }
+      ],
+      "detail": {
+        "energy": 14.0199
+      },
+      "medium": "semantic",
+      "plate": null,
+      "text": null
+    },
+    {
+      "id": "studio-note",
+      "kind": "text",
+      "note": "small studio positioning note",
+      "grid": "A1:B1",
+      "coverBox": {
+        "x": 0,
+        "y": 0.1,
+        "w": 0.2,
+        "h": 0.1
+      },
+      "box": {
+        "x": 0.0378,
+        "y": 0.1119,
+        "w": 0.0681,
+        "h": 0.0726
+      },
+      "px": {
+        "x": 60,
+        "y": 111,
+        "w": 108,
+        "h": 72
+      },
+      "aspect": 1.5,
+      "palette": [
+        {
+          "hex": "#e9e8df",
+          "coverage": 0.9352
+        },
+        {
+          "hex": "#a5a39f",
+          "coverage": 0.0613
+        },
+        {
+          "hex": "#88837d",
+          "coverage": 0.0035
+        }
+      ],
+      "detail": {
+        "energy": 8.8106
+      },
+      "medium": "semantic",
+      "plate": null,
+      "text": null,
+      "type": {
+        "comp": {
+          "lines": 3,
+          "glyphs": 29,
+          "capHeightPx": 6.1,
+          "inkIsDark": true,
+          "allCaps": true,
+          "advance": 0.7133,
+          "advTall": 0.7133,
+          "advX": null,
+          "gap": 0.4725,
+          "xRatio": null,
+          "stemW": 0.2448,
+          "contrast": 1.028,
+          "serif": 0.3868,
+          "densTall": 0.6802,
+          "densX": null,
+          "weight": 0.6802
+        },
+        "widthClass": "normal",
+        "weightClass": "black"
+      }
+    },
+    {
+      "id": "coordinates",
+      "kind": "text",
+      "note": "Brasil coordinate note",
+      "grid": "B1:C1",
+      "coverBox": {
+        "x": 0.1,
+        "y": 0.1,
+        "w": 0.2,
+        "h": 0.1
+      },
+      "box": {
+        "x": 0.1683,
+        "y": 0.13,
+        "w": 0.053,
+        "h": 0.0484
+      },
+      "px": {
+        "x": 267,
+        "y": 129,
+        "w": 84,
+        "h": 48
+      },
+      "aspect": 1.75,
+      "palette": [
+        {
+          "hex": "#e9e8dd",
+          "coverage": 0.8996
+        },
+        {
+          "hex": "#b8b4af",
+          "coverage": 0.0826
+        },
+        {
+          "hex": "#988f8d",
+          "coverage": 0.0156
+        },
+        {
+          "hex": "#787868",
+          "coverage": 0.0022
+        }
+      ],
+      "detail": {
+        "energy": 7.8396
+      },
+      "medium": "semantic",
+      "plate": null,
+      "text": null,
+      "type": {
+        "comp": {
+          "lines": 3,
+          "glyphs": 24,
+          "capHeightPx": 6.2,
+          "inkIsDark": true,
+          "allCaps": false,
+          "advance": 0.7212,
+          "advTall": 0.7212,
+          "advX": 0.6411,
+          "gap": 0.3625,
+          "xRatio": 0.6954,
+          "stemW": 0.2915,
+          "contrast": 1.3294,
+          "serif": null,
+          "densTall": 0.6906,
+          "densX": 0.5318,
+          "weight": 0.6906
+        },
+        "widthClass": "normal",
+        "weightClass": "black"
+      }
+    },
+    {
+      "id": "movement-note",
+      "kind": "text",
+      "note": "small ideas em movimento note",
+      "grid": "I1:J1",
+      "coverBox": {
+        "x": 0.8,
+        "y": 0.1,
+        "w": 0.2,
+        "h": 0.1
+      },
+      "box": {
+        "x": 0.8001,
+        "y": 0.0998,
+        "w": 0.1248,
+        "h": 0.0968
+      },
+      "px": {
+        "x": 1269,
+        "y": 99,
+        "w": 198,
+        "h": 96
+      },
+      "aspect": 2.0625,
+      "palette": [
+        {
+          "hex": "#a59f9f",
+          "coverage": 0.916
+        },
+        {
+          "hex": "#e8e7d8",
+          "coverage": 0.0816
+        },
+        {
+          "hex": "#cecede",
+          "coverage": 0.0024
+        }
+      ],
+      "detail": {
+        "energy": 3.0599
+      },
+      "medium": "semantic",
+      "plate": null,
+      "text": null,
+      "type": {
+        "comp": null,
+        "measuredAt": "2026-09-25T21:23:03.750Z",
+        "note": "no separable lettering in the crop; size by the region box"
+      }
+    },
+    {
+      "id": "hero-headline",
+      "kind": "text",
+      "note": "large editorial headline Ideias que encontram direção. Tecnologia que faz avançar.",
+      "grid": "A2:D5",
+      "coverBox": {
+        "x": 0,
+        "y": 0.2,
+        "w": 0.4,
+        "h": 0.4
+      },
+      "box": {
+        "x": 0,
+        "y": 0.2238,
+        "w": 0.3997,
+        "h": 0.376
+      },
+      "px": {
+        "x": 0,
+        "y": 222,
+        "w": 634,
+        "h": 373
+      },
+      "aspect": 1.6997,
+      "palette": [
+        {
+          "hex": "#e9e8dc",
+          "coverage": 0.8212
+        },
+        {
+          "hex": "#0d0d0f",
+          "coverage": 0.1414
+        },
+        {
+          "hex": "#b4b3ae",
+          "coverage": 0.015
+        },
+        {
+          "hex": "#505050",
+          "coverage": 0.0131
+        },
+        {
+          "hex": "#7f7e78",
+          "coverage": 0.0093
+        }
+      ],
+      "detail": {
+        "energy": 59.7968
+      },
+      "medium": "semantic",
+      "plate": null,
+      "text": null,
+      "type": {
+        "comp": {
+          "lines": 4,
+          "glyphs": 17,
+          "capHeightPx": 64.9,
+          "inkIsDark": true,
+          "allCaps": false,
+          "advance": 1.1936,
+          "advTall": 1.4513,
+          "advX": 0.5999,
+          "gap": 0.0296,
+          "xRatio": 0.6938,
+          "stemW": 0.1348,
+          "contrast": 1.9938,
+          "serif": 1.6334,
+          "densTall": 0.3477,
+          "densX": 0.4495,
+          "weight": 0.3477
+        },
+        "widthClass": "normal",
+        "weightClass": "regular",
+        "chosen": {
+          "family": "Playfair Display",
+          "weight": 400,
+          "fontSizePx": 93,
+          "source": "catalog",
+          "estimatedSize": true,
+          "stamp": "9dbaf0086aeb"
+        }
+      }
+    },
+    {
+      "id": "project-photo",
+      "kind": "image",
+      "note": "large editorial photograph of Tape Car vehicle rear in urban landscape, full-frame project proof",
+      "grid": "E1:J8",
+      "bleed": true,
+      "box": {
+        "x": 0.4,
+        "y": 0.1,
+        "w": 0.6,
+        "h": 0.8
+      },
+      "px": {
+        "x": 634,
+        "y": 99,
+        "w": 952,
+        "h": 794
+      },
+      "aspect": 1.199,
+      "palette": [
+        {
+          "hex": "#151517",
+          "coverage": 0.3226
+        },
+        {
+          "hex": "#e8e6d6",
+          "coverage": 0.2184
+        },
+        {
+          "hex": "#b3aba5",
+          "coverage": 0.204
+        },
+        {
+          "hex": "#464241",
+          "coverage": 0.1798
+        },
+        {
+          "hex": "#c7b196",
+          "coverage": 0.0751
+        }
+      ],
+      "detail": {
+        "energy": 18.1406
+      },
+      "medium": "raster",
+      "plate": "assets/plates/project-photo.png",
+      "text": null
+    },
+    {
+      "id": "project-label",
+      "kind": "text",
+      "note": "PROJETO REAL — TAPE CAR text label positioned above the project image",
+      "grid": "E1:G1",
+      "codeDrawn": true,
+      "box": {
+        "x": 0.4,
+        "y": 0.1,
+        "w": 0.3,
+        "h": 0.1
+      },
+      "px": {
+        "x": 634,
+        "y": 99,
+        "w": 476,
+        "h": 99
+      },
+      "aspect": 4.8081,
+      "palette": [
+        {
+          "hex": "#08090a",
+          "coverage": 0.5463
+        },
+        {
+          "hex": "#a3a0a4",
+          "coverage": 0.1887
+        },
+        {
+          "hex": "#2b2e3a",
+          "coverage": 0.154
+        },
+        {
+          "hex": "#e8e8d8",
+          "coverage": 0.0835
+        },
+        {
+          "hex": "#bcae9e",
+          "coverage": 0.0275
+        }
+      ],
+      "detail": {
+        "energy": 20.457
+      },
+      "medium": "semantic",
+      "plate": null,
+      "text": null,
+      "type": {
+        "comp": null,
+        "measuredAt": "2026-09-25T21:23:04.045Z",
+        "note": "no separable lettering in the crop; size by the region box"
+      }
+    },
+    {
+      "id": "project-side-note",
+      "kind": "text",
+      "note": "small movement inteligente para pessoas reais note",
+      "grid": "I2:J3",
+      "coverBox": {
+        "x": 0.8,
+        "y": 0.2,
+        "w": 0.2,
+        "h": 0.2
+      },
+      "box": {
+        "x": 0.8001,
+        "y": 0.1996,
+        "w": 0.0681,
+        "h": 0.0968
+      },
+      "px": {
+        "x": 1269,
+        "y": 198,
+        "w": 108,
+        "h": 96
+      },
+      "aspect": 1.125,
+      "palette": [
+        {
+          "hex": "#aaa8a6",
+          "coverage": 1
+        }
+      ],
+      "detail": {
+        "energy": 0.5449
+      },
+      "medium": "semantic",
+      "plate": null,
+      "text": null,
+      "type": {
+        "comp": null,
+        "measuredAt": "2026-09-25T21:23:04.183Z",
+        "note": "no separable lettering in the crop; size by the region box"
+      }
+    },
+    {
+      "id": "route-left",
+      "kind": "chrome",
+      "note": "thin cobalt route line with circular nodes",
+      "grid": "A5:D6",
+      "codeDrawn": true,
+      "box": {
+        "x": 0,
+        "y": 0.5,
+        "w": 0.4,
+        "h": 0.2
+      },
+      "px": {
+        "x": 0,
+        "y": 496,
+        "w": 634,
+        "h": 198
+      },
+      "aspect": 3.202,
+      "palette": [
+        {
+          "hex": "#e8e8db",
+          "coverage": 0.9161
+        },
+        {
+          "hex": "#0c0d0f",
+          "coverage": 0.0461
+        },
+        {
+          "hex": "#d8f838",
+          "coverage": 0.0199
+        },
+        {
+          "hex": "#a0a09a",
+          "coverage": 0.01
+        },
+        {
+          "hex": "#696964",
+          "coverage": 0.0079
+        }
+      ],
+      "detail": {
+        "energy": 25.9917
+      },
+      "medium": "semantic",
+      "plate": null,
+      "text": null
+    },
+    {
+      "id": "route-right",
+      "kind": "chrome",
+      "note": "continuation of thin cobalt route line across the project image",
+      "grid": "D5:J7",
+      "codeDrawn": true,
+      "box": {
+        "x": 0.3,
+        "y": 0.5,
+        "w": 0.7,
+        "h": 0.3
+      },
+      "px": {
+        "x": 476,
+        "y": 496,
+        "w": 1110,
+        "h": 298
+      },
+      "aspect": 3.7248,
+      "palette": [
+        {
+          "hex": "#18191b",
+          "coverage": 0.4016
+        },
+        {
+          "hex": "#e9e7d7",
+          "coverage": 0.2553
+        },
+        {
+          "hex": "#413b38",
+          "coverage": 0.1744
+        },
+        {
+          "hex": "#c6af95",
+          "coverage": 0.0967
+        },
+        {
+          "hex": "#6d6052",
+          "coverage": 0.072
+        }
+      ],
+      "detail": {
+        "energy": 15.4928
+      },
+      "medium": "semantic",
+      "plate": null,
+      "text": null
+    },
+    {
+      "id": "route-labels",
+      "kind": "text",
+      "note": "IDENTIDADE EXPERIÊNCIA AUTOMAÇÃO SISTEMAS route labels",
+      "grid": "A6:D6",
+      "coverBox": {
+        "x": 0,
+        "y": 0.6,
+        "w": 0.4,
+        "h": 0.1
+      },
+      "box": {
+        "x": 0.0605,
+        "y": 0.5998,
+        "w": 0.3392,
+        "h": 0.0484
+      },
+      "px": {
+        "x": 96,
+        "y": 595,
+        "w": 538,
+        "h": 48
+      },
+      "aspect": 11.2083,
+      "palette": [
+        {
+          "hex": "#e9e8da",
+          "coverage": 0.9336
+        },
+        {
+          "hex": "#d2cfdb",
+          "coverage": 0.0232
+        },
+        {
+          "hex": "#3f3c3a",
+          "coverage": 0.0189
+        },
+        {
+          "hex": "#64635e",
+          "coverage": 0.0127
+        },
+        {
+          "hex": "#546fea",
+          "coverage": 0.0116
+        }
+      ],
+      "detail": {
+        "energy": 24.8285
+      },
+      "medium": "semantic",
+      "plate": null,
+      "text": null,
+      "type": {
+        "comp": null,
+        "measuredAt": "2026-09-25T21:25:30.265Z",
+        "note": "no separable lettering in the crop; size by the region box"
+      }
+    },
+    {
+      "id": "primary-action",
+      "kind": "control",
+      "note": "lime rectangular COMEÇAR UM PROJETO button with arrow",
+      "grid": "A7:C7",
+      "coverBox": {
+        "x": 0,
+        "y": 0.7,
+        "w": 0.3,
+        "h": 0.1
+      },
+      "box": {
+        "x": 0.0567,
+        "y": 0.7056,
+        "w": 0.1135,
+        "h": 0.0302
+      },
+      "px": {
+        "x": 90,
+        "y": 700,
+        "w": 180,
+        "h": 30
+      },
+      "aspect": 6,
+      "palette": [
+        {
+          "hex": "#d9f837",
+          "coverage": 0.8932
+        },
+        {
+          "hex": "#a6be28",
+          "coverage": 0.0339
+        },
+        {
+          "hex": "#546913",
+          "coverage": 0.0305
+        },
+        {
+          "hex": "#3d4c0d",
+          "coverage": 0.0254
+        },
+        {
+          "hex": "#232e0a",
+          "coverage": 0.0169
+        }
+      ],
+      "detail": {
+        "energy": 21.4248
+      },
+      "medium": "semantic",
+      "plate": null,
+      "text": null
+    },
+    {
+      "id": "bottom-values",
+      "kind": "text",
+      "note": "small IDEIAS SISTEMAS PESSOAS RESULTADOS stack",
+      "grid": "A8:B8",
+      "coverBox": {
+        "x": 0,
+        "y": 0.8,
+        "w": 0.2,
+        "h": 0.1
+      },
+      "box": {
+        "x": 0.0378,
+        "y": 0.8004,
+        "w": 0.0567,
+        "h": 0.0484
+      },
+      "px": {
+        "x": 60,
+        "y": 794,
+        "w": 90,
+        "h": 48
+      },
+      "aspect": 1.875,
+      "palette": [
+        {
+          "hex": "#e7e7db",
+          "coverage": 0.8875
+        },
+        {
+          "hex": "#959593",
+          "coverage": 0.0729
+        },
+        {
+          "hex": "#b8b4ac",
+          "coverage": 0.0375
+        },
+        {
+          "hex": "#685868",
+          "coverage": 0.0021
+        }
+      ],
+      "detail": {
+        "energy": 10.9298
+      },
+      "medium": "semantic",
+      "plate": null,
+      "text": null,
+      "type": {
+        "comp": {
+          "lines": 3,
+          "glyphs": 25,
+          "capHeightPx": 6.6,
+          "inkIsDark": true,
+          "allCaps": false,
+          "advance": 0.6993,
+          "advTall": 0.6993,
+          "advX": null,
+          "gap": 0.4784,
+          "xRatio": 0.8284,
+          "stemW": 0.254,
+          "contrast": 1.112,
+          "serif": 0.5158,
+          "densTall": 0.647,
+          "densX": null,
+          "weight": 0.647
+        },
+        "widthClass": "normal",
+        "weightClass": "bold"
+      }
+    },
+    {
+      "id": "bottom-method",
+      "kind": "text",
+      "note": "small DO PLANEJAMENTO À OPERAÇÃO COM PROPÓSITO note",
+      "grid": "B8:D8",
+      "coverBox": {
+        "x": 0.1,
+        "y": 0.8,
+        "w": 0.3,
+        "h": 0.1
+      },
+      "box": {
+        "x": 0.1835,
+        "y": 0.8004,
+        "w": 0.0794,
+        "h": 0.0363
+      },
+      "px": {
+        "x": 291,
+        "y": 794,
+        "w": 126,
+        "h": 36
+      },
+      "aspect": 3.5,
+      "palette": [
+        {
+          "hex": "#e8e7da",
+          "coverage": 0.879
+        },
+        {
+          "hex": "#a5a09a",
+          "coverage": 0.119
+        },
+        {
+          "hex": "#887878",
+          "coverage": 0.002
+        }
+      ],
+      "detail": {
+        "energy": 13.3615
+      },
+      "medium": "semantic",
+      "plate": null,
+      "text": null,
+      "type": {
+        "comp": {
+          "lines": 2,
+          "glyphs": 21,
+          "capHeightPx": 7.8,
+          "inkIsDark": true,
+          "allCaps": false,
+          "advance": 0.6229,
+          "advTall": 0.6611,
+          "advX": 0.6229,
+          "gap": 0.3636,
+          "xRatio": 0.8216,
+          "stemW": 0.2273,
+          "contrast": 1.0852,
+          "serif": null,
+          "densTall": 0.595,
+          "densX": 0.6764,
+          "weight": 0.595
+        },
+        "widthClass": "normal",
+        "weightClass": "bold"
+      }
+    },
+    {
+      "id": "project-metadata",
+      "kind": "text",
+      "note": "small PROJETO REAL TAPE CAR coordinate metadata",
+      "grid": "I7:J8",
+      "coverBox": {
+        "x": 0.8,
+        "y": 0.7,
+        "w": 0.2,
+        "h": 0.2
+      },
+      "box": {
+        "x": 0.8001,
+        "y": 0.6996,
+        "w": 0.1967,
+        "h": 0.1391
+      },
+      "px": {
+        "x": 1269,
+        "y": 694,
+        "w": 312,
+        "h": 138
+      },
+      "aspect": 2.2609,
+      "palette": [
+        {
+          "hex": "#2c2a29",
+          "coverage": 0.7168
+        },
+        {
+          "hex": "#e8e7d9",
+          "coverage": 0.2377
+        },
+        {
+          "hex": "#1b1828",
+          "coverage": 0.0235
+        },
+        {
+          "hex": "#5c5956",
+          "coverage": 0.018
+        },
+        {
+          "hex": "#d4d0e4",
+          "coverage": 0.004
+        }
+      ],
+      "detail": {
+        "energy": 10.9579
+      },
+      "medium": "semantic",
+      "plate": null,
+      "text": null,
+      "type": {
+        "comp": null,
+        "measuredAt": "2026-09-25T21:23:04.141Z",
+        "note": "no separable lettering in the crop; size by the region box"
+      }
+    },
+    {
+      "id": "contour-texture",
+      "kind": "texture",
+      "note": "sparse cobalt geographic contour lines on warm paper",
+      "grid": "J1:J8",
+      "box": {
+        "x": 0.9,
+        "y": 0.1,
+        "w": 0.1,
+        "h": 0.8
+      },
+      "px": {
+        "x": 1427,
+        "y": 99,
+        "w": 159,
+        "h": 794
+      },
+      "aspect": 0.2003,
+      "palette": [
+        {
+          "hex": "#e8e7d8",
+          "coverage": 0.4666
+        },
+        {
+          "hex": "#beb2a8",
+          "coverage": 0.2305
+        },
+        {
+          "hex": "#252424",
+          "coverage": 0.1811
+        },
+        {
+          "hex": "#4c4746",
+          "coverage": 0.1102
+        },
+        {
+          "hex": "#796e64",
+          "coverage": 0.0115
+        }
+      ],
+      "detail": {
+        "energy": 5.8886
+      },
+      "medium": "raster",
+      "plate": "assets/plates/contour-texture.png",
+      "text": null
+    },
+    {
+      "id": "next-section-index",
+      "kind": "text",
+      "note": "02 PRÓXIMO CAPÍTULO index",
+      "grid": "A9:B9",
+      "coverBox": {
+        "x": 0,
+        "y": 0.9,
+        "w": 0.2,
+        "h": 0.1
+      },
+      "box": {
+        "x": 0.0378,
+        "y": 0.9304,
+        "w": 0.162,
+        "h": 0.0696
+      },
+      "px": {
+        "x": 60,
+        "y": 923,
+        "w": 257,
+        "h": 69
+      },
+      "aspect": 3.7246,
+      "palette": [
+        {
+          "hex": "#e9e8da",
+          "coverage": 0.6959
+        },
+        {
+          "hex": "#0b0b0e",
+          "coverage": 0.2345
+        },
+        {
+          "hex": "#888784",
+          "coverage": 0.0294
+        },
+        {
+          "hex": "#aeada5",
+          "coverage": 0.0269
+        },
+        {
+          "hex": "#60605d",
+          "coverage": 0.0132
+        }
+      ],
+      "detail": {
+        "energy": 39.6738
+      },
+      "medium": "semantic",
+      "plate": null,
+      "text": null,
+      "type": {
+        "comp": null,
+        "measuredAt": "2026-09-25T21:23:04.440Z",
+        "note": "no separable lettering in the crop; size by the region box"
+      }
+    },
+    {
+      "id": "next-section-heading",
+      "kind": "text",
+      "note": "cropped large Projetos que heading beginning next section",
+      "grid": "A9:D9",
+      "coverBox": {
+        "x": 0,
+        "y": 0.9,
+        "w": 0.4,
+        "h": 0.1
+      },
+      "box": {
+        "x": 0.0378,
+        "y": 0.9304,
+        "w": 0.314,
+        "h": 0.0696
+      },
+      "px": {
+        "x": 60,
+        "y": 923,
+        "w": 498,
+        "h": 69
+      },
+      "aspect": 7.2174,
+      "palette": [
+        {
+          "hex": "#e9e8da",
+          "coverage": 0.7366
+        },
+        {
+          "hex": "#0c0c0e",
+          "coverage": 0.207
+        },
+        {
+          "hex": "#b4b3ac",
+          "coverage": 0.0237
+        },
+        {
+          "hex": "#848382",
+          "coverage": 0.0203
+        },
+        {
+          "hex": "#474746",
+          "coverage": 0.0124
+        }
+      ],
+      "detail": {
+        "energy": 58.8329
+      },
+      "medium": "semantic",
+      "plate": null,
+      "text": null,
+      "type": {
+        "comp": {
+          "lines": 1,
+          "glyphs": 7,
+          "capHeightPx": 59.1,
+          "inkIsDark": true,
+          "allCaps": false,
+          "advance": 0.7108,
+          "advTall": 2.2679,
+          "advX": 0.5416,
+          "gap": 0.0846,
+          "xRatio": 0.6301,
+          "stemW": 0.1824,
+          "contrast": 2.3123,
+          "serif": 1.0108,
+          "densTall": 0.3453,
+          "densX": 0.4769,
+          "weight": 0.3453
+        },
+        "widthClass": "condensed",
+        "weightClass": "regular"
+      }
+    },
+    {
+      "id": "next-project-plate",
+      "kind": "plate",
+      "note": "cropped monochrome mountain contour illustration beginning next section",
+      "grid": "F9:I9",
+      "box": {
+        "x": 0.5,
+        "y": 0.9,
+        "w": 0.4,
+        "h": 0.1
+      },
+      "px": {
+        "x": 793,
+        "y": 893,
+        "w": 634,
+        "h": 99
+      },
+      "aspect": 6.404,
+      "palette": [
+        {
+          "hex": "#e3e1d4",
+          "coverage": 0.855
+        },
+        {
+          "hex": "#545254",
+          "coverage": 0.0646
+        },
+        {
+          "hex": "#b6b0ab",
+          "coverage": 0.0504
+        },
+        {
+          "hex": "#7e7a75",
+          "coverage": 0.0163
+        },
+        {
+          "hex": "#c8c9dd",
+          "coverage": 0.0138
+        }
+      ],
+      "detail": {
+        "energy": 10.538
+      },
+      "medium": "raster",
+      "plate": "assets/plates/next-project-plate.png",
+      "text": null
+    },
+    {
+      "id": "next-section-note",
+      "kind": "text",
+      "note": "small MESMA DIREÇÃO MAIS POSSIBILIDADES note",
+      "grid": "I9:J9",
+      "coverBox": {
+        "x": 0.8,
+        "y": 0.9,
+        "w": 0.2,
+        "h": 0.1
+      },
+      "box": {
+        "x": 0.8001,
+        "y": 0.9063,
+        "w": 0.0605,
+        "h": 0.0938
+      },
+      "px": {
+        "x": 1269,
+        "y": 899,
+        "w": 96,
+        "h": 93
+      },
+      "aspect": 1.0323,
+      "palette": [
+        {
+          "hex": "#dad5cb",
+          "coverage": 0.5645
+        },
+        {
+          "hex": "#525052",
+          "coverage": 0.3911
+        },
+        {
+          "hex": "#7e7a77",
+          "coverage": 0.0323
+        },
+        {
+          "hex": "#a3a096",
+          "coverage": 0.0101
+        },
+        {
+          "hex": "#403848",
+          "coverage": 0.002
+        }
+      ],
+      "detail": {
+        "energy": 8.1388
+      },
+      "medium": "semantic",
+      "plate": null,
+      "text": null,
+      "type": {
+        "comp": null,
+        "measuredAt": "2026-09-25T21:25:29.661Z",
+        "note": "no separable lettering in the crop; size by the region box"
+      }
+    }
+  ]
+}

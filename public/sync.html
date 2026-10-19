@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Avancini Sync | CRM, chatbot e agentes de IA</title>
+  <meta name="description" content="O Avancini Sync organiza conversas, oportunidades e próximos passos com CRM, chatbot e agentes de IA configurados para sua operação.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/ecosystem-header.css">
+  <link rel="stylesheet" href="/sync-redesign.css">
+</head>
+<body>
+  <div id="topSentinel" aria-hidden="true"></div>
+  <header class="ecosystem-header ecosystem-header--sync site-header sync-ecosystem-header" id="siteHeader">
+    <div class="ecosystem-header__inner sync-header-inner">
+      <a class="sync-brand" href="#inicio" aria-label="Avancini Sync, início">
+        <span class="avancini-mark avancini-mark-sync sync-brand-mark" aria-hidden="true"><i class="avancini-mark-orbit"></i><i class="avancini-mark-cap"></i><i class="avancini-mark-leg avancini-mark-leg-left"></i><i class="avancini-mark-leg avancini-mark-leg-right"></i><i class="avancini-mark-notch"></i><i class="avancini-mark-slash"></i></span>
+        <span class="sync-brand-copy"><span>AVANCINI <b>SYNC</b></span><small>EQUIPE MULTIAGENTE DE IA</small></span>
+      </a>
+      <nav class="sync-ecosystem-nav" aria-label="Ecossistema Avancini"><a href="/dash">Dash</a><a href="/">OS</a><a href="/#escolher">Escolher</a></nav>
+      <button class="sync-menu-button" id="syncMenuBtn" type="button" aria-controls="syncMenu" aria-expanded="false"><span class="sync-menu-icon" aria-hidden="true"><i></i><i></i></span>Menu</button>
+    </div>
+  </header>
+
+  <section class="sync-menu-overlay" id="syncMenu" role="dialog" aria-modal="true" aria-label="Navegação do Avancini Sync" aria-hidden="true">
+    <div class="sync-menu-shell">
+      <header class="sync-menu-head"><span>Navegação · 08 seções</span><nav class="sync-menu-products" aria-label="Outras soluções"><a href="/dash">Avancini Dash →</a><a href="/">Avancini OS →</a></nav><button class="sync-menu-close" id="syncMenuClose" type="button" aria-label="Fechar menu">× <span>Fechar</span><small>Esc</small></button></header>
+      <nav class="sync-menu-links" aria-label="Seções do Sync">
+        <a href="#produto"><small>01</small><strong>Produto</strong><span>Central de conversas e oportunidades</span><b>→</b></a>
+        <a href="#capacidades"><small>02</small><strong>Capacidades</strong><span>O que o Sync assume na rotina</span><b>→</b></a>
+        <a href="#fluxo"><small>03</small><strong>Fluxo</strong><span>Da mensagem ao próximo passo</span><b>→</b></a>
+        <a href="#impacto"><small>04</small><strong>Impacto</strong><span>O que muda na rotina da equipe</span><b>→</b></a>
+        <a href="#agentes"><small>05</small><strong>Agentes</strong><span>Funções coordenadas por objetivo</span><b>→</b></a>
+        <a href="#seguranca"><small>06</small><strong>Controle</strong><span>Limites, histórico e entrega humana</span><b>→</b></a>
+        <a href="#faq"><small>07</small><strong>Dúvidas</strong><span>Respostas antes da implantação</span><b>→</b></a>
+        <a href="#contato"><small>08</small><strong>Contato</strong><span>Comece pelo seu atendimento atual</span><b>→</b></a>
+      </nav>
+      <footer class="sync-menu-foot"><span>Seu atendimento pode começar por uma conversa clara</span><a href="#contato">Solicitar demonstração</a></footer>
+    </div>
+  </section>
+
+  <main>
+    <section class="sync-hero" id="inicio">
+      <div class="sync-grid sync-hero-grid">
+        <div class="sync-hero-copy visible" data-reveal>
+          <h1>Toda conversa termina com <span>resposta e próximo passo.</span></h1>
+          <p class="sync-lead">O Sync entende a necessidade, responde com o tom da sua empresa e entrega a oportunidade organizada para sua equipe continuar.</p>
+          <div class="sync-actions"><a class="sync-button sync-button--primary" href="#produto">Ver uma conversa acontecer <span>→</span></a><a class="sync-button sync-button--quiet" href="#contato">Planejar meu atendimento</a></div>
+          <ul class="sync-proof-list sync-proof-strip" aria-label="O que o Sync entrega"><li><b>Resposta imediata</b><span>sem deixar o contato esperando</span></li><li><b>Contexto preservado</b><span>sem reler a conversa inteira</span></li><li><b>Próximo passo definido</b><span>pronto para a equipe continuar</span></li></ul>
+        </div>
+        <div class="sync-hero-visual">
+          <div class="sync-live-demo sync-live-demo--stable sync-whatsapp-demo visible" id="syncLiveDemo" data-live-stage="received" data-reveal aria-label="Demonstração de conversa no WhatsApp">
+            <header class="sync-live-head">
+              <div class="sync-whatsapp-brand"><span class="sync-wa-avatar"><img src="/whatsapp.svg" alt=""></span><span><strong>Avancini Sync</strong><small><i></i><span id="syncLiveStatus">online</span></small></span></div>
+              <div class="sync-wa-actions" aria-label="Ações da conversa">
+                <button type="button" aria-label="Iniciar chamada de vídeo" tabindex="-1"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 8.5 20 6v12l-5-2.5z"></path><rect x="3" y="6" width="12" height="12" rx="2"></rect></svg></button>
+                <button type="button" aria-label="Pesquisar" tabindex="-1"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="m16 16 4 4"></path></svg></button>
+                <button type="button" aria-label="Mais opções" tabindex="-1"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg></button>
+              </div>
+            </header>
+            <div class="sync-live-body">
+              <div class="sync-live-thread" role="log" aria-live="polite" aria-atomic="false">
+                <div class="sync-live-date">HOJE</div>
+                <article class="sync-live-message sync-live-message--customer"><p>Olá, preciso saber qual serviço faz sentido para minha empresa.</p><footer class="sync-message-meta"><time>10:42</time></footer></article>
+                <div class="sync-live-reading" aria-label="Avancini Sync está digitando"><i></i><i></i><i></i></div>
+                <article class="sync-live-message sync-live-message--sync"><p>Consigo orientar. Sua prioridade hoje é organizar o atendimento ou captar mais oportunidades?</p><footer class="sync-message-meta"><time>10:42</time><span class="sync-checks" aria-label="Mensagem entregue">✓✓</span></footer></article>
+              </div>
+              <div class="sync-wa-composer" aria-label="Campo de mensagem demonstrativo">
+                <button type="button" aria-label="Adicionar emoji" tabindex="-1"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M8 14s1.3 2 4 2 4-2 4-2M9 9h.01M15 9h.01"></path></svg></button>
+                <button type="button" aria-label="Anexar" tabindex="-1"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8.5 12.5 5.7-5.7a3 3 0 0 1 4.2 4.2l-7.1 7.1a5 5 0 0 1-7.1-7.1l7.1-7.1"></path></svg></button>
+                <span class="sync-wa-composer-field">Digite uma mensagem</span>
+                <button type="button" aria-label="Gravar áudio" tabindex="-1"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"></rect><path d="M6 11a6 6 0 0 0 12 0M12 17v4M9 21h6"></path></svg></button>
+              </div>
+              <aside class="sync-live-summary" aria-live="polite">
+                <header><span><b class="sync-insight-label">Leitura do Sync</b>O que o atendimento já organizou</span><i data-live-summary-status>Mensagem recebida</i></header>
+                <dl><div><dt>Necessidade</dt><dd data-live-need>Aguardando leitura</dd></div><div><dt>Prioridade</dt><dd data-live-priority>Ainda não definida</dd></div><div><dt>Próximo passo</dt><dd data-live-next>Analisar a mensagem</dd></div></dl>
+                <div class="sync-live-handoff"><span><i></i><span data-live-handoff>Mensagem recebida</span></span><b data-live-handoff-badge>Na fila</b></div>
+              </aside>
+            </div>
+            <div class="sync-live-steps sync-live-navigation" aria-label="Etapas da demonstração"><button class="sync-live-step sync-live-step--active" type="button" data-live-step="received" aria-pressed="true"><span>01</span>Mensagem recebida</button><button class="sync-live-step" type="button" data-live-step="understood" aria-pressed="false"><span>02</span>Contexto entendido</button><button class="sync-live-step" type="button" data-live-step="ready" aria-pressed="false"><span>03</span>Próximo passo pronto</button></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sync-product" id="produto">
+      <div class="sync-grid">
+        <header class="sync-section-intro sync-section-intro--center" data-reveal><p>Uma operação em um só lugar</p><h2>Veja o que precisa de atenção sem procurar em cinco ferramentas.</h2><span>O painel abaixo é um cenário demonstrativo. Ele mostra como conversas, dados e tarefas chegam organizados para sua equipe.</span></header>
+        <div class="sync-workspace" data-reveal>
+          <aside class="sync-workspace-nav">
+            <div class="sync-mini-brand"><i>A</i><b>Avancini Sync</b></div>
+            <nav role="tablist" aria-label="Módulos demonstrativos do Sync">
+              <button class="active" id="workspace-tab-overview" type="button" role="tab" aria-selected="true" aria-controls="workspace-panel-overview" data-workspace-tab="overview"><span>Visão geral</span><small>Agora</small></button>
+              <button id="workspace-tab-conversations" type="button" role="tab" aria-selected="false" aria-controls="workspace-panel-conversations" tabindex="-1" data-workspace-tab="conversations"><span>Conversas</span><small>3 abertas</small></button>
+              <button id="workspace-tab-opportunities" type="button" role="tab" aria-selected="false" aria-controls="workspace-panel-opportunities" tabindex="-1" data-workspace-tab="opportunities"><span>Oportunidades</span><small>7 ativas</small></button>
+              <button id="workspace-tab-agents" type="button" role="tab" aria-selected="false" aria-controls="workspace-panel-agents" tabindex="-1" data-workspace-tab="agents"><span>Agentes</span><small>4 funções</small></button>
+              <button id="workspace-tab-knowledge" type="button" role="tab" aria-selected="false" aria-controls="workspace-panel-knowledge" tabindex="-1" data-workspace-tab="knowledge"><span>Conhecimento</span><small>Base pronta</small></button>
+            </nav>
+            <div class="sync-workspace-user"><span>JA</span><small>Equipe online</small></div>
+          </aside>
+          <div class="sync-workspace-main">
+            <div class="sync-workspace-top"><div><small id="workspaceEyebrow">Hoje</small><h3 id="workspaceTitle">Central de atendimento</h3></div><span class="sync-live-dot" id="workspaceStatus">Operação ativa</span></div>
+
+            <section class="sync-workspace-panel active" id="workspace-panel-overview" role="tabpanel" aria-labelledby="workspace-tab-overview" data-workspace-panel="overview">
+              <div class="sync-workspace-stats"><article><small>Conversas abertas</small><strong>12</strong><span>4 aguardam a equipe</span></article><article><small>Oportunidades</small><strong>7</strong><span>com próximo passo</span></article><article><small>Follow-ups</small><strong>5</strong><span>programados hoje</span></article></div>
+              <div class="sync-overview-grid">
+                <article class="sync-overview-queue"><header><b>Próximas ações</b><span>Por prioridade</span></header><ol><li><i>CM</i><div><b>Clínica Movimento</b><small>Confirmar preferência de horário</small></div><em>Agora</em></li><li><i>AF</i><div><b>Almeida Imóveis</b><small>Enviar opções dentro da faixa</small></div><em>Hoje</em></li><li><i>RC</i><div><b>Ramos Consultoria</b><small>Equipe precisa assumir a negociação</small></div><em>Equipe</em></li></ol></article>
+                <article class="sync-overview-radar"><header><b>Fluxo do dia</b><span>Cenário demonstrativo</span></header><div><span style="--value:78%"><b>Respondidas</b><i></i><small>18</small></span><span style="--value:54%"><b>Em qualificação</b><i></i><small>7</small></span><span style="--value:36%"><b>Prontas para equipe</b><i></i><small>4</small></span></div><p>O painel reúne o que chegou, o que a IA organizou e onde uma pessoa precisa continuar.</p></article>
+              </div>
+            </section>
+
+            <section class="sync-workspace-panel" id="workspace-panel-conversations" role="tabpanel" aria-labelledby="workspace-tab-conversations" data-workspace-panel="conversations" hidden>
+              <div class="sync-workspace-body">
+                <section class="sync-inbox-demo"><header><b>Conversas recentes</b><span>Fila organizada</span></header><button class="active" type="button" data-thread="clinica"><i>CM</i><span><b>Clínica Movimento</b><small>Quero saber sobre avaliação...</small></span><time>agora</time></button><button type="button" data-thread="imoveis"><i>AF</i><span><b>Almeida Imóveis</b><small>Procuro um imóvel na região...</small></span><time>4 min</time></button><button type="button" data-thread="servicos"><i>RC</i><span><b>Ramos Consultoria</b><small>Vocês atendem empresas...</small></span><time>9 min</time></button></section>
+                <section class="sync-chat-demo" aria-live="polite"><header><div><b id="demoContact">Clínica Movimento</b><small id="demoIntent">Interesse: avaliação inicial</small></div><span>Contexto ativo</span></header><div class="sync-chat-stream" id="demoMessages"><p class="from-client">Quero entender como funciona a primeira avaliação.</p><p class="from-sync">Posso orientar. É para você ou para outra pessoa? Assim preparo o caminho certo.</p></div><div class="sync-chat-summary"><small>Resumo preparado para a equipe</small><b id="demoSummary">Novo contato · avaliação inicial · aguardando preferência de horário</b></div></section>
+              </div>
+            </section>
+
+            <section class="sync-workspace-panel" id="workspace-panel-opportunities" role="tabpanel" aria-labelledby="workspace-tab-opportunities" data-workspace-panel="opportunities" hidden>
+              <div class="sync-pipeline-demo"><article><header><span>Novo interesse</span><b>3</b></header><div><small>Clínica Movimento</small><strong>Avaliação inicial</strong><p>Origem: WhatsApp</p><em>Contexto identificado</em></div><div><small>Studio Forma</small><strong>Plano empresarial</strong><p>Origem: site</p><em>Aguardando resposta</em></div></article><article><header><span>Em conversa</span><b>2</b></header><div><small>Almeida Imóveis</small><strong>Imóvel residencial</strong><p>Faixa e região registradas</p><em>Próximo passo hoje</em></div><div><small>Espaço Vitta</small><strong>Atendimento recorrente</strong><p>Escopo em qualificação</p><em>2 dados pendentes</em></div></article><article><header><span>Pronto para equipe</span><b>2</b></header><div><small>Ramos Consultoria</small><strong>Operação multiunidade</strong><p>Resumo e contato salvos</p><em>Assumir negociação</em></div><div><small>Solaris Energia</small><strong>Visita técnica</strong><p>Endereço confirmado</p><em>Agendar visita</em></div></article></div>
+            </section>
+
+            <section class="sync-workspace-panel" id="workspace-panel-agents" role="tabpanel" aria-labelledby="workspace-tab-agents" data-workspace-panel="agents" hidden>
+              <div class="sync-agent-console"><div class="sync-agent-list"><article><i>01</i><div><b>Entrada</b><small>Recebe, identifica o assunto e direciona</small></div><span>Ativo</span></article><article><i>02</i><div><b>Contexto</b><small>Consulta a base e prepara respostas</small></div><span>Ativo</span></article><article><i>03</i><div><b>Oportunidade</b><small>Qualifica, registra e define a ação</small></div><span>Ativo</span></article><article><i>04</i><div><b>Continuidade</b><small>Retoma no prazo configurado</small></div><span>Ativo</span></article></div><aside><header><b>Atividade coordenada</b><span>Ao vivo</span></header><ol><li><time>10:42</time><p><b>Entrada</b> identificou uma dúvida comercial</p></li><li><time>10:42</time><p><b>Contexto</b> consultou serviços e regras</p></li><li><time>10:43</time><p><b>Oportunidade</b> preparou o próximo passo</p></li></ol><small>Cada função tem limite próprio e deixa o histórico disponível para a equipe.</small></aside></div>
+            </section>
+
+            <section class="sync-workspace-panel" id="workspace-panel-knowledge" role="tabpanel" aria-labelledby="workspace-tab-knowledge" data-workspace-panel="knowledge" hidden>
+              <div class="sync-knowledge-demo"><section><header><div><b>Fontes de conhecimento</b><small>O que o Sync pode consultar</small></div><button type="button">Adicionar fonte</button></header><ul><li><i>SV</i><div><b>Serviços e valores</b><small>Site institucional · atualizado hoje</small></div><span>Pronto</span></li><li><i>HR</i><div><b>Horários e regiões atendidas</b><small>Documento · atualizado há 2 dias</small></div><span>Pronto</span></li><li><i>PO</i><div><b>Políticas de atendimento</b><small>Base interna · revisão mensal</small></div><span>Pronto</span></li><li><i>DV</i><div><b>Dúvidas recorrentes</b><small>Conversas aprovadas pela equipe</small></div><span>Revisar</span></li></ul></section><aside><header><b>Pontos a revisar</b><span>2</span></header><p><strong>Condição especial</strong><small>O agente deve transferir antes de negociar.</small></p><p><strong>Nova área de atendimento</strong><small>Confirme a região antes de publicar a resposta.</small></p><footer>Sem resposta aprovada, o Sync pergunta ou encaminha — não improvisa.</footer></aside></div>
+            </section>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sync-capabilities" id="capacidades"><div class="sync-grid">
+      <header class="sync-section-intro" data-reveal><p>Menos repetição, mais continuidade</p><h2>O Sync assume o trabalho operacional que interrompe sua equipe.</h2><span>As conversas continuam naturais porque cada automação tem uma função clara e um limite definido.</span></header>
+      <div class="sync-capability-layout">
+        <article class="sync-capability-main" data-reveal><div class="sync-capability-copy"><small>Atendimento inteligente</small><h3>Responde com o conhecimento da sua empresa.</h3><p>Serviços, horários, políticas, etapas e objeções deixam de depender da memória de alguém. O agente consulta a base certa e sabe quando não deve improvisar.</p><ul><li>Tom de voz configurado</li><li>Respostas aprovadas</li><li>Encaminhamento seguro</li></ul></div><div class="sync-message-stack" aria-hidden="true"><p>Qual plano combina com minha rotina?</p><p>Antes de indicar, preciso entender duas coisas...</p><span>Base consultada · resposta registrada</span></div></article>
+        <article class="sync-capability-card" data-reveal><span>CRM conectado</span><h3>O contexto não se perde entre mensagens.</h3><p>Interesse, origem, resumo e próxima ação ficam no mesmo histórico.</p><div class="sync-mini-pipeline" aria-hidden="true"><i>Entrada</i><i>Qualificado</i><i>Equipe</i></div></article>
+        <article class="sync-capability-card" data-reveal><span>Agentes coordenados</span><h3>Cada agente cuida de uma parte.</h3><p>Um responde, outro organiza, outro acompanha. Todos seguem a mesma estratégia.</p><div class="sync-agent-dots" aria-hidden="true"><i>1</i><i>2</i><i>3</i><b>objetivo comum</b></div></article>
+      </div>
+    </div></section>
+
+    <section class="sync-flow" id="fluxo"><div class="sync-grid sync-flow-grid"><div class="sync-flow-copy" data-reveal><p>Da mensagem à decisão</p><h2>Uma conversa boa não termina em resposta. Ela avança.</h2><span>O Sync reconhece o momento do cliente, coleta somente o necessário e deixa o próximo passo pronto.</span><a class="sync-text-link" href="#contato">Mapear meu atendimento <b>→</b></a></div><div class="sync-flow-steps"><article data-reveal><small>01</small><div><h3>Receber</h3><p>O cliente fala pelo canal que já usa.</p></div><span>Mensagem</span></article><article data-reveal><small>02</small><div><h3>Entender</h3><p>A IA identifica intenção, urgência e contexto.</p></div><span>Leitura</span></article><article data-reveal><small>03</small><div><h3>Organizar</h3><p>Os dados viram histórico, etapa e tarefa.</p></div><span>CRM</span></article><article data-reveal><small>04</small><div><h3>Conduzir</h3><p>O cliente recebe orientação ou chega à pessoa certa.</p></div><span>Ação</span></article></div></div></section>
+
+    <section class="sync-impact" id="impacto">
+      <div class="sync-grid">
+        <header class="sync-section-intro" data-reveal><p>Cenário demonstrativo</p><h2>Veja o que muda em um dia de atendimento.</h2><span>Escolha um momento da jornada. O exemplo mostra como o Sync reduz espera, preserva contexto e mantém oportunidades em movimento.</span></header>
+        <div class="sync-impact-shell" data-reveal>
+          <div class="sync-impact-tabs" role="tablist" aria-label="Cenários de impacto operacional">
+            <button class="active" id="impact-tab-captacao" type="button" role="tab" aria-selected="true" aria-controls="impact-panel-captacao" data-impact-tab="captacao"><small>01</small><span>Captação</span></button>
+            <button id="impact-tab-atendimento" type="button" role="tab" aria-selected="false" aria-controls="impact-panel-atendimento" tabindex="-1" data-impact-tab="atendimento"><small>02</small><span>Atendimento</span></button>
+            <button id="impact-tab-posvenda" type="button" role="tab" aria-selected="false" aria-controls="impact-panel-posvenda" tabindex="-1" data-impact-tab="posvenda"><small>03</small><span>Pós-venda</span></button>
+          </div>
+          <div class="sync-impact-panels">
+            <article class="sync-impact-panel" id="impact-panel-captacao" role="tabpanel" aria-labelledby="impact-tab-captacao" data-impact-panel="captacao">
+              <div class="sync-impact-story"><small>Contato no momento do interesse</small><h3>Da primeira mensagem à oportunidade organizada.</h3><ol><li><time>08:12</time><span><b>Nova conversa</b>O cliente pergunta e informa o que procura.</span></li><li><time>08:13</time><span><b>Resposta orientada</b>O agente consulta o conteúdo aprovado e tira a primeira dúvida.</span></li><li><time>08:16</time><span><b>Próximo passo registrado</b>Interesse, prazo e encaminhamento chegam prontos para a equipe.</span></li></ol></div>
+              <div class="sync-impact-result"><small>Na prática</small><h4>Menos oportunidade perdida entre mensagem e retorno.</h4><ul><li>Contato atendido enquanto o interesse está ativo</li><li>Equipe recebe o contexto sem reler toda a conversa</li><li>Continuidade deixa de depender da memória</li></ul></div>
+            </article>
+            <article class="sync-impact-panel" id="impact-panel-atendimento" role="tabpanel" aria-labelledby="impact-tab-atendimento" data-impact-panel="atendimento" hidden>
+              <div class="sync-impact-story"><small>Rotina de atendimento</small><h3>A dúvida comum é resolvida. A exceção chega à pessoa certa.</h3><ol><li><time>10:04</time><span><b>Pergunta recebida</b>O cliente explica a necessidade no WhatsApp.</span></li><li><time>10:05</time><span><b>Base consultada</b>O Sync responde dentro das regras e confirma os dados essenciais.</span></li><li><time>10:08</time><span><b>Transferência com resumo</b>Quando é preciso decidir, a equipe assume sem recomeçar.</span></li></ol></div>
+              <div class="sync-impact-result"><small>Na prática</small><h4>Mais agilidade sem transformar atendimento em resposta genérica.</h4><ul><li>Cliente não precisa repetir o que já explicou</li><li>Equipe concentra tempo em decisões e exceções</li><li>Histórico permanece disponível para acompanhar</li></ul></div>
+            </article>
+            <article class="sync-impact-panel" id="impact-panel-posvenda" role="tabpanel" aria-labelledby="impact-tab-posvenda" data-impact-panel="posvenda" hidden>
+              <div class="sync-impact-story"><small>Continuidade e relacionamento</small><h3>O atendimento continua depois da entrega.</h3><ol><li><time>D+1</time><span><b>Entrega registrada</b>O CRM sabe o que foi combinado e concluído.</span></li><li><time>D+3</time><span><b>Check-in programado</b>O cliente recebe uma mensagem no momento definido pela operação.</span></li><li><time>D+7</time><span><b>Sinal acompanhado</b>Feedback, nova necessidade ou retorno entram no fluxo correto.</span></li></ol></div>
+              <div class="sync-impact-result"><small>Na prática</small><h4>Relacionamento consistente para aumentar satisfação e recorrência.</h4><ul><li>Clientes recebem acompanhamento sem cobrança improvisada</li><li>Sinais de satisfação e novas demandas ficam visíveis</li><li>A equipe sabe quem acompanhar e por quê</li></ul></div>
+            </article>
+          </div>
+          <footer class="sync-impact-footer"><p><b>Exemplo ilustrativo.</b> O fluxo final depende das regras, integrações e volume da sua empresa.</p><a class="sync-button sync-button--primary" href="#contato">Ver meu cenário <span>→</span></a></footer>
+        </div>
+      </div>
+    </section>
+
+    <section class="sync-agents" id="agentes"><div class="sync-grid"><header class="sync-section-intro sync-section-intro--center" data-reveal><p>Uma equipe digital configurada para sua operação</p><h2>Agentes especializados para cada etapa. Um atendimento coerente.</h2><span>Você não recebe um robô genérico. Recebe funções coordenadas em torno do que sua empresa precisa executar.</span></header><div class="sync-agent-board" data-reveal><div class="sync-agent-network" aria-hidden="true"><span>SYNC</span><i></i><i></i><i></i><i></i></div><article><small>Agente de entrada</small><h3>Acolhe e direciona</h3><p>Entende o assunto e abre o caminho certo.</p></article><article><small>Agente de contexto</small><h3>Consulta e explica</h3><p>Usa a base da empresa para responder com precisão.</p></article><article><small>Agente de oportunidade</small><h3>Qualifica e registra</h3><p>Organiza interesse, prioridade e próxima ação.</p></article><article><small>Agente de continuidade</small><h3>Acompanha sem pressionar</h3><p>Retoma conversas conforme as regras definidas.</p></article></div></div></section>
+
+    <section class="sync-control" id="seguranca"><div class="sync-grid sync-control-grid"><div class="sync-control-screen" data-reveal><header><span>Regras da operação</span><b>Controle da equipe</b></header><div><i class="on"></i><p><b>Responder dúvidas recorrentes</b><small>Usar apenas conteúdo aprovado</small></p><span>Ativo</span></div><div><i class="on"></i><p><b>Preparar agendamento</b><small>Confirmar dados antes de enviar</small></p><span>Ativo</span></div><div><i></i><p><b>Negociar condição especial</b><small>Transferir para uma pessoa</small></p><span>Humano</span></div><div><i class="on"></i><p><b>Registrar resumo no CRM</b><small>Salvar intenção e próximo passo</small></p><span>Ativo</span></div></div><div class="sync-control-copy" data-reveal><p>Automação com responsabilidade</p><h2>Sua equipe continua no controle.</h2><span>O Sync trabalha dentro de regras claras, registra o que aconteceu e chama uma pessoa quando a conversa exige julgamento, negociação ou cuidado.</span><ul><li>Limites por tipo de assunto</li><li>Histórico de cada interação</li><li>Transferência com resumo</li><li>Ajustes contínuos na base</li></ul></div></div></section>
+
+    <section class="sync-faq" id="faq"><div class="sync-grid sync-faq-grid"><div class="sync-faq-copy" data-reveal><p>Perguntas antes de começar</p><h2>O que você precisa saber para avaliar o Sync.</h2><span>Sem promessa vaga. A demonstração usa o cenário da sua empresa para mostrar o que pode ou não ser automatizado.</span><a class="sync-button sync-button--primary" href="#contato">Falar sobre meu cenário <span>→</span></a></div><div class="sync-faq-list"><article><button type="button" aria-expanded="false"><span>A IA pode inventar respostas?</span><b>+</b></button><div><p>O agente é configurado para usar a base aprovada e respeitar limites. Quando falta informação ou a situação pede decisão humana, ele registra o contexto e transfere a conversa.</p></div></article><article><button type="button" aria-expanded="false"><span>Preciso trocar meu WhatsApp?</span><b>+</b></button><div><p>Isso depende da estrutura atual. Na demonstração avaliamos o número, a operação e a integração mais segura antes de propor qualquer mudança.</p></div></article><article><button type="button" aria-expanded="false"><span>O Sync substitui minha equipe?</span><b>+</b></button><div><p>Não. Ele assume repetição, organização e acompanhamento. Sua equipe entra nos momentos que pedem negociação, julgamento ou relacionamento humano.</p></div></article><article><button type="button" aria-expanded="false"><span>Quanto tempo leva para implantar?</span><b>+</b></button><div><p>Uma operação inicial costuma levar de 7 a 15 dias. O prazo varia conforme o volume de conteúdo, as regras, os canais e as integrações necessárias.</p></div></article><article><button type="button" aria-expanded="false"><span>Depois de publicado, o agente pode melhorar?</span><b>+</b></button><div><p>Sim. Dúvidas novas e caminhos que não funcionaram ajudam a ajustar a base, as regras e o encaminhamento sem reconstruir tudo.</p></div></article></div></div></section>
+
+    <section class="sync-cta" id="contato"><div class="sync-grid" data-reveal><p>Comece pelo seu atendimento atual</p><h2>Veja onde o Sync pode reduzir espera, organizar oportunidades e devolver tempo à sua equipe.</h2><a class="sync-button sync-button--primary" href="https://wa.me/5573981019782?text=Ol%C3%A1%2C+quero+avaliar+o+Avancini+Sync+no+meu+atendimento." target="_blank" rel="noopener">Solicitar demonstração <span>→</span></a></div></section>
+  </main>
+
+  <footer class="sync-footer"><div class="sync-grid"><div class="sync-footer-main"><div><div class="sync-brand-copy"><span>AVANCINI <b>SYNC</b></span><small>EQUIPE MULTIAGENTE DE IA</small></div><p>Conversas organizadas, oportunidades acompanhadas e equipe no controle.</p></div><nav><b>Navegação</b><a href="#produto">Produto</a><a href="#capacidades">Capacidades</a><a href="#agentes">Agentes</a><a href="#faq">Dúvidas</a></nav><nav><b>Ecossistema</b><a href="/dash">Avancini Dash</a><a href="/">Avancini OS</a><a href="/#escolher">Escolher solução</a></nav><nav><b>Contato</b><span>ivoavancini@hotmail.com</span><span>(73) 98101-9782</span></nav></div><div class="sync-footer-bottom"><span>© 2026 Avancini OS. Todos os direitos reservados.</span><div><a href="/privacidade">Privacidade</a><a href="/termos">Termos de uso</a><a href="#inicio">Voltar ao topo ↑</a></div></div></div></footer>
+
+  <button class="wa" id="syncWaButton" type="button" aria-controls="syncWaDialog" aria-expanded="false" aria-label="Conversar no WhatsApp"><img src="/whatsapp.svg" alt=""><span class="wa-badge">1</span></button>
+  <div class="sync-wa-backdrop" id="syncWaBackdrop"></div>
+  <section class="sync-wa-panel" id="syncWaDialog" role="dialog" aria-modal="true" aria-labelledby="syncWaTitle" tabindex="-1">
+    <header>
+      <span class="sync-wa-avatar-wrap"><img class="sync-wa-avatar" src="/jose-avancini-real.jpg" alt="José Avancini"><i aria-hidden="true"></i></span>
+      <div class="sync-wa-title"><strong id="syncWaTitle">José Avancini <b>· Sync</b></strong><span><b>online</b><span> · demonstração orientada</span></span></div>
+      <button class="sync-wa-close" id="syncWaClose" type="button" aria-label="Fechar">×</button>
+    </header>
+    <form class="sync-wa-form" id="syncWaForm">
+      <label class="sync-wa-name" for="syncWaName"><svg class="sync-wa-user-icon" aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"></circle><path d="M5.5 20v-2.5a6.5 6.5 0 0 1 13 0V20"></path></svg><input class="sync-wa-field" id="syncWaName" name="name" autocomplete="name" placeholder="Seu nome" aria-label="Seu nome"></label>
+      <div class="sync-wa-phone-row">
+        <div class="sync-country-wrap">
+          <button class="sync-country-button" id="syncCountryButton" type="button" aria-expanded="false" aria-controls="syncCountryMenu" aria-label="Selecionar país"><img class="sync-country-flag" src="/flags/br.svg" alt=""><span class="sync-country-code">+55</span><span class="sync-country-chevron" aria-hidden="true">⌄</span></button>
+          <div class="sync-country-menu" id="syncCountryMenu" role="listbox" aria-label="Selecione o país">
+            <label class="sync-country-search" for="syncCountrySearch"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5"></circle><path d="m12.2 12.2 4 4"></path></svg><input id="syncCountrySearch" type="search" placeholder="Buscar país…" autocomplete="off"></label>
+            <div class="sync-country-options">
+              <button type="button" role="option" data-code="+55" data-asset="br" data-country="Brasil"><span><img src="/flags/br.svg" alt="">Brasil</span><span>+55</span></button>
+              <button type="button" role="option" data-code="+1" data-asset="us" data-country="Estados Unidos"><span><img src="/flags/us.svg" alt="">Estados Unidos</span><span>+1</span></button>
+              <button type="button" role="option" data-code="+351" data-asset="pt" data-country="Portugal"><span><img src="/flags/pt.svg" alt="">Portugal</span><span>+351</span></button>
+              <button type="button" role="option" data-code="+52" data-asset="mx" data-country="México"><span><img src="/flags/mx.svg" alt="">México</span><span>+52</span></button>
+              <button type="button" role="option" data-code="+54" data-asset="ar" data-country="Argentina"><span><img src="/flags/ar.svg" alt="">Argentina</span><span>+54</span></button>
+              <button type="button" role="option" data-code="+44" data-asset="gb" data-country="Reino Unido"><span><img src="/flags/gb.svg" alt="">Reino Unido</span><span>+44</span></button>
+              <button type="button" role="option" data-code="+34" data-asset="es" data-country="Espanha"><span><img src="/flags/es.svg" alt="">Espanha</span><span>+34</span></button>
+              <button type="button" role="option" data-code="+33" data-asset="fr" data-country="França"><span><img src="/flags/fr.svg" alt="">França</span><span>+33</span></button>
+              <button type="button" role="option" data-code="+49" data-asset="de" data-country="Alemanha"><span><img src="/flags/de.svg" alt="">Alemanha</span><span>+49</span></button>
+              <button type="button" role="option" data-code="+81" data-asset="jp" data-country="Japão"><span><img src="/flags/jp.svg" alt="">Japão</span><span>+81</span></button>
+              <p class="sync-country-empty" hidden>Nenhum país encontrado.</p>
+            </div>
+          </div>
+        </div>
+        <input class="sync-wa-field" id="syncWaPhone" name="phone" inputmode="tel" autocomplete="tel" placeholder="(11) 99999-9999" aria-label="Telefone">
+      </div>
+      <button class="sync-wa-submit" id="syncWaSubmit" type="submit"><img src="/whatsapp.svg" alt="" aria-hidden="true">INICIAR CONVERSA</button>
+    </form>
+  </section>
+  <script src="/sync-redesign.js" defer></script>
+</body>
+</html>

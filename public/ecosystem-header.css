@@ -1,0 +1,171 @@
+:root {
+  --ecosystem-header-height: 76px;
+  --ecosystem-header-mobile-height: 66px;
+  --ecosystem-header-gutter-shared: max(24px, calc((100vw - 1280px) / 2));
+  --ecosystem-header-gap: 28px;
+  --ecosystem-brand-mark-size: 28px;
+  --ecosystem-brand-title-size: 13px;
+  --ecosystem-brand-caption-size: 7.5px;
+  --ecosystem-nav-size: 14px;
+  --ecosystem-control-height: 44px;
+}
+
+/* Uma única régua para OS, Dash e Sync. As variantes definem somente a identidade. */
+.ecosystem-header {
+  width: 100% !important;
+  height: var(--ecosystem-header-height) !important;
+  min-height: var(--ecosystem-header-height) !important;
+  box-sizing: border-box !important;
+  font-family: var(--font-manrope, Manrope), Arial, sans-serif !important;
+}
+
+.ecosystem-header.dash-header,
+.ecosystem-header.os-header,
+.ecosystem-header .ecosystem-header__inner {
+  display: grid !important;
+  grid-template-columns: minmax(220px, 1fr) auto minmax(220px, 1fr) !important;
+  align-items: center !important;
+  gap: var(--ecosystem-header-gap) !important;
+}
+
+.ecosystem-header.dash-header,
+.ecosystem-header.os-header {
+  padding: 0 var(--ecosystem-header-gutter-shared) !important;
+}
+
+.ecosystem-header .ecosystem-header__inner {
+  width: 100% !important;
+  height: 100% !important;
+  margin: 0 !important;
+  padding: 0 var(--ecosystem-header-gutter-shared) !important;
+  box-sizing: border-box !important;
+}
+
+.ecosystem-header .dash-header-brand,
+.ecosystem-header .os-brand,
+.ecosystem-header .sync-brand {
+  grid-column: 1 !important;
+  justify-self: start !important;
+  min-height: 44px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 9px !important;
+}
+
+.ecosystem-header .dash-header-ecosystem,
+.ecosystem-header .os-nav,
+.ecosystem-header .sync-ecosystem-nav {
+  grid-column: 2 !important;
+  justify-self: center !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 28px !important;
+}
+
+.ecosystem-header .dash-header-ecosystem a,
+.ecosystem-header .os-nav a,
+.ecosystem-header .sync-ecosystem-nav a {
+  min-height: 44px !important;
+  padding: 0 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  font-family: var(--font-manrope, Manrope), Arial, sans-serif !important;
+  font-size: var(--ecosystem-nav-size) !important;
+  font-weight: 700 !important;
+  line-height: 1 !important;
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+}
+
+.ecosystem-header .dash-header-menu-button,
+.ecosystem-header .sync-menu-button,
+.ecosystem-header .os-button-header {
+  grid-column: 3 !important;
+  justify-self: end !important;
+  min-height: var(--ecosystem-control-height) !important;
+  height: var(--ecosystem-control-height) !important;
+  margin: 0 !important;
+  font-family: var(--font-manrope, Manrope), Arial, sans-serif !important;
+  font-size: var(--ecosystem-nav-size) !important;
+  font-weight: 700 !important;
+  line-height: 1 !important;
+}
+
+.ecosystem-header .dash-header-menu-button,
+.ecosystem-header .sync-menu-button {
+  width: 108px !important;
+  min-width: 108px !important;
+  padding-inline: 19px !important;
+}
+
+.ecosystem-header .dash-brand-lockup.is-compact .dash-brand-mark,
+.ecosystem-header .os-brand-mark,
+.ecosystem-header .sync-brand-mark {
+  width: var(--ecosystem-brand-mark-size) !important;
+  height: var(--ecosystem-brand-mark-size) !important;
+  flex: 0 0 var(--ecosystem-brand-mark-size) !important;
+}
+
+.ecosystem-header .dash-brand-copy > span,
+.ecosystem-header .os-wordmark strong,
+.ecosystem-header .sync-brand-copy > span {
+  font-family: var(--font-manrope, Manrope), Arial, sans-serif !important;
+  font-size: var(--ecosystem-brand-title-size) !important;
+  font-weight: 800 !important;
+  line-height: 1 !important;
+  letter-spacing: -0.035em !important;
+}
+
+.ecosystem-header .dash-brand-copy small,
+.ecosystem-header .sync-brand-copy small {
+  font-family: var(--font-manrope, Manrope), Arial, sans-serif !important;
+  font-size: var(--ecosystem-brand-caption-size) !important;
+  font-weight: 800 !important;
+  line-height: 1 !important;
+  letter-spacing: 0.055em !important;
+}
+
+.ecosystem-header .os-wordmark span {
+  font-size: 11px !important;
+  font-weight: 800 !important;
+}
+
+.ecosystem-header--dash { --ecosystem-identity: #8df47b; }
+.ecosystem-header--sync { --ecosystem-identity: #23c7f1; }
+.ecosystem-header--os { --ecosystem-identity: #0d5bd7; }
+
+@media (max-width: 760px) {
+  .ecosystem-header {
+    height: var(--ecosystem-header-mobile-height) !important;
+    min-height: var(--ecosystem-header-mobile-height) !important;
+  }
+
+  .ecosystem-header.dash-header,
+  .ecosystem-header.os-header,
+  .ecosystem-header .ecosystem-header__inner {
+    grid-template-columns: minmax(0, 1fr) auto !important;
+    gap: 12px !important;
+    padding-inline: 18px !important;
+  }
+
+  .ecosystem-header .dash-header-ecosystem,
+  .ecosystem-header .os-nav,
+  .ecosystem-header .sync-ecosystem-nav {
+    display: none !important;
+  }
+
+  .ecosystem-header .dash-header-menu-button,
+  .ecosystem-header .sync-menu-button,
+  .ecosystem-header .os-button-header {
+    grid-column: 2 !important;
+    min-height: 42px !important;
+    height: 42px !important;
+  }
+
+  .ecosystem-header .dash-header-menu-button,
+  .ecosystem-header .sync-menu-button {
+    width: 96px !important;
+    min-width: 96px !important;
+    padding-inline: 15px !important;
+  }
+}

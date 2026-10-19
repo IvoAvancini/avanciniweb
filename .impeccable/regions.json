@@ -1,0 +1,152 @@
+{
+  "regions": [
+    {
+      "id": "paper-texture",
+      "kind": "texture",
+      "grid": "C0:C0",
+      "note": "warm mineral paper fiber with faint print texture"
+    },
+    {
+      "id": "header-rule",
+      "kind": "chrome",
+      "grid": "A0:J0",
+      "note": "compact header with a thin black bottom rule"
+    },
+    {
+      "id": "brand",
+      "kind": "text",
+      "grid": "A0:B0",
+      "note": "AVANCINI OS wordmark"
+    },
+    {
+      "id": "header-nav",
+      "kind": "text",
+      "grid": "D0:G0",
+      "note": "ESTÚDIO PROJETOS SERVIÇOS CONTATO navigation"
+    },
+    {
+      "id": "menu-control",
+      "kind": "control",
+      "grid": "I0:J0",
+      "note": "MENU label and two-line menu icon"
+    },
+    {
+      "id": "studio-note",
+      "kind": "text",
+      "grid": "A1:B1",
+      "note": "small studio positioning note"
+    },
+    {
+      "id": "coordinates",
+      "kind": "text",
+      "grid": "B1:C1",
+      "note": "Brasil coordinate note"
+    },
+    {
+      "id": "movement-note",
+      "kind": "text",
+      "grid": "I1:J1",
+      "note": "small ideas em movimento note"
+    },
+    {
+      "id": "hero-headline",
+      "kind": "text",
+      "grid": "A2:D5",
+      "note": "large editorial headline Ideias que encontram direção. Tecnologia que faz avançar."
+    },
+    {
+      "id": "project-photo",
+      "kind": "image",
+      "grid": "E1:J8",
+      "note": "large editorial photograph of Tape Car vehicle rear in urban landscape, full-frame project proof",
+      "bleed": true
+    },
+    {
+      "id": "project-label",
+      "kind": "text",
+      "grid": "E1:G1",
+      "note": "PROJETO REAL — TAPE CAR text label positioned above the project image",
+      "codeDrawn": true
+    },
+    {
+      "id": "project-side-note",
+      "kind": "text",
+      "grid": "I2:J3",
+      "note": "small movement inteligente para pessoas reais note"
+    },
+    {
+      "id": "route-left",
+      "kind": "chrome",
+      "grid": "A5:D6",
+      "note": "thin cobalt route line with circular nodes",
+      "codeDrawn": true
+    },
+    {
+      "id": "route-right",
+      "kind": "chrome",
+      "grid": "D5:J7",
+      "note": "continuation of thin cobalt route line across the project image",
+      "codeDrawn": true
+    },
+    {
+      "id": "route-labels",
+      "kind": "text",
+      "grid": "A6:D6",
+      "note": "IDENTIDADE EXPERIÊNCIA AUTOMAÇÃO SISTEMAS route labels"
+    },
+    {
+      "id": "primary-action",
+      "kind": "control",
+      "grid": "A7:C7",
+      "note": "lime rectangular COMEÇAR UM PROJETO button with arrow"
+    },
+    {
+      "id": "bottom-values",
+      "kind": "text",
+      "grid": "A8:B8",
+      "note": "small IDEIAS SISTEMAS PESSOAS RESULTADOS stack"
+    },
+    {
+      "id": "bottom-method",
+      "kind": "text",
+      "grid": "B8:D8",
+      "note": "small DO PLANEJAMENTO À OPERAÇÃO COM PROPÓSITO note"
+    },
+    {
+      "id": "project-metadata",
+      "kind": "text",
+      "grid": "I7:J8",
+      "note": "small PROJETO REAL TAPE CAR coordinate metadata"
+    },
+    {
+      "id": "contour-texture",
+      "kind": "texture",
+      "grid": "J1:J8",
+      "note": "sparse cobalt geographic contour lines on warm paper"
+    },
+    {
+      "id": "next-section-index",
+      "kind": "text",
+      "grid": "A9:B9",
+      "note": "02 PRÓXIMO CAPÍTULO index"
+    },
+    {
+      "id": "next-section-heading",
+      "kind": "text",
+      "grid": "A9:D9",
+      "note": "cropped large Projetos que heading beginning next section"
+    },
+    {
+      "id": "next-project-plate",
+      "kind": "plate",
+      "grid": "F9:I9",
+      "note": "cropped monochrome mountain contour illustration beginning next section"
+    },
+    {
+      "id": "next-section-note",
+      "kind": "text",
+      "grid": "I9:J9",
+      "note": "small MESMA DIREÇÃO MAIS POSSIBILIDADES note"
+    }
+  ]
+}

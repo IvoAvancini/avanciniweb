@@ -1,0 +1,212 @@
+/* ==========================================================================
+   SIGNAL SHELL & GLOBAL MOTION ARCHITECTURE
+   ========================================================================== */
+
+.atlas-page {
+  --bg-deep: #03060d;
+  --bg-card: #0a0e17;
+  --text-white: #f8fafc;
+  --text-muted: #94a3b8;
+  --accent-blue: #38bdf8;
+  --accent-green: #22c55e;
+  
+  min-height: 100vh;
+  overflow-x: clip;
+  color: var(--text-white);
+  background: var(--bg-deep);
+  font-family: var(--font-manrope), sans-serif;
+  scroll-behavior: smooth;
+}
+
+.atlas-page ::selection {
+  color: #03060d;
+  background: var(--accent-blue);
+}
+
+.atlas-page :focus-visible {
+  outline: 2px solid var(--accent-blue);
+  outline-offset: 4px;
+}
+
+/* ==========================================================================
+   ANIMAÇÕES DE SCROLL REVEAL (SUAVE & FLUIDO)
+   ========================================================================== */
+
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(28px);
+  filter: blur(6px);
+  transition:
+    opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform, filter;
+}
+
+[data-reveal][data-visible="true"] {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+
+/* Sem layout shifting ou travamentos */
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    transition: none !important;
+  }
+}
+
+/* ==========================================================================
+   MENU OVERLAY (DARK LUXURY EM OBSIDIANA)
+   ========================================================================== */
+
+.atlas-menu {
+  position: fixed;
+  z-index: 200;
+  inset: 0;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: clamp(24px, 5vw, 64px);
+  color: #ffffff;
+  background: rgba(5, 8, 17, 0.95);
+  backdrop-filter: blur(28px);
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(-20px);
+  transition:
+    opacity 0.35s ease,
+    transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+    visibility 0.45s;
+}
+
+.atlas-menu.is-open {
+  visibility: visible;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.atlas-menu-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 24px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  font: 750 10px/1 var(--font-space), sans-serif;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent-blue);
+}
+
+.atlas-menu-top button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 42px;
+  padding: 8px 18px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 30px;
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.05);
+  font: 700 11px/1 var(--font-space), sans-serif;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.atlas-menu-top button:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: #ffffff;
+}
+
+.atlas-menu-top button > span {
+  font-size: 16px;
+  line-height: 1;
+}
+
+.atlas-menu nav {
+  align-self: center;
+  display: grid;
+  max-width: 900px;
+  margin: 30px auto;
+  width: 100%;
+}
+
+.atlas-menu nav a {
+  display: grid;
+  grid-template-columns: minmax(240px, 1fr) 1fr auto;
+  align-items: center;
+  min-height: clamp(62px, 8.5vh, 84px);
+  padding: 0 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+  text-decoration: none;
+  transition:
+    color 0.2s ease,
+    transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    background 0.2s ease;
+}
+
+.atlas-menu nav a:first-child {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.atlas-menu nav a:hover {
+  color: var(--accent-blue);
+  transform: translateX(10px);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.atlas-menu nav strong {
+  font: 650 clamp(24px, 2.8vw, 42px) / 1 var(--font-space), sans-serif;
+  letter-spacing: -0.03em;
+}
+
+.atlas-menu nav span {
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+.atlas-menu nav .direction-icon {
+  color: var(--accent-blue);
+}
+
+.atlas-menu-contact {
+  justify-self: end;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 52px;
+  padding: 0 28px;
+  border-radius: 12px;
+  color: #03060d;
+  background: var(--accent-blue);
+  font: 750 11px/1 var(--font-space), sans-serif;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.25s;
+}
+
+.atlas-menu-contact:hover {
+  background: #7dd3fc;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(56, 189, 248, 0.4);
+}
+
+@media (max-width: 900px) {
+  .atlas-menu nav a {
+    grid-template-columns: 1fr auto;
+    padding: 0;
+  }
+  .atlas-menu nav span {
+    display: none;
+  }
+  .atlas-menu-contact {
+    justify-self: stretch;
+    justify-content: center;
+  }
+}

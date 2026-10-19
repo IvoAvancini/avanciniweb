@@ -46,6 +46,12 @@ const nextConfig: NextConfig = {
       ],
     },
   ],
+  rewrites: async () => [
+    {
+      source: "/dash/projetos/:slug",
+      destination: "/dash-projetos/:slug.html",
+    },
+  ],
 };
 
 export default nextConfig;
